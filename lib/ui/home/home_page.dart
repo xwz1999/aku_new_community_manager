@@ -1,10 +1,13 @@
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -76,10 +79,11 @@ Widget _card(String number, String text, Color color) {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final userProvider=Provider.of<UserProvider>(context);
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: true);
     return Scaffold(
-      drawer: Drawer(),
+      drawer: PersonalDraw(),
       backgroundColor: Color(0xFFF9F9F9),
       //自定义bar
       appBar: PreferredSize(
@@ -115,11 +119,13 @@ class _HomePageState extends State<HomePage> {
                       //头像按钮
                       child: Builder(builder: (BuildContext context) {
                         return AkuRoundButton(
-                          height: 36.w,
+                          height: 72.w,
                           onPressed: () {
                             Scaffold.of(context).openDrawer();
                           },
-                          child: CircleAvatar(radius: 36.w),
+                          child: CircleAvatar(radius: 36.w,
+                          backgroundColor: Colors.grey,
+                          child: userProvider.isSigned?null:null,),
                         );
                       })),
                   SizedBox(width: 16.w),
