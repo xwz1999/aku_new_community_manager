@@ -356,7 +356,10 @@ class _HomePageState extends State<HomePage> {
                     _card('22', '处理中事项', Color(0xFFFFC40C)),
                   ],
                 ),
-                AkuDiveder().horizontalDivider(343.w),
+                Row(children: [
+                  AkuDiveder().horizontalDivider(343.w),
+                  AkuDiveder(isReverse: true).horizontalDivider(343.w)
+                ]),
                 Row(
                   children: [
                     _card('25', '已处理事项', Color(0xFF3F8FFE)),
