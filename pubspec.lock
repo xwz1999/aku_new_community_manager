@@ -6,7 +6,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "2b1ac75fc1af348c93f3fb407c8d0e57f442a3cf"
+      resolved-ref: e57b6920e49f325c041fac955e1f3297dc9f1d09
       url: "http://test.akuhotel.com:8099/aku_fe/aku_ui.git"
     source: git
     version: "0.0.1"
