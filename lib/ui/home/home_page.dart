@@ -3,6 +3,7 @@ import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -11,8 +12,31 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+Widget _menuButton(IconData iconData, String text,Widget page) {
+  return AkuButton(
+    height: 75.w+8.w+33.w,
+    onPressed:(){
+      Get.to(page);
+    },child: Column(
+    children: [
+      Icon(
+        iconData,
+        size: 75.w,
+      ),
+      SizedBox(height: 8.w),
+      Text(
+        text,
+        style: TextStyle(
+          color: Color(0xFF4A4B51),
+          fontSize: 24.sp,
+          fontWeight: FontWeight.bold,
+        ),
+      )
+    ],
+  ),);
+}
+
 class _HomePageState extends State<HomePage> {
-  TextEditingController _controller;
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context,
@@ -94,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                       ]),
                     ),
                   ),
-                  SizedBox(width:15.w),
+                  SizedBox(width: 15.w),
                   Container(
                     margin: EdgeInsets.only(top: 5.w, bottom: 5.w),
                     child: MaterialButton(
@@ -121,7 +145,6 @@ class _HomePageState extends State<HomePage> {
                       ]),
                     ),
                   ),
-
                   Container(
                     margin: EdgeInsets.only(top: 5.w, bottom: 5.w),
                     child: AkuMaterialButton(
@@ -145,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                       ]),
                     ),
                   ),
-                  SizedBox(width:17.w),
+                  SizedBox(width: 17.w),
                 ]),
               ),
               SizedBox(height: 24.w),
@@ -165,117 +188,19 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 16.w),
               Container(
                 margin: EdgeInsets.only(left: 32.w, right: 32.w),
+                padding: EdgeInsets.only(top:24.w),
                 color: Color(0xFFFFFFFF),
                 width: double.infinity,
                 height: 163.w,
-                child: Column(children: [
-                  SizedBox(
-                    height: 24.w,
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 48.w),
-                      Container(
-                        width: 75.w,
-                        height: 75.w,
-                        child: Icon(
-                          Icons.accessibility,
-                          size: 75.w,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 97.w,
-                      ),
-                      Container(
-                        width: 75.w,
-                        height: 75.w,
-                        child: Icon(
-                          Icons.account_balance,
-                          size: 75.w,
-                        ),
-                      ),
-                      SizedBox(width: 97.w),
-                      Container(
-                        width: 75.w,
-                        height: 75.w,
-                        child: Icon(
-                          Icons.youtube_searched_for,
-                          size: 75.w,
-                        ),
-                      ),
-                      SizedBox(width: 97.w),
-                      Container(
-                        width: 75.w,
-                        height: 75.w,
-                        child: Icon(
-                          Icons.wysiwyg,
-                          size: 75.w,
-                        ),
-                      ),
-                      SizedBox(width: 47.w),
-                    ],
-                  ),
-                  SizedBox(height: 8.w),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      // SizedBox(width: 37.w),
-                      Container(
-                        // width:96.w,
-                        height: 33.w,
-                        child: Text(
-                          '一键报警',
-                          style: TextStyle(
-                            color: Color(0xFF4A4B51),
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      // SizedBox(width: 76.w),
-                      Container(
-                        // width:96.w,
-                        height: 33.w,
-                        child: Text(
-                          '访客管理',
-                          style: TextStyle(
-                            color: Color(0xFF4A4B51),
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      // SizedBox(width: 76.w),
-                      Container(
-                        // width:96.w,
-                        height: 33.w,
-                        child: Text(
-                          '报事报修',
-                          style: TextStyle(
-                            color: Color(0xFF4A4B51),
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      // SizedBox(width: 76.w),
-                      Container(
-                        // width:96.w,
-                        height: 33.w,
-                        child: Text(
-                          '全部应用',
-                          style: TextStyle(
-                            color: Color(0xFF4A4B51),
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      // SizedBox(width: 37.w),
-                    ],
-                  ),
-                  SizedBox(height: 23.w),
-                ]),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _menuButton(Icons.wysiwyg, '一键报警',HomePage()),
+                    _menuButton(Icons.work, '访客管理',HomePage()),
+                    _menuButton(Icons.accessibility, '报事报修',HomePage()),
+                    _menuButton(Icons.account_balance, '全部应用',HomePage()),
+                  ],
+                ),
               ),
             ],
           ),
