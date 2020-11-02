@@ -184,7 +184,6 @@ class _HomePageState extends State<HomePage> {
                           Icons.access_alarm,
                           size: 48.w,
                         ),
-                        SizedBox(height: 2.w),
                         Text(
                           '扫一扫',
                           style: TextStyle(
@@ -208,7 +207,6 @@ class _HomePageState extends State<HomePage> {
                           Icons.access_time,
                           size: 48.w,
                         ),
-                        SizedBox(height: 2.w),
                         Text(
                           '消息',
                           style: TextStyle(

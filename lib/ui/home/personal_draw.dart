@@ -54,7 +54,6 @@ class _PersonalDrawState extends State<PersonalDraw> {
           Container(
             margin: EdgeInsets.only(bottom: 80.w),
             width: double.infinity,
-            height: 72.w,
             child: Row(
               children: [
                 SizedBox(width: 32.w),
