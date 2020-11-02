@@ -2,13 +2,16 @@ import 'dart:ui';
 
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/login/login_sms_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:extended_text/extended_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:get/route_manager.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -24,6 +27,10 @@ class _LoginPageState extends State<LoginPage> {
     return RegexUtil.isMobileSimple(_textController.text);
   }
 
+  bool get emptyText {
+    return TextUtil.isEmpty(_textController.text);
+  }
+
   @override
   void dispose() {
     _textController?.dispose();
@@ -36,34 +43,28 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.white,
       leading: AkuBackButton.close(),
       body: ListView(
+        padding: EdgeInsets.symmetric(
+          vertical: 40.w,
+          horizontal: 32.w,
+        ),
         children: [
-          Padding(
-            padding: EdgeInsets.only(
-              top: 40.w,
-              bottom: 184.w,
-              left: 32.w,
-            ),
-            child: Text(
-              '欢迎登录小蜜蜂',
-              style: TextStyle(
-                color: AppStyle.primaryTextColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 48.sp,
-              ),
+          Text(
+            '欢迎登录小蜜蜂',
+            style: TextStyle(
+              color: AppStyle.primaryTextColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 48.sp,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
-            child: Text(
-              '手机号码',
-              style: TextStyle(
-                color: AppStyle.primaryTextColor,
-                fontSize: 24.sp,
-              ),
+          AkuBox.h(184),
+          Text(
+            '手机号码',
+            style: TextStyle(
+              color: AppStyle.primaryTextColor,
+              fontSize: 24.sp,
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
             width: double.infinity,
             child: TextField(
               autofocus: true,
@@ -73,6 +74,23 @@ class _LoginPageState extends State<LoginPage> {
               },
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
+                suffixIconConstraints: BoxConstraints(
+                  minHeight: 0,
+                  minWidth: 0,
+                ),
+                suffixIcon: emptyText
+                    ? SizedBox()
+                    : GestureDetector(
+                        onTap: () {
+                          _textController.clear();
+                          setState(() {});
+                        },
+                        child: Icon(
+                          CupertinoIcons.clear_circled_solid,
+                          size: 30.w,
+                          color: Color(0xFF999999),
+                        ),
+                      ),
                 border: UnderlineInputBorder(
                   borderSide: BorderSide(
                     color: Color(0xFFE8E8E8),
@@ -93,7 +111,9 @@ class _LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: AkuMaterialButton(
               color: AppStyle.primaryColor,
-              onPressed: phoneValid ? () {} : null,
+              onPressed: phoneValid
+                  ? () => Get.off(LoginSMSPage(phone: _textController.text))
+                  : null,
               nullColor: Color(0xFFFFE67D),
               radius: 8.w,
               child: Text(

@@ -181,6 +181,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.8.0-nullsafety.1"
+  pin_input_text_field:
+    dependency: "direct main"
+    description:
+      name: pin_input_text_field
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.1.1"
   provider:
     dependency: "direct main"
     description:
