@@ -5,6 +5,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
@@ -83,8 +84,50 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
       bottom: Container(
-        padding: EdgeInsets.all(40),
-        child: Text(''),
+        height: 110.w,
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(vertical: 40.w),
+        child: ExtendedText.rich(
+          TextSpan(
+            style: TextStyle(
+              color: AppStyle.minorTextColor,
+              fontSize: 22.sp,
+            ),
+            children: [
+              TextSpan(
+                text: '登录即代表您已同意我们的',
+              ),
+              ExtendedWidgetSpan(
+                child: GestureDetector(
+                  child: Text(
+                    '《服务协议》',
+                    style: TextStyle(
+                      color: AppStyle.secondaryColor,
+                      fontSize: 22.sp,
+                    ),
+                  ),
+                ),
+              ),
+              TextSpan(
+                text: '和',
+              ),
+              ExtendedWidgetSpan(
+                child: GestureDetector(
+                  child: Text(
+                    '《隐私政策》',
+                    style: TextStyle(
+                      color: AppStyle.secondaryColor,
+                      fontSize: 22.sp,
+                    ),
+                  ),
+                ),
+              ),
+              TextSpan(
+                text: '',
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -6,6 +6,7 @@ class AppStyle {
   //颜色，渐变主颜色和次级颜色
   static const primaryColor = Color(0xFFFDCF12);
   static const minorColor = Color(0xFFFFDF5D);
+  static const secondaryColor = Color(0xFF3F8FFE);
 
   //字体
   ///主字体颜色
