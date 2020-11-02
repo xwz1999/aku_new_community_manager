@@ -44,6 +44,8 @@ dependencies:
 
   extended_text: ^4.0.0
 
+  common_utils: ^1.2.1
+
   aku_ui:
     git:
       url: http://test.akuhotel.com:8099/aku_fe/aku_ui.git

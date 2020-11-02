@@ -5,6 +5,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:common_utils/common_utils.dart';
 import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -17,6 +18,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _textController = TextEditingController();
+
+  bool get phoneValid {
+    return RegexUtil.isMobileSimple(_textController.text);
+  }
+
+  @override
+  void dispose() {
+    _textController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -54,6 +67,10 @@ class _LoginPageState extends State<LoginPage> {
             width: double.infinity,
             child: TextField(
               autofocus: true,
+              controller: _textController,
+              onChanged: (text) {
+                setState(() {});
+              },
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 border: UnderlineInputBorder(
@@ -75,10 +92,20 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: AkuMaterialButton(
-              color: AppStyle.minorColor,
-              onPressed: () {},
+              color: AppStyle.primaryColor,
+              onPressed: phoneValid ? () {} : null,
+              nullColor: Color(0xFFFFE67D),
               radius: 8.w,
-              child: Text('获取验证码'),
+              child: Text(
+                '获取验证码',
+                style: TextStyle(
+                  color: phoneValid
+                      ? AppStyle.primaryTextColor
+                      : AppStyle.minorTextColor,
+                  fontSize: 32.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           ),
         ],
