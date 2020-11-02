@@ -1,0 +1,1 @@
+cwebp  -q 60 -resize 1000 0 $1 -o ./assets/static_temp/$2
