@@ -1,3 +1,4 @@
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/messages/system_message.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -17,17 +18,17 @@ class Message extends StatefulWidget {
 class _MessageState extends State<Message> {
 
   Widget _messageTypeImage(String type){
-    Icon path;
+    String path;
     Color ca;
     Color cb;
      switch (type) {
       case'系统消息' :
-        path=Icon(Icons.system_update,size: 66.w,) ;
+        path=R.ASSETS_MESSAGE_IC_TONGZHI_PNG;
         ca=Color(0xFFFFDE9A);
         cb=Color(0xFFFFB00A);
         break;
         case '评论消息':
-     path=Icon(Icons.message,size: 66.w,) ;
+     path=R.ASSETS_MESSAGE_IC_PINGLUN_PNG;
         ca=Color(0xFF81D1FF);
         cb=Color(0xFF1792FF);
                 break;
@@ -46,7 +47,7 @@ class _MessageState extends State<Message> {
                           cb,
                         ]),
                   ),
-                  child: path,
+                  child: Image.asset(path,width: 70.w,height: 70.w,),
                 );
   }
   Widget _messageListTile(String date, Widget messageImage, String title,String text,int number,Widget page) {
@@ -61,6 +62,7 @@ class _MessageState extends State<Message> {
               top: 24.w,
               left: 32.w,
               bottom: 24.w,
+              right: 31.w,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,

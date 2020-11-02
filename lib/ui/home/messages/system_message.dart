@@ -3,6 +3,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:aku_community_manager/const/resource.dart';
 
 class SystemMessage extends StatefulWidget {
   SystemMessage({Key key}) : super(key: key);
@@ -58,7 +59,7 @@ class _SystemMessageState extends State<SystemMessage> {
               SizedBox(height:24.w),
               Row(
                 children: [
-                  Icon(Icons.contact_page, size: 40.w),
+                  Image.asset(R.ASSETS_MESSAGE_IC_PEOPLE_PNG,width: 40.w,height: 40.w,),
                   SizedBox(
                     width: 4.w,
                   ),
@@ -78,10 +79,7 @@ class _SystemMessageState extends State<SystemMessage> {
               SizedBox(height:16.w),
               Row(
                 children: [
-                  Icon(
-                    Icons.phone,
-                    size: 40.w,
-                  ),
+                  Image.asset(R.ASSETS_MESSAGE_IC_PHONE_PNG,width: 40.w,height: 40.w,),
                   SizedBox(
                     width: 4.w,
                   ),
@@ -97,10 +95,7 @@ class _SystemMessageState extends State<SystemMessage> {
               SizedBox(height:16.w),
               Row(
                 children: [
-                  Icon(
-                    Icons.airplanemode_active,
-                    size: 40.w,
-                  ),
+                  Image.asset(R.ASSETS_MESSAGE_IC_AREA_PNG,width: 40.w,height: 40.w,),
                   SizedBox(
                     width: 4.w,
                   ),
