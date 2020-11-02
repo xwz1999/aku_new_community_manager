@@ -20,27 +20,31 @@ class HomePage extends StatefulWidget {
 
 //自定义bar的菜单按钮
 Widget _menuButton(IconData iconData, String text, Widget page) {
-  return AkuButton(
-    height: 75.w + 8.w + 33.w,
-    onPressed: () {
-      Get.to(page);
-    },
-    child: Column(
-      children: [
-        Icon(
-          iconData,
-          size: 75.w,
-        ),
-        SizedBox(height: 8.w),
-        Text(
-          text,
-          style: TextStyle(
-            color: Color(0xFF4A4B51),
-            fontSize: 24.sp,
-            fontWeight: FontWeight.bold,
+  return Expanded(
+    child: AkuButton(
+      radius: 8.w,
+      height: 75.w + 8.w + 33.w,
+      onPressed: () {
+        Get.to(page);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            iconData,
+            size: 75.w,
           ),
-        )
-      ],
+          SizedBox(height: 8.w),
+          Text(
+            text,
+            style: TextStyle(
+              color: Color(0xFF4A4B51),
+              fontSize: 24.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          )
+        ],
+      ),
     ),
   );
 }
@@ -115,14 +119,14 @@ class _HomePageState extends State<HomePage> {
                     width: 16.w,
                   ),
                   Container(
-                      margin: EdgeInsets.only(top: 8.w, bottom: 8.w),
-                      width: 72.w,
-                      height: 72.w,
-                      //头像按钮
-                      child: Builder(builder: (BuildContext context) {
-                        return AkuRoundButton(
-                          height: 72.w,
-                          onPressed: () {
+                    margin: EdgeInsets.only(top: 8.w, bottom: 8.w),
+                    width: 72.w,
+                    height: 72.w,
+                    //头像按钮
+                    child: Builder(
+                      builder: (BuildContext context) {
+                        return GestureDetector(
+                          onTap: () {
                             Scaffold.of(context).openDrawer();
                           },
                           child: CircleAvatar(
@@ -131,18 +135,20 @@ class _HomePageState extends State<HomePage> {
                             child: userProvider.isSigned ? null : null,
                           ),
                         );
-                      })),
+                      },
+                    ),
+                  ),
                   SizedBox(width: 16.w),
                   Expanded(
                     child: Container(
                       margin: EdgeInsets.only(top: 8.w, bottom: 8.w),
                       alignment: Alignment.center,
                       height: 72.w,
-                      padding: EdgeInsets.only(left: 21.w),
                       child: AkuButton(
                         //搜索框按钮
                         color: Color(0xFFFFFFFF),
                         onPressed: () {},
+                        radius: 8.w,
                         child: Row(children: [
                           Container(
                             child: Column(
@@ -237,10 +243,12 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 16.w),
               Container(
                 margin: EdgeInsets.only(left: 32.w, right: 32.w),
-                padding: EdgeInsets.only(top: 24.w),
-                color: Color(0xFFFFFFFF),
                 width: double.infinity,
                 height: 163.w,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.circular(8.w),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
