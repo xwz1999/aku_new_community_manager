@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,19 +20,21 @@ class _SystemMessageState extends State<SystemMessage> {
           width: double.infinity,
           height: 48.w + 33.w,
           child: Text(
-            'date',
+            date,
             style: TextStyle(color: AppStyle.minorTextColor, fontSize: 24.sp),
           ),
         ),
         Container(
-          padding: EdgeInsets.all(24.w),
+          padding: EdgeInsets.only(top:24.w,left:24.w,right:24.w),
           color: Color(0xFFFFFFFF),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(children: [
-                Icon(
-                  Icons.point_of_sale,
-                  size: 16.w,
+                Container(
+                  width: 16.w,
+                  height: 16.w,
+                  decoration: BoxDecoration(borderRadius:BorderRadius.circular(8.w),color:Color(0xFFFF4501)),
                 ),
                 SizedBox(
                   width: 16.w,
@@ -43,7 +46,7 @@ class _SystemMessageState extends State<SystemMessage> {
                       fontSize: 32.sp,
                       fontWeight: FontWeight.w600),
                 ),
-                Spacer(),
+              SizedBox(height:8.w),
               ]),
               Text(
                 '你有一条新的报事报修，请立即处理',
@@ -52,6 +55,7 @@ class _SystemMessageState extends State<SystemMessage> {
                     fontSize: 28.sp,
                     fontWeight: FontWeight.bold),
               ),
+              SizedBox(height:24.w),
               Row(
                 children: [
                   Icon(Icons.contact_page, size: 40.w),
@@ -71,6 +75,7 @@ class _SystemMessageState extends State<SystemMessage> {
                   ),
                 ],
               ),
+              SizedBox(height:16.w),
               Row(
                 children: [
                   Icon(
@@ -89,6 +94,7 @@ class _SystemMessageState extends State<SystemMessage> {
                           color: AppStyle.primaryTextColor, fontSize: 28.sp)),
                 ],
               ),
+              SizedBox(height:16.w),
               Row(
                 children: [
                   Icon(
@@ -107,9 +113,14 @@ class _SystemMessageState extends State<SystemMessage> {
                           color: AppStyle.primaryTextColor, fontSize: 28.sp)),
                 ],
               ),
-              Divider(),
+              SizedBox(height:16.w),
+              Divider(height: 1.w,),
               AkuButton(
+                onPressed: () {
+                  
+                },
                 child: Container(
+                  height: 88.w,
                   alignment: Alignment.center,
                   padding: EdgeInsets.only(left: 24.w),
                   child: Row(
@@ -134,10 +145,8 @@ class _SystemMessageState extends State<SystemMessage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('消息', style: AppStyle().barTitleStyle),
-      ),
+    return AkuScaffold(
+      title: '系统消息',
       body: ListView(
         padding: EdgeInsets.all(32.w),
         children: [
