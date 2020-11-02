@@ -2,6 +2,7 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
@@ -201,7 +202,9 @@ class _HomePageState extends State<HomePage> {
                       minWidth: 78.w,
                       //消息按钮
                       height: double.infinity,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(Message());
+                      },
                       child: Column(children: [
                         Icon(
                           Icons.access_time,
