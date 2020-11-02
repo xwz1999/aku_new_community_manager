@@ -50,6 +50,9 @@ class _AkuTileState extends State<AkuTile> {
                 ),
                 Spacer(),
                 widget.suffix ?? SizedBox(),
+                widget.suffix != null && widget.arrow
+                    ? SizedBox(width: 24.w)
+                    : SizedBox(),
                 widget.arrow
                     ? Icon(
                         Icons.arrow_forward_ios,

@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/settings/settings_page.dart';
+import 'package:aku_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:aku_ui/common_widgets/aku_round_button.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,13 @@ class _PersonalDrawState extends State<PersonalDraw> {
               ],
             ),
           ),
-          _myListTile(Icons.contact_page, '个人信息'),
+          _myListTile(
+            Icons.contact_page,
+            '个人信息',
+            onPressed: () {
+              Get.to(UserInfoPage());
+            },
+          ),
           _myListTile(Icons.supervised_user_circle, '联系客服'),
           _myListTile(Icons.settings, '设置', onPressed: () {
             Get.to(SettingsPage());
