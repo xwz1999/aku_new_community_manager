@@ -3,6 +3,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
+import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +81,7 @@ Widget _card(String number, String text, Color color) {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final userProvider=Provider.of<UserProvider>(context);
+    final userProvider = Provider.of<UserProvider>(context);
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: true);
     return Scaffold(
@@ -124,9 +125,11 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Scaffold.of(context).openDrawer();
                           },
-                          child: CircleAvatar(radius: 36.w,
-                          backgroundColor: Colors.grey,
-                          child: userProvider.isSigned?null:null,),
+                          child: CircleAvatar(
+                            radius: 36.w,
+                            backgroundColor: Colors.grey,
+                            child: userProvider.isSigned ? null : null,
+                          ),
                         );
                       })),
                   SizedBox(width: 16.w),
@@ -173,7 +176,9 @@ class _HomePageState extends State<HomePage> {
                       height: double.infinity,
                       minWidth: 78.w,
                       padding: EdgeInsets.zero,
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(ScanPage());
+                      },
                       child: Column(children: [
                         Icon(
                           Icons.access_alarm,
