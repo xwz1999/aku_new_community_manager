@@ -7,8 +7,14 @@ class AppProvider extends ChangeNotifier {
 
   ///添加最近使用的应用
   addRecentApp(AppApplication app) {
-    if (-recentUsedApp.length >= 4) _recentUsedApp.removeLast();
-    _recentUsedApp.insert(0, app);
+    if (_recentUsedApp.indexWhere((element) => element.name == app.name) ==
+        -1) {
+      if (_recentUsedApp.length >= 4) _recentUsedApp.removeLast();
+      _recentUsedApp.insert(0, app);
+    } else {
+      _recentUsedApp.removeWhere((element) => element.name == app.name);
+      _recentUsedApp.insert(0, app);
+    }
     notifyListeners();
   }
 

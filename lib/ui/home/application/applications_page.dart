@@ -1,17 +1,26 @@
+import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:provider/provider.dart';
 
 class AppApplication {
   String name;
   String assetPath;
+  Widget page;
+  AppApplication(
+    this.name,
+    this.assetPath,
+    this.page,
+  );
 }
 
 class ApplicationPage extends StatefulWidget {
@@ -27,8 +36,20 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   int _nowSelectedIndex = 0;
 
+  List<AppApplication> _recommandApplications = [
+    AppApplication('活动管理', '', ActivityManagerPage()),
+    AppApplication('访客管理', '', Scaffold()),
+    AppApplication('便民电话', '', Scaffold()),
+    AppApplication('借还管理', '', Scaffold()),
+    AppApplication('工单管理', '', Scaffold()),
+    AppApplication('语音管家', '', Scaffold()),
+    AppApplication('一键报警', '', Scaffold()),
+    AppApplication('问卷调查', '', Scaffold()),
+  ];
+
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context);
     return AkuScaffold(
       appBar: AppBar(
         brightness: Brightness.light,
@@ -70,6 +91,7 @@ class _ApplicationPageState extends State<ApplicationPage>
         children: [
           AkuBox.h(16),
           _buildRecentUsed(),
+          appProvider.recentUsedApp.isEmpty ? SizedBox() : AkuBox.h(16),
           _buildBottomApps(),
         ],
       ),
@@ -88,10 +110,7 @@ class _ApplicationPageState extends State<ApplicationPage>
               children: [
                 Row(
                   children: [
-                    AkuMaterialButton(
-                      onPressed: () {
-                        appProvider.clearRecentApp();
-                      },
+                    Padding(
                       child: Text(
                         '最近使用',
                         style: TextStyle(
@@ -107,7 +126,9 @@ class _ApplicationPageState extends State<ApplicationPage>
                     ),
                     Spacer(),
                     AkuMaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        appProvider.clearRecentApp();
+                      },
                       child: Text(
                         '清除',
                         style: TextStyle(
@@ -122,6 +143,16 @@ class _ApplicationPageState extends State<ApplicationPage>
                       ),
                     ),
                   ],
+                ),
+                GridView(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4,
+                  ),
+                  children: appProvider.recentUsedApp
+                      .map((e) => _buildBottomAppCard(e))
+                      .toList(),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
                 ),
               ],
             ),
@@ -155,7 +186,17 @@ class _ApplicationPageState extends State<ApplicationPage>
                   });
                 },
                 children: [
-                  Text('12'),
+                  GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final application = _recommandApplications[index];
+                      return _buildBottomAppCard(application);
+                    },
+                    itemCount: _recommandApplications.length,
+                  ),
                   Text('23'),
                 ],
               ),
@@ -190,6 +231,28 @@ class _ApplicationPageState extends State<ApplicationPage>
           fontSize: 28.sp,
           fontWeight: FontWeight.bold,
         ),
+      ),
+    );
+  }
+
+  Widget _buildBottomAppCard(AppApplication application) {
+    final appProvider = Provider.of<AppProvider>(context);
+    return AkuMaterialButton(
+      onPressed: () {
+        appProvider.addRecentApp(application);
+        Get.to(application.page);
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 75.w,
+            width: 75.w,
+            child: Placeholder(),
+          ),
+          AkuBox.h(8),
+          Text(application.name),
+        ],
       ),
     );
   }
