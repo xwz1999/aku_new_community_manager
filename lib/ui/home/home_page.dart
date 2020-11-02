@@ -3,6 +3,7 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
@@ -261,7 +262,8 @@ class _HomePageState extends State<HomePage> {
                     _menuButton(Icons.wysiwyg, '一键报警', HomePage()),
                     _menuButton(Icons.work, '访客管理', HomePage()),
                     _menuButton(Icons.accessibility, '报事报修', HomePage()),
-                    _menuButton(Icons.account_balance, '全部应用', HomePage()),
+                    _menuButton(
+                        Icons.account_balance, '全部应用', ApplicationPage()),
                   ],
                 ),
               ),
