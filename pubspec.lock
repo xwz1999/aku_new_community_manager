@@ -24,6 +24,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0-nullsafety.1"
+  bot_toast:
+    dependency: "direct main"
+    description:
+      name: bot_toast
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.4"
   characters:
     dependency: transitive
     description:
@@ -132,6 +139,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.3.2+2"
+  qr_code_scanner:
+    dependency: "direct main"
+    description:
+      name: qr_code_scanner
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.13"
   sky_engine:
     dependency: transitive
     description: flutter
