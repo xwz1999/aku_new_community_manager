@@ -1,8 +1,11 @@
+import 'package:aku_community_manager/ui/settings/setting_feedback_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:get/get.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
@@ -38,11 +41,13 @@ class _SettingsPageState extends State<SettingsPage> {
           AkuTile(
             title: Text('意见反馈'),
             arrow: true,
+            onTap: () => Get.to(SettingFeedBackPage()),
           ),
           Divider(height: 1.w),
           AkuTile(
             title: Text('清理缓存'),
             arrow: true,
+            onTap: () => BotToast.showText(text: '缓存清理完成'),
           ),
         ],
       ),

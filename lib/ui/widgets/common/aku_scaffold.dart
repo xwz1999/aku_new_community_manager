@@ -35,6 +35,8 @@ class AkuScaffold extends StatefulWidget {
   ///body
   final Widget body;
 
+  final Widget bottom;
+
   ///背景色
   ///
   ///默认`0xFFF9F9F9`
@@ -48,6 +50,7 @@ class AkuScaffold extends StatefulWidget {
     this.brightness = Brightness.light,
     this.body,
     this.backgroundColor = const Color(0XFFF9F9F9),
+    this.bottom,
   }) : super(key: key);
 
   @override
@@ -76,6 +79,7 @@ class _AkuScaffoldState extends State<AkuScaffold> {
         ),
       ),
       body: widget.body,
+      bottomNavigationBar: widget.bottom,
     );
   }
 }
