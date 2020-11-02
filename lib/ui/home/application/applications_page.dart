@@ -1,5 +1,7 @@
+import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'package:aku_community_manager/const/resource.dart';
@@ -35,7 +37,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   int _nowSelectedIndex = 0;
 
   List<AppApplication> _recommandApplications = [
-    AppApplication('活动管理', '', Scaffold()),
+    AppApplication('活动管理', '', ActivityManagerPage()),
     AppApplication('访客管理', '', Scaffold()),
     AppApplication('便民电话', '', Scaffold()),
     AppApplication('借还管理', '', Scaffold()),
@@ -238,6 +240,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     return AkuMaterialButton(
       onPressed: () {
         appProvider.addRecentApp(application);
+        Get.to(application.page);
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
