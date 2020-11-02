@@ -65,22 +65,23 @@ class _AkuScaffoldState extends State<AkuScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
-      appBar: AppBar(
-        backgroundColor: widget.appBarColor,
-        leading: widget.leading ?? AkuBackButton(),
-        brightness: widget.brightness,
-        elevation: 0,
-        centerTitle: true,
-        title: DefaultTextStyle(
-          style: widget.titleStyle ??
-              TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF333333),
-                fontSize: 36.sp,
-              ),
-          child: Text(widget.title ?? ''),
-        ),
-      ),
+      appBar: widget.appBar ??
+          AppBar(
+            backgroundColor: widget.appBarColor,
+            leading: widget.leading ?? AkuBackButton(),
+            brightness: widget.brightness,
+            elevation: 0,
+            centerTitle: true,
+            title: DefaultTextStyle(
+              style: widget.titleStyle ??
+                  TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF333333),
+                    fontSize: 36.sp,
+                  ),
+              child: Text(widget.title ?? ''),
+            ),
+          ),
       body: widget.body,
       bottomNavigationBar: widget.bottom,
     );
