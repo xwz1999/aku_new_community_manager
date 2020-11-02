@@ -1,4 +1,3 @@
-
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -227,7 +226,9 @@ class _HomePageState extends State<HomePage> {
                         minWidth: 78.w,
                         //消息按钮
                         height: double.infinity,
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(Message());
+                        },
                         child: Column(children: [
                           Image.asset(
                             R.ASSETS_HOME_IC_NEWS_PNG,
