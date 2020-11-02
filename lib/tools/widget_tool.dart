@@ -47,12 +47,14 @@ class AkuDiveder {
 }
 
 class AkuBox {
+  ///生成 高度为设计高度的SizedBox
   static h(double height) {
     return SizedBox(
       height: height.w,
     );
   }
 
+  ///生成 宽度为设计高度的SizedBox
   static w(double width) {
     return SizedBox(
       width: width.w,
