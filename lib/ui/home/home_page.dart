@@ -67,7 +67,10 @@ Widget _card(String number, String text, Color color) {
             Text(
               number,
               style: TextStyle(
-                  color: color, fontSize: 40.sp, fontStyle: FontStyle.italic),
+                color: color,
+                fontSize: 40.sp,
+                fontFamily: 'Bebas',
+              ),
             ),
             SizedBox(
               height: 16.w,
