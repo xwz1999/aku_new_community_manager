@@ -35,6 +35,8 @@ dependencies:
   get: ^3.15.0
   #刷新
   flutter_easyrefresh: ^2.1.6
+  #划动组件
+  carousel_slider: ^2.3.1
   #qrcode san
   qr_code_scanner: ^0.0.13
   #toast
