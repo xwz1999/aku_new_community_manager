@@ -18,6 +18,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       appBar: AppBar(
+        brightness: Brightness.light,
         elevation: 0,
         backgroundColor: Colors.white,
         leading: SizedBox(
@@ -51,6 +52,9 @@ class _ApplicationPageState extends State<ApplicationPage> {
             borderRadius: BorderRadius.circular(8.w),
           ),
         ),
+      ),
+      body: Column(
+        children: [],
       ),
     );
   }
