@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/utils/screen_tool.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size(375.w, 430.w - 40.w + ScreenUtil().statusBarHeight),
+        preferredSize: Size(375.w, 430.w - 40.w + statusBarHeight),
         child: Container(
           height: 430.w - 40.w + ScreenUtil().statusBarHeight,
           width: double.infinity,
