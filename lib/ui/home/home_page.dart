@@ -54,6 +54,7 @@ Widget _menuButton(IconData iconData, String text, Widget page) {
 //底部信息栏卡片
 Widget _card(String number, String text, Color color) {
   return AkuButton(
+    radius: 8.w,
     onPressed: () {},
     color: Color(0xFFFFFFFF),
     child: Container(
@@ -372,7 +373,10 @@ class _HomePageState extends State<HomePage> {
           //底部信息栏
           Container(
             width: double.infinity,
-            // height: 333.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.w),
+              color: Colors.white,
+            ),
             child: Column(
               children: [
                 Row(
