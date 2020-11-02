@@ -42,7 +42,7 @@ class _CommentMessageState extends State<CommentMessage> {
                   width: 16.w,
                 ),
                 Text(
-                  '系统通知',
+                  '评论消息',
                   style: TextStyle(
                       color: AppStyle.primaryTextColor,
                       fontSize: 32.sp,
@@ -51,7 +51,7 @@ class _CommentMessageState extends State<CommentMessage> {
                 SizedBox(height: 8.w),
               ]),
               Text(
-                '你有一条新的报事报修，请立即处理',
+                '你有一条新的评论消息，请立即查看',
                 style: TextStyle(
                     color: AppStyle.primaryTextColor,
                     fontSize: 28.sp,
