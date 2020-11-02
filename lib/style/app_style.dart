@@ -17,5 +17,14 @@ class AppStyle {
     fontSize: 36.sp,
     fontWeight: FontWeight.bold,
   );
-
+final primaryStyle=TextStyle(
+  color: primaryTextColor,
+  fontSize: 28.sp,
+  fontWeight: FontWeight.bold
+);
+final minorStyle=TextStyle(
+  color: minorTextColor,
+  fontSize: 24.sp,
+  fontWeight: FontWeight.normal
+);
 }
