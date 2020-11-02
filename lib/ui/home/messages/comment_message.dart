@@ -1,19 +1,18 @@
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/aku_ui.dart';
+import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/const/resource.dart';
-
-class SystemMessage extends StatefulWidget {
-  SystemMessage({Key key}) : super(key: key);
+class CommentMessage extends StatefulWidget {
+  CommentMessage({Key key}) : super(key: key);
 
   @override
-  _SystemMessageState createState() => _SystemMessageState();
+  _CommentMessageState createState() => _CommentMessageState();
 }
 
-class _SystemMessageState extends State<SystemMessage> {
-  Widget _messageList(String date, String name, String phone, String area) {
+class _CommentMessageState extends State<CommentMessage> {
+  Widget _messageList(String date, String name, String comment,) {
     return Column(
       children: [
         Container(
@@ -70,7 +69,7 @@ class _SystemMessageState extends State<SystemMessage> {
                     width: 4.w,
                   ),
                   Text(
-                    '保修人',
+                    '评论人',
                     style: TextStyle(
                         color: AppStyle.minorTextColor, fontSize: 28.sp),
                   ),
@@ -86,38 +85,18 @@ class _SystemMessageState extends State<SystemMessage> {
               Row(
                 children: [
                   Image.asset(
-                    R.ASSETS_MESSAGE_IC_PHONE_PNG,
+                    R.ASSETS_MESSAGE_IC_STAR_PNG,
                     width: 40.w,
                     height: 40.w,
                   ),
                   SizedBox(
                     width: 4.w,
                   ),
-                  Text('联系电话',
+                  Text('综合评分',
                       style: TextStyle(
                           color: AppStyle.minorTextColor, fontSize: 28.sp)),
                   Spacer(),
-                  Text(phone,
-                      style: TextStyle(
-                          color: AppStyle.primaryTextColor, fontSize: 28.sp)),
-                ],
-              ),
-              SizedBox(height: 16.w),
-              Row(
-                children: [
-                  Image.asset(
-                    R.ASSETS_MESSAGE_IC_AREA_PNG,
-                    width: 40.w,
-                    height: 40.w,
-                  ),
-                  SizedBox(
-                    width: 4.w,
-                  ),
-                  Text('报修区域',
-                      style: TextStyle(
-                          color: AppStyle.minorTextColor, fontSize: 28.sp)),
-                  Spacer(),
-                  Text(area,
+                  Text(comment,
                       style: TextStyle(
                           color: AppStyle.primaryTextColor, fontSize: 28.sp)),
                 ],
@@ -151,16 +130,15 @@ class _SystemMessageState extends State<SystemMessage> {
       ],
     );
   }
-
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '系统消息',
-      body: ListView(
+      title: '评论消息',
+       body: ListView(
         padding: EdgeInsets.all(32.w),
         children: [
-          _messageList('2020-10-23 10:00', '杨建', '17867665666', '共区'),
-          _messageList('2020-10-22 10:00', '刘能', '17855823545', '共区'),
+          _messageList('2020-10-23 10:00', '杨建', '四星'),
+          _messageList('2020-10-24 11:00', '刘能', '四星'),
         ],
       ),
     );
