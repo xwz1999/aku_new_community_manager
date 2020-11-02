@@ -42,6 +42,8 @@ dependencies:
   #toast
   bot_toast: ^3.0.4
 
+  extended_text: ^4.0.0
+
   aku_ui:
     git:
       url: http://test.akuhotel.com:8099/aku_fe/aku_ui.git

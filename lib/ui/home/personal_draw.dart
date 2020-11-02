@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/settings/settings_page.dart';
 import 'package:aku_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_ui/common_widgets/aku_button.dart';
@@ -112,7 +113,9 @@ class _PersonalDrawState extends State<PersonalDraw> {
             Icons.contact_page,
             '个人信息',
             onPressed: () {
-              Get.to(UserInfoPage());
+              userProvider.isSigned
+                  ? Get.to(UserInfoPage())
+                  : Get.to(LoginPage());
             },
           ),
           _myListTile(Icons.supervised_user_circle, '联系客服'),

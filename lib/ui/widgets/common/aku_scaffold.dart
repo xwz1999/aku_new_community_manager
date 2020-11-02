@@ -41,6 +41,8 @@ class AkuScaffold extends StatefulWidget {
   ///
   ///默认`0xFFF9F9F9`
   final Color backgroundColor;
+
+  final Color appBarColor;
   AkuScaffold({
     Key key,
     this.appBar,
@@ -51,6 +53,7 @@ class AkuScaffold extends StatefulWidget {
     this.body,
     this.backgroundColor = const Color(0XFFF9F9F9),
     this.bottom,
+    this.appBarColor = Colors.white,
   }) : super(key: key);
 
   @override
@@ -63,7 +66,7 @@ class _AkuScaffoldState extends State<AkuScaffold> {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: widget.appBarColor,
         leading: widget.leading ?? AkuBackButton(),
         brightness: widget.brightness,
         elevation: 0,
@@ -75,7 +78,7 @@ class _AkuScaffoldState extends State<AkuScaffold> {
                 color: Color(0xFF333333),
                 fontSize: 36.sp,
               ),
-          child: Text(widget.title),
+          child: Text(widget.title ?? ''),
         ),
       ),
       body: widget.body,
