@@ -1,3 +1,4 @@
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -186,9 +187,10 @@ class _HomePageState extends State<HomePage> {
                         Get.to(ScanPage());
                       },
                       child: Column(children: [
-                        Icon(
-                          Icons.access_alarm,
-                          size: 48.w,
+                        Image.asset(
+                          R.ASSETS_HOME_IC_SCAN_PNG,
+                          height: 48.w,
+                          width: 48.w,
                         ),
                         Text(
                           '扫一扫',
@@ -209,9 +211,10 @@ class _HomePageState extends State<HomePage> {
                       height: double.infinity,
                       onPressed: () {},
                       child: Column(children: [
-                        Icon(
-                          Icons.access_time,
-                          size: 48.w,
+                        Image.asset(
+                          R.ASSETS_HOME_IC_NEWS_PNG,
+                          height: 48.w,
+                          width: 48.w,
                         ),
                         Text(
                           '消息',
