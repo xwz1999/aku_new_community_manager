@@ -17,12 +17,15 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  UserInfoModel _userInfoModel = UserInfoModel(
-    nickName: '李大海',
-    avatar: null,
-  );
+  UserInfoModel _userInfoModel = UserInfoModel.empty();
 
   UserInfoModel get userInfoModel => _userInfoModel;
+
+  setUserInfo(UserInfoModel model) {
+    _userInfoModel = model;
+    _isSigned = true;
+    notifyListeners();
+  }
 
   setNickName(String name) {
     _userInfoModel.nickName = name;
