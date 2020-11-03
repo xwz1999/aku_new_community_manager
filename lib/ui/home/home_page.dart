@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //自定义bar的菜单按钮
+  ///自定义bar的菜单按钮
   Widget _menuButton(String assetPath, String text, Widget page) {
     return Expanded(
       child: AkuButton(
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-//底部信息栏卡片
+///底部信息栏卡片
   Widget _card(
     String number,
     String text,
