@@ -37,13 +37,14 @@ class _ApplicationPageState extends State<ApplicationPage>
   int _nowSelectedIndex = 0;
 
   List<AppApplication> _recommandApplications = [
-    AppApplication('活动管理', '', ActivityManagerPage()),
-    AppApplication('访客管理', '', Scaffold()),
+    AppApplication(
+        '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
+    AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, Scaffold()),
     AppApplication('便民电话', '', Scaffold()),
-    AppApplication('借还管理', '', Scaffold()),
+    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
     AppApplication('工单管理', '', Scaffold()),
     AppApplication('语音管家', '', Scaffold()),
-    AppApplication('一键报警', '', Scaffold()),
+    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
     AppApplication('问卷调查', '', Scaffold()),
   ];
 
@@ -245,10 +246,10 @@ class _ApplicationPageState extends State<ApplicationPage>
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: 75.w,
-            width: 75.w,
-            child: Placeholder(),
+          Image.asset(
+            application.assetPath,
+            height: 72.w,
+            width: 72.w,
           ),
           AkuBox.h(8),
           Text(application.name),

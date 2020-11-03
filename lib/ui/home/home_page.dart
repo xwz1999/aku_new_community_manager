@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //自定义bar的菜单按钮
-  Widget _menuButton(String path, String text, Widget page) {
+  Widget _menuButton(String assetPath, String text, Widget page) {
     return Expanded(
       child: AkuButton(
         radius: 8.w,
@@ -37,9 +37,9 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              path,
-              width: 75.w,
+              assetPath,
               height: 75.w,
+              width: 75.w,
             ),
             SizedBox(height: 8.w),
             Text(
