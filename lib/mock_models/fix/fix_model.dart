@@ -1,6 +1,4 @@
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 enum FIX_ENUM {
@@ -51,6 +49,64 @@ class FixModel {
 
   static List<FixModel> initList() {
     return [
+      FixModel(
+        title: '小区西大门车栏坏了，请物业尽快修理更换。',
+        dateStart: DateTime(2020, 10, 21, 7, 28, 56),
+        type: FIX_ENUM.WAIT_PICKUP,
+        imgs: [R.ASSETS_STATIC_FIX_AIR1_PNG, R.ASSETS_STATIC_FIX_AIR2_PNG],
+        detail: FixDetailModel(
+          userName: '杨建',
+          userPhoneNumber: '18882928888',
+          fixArea: 'B区',
+          type: FIX_PAYMENT_TYPE.FREE,
+          limit: FIX_DATE_LIMIT.HOUR_24,
+          subType: FIX_SUB_TYPE.NORMAL,
+          fixStatuses: [
+            FixStatus(title: '申请保修', date: DateTime(2020, 10, 23, 10, 28, 56)),
+            FixStatus(
+                title: '分派给李保国师傅', date: DateTime(2020, 10, 23, 10, 32, 14)),
+            FixStatus(title: '师傅已接单', date: DateTime(2020, 10, 23, 10, 38, 26)),
+          ],
+          result: FixResult(
+            detail: '电饭煲插头没插',
+            material: '无',
+            imgs: [R.ASSETS_STATIC_FIX_FOOD_PNG],
+          ),
+          review: UserReviewInfo(
+            rate: 5,
+            content: '师傅太用心了',
+          ),
+        ),
+      ),
+      FixModel(
+        title: '家里空调坏了，请师傅抓紧时间尽快维修。',
+        dateStart: DateTime(2020, 10, 21, 7, 28, 56),
+        type: FIX_ENUM.PROCESSING,
+        imgs: [R.ASSETS_STATIC_FIX_AIR1_PNG, R.ASSETS_STATIC_FIX_AIR2_PNG],
+        detail: FixDetailModel(
+          userName: '杨建',
+          userPhoneNumber: '18882929292',
+          fixArea: 'A区',
+          type: FIX_PAYMENT_TYPE.FREE,
+          limit: FIX_DATE_LIMIT.HOUR_24,
+          subType: FIX_SUB_TYPE.NORMAL,
+          fixStatuses: [
+            FixStatus(title: '申请保修', date: DateTime(2020, 10, 23, 10, 28, 56)),
+            FixStatus(
+                title: '分派给李保国师傅', date: DateTime(2020, 10, 23, 10, 32, 14)),
+            FixStatus(title: '师傅已接单', date: DateTime(2020, 10, 23, 10, 38, 26)),
+          ],
+          result: FixResult(
+            detail: '电饭煲插头没插',
+            material: '无',
+            imgs: [R.ASSETS_STATIC_FIX_FOOD_PNG],
+          ),
+          review: UserReviewInfo(
+            rate: 5,
+            content: '师傅太用心了',
+          ),
+        ),
+      ),
       FixModel(
         title: '家中电饭煲出问题了，请师傅速来。',
         dateStart: DateTime(2020, 10, 22, 9, 28, 56),
