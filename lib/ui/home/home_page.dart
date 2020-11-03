@@ -9,6 +9,7 @@ import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
@@ -27,7 +28,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  //自定义bar的菜单按钮
+  ///自定义bar的菜单按钮
   Widget _menuButton(String assetPath, String text, Widget page) {
     return Expanded(
       child: AkuButton(
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-//底部信息栏卡片
+///底部信息栏卡片
   Widget _card(
     String number,
     String text,
@@ -189,14 +190,12 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {},
                           radius: 8.w,
                           child: Row(children: [
+                            AkuBox.w(21.w),
                             Container(
                               child: Column(
                                 children: [
                                   SizedBox(height: 18.w),
-                                  Icon(
-                                    Icons.zoom_in_sharp,
-                                    size: 38.w,
-                                  ),
+                                  Image.asset(R.ASSETS_HOME_IC_SEARCH_PNG,width:37.w,height:37.w),
                                 ],
                               ),
                             ),
@@ -298,7 +297,7 @@ class _HomePageState extends State<HomePage> {
                       _menuButton(
                           R.ASSETS_HOME_IC_POLICE_PNG, '一键报警', HomePage()),
                       _menuButton(
-                          R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理', HomePage()),
+                          R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理', VisitorManagerPage()),
                       _menuButton(
                         R.ASSETS_HOME_IC_SERVICE_PNG,
                         '报事报修',
