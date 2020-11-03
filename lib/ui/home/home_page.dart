@@ -8,6 +8,7 @@ import 'package:aku_community_manager/ui/home/business/business_page.dart';
 import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
+import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
@@ -291,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                       _menuButton(
                           R.ASSETS_HOME_IC_POLICE_PNG, '一键报警', HomePage()),
                       _menuButton(
-                          R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理', HomePage()),
+                          R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理', VisitorManagerPage()),
                       _menuButton(
                           R.ASSETS_HOME_IC_SERVICE_PNG, '报事报修', HomePage()),
                       _menuButton(
