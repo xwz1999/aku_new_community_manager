@@ -24,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //自定义bar的菜单按钮
-  Widget _menuButton(IconData iconData, String text, Widget page) {
+  Widget _menuButton(String assetPath, String text, Widget page) {
     return Expanded(
       child: AkuButton(
         radius: 8.w,
@@ -35,9 +35,10 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              iconData,
-              size: 75.w,
+            Image.asset(
+              assetPath,
+              height: 75.w,
+              width: 75.w,
             ),
             SizedBox(height: 8.w),
             Text(
@@ -274,11 +275,14 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _menuButton(Icons.wysiwyg, '一键报警', HomePage()),
-                      _menuButton(Icons.work, '访客管理', HomePage()),
-                      _menuButton(Icons.accessibility, '报事报修', HomePage()),
                       _menuButton(
-                          Icons.account_balance, '全部应用', ApplicationPage()),
+                          R.ASSETS_HOME_IC_POLICE_PNG, '一键报警', HomePage()),
+                      _menuButton(
+                          R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理', HomePage()),
+                      _menuButton(
+                          R.ASSETS_HOME_IC_SERVICE_PNG, '报事报修', HomePage()),
+                      _menuButton(
+                          R.ASSETS_HOME_IC_ALL_PNG, '全部应用', ApplicationPage()),
                     ],
                   ),
                 ),
