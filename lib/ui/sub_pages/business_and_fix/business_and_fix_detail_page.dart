@@ -108,6 +108,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           _buildType(widget.model.type == FIX_ENUM.HAND_OUT),
           _buildProcess(),
           detailModel.result == null ? SizedBox() : _buildResult(),
+          detailModel.review == null ? SizedBox() : _buildRating(),
         ],
       ),
       bottom: Builder(
@@ -405,6 +406,45 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     );
   }
 
+  _buildRating() {
+    return _buildRawBox(
+      title: '评价信息',
+      spacing: 24,
+      children: [
+        Row(
+          children: [
+            Text(
+              '综合评分',
+              style: TextStyle(
+                color: AppStyle.minorTextColor,
+                fontSize: 28.w,
+              ),
+            ),
+            Spacer(),
+            _buildStar(detailModel.review.rate),
+          ],
+        ),
+        AkuBox.h(24),
+        Text(
+          '评价内容',
+          style: TextStyle(
+            color: AppStyle.minorTextColor,
+            fontSize: 28.w,
+          ),
+        ),
+        AkuBox.h(8),
+        Text(
+          detailModel.review.content,
+          style: TextStyle(
+            color: AppStyle.primaryTextColor,
+            fontSize: 28.w,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildTile(String asset, String title, String subTitle) {
     return Row(
       children: [
@@ -495,6 +535,21 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           ),
         ),
       ],
+    );
+  }
+
+  _buildStar(double count) {
+    List<Widget> children = [];
+    for (int i = 0; i < count; i++) {
+      children.add(Icon(
+        Icons.star,
+        color: AppStyle.primaryColor,
+        size: 32.w,
+      ));
+      children.add(AkuBox.w(16));
+    }
+    return Row(
+      children: children..removeLast(),
     );
   }
 

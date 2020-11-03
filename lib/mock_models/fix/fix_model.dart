@@ -90,10 +90,6 @@ class FixModel {
             material: '无',
             imgs: [R.ASSETS_STATIC_FIX_FOOD_PNG],
           ),
-          review: UserReviewInfo(
-            rate: 5,
-            content: '师傅太用心了',
-          ),
         ),
       ),
       FixModel(

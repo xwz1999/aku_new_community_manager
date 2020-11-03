@@ -50,6 +50,8 @@ dependencies:
 
   image_picker: ^0.6.7+12
 
+  flutter_rating_bar: ^3.0.1+1
+
   aku_ui:
     git:
       url: http://test.akuhotel.com:8099/aku_fe/aku_ui.git
