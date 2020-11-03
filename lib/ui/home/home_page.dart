@@ -184,14 +184,12 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {},
                           radius: 8.w,
                           child: Row(children: [
+                            AkuBox.w(21.w),
                             Container(
                               child: Column(
                                 children: [
                                   SizedBox(height: 18.w),
-                                  Icon(
-                                    Icons.zoom_in_sharp,
-                                    size: 38.w,
-                                  ),
+                                  Image.asset(R.ASSETS_HOME_IC_SEARCH_PNG,width:37.w,height:37.w),
                                 ],
                               ),
                             ),
