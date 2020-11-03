@@ -17,8 +17,8 @@ class VisitorCardsModel {
   String plate;
   String time;
   VisitorStatus status;
-  VisitorCardsModel(this.adress, this.name, this.status,
-      {this.plate, this.time});
+  VisitorCardsModel({this.adress, this.name, this.status,
+      this.plate, this.time});
 }
 
 class VisitorManagerPage extends StatefulWidget {
@@ -35,14 +35,14 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
 
   List<VisitorCardsModel> _cards = [
     VisitorCardsModel(
-      '深圳华悦茂峰1幢1单元702',
-      '马泽城',
-      VisitorStatus.VISIT_DONE,
+      adress:'深圳华悦茂峰1幢1单元702',
+      name:'马泽城',
+      status:VisitorStatus.VISIT_DONE,
       plate: '浙BA9899',
       time: '2020-10-24 12:00',
     ),
-    VisitorCardsModel('深圳华悦茂峰2幢2单元702', '刘揪心', VisitorStatus.NOT_VISIT),
-    VisitorCardsModel('深圳华悦茂峰3幢3单元602', '刘揪心', VisitorStatus.OUTDATE),
+    VisitorCardsModel(adress:'深圳华悦茂峰2幢2单元702',name:'刘揪心',status: VisitorStatus.NOT_VISIT),
+    VisitorCardsModel(adress:'深圳华悦茂峰3幢3单元602', name:'张空间', status:VisitorStatus.OUTDATE),
   ];
   TabController _tabController;
 
@@ -71,34 +71,6 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
             preferredSize: Size.fromHeight(88.w)),
         body: TabBarView(
           controller: _tabController,
-          // children: _tabs.map((e) => _buildTabView(_tabs.indexOf(e))).toList(),)
-          // children: [
-          //   ListView(
-          //     padding: EdgeInsets.only(left: 32.w, right: 32.w),
-          //     children: _cards
-          //         .map((e) => VisitorManagerCard(
-          //               adress: e.adress,
-          //               name: e.name,
-          //               plate: e.plate,
-          //               time: e.time,
-          //             ))
-          //         .toList(),
-          //   ),
-          //   ListView(
-          //     padding: EdgeInsets.only(left: 32.w, right: 32.w),
-          //     children: _cards
-          //         .where((element) => element.status == VisitorStatus.NOT_VISIT)
-          //         .map((e) => VisitorManagerCard(
-          //               adress: e.adress,
-          //               name: e.name,
-          //               plate: e.plate,
-          //               time: e.time,
-          //             ))
-          //         .toList(),
-          //   ),
-          //   ListView(),
-          //   ListView(),
-          // ],
           children: _tabs.map((e) => _buildListView(_tabs.indexOf(e))).toList(),
         ));
   }
@@ -107,19 +79,22 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
     List<VisitorCardsModel> _selectCards;
     switch (index) {
       case 0:
-      _selectCards = _cards;
-      break;
+        _selectCards = _cards;
+        break;
       case 1:
         _selectCards = _cards
-            .where((element) => element.status == VisitorStatus.NOT_VISIT).toList();
+            .where((element) => element.status == VisitorStatus.NOT_VISIT)
+            .toList();
         break;
       case 2:
         _selectCards = _cards
-            .where((element) => element.status == VisitorStatus.VISIT_DONE).toList();
+            .where((element) => element.status == VisitorStatus.VISIT_DONE)
+            .toList();
         break;
       case 3:
-        _selectCards =
-            _cards.where((element) => element.status == VisitorStatus.OUTDATE).toList();
+        _selectCards = _cards
+            .where((element) => element.status == VisitorStatus.OUTDATE)
+            .toList();
         break;
     }
     return ListView(
@@ -130,6 +105,7 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
                 name: e.name,
                 plate: e.plate,
                 time: e.time,
+                status: e.status,
               ))
           .toList(),
     );

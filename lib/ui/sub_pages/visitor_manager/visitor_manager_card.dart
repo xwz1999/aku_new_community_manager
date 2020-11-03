@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 class VisitorManagerCard extends StatefulWidget {
@@ -8,7 +9,8 @@ class VisitorManagerCard extends StatefulWidget {
   final String name;
   final String plate;
   final String time;
-  VisitorManagerCard({Key key, @required this.adress,@required this.name, this.plate, this.time}) : super(key: key);
+  final VisitorStatus status;
+  VisitorManagerCard({Key key, @required this.adress,@required this.name, this.plate, this.time,@required this.status}) : super(key: key);
 
   @override
   _VisitorManagerCardState createState() => _VisitorManagerCardState();
@@ -21,6 +23,7 @@ String _adress;
 String _name;
 String _plate;
 String _time;
+VisitorStatus _status;
   @override
   void initState() { 
     super.initState();
@@ -28,6 +31,7 @@ String _time;
     _name=widget.name;
     _plate=widget.plate??'无信息';
     _time=widget.time??'无信息';
+    _status=widget.status;
   }
   @override
   Widget build(BuildContext context) {
@@ -67,11 +71,20 @@ String _time;
              Positioned(
                left: 582.w,
                bottom: 104.w,
-
-               child: Placeholder(),),
+               child:_statusImage(_status) ),
            ],),
         ),
       ],
     );
+  }
+  Widget _statusImage(VisitorStatus status){
+    switch (status) {
+      case VisitorStatus.NOT_VISIT:
+      return  Placeholder();
+        case VisitorStatus.VISIT_DONE:
+       return  Placeholder();
+        case VisitorStatus.OUTDATE:
+       return Placeholder();
+    }
   }
 }
