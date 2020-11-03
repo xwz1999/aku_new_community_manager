@@ -8,6 +8,7 @@ import 'package:aku_community_manager/ui/home/business/business_page.dart';
 import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
+import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
@@ -33,7 +34,12 @@ class _HomePageState extends State<HomePage> {
         radius: 8.w,
         height: 75.w + 8.w + 33.w,
         onPressed: () {
-          Get.to(page);
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+          if (userProvider.isSigned)
+            Get.to(page);
+          else
+            Get.to(LoginPage());
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
