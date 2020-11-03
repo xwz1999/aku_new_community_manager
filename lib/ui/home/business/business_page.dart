@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
@@ -38,20 +39,9 @@ class _BusinessPageState extends State<BusinessPage>
     return AkuScaffold(
       title: '全部事项',
       appBarBottom: PreferredSize(
-        child: TabBar(
-          labelColor: AppStyle.primaryTextColor,
-          unselectedLabelColor: AppStyle.minorTextColor,
-          labelStyle: TextStyle(
-            fontSize: 28.w,
-            fontWeight: FontWeight.bold,
-          ),
-          unselectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.normal,
-          ),
-          indicatorColor: AppStyle.primaryColor,
-          indicatorSize: TabBarIndicatorSize.label,
+        child: AkuTabBar(
           controller: _tabController,
-          tabs: _tabs.map((e) => Tab(text: e)).toList(),
+          tabs: _tabs,
         ),
         preferredSize: Size.fromHeight(88.w),
       ),
