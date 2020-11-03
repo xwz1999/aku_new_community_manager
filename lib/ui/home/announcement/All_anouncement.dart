@@ -1,11 +1,13 @@
 import 'dart:ui';
 
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/home/announcement/anouncement_details.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:get/get.dart';
 
 class AnouncementCard {
   String title;
@@ -24,12 +26,24 @@ class AllAnouncement extends StatefulWidget {
 }
 
 class _AllAnouncementState extends State<AllAnouncement> {
-  Widget _anounceCard(String title, String date,) {
+  Widget _anounceCard(
+    String title,
+    String date,
+  ) {
     return Column(
       children: [
         AkuButton(
-          onPressed: (){},
-          // color: Color(0xFFFFFFFF),
+          onPressed: () {
+            Get.to(AnouncementDetails(
+              title: title,
+              date: date,
+              body: '''
+各位同事：
+深圳永成物业员工2016年国庆节放假通知如下10月1日至7日放假调休，共7天。10月8日（星期六）上班。调休期间，值班室至少三人，请各级主管自行安排。请将此消息转达给我们所有的同事、客户、供应商和任何有品要迅知的伙伴
+
+祝全体员工度过一个欢乐样和的国庆节假日''',
+            ));
+          },
           child: Container(
             color: Color(0xFFFFFFFF),
             width: double.infinity,
@@ -59,7 +73,10 @@ class _AllAnouncementState extends State<AllAnouncement> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(title,style: AppStyle().primaryStyle,),
+                      Text(
+                        title,
+                        style: AppStyle().primaryStyle,
+                      ),
                       SizedBox(height: 12.w),
                       Row(
                         children: [
@@ -81,18 +98,23 @@ class _AllAnouncementState extends State<AllAnouncement> {
             ),
           ),
         ),
-        SizedBox(height: 16.w,),
+        SizedBox(
+          height: 16.w,
+        ),
       ],
     );
   }
 
-  Widget _anouncementList(String date, List<AnouncementCard> cards,) {
+  Widget _anouncementList(
+    String date,
+    List<AnouncementCard> cards,
+  ) {
     return Column(
       children: [
         Container(
             alignment: Alignment.center,
             width: double.infinity,
-            height: 24.w + 33.w,
+            height: 48.w + 33.w,
             child: Text(
               date,
               style: AppStyle().minorStyle,
@@ -111,13 +133,22 @@ class _AllAnouncementState extends State<AllAnouncement> {
     return AkuScaffold(
       title: '全部公告',
       body: ListView(
-        padding: EdgeInsets.only(top: 24.w, left: 32.w, right: 32.w),
+        padding: EdgeInsets.only(left: 32.w, right: 32.w),
         children: [
           _anouncementList('2020-10-22', [
-            AnouncementCard('关于国庆放假的通知和安排', '2020-10-22 10:00',),
-            AnouncementCard('关于绿化组人员调动通知', '2020-10-22 11:00',),
+            AnouncementCard(
+              '关于国庆放假的通知和安排',
+              '2020-10-22 10:00',
+            ),
+            AnouncementCard(
+              '关于绿化组人员调动通知',
+              '2020-10-22 11:00',
+            ),
           ]),
-          _anouncementList('2020-10-20', [])
+          _anouncementList('2020-10-20', [
+            AnouncementCard('关于中秋放假通知与工作安排', '2020-10-22 10:00'),
+            AnouncementCard('疫情期间对大家的表扬和鼓励', '2020-10-22 11:00'),
+          ]),
         ],
       ),
     );
