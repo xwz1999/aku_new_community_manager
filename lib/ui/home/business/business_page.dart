@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
@@ -14,7 +15,7 @@ class BusinessPage extends StatefulWidget {
 
 class _BusinessPageState extends State<BusinessPage>
     with TickerProviderStateMixin {
-  List<String> tabs = ['待处理', '处理中', '已处理', '全部'];
+  List<String> _tabs = ['待处理', '处理中', '已处理', '全部'];
   TabController _tabController;
 
   @override
@@ -38,23 +39,25 @@ class _BusinessPageState extends State<BusinessPage>
     return AkuScaffold(
       title: '全部事项',
       appBarBottom: PreferredSize(
-        child: TabBar(
-          labelColor: AppStyle.primaryTextColor,
-          unselectedLabelColor: AppStyle.minorTextColor,
-          labelStyle: TextStyle(
-            fontSize: 28.w,
-            fontWeight: FontWeight.bold,
-          ),
-          unselectedLabelStyle: TextStyle(
-            fontWeight: FontWeight.normal,
-          ),
-          indicatorColor: AppStyle.primaryColor,
-          indicatorSize: TabBarIndicatorSize.label,
+        child: AkuTabBar(
           controller: _tabController,
-          tabs: tabs.map((e) => Tab(text: e)).toList(),
+          tabs: _tabs,
         ),
         preferredSize: Size.fromHeight(88.w),
       ),
+      body: TabBarView(
+        controller: _tabController,
+        children: _tabs.map((e) => _buildTabPage(_tabs.indexOf(e))).toList(),
+      ),
+    );
+  }
+
+  Widget _buildTabPage(int index) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return Text(index.toString());
+      },
+      itemCount: 50,
     );
   }
 }
