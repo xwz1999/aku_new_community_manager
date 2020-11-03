@@ -72,6 +72,7 @@ flutter:
     - assets/home/
     - assets/user/
     - assets/message/
+    - assets/manage/
 
     - assets/static_temp/
   # To add assets to your application, add an assets section, like this:

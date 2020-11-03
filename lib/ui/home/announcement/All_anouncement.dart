@@ -9,10 +9,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:get/get.dart';
 
-class AnouncementCard {
+class AnouncementCardModel {
   String title;
   String date;
-  AnouncementCard(
+  AnouncementCardModel(
     this.title,
     this.date,
   );
@@ -107,7 +107,7 @@ class _AllAnouncementState extends State<AllAnouncement> {
 
   Widget _anouncementList(
     String date,
-    List<AnouncementCard> cards,
+    List<AnouncementCardModel> cards,
   ) {
     return Column(
       children: [
@@ -136,18 +136,18 @@ class _AllAnouncementState extends State<AllAnouncement> {
         padding: EdgeInsets.only(left: 32.w, right: 32.w),
         children: [
           _anouncementList('2020-10-22', [
-            AnouncementCard(
+            AnouncementCardModel(
               '关于国庆放假的通知和安排',
               '2020-10-22 10:00',
             ),
-            AnouncementCard(
+            AnouncementCardModel(
               '关于绿化组人员调动通知',
               '2020-10-22 11:00',
             ),
           ]),
           _anouncementList('2020-10-20', [
-            AnouncementCard('关于中秋放假通知与工作安排', '2020-10-22 10:00'),
-            AnouncementCard('疫情期间对大家的表扬和鼓励', '2020-10-22 11:00'),
+            AnouncementCardModel('关于中秋放假通知与工作安排', '2020-10-22 10:00'),
+            AnouncementCardModel('疫情期间对大家的表扬和鼓励', '2020-10-22 11:00'),
           ]),
         ],
       ),

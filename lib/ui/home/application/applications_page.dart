@@ -1,4 +1,6 @@
+import 'package:aku_community_manager/ui/manage_pages/green_manage_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -39,7 +41,7 @@ class _ApplicationPageState extends State<ApplicationPage>
   List<AppApplication> _recommandApplications = [
     AppApplication(
         '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
-    AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, Scaffold()),
+    AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, VisitorManagerPage()),
     AppApplication('便民电话', '', Scaffold()),
     AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
     AppApplication('工单管理', '', Scaffold()),
@@ -47,7 +49,9 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
     AppApplication('问卷调查', '', Scaffold()),
   ];
-
+List<AppApplication> _wisdomApplications=[
+  AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
+];
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
@@ -198,7 +202,17 @@ class _ApplicationPageState extends State<ApplicationPage>
                     },
                     itemCount: _recommandApplications.length,
                   ),
-                  Text('23'),
+                   GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                    ),
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final application = _wisdomApplications[index];
+                      return _buildBottomAppCard(application);
+                    },
+                    itemCount: _wisdomApplications.length,
+                  ),
                 ],
               ),
             ),
