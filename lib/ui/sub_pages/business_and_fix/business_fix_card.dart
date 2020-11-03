@@ -52,64 +52,70 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Container(
-                child: Text(
-                  '报事报修',
-                  style: TextStyle(
-                    color: AppStyle.secondaryColor,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
+    return GestureDetector(
+      onTap: () {
+        Get.to(BusinessAndFixDetailPage(model: widget.model));
+      },
+      child: Container(
+        padding: EdgeInsets.all(24.w),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Container(
+                  child: Text(
+                    '报事报修',
+                    style: TextStyle(
+                      color: AppStyle.secondaryColor,
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 6.w, horizontal: 16.w),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(2.w),
+                    border:
+                        Border.all(width: 2.w, color: AppStyle.secondaryColor),
                   ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 6.w, horizontal: 16.w),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2.w),
-                  border:
-                      Border.all(width: 2.w, color: AppStyle.secondaryColor),
-                ),
-              ),
-              AkuBox.w(16),
-              Expanded(
-                child: Text(
-                  dateStart,
-                  style: TextStyle(
-                    color: AppStyle.minorTextColor,
-                    fontSize: 22.sp,
+                AkuBox.w(16),
+                Expanded(
+                  child: Text(
+                    dateStart,
+                    style: TextStyle(
+                      color: AppStyle.minorTextColor,
+                      fontSize: 22.sp,
+                    ),
                   ),
                 ),
-              ),
-              fixTypeWidget,
-            ],
-          ),
-          AkuBox.h(24),
-          Text(
-            widget.model.title,
-            style: TextStyle(
-              color: AppStyle.primaryTextColor,
-              fontSize: 28.sp,
-              fontWeight: FontWeight.bold,
+                fixTypeWidget,
+              ],
             ),
-          ),
-          AkuBox.h(16),
-          _buildImgs(),
-          _buildBottomCard(),
-        ],
-      ),
-      margin: EdgeInsets.symmetric(
-        horizontal: 32.w,
-        vertical: 8.w,
-      ),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.w),
+            AkuBox.h(24),
+            Text(
+              widget.model.title,
+              style: TextStyle(
+                color: AppStyle.primaryTextColor,
+                fontSize: 28.sp,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            AkuBox.h(16),
+            _buildImgs(),
+            _buildBottomCard(),
+          ],
+        ),
+        margin: EdgeInsets.symmetric(
+          horizontal: 32.w,
+          vertical: 8.w,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.w),
+        ),
       ),
     );
   }

@@ -50,6 +50,24 @@ class FixModel {
   static List<FixModel> initList() {
     return [
       FixModel(
+        title: '小区大道路灯坏了。',
+        dateStart: DateTime(2020, 10, 25, 14, 28, 56),
+        type: FIX_ENUM.HAND_OUT,
+        imgs: [
+          R.ASSETS_STATIC_FIX_LIGHT1_PNG,
+          R.ASSETS_STATIC_FIX_LIGHT2_PNG,
+          R.ASSETS_STATIC_FIX_LIGHT3_PNG,
+        ],
+        detail: FixDetailModel(
+          userName: '杨建',
+          userPhoneNumber: '18882928888',
+          fixArea: 'C区',
+          fixStatuses: [
+            FixStatus(title: '申请保修', date: DateTime(2020, 10, 23, 10, 28, 56)),
+          ],
+        ),
+      ),
+      FixModel(
         title: '小区西大门车栏坏了，请物业尽快修理更换。',
         dateStart: DateTime(2020, 10, 21, 7, 28, 56),
         type: FIX_ENUM.WAIT_PICKUP,
@@ -147,6 +165,16 @@ enum FIX_PAYMENT_TYPE {
   PAY,
 }
 
+Map<FIX_PAYMENT_TYPE, String> fixPaymentMap = {
+  FIX_PAYMENT_TYPE.FREE: '无偿服务',
+  FIX_PAYMENT_TYPE.PAY: '有偿服务',
+};
+
+Map<String, FIX_PAYMENT_TYPE> fixPaymentStringMap = {
+  '无偿服务': FIX_PAYMENT_TYPE.FREE,
+  '有偿服务': FIX_PAYMENT_TYPE.PAY,
+};
+
 ///工单子类
 enum FIX_SUB_TYPE {
   ///一般单
@@ -156,12 +184,34 @@ enum FIX_SUB_TYPE {
   HURRY,
 }
 
+Map<FIX_SUB_TYPE, String> fixSubTypeMap = {
+  FIX_SUB_TYPE.NORMAL: '一般单',
+  FIX_SUB_TYPE.HURRY: '加急单',
+};
+
+Map<String, FIX_SUB_TYPE> fixSubTypeStringMap = {
+  '一般单': FIX_SUB_TYPE.NORMAL,
+  '加急单': FIX_SUB_TYPE.HURRY,
+};
+
 ///工单时限
 enum FIX_DATE_LIMIT {
   HOUR_24,
   HOUR_12,
   HOUR_8,
 }
+
+Map<FIX_DATE_LIMIT, String> fixDateLimitMap = {
+  FIX_DATE_LIMIT.HOUR_24: '24小时内处理',
+  FIX_DATE_LIMIT.HOUR_12: '12小时内处理',
+  FIX_DATE_LIMIT.HOUR_8: '8小时内处理',
+};
+
+Map<String, FIX_DATE_LIMIT> fixDateLimitStringMap = {
+  '24小时内处理': FIX_DATE_LIMIT.HOUR_24,
+  '12小时内处理': FIX_DATE_LIMIT.HOUR_12,
+  '8小时内处理': FIX_DATE_LIMIT.HOUR_8,
+};
 
 class FixDetailModel {
   ///报修人

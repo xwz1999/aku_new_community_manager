@@ -29,11 +29,8 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
       case USER_ROLE.FIXER:
         return ['待接单', '处理中', '已处理', '全部'];
         break;
-      case USER_ROLE.SECURITY:
-        return [];
-        break;
       default:
-        return [];
+        return ['待接单', '处理中', '已处理', '全部'];
         break;
     }
   }

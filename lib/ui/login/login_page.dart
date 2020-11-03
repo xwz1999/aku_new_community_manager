@@ -72,8 +72,10 @@ class _LoginPageState extends State<LoginPage> {
               onChanged: (text) {
                 setState(() {});
               },
+              maxLength: 11,
               keyboardType: TextInputType.phone,
               decoration: InputDecoration(
+                counterText: '',
                 suffixIconConstraints: BoxConstraints(
                   minHeight: 0,
                   minWidth: 0,

@@ -5,6 +5,8 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -25,6 +27,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     return userProvider.userInfoModel.role;
   }
 
+  bool get isHandOut => widget.model.type == FIX_ENUM.HAND_OUT;
   FixDetailModel get detailModel => widget.model.detail;
 
   String get fixType {
@@ -102,10 +105,114 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
           _buildInfo(),
-          _buildType(),
+          _buildType(widget.model.type == FIX_ENUM.HAND_OUT),
           _buildProcess(),
-          _buildResult(),
+          detailModel.result == null ? SizedBox() : _buildResult(),
         ],
+      ),
+      bottom: Builder(
+        builder: (context) {
+          final userProvider =
+              Provider.of<UserProvider>(context, listen: false);
+          if (widget.model.type == FIX_ENUM.HAND_OUT) {
+            return AkuMaterialButton(
+              color: AppStyle.primaryColor,
+              nullColor: AppStyle.minorColor,
+              onPressed: detailModel.type != null &&
+                      detailModel.subType != null &&
+                      detailModel.limit != null
+                  ? () {}
+                  : null,
+              child: Text(
+                '立即派单',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
+          } else if (widget.model.type == FIX_ENUM.WAIT_PICKUP) {
+            if (userProvider.userInfoModel.role == USER_ROLE.MANAGER) {
+              return AkuMaterialButton(
+                color: AppStyle.primaryColor,
+                nullColor: AppStyle.minorColor,
+                onPressed: () {},
+                child: Text(
+                  '改派',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            } else {
+              return AkuMaterialButton(
+                color: AppStyle.primaryColor,
+                nullColor: AppStyle.minorColor,
+                onPressed: () {},
+                child: Text(
+                  '立即接单',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              );
+            }
+          } else if (widget.model.type == FIX_ENUM.PROCESSING &&
+              userProvider.userInfoModel.role == USER_ROLE.FIXER)
+            return Container(
+              height: 96.w,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, -10.w),
+                    blurRadius: 10.w,
+                    color: Color(0xFFF9F9F9),
+                  )
+                ],
+              ),
+              child: Row(
+                children: [
+                  AkuBox.w(32),
+                  MaterialButton(
+                    height: 72.w,
+                    minWidth: 304.w,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.w),
+                      side: BorderSide(
+                        width: 2.w,
+                        color: AppStyle.primaryColor,
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      '申请延时',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                  AkuMaterialButton(
+                    height: 72.w,
+                    minWidth: 304.w,
+                    radius: 4.w,
+                    color: AppStyle.primaryColor,
+                    onPressed: () {},
+                    child: Text(
+                      '处理完成',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  AkuBox.w(32),
+                ],
+              ),
+            );
+          else
+            return SizedBox();
+        },
       ),
     );
   }
@@ -160,13 +267,64 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     );
   }
 
-  _buildType() {
+  _buildType(bool canTap) {
     return _buildRawBox(
       title: '工单类型',
       children: [
-        _buildTypeTile('派单类型', fixType, false),
-        _buildTypeTile('工单时限', dateLimit, false),
-        _buildTypeTile('工单子类', subType, false),
+        _buildTypeTile(
+          '派单类型',
+          fixType,
+          canTap,
+          helpContent: '请选择服务类型',
+          onTap: () {
+            showItemSheet(
+              title: '派单类型',
+              items: ['无偿服务', '有偿服务'],
+              selectItem: fixPaymentMap[detailModel.type],
+              onTap: (result) {
+                detailModel.type = fixPaymentStringMap[result];
+              },
+            ).then((_) {
+              setState(() {});
+            });
+          },
+        ),
+        _buildTypeTile(
+          '工单时限',
+          dateLimit,
+          canTap,
+          helpContent: '请选择工单时限',
+          onTap: () {
+            showItemSheet(
+              title: '工单时限',
+              items: ['24小时内处理', '12小时内处理', '8小时内处理'],
+              selectItem: fixDateLimitMap[detailModel.limit],
+              onTap: (result) {
+                detailModel.limit = fixDateLimitStringMap[result];
+              },
+            ).then((_) {
+              setState(() {});
+            });
+          },
+        ),
+        _buildTypeTile(
+          '工单子类',
+          subType,
+          canTap,
+          helpContent: '请选择工单子类',
+          onTap: () {
+            showItemSheet(
+              title: '工单子类',
+              items: ['一般单', '加急单'],
+              selectItem: fixSubTypeMap[detailModel.subType],
+              onTap: (result) {
+                detailModel.subType = fixSubTypeStringMap[result];
+              },
+            ).then((_) {
+              setState(() {});
+            });
+          },
+        ),
       ],
     );
   }
@@ -276,11 +434,12 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     );
   }
 
-  Widget _buildTypeTile(String title, String content, bool canTap) {
+  Widget _buildTypeTile(String title, String content, bool canTap,
+      {VoidCallback onTap, String helpContent}) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: canTap ? () {} : null,
+        onTap: canTap ? onTap : null,
         child: Row(
           children: [
             AkuBox.h(96),
@@ -293,13 +452,23 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             ),
             Spacer(),
             Text(
-              content,
+              TextUtil.isEmpty(content) ? helpContent : content,
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,
-                color: AppStyle.primaryTextColor,
+                color: TextUtil.isEmpty(content)
+                    ? AppStyle.minorTextColor
+                    : AppStyle.primaryTextColor,
               ),
             ),
+            isHandOut ? AkuBox.w(24) : SizedBox(),
+            isHandOut
+                ? Icon(
+                    Icons.arrow_forward_ios,
+                    size: 24.w,
+                    color: AppStyle.minorTextColor,
+                  )
+                : SizedBox(),
           ],
         ),
       ),

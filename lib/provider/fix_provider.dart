@@ -30,6 +30,10 @@ class FixProvider extends ChangeNotifier {
         .where((element) => element.type == FIX_ENUM.WAIT_PICKUP)
         .toList();
 
+    List<FixModel> _fixerModels = _fixModels
+        .where((element) => element.type != FIX_ENUM.HAND_OUT)
+        .toList();
+
     switch (role) {
       case USER_ROLE.MANAGER:
         return [
@@ -46,7 +50,7 @@ class FixProvider extends ChangeNotifier {
           _waitPickUpModels,
           _processingModels,
           _doneModels,
-          _fixModels,
+          _fixerModels,
         ][index];
         break;
     }
