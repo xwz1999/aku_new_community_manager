@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +19,18 @@ class UserProvider extends ChangeNotifier {
 
   UserInfoModel _userInfoModel = UserInfoModel(
     nickName: '李大海',
-    avatarPath: R.ASSETS_STATIC_TEMP_F3_WEBP,
+    avatar: null,
   );
 
   UserInfoModel get userInfoModel => _userInfoModel;
 
   setNickName(String name) {
     _userInfoModel.nickName = name;
+    notifyListeners();
+  }
+
+  setAvatar(File file) {
+    _userInfoModel.avatar = file;
     notifyListeners();
   }
 }

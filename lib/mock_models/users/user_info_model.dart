@@ -1,8 +1,10 @@
+import 'dart:io';
+
 class UserInfoModel {
   String nickName;
-  String avatarPath;
+  File avatar;
   UserInfoModel({
     this.nickName,
-    this.avatarPath,
+    this.avatar,
   });
 }

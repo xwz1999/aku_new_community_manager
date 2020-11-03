@@ -4,6 +4,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/home/announcement/All_anouncement.dart';
+import 'package:aku_community_manager/ui/home/business/business_page.dart';
 import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
@@ -57,10 +58,17 @@ class _HomePageState extends State<HomePage> {
   }
 
 //底部信息栏卡片
-  Widget _card(String number, String text, Color color) {
+  Widget _card(
+    String number,
+    String text,
+    Color color,
+    int index,
+  ) {
     return AkuButton(
       radius: 8.w,
-      onPressed: () {},
+      onPressed: () {
+        Get.to(BusinessPage(initIndex: index));
+      },
       color: Color(0xFFFFFFFF),
       child: Container(
           width: 342.5.w,
@@ -151,8 +159,12 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: CircleAvatar(
                               radius: 36.w,
-                              backgroundColor: Colors.grey,
-                              child: userProvider.isSigned ? null : null,
+                              backgroundColor: Colors.white,
+                              child: userProvider.isSigned
+                                  ? userProvider.userInfoModel.avatar == null
+                                      ? Icon(Icons.person_outline)
+                                      : null
+                                  : Icon(Icons.person),
                             ),
                           );
                         },
@@ -345,43 +357,42 @@ class _HomePageState extends State<HomePage> {
               height: 172.w,
               //TODO listview
             ),
-            SizedBox(height: 32.w),
+            SizedBox(height: 16.w),
             //待办事项标题行
-            Container(
-              width: double.infinity,
-              height: 45.w,
-              child: Row(
-                children: [
-                  Text(
-                    '待办事项',
-                    style: TextStyle(
-                      color: Color(0xFF4A4B51),
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+            Row(
+              children: [
+                Text(
+                  '待办事项',
+                  style: TextStyle(
+                    color: Color(0xFF4A4B51),
+                    fontSize: 32.sp,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Spacer(),
-                  AkuButton(
-                    onPressed: () {},
-                    child: Row(
-                      children: [
-                        Text(
-                          '全部事项',
-                          style: TextStyle(
-                              color: AppStyle.minorTextColor,
-                              fontSize: 24.sp,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 22.w,
-                          color: AppStyle.minorTextColor,
-                        ),
-                      ],
-                    ),
+                ),
+                Spacer(),
+                AkuButton(
+                  padding: EdgeInsets.symmetric(vertical: 16.w),
+                  onPressed: () {
+                    Get.to(BusinessPage(initIndex: 3));
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        '全部事项',
+                        style: TextStyle(
+                            color: AppStyle.minorTextColor,
+                            fontSize: 24.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        size: 22.w,
+                        color: AppStyle.minorTextColor,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             SizedBox(height: 16.w),
             //待办事项栏
@@ -402,9 +413,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Row(
                     children: [
-                      _card('25', '未处理事项', Color(0xFFFF4E0D)),
+                      _card('25', '未处理事项', Color(0xFFFF4E0D), 0),
                       AkuDiveder().verticalDivider(166.5.w),
-                      _card('22', '处理中事项', Color(0xFFFFC40C)),
+                      _card('22', '处理中事项', Color(0xFFFFC40C), 1),
                     ],
                   ),
                   Row(children: [
@@ -413,11 +424,11 @@ class _HomePageState extends State<HomePage> {
                   ]),
                   Row(
                     children: [
-                      _card('25', '已处理事项', Color(0xFF3F8FFE)),
+                      _card('25', '已处理事项', Color(0xFF3F8FFE), 2),
                       AkuDiveder(isReverse: true).verticalDivider(
                         166.5.w,
                       ),
-                      _card('72', '全部事项', Color(0xFF333333)),
+                      _card('72', '全部事项', Color(0xFF333333), 3),
                     ],
                   ),
                 ],
