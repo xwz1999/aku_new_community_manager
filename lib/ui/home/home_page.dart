@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-///底部信息栏卡片
+  ///底部信息栏卡片
   Widget _card(
     String number,
     String text,
@@ -167,6 +167,11 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: CircleAvatar(
                               radius: 36.w,
+                              backgroundImage:
+                                  userProvider.userInfoModel.avatar == null
+                                      ? null
+                                      : FileImage(
+                                          userProvider.userInfoModel.avatar),
                               backgroundColor: Colors.white,
                               child: userProvider.isSigned
                                   ? userProvider.userInfoModel.avatar == null
@@ -195,7 +200,8 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   SizedBox(height: 18.w),
-                                  Image.asset(R.ASSETS_HOME_IC_SEARCH_PNG,width:37.w,height:37.w),
+                                  Image.asset(R.ASSETS_HOME_IC_SEARCH_PNG,
+                                      width: 37.w, height: 37.w),
                                 ],
                               ),
                             ),
@@ -296,8 +302,8 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       _menuButton(
                           R.ASSETS_HOME_IC_POLICE_PNG, '一键报警', HomePage()),
-                      _menuButton(
-                          R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理', VisitorManagerPage()),
+                      _menuButton(R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理',
+                          VisitorManagerPage()),
                       _menuButton(
                         R.ASSETS_HOME_IC_SERVICE_PNG,
                         '报事报修',

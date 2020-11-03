@@ -71,8 +71,15 @@ class _PersonalDrawState extends State<PersonalDraw> {
                     onPressed: () {},
                     child: CircleAvatar(
                       radius: 36.w,
-                      backgroundColor: Colors.grey,
-                      child: userProvider.isSigned ? null : null,
+                      backgroundImage: userProvider.userInfoModel.avatar == null
+                          ? null
+                          : FileImage(userProvider.userInfoModel.avatar),
+                      backgroundColor: Colors.white,
+                      child: userProvider.isSigned
+                          ? userProvider.userInfoModel.avatar == null
+                              ? Icon(Icons.person_outline)
+                              : null
+                          : Icon(Icons.person),
                     ),
                   ),
                   SizedBox(width: 24.w),
