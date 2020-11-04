@@ -275,17 +275,25 @@ class _HomePageState extends State<HomePage> {
                   ]),
                 ),
                 SizedBox(height: 24.w),
-                Container(
-                  margin: EdgeInsets.only(
-                    left: 32.w,
-                  ),
-                  height: 67.w,
-                  child: Text(
-                    'HI，李大海',
-                    style: TextStyle(
+                GestureDetector(
+                  onTap: () {
+                    if (!userProvider.isSigned) Get.to(LoginPage());
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      left: 32.w,
+                    ),
+                    height: 67.w,
+                    child: Text(
+                      userProvider.isSigned
+                          ? 'HI，${userProvider.userInfoModel.nickName}'
+                          : '登录/注册',
+                      style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 48.sp),
+                        fontSize: 48.sp,
+                      ),
+                    ),
                   ),
                 ),
                 SizedBox(height: 16.w),

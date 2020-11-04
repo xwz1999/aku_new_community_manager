@@ -50,6 +50,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           AkuTile(
             onTap: () {},
             title: Text('手机'),
+            suffix: Text(userProvider.userInfoModel.securePhone),
           ),
         ],
       ),
