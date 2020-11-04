@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/fix_provider.dart';
+import 'package:aku_community_manager/provider/manage_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => FixProvider()),
+        ChangeNotifierProvider(create: (context)=> GreenManageProvider()),
       ],
       child: GetMaterialApp(
         title: '小蜜蜂管家',
