@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => FixProvider()),
         ChangeNotifierProvider(create: (context)=> GreenManageProvider()),
+        ChangeNotifierProvider(create: (context)=>InspectionManageProvider()),
       ],
       child: GetMaterialApp(
         title: '小蜜蜂管家',

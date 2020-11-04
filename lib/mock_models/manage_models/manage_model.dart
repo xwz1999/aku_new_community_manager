@@ -34,3 +34,24 @@ class GreenManageCardModel {
     ];
   }
 }
+
+class InspectionManageCardModel{
+  String title;
+  String date;
+  String cycle;
+  String time;
+  List<String> persons;
+  List<String> stations;
+  InspectionManageCardModel(this.title,this.date,this.cycle,this.time,this.persons,this.stations);
+
+  static List<InspectionManageCardModel> initList(){
+    return [
+      InspectionManageCardModel('1号巡检任务', '2020.1-2020.12', '每周一、三、五', '8:00-12:00', ['王珂','陈晖洁','凯尔希','王铁锤','李狗蛋','尼古拉斯'], [
+        '小区东门入口','1号南门','3号门站','3号闸门','3号门站'
+      ]),
+      InspectionManageCardModel('2号巡检任务', '2020.1-2020.12', '每周二', '8:00-12:00',['史尔特尔'] , []),
+      InspectionManageCardModel('3号巡检任务', '2020.1-2020.12', '每周二、四、六', '8:00-12:00', ['叶莲娜'], []),
+    ];
+  }
+}
+

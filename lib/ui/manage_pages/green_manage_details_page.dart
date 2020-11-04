@@ -1,4 +1,4 @@
-import 'package:aku_community_manager/mock_models/manage_models/green_manage_model.dart';
+import 'package:aku_community_manager/mock_models/manage_models/manage_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class GreenManageDetails extends StatelessWidget {
+class GreenManageDetailsPage extends StatelessWidget {
   final GreenManageCardModel cardModel;
 
-  GreenManageDetails(this.cardModel);
+  GreenManageDetailsPage(this.cardModel);
 
   @override
   Widget build(BuildContext context) {
