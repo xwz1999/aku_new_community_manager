@@ -1,5 +1,5 @@
-import 'package:aku_community_manager/ui/manage_pages/green_manage_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
