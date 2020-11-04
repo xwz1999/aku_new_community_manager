@@ -74,6 +74,7 @@ flutter:
     - assets/home/
     - assets/user/
     - assets/message/
+    - assets/manage/
 
     - assets/static_temp/
     - assets/static_fix/
