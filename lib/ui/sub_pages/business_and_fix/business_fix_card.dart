@@ -200,7 +200,16 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                     : SizedBox(),
                 widget.model.type == FIX_ENUM.WAIT_PICKUP
                     ? AkuMaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          final userProvider =
+                              Provider.of<UserProvider>(context, listen: false);
+                          widget.model.detail.fixStatuses.add(FixStatus(
+                            title: '${userProvider.userInfoModel.nickName}已接单',
+                            date: DateTime.now(),
+                          ));
+                          widget.model.type = FIX_ENUM.PROCESSING;
+                          Get.back();
+                        },
                         radius: 4.w,
                         color: AppStyle.primaryColor,
                         minWidth: 160.w,

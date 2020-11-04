@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
+import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -55,4 +56,7 @@ class FixProvider extends ChangeNotifier {
         break;
     }
   }
+
+  List<FixerTypedModel> _fixerModels = FixerTypedModel.models;
+  List<FixerTypedModel> get fixerModels => _fixerModels;
 }

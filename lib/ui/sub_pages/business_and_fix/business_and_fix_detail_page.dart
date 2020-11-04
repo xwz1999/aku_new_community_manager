@@ -4,12 +4,14 @@ import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/fixer_department/fixer_department_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class BusinessAndFixDetailPage extends StatefulWidget {
@@ -122,7 +124,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               onPressed: detailModel.type != null &&
                       detailModel.subType != null &&
                       detailModel.limit != null
-                  ? () {}
+                  ? () {
+                      Get.to(FixerDepartmentPage(model: widget.model));
+                    }
                   : null,
               child: Text(
                 '立即派单',
@@ -136,7 +140,12 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(FixerDepartmentPage(
+                    model: widget.model,
+                    changeType: true,
+                  ));
+                },
                 child: Text(
                   '改派',
                   style: TextStyle(
@@ -148,7 +157,16 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
-                onPressed: () {},
+                onPressed: () {
+                  final userProvider =
+                      Provider.of<UserProvider>(context, listen: false);
+                  detailModel.fixStatuses.add(FixStatus(
+                    title: '${userProvider.userInfoModel.nickName}已接单',
+                    date: DateTime.now(),
+                  ));
+                  widget.model.type = FIX_ENUM.PROCESSING;
+                  Get.back();
+                },
                 child: Text(
                   '立即接单',
                   style: TextStyle(
