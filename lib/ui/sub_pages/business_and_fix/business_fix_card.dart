@@ -4,6 +4,8 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
@@ -176,7 +178,9 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                             fontSize: 28.sp,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(FixMoreTimePage(model: widget.model));
+                        },
                       )
                     : SizedBox(),
                 widget.model.type == FIX_ENUM.PROCESSING
@@ -184,7 +188,9 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                     : SizedBox(),
                 widget.model.type == FIX_ENUM.PROCESSING
                     ? AkuMaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(FixWorkFinishPage(model: widget.model));
+                        },
                         radius: 4.w,
                         color: AppStyle.primaryColor,
                         minWidth: 160.w,

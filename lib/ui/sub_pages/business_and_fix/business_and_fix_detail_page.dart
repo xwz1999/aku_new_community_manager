@@ -4,8 +4,11 @@ import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/fixer_department/fixer_department_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
@@ -203,7 +206,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                         color: AppStyle.primaryColor,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(FixMoreTimePage(model: widget.model));
+                    },
                     child: Text(
                       '申请延时',
                       style: TextStyle(
@@ -217,7 +222,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     minWidth: 304.w,
                     radius: 4.w,
                     color: AppStyle.primaryColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(FixWorkFinishPage(model: widget.model));
+                    },
                     child: Text(
                       '处理完成',
                       style: TextStyle(
@@ -237,7 +244,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   }
 
   _buildInfo() {
-    return _buildRawBox(
+    return AkuTitleBox(
       title: '报修信息',
       suffix: fixTypeWidget,
       children: [
@@ -287,7 +294,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   }
 
   _buildType(bool canTap) {
-    return _buildRawBox(
+    return AkuTitleBox(
       title: '工单类型',
       children: [
         _buildTypeTile(
@@ -349,7 +356,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   }
 
   _buildProcess() {
-    return _buildRawBox(
+    return AkuTitleBox(
       title: '报修进程',
       children: detailModel.fixStatuses.map((e) {
         return _buildProcessTile(
@@ -361,7 +368,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   }
 
   _buildResult() {
-    return _buildRawBox(
+    return AkuTitleBox(
       title: '处理情况',
       spacing: 24,
       children: [
@@ -416,7 +423,15 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           children: detailModel.result.imgs.map((e) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
-              child: (e is String) ? Image.asset(e) : Image.file(e),
+              child: (e is String)
+                  ? Image.asset(
+                      e,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.file(
+                      e,
+                      fit: BoxFit.cover,
+                    ),
             );
           }).toList(),
         ),
@@ -425,7 +440,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   }
 
   _buildRating() {
-    return _buildRawBox(
+    return AkuTitleBox(
       title: '评价信息',
       spacing: 24,
       children: [
@@ -568,41 +583,6 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     }
     return Row(
       children: children..removeLast(),
-    );
-  }
-
-  _buildRawBox({
-    String title,
-    List<Widget> children,
-    Widget suffix,
-    double spacing = 0,
-  }) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
-      color: Colors.white,
-      margin: EdgeInsets.only(bottom: 16.w),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  color: AppStyle.primaryTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 36.sp,
-                ),
-              ),
-              Spacer(),
-              suffix ?? SizedBox(),
-            ],
-          ),
-          AkuBox.h(spacing),
-          ...children,
-        ],
-      ),
     );
   }
 }
