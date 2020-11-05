@@ -6,6 +6,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
@@ -66,23 +67,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
           children: [
             Row(
               children: [
-                Container(
-                  child: Text(
-                    '报事报修',
-                    style: TextStyle(
-                      color: AppStyle.secondaryColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  padding:
-                      EdgeInsets.symmetric(vertical: 6.w, horizontal: 16.w),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(2.w),
-                    border:
-                        Border.all(width: 2.w, color: AppStyle.secondaryColor),
-                  ),
-                ),
+                AkuChipBox(title: '报事报修'),
                 AkuBox.w(16),
                 Expanded(
                   child: Text(

@@ -4,7 +4,7 @@ enum USER_ROLE {
   ///管家角色
   MANAGER,
 
-  ///修理师傅角色
+  ///师傅角色
   FIXER,
 
   ///保安角色
