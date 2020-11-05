@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+export 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class AppStyle {
   //颜色，渐变主颜色和次级颜色
   static const primaryColor = Color(0xFFFDCF12);
