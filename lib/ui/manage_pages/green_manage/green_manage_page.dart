@@ -28,7 +28,7 @@ class _GreenManagePageState extends State<GreenManagePage> {
         itemBuilder: (context, index) {
          return _greenManageCard(greenManageProvider.greenManageModels[index]);
         },
-        padding: EdgeInsets.only(left: 32.w, right: 32.w),
+        padding: EdgeInsets.only(left: 32.w, right: 32.w,bottom: 40.w),
         itemCount: greenManageProvider.greenManageModels.length,
       ),
     );

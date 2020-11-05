@@ -54,7 +54,7 @@ VisitorStatus _status;
                    AkuBox.w(8),
                    Text('$_name先生',style:_textStyle,),
                    AkuBox.w(137),
-                  Image.asset(R.ASSETS_IC_BORROW_PNG,width: 40.w,height: 40.w,),
+                  Image.asset(R.ASSETS_HOME_IC_BORROW_PNG,width: 40.w,height: 40.w,),
                   AkuBox.w(8),
                   Text(_plate,style: _textStyle,),
                   Spacer(),

@@ -2,6 +2,7 @@ import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
@@ -56,6 +57,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication(
         '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, DecorationManagerPage()),
+    AppApplication('物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, ItemsOutdoorPage()),
   ];
 
   @override

@@ -78,6 +78,7 @@ flutter:
     - assets/message/
     - assets/manage/
     - assets/inspection/
+    - assets/outdoor/
 
     - assets/static_temp/
     - assets/static_fix/
