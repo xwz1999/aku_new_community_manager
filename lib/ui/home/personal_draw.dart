@@ -56,56 +56,62 @@ class _PersonalDrawState extends State<PersonalDraw> {
         child: ListView(
           children: [
             SizedBox(
-              height: 80.w - 40.w + ScreenUtil().statusBarHeight,
+              height: ScreenUtil().statusBarHeight,
             ),
             //leading
-            Container(
-              margin: EdgeInsets.only(bottom: 80.w),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  SizedBox(width: 32.w),
-                  //头像按钮
-                  AkuRoundButton(
-                    height: 72.w,
-                    onPressed: () {},
-                    child: CircleAvatar(
-                      radius: 36.w,
-                      backgroundImage: userProvider.userInfoModel.avatar == null
-                          ? null
-                          : FileImage(userProvider.userInfoModel.avatar),
-                      backgroundColor: Colors.white,
-                      child: userProvider.isSigned
-                          ? userProvider.userInfoModel.avatar == null
-                              ? Icon(Icons.person_outline)
-                              : null
-                          : Icon(Icons.person),
-                    ),
-                  ),
-                  SizedBox(width: 24.w),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //登录按钮
-                      InkWell(
-                        onTap: () {},
+            InkWell(
+              onTap: () {
+                if (!userProvider.isSigned) {
+                  Get.to(LoginPage());
+                }
+              },
+              child: Container(
+                margin: EdgeInsets.only(bottom: 80.w, top: 40.w),
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    SizedBox(width: 32.w),
+                    //头像按钮
+                    AkuRoundButton(
+                      height: 72.w,
+                      onPressed: () {},
+                      child: CircleAvatar(
+                        radius: 36.w,
+                        backgroundImage:
+                            userProvider.userInfoModel.avatar == null
+                                ? null
+                                : FileImage(userProvider.userInfoModel.avatar),
+                        backgroundColor: Colors.white,
                         child: userProvider.isSigned
+                            ? userProvider.userInfoModel.avatar == null
+                                ? Icon(Icons.person_outline)
+                                : null
+                            : Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(width: 24.w),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //登录按钮
+                        userProvider.isSigned
                             ? Text(
                                 userProvider.userInfoModel.nickName,
                                 style: TextStyle(
-                                    color: AppStyle.primaryTextColor,
-                                    fontSize: 28.sp,
-                                    fontWeight: FontWeight.bold),
+                                  color: AppStyle.primaryTextColor,
+                                  fontSize: 28.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               )
-                            : Text('登录',
+                            : Text(
+                                '登录',
                                 style: TextStyle(
-                                    color: AppStyle.primaryTextColor,
-                                    fontSize: 28.sp,
-                                    fontWeight: FontWeight.bold)),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Row(
+                                  color: AppStyle.primaryTextColor,
+                                  fontSize: 28.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                        Row(
                           children: [
                             Icon(Icons.location_on_outlined, size: 33.w),
                             Text(
@@ -116,10 +122,10 @@ class _PersonalDrawState extends State<PersonalDraw> {
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             _myListTile(

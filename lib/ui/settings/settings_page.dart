@@ -21,6 +21,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  bool _info = false;
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -35,8 +36,12 @@ class _SettingsPageState extends State<SettingsPage> {
             title: Text('是否接受信息通知'),
             arrow: false,
             suffix: CupertinoSwitch(
-              value: false,
-              onChanged: (value) {},
+              value: _info,
+              onChanged: (value) {
+                setState(() {
+                  _info = value;
+                });
+              },
             ),
           ),
           Divider(height: 1.w),
