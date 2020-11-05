@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
@@ -45,19 +46,20 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication(
         '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
     AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, VisitorManagerPage()),
-    AppApplication('便民电话', '', Scaffold()),
     AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
-    AppApplication('工单管理', '', Scaffold()),
-    AppApplication('语音管家', '', Scaffold()),
     AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
-    AppApplication('问卷调查', '', Scaffold()),
   ];
   List<AppApplication> _wisdomApplications = [
-    AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
-    AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
+    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
+    AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, VisitorManagerPage()),
+    AppApplication('报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, BusinessAndFixPage()),
+    AppApplication('物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, ItemsOutdoorPage()),
     AppApplication(
         '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, DecorationManagerPage()),
-    AppApplication('物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, ItemsOutdoorPage()),
+    AppApplication('活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, Scaffold()),
+    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
+    AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
+    AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
   ];
 
   @override
