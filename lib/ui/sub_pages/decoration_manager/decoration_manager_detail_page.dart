@@ -203,7 +203,7 @@ class _DecorationManagerDetailStatePage
         _buildRow(
           title: '开始装修时间',
           subTitle: DateUtil.formatDate(
-            widget.model.workFinishCheck.decorationDate,
+            widget.model.decorationDate,
             format: 'yyyy-MM-dd',
           ),
         ),
@@ -231,7 +231,10 @@ class _DecorationManagerDetailStatePage
             ),
           ),
         ),
-        DecorationCheckRow(details: widget.model.workFinishCheck.checkDetails),
+        DecorationCheckRow(
+          details: widget.model.workFinishCheck.checkDetails,
+          onChange: (details) {},
+        ),
       ],
     );
   }
@@ -244,7 +247,7 @@ class _DecorationManagerDetailStatePage
         _buildRow(
           title: '开始装修时间',
           subTitle: DateUtil.formatDate(
-            widget.model.cycleCheck.decorationDate,
+            widget.model.decorationDate,
             format: 'yyyy-MM-dd',
           ),
         ),

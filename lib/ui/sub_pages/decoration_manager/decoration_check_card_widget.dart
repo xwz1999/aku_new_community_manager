@@ -6,7 +6,9 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class DecorationCheckCardWidget extends StatelessWidget {
   final CHECK_TYPE type;
-  const DecorationCheckCardWidget({Key key, @required this.type})
+  final bool checked;
+  const DecorationCheckCardWidget(
+      {Key key, @required this.type, this.checked = false})
       : super(key: key);
 
   @override
@@ -34,10 +36,11 @@ class DecorationCheckCardWidget extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         border: Border.all(
-          color: Color(0xFFE8E8E8),
+          color: checked ? AppStyle.primaryTextColor : Color(0xFFE8E8E8),
           width: 3.w,
         ),
         borderRadius: BorderRadius.circular(8.w),
+        color: checked ? Color(0xFFFFF3CC) : Colors.white,
       ),
     );
   }

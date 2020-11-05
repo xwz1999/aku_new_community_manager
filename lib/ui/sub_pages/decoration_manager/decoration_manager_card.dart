@@ -38,7 +38,7 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
               AkuBox.w(16),
               Text(
                 DateUtil.formatDate(
-                  widget.model.cycleCheck.decorationDate,
+                  widget.model.decorationDate,
                   format: 'yyyy-MM-dd HH:mm:ss',
                 ),
                 style: TextStyle(

@@ -4,6 +4,23 @@ import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
 class DecorationData {
   static List<DecorationModel> allModels = [
     DecorationModel(
+      type: DecorationType.WAIT_HAND_OUT,
+      statusType: DecorationStatusType.PROGRESS,
+      decorationDate: DateTime(2020, 1, 23, 12, 23, 0),
+      userHomeModel: UserHomeModel(
+        userName: '林居明',
+        plot: '深圳华茂悦峰',
+        detailAddr: '2幢-2单元-501室',
+        phone: '19995430126',
+      ),
+      decorationTeamModel: DecorationTeamModel(
+        name: '深圳莫川装修有限公司',
+        userName: '李惠政',
+        phone: '19298540192',
+      ),
+    ),
+    DecorationModel(
+      decorationDate: DateTime(2020, 1, 23, 12, 23, 0),
       type: DecorationType.DONE,
       statusType: DecorationStatusType.DONE,
       userHomeModel: UserHomeModel(
@@ -11,7 +28,6 @@ class DecorationData {
         plot: '深圳华茂悦峰',
         detailAddr: '1幢-1单元-302室',
         phone: '18201939840',
-        decorationStatus: false,
       ),
       decorationTeamModel: DecorationTeamModel(
         name: '深圳莫川装修有限公司',
@@ -19,7 +35,6 @@ class DecorationData {
         phone: '19298540192',
       ),
       cycleCheck: CycleCheck(
-        decorationDate: DateTime(2020, 1, 23, 12, 23, 0),
         authPerson: FixerModel(name: '林鸿章', phone: '18294859301'),
         startDate: DateTime(2020, 1, 23, 20, 23, 0),
         checkCycle: 7,
@@ -31,7 +46,6 @@ class DecorationData {
         ],
       ),
       workFinishCheck: WorkFinishCheck(
-        decorationDate: DateTime(2020, 1, 23, 12, 23, 0),
         authPerson: FixerModel(name: '林鸿章', phone: '18294859301'),
         startDate: DateTime(2020, 1, 23, 20, 23, 0),
         checkDetails: [

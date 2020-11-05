@@ -53,6 +53,7 @@ Map<CHECK_TYPE, String> checkAssetMap = {
 class DecorationModel {
   DecorationType type;
   DecorationStatusType statusType;
+  DateTime decorationDate;
   UserHomeModel userHomeModel;
   DecorationTeamModel decorationTeamModel;
   CycleCheck cycleCheck;
@@ -71,6 +72,7 @@ class DecorationModel {
     @required this.statusType,
     @required this.userHomeModel,
     @required this.decorationTeamModel,
+    @required this.decorationDate,
     this.cycleCheck,
     this.workFinishCheck,
     this.checkInfomations,
@@ -83,13 +85,11 @@ class UserHomeModel {
   String detailAddr;
   String userName;
   String phone;
-  bool decorationStatus;
   UserHomeModel({
     this.plot,
     this.detailAddr,
     this.userName,
     this.phone,
-    this.decorationStatus,
   });
 }
 
@@ -107,7 +107,6 @@ class DecorationTeamModel {
 
 ///周期检查
 class CycleCheck {
-  DateTime decorationDate;
   FixerModel authPerson;
   DateTime startDate;
 
@@ -115,7 +114,6 @@ class CycleCheck {
   int checkCycle;
   List<CHECK_TYPE> checkDetails;
   CycleCheck({
-    this.decorationDate,
     this.authPerson,
     this.startDate,
     this.checkCycle,
@@ -124,12 +122,10 @@ class CycleCheck {
 }
 
 class WorkFinishCheck {
-  DateTime decorationDate;
   FixerModel authPerson;
   DateTime startDate;
   List<CHECK_TYPE> checkDetails;
   WorkFinishCheck({
-    this.decorationDate,
     this.authPerson,
     this.startDate,
     this.checkDetails,
