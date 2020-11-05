@@ -6,6 +6,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_row.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_checkbox.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_department_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_follow_check.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -49,8 +50,7 @@ class _DecorationManagerDetailStatePage
               ? SizedBox()
               : _buildFinishWorkCheck(),
           _buildCycleCheck(),
-          widget.model.type == DecorationType.WAIT_HAND_OUT ||
-                  widget.model.type == DecorationType.HAND_OUT
+          widget.model.checkInfomations == null
               ? SizedBox()
               : _buildCheckDetail(),
         ],
@@ -79,9 +79,21 @@ class _DecorationManagerDetailStatePage
 
           // else if(widget.model.type)
         } else if (role == USER_ROLE.PROPERTY) {
-          // return
-        }
-        // return
+          switch (widget.model.type) {
+            case DecorationType.HAND_OUT:
+              return AkuBottomButton(
+                title: '立即执行',
+                onTap: () {
+                  Get.to(DecorationFollowCheck(model: widget.model));
+                },
+              );
+              break;
+            default:
+              return SizedBox();
+              break;
+          }
+        } else
+          return SizedBox();
       }),
     );
   }
