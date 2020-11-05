@@ -3,12 +3,15 @@ import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_detail_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class DecorationManagerCard extends StatefulWidget {
@@ -35,7 +38,7 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
               AkuBox.w(16),
               Text(
                 DateUtil.formatDate(
-                  widget.model.cycleCheck.decorationDate,
+                  widget.model.decorationDate,
                   format: 'yyyy-MM-dd HH:mm:ss',
                 ),
                 style: TextStyle(
@@ -45,9 +48,15 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
               ),
               Spacer(),
               Text(
-                _getTagName(),
+                DecorationUIUtil(context).getTagName(
+                  widget.model.type,
+                  widget.model.statusType,
+                ),
                 style: TextStyle(
-                  color: _getTagColor(),
+                  color: DecorationUIUtil(context).getTagColor(
+                    widget.model.type,
+                    widget.model.statusType,
+                  ),
                   fontSize: 24.w,
                 ),
               ),
@@ -83,7 +92,9 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
           Align(
             alignment: Alignment.centerRight,
             child: AkuMaterialButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(DecorationManagerDetailPage(model: widget.model));
+              },
               height: 64.w,
               minWidth: 160.w,
               color: AppStyle.primaryColor,
@@ -133,50 +144,5 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
         ),
       ],
     );
-  }
-
-  _getTagName() {
-    Map<DecorationType, String> managerMap = {
-      DecorationType.WAIT_HAND_OUT: '待指派',
-      DecorationType.HAND_OUT: '已指派',
-      DecorationType.DONE: '已执行',
-    };
-
-    Map<DecorationType, String> fixerMap = {
-      DecorationType.HAND_OUT: '待执行',
-      DecorationType.DONE: '已执行',
-    };
-
-    Map<DecorationStatusType, String> defaultMap = {
-      DecorationStatusType.DONE: '装修完成',
-      DecorationStatusType.PROGRESS: '装修中',
-    };
-
-    switch (role) {
-      case USER_ROLE.MANAGER:
-        return managerMap[widget.model.type];
-        break;
-      case USER_ROLE.PROPERTY:
-        return fixerMap[widget.model.type];
-        break;
-      default:
-        return defaultMap[widget.model.statusType];
-        break;
-    }
-  }
-
-  Color _getTagColor() {
-    if (role == USER_ROLE.MANAGER || role == USER_ROLE.PROPERTY) {
-      if (widget.model.type == DecorationType.WAIT_HAND_OUT ||
-          widget.model.type == DecorationType.HAND_OUT) {
-        return Color(0xFFFF4501);
-      } else
-        return AppStyle.minorTextColor;
-    } else {
-      if (widget.model.statusType == DecorationStatusType.PROGRESS) {
-        return Color(0xFFFF4501);
-      } else
-        return Color(0xFF32B814);
-    }
   }
 }

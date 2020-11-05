@@ -7,6 +7,9 @@ enum FIXER_TYPE {
 
   ///水泥组
   CEMENT,
+
+  ///物业组
+  PROPERTY,
 }
 
 class FixerModel {
@@ -28,6 +31,8 @@ class FixerTypedModel {
       case FIXER_TYPE.CEMENT:
         return '水泥组';
         break;
+      case FIXER_TYPE.PROPERTY:
+        return '物业组';
       default:
         return '';
     }
@@ -63,6 +68,16 @@ class FixerTypedModel {
       fixers: [
         FixerModel(name: '李建国师傅', phone: '18923747283'),
         FixerModel(name: '李历程师傅', phone: '18910298345'),
+      ],
+    ),
+  ];
+
+  static List<FixerTypedModel> propertyModels = [
+    FixerTypedModel(
+      type: FIXER_TYPE.PROPERTY,
+      fixers: [
+        FixerModel(name: '李国师傅', phone: '18923747283'),
+        FixerModel(name: '章则林师傅', phone: '18910298345'),
       ],
     ),
   ];

@@ -58,5 +58,7 @@ class FixProvider extends ChangeNotifier {
   }
 
   List<FixerTypedModel> _fixerModels = FixerTypedModel.models;
+  List<FixerTypedModel> _propertyModels = FixerTypedModel.propertyModels;
   List<FixerTypedModel> get fixerModels => _fixerModels;
+  List<FixerTypedModel> get propertyModels => _propertyModels;
 }
