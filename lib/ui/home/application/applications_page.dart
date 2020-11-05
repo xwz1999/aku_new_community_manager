@@ -1,4 +1,5 @@
-import 'package:aku_community_manager/ui/manage_pages/green_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
@@ -52,9 +53,11 @@ class _ApplicationPageState extends State<ApplicationPage>
   ];
   List<AppApplication> _wisdomApplications = [
     AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
+    AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication(
         '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, DecorationManagerPage()),
   ];
+
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context);
