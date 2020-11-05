@@ -56,7 +56,8 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, ItemsOutdoorPage()),
     AppApplication(
         '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, DecorationManagerPage()),
-    AppApplication('活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, Scaffold()),
+    AppApplication(
+        '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
     AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
     AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
