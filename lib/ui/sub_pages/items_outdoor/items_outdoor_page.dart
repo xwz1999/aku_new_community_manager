@@ -45,7 +45,7 @@ void dispose() {
     List<ItemsOutdoorModel> _selectModels = _outdoorModels.getOutdoorModels(index);
     return ListView(
       padding: EdgeInsets.only(left: 32.w,right: 32.w),
-      children: _selectModels.map((e) => ItemsOutdoorCard(cardModel:e)).toList(),
+      children: _selectModels.map((e) => ItemsOutdoorCard(cardModel:e,isdetail: false,)).toList(),
     );
   }
 }

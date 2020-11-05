@@ -79,7 +79,7 @@ DateTime datetime;
         identify: '业主',
         items: ItemDetails(
           itemname: '家具',
-          weight: 40,
+          weight: 60,
           way: '搬家公司',
           imagepath: [
             R.ASSETS_OUTDOOR_ITME1_PNG,
@@ -98,7 +98,7 @@ DateTime datetime;
         identify: '业主',
         items: ItemDetails(
           itemname: '家具',
-          weight: 40,
+          weight: 80,
           way: '搬家公司',
           imagepath: [
             R.ASSETS_OUTDOOR_ITME1_PNG,
@@ -117,7 +117,7 @@ DateTime datetime;
         identify: '业主',
         items: ItemDetails(
           itemname: '家具',
-          weight: 40,
+          weight: 120,
           way: '搬家公司',
           imagepath: [
             R.ASSETS_OUTDOOR_ITME1_PNG,
