@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
 import 'package:flutter/material.dart';
+import 'package:aku_community_manager/const/resource.dart';
 
 enum DecorationType {
   ///待指派
@@ -39,6 +40,14 @@ Map<String, CHECK_TYPE> checkTypeStringMap = {
   '墙面': CHECK_TYPE.WALL,
   '门窗': CHECK_TYPE.DOOR_AND_WINDOWS,
   '安防': CHECK_TYPE.SECURITY,
+};
+
+Map<CHECK_TYPE, String> checkAssetMap = {
+  CHECK_TYPE.ELECTRIC: R.ASSETS_MANAGE_CIRCUIT_PNG,
+  CHECK_TYPE.WATER: R.ASSETS_MANAGE_WATERWAY_PNG,
+  CHECK_TYPE.WALL: R.ASSETS_MANAGE_WALL_PNG,
+  CHECK_TYPE.DOOR_AND_WINDOWS: R.ASSETS_MANAGE_WINDOW_PNG,
+  CHECK_TYPE.SECURITY: R.ASSETS_MANAGE_SECURITY_PNG,
 };
 
 class DecorationModel {
@@ -152,6 +161,7 @@ class CheckInfomation {
 class CheckDetail {
   CHECK_TYPE type;
   bool status;
+  String get assetpath => checkAssetMap[type];
   CheckDetail({
     @required this.type,
     this.status = true,

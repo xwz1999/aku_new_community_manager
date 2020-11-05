@@ -1,0 +1,44 @@
+import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:flutter/material.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
+
+class DecorationCheckCardWidget extends StatelessWidget {
+  final CHECK_TYPE type;
+  const DecorationCheckCardWidget({Key key, @required this.type})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 160.w,
+      width: 124.w,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            checkAssetMap[type],
+            height: 56.w,
+            width: 56.w,
+          ),
+          AkuBox.h(4),
+          Text(
+            checkTypeMap[type],
+            style: TextStyle(
+              color: AppStyle.primaryTextColor,
+              fontSize: 24.sp,
+            ),
+          ),
+        ],
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color(0xFFE8E8E8),
+          width: 3.w,
+        ),
+        borderRadius: BorderRadius.circular(8.w),
+      ),
+    );
+  }
+}

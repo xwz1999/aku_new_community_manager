@@ -1,11 +1,15 @@
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_row.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_checkbox.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class DecorationManagerDetailPage extends StatefulWidget {
@@ -195,7 +199,40 @@ class _DecorationManagerDetailStatePage
     return AkuTitleBox(
       title: '完工检查',
       spacing: 24,
-      children: [],
+      children: [
+        _buildRow(
+          title: '开始装修时间',
+          subTitle: DateUtil.formatDate(
+            widget.model.workFinishCheck.decorationDate,
+            format: 'yyyy-MM-dd',
+          ),
+        ),
+        _buildRow(
+          title: '接受人',
+          subTitle: widget.model.workFinishCheck.authPerson.name,
+        ),
+        _buildRow(title: '所属项目', subTitle: '装修管理'),
+        _buildRow(
+          title: '开始日期',
+          subTitle: DateUtil.formatDate(
+            widget.model.workFinishCheck.startDate,
+            format: 'yyyy-MM-dd',
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 28.w,
+          ),
+          child: Text(
+            '检查内容',
+            style: TextStyle(
+              color: AppStyle.primaryTextColor,
+              fontSize: 28.w,
+            ),
+          ),
+        ),
+        DecorationCheckRow(details: widget.model.workFinishCheck.checkDetails),
+      ],
     );
   }
 
@@ -203,7 +240,40 @@ class _DecorationManagerDetailStatePage
     return AkuTitleBox(
       title: '周期检查',
       spacing: 24,
-      children: [],
+      children: [
+        _buildRow(
+          title: '开始装修时间',
+          subTitle: DateUtil.formatDate(
+            widget.model.cycleCheck.decorationDate,
+            format: 'yyyy-MM-dd',
+          ),
+        ),
+        _buildRow(
+          title: '接受人',
+          subTitle: widget.model.cycleCheck.authPerson.name,
+        ),
+        _buildRow(title: '所属项目', subTitle: '装修管理'),
+        _buildRow(
+          title: '开始日期',
+          subTitle: DateUtil.formatDate(
+            widget.model.cycleCheck.startDate,
+            format: 'yyyy-MM-dd',
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 28.w,
+          ),
+          child: Text(
+            '检查内容',
+            style: TextStyle(
+              color: AppStyle.primaryTextColor,
+              fontSize: 28.w,
+            ),
+          ),
+        ),
+        DecorationCheckRow(details: widget.model.cycleCheck.checkDetails),
+      ],
     );
   }
 
@@ -211,7 +281,158 @@ class _DecorationManagerDetailStatePage
     return AkuTitleBox(
       title: '执行信息',
       spacing: 24,
-      children: [],
+      children: widget.model.checkInfomations.map((e) {
+        return Container(
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(
+                color: Color(0xFFE8E8E8),
+                width: 1.w,
+              ),
+            ),
+          ),
+          child: ExpandablePanel(
+            theme: ExpandableThemeData(
+              tapHeaderToExpand: true,
+              iconPlacement: ExpandablePanelIconPlacement.right,
+              iconPadding: EdgeInsets.only(top: 32.w),
+              iconSize: 32.w,
+              iconColor: AppStyle.minorTextColor,
+            ),
+            header: Row(
+              children: [
+                AkuBox.h(96),
+                Text(
+                  '${DateUtil.formatDate(e.checkDate, format: 'yyyy-MM-dd')} ' +
+                      e.checkType,
+                  style: TextStyle(
+                    color: AppStyle.primaryTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28.sp,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  e.checkAllResult ? '正常' : '异常',
+                  style: TextStyle(
+                    color: e.checkAllResult
+                        ? Color(0xFF32B814)
+                        : Color(0xFFFF4501),
+                    fontSize: 28.sp,
+                  ),
+                ),
+              ],
+            ),
+            expanded: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ...e.details.map((e) {
+                  return Container(
+                    height: 96.w,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(
+                          color: Color(0xFFE8E8E8),
+                          width: 1.w,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        AkuBox.w(48),
+                        Image.asset(
+                          e.assetpath,
+                          height: 40.w,
+                        ),
+                        Text(
+                          e.typeValue,
+                          style: TextStyle(
+                            fontSize: 28.sp,
+                            color: AppStyle.primaryTextColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Spacer(),
+                        DecorationCheckBox(
+                          initValue: e.status,
+                        ),
+                        Spacer(),
+                      ],
+                    ),
+                  );
+                }).toList(),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(
+                        width: 1.w,
+                        color: Color(0xFFE8E8E8),
+                      ),
+                    ),
+                  ),
+                  height: 96.w,
+                  padding: EdgeInsets.symmetric(horizontal: 32.w),
+                  alignment: Alignment.centerLeft,
+                  child: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: '检查描述:',
+                          style: TextStyle(
+                            color: AppStyle.minorTextColor,
+                          ),
+                        ),
+                        TextSpan(
+                          text: e.info,
+                        ),
+                      ],
+                      style: TextStyle(
+                        color: AppStyle.primaryTextColor,
+                        fontSize: 28.sp,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  _buildRow({
+    String title,
+    String subTitle,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        border:
+            Border(bottom: BorderSide(color: Color(0xFFE8E8E8), width: 1.w)),
+      ),
+      child: InkWell(
+        child: Row(
+          children: [
+            AkuBox.h(96),
+            Text(
+              title,
+              style: TextStyle(
+                color: AppStyle.primaryTextColor,
+                fontSize: 28.w,
+              ),
+            ),
+            Spacer(),
+            Text(
+              subTitle,
+              style: TextStyle(
+                color: AppStyle.primaryTextColor,
+                fontSize: 28.w,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
