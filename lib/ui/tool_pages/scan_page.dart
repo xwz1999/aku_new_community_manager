@@ -1,3 +1,5 @@
+import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -12,6 +14,7 @@ class ScanPage extends StatefulWidget {
 class _ScanPageState extends State<ScanPage> {
   GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   QRViewController _qrViewController;
+  String tempText;
 
   @override
   void dispose() {
@@ -29,7 +32,10 @@ class _ScanPageState extends State<ScanPage> {
             onQRViewCreated: (controller) {
               _qrViewController = controller;
               controller.scannedDataStream.listen((event) {
-                BotToast.showText(text: event);
+                if (tempText != event) {
+                  tempText = event;
+                  BotToast.showText(text: event);
+                }
               });
             },
           ),
@@ -38,11 +44,21 @@ class _ScanPageState extends State<ScanPage> {
               height: 200,
               width: 200,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
                 border: Border.all(
                   color: Colors.red,
                   width: 1,
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            left: 10,
+            top: 10 + statusBarHeight,
+            child: Material(
+              color: Colors.black45,
+              borderRadius: BorderRadius.circular(40),
+              child: AkuBackButton.close(brightness: Brightness.dark),
             ),
           ),
         ],
