@@ -40,4 +40,8 @@ class AppStyle {
       color: primaryTextColor, fontSize: 28.sp, fontWeight: FontWeight.bold);
   final minorStyle = TextStyle(
       color: minorTextColor, fontSize: 24.sp, fontWeight: FontWeight.normal);
+  final secondaryTextStyle = TextStyle(
+      color: AppStyle.minorTextColor,
+      fontSize: 28.sp,
+      fontWeight: FontWeight.normal);
 }
