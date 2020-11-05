@@ -61,12 +61,20 @@ class _SettingsPageState extends State<SettingsPage> {
               ? Padding(
                   padding: EdgeInsets.symmetric(horizontal: 64.w),
                   child: AkuMaterialButton(
+                    radius: 8.w,
                     color: AppStyle.primaryColor,
                     onPressed: () {
                       userProvider.setisSigned(false);
                       Get.offAll(HomePage());
                     },
-                    child: Text('退出登录'),
+                    child: Text(
+                      '退出登录',
+                      style: TextStyle(
+                        color: AppStyle.primaryTextColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 32.w,
+                      ),
+                    ),
                   ),
                 )
               : SizedBox(),

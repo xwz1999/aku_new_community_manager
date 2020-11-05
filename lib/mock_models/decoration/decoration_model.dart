@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
 import 'package:flutter/material.dart';
+import 'package:aku_community_manager/const/resource.dart';
 
 enum DecorationType {
   ///待指派
@@ -41,9 +42,18 @@ Map<String, CHECK_TYPE> checkTypeStringMap = {
   '安防': CHECK_TYPE.SECURITY,
 };
 
+Map<CHECK_TYPE, String> checkAssetMap = {
+  CHECK_TYPE.ELECTRIC: R.ASSETS_MANAGE_CIRCUIT_PNG,
+  CHECK_TYPE.WATER: R.ASSETS_MANAGE_WATERWAY_PNG,
+  CHECK_TYPE.WALL: R.ASSETS_MANAGE_WALL_PNG,
+  CHECK_TYPE.DOOR_AND_WINDOWS: R.ASSETS_MANAGE_WINDOW_PNG,
+  CHECK_TYPE.SECURITY: R.ASSETS_MANAGE_SECURITY_PNG,
+};
+
 class DecorationModel {
   DecorationType type;
   DecorationStatusType statusType;
+  DateTime decorationDate;
   UserHomeModel userHomeModel;
   DecorationTeamModel decorationTeamModel;
   CycleCheck cycleCheck;
@@ -62,6 +72,7 @@ class DecorationModel {
     @required this.statusType,
     @required this.userHomeModel,
     @required this.decorationTeamModel,
+    @required this.decorationDate,
     this.cycleCheck,
     this.workFinishCheck,
     this.checkInfomations,
@@ -74,13 +85,11 @@ class UserHomeModel {
   String detailAddr;
   String userName;
   String phone;
-  bool decorationStatus;
   UserHomeModel({
     this.plot,
     this.detailAddr,
     this.userName,
     this.phone,
-    this.decorationStatus,
   });
 }
 
@@ -98,7 +107,6 @@ class DecorationTeamModel {
 
 ///周期检查
 class CycleCheck {
-  DateTime decorationDate;
   FixerModel authPerson;
   DateTime startDate;
 
@@ -106,7 +114,6 @@ class CycleCheck {
   int checkCycle;
   List<CHECK_TYPE> checkDetails;
   CycleCheck({
-    this.decorationDate,
     this.authPerson,
     this.startDate,
     this.checkCycle,
@@ -115,12 +122,10 @@ class CycleCheck {
 }
 
 class WorkFinishCheck {
-  DateTime decorationDate;
   FixerModel authPerson;
   DateTime startDate;
   List<CHECK_TYPE> checkDetails;
   WorkFinishCheck({
-    this.decorationDate,
     this.authPerson,
     this.startDate,
     this.checkDetails,
@@ -152,6 +157,7 @@ class CheckInfomation {
 class CheckDetail {
   CHECK_TYPE type;
   bool status;
+  String get assetpath => checkAssetMap[type];
   CheckDetail({
     @required this.type,
     this.status = true,
