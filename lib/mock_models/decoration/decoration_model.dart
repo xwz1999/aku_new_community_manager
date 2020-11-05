@@ -112,7 +112,13 @@ class CycleCheck {
 
   ///check cycle in days
   int checkCycle;
-  List<CHECK_TYPE> checkDetails;
+  List<CHECK_TYPE> checkDetails = [
+    CHECK_TYPE.ELECTRIC,
+    CHECK_TYPE.WATER,
+    CHECK_TYPE.WALL,
+    CHECK_TYPE.DOOR_AND_WINDOWS,
+    CHECK_TYPE.SECURITY,
+  ];
   CycleCheck({
     this.authPerson,
     this.startDate,
