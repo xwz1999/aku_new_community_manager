@@ -18,6 +18,7 @@ class DecorationData {
         userName: '李惠政',
         phone: '19298540192',
       ),
+      cycleCheck: CycleCheck(),
     ),
     DecorationModel(
       decorationDate: DateTime(2020, 1, 23, 12, 23, 0),

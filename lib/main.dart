@@ -4,7 +4,9 @@ import 'package:aku_community_manager/provider/manage_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +23,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => UserProvider()),
         ChangeNotifierProvider(create: (context) => AppProvider()),
         ChangeNotifierProvider(create: (context) => FixProvider()),
-        ChangeNotifierProvider(create: (context)=> GreenManageProvider()),
-        ChangeNotifierProvider(create: (context)=>InspectionManageProvider()),
+        ChangeNotifierProvider(create: (context) => GreenManageProvider()),
+        ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
       ],
       child: GetMaterialApp(
         title: '小蜜蜂管家',
@@ -30,6 +32,14 @@ class MyApp extends StatelessWidget {
         builder: BotToastInit(),
         navigatorObservers: [
           BotToastNavigatorObserver(),
+        ],
+        localizationsDelegates: [
+          GlobalCupertinoLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: [
+          const Locale('zh'),
         ],
       ),
     );

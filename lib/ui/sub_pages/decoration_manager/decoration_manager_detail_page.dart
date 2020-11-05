@@ -3,14 +3,20 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_row.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_checkbox.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_department_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DecorationManagerDetailPage extends StatefulWidget {
   final DecorationModel model;
@@ -24,6 +30,7 @@ class DecorationManagerDetailPage extends StatefulWidget {
 
 class _DecorationManagerDetailStatePage
     extends State<DecorationManagerDetailPage> {
+  bool get isWaitHandOut => widget.model.type == DecorationType.WAIT_HAND_OUT;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -32,9 +39,13 @@ class _DecorationManagerDetailStatePage
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
           _buildInfo(),
-          _buildFinishWorkCheck(),
+          widget.model.workFinishCheck == null
+              ? SizedBox()
+              : _buildFinishWorkCheck(),
           _buildCycleCheck(),
-          _buildCheckDetail(),
+          widget.model.type == DecorationType.WAIT_HAND_OUT
+              ? SizedBox()
+              : _buildCheckDetail(),
         ],
       ),
     );
@@ -209,13 +220,13 @@ class _DecorationManagerDetailStatePage
         ),
         _buildRow(
           title: '接受人',
-          subTitle: widget.model.workFinishCheck.authPerson.name,
+          subTitle: widget.model.workFinishCheck?.authPerson?.name,
         ),
         _buildRow(title: '所属项目', subTitle: '装修管理'),
         _buildRow(
           title: '开始日期',
           subTitle: DateUtil.formatDate(
-            widget.model.workFinishCheck.startDate,
+            widget.model.workFinishCheck?.startDate,
             format: 'yyyy-MM-dd',
           ),
         ),
@@ -232,7 +243,7 @@ class _DecorationManagerDetailStatePage
           ),
         ),
         DecorationCheckRow(
-          details: widget.model.workFinishCheck.checkDetails,
+          details: widget.model.workFinishCheck?.checkDetails,
           onChange: (details) {},
         ),
       ],
@@ -253,15 +264,164 @@ class _DecorationManagerDetailStatePage
         ),
         _buildRow(
           title: '接受人',
-          subTitle: widget.model.cycleCheck.authPerson.name,
+          subTitle: widget.model.cycleCheck?.authPerson?.name,
+          onTap: isWaitHandOut
+              ? () {
+                  Get.to(DecorationDepartmentPage(
+                    model: widget.model,
+                  )).then((value) => setState(() {}));
+                }
+              : null,
         ),
         _buildRow(title: '所属项目', subTitle: '装修管理'),
         _buildRow(
           title: '开始日期',
           subTitle: DateUtil.formatDate(
-            widget.model.cycleCheck.startDate,
+            widget.model.cycleCheck?.startDate,
             format: 'yyyy-MM-dd',
           ),
+          onTap: isWaitHandOut
+              ? () {
+                  showAkuSheet(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            AkuBox.h(96),
+                            AkuBackButton.text(),
+                            Spacer(),
+                            Text(
+                              '开始日期',
+                              style: TextStyle(
+                                color: AppStyle.primaryTextColor,
+                                fontSize: 32.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            AkuMaterialButton(
+                              minWidth: (64 + 56).w,
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                '确定',
+                                style: TextStyle(
+                                  color: AppStyle.secondaryColor,
+                                  fontSize: 28.sp,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 500.w,
+                          child: CupertinoDatePicker(
+                            onDateTimeChanged: (dateTime) {
+                              widget.model.cycleCheck.startDate = dateTime;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ).then((value) {
+                    setState(() {});
+                  });
+                }
+              : null,
+        ),
+        _buildRow(
+          title: '检查周期',
+          subTitle: widget.model.cycleCheck.checkCycle == null
+              ? null
+              : '${widget.model.cycleCheck.checkCycle}天',
+          onTap: isWaitHandOut
+              ? () {
+                  showAkuSheet(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            AkuBox.h(96),
+                            AkuBackButton.text(),
+                            Spacer(),
+                            Text(
+                              '检查周期',
+                              style: TextStyle(
+                                color: AppStyle.primaryTextColor,
+                                fontSize: 32.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            AkuMaterialButton(
+                              minWidth: (64 + 56).w,
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                '确定',
+                                style: TextStyle(
+                                  color: AppStyle.secondaryColor,
+                                  fontSize: 28.sp,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          height: 500.w,
+                          child: CupertinoPicker(
+                            children: [
+                              Center(
+                                child: Text('1天'),
+                              ),
+                              Center(
+                                child: Text('3天'),
+                              ),
+                              Center(
+                                child: Text('7天'),
+                              ),
+                              Center(
+                                child: Text('14天'),
+                              ),
+                              Center(
+                                child: Text('30天'),
+                              ),
+                            ],
+                            itemExtent: 88.w,
+                            onSelectedItemChanged: (int value) {
+                              int realValue = 0;
+                              switch (value) {
+                                case 0:
+                                  realValue = 1;
+                                  break;
+                                case 1:
+                                  realValue = 3;
+                                  break;
+                                case 2:
+                                  realValue = 7;
+                                  break;
+                                case 3:
+                                  realValue = 14;
+                                  break;
+                                case 4:
+                                  realValue = 30;
+                                  break;
+                              }
+                              widget.model.cycleCheck.checkCycle = realValue;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ).then((value) {
+                    setState(() {});
+                  });
+                }
+              : null,
         ),
         Padding(
           padding: EdgeInsets.symmetric(
@@ -275,7 +435,19 @@ class _DecorationManagerDetailStatePage
             ),
           ),
         ),
-        DecorationCheckRow(details: widget.model.cycleCheck.checkDetails),
+        DecorationCheckRow(
+          details: [
+            CHECK_TYPE.ELECTRIC,
+            CHECK_TYPE.WATER,
+            CHECK_TYPE.WALL,
+            CHECK_TYPE.DOOR_AND_WINDOWS,
+            CHECK_TYPE.SECURITY,
+          ],
+          onChange: (details) {
+            widget.model.cycleCheck.checkDetails = details;
+          },
+          canTap: isWaitHandOut,
+        )
       ],
     );
   }
@@ -407,33 +579,50 @@ class _DecorationManagerDetailStatePage
   _buildRow({
     String title,
     String subTitle,
+    VoidCallback onTap,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        border:
-            Border(bottom: BorderSide(color: Color(0xFFE8E8E8), width: 1.w)),
-      ),
+    return Material(
+      color: Colors.transparent,
       child: InkWell(
-        child: Row(
-          children: [
-            AkuBox.h(96),
-            Text(
-              title,
-              style: TextStyle(
-                color: AppStyle.primaryTextColor,
-                fontSize: 28.w,
-              ),
+        onTap: onTap,
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border(
+                bottom: BorderSide(color: Color(0xFFE8E8E8), width: 1.w)),
+          ),
+          child: InkWell(
+            child: Row(
+              children: [
+                AkuBox.h(96),
+                Text(
+                  title,
+                  style: TextStyle(
+                    color: AppStyle.primaryTextColor,
+                    fontSize: 28.w,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  TextUtil.isEmpty(subTitle) ? '请选择' : subTitle,
+                  style: TextStyle(
+                    color: TextUtil.isEmpty(subTitle)
+                        ? AppStyle.minorTextColor
+                        : AppStyle.primaryTextColor,
+                    fontSize: 28.w,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap == null ? SizedBox() : AkuBox.w(24),
+                onTap == null
+                    ? SizedBox()
+                    : Icon(
+                        Icons.arrow_forward_ios,
+                        size: 32.w,
+                        color: AppStyle.minorTextColor,
+                      ),
+              ],
             ),
-            Spacer(),
-            Text(
-              subTitle,
-              style: TextStyle(
-                color: AppStyle.primaryTextColor,
-                fontSize: 28.w,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

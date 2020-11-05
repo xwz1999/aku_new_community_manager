@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
 ///show bottom sheet
-showAkuSheet({
+Future showAkuSheet({
   Widget child,
 }) async {
   await Get.bottomSheet(
@@ -20,12 +20,7 @@ showAkuSheet({
   );
 }
 
-Future showItemSheet({
-  String title,
-  List<String> items,
-  String selectItem,
-  Function(String result) onTap,
-}) async {
+Future showNormalSheet(String title, List<Widget> children) async {
   await showAkuSheet(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -49,27 +44,38 @@ Future showItemSheet({
             Spacer(),
           ],
         ),
-        ...items.map((e) {
-          return AkuMaterialButton(
-            height: 96.w,
-            minWidth: double.infinity,
-            onPressed: () {
-              Get.back();
-              onTap(e);
-            },
-            child: Text(
-              e,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 32.sp,
-                color: e == selectItem
-                    ? AppStyle.secondaryColor
-                    : AppStyle.primaryTextColor,
-              ),
-            ),
-          );
-        }).toList(),
+        ...children,
       ],
     ),
   );
+}
+
+Future showItemSheet({
+  String title,
+  List<String> items,
+  String selectItem,
+  Function(String result) onTap,
+}) async {
+  await showNormalSheet(
+      title,
+      items.map((e) {
+        return AkuMaterialButton(
+          height: 96.w,
+          minWidth: double.infinity,
+          onPressed: () {
+            Get.back();
+            onTap(e);
+          },
+          child: Text(
+            e,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 32.sp,
+              color: e == selectItem
+                  ? AppStyle.secondaryColor
+                  : AppStyle.primaryTextColor,
+            ),
+          ),
+        );
+      }).toList());
 }

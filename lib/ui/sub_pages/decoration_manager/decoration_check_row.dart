@@ -8,7 +8,9 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 class DecorationCheckRow extends StatefulWidget {
   final List<CHECK_TYPE> details;
   final Function(List<CHECK_TYPE> details) onChange;
-  DecorationCheckRow({Key key, @required this.details, this.onChange})
+  final bool canTap;
+  DecorationCheckRow(
+      {Key key, @required this.details, this.onChange, this.canTap = false})
       : super(key: key);
 
   @override
@@ -35,9 +37,10 @@ class _DecorationCheckRowState extends State<DecorationCheckRow> {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: widget.onChange == null
+            onTap: !widget.canTap
                 ? null
                 : () {
+                    widget.onChange(_checkedDetails);
                     setState(() {
                       _checkedDetails.indexOf(_tempCheckDetails[index]) != -1
                           ? _checkedDetails.remove(_tempCheckDetails[index])
@@ -48,7 +51,7 @@ class _DecorationCheckRowState extends State<DecorationCheckRow> {
               color: Colors.transparent,
               child: DecorationCheckCardWidget(
                 type: _tempCheckDetails[index],
-                checked: widget.onChange == null
+                checked: !widget.canTap
                     ? false
                     : _checkedDetails.indexOf(_tempCheckDetails[index]) != -1,
               ),
