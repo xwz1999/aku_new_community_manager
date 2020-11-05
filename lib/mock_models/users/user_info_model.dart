@@ -10,6 +10,9 @@ enum USER_ROLE {
   ///保安角色
   SECURITY,
 
+  ///物业角色
+  PROPERTY,
+
   ///无角色
   EMPTY,
 }
@@ -65,5 +68,14 @@ class UserInfoModel {
     this.avatar,
     this.role = USER_ROLE.SECURITY,
     this.phone = '13918237877',
+  });
+
+  ///师傅角色生成
+  ///password 000003
+  UserInfoModel.property({
+    this.nickName = '刘物业',
+    this.avatar,
+    this.role = USER_ROLE.PROPERTY,
+    this.phone = '18965438676',
   });
 }

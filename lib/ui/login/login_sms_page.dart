@@ -107,6 +107,9 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
               } else if (text == '000002') {
                 userProvider.setUserInfo(UserInfoModel.security());
                 Get.offAll(HomePage());
+              } else if (text == '000003') {
+                userProvider.setUserInfo(UserInfoModel.property());
+                Get.offAll(HomePage());
               } else {
                 if (text.length == 6) BotToast.showText(text: '验证码错误');
               }
