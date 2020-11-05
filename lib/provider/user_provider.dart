@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:flutter/material.dart';
 

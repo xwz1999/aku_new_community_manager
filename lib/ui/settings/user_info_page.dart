@@ -26,7 +26,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           AkuTile(
             onTap: () {
               akuPickImage().then((file) {
-                userProvider.setAvatar(file);
+                if (file != null) userProvider.setAvatar(file);
               });
             },
             title: Text('头像'),
@@ -50,6 +50,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           AkuTile(
             onTap: () {},
             title: Text('手机'),
+            suffix: Text(userProvider.userInfoModel.securePhone),
           ),
         ],
       ),

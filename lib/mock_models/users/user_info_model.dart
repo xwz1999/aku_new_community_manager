@@ -18,16 +18,26 @@ class UserInfoModel {
   String nickName;
   File avatar;
   USER_ROLE role;
+  String phone;
+  String get securePhone {
+    if (phone.length < 8)
+      return phone;
+    else
+      return '${phone.substring(0, 3)}****${phone.substring(7)}';
+  }
+
   UserInfoModel({
     this.nickName,
     this.avatar,
     this.role,
+    this.phone,
   });
 
   UserInfoModel.empty({
     this.nickName = '',
     this.avatar,
     this.role = USER_ROLE.EMPTY,
+    this.phone = '',
   });
 
   ///管家角色生成
@@ -36,6 +46,7 @@ class UserInfoModel {
     this.nickName = '李管家',
     this.avatar,
     this.role = USER_ROLE.MANAGER,
+    this.phone = '18819289976',
   });
 
   ///师傅角色生成
@@ -44,6 +55,7 @@ class UserInfoModel {
     this.nickName = '王师傅',
     this.avatar,
     this.role = USER_ROLE.FIXER,
+    this.phone = '18927139123',
   });
 
   ///师傅角色生成
@@ -52,5 +64,6 @@ class UserInfoModel {
     this.nickName = '林保安',
     this.avatar,
     this.role = USER_ROLE.SECURITY,
+    this.phone = '13918237877',
   });
 }
