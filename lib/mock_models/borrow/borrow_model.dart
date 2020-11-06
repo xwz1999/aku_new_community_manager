@@ -19,6 +19,7 @@ enum BORROW_STATUS {
 enum GOODS_STATUS {
   NORMAL,
   BROKEN,
+  LOST,
 }
 
 class BorrowModel {
@@ -28,6 +29,7 @@ class BorrowModel {
   GOODS_STATUS goodsStatus;
   String title;
   SingleBorrowGoods borrowGoods;
+  DateTime date;
 
   BorrowModel({
     @required this.borrowPerson,
@@ -35,6 +37,8 @@ class BorrowModel {
     @required this.borrowTime,
     @required this.goodsStatus,
     @required this.borrowGoods,
+    @required this.title,
+    @required this.date,
   });
 }
 
@@ -69,6 +73,12 @@ class SingleBorrowGoods {
   String code;
   dynamic assetpath;
   BORROW_STATUS status;
+  String get borrowValue => {
+        BORROW_STATUS.BORROWING: '出借中',
+        BORROW_STATUS.DONE: '已归还',
+        BORROW_STATUS.NOT_BORROW: '未出借',
+        BORROW_STATUS.WAIT_CHECK: '待检查',
+      }[status];
   SingleBorrowGoods({
     this.name,
     this.code,

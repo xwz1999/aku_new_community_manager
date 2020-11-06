@@ -1,7 +1,10 @@
+import 'package:aku_community_manager/mock_models/borrow/borrow_data.dart';
+import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/all_borrow_goods.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
@@ -61,6 +64,36 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
           ),
         ),
       ],
+      body: TabBarView(
+        controller: _tabController,
+        children: _getChildren(),
+      ),
     );
   }
+
+  List<Widget> _getChildren() {
+    switch (role) {
+      case USER_ROLE.MANAGER:
+        return [
+          getView(BorrowData.models),
+          getView(BorrowData.borrowModels),
+          getView(BorrowData.checkModels),
+          getView(BorrowData.doneModels),
+        ];
+        break;
+      default:
+        return [];
+    }
+  }
+}
+
+Widget getView(List<BorrowModel> models) {
+  return ListView.builder(
+    itemBuilder: (context, index) {
+      return BorrowManagerCard(
+        model: models[index],
+      );
+    },
+    itemCount: models.length,
+  );
 }
