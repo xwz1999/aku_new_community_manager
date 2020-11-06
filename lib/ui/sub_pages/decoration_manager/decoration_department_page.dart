@@ -1,6 +1,5 @@
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
 import 'package:aku_community_manager/provider/fix_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';

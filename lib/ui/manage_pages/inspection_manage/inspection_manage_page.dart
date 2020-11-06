@@ -1,14 +1,10 @@
-import 'package:aku_community_manager/mock_models/manage_models/manage_model.dart';
 import 'package:aku_community_manager/provider/manage_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:aku_community_manager/const/resource.dart';
 
 class InspectionManagePage extends StatefulWidget {
   InspectionManagePage({Key key}) : super(key: key);

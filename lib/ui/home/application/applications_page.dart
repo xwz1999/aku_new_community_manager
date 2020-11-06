@@ -178,7 +178,6 @@ class _ApplicationPageState extends State<ApplicationPage>
 
   ///应用组
   _buildBottomApps() {
-    final appProvider = Provider.of<AppProvider>(context);
     return Expanded(
       child: Row(
         children: [
