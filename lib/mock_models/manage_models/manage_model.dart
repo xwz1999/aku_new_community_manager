@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/const/resource.dart';
-
 class GreenManageCardModel {
   String title;
   String task;

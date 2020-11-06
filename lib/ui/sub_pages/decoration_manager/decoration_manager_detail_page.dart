@@ -1,12 +1,16 @@
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
+import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_row.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_checkbox.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_department_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_follow_check.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/const/resource.dart';
@@ -17,6 +21,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class DecorationManagerDetailPage extends StatefulWidget {
   final DecorationModel model;
@@ -31,6 +36,8 @@ class DecorationManagerDetailPage extends StatefulWidget {
 class _DecorationManagerDetailStatePage
     extends State<DecorationManagerDetailPage> {
   bool get isWaitHandOut => widget.model.type == DecorationType.WAIT_HAND_OUT;
+  USER_ROLE get role =>
+      Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -43,11 +50,51 @@ class _DecorationManagerDetailStatePage
               ? SizedBox()
               : _buildFinishWorkCheck(),
           _buildCycleCheck(),
-          widget.model.type == DecorationType.WAIT_HAND_OUT
+          widget.model.checkInfomations == null
               ? SizedBox()
               : _buildCheckDetail(),
         ],
       ),
+      bottom: Builder(builder: (context) {
+        final CycleCheck cycleCheck = widget.model.cycleCheck;
+        if (role == USER_ROLE.MANAGER) {
+          switch (widget.model.type) {
+            case DecorationType.WAIT_HAND_OUT:
+              return AkuBottomButton(
+                title: '立即安排',
+                onTap: cycleCheck.authPerson != null &&
+                        cycleCheck.checkCycle != null &&
+                        cycleCheck.startDate != null
+                    ? () {
+                        widget.model.type = DecorationType.HAND_OUT;
+                        setState(() {});
+                      }
+                    : null,
+              );
+              break;
+            default:
+              return SizedBox();
+              break;
+          }
+
+          // else if(widget.model.type)
+        } else if (role == USER_ROLE.PROPERTY) {
+          switch (widget.model.type) {
+            case DecorationType.HAND_OUT:
+              return AkuBottomButton(
+                title: '立即执行',
+                onTap: () {
+                  Get.to(DecorationFollowCheck(model: widget.model));
+                },
+              );
+              break;
+            default:
+              return SizedBox();
+              break;
+          }
+        } else
+          return SizedBox();
+      }),
     );
   }
 

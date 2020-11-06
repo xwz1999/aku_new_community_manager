@@ -6,7 +6,7 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class AkuScaffold extends StatefulWidget {
   ///AppBar 使用该值 `title`,`titleStyle`,`leading`,
-  ///`brightness`,`appBarColor`,``将失效
+  ///`brightness`,`appBarColor`,`actions`将失效
   final PreferredSizeWidget appBar;
 
   ///title
@@ -45,6 +45,8 @@ class AkuScaffold extends StatefulWidget {
 
   final Color appBarColor;
 
+  final List<Widget> actions;
+
   final PreferredSizeWidget appBarBottom;
   AkuScaffold({
     Key key,
@@ -58,6 +60,7 @@ class AkuScaffold extends StatefulWidget {
     this.bottom,
     this.appBarColor = Colors.white,
     this.appBarBottom,
+    this.actions = const [],
   }) : super(key: key);
 
   @override
@@ -86,6 +89,7 @@ class _AkuScaffoldState extends State<AkuScaffold> {
               child: Text(widget.title ?? ''),
             ),
             bottom: widget.appBarBottom,
+            actions: widget.actions,
           ),
       body: widget.body,
       bottomNavigationBar: widget.bottom,

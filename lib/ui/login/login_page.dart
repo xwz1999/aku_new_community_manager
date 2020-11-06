@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/agreements/agreement_page.dart';
+import 'package:aku_community_manager/ui/agreements/privacy_page.dart';
 import 'package:aku_community_manager/ui/login/login_sms_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -67,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: double.infinity,
             child: TextField(
-              autofocus: true,
               controller: _textController,
               onChanged: (text) {
                 setState(() {});
@@ -148,6 +149,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               ExtendedWidgetSpan(
                 child: GestureDetector(
+                  onTap: () {
+                    Get.to(AgreementPage());
+                  },
                   child: Text(
                     '《服务协议》',
                     style: TextStyle(
@@ -162,6 +166,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
               ExtendedWidgetSpan(
                 child: GestureDetector(
+                  onTap: () {
+                    Get.to(PrivacyPage());
+                  },
                   child: Text(
                     '《隐私政策》',
                     style: TextStyle(

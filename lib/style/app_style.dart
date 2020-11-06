@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:aku_community_manager/const/resource.dart';
 
 class AppStyle {
   //颜色，渐变主颜色和次级颜色

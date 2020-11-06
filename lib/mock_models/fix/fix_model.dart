@@ -1,5 +1,6 @@
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:flutter/material.dart';
+
+import 'package:aku_community_manager/const/resource.dart';
 
 enum FIX_ENUM {
   ///待派单
@@ -110,15 +111,6 @@ class FixModel {
                 title: '分派给李保国师傅', date: DateTime(2020, 10, 23, 10, 32, 14)),
             FixStatus(title: '师傅已接单', date: DateTime(2020, 10, 23, 10, 38, 26)),
           ],
-          result: FixResult(
-            detail: '电饭煲插头没插',
-            material: '无',
-            imgs: [R.ASSETS_STATIC_FIX_FOOD_PNG],
-          ),
-          review: UserReviewInfo(
-            rate: 5,
-            content: '师傅太用心了',
-          ),
         ),
       ),
       FixModel(
@@ -130,7 +122,7 @@ class FixModel {
           userName: '杨建',
           userPhoneNumber: '18882929292',
           fixArea: 'A区',
-          type: FIX_PAYMENT_TYPE.FREE,
+          type: FIX_PAYMENT_TYPE.PAY,
           limit: FIX_DATE_LIMIT.HOUR_24,
           subType: FIX_SUB_TYPE.NORMAL,
           fixStatuses: [
@@ -148,6 +140,10 @@ class FixModel {
           review: UserReviewInfo(
             rate: 5,
             content: '师傅太用心了',
+          ),
+          priceDetail: FixPriceDetail(
+            humanPrice: 10,
+            materialPrice: 0,
           ),
         ),
       ),
@@ -228,6 +224,8 @@ class FixDetailModel {
   FixResult result;
 
   UserReviewInfo review;
+
+  FixPriceDetail priceDetail;
   FixDetailModel({
     this.userName,
     this.userPhoneNumber,
@@ -238,6 +236,7 @@ class FixDetailModel {
     this.fixStatuses,
     this.result,
     this.review,
+    this.priceDetail,
   });
 }
 
@@ -270,4 +269,14 @@ class UserReviewInfo {
     this.rate,
     this.content,
   });
+}
+
+class FixPriceDetail {
+  double humanPrice;
+  double materialPrice;
+  FixPriceDetail({
+    this.humanPrice,
+    this.materialPrice,
+  });
+  double get allPrice => humanPrice + materialPrice;
 }
