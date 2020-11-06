@@ -7,6 +7,7 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -77,6 +78,9 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                 _buildRow(
                     '总类名称',
                     TextField(
+                      onChanged: (_) {
+                        setState(() {});
+                      },
                       style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 28.sp,
@@ -92,6 +96,9 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                 _buildRow(
                     '物品数量',
                     TextField(
+                      onChanged: (_) {
+                        setState(() {});
+                      },
                       style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 28.sp,
@@ -154,6 +161,28 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                 ),
                 AkuBox.h(28),
               ],
+            ),
+          ),
+          AkuBox.h(470),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 64.w),
+            child: AkuBottomButton(
+              title: '确定',
+              onTap: TextUtil.isEmpty(_textEditingController.text) ||
+                      TextUtil.isEmpty(_numberController.text) ||
+                      file == null ||
+                      int.tryParse(_numberController.text) == null
+                  ? null
+                  : () {
+                      BorrowData.borrowObjects.add(
+                        BorrowObject.init(
+                          name: _textEditingController.text,
+                          allNumber: int.parse(_numberController.text),
+                          assetPath: file,
+                        ),
+                      );
+                      Get.back();
+                    },
             ),
           ),
         ],
