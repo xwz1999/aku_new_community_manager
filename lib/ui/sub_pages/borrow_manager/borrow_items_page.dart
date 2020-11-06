@@ -27,7 +27,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
     return AkuScaffold(
       title: '物品查看',
       actions: [
-        userProvider.userInfoModel.role != USER_ROLE.MANAGER
+        userProvider.userInfoModel.role == USER_ROLE.MANAGER
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {
@@ -76,7 +76,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                   ),
                 ),
                 Spacer(),
-                userProvider.userInfoModel.role != USER_ROLE.MANAGER
+                userProvider.userInfoModel.role == USER_ROLE.MANAGER
                     ? AkuMaterialButton(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         onPressed: () {

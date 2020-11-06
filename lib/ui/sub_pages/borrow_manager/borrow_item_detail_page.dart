@@ -1,9 +1,12 @@
 import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
+import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BorrowItemDetailPage extends StatefulWidget {
   final SingleBorrowGoods item;
@@ -30,24 +33,27 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '物品详情',
       actions: [
-        AkuMaterialButton(
-          minWidth: 120.w,
-          onPressed: () {
-            setState(() {
-              _isEditing = !_isEditing;
-            });
-          },
-          child: Text(
-            _isEditing ? '完成' : '编辑',
-            style: TextStyle(
-              fontSize: 28.w,
-              color: AppStyle.primaryTextColor,
-            ),
-          ),
-        ),
+        userProvider.userInfoModel.role == USER_ROLE.MANAGER
+            ? AkuMaterialButton(
+                minWidth: 120.w,
+                onPressed: () {
+                  setState(() {
+                    _isEditing = !_isEditing;
+                  });
+                },
+                child: Text(
+                  _isEditing ? '完成' : '编辑',
+                  style: TextStyle(
+                    fontSize: 28.w,
+                    color: AppStyle.primaryTextColor,
+                  ),
+                ),
+              )
+            : SizedBox(),
       ],
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 16.w),
