@@ -1,4 +1,7 @@
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/mock_models/all_model.dart';
+import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
+import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -10,6 +13,8 @@ import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
@@ -42,7 +47,8 @@ class _HomePageState extends State<HomePage> {
               Provider.of<UserProvider>(context, listen: false);
           if (userProvider.isSigned) {
             Get.to(page);
-            appProvider.addRecentApp(AppApplication(text, assetPath, page));
+            if (text != '全部应用')
+              appProvider.addRecentApp(AppApplication(text, assetPath, page));
           } else
             Get.to(LoginPage());
         },
@@ -71,7 +77,7 @@ class _HomePageState extends State<HomePage> {
 
   ///底部信息栏卡片
   Widget _card(
-    String number,
+    int number,
     String text,
     Color color,
     int index,
@@ -92,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 height: 32.w,
               ),
               Text(
-                number,
+                number == null ? '0' : number.toString(),
                 style: TextStyle(
                   color: color,
                   fontSize: 40.sp,
@@ -257,7 +263,10 @@ class _HomePageState extends State<HomePage> {
                         //消息按钮
                         height: double.infinity,
                         onPressed: () {
-                          Get.to(Message());
+                          if (userProvider.isSigned)
+                            Get.to(Message());
+                          else
+                            Get.to(LoginPage());
                         },
                         child: Column(children: [
                           Image.asset(
@@ -389,81 +398,114 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 16.w),
             //待办事项标题行
-            Row(
-              children: [
-                Text(
-                  '待办事项',
-                  style: TextStyle(
-                    color: Color(0xFF4A4B51),
-                    fontSize: 32.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Spacer(),
-                AkuButton(
-                  padding: EdgeInsets.symmetric(vertical: 16.w),
-                  onPressed: () {
-                    Get.to(BusinessPage(initIndex: 3));
-                  },
-                  child: Row(
+            !userProvider.isSigned
+                ? SizedBox()
+                : Row(
                     children: [
                       Text(
-                        '全部事项',
+                        '待办事项',
                         style: TextStyle(
-                            color: AppStyle.minorTextColor,
-                            fontSize: 24.sp,
-                            fontWeight: FontWeight.bold),
+                          color: Color(0xFF4A4B51),
+                          fontSize: 32.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: 22.w,
-                        color: AppStyle.minorTextColor,
+                      Spacer(),
+                      AkuButton(
+                        padding: EdgeInsets.symmetric(vertical: 16.w),
+                        onPressed: () {
+                          Get.to(BusinessPage(initIndex: 3));
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              '全部事项',
+                              style: TextStyle(
+                                  color: AppStyle.minorTextColor,
+                                  fontSize: 24.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 22.w,
+                              color: AppStyle.minorTextColor,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
-            ),
             SizedBox(height: 16.w),
             //待办事项栏
-            Container(
-              width: double.infinity,
-              height: 449.w,
-              //TODO listview
-            ),
+            !userProvider.isSigned
+                ? SizedBox()
+                : Container(
+                    height: 480.w,
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return AkuBox.w(16);
+                      },
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          width: 526.w,
+                          child: Builder(
+                            builder: (context) {
+                              final item = AllModel(context).waitThings[index];
+                              if (item is DecorationModel) {
+                                return DecorationManagerCard(model: item);
+                              } else if (item is FixModel) {
+                                return BusinessFixCard(
+                                    model: item, homeDisplay: true);
+                              } else
+                                return SizedBox();
+                            },
+                          ),
+                        );
+                      },
+                      itemCount: AllModel(context).waitThings.length,
+                    ),
+                    //TODO listview
+                  ),
             SizedBox(height: 24.w),
             //底部信息栏
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.w),
-                color: Colors.white,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      _card('25', '未处理事项', Color(0xFFFF4E0D), 0),
-                      AkuDiveder().verticalDivider(166.5.w),
-                      _card('22', '处理中事项', Color(0xFFFFC40C), 1),
-                    ],
+            !userProvider.isSigned
+                ? SizedBox()
+                : Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.w),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            _card(AllModel(context).waitThings?.length, '未处理事项',
+                                Color(0xFFFF4E0D), 0),
+                            AkuDiveder().verticalDivider(166.5.w),
+                            _card(AllModel(context).processingThings?.length,
+                                '处理中事项', Color(0xFFFFC40C), 1),
+                          ],
+                        ),
+                        Row(children: [
+                          AkuDiveder().horizontalDivider(343.w),
+                          AkuDiveder(isReverse: true).horizontalDivider(343.w)
+                        ]),
+                        Row(
+                          children: [
+                            _card(AllModel(context).doneThings?.length, '已处理事项',
+                                Color(0xFF3F8FFE), 2),
+                            AkuDiveder(isReverse: true).verticalDivider(
+                              166.5.w,
+                            ),
+                            _card(AllModel(context).allThings?.length, '全部事项',
+                                Color(0xFF333333), 3),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(children: [
-                    AkuDiveder().horizontalDivider(343.w),
-                    AkuDiveder(isReverse: true).horizontalDivider(343.w)
-                  ]),
-                  Row(
-                    children: [
-                      _card('25', '已处理事项', Color(0xFF3F8FFE), 2),
-                      AkuDiveder(isReverse: true).verticalDivider(
-                        166.5.w,
-                      ),
-                      _card('72', '全部事项', Color(0xFF333333), 3),
-                    ],
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),

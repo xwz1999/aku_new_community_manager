@@ -239,6 +239,8 @@ class _WarningPageState extends State<WarningPage> {
   }
 
   _getLocation() {
+    _location = null;
+    setState(() {});
     PermissionTool.getLocationPermission().then((state) {
       if (state) {
         AmapLocation.instance.fetchLocation().then((location) {

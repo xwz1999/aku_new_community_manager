@@ -61,9 +61,9 @@ class _PersonalDrawState extends State<PersonalDraw> {
             //leading
             InkWell(
               onTap: () {
-                if (!userProvider.isSigned) {
-                  Get.to(LoginPage());
-                }
+                userProvider.isSigned
+                    ? Get.to(UserInfoPage())
+                    : Get.to(LoginPage());
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 80.w, top: 40.w),
