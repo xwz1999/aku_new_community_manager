@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -15,6 +16,7 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -120,9 +122,11 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
+    int _currentIndicator = 0;
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
+    final _anouncementProvider = Provider.of<AnouncementProvider>(context);
     ScreenUtil.init(context,
         designSize: Size(750, 1334), allowFontScaling: true);
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -380,8 +384,46 @@ class _HomePageState extends State<HomePage> {
               color: Color(0xFFFFFFFF),
               //公告栏
               width: double.infinity,
-              height: 172.w,
-              //TODO listview
+              height: 200.w,
+              child: Column(
+                children: [
+                  CarouselSlider(
+                    items: _anouncementProvider.anouncementCardModels
+                        .map((e) => AllAnouncementState.anounceCard(e))
+                        .toList(),
+                    options: CarouselOptions(
+                      viewportFraction: 1.0,
+                      aspectRatio: 686 / 172,
+                      autoPlay: true,
+                      onPageChanged: (index, _) {
+                        setState(() {
+                          _currentIndicator = index;
+                        });
+                      },
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:
+                        _anouncementProvider.anouncementCardModels.map((e) {
+                      int index =
+                          _anouncementProvider.anouncementCardModels.indexOf(e);
+                      return Container(
+                        width: 8.w,
+                        height: 8.w,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 10.w, horizontal: 2.w),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _currentIndicator == index
+                              ? Color.fromRGBO(0, 0, 0, 0.9)
+                              : Color.fromRGBO(0, 0, 0, 0.4),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: 16.w),
             //待办事项标题行
