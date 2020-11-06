@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_page.dart';
@@ -46,7 +47,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication(
         '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
     AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, VisitorManagerPage()),
-    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
+    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, BorrowManagerPage()),
     AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
   ];
   List<AppApplication> _wisdomApplications = [
@@ -58,7 +59,7 @@ class _ApplicationPageState extends State<ApplicationPage>
         '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, DecorationManagerPage()),
     AppApplication(
         '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
-    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, Scaffold()),
+    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, BorrowManagerPage()),
     AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
   ];
