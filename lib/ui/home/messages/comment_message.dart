@@ -16,9 +16,9 @@ class _CommentMessageState extends State<CommentMessage> {
     return Column(
       children: [
         Container(
+          margin: EdgeInsets.only(top:24.w,bottom:24.w),
           alignment: Alignment.center,
           width: double.infinity,
-          height: 48.w + 33.w,
           child: Text(
             date,
             style: TextStyle(color: AppStyle.minorTextColor, fontSize: 24.sp),
@@ -135,7 +135,7 @@ class _CommentMessageState extends State<CommentMessage> {
     return AkuScaffold(
       title: '评论消息',
        body: ListView(
-        padding: EdgeInsets.all(32.w),
+        padding: EdgeInsets.only(left:32.w,right: 32.w,bottom: 40.w),
         children: [
           _messageList('2020-10-23 10:00', '杨建', '四星'),
           _messageList('2020-10-24 11:00', '刘能', '四星'),

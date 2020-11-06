@@ -19,8 +19,8 @@ class ItemsOutdoorModel {
   ///出户状态
   OUTDOORSTATUS status;
 
-///卡片上方时间，即开始时间
-DateTime datetime;
+  ///卡片上方时间，即开始时间
+  DateTime datetime;
 
   ///小区名字
   String communityname;
@@ -37,23 +37,36 @@ DateTime datetime;
   ///物品
   ItemDetails items;
 
-  ///出户时间
+  ///预计出户时间
   String outtime;
-  ItemsOutdoorModel(
-      {@required this.status,
-      @required this.datetime,
-      @required this.communityname,
-      @required this.adress,
-      @required this.name,
-      @required this.identify,
-      @required this.items,
-      @required this.outtime});
+
+  ///实际出户/驳回时间
+  String finalOutTime;
+
+  ///出户地点
+  String outPlace;
+
+  ///驳回理由
+  String rejectReason;
+  ItemsOutdoorModel({
+    @required this.status,
+    @required this.datetime,
+    @required this.communityname,
+    @required this.adress,
+    @required this.name,
+    @required this.identify,
+    @required this.items,
+    @required this.outtime,
+    this.finalOutTime,
+    this.outPlace,
+    this.rejectReason,
+  });
 
   static List<ItemsOutdoorModel> initList() {
     return [
       ItemsOutdoorModel(
         status: OUTDOORSTATUS.NOT_OUT,
-        datetime: DateTime(2020,10,23,09,28,56),
+        datetime: DateTime(2020, 10, 23, 09, 28, 56),
         communityname: '深圳华悦茂峰',
         adress: '1幢1单元702室',
         name: '马云',
@@ -69,10 +82,13 @@ DateTime datetime;
           ],
         ),
         outtime: '2020-10-24 12:00',
+        finalOutTime: '',
+        outPlace: '',
+        rejectReason: '',
       ),
       ItemsOutdoorModel(
         status: OUTDOORSTATUS.OUT_DONE,
-        datetime: DateTime(2020,10,23,09,28,56),
+        datetime: DateTime(2020, 10, 23, 09, 28, 56),
         communityname: '深圳华悦茂峰',
         adress: '1幢1单元702室',
         name: '马云',
@@ -88,10 +104,13 @@ DateTime datetime;
           ],
         ),
         outtime: '2020-10-24 12:00',
+        finalOutTime: '2020-10-23 11:23:56',
+        outPlace: '东大门',
+        rejectReason: ''
       ),
       ItemsOutdoorModel(
         status: OUTDOORSTATUS.REJECTED,
-        datetime: DateTime(2020,10,23,09,28,56),
+        datetime: DateTime(2020, 10, 23, 09, 28, 56),
         communityname: '深圳华悦茂峰',
         adress: '1幢1单元702室',
         name: '马云',
@@ -107,10 +126,13 @@ DateTime datetime;
           ],
         ),
         outtime: '2020-10-24 12:00',
+        finalOutTime: '2020-10-24 12:22:34',
+        outPlace: '',
+        rejectReason: '申报物品与实际物品不符',
       ),
       ItemsOutdoorModel(
         status: OUTDOORSTATUS.CANCELLATION,
-        datetime: DateTime(2020,10,23,09,28,56),
+        datetime: DateTime(2020, 10, 23, 09, 28, 56),
         communityname: '深圳华悦茂峰',
         adress: '1幢1单元702室',
         name: '马云',
@@ -126,6 +148,9 @@ DateTime datetime;
           ],
         ),
         outtime: '2020-10-24 12:00',
+        finalOutTime: '',
+        outPlace: '',
+        rejectReason: '',
       ),
     ];
   }
