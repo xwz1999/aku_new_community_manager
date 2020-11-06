@@ -13,6 +13,7 @@ import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
+import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
@@ -312,9 +313,12 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _menuButton(
-                          R.ASSETS_HOME_IC_POLICE_PNG, '一键报警', HomePage()),
-                      _menuButton(R.ASSETS_HOME_IC_VISITORS_PNG, '访客管理',
-                          VisitorManagerPage()),
+                          R.ASSETS_HOME_IC_POLICE_PNG, '一键报警', WarningPage()),
+                      _menuButton(
+                        R.ASSETS_HOME_IC_VISITORS_PNG,
+                        '访客管理',
+                        VisitorManagerPage(),
+                      ),
                       _menuButton(
                         R.ASSETS_HOME_IC_SERVICE_PNG,
                         '报事报修',
