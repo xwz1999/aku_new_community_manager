@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -30,6 +31,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   ///自定义bar的菜单按钮
   Widget _menuButton(String assetPath, String text, Widget page) {
+    final appProvider = Provider.of<AppProvider>(context);
     return Expanded(
       child: AkuButton(
         radius: 8.w,
@@ -37,9 +39,10 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (userProvider.isSigned)
+          if (userProvider.isSigned) {
             Get.to(page);
-          else
+            appProvider.addRecentApp(AppApplication(text, assetPath, page));
+          } else
             Get.to(LoginPage());
         },
         child: Column(

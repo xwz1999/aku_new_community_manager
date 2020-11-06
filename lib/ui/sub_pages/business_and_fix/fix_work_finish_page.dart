@@ -33,7 +33,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
     _descriptionController?.dispose();
     _materialController?.dispose();
     _materialPriceController?.dispose();
-    _materialPriceController?.dispose();
+    _humanController?.dispose();
     super.dispose();
   }
 

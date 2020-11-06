@@ -69,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             width: double.infinity,
             child: TextField(
-              autofocus: true,
               controller: _textController,
               onChanged: (text) {
                 setState(() {});
