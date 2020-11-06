@@ -69,6 +69,7 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
     final fixProvider = Provider.of<FixProvider>(context, listen: false);
     List<FixModel> models = fixProvider.getFixModel(index, context);
     return ListView.builder(
+      padding: EdgeInsets.symmetric(horizontal: 32.w),
       itemBuilder: (context, index) {
         return BusinessFixCard(model: models[index]);
       },
