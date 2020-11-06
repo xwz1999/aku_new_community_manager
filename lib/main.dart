@@ -13,7 +13,9 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await AmapCore.init('');
+  await AmapLocation.instance.init(iosKey: '');
   runApp(MyApp());
 }
 

@@ -6,6 +6,7 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
+import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,10 +49,10 @@ class _ApplicationPageState extends State<ApplicationPage>
         '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ActivityManagerPage()),
     AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, VisitorManagerPage()),
     AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, BorrowManagerPage()),
-    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
+    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, WarningPage()),
   ];
   List<AppApplication> _wisdomApplications = [
-    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, Scaffold()),
+    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, WarningPage()),
     AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, VisitorManagerPage()),
     AppApplication('报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, BusinessAndFixPage()),
     AppApplication('物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, ItemsOutdoorPage()),
