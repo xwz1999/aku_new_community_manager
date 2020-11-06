@@ -9,6 +9,7 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_fin
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:extended_text/extended_text.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:get/get.dart';
@@ -16,7 +17,9 @@ import 'package:provider/provider.dart';
 
 class BusinessFixCard extends StatefulWidget {
   final FixModel model;
-  BusinessFixCard({Key key, @required this.model}) : super(key: key);
+  final bool homeDisplay;
+  BusinessFixCard({Key key, @required this.model, this.homeDisplay = false})
+      : super(key: key);
 
   @override
   _BusinessFixCardState createState() => _BusinessFixCardState();
@@ -81,9 +84,13 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                 fixTypeWidget,
               ],
             ),
-            AkuBox.h(24),
+            widget.homeDisplay ? AkuBox.h(12) : AkuBox.h(24),
             Text(
               widget.model.title,
+              maxLines: widget.homeDisplay ? 1 : null,
+              overflow: !widget.homeDisplay
+                  ? TextOverflow.visible
+                  : TextOverflow.ellipsis,
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontSize: 28.sp,
@@ -95,10 +102,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             _buildBottomCard(),
           ],
         ),
-        margin: EdgeInsets.symmetric(
-          horizontal: 32.w,
-          vertical: 8.w,
-        ),
+        margin: EdgeInsets.only(top: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.w),
@@ -222,9 +226,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
       default:
         return Column(
           children: [
-            Divider(
-              height: 48.w,
-            ),
+            widget.homeDisplay ? Divider(height: 24.w) : Divider(height: 48.w),
             Align(
               alignment: Alignment.centerRight,
               child: AkuMaterialButton(
