@@ -10,6 +10,34 @@ packages:
       url: "http://test.akuhotel.com:8099/aku_fe/aku_ui.git"
     source: git
     version: "0.0.1"
+  amap_core_fluttify:
+    dependency: transitive
+    description:
+      name: amap_core_fluttify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.12.0"
+  amap_location_fluttify:
+    dependency: transitive
+    description:
+      name: amap_location_fluttify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.18.0"
+  amap_map_fluttify:
+    dependency: "direct main"
+    description:
+      name: amap_map_fluttify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.29.0"
+  amap_search_fluttify:
+    dependency: transitive
+    description:
+      name: amap_search_fluttify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.14.0"
   async:
     dependency: transitive
     description:
@@ -80,6 +108,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.1"
+  core_location_fluttify:
+    dependency: transitive
+    description:
+      name: core_location_fluttify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.1"
   crypto:
     dependency: transitive
     description:
@@ -177,6 +212,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  foundation_fluttify:
+    dependency: transitive
+    description:
+      name: foundation_fluttify
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.9.10+1"
   get:
     dependency: "direct main"
     description:

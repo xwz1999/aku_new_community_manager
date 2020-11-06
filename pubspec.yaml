@@ -58,6 +58,8 @@ dependencies:
 
   url_launcher: ^5.7.10
 
+  amap_map_fluttify: ^0.29.0
+
   aku_ui:
     git:
       url: http://test.akuhotel.com:8099/aku_fe/aku_ui.git
