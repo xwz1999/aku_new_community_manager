@@ -52,7 +52,7 @@ class AllAnouncementState extends State<AllAnouncement> {
                             Color(0xFF7EB4FF),
                             Color(0xFF3F8FFE),
                           ])),
-                  child: Image.asset(R.ASSETS_MESSAGE_IC_TONGZHI_PNG),
+                  child: Image.asset(R.ASSETS_MANAGE_IC_ANNOUNCE_PNG),
                 ),
                 SizedBox(
                   width: 24.w,
