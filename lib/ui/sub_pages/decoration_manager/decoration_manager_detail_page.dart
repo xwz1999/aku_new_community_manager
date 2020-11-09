@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
@@ -122,7 +124,12 @@ class _DecorationManagerDetailStatePage
           midBottom: widget.model.userHomeModel.detailAddr,
           name: '业主：' + widget.model.userHomeModel.userName,
           phone: widget.model.userHomeModel.phone,
-          rightTopWidget: Placeholder(),
+          rightTopWidget: Transform.rotate(
+            angle: pi/4,
+                      child: widget.model.statusType == DecorationStatusType.DONE
+                ? Image.asset(R.ASSETS_MANAGE_IC_WANCHENG_PNG)
+                : Image.asset(R.ASSETS_MANAGE_IC_ZHUANGXIU_PNG),
+          ),
         ),
         AkuBox.h(16),
         _buildInfoCard(
