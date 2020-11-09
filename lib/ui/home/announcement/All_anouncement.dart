@@ -41,6 +41,7 @@ class AllAnouncementState extends State<AllAnouncement> {
             child: Row(
               children: [
                 Container(
+                  alignment: Alignment.center,
                   width: 104.w,
                   height: 104.w,
                   decoration: BoxDecoration(
@@ -52,7 +53,7 @@ class AllAnouncementState extends State<AllAnouncement> {
                             Color(0xFF7EB4FF),
                             Color(0xFF3F8FFE),
                           ])),
-                  child: Image.asset(R.ASSETS_MANAGE_IC_ANNOUNCE_PNG),
+                  child: Image.asset(R.ASSETS_MANAGE_IC_ANNOUNCE_PNG,width: 74.w,height: 60.w,),
                 ),
                 SizedBox(
                   width: 24.w,

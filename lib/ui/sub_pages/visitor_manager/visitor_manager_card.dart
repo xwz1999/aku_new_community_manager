@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
@@ -70,7 +72,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                   Row(
                     children: [
                       Image.asset(
-                        R.ASSETS_USER_IC_PERSON_PNG,
+                        R.ASSETS_OUTDOOR_IC_PEOPLE_PNG,
                         width: 40.w,
                         height: 40.w,
                       ),
@@ -81,7 +83,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                       ),
                       AkuBox.w(137),
                       Image.asset(
-                        R.ASSETS_HOME_IC_BORROW_PNG,
+                        R.ASSETS_MANAGE_IC_CAR_PNG,
                         width: 40.w,
                         height: 40.w,
                       ),
@@ -97,7 +99,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                   Row(
                     children: [
                       Image.asset(
-                        R.ASSETS_HOME_IC_ARTICLE_PNG,
+                        R.ASSETS_MANAGE_IC_TIME_PNG,
                         width: 40.w,
                         height: 40.w,
                       ),
@@ -109,7 +111,13 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                 ],
               ),
               Positioned(
-                  left: 582.w, bottom: 104.w, child: _statusImage(_status)),
+                left: 552.w-24.w,
+                bottom: 75.w-28.w,
+                child: Transform.rotate(
+                  angle: pi / 4,
+                  child: Image.asset(_statusImage(_status),width: 140.w,height: 140.w,),
+                ),
+              ),
             ],
           ),
         ),
@@ -117,16 +125,16 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
     );
   }
 
-  Widget _statusImage(VisitorStatus status) {
+  String _statusImage(VisitorStatus status) {
     switch (status) {
       case VisitorStatus.NOT_VISIT:
-        return Placeholder();
+        return R.ASSETS_MANAGE_IC_WEIDAO_PNG;
       case VisitorStatus.VISIT_DONE:
-        return Placeholder();
+        return R.ASSETS_MANAGE_IC_DAOFANG_PNG;
       case VisitorStatus.OUTDATE:
-        return Placeholder();
+        return R.ASSETS_MANAGE_IC_GUOQI_PNG;
       default:
-        return Placeholder();
+        return '';
     }
   }
 }

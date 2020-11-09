@@ -72,7 +72,7 @@ class InspectionManageCard {
               Row(
                 children: [
                   Image.asset(
-                    R.ASSETS_HOME_IC_NEWS_PNG,
+                    R.ASSETS_INSPECTION_IC_XUNJIAN_PNG,
                     width: 40.w,
                     height: 40.w,
                   ),

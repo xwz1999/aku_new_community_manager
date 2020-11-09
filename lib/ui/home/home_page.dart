@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-    int _currentIndicator = 0;
+  int _currentIndicator = 0;
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -395,48 +395,52 @@ class _HomePageState extends State<HomePage> {
             //公告栏
             Container(
               color: Color(0xFFFFFFFF),
-              //公告栏
               width: double.infinity,
-              height: 200.w,
-              child: Column(
-                children: [
-                  CarouselSlider(
-                    items: _anouncementProvider.anouncementCardModels
-                        .map((e) => AllAnouncementState.anounceCard(e))
-                        .toList(),
-                    options: CarouselOptions(
-                      viewportFraction: 1.0,
-                      aspectRatio: 686 / 172,
-                      autoPlay: true,
-                      onPageChanged: (index, _) {
-                        setState(() {
-                          _currentIndicator = index;
-                        });
-                      },
+              height: 172.w,
+              child: Stack(children: [
+                    CarouselSlider(
+                      items: _anouncementProvider.anouncementCardModels
+                          .map((e) => AllAnouncementState.anounceCard(e))
+                          .toList(),
+                      options: CarouselOptions(
+                        viewportFraction: 1.0,
+                        aspectRatio: 686 / 172,
+                        autoPlay: true,
+                        onPageChanged: (index, _) {
+                          setState(() {
+                            _currentIndicator = index;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                        _anouncementProvider.anouncementCardModels.map((e) {
-                      int index =
-                          _anouncementProvider.anouncementCardModels.indexOf(e);
-                      return Container(
-                        width: 8.w,
-                        height: 8.w,
-                        margin: EdgeInsets.symmetric(
-                            vertical: 10.w, horizontal: 2.w),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentIndicator == index
-                              ? Color.fromRGBO(0, 0, 0, 0.9)
-                              : Color.fromRGBO(0, 0, 0, 0.4),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
+                 Positioned(
+                      top: 144.w,
+                      left: 0,
+                      bottom: 16.w,
+                      right: 0,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:
+                            _anouncementProvider.anouncementCardModels.map((e) {
+                          int index = _anouncementProvider.anouncementCardModels
+                              .indexOf(e);
+                          return Container(
+                            width: 12.w,
+                            height: 12.w,
+                            margin: EdgeInsets.symmetric(
+                                 horizontal: 12.w),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: _currentIndicator == index
+                                  ? Color(0xFFFFC40C)
+                                  : Color(0xFFE8E8E8),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+              ]),
             ),
             SizedBox(height: 16.w),
             //待办事项标题行
