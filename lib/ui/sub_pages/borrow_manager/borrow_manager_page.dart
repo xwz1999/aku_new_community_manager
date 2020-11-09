@@ -82,7 +82,11 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
         ];
         break;
       default:
-        return [];
+        return [
+          getView(BorrowData.models),
+          getView(BorrowData.borrowModels),
+          getView(BorrowData.doneModels),
+        ];
     }
   }
 }
