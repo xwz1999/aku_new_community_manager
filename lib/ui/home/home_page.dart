@@ -60,8 +60,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             Image.asset(
               assetPath,
-              height: 75.w,
-              width: 75.w,
+              height: 60.w,
+              width: 60.w,
             ),
             SizedBox(height: 8.w),
             Text(
@@ -513,7 +513,6 @@ class _HomePageState extends State<HomePage> {
                       },
                       itemCount: AllModel(context).waitThings.length,
                     ),
-                    //TODO listview
                   ),
             SizedBox(height: 24.w),
             //底部信息栏
