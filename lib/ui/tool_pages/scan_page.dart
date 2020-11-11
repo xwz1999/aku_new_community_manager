@@ -4,7 +4,7 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+// import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanPage extends StatefulWidget {
   ScanPage({Key key}) : super(key: key);
@@ -15,7 +15,7 @@ class ScanPage extends StatefulWidget {
 
 class _ScanPageState extends State<ScanPage> {
   GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  QRViewController _qrViewController;
+  // QRViewController _qrViewController;
   String tempText;
   Timer _timer;
   bool _barMove = false;
@@ -33,7 +33,7 @@ class _ScanPageState extends State<ScanPage> {
 
   @override
   void dispose() {
-    _qrViewController?.dispose();
+    // _qrViewController?.dispose();
     _timer?.cancel();
     super.dispose();
   }
@@ -43,18 +43,18 @@ class _ScanPageState extends State<ScanPage> {
     return Scaffold(
       body: Stack(
         children: [
-          QRView(
-            key: qrKey,
-            onQRViewCreated: (controller) {
-              _qrViewController = controller;
-              controller.scannedDataStream.listen((event) {
-                if (tempText != event) {
-                  tempText = event;
-                  BotToast.showText(text: event);
-                }
-              });
-            },
-          ),
+          // QRView(
+          //   key: qrKey,
+          //   onQRViewCreated: (controller) {
+          //     _qrViewController = controller;
+          //     controller.scannedDataStream.listen((event) {
+          //       if (tempText != event) {
+          //         tempText = event;
+          //         BotToast.showText(text: event);
+          //       }
+          //     });
+          //   },
+          // ),
           Center(
             child: Stack(
               children: [
