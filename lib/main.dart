@@ -5,6 +5,7 @@ import 'package:aku_community_manager/provider/manage_provider.dart';
 import 'package:aku_community_manager/provider/outdoor_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
+import 'package:aku_community_manager/ui/splash/splash_page.dart';
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         title: '小蜜蜂管家',
-        home: HomePage(),
+        home: SplashPage(),
         builder: BotToastInit(),
         navigatorObservers: [
           BotToastNavigatorObserver(),
