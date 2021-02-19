@@ -73,33 +73,29 @@ class _PersonalDrawState extends State<PersonalDraw> {
                   children: [
                     SizedBox(width: 32.w),
                     //头像按钮
-                    AkuRoundButton(
-                      height: 72.w,
-                      onPressed: () {},
-                      child: Material(
-                        borderRadius: BorderRadius.circular(36.w),
-                        clipBehavior: Clip.antiAlias,
-                        color: Colors.grey,
-                        child: userProvider.isLogin
-                            ? FadeInImage.assetNetwork(
-                                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                                image: API.image(
-                                  userProvider.profileModel.firstImg?.url ?? '',
-                                ),
-                                height: 72.w,
-                                width: 72.w,
-                              )
-                            : Icon(Icons.person),
-                      ),
+                    Material(
+                      borderRadius: BorderRadius.circular(36.w),
+                      clipBehavior: Clip.antiAlias,
+                      color: Colors.grey,
+                      child: userProvider.isLogin
+                          ? FadeInImage.assetNetwork(
+                              placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                              image: API.image(
+                                userProvider.profileModel.firstImg?.url ?? '',
+                              ),
+                              height: 72.w,
+                              width: 72.w,
+                            )
+                          : Icon(Icons.person),
                     ),
                     SizedBox(width: 24.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         //登录按钮
-                        userProvider.isSigned
+                        userProvider.isLogin
                             ? Text(
-                                userProvider.userInfoModel.nickName,
+                                userProvider.infoModel.nickName,
                                 style: TextStyle(
                                   color: AppStyle.primaryTextColor,
                                   fontSize: 28.sp,
