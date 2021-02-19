@@ -48,9 +48,9 @@ class _ScanPageState extends State<ScanPage> {
             onQRViewCreated: (controller) {
               _qrViewController = controller;
               controller.scannedDataStream.listen((event) {
-                if (tempText != event) {
-                  tempText = event;
-                  BotToast.showText(text: event);
+                if (tempText != event.code) {
+                  tempText = event.code;
+                  BotToast.showText(text: event.code);
                 }
               });
             },

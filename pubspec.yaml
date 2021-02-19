@@ -40,7 +40,7 @@ dependencies:
   #划动组件
   carousel_slider: ^2.3.1
   #qrcode san
-  qr_code_scanner: ^0.0.13
+  qr_code_scanner: 
   #toast
   bot_toast: ^3.0.4
 
