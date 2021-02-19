@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:extended_text/extended_text.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 

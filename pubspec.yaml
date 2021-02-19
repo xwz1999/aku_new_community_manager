@@ -1,7 +1,7 @@
 name: aku_community_manager
 description: A new Flutter application.
 
-publish_to: "none" 
+publish_to: "none"
 
 version: 1.0.3+4
 
@@ -84,4 +84,3 @@ flutter:
     - family: Bebas
       fonts:
         - asset: assets/fonts/BebasNeue-Regular.ttf
-

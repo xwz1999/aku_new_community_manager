@@ -11,7 +11,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/all_model.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';

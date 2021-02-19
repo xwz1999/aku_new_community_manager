@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:get/get.dart';
 
 // Project imports:

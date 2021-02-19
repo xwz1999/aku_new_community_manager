@@ -14,7 +14,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -22,7 +21,6 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/utils/network/login_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class LoginSMSPage extends StatefulWidget {

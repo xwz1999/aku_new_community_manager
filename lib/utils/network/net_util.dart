@@ -4,7 +4,6 @@ import 'dart:io';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:power_logger/power_logger.dart';
 
 // Project imports:

@@ -12,7 +12,6 @@ import 'package:provider/provider.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/outdoor_models/outdoor_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
-import 'package:aku_community_manager/provider/outdoor_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';

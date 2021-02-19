@@ -6,8 +6,6 @@ import 'package:common_utils/common_utils.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';

@@ -23,7 +23,6 @@ class ScanPage extends StatefulWidget {
 
 class _ScanPageState extends State<ScanPage> {
   GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  QRViewController _qrViewController;
   String tempText;
   Timer _timer;
   bool _barMove = false;
@@ -54,7 +53,6 @@ class _ScanPageState extends State<ScanPage> {
           QRView(
             key: qrKey,
             onQRViewCreated: (controller) {
-              _qrViewController = controller;
               controller.scannedDataStream.listen((event) {
                 if (tempText != event.code) {
                   tempText = event.code;

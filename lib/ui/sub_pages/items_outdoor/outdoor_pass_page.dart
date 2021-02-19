@@ -7,14 +7,11 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/mock_models/outdoor_models/outdoor_model.dart';
-import 'package:aku_community_manager/provider/outdoor_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class OutdoorPassPage extends StatefulWidget {
@@ -41,7 +38,6 @@ class _OutdoorPassPageState extends State<OutdoorPassPage> {
 
   @override
   Widget build(BuildContext context) {
-    OutdoorProvider _outdoorModels = Provider.of<OutdoorProvider>(context);
     String _currentTime = DateUtil.formatDate(DateTime.now());
 
     return AkuScaffold(
