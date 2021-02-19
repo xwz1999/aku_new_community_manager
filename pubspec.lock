@@ -331,7 +331,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.3.2+2"
-<<<<<<< HEAD
   qr_code_scanner:
     dependency: "direct main"
     description:
@@ -339,8 +338,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.4"
-=======
->>>>>>> ab20e0182b1eb7d36a3c5f8fb1bf49fc739776ee
   rational:
     dependency: transitive
     description:
