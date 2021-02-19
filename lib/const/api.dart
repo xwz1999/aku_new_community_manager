@@ -12,6 +12,7 @@ class API {
 
   static const int networkTimeOut = 10000;
   static _Auth auth = _Auth();
+  static _User user = _User();
 }
 
 class _Auth {
@@ -20,4 +21,12 @@ class _Auth {
 
   ///登录/退出：管家app用户短信登录
   String get login => '/login/loginSMSUser';
+}
+
+class _User {
+  ///个人资料：查询个人资料信息
+  String get profile => '/user/personalData/findPersonalData';
+
+  ///个人资料：获取用户信息
+  String get info => '/user/personalData/getUserDetail';
 }

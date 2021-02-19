@@ -1,3 +1,4 @@
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -61,7 +62,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
             //leading
             InkWell(
               onTap: () {
-                userProvider.isSigned
+                userProvider.isLogin
                     ? Get.to(UserInfoPage())
                     : Get.to(LoginPage());
               },
@@ -75,17 +76,19 @@ class _PersonalDrawState extends State<PersonalDraw> {
                     AkuRoundButton(
                       height: 72.w,
                       onPressed: () {},
-                      child: CircleAvatar(
-                        radius: 36.w,
-                        backgroundImage:
-                            userProvider.userInfoModel.avatar == null
-                                ? null
-                                : FileImage(userProvider.userInfoModel.avatar),
-                        backgroundColor: Colors.white,
-                        child: userProvider.isSigned
-                            ? userProvider.userInfoModel.avatar == null
-                                ? Icon(Icons.person_outline)
-                                : null
+                      child: Material(
+                        borderRadius: BorderRadius.circular(36.w),
+                        clipBehavior: Clip.antiAlias,
+                        color: Colors.grey,
+                        child: userProvider.isLogin
+                            ? FadeInImage.assetNetwork(
+                                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                                image: API.image(
+                                  userProvider.profileModel.firstImg?.url ?? '',
+                                ),
+                                height: 72.w,
+                                width: 72.w,
+                              )
                             : Icon(Icons.person),
                       ),
                     ),

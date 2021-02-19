@@ -1,3 +1,4 @@
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/mock_models/all_model.dart';
@@ -15,6 +16,7 @@ import 'package:aku_community_manager/ui/home/application/applications_page.dart
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_community_manager/ui/home/search_workorder_page.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
+import 'package:aku_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
@@ -48,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (userProvider.isSigned) {
+          if (userProvider.isLogin) {
             Get.to(page);
             if (text != '全部应用')
               appProvider.addRecentApp(AppApplication(text, assetPath, page));
@@ -173,6 +175,11 @@ class _HomePageState extends State<HomePage> {
                       margin: EdgeInsets.only(top: 8.w, bottom: 8.w),
                       width: 72.w,
                       height: 72.w,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(36.w),
+                      ),
                       //头像按钮
                       child: Builder(
                         builder: (BuildContext context) {
@@ -180,20 +187,14 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Scaffold.of(context).openDrawer();
                             },
-                            child: CircleAvatar(
-                              radius: 36.w,
-                              backgroundImage:
-                                  userProvider.userInfoModel.avatar == null
-                                      ? null
-                                      : FileImage(
-                                          userProvider.userInfoModel.avatar),
-                              backgroundColor: Colors.white,
-                              child: userProvider.isSigned
-                                  ? userProvider.userInfoModel.avatar == null
-                                      ? Icon(Icons.person_outline)
-                                      : null
-                                  : Icon(Icons.person),
-                            ),
+                            child: userProvider.isLogin
+                                ? FadeInImage.assetNetwork(
+                                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                                    image: API.image(userProvider
+                                            .profileModel.firstImg?.url ??
+                                        ''),
+                                  )
+                                : Icon(Icons.person),
                           );
                         },
                       ),
@@ -270,7 +271,7 @@ class _HomePageState extends State<HomePage> {
                         //消息按钮
                         height: double.infinity,
                         onPressed: () {
-                          if (userProvider.isSigned)
+                          if (userProvider.isLogin)
                             Get.to(Message());
                           else
                             Get.to(LoginPage());
@@ -297,7 +298,10 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 24.w),
                 GestureDetector(
                   onTap: () {
-                    if (!userProvider.isSigned) Get.to(LoginPage());
+                    if (!userProvider.isLogin)
+                      Get.to(LoginPage());
+                    else
+                      Get.to(UserInfoPage());
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -305,8 +309,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     height: 67.w,
                     child: Text(
-                      userProvider.isSigned
-                          ? 'HI，${userProvider.userInfoModel.nickName}'
+                      userProvider.isLogin
+                          ? 'HI，${userProvider.infoModel.nickName}'
                           : '登录/注册',
                       style: TextStyle(
                         color: AppStyle.primaryTextColor,

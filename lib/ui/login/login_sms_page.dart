@@ -117,7 +117,8 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
                   data: {'tel': widget.phone, 'code': text},
                 );
                 if (response.data['status'] == true) {
-                  userProvider.setLogin(response.data['token']);
+                  await userProvider.setLogin(response.data['token']);
+                  Get.offAll(HomePage());
                 } else {
                   _textEditingController.clear();
                   BotToast.showText(text: '登陆失败');
