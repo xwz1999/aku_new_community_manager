@@ -87,6 +87,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.2.0-nullsafety.1"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.0"
   clock:
     dependency: transitive
     description:
@@ -268,6 +275,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.15.0"
+  glob:
+    dependency: transitive
+    description:
+      name: glob
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
+  grinder:
+    dependency: "direct dev"
+    description:
+      name: grinder
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.8.6"
   highlight:
     dependency: transitive
     description:
@@ -338,6 +359,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.3"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.6.2"
   logger:
     dependency: "direct main"
     description:
@@ -366,6 +394,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.4"
+  node_interop:
+    dependency: transitive
+    description:
+      name: node_interop
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.1"
+  node_io:
+    dependency: transitive
+    description:
+      name: node_io
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
   path:
     dependency: transitive
     description:
