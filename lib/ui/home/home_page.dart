@@ -23,6 +23,7 @@ import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manag
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -187,14 +188,7 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Scaffold.of(context).openDrawer();
                             },
-                            child: userProvider.isLogin
-                                ? FadeInImage.assetNetwork(
-                                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                                    image: API.image(userProvider
-                                            .profileModel.firstImg?.url ??
-                                        ''),
-                                  )
-                                : Icon(Icons.person),
+                            child: AkuAvatar(),
                           );
                         },
                       ),
@@ -450,7 +444,7 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: 16.w),
             //待办事项标题行
-            !userProvider.isSigned
+            !userProvider.isLogin
                 ? SizedBox()
                 : Row(
                     children: [
@@ -489,7 +483,7 @@ class _HomePageState extends State<HomePage> {
                   ),
             SizedBox(height: 16.w),
             //待办事项栏
-            !userProvider.isSigned
+            !userProvider.isLogin
                 ? SizedBox()
                 : Container(
                     height: 480.w,
@@ -520,7 +514,7 @@ class _HomePageState extends State<HomePage> {
                   ),
             SizedBox(height: 24.w),
             //底部信息栏
-            !userProvider.isSigned
+            !userProvider.isLogin
                 ? SizedBox()
                 : Container(
                     width: double.infinity,

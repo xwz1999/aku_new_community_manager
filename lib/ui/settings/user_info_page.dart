@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
@@ -33,21 +34,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
             },
             title: Text('头像'),
             height: 168.w,
-            suffix: Material(
-              color: Colors.grey,
-              borderRadius: BorderRadius.circular(36.w),
-              clipBehavior: Clip.antiAlias,
-              child: userProvider.isLogin
-                  ? FadeInImage.assetNetwork(
-                      placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                      image: API.image(
-                        userProvider.profileModel.firstImg?.url ?? '',
-                      ),
-                      height: 72.w,
-                      width: 72.w,
-                    )
-                  : Icon(Icons.person),
-            ),
+            suffix: AkuAvatar(),
           ),
           AkuTile(
             onTap: () {},

@@ -76,14 +76,14 @@ class _SettingsPageState extends State<SettingsPage> {
             onTap: () => Get.to(AgreementPage()),
           ),
           AkuBox.h(320),
-          userProvider.isSigned
+          userProvider.isLogin
               ? Padding(
                   padding: EdgeInsets.symmetric(horizontal: 64.w),
                   child: AkuMaterialButton(
                     radius: 8.w,
                     color: AppStyle.primaryColor,
                     onPressed: () {
-                      userProvider.setisSigned(false);
+                      userProvider.logout();
                       Get.offAll(HomePage());
                     },
                     child: Text(

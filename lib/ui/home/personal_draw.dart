@@ -5,6 +5,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/settings/settings_page.dart';
 import 'package:aku_community_manager/ui/settings/user_info_page.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:aku_ui/common_widgets/aku_round_button.dart';
 import 'package:flutter/material.dart';
@@ -73,21 +74,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                   children: [
                     SizedBox(width: 32.w),
                     //头像按钮
-                    Material(
-                      borderRadius: BorderRadius.circular(36.w),
-                      clipBehavior: Clip.antiAlias,
-                      color: Colors.grey,
-                      child: userProvider.isLogin
-                          ? FadeInImage.assetNetwork(
-                              placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                              image: API.image(
-                                userProvider.profileModel.firstImg?.url ?? '',
-                              ),
-                              height: 72.w,
-                              width: 72.w,
-                            )
-                          : Icon(Icons.person),
-                    ),
+                    AkuAvatar(),
                     SizedBox(width: 24.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,7 +118,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
               R.ASSETS_USER_IC_PERSON_PNG,
               '个人信息',
               onPressed: () {
-                userProvider.isSigned
+                userProvider.isLogin
                     ? Get.to(UserInfoPage())
                     : Get.to(LoginPage());
               },

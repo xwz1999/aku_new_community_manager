@@ -56,6 +56,11 @@ class UserProvider extends ChangeNotifier {
       return USER_INFO.UserInfoModel.fromJson(model.data);
   }
 
+  logout() {
+    _isLogin = false;
+    notifyListeners();
+  }
+
   bool _isSigned = false;
 
   ///用户是否登陆
