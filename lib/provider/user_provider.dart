@@ -61,8 +61,10 @@ class UserProvider extends ChangeNotifier {
       return USER_INFO.UserInfoModel.fromJson(model.data);
   }
 
+  ///注销登录
   logout() {
     _isLogin = false;
+    HiveStore.appBox.delete('token');
     notifyListeners();
   }
 

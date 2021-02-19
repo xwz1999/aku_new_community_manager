@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,6 +12,7 @@ import 'package:power_logger/power_logger.dart';
 // Project imports:
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/utils/hive_store.dart';
+import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
@@ -21,9 +23,13 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   Future _originOp() async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     //初始化HiveStore
     await Hive.initFlutter();
     await HiveStore.init();
+    if (HiveStore.appBox.containsKey('token')) {
+      await userProvider.setLogin(HiveStore.appBox.get('token'));
+    }
 
     //初始化AMap
     await AmapLocation.instance.init(iosKey: 'ios key');
