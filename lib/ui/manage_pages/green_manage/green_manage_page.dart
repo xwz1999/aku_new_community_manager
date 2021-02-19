@@ -26,9 +26,9 @@ class _GreenManagePageState extends State<GreenManagePage> {
       title: '绿化管理',
       body: ListView.builder(
         itemBuilder: (context, index) {
-         return _greenManageCard(greenManageProvider.greenManageModels[index]);
+          return _greenManageCard(greenManageProvider.greenManageModels[index]);
         },
-        padding: EdgeInsets.only(left: 32.w, right: 32.w,bottom: 40.w),
+        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
         itemCount: greenManageProvider.greenManageModels.length,
       ),
     );
@@ -42,8 +42,7 @@ class _GreenManagePageState extends State<GreenManagePage> {
         //跳转管理详情按钮
         AkuButton(
           onPressed: () {
-            Get.to(GreenManageDetailsPage(cardModel)
-            );
+            Get.to(GreenManageDetailsPage(cardModel));
           },
           child: Container(
             height: 302.w,

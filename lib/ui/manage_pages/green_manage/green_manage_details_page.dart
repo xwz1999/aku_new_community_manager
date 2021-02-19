@@ -117,10 +117,10 @@ class GreenManageDetailsPage extends StatelessWidget {
           AkuBox.h(16),
           Expanded(
               child: Container(
-                alignment: Alignment.centerLeft,
+            alignment: Alignment.centerLeft,
             width: double.infinity,
             color: Color(0xFFFFFFFF),
-            padding: EdgeInsets.only(top: 16.w,left: 32.w,right: 32.w),
+            padding: EdgeInsets.only(top: 16.w, left: 32.w, right: 32.w),
             child: Column(
               children: [
                 Text('详细描述',
@@ -129,7 +129,11 @@ class GreenManageDetailsPage extends StatelessWidget {
                         fontSize: 32.w,
                         fontWeight: FontWeight.bold)),
                 AkuBox.h(16),
-                Text(cardModel.body,style: TextStyle(color:AppStyle.primaryTextColor,fontSize: 28.w),),
+                Text(
+                  cardModel.body,
+                  style: TextStyle(
+                      color: AppStyle.primaryTextColor, fontSize: 28.w),
+                ),
               ],
             ),
           )),

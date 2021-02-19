@@ -87,27 +87,26 @@ class ItemsOutdoorModel {
         rejectReason: '',
       ),
       ItemsOutdoorModel(
-        status: OUTDOORSTATUS.OUT_DONE,
-        datetime: DateTime(2020, 10, 23, 09, 28, 56),
-        communityname: '深圳华悦茂峰',
-        adress: '1幢1单元702室',
-        name: '马云',
-        identify: '业主',
-        items: ItemDetails(
-          itemname: '家具',
-          weight: 60,
-          way: '搬家公司',
-          imagepath: [
-            R.ASSETS_OUTDOOR_ITME1_PNG,
-            R.ASSETS_OUTDOOR_ITEM2_PNG,
-            R.ASSETS_OUTDOOR_ITEM3_PNG
-          ],
-        ),
-        outtime: '2020-10-24 12:00',
-        finalOutTime: '2020-10-23 11:23:56',
-        outPlace: '东大门',
-        rejectReason: ''
-      ),
+          status: OUTDOORSTATUS.OUT_DONE,
+          datetime: DateTime(2020, 10, 23, 09, 28, 56),
+          communityname: '深圳华悦茂峰',
+          adress: '1幢1单元702室',
+          name: '马云',
+          identify: '业主',
+          items: ItemDetails(
+            itemname: '家具',
+            weight: 60,
+            way: '搬家公司',
+            imagepath: [
+              R.ASSETS_OUTDOOR_ITME1_PNG,
+              R.ASSETS_OUTDOOR_ITEM2_PNG,
+              R.ASSETS_OUTDOOR_ITEM3_PNG
+            ],
+          ),
+          outtime: '2020-10-24 12:00',
+          finalOutTime: '2020-10-23 11:23:56',
+          outPlace: '东大门',
+          rejectReason: ''),
       ItemsOutdoorModel(
         status: OUTDOORSTATUS.REJECTED,
         datetime: DateTime(2020, 10, 23, 09, 28, 56),

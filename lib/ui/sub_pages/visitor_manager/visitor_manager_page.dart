@@ -17,8 +17,8 @@ class VisitorCardsModel {
   String plate;
   String time;
   VisitorStatus status;
-  VisitorCardsModel({this.adress, this.name, this.status,
-      this.plate, this.time});
+  VisitorCardsModel(
+      {this.adress, this.name, this.status, this.plate, this.time});
 }
 
 class VisitorManagerPage extends StatefulWidget {
@@ -35,14 +35,16 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
 
   List<VisitorCardsModel> _cards = [
     VisitorCardsModel(
-      adress:'深圳华悦茂峰1幢1单元702',
-      name:'马泽城',
-      status:VisitorStatus.VISIT_DONE,
+      adress: '深圳华悦茂峰1幢1单元702',
+      name: '马泽城',
+      status: VisitorStatus.VISIT_DONE,
       plate: '浙BA9899',
       time: '2020-10-24 12:00',
     ),
-    VisitorCardsModel(adress:'深圳华悦茂峰2幢2单元702',name:'刘揪心',status: VisitorStatus.NOT_VISIT),
-    VisitorCardsModel(adress:'深圳华悦茂峰3幢3单元602', name:'张空间', status:VisitorStatus.OUTDATE),
+    VisitorCardsModel(
+        adress: '深圳华悦茂峰2幢2单元702', name: '刘揪心', status: VisitorStatus.NOT_VISIT),
+    VisitorCardsModel(
+        adress: '深圳华悦茂峰3幢3单元602', name: '张空间', status: VisitorStatus.OUTDATE),
   ];
   TabController _tabController;
 

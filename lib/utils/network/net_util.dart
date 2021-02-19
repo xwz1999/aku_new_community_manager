@@ -11,8 +11,6 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:power_logger/power_logger.dart';
 
-
-
 class NetUtil {
   Dio _dio;
   static final NetUtil _netUtil = NetUtil._internal();

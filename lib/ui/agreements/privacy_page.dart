@@ -12,10 +12,10 @@ class PrivacyPage extends StatelessWidget {
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.sp),
         child: Column(
-          children: [Text(
+          children: [
+            Text(
               '小蜜蜂智慧社区管家端隐私政策',
-              style: TextStyle(
-                  fontWeight: FontWeight.w600, fontSize: 35.w),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 35.w),
             ),
             Text(
               '''

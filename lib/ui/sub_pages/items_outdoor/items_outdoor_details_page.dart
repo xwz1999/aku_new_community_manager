@@ -150,7 +150,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
           ),
         ],
       ),
-      bottom:_bottomCard(userRole) ,
+      bottom: _bottomCard(userRole),
     );
   }
 
@@ -177,7 +177,9 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   children: [
                     AkuButton(
                       onPressed: () {
-                        Get.to(OutdoorNotpassPage(model: widget.cardMedel,));
+                        Get.to(OutdoorNotpassPage(
+                          model: widget.cardMedel,
+                        ));
                       },
                       child: Container(
                         width: 304.w,
@@ -197,7 +199,9 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                     Spacer(),
                     AkuMaterialButton(
                       onPressed: () {
-                        Get.to(OutdoorPassPage( model: widget.cardMedel,));
+                        Get.to(OutdoorPassPage(
+                          model: widget.cardMedel,
+                        ));
                       },
                       radius: 4.w,
                       color: Color(0xFFFFC40C),
@@ -269,7 +273,6 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
         );
         break;
       case OUTDOORSTATUS.REJECTED:
-
         return Container(
           height: 226.w,
           color: Color(0xFFFFFFFF),

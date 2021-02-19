@@ -18,7 +18,7 @@ class _SystemMessageState extends State<SystemMessage> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top:24.w,bottom: 24.w),
+          margin: EdgeInsets.only(top: 24.w, bottom: 24.w),
           alignment: Alignment.center,
           width: double.infinity,
           child: Text(
@@ -159,7 +159,7 @@ class _SystemMessageState extends State<SystemMessage> {
     return AkuScaffold(
       title: '系统消息',
       body: ListView(
-        padding: EdgeInsets.only(left:32.w,right:32.w,bottom: 40.w),
+        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
         children: [
           _messageList('2020-10-23 10:00', '杨建', '17867665666', '共区'),
           _messageList('2020-10-22 10:00', '刘能', '17855823545', '共区'),

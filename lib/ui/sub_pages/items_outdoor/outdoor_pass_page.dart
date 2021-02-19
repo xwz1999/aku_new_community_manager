@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 
 class OutdoorPassPage extends StatefulWidget {
   final ItemsOutdoorModel model;
-  OutdoorPassPage({Key key,@required this.model}) : super(key: key);
+  OutdoorPassPage({Key key, @required this.model}) : super(key: key);
 
   @override
   _OutdoorPassPageState createState() => _OutdoorPassPageState();
@@ -109,16 +109,18 @@ class _OutdoorPassPageState extends State<OutdoorPassPage> {
         ],
       ),
       bottom: AkuButton(
-        onPressed:_textController.text==null?(){
-          BotToast.showText(text: '出口不能为空！');
-        }: () {
-         widget.model.finalOutTime=_currentTime;
-          widget.model.outPlace=_textController.text;
-          widget.model.datetime=DateTime.now();
-          widget.model.status=OUTDOORSTATUS.OUT_DONE;
-          Get.back();
-          Get.back();
-        },
+        onPressed: _textController.text == null
+            ? () {
+                BotToast.showText(text: '出口不能为空！');
+              }
+            : () {
+                widget.model.finalOutTime = _currentTime;
+                widget.model.outPlace = _textController.text;
+                widget.model.datetime = DateTime.now();
+                widget.model.status = OUTDOORSTATUS.OUT_DONE;
+                Get.back();
+                Get.back();
+              },
         child: Container(
           color: Color(0xFFFFC40C),
           height: 98.w,

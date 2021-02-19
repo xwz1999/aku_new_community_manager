@@ -22,25 +22,32 @@ class InspectionManageCard {
       children: [
         AkuBox.h(16),
         AkuButton(
-          onPressed: extra? () {
-            Get.to(InspectionManageDetailsPage(cardModel: cardModel,));
-          }:(){},
+          onPressed: extra
+              ? () {
+                  Get.to(InspectionManageDetailsPage(
+                    cardModel: cardModel,
+                  ));
+                }
+              : () {},
           child: Container(
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: extra? 48.w:40.w),
+            padding: EdgeInsets.only(
+                left: 24.w, right: 24.w, bottom: extra ? 48.w : 40.w),
             width: double.infinity,
-            height:extra? 362.w:270.w,
-            decoration: BoxDecoration(borderRadius:BorderRadius.circular(8.w),color: Color(0xFFFFFFFF)),
+            height: extra ? 362.w : 270.w,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.w),
+                color: Color(0xFFFFFFFF)),
             child: Column(children: [
               Container(
-                  height:extra? 93.w :86.w,
+                  height: extra ? 93.w : 86.w,
                   width: double.infinity,
                   alignment: Alignment.centerLeft,
                   child: Text(
                     cardModel.title,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
-                        fontSize: extra? 32.sp:36.sp,
+                        fontSize: extra ? 32.sp : 36.sp,
                         fontWeight: FontWeight.bold),
                   )),
               extra
@@ -48,7 +55,7 @@ class InspectionManageCard {
                       height: 1.w,
                     )
                   : SizedBox(),
-              extra? AkuBox.h(24):SizedBox(),
+              extra ? AkuBox.h(24) : SizedBox(),
               Row(
                 children: [
                   Image.asset(

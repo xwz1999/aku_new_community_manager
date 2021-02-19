@@ -27,7 +27,7 @@ class _AkuRadioState extends State<AkuRadio> {
         width: widget.size,
         height: widget.size,
         decoration: BoxDecoration(
-          border: Border.all(color: Color(0xFFE8E8E8),width: 2.w),
+            border: Border.all(color: Color(0xFFE8E8E8), width: 2.w),
             borderRadius: BorderRadius.circular(widget.size / 2),
             gradient: LinearGradient(
                 begin: Alignment.topLeft,

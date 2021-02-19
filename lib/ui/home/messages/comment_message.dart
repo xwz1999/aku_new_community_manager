@@ -4,6 +4,7 @@ import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/const/resource.dart';
+
 class CommentMessage extends StatefulWidget {
   CommentMessage({Key key}) : super(key: key);
 
@@ -12,11 +13,15 @@ class CommentMessage extends StatefulWidget {
 }
 
 class _CommentMessageState extends State<CommentMessage> {
-  Widget _messageList(String date, String name, String comment,) {
+  Widget _messageList(
+    String date,
+    String name,
+    String comment,
+  ) {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top:24.w,bottom:24.w),
+          margin: EdgeInsets.only(top: 24.w, bottom: 24.w),
           alignment: Alignment.center,
           width: double.infinity,
           child: Text(
@@ -130,12 +135,13 @@ class _CommentMessageState extends State<CommentMessage> {
       ],
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '评论消息',
-       body: ListView(
-        padding: EdgeInsets.only(left:32.w,right: 32.w,bottom: 40.w),
+      body: ListView(
+        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
         children: [
           _messageList('2020-10-23 10:00', '杨建', '四星'),
           _messageList('2020-10-24 11:00', '刘能', '四星'),

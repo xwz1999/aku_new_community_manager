@@ -21,7 +21,7 @@ class _InspectionManagePageState extends State<InspectionManagePage> {
     return AkuScaffold(
       title: '巡检管理',
       body: ListView(
-        padding: EdgeInsets.only(left: 32.w, right: 32.w,bottom: 40.w),
+        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
         children: _inspectionManageModel.inspectionManageModels
             .map((e) => InspectionManageCard(e).inspectionManageCard())
             .toList(),

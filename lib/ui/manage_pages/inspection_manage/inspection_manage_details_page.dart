@@ -54,9 +54,8 @@ class InspectionManageDetailsPage extends StatelessWidget {
             color: Color(0xFFFFFFFF),
             padding: EdgeInsets.only(top: 24.w, left: 32.w, right: 32.w),
             width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text('巡检站点',
                   style: TextStyle(
                       color: AppStyle.primaryTextColor,

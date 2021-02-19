@@ -125,8 +125,8 @@ class _DecorationManagerDetailStatePage
           name: '业主：' + widget.model.userHomeModel.userName,
           phone: widget.model.userHomeModel.phone,
           rightTopWidget: Transform.rotate(
-            angle: pi/4,
-                      child: widget.model.statusType == DecorationStatusType.DONE
+            angle: pi / 4,
+            child: widget.model.statusType == DecorationStatusType.DONE
                 ? Image.asset(R.ASSETS_MANAGE_IC_WANCHENG_PNG)
                 : Image.asset(R.ASSETS_MANAGE_IC_ZHUANGXIU_PNG),
           ),

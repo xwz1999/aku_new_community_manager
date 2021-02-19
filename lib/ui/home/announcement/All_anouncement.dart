@@ -20,9 +20,7 @@ class AllAnouncement extends StatefulWidget {
 }
 
 class AllAnouncementState extends State<AllAnouncement> {
-  static Widget anounceCard(
-   AnouncementCardModel model
-  ) {
+  static Widget anounceCard(AnouncementCardModel model) {
     return Column(
       children: [
         AkuButton(
@@ -30,7 +28,7 @@ class AllAnouncementState extends State<AllAnouncement> {
             Get.to(AnouncementDetails(
               title: model.title,
               date: model.date,
-              body: model.body==null?'':model.body,
+              body: model.body == null ? '' : model.body,
             ));
           },
           child: Container(
@@ -53,7 +51,11 @@ class AllAnouncementState extends State<AllAnouncement> {
                             Color(0xFF7EB4FF),
                             Color(0xFF3F8FFE),
                           ])),
-                  child: Image.asset(R.ASSETS_MANAGE_IC_ANNOUNCE_PNG,width: 74.w,height: 60.w,),
+                  child: Image.asset(
+                    R.ASSETS_MANAGE_IC_ANNOUNCE_PNG,
+                    width: 74.w,
+                    height: 60.w,
+                  ),
                 ),
                 SizedBox(
                   width: 24.w,
@@ -120,14 +122,17 @@ class AllAnouncementState extends State<AllAnouncement> {
 
   @override
   Widget build(BuildContext context) {
-  final  AnouncementProvider _anouncementProvider=Provider.of<AnouncementProvider>(context);
+    final AnouncementProvider _anouncementProvider =
+        Provider.of<AnouncementProvider>(context);
     return AkuScaffold(
       title: '全部公告',
       body: ListView(
         padding: EdgeInsets.only(left: 32.w, right: 32.w),
         children: [
-          _anouncementList('2020-10-22', _anouncementProvider.anouncementCardModels.sublist(0,2)),
-          _anouncementList('2020-10-20', _anouncementProvider.anouncementCardModels.sublist(2,2)),
+          _anouncementList('2020-10-22',
+              _anouncementProvider.anouncementCardModels.sublist(0, 2)),
+          _anouncementList('2020-10-20',
+              _anouncementProvider.anouncementCardModels.sublist(2, 2)),
         ],
       ),
     );

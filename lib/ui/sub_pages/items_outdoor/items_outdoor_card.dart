@@ -192,7 +192,11 @@ class _ItemsOutdoorCardState extends State<ItemsOutdoorCard> {
         AkuBox.h(12),
         Row(
           children: [
-            Image.asset(R.ASSETS_OUTDOOR_IC_CHUHU_PNG,width: 40.w,height: 40.w,),
+            Image.asset(
+              R.ASSETS_OUTDOOR_IC_CHUHU_PNG,
+              width: 40.w,
+              height: 40.w,
+            ),
             Text(
               '出户物品',
               style: _textStyle,
@@ -266,14 +270,14 @@ class _ItemsOutdoorCardState extends State<ItemsOutdoorCard> {
                     width: 160.w,
                     height: 64.w,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.w),
+                        borderRadius: BorderRadius.circular(8.w),
                         gradient: LinearGradient(
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                          AppStyle.primaryColor,
-                          AppStyle.minorColor
-                        ])),
+                              AppStyle.primaryColor,
+                              AppStyle.minorColor
+                            ])),
                     child: Text(
                       '查看详情',
                       style: AppStyle().primaryStyle,

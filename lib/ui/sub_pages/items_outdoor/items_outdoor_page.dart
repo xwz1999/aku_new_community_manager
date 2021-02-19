@@ -14,19 +14,22 @@ class ItemsOutdoorPage extends StatefulWidget {
   _ItemsOutdoorPageState createState() => _ItemsOutdoorPageState();
 }
 
-class _ItemsOutdoorPageState extends State<ItemsOutdoorPage> with TickerProviderStateMixin {
+class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
+    with TickerProviderStateMixin {
   List<String> _tabs = ['待出户', '已出户', '已驳回', '已作废', '全部'];
   TabController _tabController;
   @override
   void initState() {
     super.initState();
-    _tabController=TabController(length: _tabs.length, vsync: this);
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
-@override
-void dispose() { 
-  _tabController?.dispose();
-  super.dispose();
-}
+
+  @override
+  void dispose() {
+    _tabController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -36,16 +39,24 @@ void dispose() {
         child: AkuTabBar(controller: _tabController, tabs: _tabs),
       ),
       body: TabBarView(
-        controller: _tabController,
-        children: _tabs.map((e) => _buildListView(_tabs.indexOf(e))).toList()),
+          controller: _tabController,
+          children:
+              _tabs.map((e) => _buildListView(_tabs.indexOf(e))).toList()),
     );
   }
-  Widget _buildListView(int index){
-    final _outdoorModels=Provider.of<OutdoorProvider>(context);
-    List<ItemsOutdoorModel> _selectModels = _outdoorModels.getOutdoorModels(index);
+
+  Widget _buildListView(int index) {
+    final _outdoorModels = Provider.of<OutdoorProvider>(context);
+    List<ItemsOutdoorModel> _selectModels =
+        _outdoorModels.getOutdoorModels(index);
     return ListView(
-      padding: EdgeInsets.only(left: 32.w,right: 32.w),
-      children: _selectModels.map((e) => ItemsOutdoorCard(cardModel:e,isdetail: false,)).toList(),
+      padding: EdgeInsets.only(left: 32.w, right: 32.w),
+      children: _selectModels
+          .map((e) => ItemsOutdoorCard(
+                cardModel: e,
+                isdetail: false,
+              ))
+          .toList(),
     );
   }
 }
