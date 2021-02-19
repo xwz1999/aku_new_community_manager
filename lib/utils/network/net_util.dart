@@ -2,8 +2,11 @@
 import 'dart:io';
 
 // Package imports:
+import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:power_logger/power_logger.dart';
 
 // Project imports:
@@ -11,6 +14,7 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:provider/provider.dart';
 
 class NetUtil {
   Dio _dio;
@@ -44,7 +48,7 @@ class NetUtil {
 
   ///call auth after login
   auth(String token) {
-    _dio.options.headers.putIfAbsent('App-Admin-Token', () => token);
+    _dio.options.headers.putIfAbsent('Butler-Admin-Token', () => token);
   }
 
   /// ## alias of Dio().get
@@ -155,11 +159,11 @@ class NetUtil {
   }
 
   _parseRequestError(BaseModel model, {bool showMessage = false}) {
-    // final userProvider = Provider.of<UserProvider>(Get.context, listen: false);
-    // if (!model.status && model.message == '登录失效，请登录' && userProvider.isLogin) {
-    //   userProvider.logout();
-    //   Get.offAll(SignInPage());
-    // }
+    final userProvider = Provider.of<UserProvider>(Get.context, listen: false);
+    if (!model.status && model.message == '登录失效，请登录' && userProvider.isLogin) {
+      userProvider.logout();
+      Get.offAll(LoginPage());
+    }
     if (!model.status || showMessage) {
       BotToast.showText(text: model.message);
     }

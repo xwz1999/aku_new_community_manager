@@ -20,6 +20,8 @@ class AkuAvatar extends StatelessWidget {
     return userProvider.isLogin
         ? Material(
             color: Colors.grey,
+            borderRadius: BorderRadius.circular((size ?? 72.w) / 2),
+            clipBehavior: Clip.antiAlias,
             child: FadeInImage.assetNetwork(
               placeholder: R.ASSETS_PLACEHOLDER_WEBP,
               image: API.image(userProvider.profileModel.firstImg?.url ?? ''),
