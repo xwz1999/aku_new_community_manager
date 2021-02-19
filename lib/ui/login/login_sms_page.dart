@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -7,8 +8,11 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/utils/network/login_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:get/get.dart';
@@ -47,9 +51,18 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
     });
   }
 
+  sendSMS() {
+    NetUtil().post(
+      API.auth.sendSMS,
+      params: {'tel': widget.phone},
+      showMessage: true,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
+    sendSMS();
     startTick();
   }
 
@@ -62,6 +75,7 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       backgroundColor: Colors.white,
       leading: AkuBackButton(),
@@ -95,31 +109,51 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
               lineHeight: 1.w,
               colorBuilder: FixedColorBuilder(Color(0xFFE8E8E8)),
             ),
-            onChanged: (text) {
-              final userProvider =
-                  Provider.of<UserProvider>(context, listen: false);
-              if (text == '000000') {
-                userProvider.setUserInfo(UserInfoModel.manager());
-                Get.offAll(HomePage());
-              } else if (text == '000001') {
-                userProvider.setUserInfo(UserInfoModel.fixer());
-                Get.offAll(HomePage());
-              } else if (text == '000002') {
-                userProvider.setUserInfo(UserInfoModel.security());
-                Get.offAll(HomePage());
-              } else if (text == '000003') {
-                userProvider.setUserInfo(UserInfoModel.property());
-                Get.offAll(HomePage());
-              } else {
-                if (text.length == 6) BotToast.showText(text: '验证码错误');
+            onChanged: (text) async {
+              if (text.length == 6) {
+                Function cancel = BotToast.showLoading();
+                Response response = await NetUtil().dio.post(
+                  API.auth.login,
+                  data: {'tel': widget.phone, 'code': text},
+                );
+                if (response.data['status'] == true) {
+                  userProvider.setLogin(response.data['token']);
+                } else {
+                  _textEditingController.clear();
+                  BotToast.showText(text: '登陆失败');
+                }
+                cancel();
               }
+
+              // final userProvider =
+              //     Provider.of<UserProvider>(context, listen: false);
+              // if (text == '000000') {
+              //   userProvider.setUserInfo(UserInfoModel.manager());
+              //   Get.offAll(HomePage());
+              // } else if (text == '000001') {
+              //   userProvider.setUserInfo(UserInfoModel.fixer());
+              //   Get.offAll(HomePage());
+              // } else if (text == '000002') {
+              //   userProvider.setUserInfo(UserInfoModel.security());
+              //   Get.offAll(HomePage());
+              // } else if (text == '000003') {
+              //   userProvider.setUserInfo(UserInfoModel.property());
+              //   Get.offAll(HomePage());
+              // } else {
+              //   if (text.length == 6) BotToast.showText(text: '验证码错误');
+              // }
             },
           ),
           AkuBox.h(40),
           Row(
             children: [
               AkuMaterialButton(
-                onPressed: canResend ? () => startTick() : null,
+                onPressed: canResend
+                    ? () {
+                        sendSMS();
+                        startTick();
+                      }
+                    : null,
                 child: Text(
                   '重新发送 $countString',
                   style: TextStyle(

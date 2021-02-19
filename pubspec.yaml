@@ -57,6 +57,9 @@ dependencies:
     git:
       url: http://test.akuhotel.com:8099/aku_fe/aku_ui.git
 
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
