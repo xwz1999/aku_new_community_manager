@@ -1,18 +1,23 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_detail_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class DecorationManagerCard extends StatefulWidget {
   final DecorationModel model;

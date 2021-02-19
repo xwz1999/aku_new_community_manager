@@ -1,13 +1,18 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/outdoor_models/outdoor_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
-import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:get/get.dart';
 
 class ItemsOutdoorCard extends StatefulWidget {
   final ItemsOutdoorModel cardModel;

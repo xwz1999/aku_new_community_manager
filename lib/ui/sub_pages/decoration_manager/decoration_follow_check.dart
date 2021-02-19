@@ -1,3 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:get/get.dart';
+
+// Project imports:
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
@@ -5,9 +13,6 @@ import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_success_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class DecorationFollowCheck extends StatefulWidget {
   final DecorationModel model;

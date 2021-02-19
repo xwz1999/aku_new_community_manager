@@ -1,7 +1,20 @@
+// Dart imports:
 import 'dart:ui';
 
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:extended_text/extended_text.dart';
+import 'package:get/route_manager.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/agreements/agreement_page.dart';
 import 'package:aku_community_manager/ui/agreements/privacy_page.dart';
@@ -9,13 +22,6 @@ import 'package:aku_community_manager/ui/login/login_sms_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:extended_text/extended_text.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:get/route_manager.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);

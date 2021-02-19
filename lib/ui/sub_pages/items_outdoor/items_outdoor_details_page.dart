@@ -1,3 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/aku_ui.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/outdoor_models/outdoor_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/outdoor_provider.dart';
@@ -8,13 +20,6 @@ import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_c
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/outdoor_notpass_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/outdoor_pass_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/aku_ui.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class ItemsOutdoorDetailsPage extends StatefulWidget {
   final ItemsOutdoorModel cardMedel;

@@ -1,6 +1,11 @@
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+
+// Project imports:
+import 'package:aku_community_manager/style/app_style.dart';
 
 class AkuBottomButton extends StatefulWidget {
   final VoidCallback onTap;

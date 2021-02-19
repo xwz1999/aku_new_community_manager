@@ -1,15 +1,21 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_cupertino_button.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:get/get.dart';
+
+// Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_success.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/common_widgets/aku_cupertino_button.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class WarningSubPage extends StatefulWidget {
   WarningSubPage({Key key}) : super(key: key);

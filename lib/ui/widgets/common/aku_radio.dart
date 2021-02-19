@@ -1,7 +1,11 @@
+// Dart imports:
 import 'dart:ffi';
 
-import 'package:aku_community_manager/style/app_style.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:aku_community_manager/style/app_style.dart';
 
 class AkuRadio extends StatefulWidget {
   final double size;

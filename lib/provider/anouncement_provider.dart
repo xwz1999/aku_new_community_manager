@@ -1,5 +1,8 @@
-import 'package:aku_community_manager/mock_models/anouncement/anouncement_model.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:aku_community_manager/mock_models/anouncement/anouncement_model.dart';
 
 class AnouncementProvider extends ChangeNotifier {
   List<AnouncementCardModel> _anouncementCardModel =

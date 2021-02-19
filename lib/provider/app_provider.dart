@@ -1,5 +1,8 @@
-import 'package:aku_community_manager/ui/home/application/applications_page.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 
 class AppProvider extends ChangeNotifier {
   List<AppApplication> _recentUsedApp = [];

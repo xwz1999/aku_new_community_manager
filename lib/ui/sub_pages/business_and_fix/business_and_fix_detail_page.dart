@@ -1,8 +1,19 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
@@ -10,12 +21,6 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_depart
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class BusinessAndFixDetailPage extends StatefulWidget {
   final FixModel model;

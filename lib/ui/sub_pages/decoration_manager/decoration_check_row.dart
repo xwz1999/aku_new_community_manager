@@ -1,9 +1,11 @@
-import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_card_widget.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
+import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_card_widget.dart';
 
 class DecorationCheckRow extends StatefulWidget {
   final List<CHECK_TYPE> details;

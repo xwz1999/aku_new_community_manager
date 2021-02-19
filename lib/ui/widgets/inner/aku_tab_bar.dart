@@ -1,5 +1,8 @@
-import 'package:aku_community_manager/style/app_style.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class AkuTabBar extends StatefulWidget {

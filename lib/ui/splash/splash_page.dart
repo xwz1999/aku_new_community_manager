@@ -1,11 +1,16 @@
-import 'package:aku_community_manager/ui/home/home_page.dart';
-import 'package:aku_community_manager/utils/hive_store.dart';
-import 'package:amap_map_fluttify/amap_map_fluttify.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:power_logger/power_logger.dart';
+
+// Project imports:
+import 'package:aku_community_manager/ui/home/home_page.dart';
+import 'package:aku_community_manager/utils/hive_store.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);

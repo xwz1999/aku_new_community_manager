@@ -1,14 +1,19 @@
-import 'package:aku_community_manager/const/resource.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:provider/provider.dart';
 
 class UserInfoPage extends StatefulWidget {
   UserInfoPage({Key key}) : super(key: key);

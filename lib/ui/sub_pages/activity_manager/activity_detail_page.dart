@@ -1,10 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+
+// Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/fake_activity_model.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class ActivityDetailPage extends StatefulWidget {
   final FakeActivityManagerModel model;

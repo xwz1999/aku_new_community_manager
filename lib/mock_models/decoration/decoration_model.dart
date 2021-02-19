@@ -1,6 +1,9 @@
-import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
 
 enum DecorationType {
   ///待指派

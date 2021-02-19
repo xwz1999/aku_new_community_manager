@@ -2,14 +2,16 @@
 import 'dart:io';
 
 // Package imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/utils/network/base_file_model.dart';
-import 'package:aku_community_manager/utils/network/base_list_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:power_logger/power_logger.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/base_file_model.dart';
+import 'package:aku_community_manager/utils/network/base_list_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
 
 class NetUtil {
   Dio _dio;

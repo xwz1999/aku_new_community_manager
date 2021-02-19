@@ -1,14 +1,19 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/models/user/user_profile_model.dart';
 import 'package:aku_community_manager/utils/hive_store.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
+
 import 'package:aku_community_manager/models/user/user_info_model.dart'
     as USER_INFO;
-import 'package:flutter/material.dart';
 
 //登录状态管理
 class UserProvider extends ChangeNotifier {

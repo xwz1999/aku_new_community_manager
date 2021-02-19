@@ -1,10 +1,17 @@
+// Dart imports:
 import 'dart:async';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+// Project imports:
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+
 // import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanPage extends StatefulWidget {

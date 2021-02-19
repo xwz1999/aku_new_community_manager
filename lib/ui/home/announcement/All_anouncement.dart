@@ -1,16 +1,22 @@
+// Dart imports:
 import 'dart:ui';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/aku_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/anouncement/anouncement_model.dart';
 import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/announcement/anouncement_details.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/aku_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 class AllAnouncement extends StatefulWidget {
   AllAnouncement({Key key}) : super(key: key);

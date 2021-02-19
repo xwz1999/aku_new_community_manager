@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 
 class FakeActivityManagerModel {
