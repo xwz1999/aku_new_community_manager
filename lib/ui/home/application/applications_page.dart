@@ -77,33 +77,39 @@ class _ApplicationPageState extends State<ApplicationPage>
           width: 89.w,
           child: AkuBackButton(),
         ),
-        titleSpacing: 0,
-        title: Container(
-          margin: EdgeInsets.only(right: 37.w),
-          padding: EdgeInsets.symmetric(horizontal: 32.w),
-          height: 72.w,
-          child: Row(
-            children: [
-              Image.asset(
-                R.ASSETS_HOME_IC_SEARCH_PNG,
-                height: 40.w,
-                width: 40.w,
-              ),
-              AkuBox.w(16),
-              Text(
-                '搜索应用',
-                style: TextStyle(
-                  color: AppStyle.minorTextColor,
-                  fontSize: 28.sp,
-                ),
-              ),
-            ],
-          ),
-          decoration: BoxDecoration(
-            color: Color(0xFFF9F9F9),
-            borderRadius: BorderRadius.circular(8.w),
-          ),
+        //   titleSpacing: 0,
+        //   title: Container(
+        //     margin: EdgeInsets.only(right: 37.w),
+        //     padding: EdgeInsets.symmetric(horizontal: 32.w),
+        //     height: 72.w,
+        //     child: Row(
+        //       children: [
+        //         Image.asset(
+        //           R.ASSETS_HOME_IC_SEARCH_PNG,
+        //           height: 40.w,
+        //           width: 40.w,
+        //         ),
+        //         AkuBox.w(16),
+        //         Text(
+        //           '搜索应用',
+        //           style: TextStyle(
+        //             color: AppStyle.minorTextColor,
+        //             fontSize: 28.sp,
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //     decoration: BoxDecoration(
+        //       color: Color(0xFFF9F9F9),
+        //       borderRadius: BorderRadius.circular(8.w),
+        //     ),
+        //   ),
+        // ),
+        title: Text(
+          '全部应用',
+          style: AppStyle().barTitleStyle,
         ),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -274,11 +280,17 @@ class _ApplicationPageState extends State<ApplicationPage>
         children: [
           Image.asset(
             application.assetPath,
-            height: 72.w,
-            width: 72.w,
+            height: 60.w,
+            width: 60.w,
           ),
           AkuBox.h(8),
-          Text(application.name),
+          Text(
+            application.name,
+            style: TextStyle(
+                color: AppStyle.primaryTextColor,
+                fontSize: 24.sp,
+                fontWeight: FontWeight.bold),
+          ),
         ],
       ),
     );

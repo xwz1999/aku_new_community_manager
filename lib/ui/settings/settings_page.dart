@@ -1,6 +1,8 @@
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/agreements/agreement_page.dart';
+import 'package:aku_community_manager/ui/agreements/privacy_page.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/ui/settings/setting_feedback_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -60,6 +62,18 @@ class _SettingsPageState extends State<SettingsPage> {
             title: Text('清理缓存'),
             arrow: true,
             onTap: () => BotToast.showText(text: '缓存清理完成'),
+          ),
+          Divider(height: 1.w),
+          AkuTile(
+            title: Text('隐私政策'),
+            arrow: true,
+            onTap: () => Get.to(PrivacyPage()),
+          ),
+          Divider(height: 1.w),
+          AkuTile(
+            title: Text('用户协议'),
+            arrow: true,
+            onTap: () => Get.to(AgreementPage()),
           ),
           AkuBox.h(320),
           userProvider.isSigned

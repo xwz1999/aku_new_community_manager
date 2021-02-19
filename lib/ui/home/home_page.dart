@@ -13,6 +13,7 @@ import 'package:aku_community_manager/ui/home/business/business_page.dart';
 import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
+import 'package:aku_community_manager/ui/home/search_workorder_page.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
@@ -59,8 +60,8 @@ class _HomePageState extends State<HomePage> {
           children: [
             Image.asset(
               assetPath,
-              height: 75.w,
-              width: 75.w,
+              height: 60.w,
+              width: 60.w,
             ),
             SizedBox(height: 8.w),
             Text(
@@ -206,7 +207,9 @@ class _HomePageState extends State<HomePage> {
                         child: AkuButton(
                           //搜索框按钮
                           color: Color(0xFFFFFFFF),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(SearchWorkOrderPage());
+                          },
                           radius: 8.w,
                           child: Row(children: [
                             AkuBox.w(21.w),
@@ -398,48 +401,47 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               height: 172.w,
               child: Stack(children: [
-                    CarouselSlider(
-                      items: _anouncementProvider.anouncementCardModels
-                          .map((e) => AllAnouncementState.anounceCard(e))
-                          .toList(),
-                      options: CarouselOptions(
-                        viewportFraction: 1.0,
-                        aspectRatio: 686 / 172,
-                        autoPlay: true,
-                        onPageChanged: (index, _) {
-                          setState(() {
-                            _currentIndicator = index;
-                          });
-                        },
-                      ),
-                    ),
-                 Positioned(
-                      top: 144.w,
-                      left: 0,
-                      bottom: 16.w,
-                      right: 0,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children:
-                            _anouncementProvider.anouncementCardModels.map((e) {
-                          int index = _anouncementProvider.anouncementCardModels
-                              .indexOf(e);
-                          return Container(
-                            width: 12.w,
-                            height: 12.w,
-                            margin: EdgeInsets.symmetric(
-                                 horizontal: 12.w),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _currentIndicator == index
-                                  ? Color(0xFFFFC40C)
-                                  : Color(0xFFE8E8E8),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                    ),
+                CarouselSlider(
+                  items: _anouncementProvider.anouncementCardModels
+                      .map((e) => AllAnouncementState.anounceCard(e))
+                      .toList(),
+                  options: CarouselOptions(
+                    viewportFraction: 1.0,
+                    aspectRatio: 686 / 172,
+                    autoPlay: true,
+                    onPageChanged: (index, _) {
+                      setState(() {
+                        _currentIndicator = index;
+                      });
+                    },
+                  ),
+                ),
+                Positioned(
+                  top: 144.w,
+                  left: 0,
+                  bottom: 16.w,
+                  right: 0,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children:
+                        _anouncementProvider.anouncementCardModels.map((e) {
+                      int index =
+                          _anouncementProvider.anouncementCardModels.indexOf(e);
+                      return Container(
+                        width: 12.w,
+                        height: 12.w,
+                        margin: EdgeInsets.symmetric(horizontal: 12.w),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _currentIndicator == index
+                              ? Color(0xFFFFC40C)
+                              : Color(0xFFE8E8E8),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
               ]),
             ),
             SizedBox(height: 16.w),
@@ -511,7 +513,6 @@ class _HomePageState extends State<HomePage> {
                       },
                       itemCount: AllModel(context).waitThings.length,
                     ),
-                    //TODO listview
                   ),
             SizedBox(height: 24.w),
             //底部信息栏
