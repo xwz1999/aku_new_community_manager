@@ -11,12 +11,34 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AmapCore.init('');
   await AmapLocation.instance.init(iosKey: '');
+  JPush jpush = new JPush();
+  jpush.addEventHandler(
+    // 接收通知回调方法。
+    onReceiveNotification: (Map<String, dynamic> message) async {
+      print("flutter onReceiveNotification: $message");
+    },
+    // 点击通知回调方法。
+    onOpenNotification: (Map<String, dynamic> message) async {
+      print("flutter onOpenNotification: $message");
+    },
+    // 接收自定义消息回调方法。
+    onReceiveMessage: (Map<String, dynamic> message) async {
+      print("flutter onReceiveMessage: $message");
+    },
+  );
+  jpush.setup(
+    appKey: "99067fe33fa04aad88c3acac",
+    channel: "developer-default",
+    production: false,
+    debug: true, // 设置是否打印 debug 日志
+  );
   runApp(MyApp());
 }
 
@@ -34,7 +56,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => OutdoorProvider()),
         ChangeNotifierProvider(create: (context) => GreenManageProvider()),
         ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
-        ChangeNotifierProvider(create: (context)=>AnouncementProvider()),
+        ChangeNotifierProvider(create: (context) => AnouncementProvider()),
       ],
       child: GetMaterialApp(
         title: '小蜜蜂管家',
