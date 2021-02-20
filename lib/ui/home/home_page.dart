@@ -532,20 +532,20 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             _card(AllModel(context).waitThings?.length, '未处理事项',
                                 Color(0xFFFF4E0D), 0),
-                            AkuDiveder().verticalDivider(166.5.w),
+                            GridientDiveder().verticalDivider(166.5.w),
                             _card(AllModel(context).processingThings?.length,
                                 '处理中事项', Color(0xFFFFC40C), 1),
                           ],
                         ),
                         Row(children: [
-                          AkuDiveder().horizontalDivider(343.w),
-                          AkuDiveder(isReverse: true).horizontalDivider(343.w)
+                          GridientDiveder().horizontalDivider(343.w),
+                          GridientDiveder(isReverse: true).horizontalDivider(343.w)
                         ]),
                         Row(
                           children: [
                             _card(AllModel(context).doneThings?.length, '已处理事项',
                                 Color(0xFF3F8FFE), 2),
-                            AkuDiveder(isReverse: true).verticalDivider(
+                            GridientDiveder(isReverse: true).verticalDivider(
                               166.5.w,
                             ),
                             _card(AllModel(context).allThings?.length, '全部事项',

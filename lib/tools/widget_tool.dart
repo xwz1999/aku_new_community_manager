@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///自定义分割线
-class AkuDiveder {
+class GridientDiveder {
   final bool isReverse; //颜色方向反转
-  const AkuDiveder({Key key, this.isReverse = false});
+  const GridientDiveder({Key key, this.isReverse = false});
   Widget verticalDivider(double height) {
     return Container(
       width: 1.w,

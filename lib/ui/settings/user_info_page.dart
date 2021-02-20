@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,6 +13,7 @@ import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class UserInfoPage extends StatefulWidget {
   UserInfoPage({Key key}) : super(key: key);
@@ -49,7 +51,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
             title: Text('手机'),
             suffix: Text(TextUtil.hideNumber(userProvider.infoModel.tel)),
           ),
-        ],
+        ].sepWidget(separate: AkuDivider.horizontal()),
       ),
     );
   }
