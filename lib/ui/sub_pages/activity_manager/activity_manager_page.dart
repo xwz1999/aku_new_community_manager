@@ -1,10 +1,14 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/activity_item_model.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_community_manager/utils/network/base_list_model.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_card.dart';
-import 'package:aku_community_manager/ui/sub_pages/activity_manager/fake_activity_model.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 class ActivityManagerPage extends StatefulWidget {
   ActivityManagerPage({Key key}) : super(key: key);
@@ -14,16 +18,27 @@ class ActivityManagerPage extends StatefulWidget {
 }
 
 class _ActivityManagerPageState extends State<ActivityManagerPage> {
+  EasyRefreshController _refreshController = EasyRefreshController();
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '活动管理',
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          final model = fakeAcitivityManagerModels[index];
-          return ActivityManagerCard(model: model);
+      body: BeeListView(
+        builder: (List<dynamic> items) {
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return ActivityManagerCard(model: items[index]);
+            },
+            itemCount: items.length,
+          );
         },
-        itemCount: fakeAcitivityManagerModels.length,
+        controller: _refreshController,
+        convert: (BaseListModel model) {
+          return model.tableList
+              .map((e) => ActivityItemModel.fromJson(e))
+              .toList();
+        },
+        path: API.manage.acitivityList,
       ),
     );
   }

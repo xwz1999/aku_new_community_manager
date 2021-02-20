@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/activity_item_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_detail_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,26 +11,21 @@ import 'package:get/route_manager.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_detail_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/activity_manager/fake_activity_model.dart';
 
 class ActivityManagerCard extends StatelessWidget {
-  String get startDate =>
-      DateUtil.formatDate(model.dateStart, format: 'yyyy-MM-dd');
-
-  String get endDate =>
-      DateUtil.formatDate(model.dateEnd, format: 'yyyy-MM-dd');
-
-  final FakeActivityManagerModel model;
+  final ActivityItemModel model;
   const ActivityManagerCard({Key key, @required this.model}) : super(key: key);
-
+  String get startDate =>
+      DateUtil.formatDate(model.registrationStart, format: 'yyyy-MM-dd');
+  String get endDate =>
+      DateUtil.formatDate(model.registrationEnd, format: 'yyyy-MM-dd');
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
       child: GestureDetector(
         onTap: () {
-          Get.to(ActivityDetailPage(model: model));
+          Get.to(ActivityDetailPage(id: model.id));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -41,8 +38,9 @@ class ActivityManagerCard extends StatelessWidget {
                 width: double.infinity,
                 child: Hero(
                   tag: model.title,
-                  child: Image.asset(
-                    model.imgPath,
+                  child: FadeInImage.assetNetwork(
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                    image: model.firstImg?.url ?? '',
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -63,7 +61,7 @@ class ActivityManagerCard extends StatelessWidget {
                     ),
                   ),
                   AkuBox.h(12),
-                  _buildTile('主办方:', model.hostName),
+                  _buildTile('主办方:', model.sponsorName),
                   _buildTile('地点:', model.location),
                   _buildTile('报名时间:', '$startDate\至$endDate'),
                 ],

@@ -38,4 +38,10 @@ class _User {
 class _Manage {
   ///报事报修：查询 维修部组织信息及人员
   String get fixers => '/user/repair/findRepairOrganization';
+
+  ///活动管理：管家app 查询所有的活动管理信息
+  String get acitivityList => '/user/activity/list';
+
+  ///活动管理：管家app 根据活动管理主键id查询活动详情
+  String get activityDetail => '/user/activity/findById';
 }
