@@ -33,6 +33,9 @@ class _User {
 
   ///个人资料：获取用户信息
   String get info => '/user/personalData/getUserDetail';
+
+  ///个人资料：修改管家用户昵称
+  String get updateNickName => '/user/personalData/updateNickName';
 }
 
 class _Manage {

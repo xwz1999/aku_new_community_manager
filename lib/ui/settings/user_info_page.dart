@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_community_manager/ui/settings/nick_name_change_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,6 +15,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_community_manager/tools/extensions/router_extension_tool.dart';
 
 class UserInfoPage extends StatefulWidget {
   UserInfoPage({Key key}) : super(key: key);
@@ -42,7 +44,10 @@ class _UserInfoPageState extends State<UserInfoPage> {
             suffix: AkuAvatar(),
           ),
           AkuTile(
-            onTap: () {},
+            onTap: () async {
+              await NickNameChangePage().to();
+              setState(() {});
+            },
             title: Text('昵称'),
             suffix: Text(userProvider.infoModel.nickName),
           ),
