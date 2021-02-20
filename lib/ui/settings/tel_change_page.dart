@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/ui/settings/update_userinfo_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,8 @@ class _TelChangePageState extends State<TelChangePage> {
     bool timeActive = _timer?.isActive ?? false;
     return (!timeActive) && validPhone;
   }
-   startTick() {
+
+  startTick() {
     _timer = Timer.periodic(Duration(seconds: 1), (_timer) {
       if (_timer.tick >= 60) {
         _timer.cancel();
@@ -37,23 +40,25 @@ class _TelChangePageState extends State<TelChangePage> {
       setState(() {});
     });
   }
+
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-    _codeController=TextEditingController();
-    _newTelController=TextEditingController();
-    _oldTelController=TextEditingController();
+    _codeController = TextEditingController();
+    _newTelController = TextEditingController();
+    _oldTelController = TextEditingController();
   }
+
   @override
-  void dispose() { 
+  void dispose() {
     _codeController?.dispose();
     _newTelController?.dispose();
     _oldTelController?.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-
     UserProvider userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '修改手机',
@@ -97,8 +102,13 @@ class _TelChangePageState extends State<TelChangePage> {
                       BoxConstraints(minHeight: 0.w, minWidth: 0.w),
                   suffixIcon: MaterialButton(
                     onPressed: _canGetCode
-                        ? () {
-                            startTick();
+                        ? () async {
+                            BaseModel baseModel =
+                                await UpdateUserInfoFunc.sendTelUpdateCode(
+                                    _newTelController.text);
+                            if (baseModel.status) {
+                              startTick();
+                            } else {}
                           }
                         : () {},
                     child: _timer?.isActive ?? false
@@ -107,7 +117,11 @@ class _TelChangePageState extends State<TelChangePage> {
                             .color(Color(0xFFFFC40C))
                             .size(28.sp)
                             .make()
-                        : '获取验证码'.text.color(Color(0xFFFFC40C)).size(28.sp).make(),
+                        : '获取验证码'
+                            .text
+                            .color(Color(0xFFFFC40C))
+                            .size(28.sp)
+                            .make(),
                     padding: EdgeInsets.zero,
                     minWidth: 177.w,
                     height: 62.w,
@@ -155,7 +169,7 @@ class _TelChangePageState extends State<TelChangePage> {
               ),
               64.w.heightBox,
               MaterialButton(
-                onPressed: () {
+                onPressed: () async {
                   if (TextUtil.isEmpty(_oldTelController.text)) {
                     BotToast.showText(text: '旧手机号不能为空');
                   } else if (TextUtil.isEmpty(_newTelController.text)) {
@@ -163,9 +177,16 @@ class _TelChangePageState extends State<TelChangePage> {
                   } else if (TextUtil.isEmpty(_codeController.text)) {
                     BotToast.showText(text: '验证码不能为空');
                   } else {
-                    // userProvider.setTel(_oldTelController.text,
-                    //     _newTelController.text, _codeController.text);
-                    Get.back();
+                    BaseModel baseModel = await UpdateUserInfoFunc.updateTel(
+                        _oldTelController.text,
+                        _newTelController.text,
+                        _codeController.text);
+                    if (baseModel.status) {
+                      userProvider.setTel(_newTelController.text);
+                      Get.back();
+                    } else {
+                      BotToast.showText(text: baseModel.message);
+                    }
                   }
                 },
                 child: '保存'.text.black.size(32.sp).make(),

@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/ui/settings/nick_name_change_page.dart';
+import 'package:aku_community_manager/ui/settings/tel_change_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -52,7 +53,12 @@ class _UserInfoPageState extends State<UserInfoPage> {
             suffix: Text(userProvider.infoModel.nickName),
           ),
           AkuTile(
-            onTap: () {},
+            onTap: () async{
+              await TelChangePage().to();
+              setState(() {
+                
+              });
+            },
             title: Text('手机'),
             suffix: Text(TextUtil.hideNumber(userProvider.infoModel.tel)),
           ),
