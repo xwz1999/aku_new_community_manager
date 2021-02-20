@@ -136,7 +136,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                 ],
               ),
               Positioned(
-                left: 552.w - 24.w,
+                right: 0,
                 bottom: 75.w - 28.w,
                 child: Transform.rotate(
                   angle: pi / 4,
