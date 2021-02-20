@@ -51,9 +51,7 @@ dependencies:
   
   dio:
 
-  power_logger:
-    git:
-      url: http://192.168.2.201:8099/aku_fe/power_logger.git
+  power_logger: ^0.1.0
   logger: ^0.9.4
   aku_ui:
     git:

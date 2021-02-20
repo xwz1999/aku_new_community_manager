@@ -21,6 +21,9 @@ class _Auth {
 
   ///登录/退出：管家app用户短信登录
   String get login => '/login/loginSMSUser';
+
+  ///登录/退出：管家用户退出账户
+  String get logout => '/user/signOut';
 }
 
 class _User {

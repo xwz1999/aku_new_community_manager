@@ -2,6 +2,7 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -24,13 +25,9 @@ class UserProvider extends ChangeNotifier {
   ///登陆
   Future setLogin(int token) async {
     _isLogin = true;
-    NetUtil()
-        .dio
-        .options
-        .headers
-        .putIfAbsent('butlerApp-admin-token', () => token);
-    HiveStore.appBox.put('token', token);
-    HiveStore.appBox.put('login', true);
+    NetUtil().auth(token);
+    await HiveStore.appBox.put('token', token);
+    await HiveStore.appBox.put('login', true);
     _profileModel = await updateProfile();
     _infoModel = await updateUserInfo();
     // await setCurrentHouse((_userDetailModel?.estateNames?.isEmpty ?? true)
@@ -62,9 +59,12 @@ class UserProvider extends ChangeNotifier {
   }
 
   ///注销登录
-  logout() {
+  logout() async {
+    await NetUtil().get(API.auth.logout, showMessage: true);
+    NetUtil().logout();
     _isLogin = false;
-    HiveStore.appBox.delete('token');
+    await HiveStore.appBox.delete('token');
+    await HiveStore.appBox.put('login', false);
     notifyListeners();
   }
 

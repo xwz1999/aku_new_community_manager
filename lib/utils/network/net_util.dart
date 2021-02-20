@@ -37,6 +37,7 @@ class NetUtil {
       onRequest: (RequestOptions options) async => options,
       onResponse: (Response response) async {
         LoggerData.addData(response);
+        print(response.headers);
         return response;
       },
       onError: (DioError error) async {
@@ -47,8 +48,12 @@ class NetUtil {
   }
 
   ///call auth after login
-  auth(String token) {
-    _dio.options.headers.putIfAbsent('Butler-Admin-Token', () => token);
+  auth(int token) {
+    _dio.options.headers.putIfAbsent('butlerApp-admin-token', () => token);
+  }
+
+  logout() {
+    _dio.options.headers.remove('butlerApp-admin-token');
   }
 
   /// ## alias of Dio().get
