@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -49,6 +50,10 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),
+      ),
+    );
   }
 }
