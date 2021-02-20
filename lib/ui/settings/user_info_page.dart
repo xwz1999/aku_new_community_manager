@@ -49,7 +49,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           AkuTile(
             onTap: () {},
             title: Text('手机'),
-            suffix: Text(TextUtil.hideNumber(userProvider.infoModel.tel)),
+            suffix: Text(TextUtil.hideNumber(userProvider.profileModel.tel)),
           ),
         ].sepWidget(separate: AkuDivider.horizontal()),
       ),
