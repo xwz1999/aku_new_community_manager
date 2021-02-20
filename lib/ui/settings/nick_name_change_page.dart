@@ -49,7 +49,7 @@ class _NickNameChangePageState extends State<NickNameChangePage> {
                 controller: _textEditingController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
-                  hintText: '${userProvider.userInfoModel.nickName}',
+                  hintText: '${userProvider.infoModel.nickName}',
                   hintStyle:
                       TextStyle(color: Color(0xFF999999), fontSize: 34.sp),
                   border: UnderlineInputBorder(
@@ -62,7 +62,7 @@ class _NickNameChangePageState extends State<NickNameChangePage> {
               150.w.heightBox,
               MaterialButton(
                 onPressed: () async {
-                  BaseModel baseModel = await NetUtil().get(
+                  BaseModel baseModel = await NetUtil().post(
                       API.user.updateNickName,
                       params: {'nickName': _textEditingController.text});
 
