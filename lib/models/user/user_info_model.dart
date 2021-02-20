@@ -4,6 +4,18 @@ class UserInfoModel {
   String nickName;
   List<int> jurisdiction;
 
+  ///派单(派单人)
+  bool get canSendTicket => jurisdiction.contains(52);
+
+  ///接单（维修人）
+  bool get canPickUpTicket => jurisdiction.contains(53);
+
+  ///放行（保安）
+  bool get canPass => jurisdiction.contains(55);
+
+  ///操作权限（借还管理）
+  bool get canOperation => jurisdiction.contains(57);
+
   UserInfoModel({this.id, this.roleId, this.nickName, this.jurisdiction});
 
   UserInfoModel.fromJson(Map<String, dynamic> json) {
