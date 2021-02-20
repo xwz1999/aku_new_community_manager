@@ -88,14 +88,20 @@ class UserProvider extends ChangeNotifier {
     _isSigned = true;
     notifyListeners();
   }
-
+///修改昵称
   setNickName(String name) {
-    _userInfoModel.nickName = name;
+    _infoModel.nickName = name;
     notifyListeners();
   }
 
   setAvatar(File file) {
     _userInfoModel.avatar = file;
+    notifyListeners();
+  }
+
+  ///修改手机
+  setTel(String tel){
+    _infoModel.tel=tel;
     notifyListeners();
   }
 }
