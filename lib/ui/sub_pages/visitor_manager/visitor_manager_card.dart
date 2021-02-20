@@ -2,6 +2,8 @@
 import 'dart:math';
 
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/visitor_item_model.dart';
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,19 +16,8 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 
 class VisitorManagerCard extends StatefulWidget {
-  final String adress;
-  final String name;
-  final String plate;
-  final String time;
-  final VisitorStatus status;
-  VisitorManagerCard(
-      {Key key,
-      @required this.adress,
-      @required this.name,
-      this.plate,
-      this.time,
-      @required this.status})
-      : super(key: key);
+  final VisitorItemModel model;
+  VisitorManagerCard({Key key, @required this.model}) : super(key: key);
 
   @override
   _VisitorManagerCardState createState() => _VisitorManagerCardState();
@@ -37,19 +28,47 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
     color: AppStyle.primaryTextColor,
     fontSize: 28.sp,
   );
-  String _adress;
-  String _name;
-  String _plate;
-  String _time;
-  VisitorStatus _status;
-  @override
-  void initState() {
-    super.initState();
-    _adress = widget.adress;
-    _name = widget.name;
-    _plate = widget.plate ?? '无信息';
-    _time = widget.time ?? '无信息';
-    _status = widget.status;
+
+  String get _time {
+    if (widget.model.visit == null)
+      return '无信息';
+    else
+      return DateUtil.formatDate(
+        widget.model.visit,
+        format: 'yyyy-MM-dd HH:mm',
+      );
+  }
+
+  // String get _visitorStatus {
+  //   switch (widget.model.visitorStatus) {
+  //     case 1:
+  //       if (widget.model.effective.difference(DateTime.now()).isNegative)
+  //         return '已过期';
+  //       return '未到';
+  //     case 2:
+  //       return '已到';
+  //     case 3:
+  //       return '已过期';
+  //     case 4:
+  //       return '作废';
+  //     default:
+  //       return '未知';
+  //   }
+  // }
+
+  VisitorStatus get _visitorStatusEnum {
+    switch (widget.model.visitorStatus) {
+      case 1:
+        if (widget.model.effective.difference(DateTime.now()).isNegative)
+          return VisitorStatus.OUTDATE;
+        return VisitorStatus.NOT_VISIT;
+      case 2:
+        return VisitorStatus.VISIT_DONE;
+      case 3:
+        return VisitorStatus.OUTDATE;
+      default:
+        return null;
+    }
   }
 
   @override
@@ -68,7 +87,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _adress,
+                    widget.model.roomName,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 32.sp,
@@ -84,7 +103,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                       ),
                       AkuBox.w(8),
                       Text(
-                        '$_name先生',
+                        widget.model.name,
                         style: _textStyle,
                       ),
                       AkuBox.w(137),
@@ -95,7 +114,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                       ),
                       AkuBox.w(8),
                       Text(
-                        _plate,
+                        widget.model.carNum ?? '无信息',
                         style: _textStyle,
                       ),
                       Spacer(),
@@ -122,7 +141,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                 child: Transform.rotate(
                   angle: pi / 4,
                   child: Image.asset(
-                    _statusImage(_status),
+                    _statusImage(_visitorStatusEnum),
                     width: 140.w,
                     height: 140.w,
                   ),

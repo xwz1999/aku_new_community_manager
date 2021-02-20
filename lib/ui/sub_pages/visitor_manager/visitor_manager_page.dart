@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -78,43 +79,12 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
             preferredSize: Size.fromHeight(88.w)),
         body: TabBarView(
           controller: _tabController,
-          children: _tabs.map((e) => _buildListView(_tabs.indexOf(e))).toList(),
+          children: [
+            VisitorManagerView(status: null),
+            VisitorManagerView(status: 1),
+            VisitorManagerView(status: 2),
+            VisitorManagerView(status: 3),
+          ],
         ));
-  }
-
-  Widget _buildListView(int index) {
-    List<VisitorCardsModel> _selectCards;
-    switch (index) {
-      case 0:
-        _selectCards = _cards;
-        break;
-      case 1:
-        _selectCards = _cards
-            .where((element) => element.status == VisitorStatus.NOT_VISIT)
-            .toList();
-        break;
-      case 2:
-        _selectCards = _cards
-            .where((element) => element.status == VisitorStatus.VISIT_DONE)
-            .toList();
-        break;
-      case 3:
-        _selectCards = _cards
-            .where((element) => element.status == VisitorStatus.OUTDATE)
-            .toList();
-        break;
-    }
-    return ListView(
-      padding: EdgeInsets.only(left: 32.w, right: 32.w),
-      children: _selectCards
-          .map((e) => VisitorManagerCard(
-                adress: e.adress,
-                name: e.name,
-                plate: e.plate,
-                time: e.time,
-                status: e.status,
-              ))
-          .toList(),
-    );
   }
 }

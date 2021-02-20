@@ -47,4 +47,7 @@ class _Manage {
 
   ///活动管理：管家app 根据活动管理主键id查询活动详情
   String get activityDetail => '/user/activity/findById';
+
+  ///访客管理：管家app显示所有的访客信息 （包含条件搜索）
+  String get visitorList => '/user/visitor/list';
 }
