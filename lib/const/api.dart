@@ -13,6 +13,7 @@ class API {
   static const int networkTimeOut = 10000;
   static _Auth auth = _Auth();
   static _User user = _User();
+  static _Manage manage = _Manage();
 }
 
 class _Auth {
@@ -32,4 +33,9 @@ class _User {
 
   ///个人资料：获取用户信息
   String get info => '/user/personalData/getUserDetail';
+}
+
+class _Manage {
+  ///报事报修：查询 维修部组织信息及人员
+  String get fixers => '/user/repair/findRepairOrganization';
 }

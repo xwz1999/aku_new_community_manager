@@ -40,7 +40,7 @@ class UserInfoModel {
   UserInfoModel.empty({
     this.nickName = '',
     this.avatar,
-    this.role = USER_ROLE.EMPTY,
+    this.role = USER_ROLE.MANAGER,
     this.phone = '',
   });
 

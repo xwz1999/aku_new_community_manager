@@ -1,17 +1,19 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/fixer_item_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
-import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
-import 'package:aku_community_manager/provider/fix_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
@@ -28,19 +30,30 @@ class FixerDepartmentPage extends StatefulWidget {
 }
 
 class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
-  List<FixerModel> _pickedFixers = [];
+  List<RepairmanVos> _pickedFixers = [];
+
+  List<FixerItemModel> _fixerItems = [];
   @override
   Widget build(BuildContext context) {
-    final fixProvider = Provider.of<FixProvider>(context);
-
     return AkuScaffold(
       title: '房屋管理维修部',
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 16.w),
-        itemBuilder: (context, index) {
-          return _buildItem(fixProvider.fixerModels[index], index);
+      body: EasyRefresh(
+        firstRefresh: true,
+        header: MaterialHeader(),
+        onRefresh: () async {
+          BaseModel model = await NetUtil().get(API.manage.fixers);
+          _fixerItems = (model.data as List)
+              .map((e) => FixerItemModel.fromJson(e))
+              .toList();
+          setState(() {});
         },
-        itemCount: fixProvider.fixerModels.length,
+        child: ListView.builder(
+          padding: EdgeInsets.symmetric(vertical: 16.w),
+          itemBuilder: (context, index) {
+            return _buildItem(_fixerItems[index], index);
+          },
+          itemCount: _fixerItems.length,
+        ),
       ),
       bottom: AkuMaterialButton(
         height: 96.w,
@@ -83,7 +96,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
     );
   }
 
-  _buildItem(FixerTypedModel model, int index) {
+  _buildItem(FixerItemModel model, int index) {
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -102,7 +115,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: Text(
-              model.typeName,
+              model.name,
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontSize: 32.sp,
@@ -119,14 +132,16 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                 height: 1.w,
                 thickness: 1.w,
               ),
-              ...model.fixers.map((e) {
+              ...model.repairmanVos.map((e) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AkuMaterialButton(
                       height: 96.w,
                       onPressed: () {
-                        if (_pickedFixers.indexOf(e) == -1) {
+                        if (_pickedFixers
+                                .indexWhere((element) => element.id == e.id) ==
+                            -1) {
                           _pickedFixers.add(e);
                         } else {
                           _pickedFixers.remove(e);
@@ -171,7 +186,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                             width: 40.w,
                           ),
                           Text(
-                            e.phone,
+                            e.tel,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.w,
@@ -182,7 +197,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                         ],
                       ),
                     ),
-                    model.fixers.last == e
+                    model.repairmanVos.last == e
                         ? SizedBox()
                         : Divider(
                             indent: 32.w,

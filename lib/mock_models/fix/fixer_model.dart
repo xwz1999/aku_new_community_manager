@@ -12,6 +12,8 @@ enum FIXER_TYPE {
   PROPERTY,
 }
 
+//TODO CLEAN BOTTOM CODES.
+@Deprecated("fixer_model need to be cleaned.")
 class FixerModel {
   String name;
   String phone;
