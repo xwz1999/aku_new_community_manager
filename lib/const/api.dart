@@ -62,4 +62,7 @@ class _Manage {
 
   ///借还管理：查询全部物品
   String get borrowList => '/user/borrow/articleList';
+
+  ///借还管理：根据物品主键id查询所有的物品明细信息
+  String get borrowDetailList => '/user/borrow/articleDetailList';
 }

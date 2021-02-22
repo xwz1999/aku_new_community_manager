@@ -73,7 +73,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
 
   _buildCard(BorrowItemModel object) {
     return GestureDetector(
-      // onTap: () => Get.to(BorrowItemPage(object: object)),
+      onTap: () => Get.to(BorrowItemPage(id: object.id)),
       child: Container(
         padding: EdgeInsets.all(24.w),
         margin: EdgeInsets.only(top: 16.w),
