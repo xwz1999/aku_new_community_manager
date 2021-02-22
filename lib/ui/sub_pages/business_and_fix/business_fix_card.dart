@@ -1,26 +1,23 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/bussiness_and_fix_model.dart';
+import 'package:aku_community_manager/tools/aku_map.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 
 class BusinessFixCard extends StatefulWidget {
-  final FixModel model;
+  final BussinessAndFixModel model;
   final bool homeDisplay;
   BusinessFixCard({Key key, @required this.model, this.homeDisplay = false})
       : super(key: key);
@@ -35,36 +32,37 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
     return userProvider.userInfoModel.role;
   }
 
-  String get dateStart => DateUtil.formatDate(widget.model.dateStart,
+  String get dateStart => DateUtil.formatDateStr(widget.model.repairDate,
       format: 'yyyy-MM-dd HH:mm:ss');
 
-  Widget get fixTypeWidget {
-    if (userRole == USER_ROLE.MANAGER) {
-      return Text(
-        FixModel.managerRoleMap[widget.model.type],
-        style: TextStyle(
-          color: widget.model.type != FIX_ENUM.DONE
-              ? Color(0XFFFF4501)
-              : AppStyle.minorTextColor,
-        ),
-      );
-    } else {
-      return Text(
-        FixModel.otherRoleMap[widget.model.type],
-        style: TextStyle(
-          color: widget.model.type != FIX_ENUM.DONE
-              ? Color(0XFFFF4501)
-              : AppStyle.minorTextColor,
-        ),
-      );
-    }
-  }
+  // Widget get fixTypeWidget {
+  //   if (userRole == USER_ROLE.MANAGER) {
+  //     return Text(
+  //       FixModel.managerRoleMap[widget.model.type],
+  //       style: TextStyle(
+  //         color: widget.model.status > 3
+  //             ? Color(0XFFFF4501)
+  //             : AppStyle.minorTextColor,
+  //       ),
+  //     );
+  //   } else {
+  //     return Text(
+  //       FixModel.otherRoleMap[widget.model.type],
+  //       style: TextStyle(
+  //         color: widget.model.type > 3
+  //             ? Color(0XFFFF4501)
+  //             : AppStyle.minorTextColor,
+  //       ),
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        Get.to(BusinessAndFixDetailPage(model: widget.model));
+        // Get.to(BusinessAndFixDetailPage(model: widget.model));
       },
       child: Container(
         padding: EdgeInsets.all(24.w),
@@ -85,12 +83,22 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                     ),
                   ),
                 ),
-                fixTypeWidget,
+                Text(
+                  AkuMap.fixStatus(
+                      userProvider.infoModel.canOperation,
+                      userProvider.infoModel.canPickUpTicket,
+                      widget.model.status),
+                  style: TextStyle(
+                    color: widget.model.status <4
+                        ? Color(0XFFFF4501)
+                        : AppStyle.minorTextColor,
+                  ),
+                ),
               ],
             ),
             widget.homeDisplay ? AkuBox.h(12) : AkuBox.h(24),
             Text(
-              widget.model.title,
+              widget.model.reportDetail,
               maxLines: widget.homeDisplay ? 1 : null,
               overflow: !widget.homeDisplay
                   ? TextOverflow.visible
@@ -121,21 +129,20 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          var imgObj = widget.model.imgs[index];
+          var imgObj = widget.model.imgUrls[index].url;
           return Container(
             margin: EdgeInsets.symmetric(horizontal: 8.w),
             height: 168.w,
             width: 168.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4.w),
-              image: DecorationImage(
-                  image: (imgObj is String)
-                      ? AssetImage(imgObj)
-                      : FileImage(imgObj)),
             ),
+            clipBehavior: Clip.antiAlias,
+            child: FadeInImage.assetNetwork(
+                placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: imgObj),
           );
         },
-        itemCount: widget.model.imgs.length,
+        itemCount: widget.model.imgUrls.length,
       ),
     );
   }
@@ -143,7 +150,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
   _buildBottomCard() {
     switch (userRole) {
       case USER_ROLE.FIXER:
-        if (widget.model.type == FIX_ENUM.DONE) return SizedBox();
+        if (widget.model.status > 4) return SizedBox();
         return Column(
           children: [
             Divider(
@@ -152,7 +159,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             Row(
               children: [
                 Spacer(),
-                widget.model.type == FIX_ENUM.PROCESSING
+                widget.model.status == 3
                     ? MaterialButton(
                         padding: EdgeInsets.zero,
                         height: 64.w,
@@ -172,17 +179,15 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(FixMoreTimePage(model: widget.model));
+                          // Get.to(FixMoreTimePage(model: widget.model));
                         },
                       )
                     : SizedBox(),
-                widget.model.type == FIX_ENUM.PROCESSING
-                    ? AkuBox.w(24)
-                    : SizedBox(),
-                widget.model.type == FIX_ENUM.PROCESSING
+                widget.model.status == 3 ? AkuBox.w(24) : SizedBox(),
+                widget.model.status == 3
                     ? AkuMaterialButton(
                         onPressed: () {
-                          Get.to(FixWorkFinishPage(model: widget.model));
+                          // Get.to(FixWorkFinishPage(model: widget.model));
                         },
                         radius: 4.w,
                         color: AppStyle.primaryColor,
@@ -197,17 +202,17 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                         ),
                       )
                     : SizedBox(),
-                widget.model.type == FIX_ENUM.WAIT_PICKUP
+                widget.model.status == 2
                     ? AkuMaterialButton(
                         onPressed: () {
-                          final userProvider =
-                              Provider.of<UserProvider>(context, listen: false);
-                          widget.model.detail.fixStatuses.add(FixStatus(
-                            title: '${userProvider.userInfoModel.nickName}已接单',
-                            date: DateTime.now(),
-                          ));
-                          widget.model.type = FIX_ENUM.PROCESSING;
-                          Get.back();
+                          // final userProvider =
+                          //     Provider.of<UserProvider>(context, listen: false);
+                          // widget.model.detail.fixStatuses.add(FixStatus(
+                          //   title: '${userProvider.userInfoModel.nickName}已接单',
+                          //   date: DateTime.now(),
+                          // ));
+                          // widget.model.type = FIX_ENUM.PROCESSING;
+                          // Get.back();
                         },
                         radius: 4.w,
                         color: AppStyle.primaryColor,
@@ -236,7 +241,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
               child: AkuMaterialButton(
                 height: 64.w,
                 onPressed: () {
-                  Get.to(BusinessAndFixDetailPage(model: widget.model));
+                  // Get.to(BusinessAndFixDetailPage(model: widget.model));
                 },
                 radius: 4,
                 color: AppStyle.primaryColor,

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/bussiness_and_fix_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/all_model.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
@@ -504,7 +504,7 @@ class _HomePageState extends State<HomePage> {
                               final item = AllModel(context).waitThings[index];
                               if (item is DecorationModel) {
                                 return DecorationManagerCard(model: item);
-                              } else if (item is FixModel) {
+                              } else if (item is BussinessAndFixModel) {
                                 return BusinessFixCard(
                                     model: item, homeDisplay: true);
                               } else

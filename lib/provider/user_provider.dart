@@ -100,7 +100,7 @@ class UserProvider extends ChangeNotifier {
 
   ///修改手机
   setTel(String tel){
-    _infoModel.tel=tel;
+    _profileModel.tel=tel;
     notifyListeners();
   }
 }

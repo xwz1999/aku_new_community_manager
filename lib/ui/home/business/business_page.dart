@@ -1,10 +1,10 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/bussiness_and_fix_model.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:aku_community_manager/mock_models/all_model.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
@@ -72,7 +72,7 @@ class _BusinessPageState extends State<BusinessPage>
         final item = list[index];
         if (item is DecorationModel) {
           return DecorationManagerCard(model: item);
-        } else if (item is FixModel) {
+        } else if (item is BussinessAndFixModel) {
           return BusinessFixCard(model: item);
         } else
           return SizedBox();

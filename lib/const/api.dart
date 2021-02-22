@@ -57,4 +57,7 @@ class _Manage {
 
   ///访客管理：管家app显示所有的访客信息 （包含条件搜索）
   String get visitorList => '/user/visitor/list';
+
+  ///报事报修：查询所有的报事报修信息(包含条件搜索)
+  String get repairList => '/user/repair/list';
 }

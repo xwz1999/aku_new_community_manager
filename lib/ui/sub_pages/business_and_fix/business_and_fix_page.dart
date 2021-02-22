@@ -1,16 +1,13 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/bussiness_and_fix_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
-import 'package:aku_community_manager/provider/fix_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
@@ -27,16 +24,21 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
 
   List<String> get _tabs {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    switch (userProvider.userInfoModel.role) {
-      case USER_ROLE.MANAGER:
-        return ['待派单', '已派单', '处理中', '已处理', '全部'];
-        break;
-      case USER_ROLE.FIXER:
-        return ['待接单', '处理中', '已处理', '全部'];
-        break;
-      default:
-        return ['待接单', '处理中', '已处理', '全部'];
-        break;
+    // switch (userProvider.userInfoModel.role) {
+    //   case USER_ROLE.MANAGER:
+    //     return ['待派单', '已派单', '处理中', '已处理', '全部'];
+    //     break;
+    //   case USER_ROLE.FIXER:
+    //     return ['待接单', '处理中', '已处理', '全部'];
+    //     break;
+    //   default:
+    //     return ['待接单', '处理中', '已处理', '全部'];
+    //     break;
+    // }
+    if (userProvider.infoModel.canOperation) {
+      return ['待派单', '已派单', '处理中', '已处理', '全部'];
+    } else {
+      return ['待接单', '处理中', '已处理', '全部'];
     }
   }
 
@@ -54,6 +56,7 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     return AkuScaffold(
       title: '报事报修',
       appBarBottom: PreferredSize(
@@ -65,20 +68,28 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: _tabs.map((e) => _buildTabView(_tabs.indexOf(e))).toList(),
+        children: [
+          ...userProvider.infoModel.canOperation
+              ? [
+                  BussinessAndFixView(
+                    status: 1,
+                  )
+                ]
+              : [],
+          BussinessAndFixView(
+            status: 2,
+          ),
+          BussinessAndFixView(
+            status: 3,
+          ),
+          BussinessAndFixView(
+            status: 4,
+          ),
+          BussinessAndFixView(
+            status: null,
+          ),
+        ],
       ),
-    );
-  }
-
-  Widget _buildTabView(int index) {
-    final fixProvider = Provider.of<FixProvider>(context, listen: false);
-    List<FixModel> models = fixProvider.getFixModel(index, context);
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 32.w),
-      itemBuilder: (context, index) {
-        return BusinessFixCard(model: models[index]);
-      },
-      itemCount: models.length,
     );
   }
 }
