@@ -13,7 +13,6 @@ class API {
   static const int networkTimeOut = 10000;
   static _Auth auth = _Auth();
   static _User user = _User();
-  static _Manage manage = _Manage();
 }
 
 class _Auth {
@@ -41,10 +40,6 @@ class _User {
   String get sendTelUpdateCode => '/user/personalData/sendTelUpdateCode';
 
   ///个人资料：根据新手机号发送修改验证码
-  String get updateTel => '/user/personalData/updateTel';
-}
-
-class _Manage {
-  ///访客管理：管家app显示所有的访客信息 （包含条件搜索)
-  String get visitorList => '/user/visitor/list';
+  String get updateTel =>'/user/personalData/updateTel';
+  
 }
