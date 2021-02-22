@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/models/manager/bussiness_and_fix_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
 import 'package:flutter/material.dart';
 

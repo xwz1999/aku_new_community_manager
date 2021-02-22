@@ -60,4 +60,10 @@ class _Manage {
 
   ///报事报修：查询所有的报事报修信息(包含条件搜索)
   String get repairList => '/user/repair/list';
+
+  ///报事报修：根据报事报修id查询报修详情
+  String get repairDetail => '/user/repair/findById';
+
+  ///报事报修：查询派工单详情表-派工类型
+  String get dispatchListDetailType => 'system/dataDictionary/findSysDispatchListDetailType';
 }
