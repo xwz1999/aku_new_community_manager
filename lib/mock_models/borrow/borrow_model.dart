@@ -24,6 +24,8 @@ enum GOODS_STATUS {
   LOST,
 }
 
+//TODO CLEAN BOTTOM CODES.
+@Deprecated(" borrow_model need to be cleaned.")
 class BorrowModel {
   String borrowPerson;
   String phone;

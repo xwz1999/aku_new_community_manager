@@ -2,6 +2,8 @@
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 
+//TODO CLEAN BOTTOM CODES.
+@Deprecated("borrow_data need to be cleaned.")
 class BorrowData {
   static List<BorrowModel> get checkModels => models.where((e) {
         return e.borrowGoods.status == BORROW_STATUS.WAIT_CHECK;

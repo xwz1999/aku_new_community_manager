@@ -41,8 +41,7 @@ class _User {
   String get sendTelUpdateCode => '/user/personalData/sendTelUpdateCode';
 
   ///个人资料：根据新手机号发送修改验证码
-  String get updateTel =>'/user/personalData/updateTel';
-  
+  String get updateTel => '/user/personalData/updateTel';
 }
 
 class _Manage {
@@ -60,4 +59,7 @@ class _Manage {
 
   ///报事报修：查询所有的报事报修信息(包含条件搜索)
   String get repairList => '/user/repair/list';
+
+  ///借还管理：查询全部物品
+  String get borrowList => '/user/borrow/articleList';
 }
