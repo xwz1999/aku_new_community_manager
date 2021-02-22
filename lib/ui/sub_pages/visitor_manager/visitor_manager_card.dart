@@ -2,6 +2,7 @@
 import 'dart:math';
 
 // Flutter imports:
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -48,15 +49,13 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
     _adress = widget.adress;
     _name = widget.name;
     _plate = widget.plate ?? '无信息';
-    _time = widget.time ?? '无信息';
+    _time = widget.time;
     _status = widget.status;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        AkuBox.h(16),
+    return 
         Container(
           color: Color(0xFFFFFFFF),
           width: double.infinity,
@@ -110,7 +109,12 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                         height: 40.w,
                       ),
                       AkuBox.w(8),
-                      Text(_time, style: _textStyle),
+                      Text(
+                          _time==null
+                              ? '无信息'
+                              : DateUtil.formatDateStr(_time,
+                                  format: DateFormats.y_mo_d_h_m),
+                          style: _textStyle),
                       Spacer(),
                     ],
                   ),
@@ -130,9 +134,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
               ),
             ],
           ),
-        ),
-      ],
-    );
+        );
   }
 
   String _statusImage(VisitorStatus status) {
@@ -142,6 +144,8 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
       case VisitorStatus.VISIT_DONE:
         return R.ASSETS_MANAGE_IC_DAOFANG_PNG;
       case VisitorStatus.OUTDATE:
+        return R.ASSETS_MANAGE_IC_GUOQI_PNG;
+      case VisitorStatus.CANCEL:
         return R.ASSETS_MANAGE_IC_GUOQI_PNG;
       default:
         return '';
