@@ -1,8 +1,13 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/borrow/borrow_item_detail_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -14,8 +19,8 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class BorrowItemDetailPage extends StatefulWidget {
-  final SingleBorrowGoods item;
-  BorrowItemDetailPage({Key key, this.item}) : super(key: key);
+  final int id;
+  BorrowItemDetailPage({Key key, this.id}) : super(key: key);
 
   @override
   _BorrowItemDetailPageState createState() => _BorrowItemDetailPageState();
@@ -24,10 +29,11 @@ class BorrowItemDetailPage extends StatefulWidget {
 class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
   bool _isEditing = false;
   TextEditingController _textEditingController;
+  BorrowItemDetailModel _detailModel;
   @override
   void initState() {
     super.initState();
-    _textEditingController = TextEditingController(text: widget.item.name);
+    _textEditingController = TextEditingController(text: '');
   }
 
   @override
@@ -60,77 +66,86 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
               )
             : SizedBox(),
       ],
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 16.w),
-        children: [
-          Container(
-            color: Colors.white,
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
-            child: Column(
-              children: [
-                _buildRow(
-                    '物品名称',
-                    TextField(
-                      style: TextStyle(
-                        color: AppStyle.primaryTextColor,
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      controller: _textEditingController,
-                      enabled: _isEditing,
-                      onChanged: (text) {
-                        widget.item.name = text;
-                      },
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                    )),
-                Divider(height: 1.w),
-                _buildRow(
-                    '物品单号',
-                    Text(
-                      widget.item.code,
-                      style: TextStyle(
-                        color: _isEditing
-                            ? AppStyle.minorTextColor
-                            : AppStyle.primaryTextColor,
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
-                _buildRow(
-                    '出借状态',
-                    Text(
-                      '未出借',
-                      style: TextStyle(
-                        color: _isEditing
-                            ? AppStyle.minorTextColor
-                            : AppStyle.primaryTextColor,
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
-                _buildRow(
-                  '物品图片',
-                  (widget.item.assetpath is String)
-                      ? Image.asset(
-                          widget.item.assetpath,
-                          height: 184.w,
-                          width: 184.w,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.file(
-                          widget.item.assetpath,
-                          height: 184.w,
-                          width: 184.w,
-                          fit: BoxFit.cover,
+      body: EasyRefresh(
+        firstRefresh: true,
+        header: MaterialHeader(),
+        onRefresh: () async {
+          BaseModel model = await NetUtil().get(
+            API.manage.borrowItemDetail,
+            params: {'articleDetailId': widget.id},
+          );
+          _detailModel = BorrowItemDetailModel.fromJson(model.data);
+          _textEditingController.text = _detailModel.name;
+          setState(() {});
+        },
+        child: _detailModel == null
+            ? SizedBox()
+            : ListView(
+                padding: EdgeInsets.symmetric(vertical: 16.w),
+                children: [
+                  Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.symmetric(horizontal: 32.w),
+                    child: Column(
+                      children: [
+                        _buildRow(
+                            '物品名称',
+                            TextField(
+                              style: TextStyle(
+                                color: AppStyle.primaryTextColor,
+                                fontSize: 28.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              controller: _textEditingController,
+                              enabled: _isEditing,
+                              onChanged: (text) {
+                                //TODO edit
+                                // widget.item.name = text;
+                              },
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                              ),
+                            )),
+                        Divider(height: 1.w),
+                        _buildRow(
+                            '物品单号',
+                            Text(
+                              _detailModel.code,
+                              style: TextStyle(
+                                color: _isEditing
+                                    ? AppStyle.minorTextColor
+                                    : AppStyle.primaryTextColor,
+                                fontSize: 28.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                        _buildRow(
+                            '出借状态',
+                            Text(
+                              '未出借',
+                              style: TextStyle(
+                                color: _isEditing
+                                    ? AppStyle.minorTextColor
+                                    : AppStyle.primaryTextColor,
+                                fontSize: 28.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                        _buildRow(
+                          '物品图片',
+                          FadeInImage.assetNetwork(
+                            placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                            image: API.image(_detailModel.firstImg?.url ?? ''),
+                            height: 184.w,
+                            width: 184.w,
+                          ),
                         ),
-                ),
-                AkuBox.h(28),
-              ],
-            ),
-          ),
-        ],
+                        AkuBox.h(28),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }

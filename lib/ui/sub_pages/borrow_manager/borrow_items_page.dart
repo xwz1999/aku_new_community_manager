@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/borrow/borrow_detail_item_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_item_detail_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,13 +13,10 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_item_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_item_detail_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class BorrowItemPage extends StatefulWidget {
@@ -77,7 +75,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
     final userProvider = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: () {
-        // Get.to(BorrowItemDetailPage(item: item));
+        Get.to(BorrowItemDetailPage(id: item.id));
       },
       child: Container(
         margin: EdgeInsets.only(top: 16.w),
@@ -172,7 +170,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                       _buildRow(
                         R.ASSETS_MANAGE_BORROW_PNG,
                         '出借状态',
-                        '未借出',
+                        item.borrowed ? '已出借' : '未借出',
                         color: AppStyle.secondaryColor,
                       ),
                     ],
