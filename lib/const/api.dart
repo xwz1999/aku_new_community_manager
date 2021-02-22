@@ -36,6 +36,13 @@ class _User {
 
   ///个人资料：修改管家用户昵称
   String get updateNickName => '/user/personalData/updateNickName';
+
+  ///个人资料：发送手机号修改验证码
+  String get sendTelUpdateCode => '/user/personalData/sendTelUpdateCode';
+
+  ///个人资料：根据新手机号发送修改验证码
+  String get updateTel =>'/user/personalData/updateTel';
+  
 }
 
 class _Manage {
