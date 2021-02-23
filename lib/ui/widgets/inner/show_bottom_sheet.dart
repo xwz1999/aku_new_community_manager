@@ -58,6 +58,7 @@ Future showNormalSheet(String title, List<Widget> children) async {
 Future showItemSheet({
   String title,
   List<String> items,
+  List<int> ids,
   int selectItem,
   Function(int result) onTap,
 }) async {
@@ -69,14 +70,14 @@ Future showItemSheet({
           minWidth: double.infinity,
           onPressed: () {
             Get.back();
-            onTap(items.indexOf(e));
+            onTap(ids[items.indexOf(e)]);
           },
           child: Text(
             e,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32.sp,
-              color: e == items[selectItem]
+              color: items.indexOf(e)==ids.indexOf(selectItem)
                   ? AppStyle.secondaryColor
                   : AppStyle.primaryTextColor,
             ),

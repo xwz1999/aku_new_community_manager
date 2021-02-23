@@ -8,12 +8,12 @@ class DispatchReportModel {
   String remark;
 
   DispatchReportModel.zero() {
-    dispatchListId = 0;
-    workOrderTyoe = 0;
-    workOrderTyoe = 0;
-    workOrderTimeLimit = 0;
-    type = 0;
-    operato = 0;
+    dispatchListId = -1;
+    workOrderTyoe = -1;
+    workOrderTypeDetail = -1;
+    workOrderTimeLimit = -1;
+    type = -1;
+    operato = -1;
     remark = '';
   }
   DispatchReportModel(

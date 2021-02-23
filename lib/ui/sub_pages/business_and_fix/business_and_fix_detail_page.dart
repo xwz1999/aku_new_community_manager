@@ -6,6 +6,7 @@ import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_det
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_order_type_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_time_limit_model.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
 import 'package:aku_community_manager/utils/network/manage_func.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -63,51 +65,6 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     super.dispose();
   }
 
-  // String get fixType {
-  //   switch (detailModel.type) {
-  //     case FIX_PAYMENT_TYPE.FREE:
-  //       return '无偿服务';
-  //       break;
-  //     case FIX_PAYMENT_TYPE.PAY:
-  //       return '有偿服务';
-  //       break;
-  //     default:
-  //       return '';
-  //       break;
-  //   }
-  // }
-
-  // String get dateLimit {
-  //   switch (detailModel.limit) {
-  //     case FIX_DATE_LIMIT.HOUR_24:
-  //       return '24小时内处理';
-  //       break;
-  //     case FIX_DATE_LIMIT.HOUR_12:
-  //       return '12小时内处理';
-  //       break;
-  //     case FIX_DATE_LIMIT.HOUR_8:
-  //       return '8小时内处理';
-  //       break;
-  //     default:
-  //       return '';
-  //       break;
-  //   }
-  // }
-
-  // String get subType {
-  //   switch (detailModel.subType) {
-  //     case FIX_SUB_TYPE.NORMAL:
-  //       return '一般单';
-  //       break;
-  //     case FIX_SUB_TYPE.HURRY:
-  //       return '加急单';
-  //       break;
-  //     default:
-  //       return '';
-  //       break;
-  //   }
-  // }
-
   Widget fixTypeWidget() {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
@@ -136,10 +93,10 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         header: MaterialHeader(),
         onRefresh: () async {
           _detailModel = await ManageFunc.repairDetail(widget.model.id);
+          _reportModel.dispatchListId = widget.model.id;
+          _reportModel.workOrderTyoe = 1;
           _onload = false;
-          setState(() {
-            
-          });
+          setState(() {});
         },
         child: _onload
             ? _empty()
@@ -170,7 +127,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                       _reportModel.workOrderTyoe != null &&
                       _reportModel.workOrderTimeLimit != null
                   ? () {
-                      // Get.to(FixerDepartmentPage(model: widget.model));
+                      Get.to(FixerDepartmentPage(model: _reportModel));
                     }
                   : null,
               child: Text(
@@ -342,9 +299,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
       children: [
         _buildTypeTile(
           '派单类型',
-          _dispatchModels==null
+          _dispatchModels == null
               ? null
-              : _dispatchModels[_reportModel.type]?.showName,
+              : _dispatchModels[_dispatchModels.indexWhere(
+                      (element) => element.showValue == _reportModel.type)]
+                  .showName,
           canTap,
           helpContent: '请选择服务类型',
           onTap: () async {
@@ -354,20 +313,26 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             showItemSheet(
               title: '派单类型',
               items: _dispatchModels.map((e) => e.showName).toList(),
+              ids: _dispatchModels.map((e) => e.showValue).toList(),
               selectItem: _reportModel.type,
               onTap: (result) {
                 _reportModel.type = result;
               },
             ).then((_) {
+              if (_reportModel.type == -1) {
+                _dispatchModels = null;
+              }
               setState(() {});
             });
           },
         ),
         _buildTypeTile(
           '工单时限',
-          _timeLimitModels==null
+          _timeLimitModels == null
               ? null
-              : _timeLimitModels[_reportModel.workOrderTimeLimit]?.name,
+              : _timeLimitModels[_timeLimitModels.indexWhere((element) =>
+                      element.id == _reportModel.workOrderTimeLimit)]
+                  ?.name,
           canTap,
           helpContent: '请选择工单时限',
           onTap: () async {
@@ -377,20 +342,26 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             showItemSheet(
               title: '工单时限',
               items: _timeLimitModels.map((e) => e.name).toList(),
+              ids: _timeLimitModels.map((e) => e.id).toList(),
               selectItem: _reportModel.workOrderTimeLimit,
               onTap: (result) {
                 _reportModel.workOrderTimeLimit = result;
               },
             ).then((_) {
+              if (_reportModel.workOrderTimeLimit == -1) {
+                _timeLimitModels = null;
+              }
               setState(() {});
             });
           },
         ),
         _buildTypeTile(
           '工单子类',
-          _workTypeModels==null
+          _workTypeModels == null
               ? null
-              : _workTypeModels[_reportModel.workOrderTyoe].name,
+              : _workTypeModels[_workTypeModels.indexWhere((element) =>
+                      element.id == _reportModel.workOrderTypeDetail)]
+                  .name,
           canTap,
           helpContent: '请选择工单子类',
           onTap: () async {
@@ -400,11 +371,15 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             showItemSheet(
               title: '工单子类',
               items: _workTypeModels.map((e) => e.name).toList(),
-              selectItem: _reportModel.workOrderTyoe,
+              ids: _workTypeModels.map((e) => e.id).toList(),
+              selectItem: _reportModel.workOrderTypeDetail,
               onTap: (result) {
-                _reportModel.workOrderTyoe = result;
+                _reportModel.workOrderTypeDetail = result;
               },
             ).then((_) {
+              if (_reportModel.workOrderTypeDetail == -1) {
+                _workTypeModels = null;
+              }
               setState(() {});
             });
           },

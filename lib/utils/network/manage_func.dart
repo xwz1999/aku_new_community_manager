@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
@@ -31,5 +32,18 @@ class ManageFunc {
       'workOrderTypeId': id,
     });
     return baseModel.data as List;
+  }
+
+  static Future repairDispatch(DispatchReportModel model) async {
+    BaseModel baseModel = await NetUtil().get(API.manage.repairDispatch, params:{
+      'dispatchListId':model.dispatchListId,
+      'workOrderType':model.workOrderTyoe,
+      'workOrderTypeDetail':model.workOrderTypeDetail,
+      'workOrderTimeLimit':model.workOrderTimeLimit,
+      'type':model.type,
+      'operator':model.operato,
+      'remake':model.remark,
+    });
+  return baseModel;
   }
 }

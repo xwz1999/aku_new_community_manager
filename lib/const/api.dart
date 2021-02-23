@@ -72,5 +72,8 @@ class _Manage {
 
   ///报事报修：查询所有的工单类型明细信息（工单子类信息）
   String get workOrderTypeDetail => '/user/repair/findWorkOrderTypeDetail';
+
+  ///报事报修：报事报修：派单
+  String get repairDispatch => '/user/repair/dispatch';
   
 }

@@ -1,8 +1,11 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
 import 'package:aku_community_manager/models/manager/fixer_item_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/manage_func.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,14 +16,13 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class FixerDepartmentPage extends StatefulWidget {
-  final FixModel model;
+  final DispatchReportModel model;
   final bool changeType;
   FixerDepartmentPage({Key key, @required this.model, this.changeType = false})
       : super(key: key);
@@ -30,6 +32,7 @@ class FixerDepartmentPage extends StatefulWidget {
 }
 
 class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
+  DispatchReportModel _reportModel;
   List<RepairmanVos> _pickedFixers = [];
 
   List<FixerItemModel> _fixerItems = [];
@@ -45,6 +48,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
           _fixerItems = (model.data as List)
               .map((e) => FixerItemModel.fromJson(e))
               .toList();
+          _reportModel = widget.model;
           setState(() {});
         },
         child: ListView.builder(
@@ -57,29 +61,41 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
       ),
       bottom: AkuMaterialButton(
         height: 96.w,
-        onPressed: _pickedFixers.isEmpty
-            ? null
-            : () {
-                if (widget.changeType) {
-                  Get.back();
-                  _pickedFixers.forEach((element) {
-                    widget.model.detail.fixStatuses.add(
-                      FixStatus(
-                          title: '改派给${element.name}', date: DateTime.now()),
-                    );
-                  });
-                } else {
-                  Get.back();
-                  Get.back();
-                  widget.model.type = FIX_ENUM.WAIT_PICKUP;
-                  _pickedFixers.forEach((element) {
-                    widget.model.detail.fixStatuses.add(
-                      FixStatus(
-                          title: '分配给${element.name}', date: DateTime.now()),
-                    );
-                  });
-                }
-              },
+        onPressed: () async {
+          if (widget.changeType) {
+          } else {
+            BaseModel baseModel = await ManageFunc.repairDispatch(_reportModel);
+            if (baseModel.status) {
+              Get.back();
+              Get.back();
+            } else {
+              BotToast.showText(text: baseModel.message);
+            }
+          }
+        },
+        // onPressed: _pickedFixers.isEmpty
+        //     ? null
+        //     : () {
+        //         if (widget.changeType) {
+        //           Get.back();
+        //           _pickedFixers.forEach((element) {
+        //             widget.model.detail.fixStatuses.add(
+        //               FixStatus(
+        //                   title: '改派给${element.name}', date: DateTime.now()),
+        //             );
+        //           });
+        //         } else {
+        //           Get.back();
+        //           Get.back();
+        //           widget.model.type = FIX_ENUM.WAIT_PICKUP;
+        //           _pickedFixers.forEach((element) {
+        //             widget.model.detail.fixStatuses.add(
+        //               FixStatus(
+        //                   title: '分配给${element.name}', date: DateTime.now()),
+        //             );
+        //           });
+        //         }
+        //       },
         color: AppStyle.primaryColor,
         nullColor: AppStyle.primaryColor.withOpacity(0.5),
         child: Text(
@@ -139,13 +155,14 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                     AkuMaterialButton(
                       height: 96.w,
                       onPressed: () {
-                        if (_pickedFixers
-                                .indexWhere((element) => element.id == e.id) ==
-                            -1) {
-                          _pickedFixers.add(e);
-                        } else {
-                          _pickedFixers.remove(e);
-                        }
+                        // if (_pickedFixers
+                        //         .indexWhere((element) => element.id == e.id) ==
+                        //     -1) {
+                        //   _pickedFixers.add(e);
+                        // } else {
+                        //   _pickedFixers.remove(e);
+                        // }
+                        _reportModel.operato = e.id;
                         setState(() {});
                       },
                       child: Row(
@@ -154,12 +171,17 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                           Checkbox(
                             checkColor: AppStyle.primaryTextColor,
                             activeColor: AppStyle.primaryColor,
-                            value: _pickedFixers.indexOf(e) != -1,
+                            value: _reportModel.operato == e.id,
                             onChanged: (state) {
-                              if (_pickedFixers.indexOf(e) == -1) {
-                                _pickedFixers.add(e);
+                              // if (_pickedFixers.indexOf(e) == -1) {
+                              //   _pickedFixers.add(e);
+                              // } else {
+                              //   _pickedFixers.remove(e);
+                              // }
+                              if (_reportModel.operato == e.id) {
+                                _reportModel.operato = -1;
                               } else {
-                                _pickedFixers.remove(e);
+                                _reportModel.operato = e.id;
                               }
                               setState(() {});
                             },
