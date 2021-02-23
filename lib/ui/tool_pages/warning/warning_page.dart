@@ -54,6 +54,7 @@ class _WarningPageState extends State<WarningPage> {
             showScaleControl: false,
             onMapCreated: (controller) async {
               _amapController = controller;
+              _amapController.showMyLocation(MyLocationOption());
               _getLocation();
             },
           ),
