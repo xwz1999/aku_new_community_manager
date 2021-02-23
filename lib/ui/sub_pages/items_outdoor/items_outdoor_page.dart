@@ -1,5 +1,10 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/goods_out/goods_out_item_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_view.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,6 +28,7 @@ class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['待出户', '已出户', '已驳回', '已作废', '全部'];
   TabController _tabController;
+  EasyRefreshController _refreshController = EasyRefreshController();
   @override
   void initState() {
     super.initState();
@@ -44,24 +50,15 @@ class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
         child: AkuTabBar(controller: _tabController, tabs: _tabs),
       ),
       body: TabBarView(
-          controller: _tabController,
-          children:
-              _tabs.map((e) => _buildListView(_tabs.indexOf(e))).toList()),
-    );
-  }
-
-  Widget _buildListView(int index) {
-    final _outdoorModels = Provider.of<OutdoorProvider>(context);
-    List<ItemsOutdoorModel> _selectModels =
-        _outdoorModels.getOutdoorModels(index);
-    return ListView(
-      padding: EdgeInsets.only(left: 32.w, right: 32.w),
-      children: _selectModels
-          .map((e) => ItemsOutdoorCard(
-                cardModel: e,
-                isdetail: false,
-              ))
-          .toList(),
+        controller: _tabController,
+        children: [
+          ItemsOutdoorView(status: 1),
+          ItemsOutdoorView(status: 2),
+          ItemsOutdoorView(status: 3),
+          ItemsOutdoorView(status: 4),
+          ItemsOutdoorView(status: null),
+        ],
+      ),
     );
   }
 }

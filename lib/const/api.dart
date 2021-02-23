@@ -80,4 +80,10 @@ class _Manage {
 
   ///借还管理：提交检查结果
   String get borrowCheck => '/user/borrow/submitCheck';
+
+  ///物品出户：查询所有的物品出户信息(包含搜索条件)
+  String get goodsOutList => '/user/articleOut/list';
+
+  ///物品出户：根据物品出户主键id查询出户详情
+  String get goodsOutDetail => '/user/articleOut/findById';
 }
