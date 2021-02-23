@@ -75,5 +75,7 @@ class _Manage {
 
   ///报事报修：报事报修：派单
   String get repairDispatch => '/user/repair/dispatch';
-  
+
+  ///报事报修：改派
+  String get repairReassignment => '/user/repair/reassignment';
 }

@@ -63,6 +63,13 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
         height: 96.w,
         onPressed: () async {
           if (widget.changeType) {
+            BaseModel baseModel = await ManageFunc.repairReassignment(
+                _reportModel.dispatchListId, _reportModel.operato);
+            if (baseModel.status) {
+              Get.back();
+            } else {
+              BotToast.showText(text: baseModel.message);
+            }
           } else {
             BaseModel baseModel = await ManageFunc.repairDispatch(_reportModel);
             if (baseModel.status) {

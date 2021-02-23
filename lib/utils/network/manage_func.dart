@@ -35,15 +35,22 @@ class ManageFunc {
   }
 
   static Future repairDispatch(DispatchReportModel model) async {
-    BaseModel baseModel = await NetUtil().get(API.manage.repairDispatch, params:{
-      'dispatchListId':model.dispatchListId,
-      'workOrderType':model.workOrderTyoe,
-      'workOrderTypeDetail':model.workOrderTypeDetail,
-      'workOrderTimeLimit':model.workOrderTimeLimit,
-      'type':model.type,
-      'operator':model.operato,
-      'remake':model.remark,
+    BaseModel baseModel =
+        await NetUtil().get(API.manage.repairDispatch, params: {
+      'dispatchListId': model.dispatchListId,
+      'workOrderType': model.workOrderTyoe,
+      'workOrderTypeDetail': model.workOrderTypeDetail,
+      'workOrderTimeLimit': model.workOrderTimeLimit,
+      'type': model.type,
+      'operator': model.operato,
+      'remake': model.remark,
     });
-  return baseModel;
+    return baseModel;
+  }
+
+  static Future repairReassignment(int id, int operato) async {
+    BaseModel baseModel = await NetUtil().get(API.manage.repairReassignment,
+        params: {'dispatchListId': id, 'operator': operato});
+    return baseModel;
   }
 }

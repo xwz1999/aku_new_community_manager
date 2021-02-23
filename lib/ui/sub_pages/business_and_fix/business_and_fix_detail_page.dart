@@ -143,10 +143,10 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
                 onPressed: () {
-                  // Get.to(FixerDepartmentPage(
-                  //   model: widget.model,
-                  //   changeType: true,
-                  // ));
+                  Get.to(FixerDepartmentPage(
+                    model:_reportModel ,
+                    changeType: true,
+                  ));
                 },
                 child: Text(
                   '改派',
