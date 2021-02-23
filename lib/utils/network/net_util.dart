@@ -37,7 +37,6 @@ class NetUtil {
       onRequest: (RequestOptions options) async => options,
       onResponse: (Response response) async {
         LoggerData.addData(response);
-        print(response.headers);
         return response;
       },
       onError: (DioError error) async {

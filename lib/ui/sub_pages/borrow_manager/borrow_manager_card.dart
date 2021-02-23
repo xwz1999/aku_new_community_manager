@@ -1,12 +1,15 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/borrow/borrow_status_item_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_check_page.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -142,8 +145,21 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                     height: 64.w,
                     color: AppStyle.primaryColor,
                     radius: 4.w,
-                    onPressed: () {
-                      BotToast.showText(text: '已提醒用户');
+                    onPressed: () async {
+                      //TODO unknown param `butlerMessage`
+                      Function cancel = BotToast.showLoading();
+                      await NetUtil().post(
+                        API.manage.remindUserReturn,
+                        params: {
+                          'borrowId': widget.model.id,
+                          'butlerMessage': {
+                            'title': '',
+                            'content': '',
+                          },
+                        },
+                        showMessage: true,
+                      );
+                      cancel();
                     },
                     child: Text(
                       '提醒归还',
@@ -161,9 +177,8 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                     height: 64.w,
                     color: AppStyle.primaryColor,
                     radius: 4.w,
-                    onPressed: () {
-                      //TODO
-                      // Get.to(BorrowManagerCheckPage(model: widget.model));
+                    onPressed: () async {
+                      await Get.to(BorrowManagerCheckPage(id: widget.model.id));
                     },
                     child: Text(
                       '检查信息',

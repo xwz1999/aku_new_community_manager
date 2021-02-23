@@ -69,5 +69,15 @@ class _Manage {
   ///借还管理：根据物品明细id 查询物品信息
   String get borrowItemDetail => '/user/borrow/findById';
 
+  ///借还管理：查询所有的借还信息（包含条件搜索）
   String get borrowStatusList => '/user/borrow/list';
+
+  ///借还管理：提醒归还(管理员发送)
+  String get remindUserReturn => '/user/borrow/remind';
+
+  ///借还管理：检查信息
+  String get borrowCheckInfo => '/user/borrow/checkItems';
+
+  ///借还管理：提交检查结果
+  String get borrowCheck => '/user/borrow/submitCheck';
 }
