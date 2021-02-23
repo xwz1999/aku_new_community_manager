@@ -1,25 +1,23 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/borrow/borrow_status_item_model.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-// Project imports:
-import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_check_page.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 
 class BorrowManagerCard extends StatefulWidget {
-  final BorrowModel model;
+  final BorrowStatusItemModel model;
   BorrowManagerCard({Key key, this.model}) : super(key: key);
 
   @override
@@ -46,12 +44,12 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
               AkuChipBox(title: '借还管理'),
               AkuBox.w(24),
               Text(
-                DateUtil.formatDate(widget.model.date),
+                DateUtil.formatDate(widget.model.create),
                 style: TextStyle(),
               ),
               Spacer(),
               Text(
-                widget.model.borrowGoods.borrowValue,
+                widget.model.borrowStatusValue,
                 style: TextStyle(
                   color: AppStyle.failColor,
                   fontWeight: FontWeight.bold,
@@ -62,7 +60,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
           ),
           AkuBox.h(24),
           Text(
-            widget.model.title,
+            widget.model.articleName,
             style: TextStyle(
               color: AppStyle.primaryTextColor,
               fontSize: 32.sp,
@@ -73,40 +71,27 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              (widget.model.borrowGoods.assetpath is String)
-                  ? Image.asset(
-                      widget.model.borrowGoods.assetpath,
-                      height: 184.w,
-                      width: 183.w,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.file(
-                      widget.model.borrowGoods.assetpath,
-                      height: 184.w,
-                      width: 183.w,
-                      fit: BoxFit.cover,
-                    ),
+              FadeInImage.assetNetwork(
+                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                image: API.image(widget.model.firstImg?.url ?? ''),
+                height: 184.w,
+                width: 184.w,
+              ),
               AkuBox.w(24),
               Expanded(
                 child: Column(
                   children: [
                     _buildRow(R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '借用人员',
-                        widget.model.borrowPerson),
+                        widget.model.borrowName),
                     _buildRow(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话',
-                        widget.model.phone),
+                        widget.model.borrowTel),
                     _buildRow(R.ASSETS_MANAGE_IC_TIME_PNG, '借用时常',
-                        '${widget.model.borrowTime}天'),
+                        '${(widget.model.borrowTime / 24).toStringAsFixed(0)}天'),
                     _buildRow(
                       R.ASSETS_MANAGE_INFO_PNG,
                       '物品状态',
-                      widget.model.goodsStatus == GOODS_STATUS.BROKEN
-                          ? '损坏'
-                          : widget.model.goodsStatus == GOODS_STATUS.LOST
-                              ? '丢失'
-                              : '正常',
-                      color: widget.model.goodsStatus == GOODS_STATUS.NORMAL
-                          ? AppStyle.primaryTextColor
-                          : AppStyle.failColor,
+                      widget.model.statusValue,
+                      color: widget.model.statusColor,
                     ),
                   ],
                 ),
@@ -120,9 +105,10 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
   }
 
   List<Widget> _buildCard() {
-    if (role != USER_ROLE.MANAGER)
+    final userProvider = Provider.of<UserProvider>(context);
+    if (!userProvider.infoModel.canOperation)
       return [];
-    else if (widget.model.borrowGoods.status == BORROW_STATUS.DONE) {
+    else if (widget.model.borrowStatus == 2) {
       return [];
     } else
       return [
@@ -142,7 +128,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                 ),
               ),
               onPressed: () {
-                launch('tel:${widget.model.phone}');
+                launch('tel:${widget.model.borrowTel}');
               },
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4.w),
@@ -150,7 +136,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
               ),
             ),
             AkuBox.w(24),
-            widget.model.borrowGoods.status == BORROW_STATUS.BORROWING
+            widget.model.borrowStatus == 1
                 ? AkuMaterialButton(
                     minWidth: 160.w,
                     height: 64.w,
@@ -169,14 +155,15 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                     ),
                   )
                 : SizedBox(),
-            widget.model.borrowGoods.status == BORROW_STATUS.WAIT_CHECK
+            widget.model.borrowStatus == 3
                 ? AkuMaterialButton(
                     minWidth: 160.w,
                     height: 64.w,
                     color: AppStyle.primaryColor,
                     radius: 4.w,
                     onPressed: () {
-                      Get.to(BorrowManagerCheckPage(model: widget.model));
+                      //TODO
+                      // Get.to(BorrowManagerCheckPage(model: widget.model));
                     },
                     child: Text(
                       '检查信息',
