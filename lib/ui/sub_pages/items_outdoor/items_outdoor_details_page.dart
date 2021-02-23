@@ -299,10 +299,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   children: [
                     AkuButton(
                       onPressed: () {
-                        //TODO not pass
-                        // Get.to(OutdoorNotpassPage(
-                        //   model: widget.cardMedel,
-                        // ));
+                        Get.to(OutdoorNotpassPage(id: _model.id));
                       },
                       child: Container(
                         width: 304.w,

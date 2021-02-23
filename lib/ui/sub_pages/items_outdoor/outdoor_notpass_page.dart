@@ -1,4 +1,7 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,8 +17,8 @@ import 'package:aku_community_manager/ui/widgets/common/aku_radio.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class OutdoorNotpassPage extends StatefulWidget {
-  final ItemsOutdoorModel model;
-  OutdoorNotpassPage({Key key, @required this.model}) : super(key: key);
+  final int id;
+  OutdoorNotpassPage({Key key, @required this.id}) : super(key: key);
 
   @override
   _OutdoorNotpassPageState createState() => _OutdoorNotpassPageState();
@@ -185,13 +188,23 @@ class _OutdoorNotpassPageState extends State<OutdoorNotpassPage> {
         ],
       ),
       bottom: AkuButton(
-        onPressed: () {
-          widget.model.finalOutTime = _currentTime;
-          widget.model.datetime = DateTime.now();
-          _select == 3
-              ? widget.model.rejectReason = _textEditingController.text
-              : widget.model.rejectReason = _rejectReason[_select];
-          widget.model.status = OUTDOORSTATUS.REJECTED;
+        onPressed: () async {
+          Function cancel = BotToast.showLoading();
+          String remark = '';
+          if (_select <= 2) {
+            remark = _rejectReason[_select];
+          } else {
+            remark = _textEditingController.text;
+          }
+          await NetUtil().post(
+            API.manage.goodsOutNotRelease,
+            params: {
+              'id': widget.id,
+              'remarks': remark,
+            },
+            showMessage: true,
+          );
+          cancel();
           Get.back();
           Get.back();
         },

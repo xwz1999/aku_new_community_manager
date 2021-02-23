@@ -89,4 +89,7 @@ class _Manage {
 
   ///物品出户：放行
   String get goodsOutRelease => '/user/articleOut/release';
+
+  ///物品出户：不放行
+  String get goodsOutNotRelease => '/user/articleOut/noRelease';
 }
