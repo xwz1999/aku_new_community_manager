@@ -65,5 +65,12 @@ class _Manage {
   String get repairDetail => '/user/repair/findById';
 
   ///报事报修：查询派工单详情表-派工类型
-  String get dispatchListDetailType => 'system/dataDictionary/findSysDispatchListDetailType';
+  String get dispatchListDetailType => '/manage/dataDictionary/findSysDispatchListDetailType';
+
+  ///报事报修：查询所有的工单时限信息(id and name)
+  String get workOrderTimeLimit => '/user/repair/findWorkOrderTimeLimit';
+
+  ///报事报修：查询所有的工单类型明细信息（工单子类信息）
+  String get workOrderTypeDetail => '/user/repair/findWorkOrderTypeDetail';
+  
 }

@@ -1,8 +1,10 @@
 // Flutter imports:
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_detail_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_order_type_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_time_limit_model.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
 import 'package:aku_community_manager/utils/network/manage_func.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -21,7 +22,6 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
@@ -47,6 +47,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   EasyRefreshController _easyRefreshController;
 
   List<DispatchDetialModel> _dispatchModels;
+  List<WorkTimeLimitModel> _timeLimitModels;
+  List<WorkOrderTypeModel> _workTypeModels;
+  DispatchReportModel _reportModel = DispatchReportModel.zero();
 
   @override
   void initState() {
@@ -134,6 +137,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         onRefresh: () async {
           _detailModel = await ManageFunc.repairDetail(widget.model.id);
           _onload = false;
+          setState(() {
+            
+          });
         },
         child: _onload
             ? _empty()
@@ -141,7 +147,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 padding: EdgeInsets.symmetric(vertical: 16.w),
                 children: [
                   _buildInfo(),
-                  _buildType(widget.model.type == FIX_ENUM.HAND_OUT),
+                  _buildType(widget.model.status == 1),
                   _buildProcess(),
                   _detailModel.handlingSituation == null
                       ? SizedBox()
@@ -156,15 +162,15 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (widget.model.type == FIX_ENUM.HAND_OUT) {
+          if (userProvider.infoModel.canOperation) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
-              onPressed: detailModel.type != null &&
-                      detailModel.subType != null &&
-                      detailModel.limit != null
+              onPressed: _reportModel.type != null &&
+                      _reportModel.workOrderTyoe != null &&
+                      _reportModel.workOrderTimeLimit != null
                   ? () {
-                      Get.to(FixerDepartmentPage(model: widget.model));
+                      // Get.to(FixerDepartmentPage(model: widget.model));
                     }
                   : null,
               child: Text(
@@ -174,8 +180,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               ),
             );
-          } else if (widget.model.type == FIX_ENUM.WAIT_PICKUP) {
-            if (userProvider.userInfoModel.role == USER_ROLE.MANAGER) {
+          } else if (widget.model.status == 3) {
+            if (userProvider.infoModel.canOperation) {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
@@ -214,8 +220,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               );
             }
-          } else if (widget.model.type == FIX_ENUM.PROCESSING &&
-              userProvider.userInfoModel.role == USER_ROLE.FIXER)
+          } else if ((widget.model.status >= 4 && widget.model.status <= 4) &&
+              userProvider.infoModel.canPickUpTicket)
             return Container(
               height: 96.w,
               alignment: Alignment.center,
@@ -336,7 +342,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
       children: [
         _buildTypeTile(
           '派单类型',
-          fixType,
+          _dispatchModels==null
+              ? null
+              : _dispatchModels[_reportModel.type]?.showName,
           canTap,
           helpContent: '请选择服务类型',
           onTap: () async {
@@ -346,9 +354,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             showItemSheet(
               title: '派单类型',
               items: _dispatchModels.map((e) => e.showName).toList(),
-              selectItem: fixPaymentMap[detailModel.type],
+              selectItem: _reportModel.type,
               onTap: (result) {
-                detailModel.type = fixPaymentStringMap[result];
+                _reportModel.type = result;
               },
             ).then((_) {
               setState(() {});
@@ -357,16 +365,21 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         _buildTypeTile(
           '工单时限',
-          dateLimit,
+          _timeLimitModels==null
+              ? null
+              : _timeLimitModels[_reportModel.workOrderTimeLimit]?.name,
           canTap,
           helpContent: '请选择工单时限',
-          onTap: () {
+          onTap: () async {
+            List models = await ManageFunc.workOrderTimeType();
+            _timeLimitModels =
+                models.map((e) => WorkTimeLimitModel.fromJson(e)).toList();
             showItemSheet(
               title: '工单时限',
-              items: ['24小时内处理', '12小时内处理', '8小时内处理'],
-              selectItem: fixDateLimitMap[detailModel.limit],
+              items: _timeLimitModels.map((e) => e.name).toList(),
+              selectItem: _reportModel.workOrderTimeLimit,
               onTap: (result) {
-                detailModel.limit = fixDateLimitStringMap[result];
+                _reportModel.workOrderTimeLimit = result;
               },
             ).then((_) {
               setState(() {});
@@ -375,16 +388,21 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         _buildTypeTile(
           '工单子类',
-          subType,
+          _workTypeModels==null
+              ? null
+              : _workTypeModels[_reportModel.workOrderTyoe].name,
           canTap,
           helpContent: '请选择工单子类',
-          onTap: () {
+          onTap: () async {
+            List models = await ManageFunc.workOrderTypeDetail(widget.model.id);
+            _workTypeModels =
+                models.map((e) => WorkOrderTypeModel.fromJson(e)).toList();
             showItemSheet(
               title: '工单子类',
-              items: ['一般单', '加急单'],
-              selectItem: fixSubTypeMap[detailModel.subType],
+              items: _workTypeModels.map((e) => e.name).toList(),
+              selectItem: _reportModel.workOrderTyoe,
               onTap: (result) {
-                detailModel.subType = fixSubTypeStringMap[result];
+                _reportModel.workOrderTyoe = result;
               },
             ).then((_) {
               setState(() {});
