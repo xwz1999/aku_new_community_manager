@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,30 +17,20 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class OutdoorPassPage extends StatefulWidget {
-  final ItemsOutdoorModel model;
-  OutdoorPassPage({Key key, @required this.model}) : super(key: key);
+  final int id;
+
+  OutdoorPassPage({Key key, this.id}) : super(key: key);
 
   @override
   _OutdoorPassPageState createState() => _OutdoorPassPageState();
 }
 
 class _OutdoorPassPageState extends State<OutdoorPassPage> {
-  TextEditingController _textController;
-  @override
-  void initState() {
-    super.initState();
-    _textController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _textController?.dispose();
-    super.dispose();
-  }
-
+  int _doorValue;
   @override
   Widget build(BuildContext context) {
-    String _currentTime = DateUtil.formatDate(DateTime.now());
+    String _currentTime =
+        DateUtil.formatDate(DateTime.now(), format: 'yyyy-MM-dd HH:mm');
 
     return AkuScaffold(
       title: '放行',
@@ -86,21 +78,34 @@ class _OutdoorPassPageState extends State<OutdoorPassPage> {
                 ),
                 AkuBox.w(32),
                 Expanded(
-                  child: Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    padding: EdgeInsets.only(left: 48.w),
-                    child: TextFormField(
-                      controller: _textController,
-                      maxLines: 1,
-                      style: TextStyle(
-                        color: AppStyle.primaryTextColor,
-                        fontSize: 32.sp,
+                  child: PopupMenuButton(
+                    itemBuilder: (context) {
+                      return [
+                        PopupMenuItem(child: Text('东门'), value: 1),
+                        PopupMenuItem(child: Text('南门'), value: 2),
+                        PopupMenuItem(child: Text('西门'), value: 3),
+                        PopupMenuItem(child: Text('北门'), value: 4),
+                      ];
+                    },
+                    onSelected: (value) {
+                      _doorValue = value;
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(left: 48.w),
+                      child: Text(
+                        _doorValue == null
+                            ? '请输入当前入口'
+                            : {
+                                1: '东门',
+                                2: '南门',
+                                3: '西门',
+                                4: '北门',
+                              }[_doorValue],
+                        style: _doorValue == null
+                            ? AppStyle().secondaryTextStyle
+                            : AppStyle().primaryStyle,
                       ),
-                      decoration: InputDecoration(
-                          hintText: '请输入当前入口',
-                          hintStyle: AppStyle().secondaryTextStyle,
-                          border: InputBorder.none),
                     ),
                   ),
                 ),
@@ -110,15 +115,21 @@ class _OutdoorPassPageState extends State<OutdoorPassPage> {
         ],
       ),
       bottom: AkuButton(
-        onPressed: _textController.text == null
+        onPressed: _doorValue == null
             ? () {
                 BotToast.showText(text: '出口不能为空！');
               }
-            : () {
-                widget.model.finalOutTime = _currentTime;
-                widget.model.outPlace = _textController.text;
-                widget.model.datetime = DateTime.now();
-                widget.model.status = OUTDOORSTATUS.OUT_DONE;
+            : () async {
+                Function cancel = BotToast.showLoading();
+                NetUtil().post(
+                  API.manage.goodsOutRelease,
+                  params: {
+                    'id': widget.id,
+                    'export': _doorValue,
+                  },
+                  showMessage: true,
+                );
+                cancel();
                 Get.back();
                 Get.back();
               },

@@ -86,4 +86,7 @@ class _Manage {
 
   ///物品出户：根据物品出户主键id查询出户详情
   String get goodsOutDetail => '/user/articleOut/findById';
+
+  ///物品出户：放行
+  String get goodsOutRelease => '/user/articleOut/release';
 }

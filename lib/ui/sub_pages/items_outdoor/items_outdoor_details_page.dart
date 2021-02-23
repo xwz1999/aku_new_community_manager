@@ -26,6 +26,7 @@ import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_c
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/outdoor_notpass_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/outdoor_pass_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ItemsOutdoorDetailsPage extends StatefulWidget {
   final int id;
@@ -134,7 +135,9 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   ),
                   Divider(height: 1.w),
                   MaterialButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      launch('tel:${_model.applicantTel}');
+                    },
                     elevation: 0,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -319,10 +322,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                     Spacer(),
                     AkuMaterialButton(
                       onPressed: () {
-                        //TODO pass
-                        // Get.to(OutdoorPassPage(
-                        //   model: widget.cardMedel,
-                        // ));
+                        Get.to(OutdoorPassPage(id: _model.id));
                       },
                       radius: 4.w,
                       color: Color(0xFFFFC40C),
