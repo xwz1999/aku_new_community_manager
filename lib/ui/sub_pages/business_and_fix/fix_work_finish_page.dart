@@ -4,6 +4,7 @@ import 'dart:io';
 // Flutter imports:
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_submit_finish_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/manage_func.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -22,16 +23,17 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
 import 'package:get/get.dart';
+import 'package:aku_community_manager/tools/extensions/router_extension_tool.dart';
 
 class FixWorkFinishPage extends StatefulWidget {
   final FixedDetailModel model;
-  final String reportDetail;
+  final BussinessAndFixModel fixModel;
   final bool dispatchType;
   FixWorkFinishPage(
       {Key key,
       @required this.model,
       @required this.dispatchType,
-      @required this.reportDetail})
+      @required this.fixModel})
       : super(key: key);
 
   @override
@@ -71,7 +73,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
             spacing: 24,
             children: [
               Text(
-                widget.reportDetail,
+                widget.fixModel.reportDetail,
                 style: TextStyle(
                   color: AppStyle.primaryTextColor,
                   fontSize: 28.w,
@@ -395,7 +397,9 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
               humanPrice + materialPrice,
               1, []);
           if (baseModel.status) {
-            Get.back(); //TODO 处理完成
+            FixSubmitFinishPage(
+              model:widget.fixModel,
+            ).to();
           } else {
             BotToast.showText(text: baseModel.message);
           }

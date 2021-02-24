@@ -227,7 +227,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     color: AppStyle.primaryColor,
                     onPressed: () {
                       Get.to(FixWorkFinishPage(
-                          reportDetail: widget.model.reportDetail,
+                          fixModel :widget.model,
                           model: _detailModel,
                           dispatchType:
                               _detailModel.dispatchType.dispatchType == 1));
