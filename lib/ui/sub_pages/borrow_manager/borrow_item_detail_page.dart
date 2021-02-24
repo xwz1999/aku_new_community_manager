@@ -3,6 +3,7 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/borrow/borrow_item_detail_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -51,7 +52,21 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
         userProvider.userInfoModel.role == USER_ROLE.MANAGER
             ? AkuMaterialButton(
                 minWidth: 120.w,
-                onPressed: () {
+                onPressed: () async {
+                  if (_isEditing && _detailModel != null) {
+                    Function cancel = BotToast.showLoading();
+                    await NetUtil().post(
+                      API.manage.borrowEdit,
+                      params: {
+                        'id': _detailModel.id,
+                        'name': _textEditingController.text,
+                        'fileUrls': _detailModel.imgUrls,
+                      },
+                      showMessage: true,
+                    );
+                    await Future.delayed(Duration(milliseconds: 1000));
+                    cancel();
+                  }
                   setState(() {
                     _isEditing = !_isEditing;
                   });

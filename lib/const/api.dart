@@ -43,6 +43,7 @@ class _User {
 
   ///个人资料：根据新手机号发送修改验证码
   String get updateTel => '/user/personalData/updateTel';
+
   ///个人资料：修改管家用户头像
   String get updateAvatar => '/user/personalData/updateHeadPortrait';
 }
@@ -83,6 +84,9 @@ class _Manage {
 
   ///借还管理：提交检查结果
   String get borrowCheck => '/user/borrow/submitCheck';
+
+  ///借还管理：修改物品明细信息
+  String get borrowEdit => '/user/borrow/updateArticleDetail';
 
   ///物品出户：查询所有的物品出户信息(包含搜索条件)
   String get goodsOutList => '/user/articleOut/list';
