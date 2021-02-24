@@ -68,7 +68,8 @@ class _Manage {
   String get repairDetail => '/user/repair/findById';
 
   ///报事报修：查询派工单详情表-派工类型
-  String get dispatchListDetailType => '/manage/dataDictionary/findSysDispatchListDetailType';
+  String get dispatchListDetailType =>
+      '/manage/dataDictionary/findSysDispatchListDetailType';
 
   ///报事报修：查询所有的工单时限信息(id and name)
   String get workOrderTimeLimit => '/user/repair/findWorkOrderTimeLimit';
@@ -88,8 +89,9 @@ class _Manage {
   ///报事报修：申请延时
   String get applyDelayed => '/user/repair/applyDelayed';
 
-///报事报修：处理完成
-String get handleResult => '/user/repair/handleResult';
+  ///报事报修：处理完成
+  String get handleResult => '/user/repair/handleResult';
+
   ///借还管理：查询全部物品
   String get borrowList => '/user/borrow/articleList';
 
@@ -130,4 +132,10 @@ String get handleResult => '/user/repair/handleResult';
 class _Upload {
   ///上传个人资料头像照片
   String get avatar => '/user/upload/butlerAppHeadSculpture';
+
+  ///上传物品信息详情照片
+  String get uploadArticleDetail => '/user/upload/uploadArticleDetail';
+
+  ///上传物品信息照片
+  String get uploadArtical => '/user/upload/uploadArticle';
 }

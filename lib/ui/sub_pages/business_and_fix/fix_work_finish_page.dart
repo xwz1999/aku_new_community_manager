@@ -2,11 +2,13 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_submit_finish_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/manage_func.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -387,7 +389,8 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
           //     materialPrice: double.parse(_materialController.text),
           //   );
           // Get.back();
-
+          List<String> urls = await NetUtil()
+              .uploadFiles(_imgs, API.upload.uploadArtical);
           BaseModel baseModel = await ManageFunc.handleResult(
               widget.model.repairDetail.dispatchId,
               _descriptionController.text,
@@ -395,10 +398,11 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
               humanPrice,
               materialPrice,
               humanPrice + materialPrice,
-              1, []);
+              1,
+              urls);
           if (baseModel.status) {
             FixSubmitFinishPage(
-              model:widget.fixModel,
+              model: widget.fixModel,
             ).to();
           } else {
             BotToast.showText(text: baseModel.message);
