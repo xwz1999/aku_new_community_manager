@@ -1,23 +1,23 @@
 // Flutter imports:
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/manage_func.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:get/get.dart';
 
 class FixMoreTimePage extends StatefulWidget {
-  final FixModel model;
-  FixMoreTimePage({Key key, @required this.model}) : super(key: key);
+  final int dispatchId;
+  FixMoreTimePage({Key key, @required this.dispatchId}) : super(key: key);
 
   @override
   _FixMoreTimePageState createState() => _FixMoreTimePageState();
@@ -25,6 +25,20 @@ class FixMoreTimePage extends StatefulWidget {
 
 class _FixMoreTimePageState extends State<FixMoreTimePage> {
   String _nowSelect = '24h';
+  List<String> _delayList = ['24h', '48h', '72h', '未知'];
+  TextEditingController _textEditingController;
+  @override
+  void initState() {
+    super.initState();
+    _textEditingController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -56,7 +70,7 @@ class _FixMoreTimePageState extends State<FixMoreTimePage> {
                 AkuBox.h(24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: ['24h', '48h', '72h', '未知'].map((e) {
+                  children: _delayList.map((e) {
                     return GestureDetector(
                       onTap: () {
                         setState(() {
@@ -131,6 +145,10 @@ class _FixMoreTimePageState extends State<FixMoreTimePage> {
                   child: TextField(
                     minLines: 7,
                     maxLines: 7,
+                    controller: _textEditingController,
+                    onChanged: (_) {
+                      setState(() {});
+                    },
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
                       border: InputBorder.none,
@@ -141,15 +159,24 @@ class _FixMoreTimePageState extends State<FixMoreTimePage> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32.w),
                   child: AkuMaterialButton(
-                    onPressed: () {
-                      final userProvider =
-                          Provider.of<UserProvider>(context, listen: false);
-                      widget.model.detail.fixStatuses.add(
-                        FixStatus(
-                            title: '${userProvider.userInfoModel.nickName}申请延时',
-                            date: DateTime.now()),
-                      );
-                      Get.back();
+                    onPressed: () async {
+                      // final userProvider =
+                      //     Provider.of<UserProvider>(context, listen: false);
+                      // widget.model.detail.fixStatuses.add(
+                      //   FixStatus(
+                      //       title: '${userProvider.userInfoModel.nickName}申请延时',
+                      //       date: DateTime.now()),
+                      // );
+                      // Get.back();
+                      BaseModel baseModel = await ManageFunc.applyDelayed(
+                          widget.dispatchId,
+                          _delayList.indexOf(_nowSelect) + 1,
+                          _textEditingController.text ?? '');
+                      if (baseModel.status) {
+                        Get.back();
+                      } else {
+                        BotToast.showText(text: baseModel.message);
+                      }
                     },
                     radius: 8.w,
                     child: Text(

@@ -6,8 +6,12 @@ import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_det
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_order_type_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_time_limit_model.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/manage_func.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -144,7 +148,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 nullColor: AppStyle.minorColor,
                 onPressed: () {
                   Get.to(FixerDepartmentPage(
-                    model:_reportModel ,
+                    model: _reportModel,
                     changeType: true,
                   ));
                 },
@@ -159,15 +163,14 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
-                onPressed: () {
-                  // final userProvider =
-                  //     Provider.of<UserProvider>(context, listen: false);
-                  // detailModel.fixStatuses.add(FixStatus(
-                  //   title: '${userProvider.userInfoModel.nickName}已接单',
-                  //   date: DateTime.now(),
-                  // ));
-                  // widget.model.type = FIX_ENUM.PROCESSING;
-                  // Get.back();
+                onPressed: () async {
+                  BaseModel baseModel =
+                      await ManageFunc.recevingOrders(widget.model.dispatchId);
+                  if (baseModel.status) {
+                    Get.back();
+                  } else {
+                    BotToast.showText(text: baseModel.message);
+                  }
                 },
                 child: Text(
                   '立即接单',
@@ -206,7 +209,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                       ),
                     ),
                     onPressed: () {
-                      // Get.to(FixMoreTimePage(model: widget.model));
+                      Get.to(
+                          FixMoreTimePage(dispatchId: widget.model.dispatchId));
                     },
                     child: Text(
                       '申请延时',
@@ -222,7 +226,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     radius: 4.w,
                     color: AppStyle.primaryColor,
                     onPressed: () {
-                      // Get.to(FixWorkFinishPage(model: widget.model));
+                      Get.to(FixWorkFinishPage(
+                          reportDetail: widget.model.reportDetail,
+                          model: _detailModel,
+                          dispatchType:
+                              _detailModel.dispatchType.dispatchType == 1));
                     },
                     child: Text(
                       '处理完成',

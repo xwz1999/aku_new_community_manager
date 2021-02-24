@@ -78,4 +78,13 @@ class _Manage {
 
   ///报事报修：改派
   String get repairReassignment => '/user/repair/reassignment';
+
+  ///报事报修：报事报修：接单
+  String get recevingOrders => '/user/repair/receivingOrders';
+
+  ///报事报修：申请延时
+  String get applyDelayed => '/user/repair/applyDelayed';
+
+///报事报修：处理完成
+String get handleResult => '/user/repair/handleResult';
 }
