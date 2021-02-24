@@ -31,25 +31,24 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
   EasyRefreshController _refreshController = EasyRefreshController();
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '物品查看',
       actions: [
-        userProvider.userInfoModel.role == USER_ROLE.MANAGER
-            ? AkuMaterialButton(
-                minWidth: 120.w,
-                onPressed: () {
-                  // Get.to(AddBorrowItemPage(object: widget.object));
-                },
-                child: Text(
-                  '新增',
-                  style: TextStyle(
-                    fontSize: 28.w,
-                    color: AppStyle.primaryTextColor,
-                  ),
-                ),
-              )
-            : SizedBox(),
+        // userProvider.userInfoModel.role == USER_ROLE.MANAGER
+        //     ? AkuMaterialButton(
+        //         minWidth: 120.w,
+        //         onPressed: () {
+        //           // Get.to(AddBorrowItemPage(object: widget.object));
+        //         },
+        //         child: Text(
+        //           '新增',
+        //           style: TextStyle(
+        //             fontSize: 28.w,
+        //             color: AppStyle.primaryTextColor,
+        //           ),
+        //         ),
+        //       )
+        //     : SizedBox(),
       ],
       body: BeeListView(
         path: API.manage.borrowDetailList,
@@ -94,54 +93,54 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                   ),
                 ),
                 Spacer(),
-                userProvider.userInfoModel.role == USER_ROLE.MANAGER
-                    ? AkuMaterialButton(
-                        padding: EdgeInsets.symmetric(horizontal: 24.w),
-                        onPressed: () {
-                          showCupertinoDialog(
-                            context: context,
-                            builder: (context) {
-                              return CupertinoAlertDialog(
-                                title: Text('删除物品'),
-                                content: Text('确定要删除${item.name}该物品吗？'),
-                                actions: [
-                                  CupertinoDialogAction(
-                                    child: Text('取消'),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                  ),
-                                  CupertinoDialogAction(
-                                    child: Text('删除'),
-                                    onPressed: () {
-                                      //TODO delete
-                                      setState(() {});
-                                      Get.back();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.delete,
-                              color: AppStyle.minorTextColor,
-                              size: 40.w,
-                            ),
-                            Text(
-                              '删除',
-                              style: TextStyle(
-                                color: AppStyle.minorTextColor,
-                                fontSize: 28.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : SizedBox(),
+                // userProvider.userInfoModel.role == USER_ROLE.MANAGER
+                //     ? AkuMaterialButton(
+                //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+                //         onPressed: () {
+                //           showCupertinoDialog(
+                //             context: context,
+                //             builder: (context) {
+                //               return CupertinoAlertDialog(
+                //                 title: Text('删除物品'),
+                //                 content: Text('确定要删除${item.name}该物品吗？'),
+                //                 actions: [
+                //                   CupertinoDialogAction(
+                //                     child: Text('取消'),
+                //                     onPressed: () {
+                //                       Get.back();
+                //                     },
+                //                   ),
+                //                   CupertinoDialogAction(
+                //                     child: Text('删除'),
+                //                     onPressed: () {
+                //                       //TODO delete
+                //                       setState(() {});
+                //                       Get.back();
+                //                     },
+                //                   ),
+                //                 ],
+                //               );
+                //             },
+                //           );
+                //         },
+                //         child: Row(
+                //           children: [
+                //             Icon(
+                //               Icons.delete,
+                //               color: AppStyle.minorTextColor,
+                //               size: 40.w,
+                //             ),
+                //             Text(
+                //               '删除',
+                //               style: TextStyle(
+                //                 color: AppStyle.minorTextColor,
+                //                 fontSize: 28.sp,
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //       )
+                //     : SizedBox(),
               ],
             ),
             Divider(
