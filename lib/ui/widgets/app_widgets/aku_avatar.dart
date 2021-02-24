@@ -27,6 +27,7 @@ class AkuAvatar extends StatelessWidget {
               image: API.image(userProvider.profileModel.firstImg?.url ?? ''),
               height: size ?? 72.w,
               width: size ?? 72.w,
+              fit: BoxFit.cover,
             ),
           )
         : CircleAvatar(

@@ -108,7 +108,7 @@ class UserProvider extends ChangeNotifier {
         },
         showMessage: true,
       );
-      await updateProfile();
+      _profileModel = await updateProfile();
       cancel();
       notifyListeners();
     }
