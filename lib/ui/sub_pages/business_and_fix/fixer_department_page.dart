@@ -36,6 +36,22 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
   List<RepairmanVos> _pickedFixers = [];
 
   List<FixerItemModel> _fixerItems = [];
+
+  bool get canDispatch {
+    if (_reportModel?.operato==null) {
+      return false;
+    } else if (_reportModel.type == -1) {
+      return false;
+    } else if (_reportModel.workOrderTimeLimit == -1) {
+      return false;
+    } else if (_reportModel.workOrderTyoe == -1) {
+      return false;
+    } else if (_reportModel.workOrderTypeDetail == -1) {
+      return false;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -61,25 +77,28 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
       ),
       bottom: AkuMaterialButton(
         height: 96.w,
-        onPressed: () async {
-          if (widget.changeType) {
-            BaseModel baseModel = await ManageFunc.repairReassignment(
-                _reportModel.dispatchListId, _reportModel.operato);
-            if (baseModel.status) {
-              Get.back();
-            } else {
-              BotToast.showText(text: baseModel.message);
-            }
-          } else {
-            BaseModel baseModel = await ManageFunc.repairDispatch(_reportModel);
-            if (baseModel.status) {
-              Get.back();
-              Get.back();
-            } else {
-              BotToast.showText(text: baseModel.message);
-            }
-          }
-        },
+        onPressed: canDispatch
+            ? () async {
+                if (widget.changeType) {
+                  BaseModel baseModel = await ManageFunc.repairReassignment(
+                      _reportModel.dispatchListId, _reportModel.operato);
+                  if (baseModel.status) {
+                    Get.back();
+                  } else {
+                    BotToast.showText(text: baseModel.message);
+                  }
+                } else {
+                  BaseModel baseModel =
+                      await ManageFunc.repairDispatch(_reportModel);
+                  if (baseModel.status) {
+                    Get.back();
+                    Get.back();
+                  } else {
+                    BotToast.showText(text: baseModel.message);
+                  }
+                }
+              }
+            : null,
         // onPressed: _pickedFixers.isEmpty
         //     ? null
         //     : () {

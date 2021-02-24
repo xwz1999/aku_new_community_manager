@@ -74,4 +74,6 @@ class AkuMap {
     8: '作废',
     9: '取消'
   };
+
+  static Map<int, String> dispatchType = {1: '无偿服务', 2: '有偿服务'};
 }

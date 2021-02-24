@@ -123,7 +123,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (userProvider.infoModel.canOperation) {
+          if (userProvider.infoModel.canOperation&&widget.model.status<2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
@@ -141,7 +141,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               ),
             );
-          } else if (widget.model.status == 3) {
+          } else if (widget.model.status == 2) {
             if (userProvider.infoModel.canOperation) {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
@@ -180,7 +180,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               );
             }
-          } else if ((widget.model.status >= 4 && widget.model.status <= 4) &&
+          } else if ((widget.model.status==3) &&
               userProvider.infoModel.canPickUpTicket)
             return Container(
               height: 96.w,
@@ -227,7 +227,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     color: AppStyle.primaryColor,
                     onPressed: () {
                       Get.to(FixWorkFinishPage(
-                          fixModel :widget.model,
+                          fixModel: widget.model,
                           model: _detailModel,
                           dispatchType:
                               _detailModel.dispatchType.dispatchType == 1));
@@ -307,11 +307,13 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
       children: [
         _buildTypeTile(
           '派单类型',
-          _dispatchModels == null
-              ? null
-              : _dispatchModels[_dispatchModels.indexWhere(
-                      (element) => element.showValue == _reportModel.type)]
-                  .showName,
+          canTap
+              ? _dispatchModels == null
+                  ? null
+                  : _dispatchModels[_dispatchModels.indexWhere(
+                          (element) => element.showValue == _reportModel.type)]
+                      .showName
+              : AkuMap.dispatchType[_detailModel.dispatchType.dispatchType],
           canTap,
           helpContent: '请选择服务类型',
           onTap: () async {
@@ -336,11 +338,13 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         _buildTypeTile(
           '工单时限',
-          _timeLimitModels == null
-              ? null
-              : _timeLimitModels[_timeLimitModels.indexWhere((element) =>
-                      element.id == _reportModel.workOrderTimeLimit)]
-                  ?.name,
+          canTap
+              ? _timeLimitModels == null
+                  ? null
+                  : _timeLimitModels[_timeLimitModels.indexWhere((element) =>
+                          element.id == _reportModel.workOrderTimeLimit)]
+                      ?.name
+              : _detailModel.dispatchType.workOrderLimitName,
           canTap,
           helpContent: '请选择工单时限',
           onTap: () async {
@@ -365,11 +369,13 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         _buildTypeTile(
           '工单子类',
-          _workTypeModels == null
-              ? null
-              : _workTypeModels[_workTypeModels.indexWhere((element) =>
-                      element.id == _reportModel.workOrderTypeDetail)]
-                  .name,
+          canTap
+              ? _workTypeModels == null
+                  ? null
+                  : _workTypeModels[_workTypeModels.indexWhere((element) =>
+                          element.id == _reportModel.workOrderTypeDetail)]
+                      .name
+              : _detailModel.dispatchType.workOrderSubclassName,
           canTap,
           helpContent: '请选择工单子类',
           onTap: () async {
