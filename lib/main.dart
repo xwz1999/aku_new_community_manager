@@ -15,7 +15,6 @@ import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/fix_provider.dart';
 import 'package:aku_community_manager/provider/manage_provider.dart';
-import 'package:aku_community_manager/provider/outdoor_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/splash/splash_page.dart';
 
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => FixProvider()),
         ChangeNotifierProvider(create: (context) => GreenManageProvider()),
         ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
-        ChangeNotifierProvider(create: (context) => OutdoorProvider()),
+        
         ChangeNotifierProvider(create: (context) => GreenManageProvider()),
         ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
         ChangeNotifierProvider(create: (context) => AnouncementProvider()),

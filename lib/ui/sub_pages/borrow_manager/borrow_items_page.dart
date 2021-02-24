@@ -1,68 +1,80 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/borrow/borrow_detail_item_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_item_detail_page.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_item_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_item_detail_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class BorrowItemPage extends StatefulWidget {
-  final BorrowObject object;
-  BorrowItemPage({Key key, @required this.object}) : super(key: key);
+  final int id;
+  BorrowItemPage({Key key, @required this.id}) : super(key: key);
 
   @override
   _BorrowItemPageState createState() => _BorrowItemPageState();
 }
 
 class _BorrowItemPageState extends State<BorrowItemPage> {
+  EasyRefreshController _refreshController = EasyRefreshController();
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '物品查看',
       actions: [
-        userProvider.userInfoModel.role == USER_ROLE.MANAGER
-            ? AkuMaterialButton(
-                minWidth: 120.w,
-                onPressed: () {
-                  Get.to(AddBorrowItemPage(object: widget.object));
-                },
-                child: Text(
-                  '新增',
-                  style: TextStyle(
-                    fontSize: 28.w,
-                    color: AppStyle.primaryTextColor,
-                  ),
-                ),
-              )
-            : SizedBox(),
+        // userProvider.userInfoModel.role == USER_ROLE.MANAGER
+        //     ? AkuMaterialButton(
+        //         minWidth: 120.w,
+        //         onPressed: () {
+        //           // Get.to(AddBorrowItemPage(object: widget.object));
+        //         },
+        //         child: Text(
+        //           '新增',
+        //           style: TextStyle(
+        //             fontSize: 28.w,
+        //             color: AppStyle.primaryTextColor,
+        //           ),
+        //         ),
+        //       )
+        //     : SizedBox(),
       ],
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 32.w),
-        itemBuilder: (context, index) {
-          return _buildCard(widget.object.items[index]);
+      body: BeeListView(
+        path: API.manage.borrowDetailList,
+        controller: _refreshController,
+        extraParams: {'articleId': widget.id},
+        convert: (model) => model.tableList
+            .map((e) => BorrowDetailItemModel.fromJson(e))
+            .toList(),
+        builder: (items) {
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+            itemBuilder: (context, index) {
+              return _buildCard(items[index]);
+            },
+            itemCount: items.length,
+          );
         },
-        itemCount: widget.object.items.length,
       ),
     );
   }
 
-  _buildCard(SingleBorrowGoods item) {
+  _buildCard(BorrowDetailItemModel item) {
     final userProvider = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: () {
-        Get.to(BorrowItemDetailPage(item: item));
+        Get.to(BorrowItemDetailPage(id: item.id));
       },
       child: Container(
         margin: EdgeInsets.only(top: 16.w),
@@ -81,54 +93,54 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                   ),
                 ),
                 Spacer(),
-                userProvider.userInfoModel.role == USER_ROLE.MANAGER
-                    ? AkuMaterialButton(
-                        padding: EdgeInsets.symmetric(horizontal: 24.w),
-                        onPressed: () {
-                          showCupertinoDialog(
-                            context: context,
-                            builder: (context) {
-                              return CupertinoAlertDialog(
-                                title: Text('删除物品'),
-                                content: Text('确定要删除${item.name}该物品吗？'),
-                                actions: [
-                                  CupertinoDialogAction(
-                                    child: Text('取消'),
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                  ),
-                                  CupertinoDialogAction(
-                                    child: Text('删除'),
-                                    onPressed: () {
-                                      widget.object.items.remove(item);
-                                      setState(() {});
-                                      Get.back();
-                                    },
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.delete,
-                              color: AppStyle.minorTextColor,
-                              size: 40.w,
-                            ),
-                            Text(
-                              '删除',
-                              style: TextStyle(
-                                color: AppStyle.minorTextColor,
-                                fontSize: 28.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : SizedBox(),
+                // userProvider.userInfoModel.role == USER_ROLE.MANAGER
+                //     ? AkuMaterialButton(
+                //         padding: EdgeInsets.symmetric(horizontal: 24.w),
+                //         onPressed: () {
+                //           showCupertinoDialog(
+                //             context: context,
+                //             builder: (context) {
+                //               return CupertinoAlertDialog(
+                //                 title: Text('删除物品'),
+                //                 content: Text('确定要删除${item.name}该物品吗？'),
+                //                 actions: [
+                //                   CupertinoDialogAction(
+                //                     child: Text('取消'),
+                //                     onPressed: () {
+                //                       Get.back();
+                //                     },
+                //                   ),
+                //                   CupertinoDialogAction(
+                //                     child: Text('删除'),
+                //                     onPressed: () {
+                //                       //TODO delete
+                //                       setState(() {});
+                //                       Get.back();
+                //                     },
+                //                   ),
+                //                 ],
+                //               );
+                //             },
+                //           );
+                //         },
+                //         child: Row(
+                //           children: [
+                //             Icon(
+                //               Icons.delete,
+                //               color: AppStyle.minorTextColor,
+                //               size: 40.w,
+                //             ),
+                //             Text(
+                //               '删除',
+                //               style: TextStyle(
+                //                 color: AppStyle.minorTextColor,
+                //                 fontSize: 28.sp,
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //       )
+                //     : SizedBox(),
               ],
             ),
             Divider(
@@ -141,19 +153,12 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                 AkuBox.w(24),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(4.w),
-                  child: (item.assetpath is String)
-                      ? Image.asset(
-                          item.assetpath,
-                          height: 184.w,
-                          width: 184.w,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.file(
-                          item.assetpath,
-                          height: 184.w,
-                          width: 184.w,
-                          fit: BoxFit.cover,
-                        ),
+                  child: FadeInImage.assetNetwork(
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                    image: API.image(item.firstImg?.url ?? ''),
+                    height: 184.w,
+                    width: 184.w,
+                  ),
                 ),
                 AkuBox.w(24),
                 Expanded(
@@ -164,7 +169,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                       _buildRow(
                         R.ASSETS_MANAGE_BORROW_PNG,
                         '出借状态',
-                        '未借出',
+                        item.borrowed ? '已出借' : '未借出',
                         color: AppStyle.secondaryColor,
                       ),
                     ],

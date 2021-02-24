@@ -1,20 +1,17 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/borrow/borrow_item_model.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/borrow/borrow_data.dart';
-import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_object_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_items_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
@@ -26,43 +23,51 @@ class AllBorrowGoods extends StatefulWidget {
 }
 
 class _AllBorrowGoodsState extends State<AllBorrowGoods> {
+  EasyRefreshController _refreshController = EasyRefreshController();
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '全部物品',
       actions: [
-        userProvider.userInfoModel.role == USER_ROLE.MANAGER
-            ? AkuMaterialButton(
-                minWidth: 120.w,
-                onPressed: () {
-                  Get.to(AddBorrowObjectPage());
-                },
-                child: Text(
-                  '新增',
-                  style: TextStyle(
-                    fontSize: 28.w,
-                    color: AppStyle.primaryTextColor,
-                  ),
-                ),
-              )
-            : SizedBox(),
+        // userProvider.userInfoModel.role == USER_ROLE.MANAGER
+        //     ? AkuMaterialButton(
+        //         minWidth: 120.w,
+        //         onPressed: () {
+        //           Get.to(AddBorrowObjectPage());
+        //         },
+        //         child: Text(
+        //           '新增',
+        //           style: TextStyle(
+        //             fontSize: 28.w,
+        //             color: AppStyle.primaryTextColor,
+        //           ),
+        //         ),
+        //       )
+        //     : SizedBox(),
       ],
-      body: ListView.builder(
-        padding: EdgeInsets.symmetric(
-          horizontal: 32.w,
-        ),
-        itemBuilder: (context, index) {
-          return _buildCard(BorrowData.borrowObjects[index]);
+      body: BeeListView(
+        path: API.manage.borrowList,
+        controller: _refreshController,
+        convert: (model) =>
+            model.tableList.map((e) => BorrowItemModel.fromJson(e)).toList(),
+        builder: (items) {
+          return ListView.builder(
+            padding: EdgeInsets.symmetric(
+              horizontal: 32.w,
+            ),
+            itemBuilder: (context, index) {
+              return _buildCard(items[index]);
+            },
+            itemCount: items.length,
+          );
         },
-        itemCount: BorrowData.borrowObjects.length,
       ),
     );
   }
 
-  _buildCard(BorrowObject object) {
+  _buildCard(BorrowItemModel object) {
     return GestureDetector(
-      onTap: () => Get.to(BorrowItemPage(object: object)),
+      onTap: () => Get.to(BorrowItemPage(id: object.id)),
       child: Container(
         padding: EdgeInsets.all(24.w),
         margin: EdgeInsets.only(top: 16.w),
@@ -70,19 +75,12 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
-              child: (object.assetPath is String)
-                  ? Image.asset(
-                      object.assetPath,
-                      width: 184.w,
-                      height: 184.w,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.file(
-                      object.assetPath,
-                      width: 184.w,
-                      height: 184.w,
-                      fit: BoxFit.cover,
-                    ),
+              child: FadeInImage.assetNetwork(
+                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                image: API.image(object.firstImg?.url ?? ''),
+                height: 184.w,
+                width: 184.w,
+              ),
             ),
             AkuBox.w(24),
             Expanded(
@@ -91,10 +89,10 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
                 _buildRow(R.ASSETS_MANAGE_ARTICLE_PNG, '物品名称', object.name),
                 AkuBox.h(12),
                 _buildRow(R.ASSETS_MANAGE_BORROW_PNG, '借出数量',
-                    object.borrowNumber.toString()),
+                    object.borrowNum.toString()),
                 AkuBox.h(12),
                 _buildRow(R.ASSETS_MANAGE_REMAINING_PNG, '剩余数量',
-                    object.items.length.toString()),
+                    object.remainingNum.toString()),
               ],
             )),
           ],

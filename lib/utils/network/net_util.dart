@@ -3,6 +3,7 @@ import 'dart:io';
 
 // Package imports:
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
@@ -37,7 +38,6 @@ class NetUtil {
       onRequest: (RequestOptions options) async => options,
       onResponse: (Response response) async {
         LoggerData.addData(response);
-        print(response.headers);
         return response;
       },
       onError: (DioError error) async {
@@ -148,6 +148,7 @@ class NetUtil {
   }
 
   _parseErr(DioError err) {
+    final userProvider = Provider.of<UserProvider>(Get.context, listen: false);
     LoggerData.addData(err);
     _makeToast(String message) {
       BotToast.showText(text: '$message\_${err?.response?.statusCode ?? ''}');

@@ -50,6 +50,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(750, 1334), allowFontScaling: true);
     return Scaffold(
       body: Center(
         child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),

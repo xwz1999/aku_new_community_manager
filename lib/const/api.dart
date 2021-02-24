@@ -14,6 +14,7 @@ class API {
   static _Auth auth = _Auth();
   static _User user = _User();
   static _Manage manage = _Manage();
+  static _Upload upload = _Upload();
 }
 
 class _Auth {
@@ -41,8 +42,10 @@ class _User {
   String get sendTelUpdateCode => '/user/personalData/sendTelUpdateCode';
 
   ///个人资料：根据新手机号发送修改验证码
-  String get updateTel =>'/user/personalData/updateTel';
-  
+  String get updateTel => '/user/personalData/updateTel';
+
+  ///个人资料：修改管家用户头像
+  String get updateAvatar => '/user/personalData/updateHeadPortrait';
 }
 
 class _Manage {
@@ -87,4 +90,44 @@ class _Manage {
 
 ///报事报修：处理完成
 String get handleResult => '/user/repair/handleResult';
+  ///借还管理：查询全部物品
+  String get borrowList => '/user/borrow/articleList';
+
+  ///借还管理：根据物品主键id查询所有的物品明细信息
+  String get borrowDetailList => '/user/borrow/articleDetailList';
+
+  ///借还管理：根据物品明细id 查询物品信息
+  String get borrowItemDetail => '/user/borrow/findById';
+
+  ///借还管理：查询所有的借还信息（包含条件搜索）
+  String get borrowStatusList => '/user/borrow/list';
+
+  ///借还管理：提醒归还(管理员发送)
+  String get remindUserReturn => '/user/borrow/remind';
+
+  ///借还管理：检查信息
+  String get borrowCheckInfo => '/user/borrow/checkItems';
+
+  ///借还管理：提交检查结果
+  String get borrowCheck => '/user/borrow/submitCheck';
+
+  ///借还管理：修改物品明细信息
+  String get borrowEdit => '/user/borrow/updateArticleDetail';
+
+  ///物品出户：查询所有的物品出户信息(包含搜索条件)
+  String get goodsOutList => '/user/articleOut/list';
+
+  ///物品出户：根据物品出户主键id查询出户详情
+  String get goodsOutDetail => '/user/articleOut/findById';
+
+  ///物品出户：放行
+  String get goodsOutRelease => '/user/articleOut/release';
+
+  ///物品出户：不放行
+  String get goodsOutNotRelease => '/user/articleOut/noRelease';
+}
+
+class _Upload {
+  ///上传个人资料头像照片
+  String get avatar => '/user/upload/butlerAppHeadSculpture';
 }

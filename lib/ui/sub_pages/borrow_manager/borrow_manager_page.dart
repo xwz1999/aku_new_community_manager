@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -30,12 +31,13 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
       Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
   TabController _tabController;
   List<String> get _tabs {
-    switch (role) {
-      case USER_ROLE.MANAGER:
-        return ['全部', '出借中', '待检查', '已归还'];
-      default:
-        return ['全部', '出借中', '已归还'];
-    }
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    return [
+      '全部',
+      '出借中',
+      ...userProvider.infoModel.canOperation ? ['待检查'] : [],
+      '已归还'
+    ];
   }
 
   @override
@@ -77,32 +79,14 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
   }
 
   List<Widget> _getChildren() {
-    switch (role) {
-      case USER_ROLE.MANAGER:
-        return [
-          getView(BorrowData.models),
-          getView(BorrowData.borrowModels),
-          getView(BorrowData.checkModels),
-          getView(BorrowData.doneModels),
-        ];
-        break;
-      default:
-        return [
-          getView(BorrowData.models),
-          getView(BorrowData.borrowModels),
-          getView(BorrowData.doneModels),
-        ];
-    }
+    final userProvider = Provider.of<UserProvider>(context);
+    return [
+      BorrowManagerView(),
+      BorrowManagerView(status: 1),
+      ...userProvider.infoModel.canOperation
+          ? [BorrowManagerView(status: 3)]
+          : [],
+      BorrowManagerView(status: 2),
+    ];
   }
-}
-
-Widget getView(List<BorrowModel> models) {
-  return ListView.builder(
-    itemBuilder: (context, index) {
-      return BorrowManagerCard(
-        model: models[index],
-      );
-    },
-    itemCount: models.length,
-  );
 }

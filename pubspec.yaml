@@ -51,7 +51,7 @@ dependencies:
   
   dio:
 
-  power_logger: ^0.1.0
+  power_logger: ^0.1.1
   logger: ^0.9.4
   aku_ui:
     git:
