@@ -17,12 +17,9 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/outdoor_models/outdoor_model.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/outdoor_notpass_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/items_outdoor/outdoor_pass_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
