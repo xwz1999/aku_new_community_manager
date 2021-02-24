@@ -14,6 +14,7 @@ class API {
   static _Auth auth = _Auth();
   static _User user = _User();
   static _Manage manage = _Manage();
+  static _Upload upload = _Upload();
 }
 
 class _Auth {
@@ -42,6 +43,8 @@ class _User {
 
   ///个人资料：根据新手机号发送修改验证码
   String get updateTel => '/user/personalData/updateTel';
+  ///个人资料：修改管家用户头像
+  String get updateAvatar => '/user/personalData/updateHeadPortrait';
 }
 
 class _Manage {
@@ -92,4 +95,9 @@ class _Manage {
 
   ///物品出户：不放行
   String get goodsOutNotRelease => '/user/articleOut/noRelease';
+}
+
+class _Upload {
+  ///上传个人资料头像照片
+  String get avatar => '/user/upload/butlerAppHeadSculpture';
 }

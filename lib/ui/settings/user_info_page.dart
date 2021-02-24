@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:io';
+
 import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/ui/settings/nick_name_change_page.dart';
 import 'package:aku_community_manager/ui/settings/tel_change_page.dart';
@@ -35,10 +37,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
         padding: EdgeInsets.symmetric(vertical: 24.w),
         children: [
           AkuTile(
-            onTap: () {
-              akuPickImage().then((file) {
-                if (file != null) userProvider.setAvatar(file);
-              });
+            onTap: () async {
+              File file = await akuPickImage();
+              if (file != null) await userProvider.setAvatar(file);
             },
             title: Text('头像'),
             height: 168.w,
@@ -53,11 +54,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
             suffix: Text(userProvider.infoModel.nickName),
           ),
           AkuTile(
-            onTap: () async{
+            onTap: () async {
               await TelChangePage().to();
-              setState(() {
-                
-              });
+              setState(() {});
             },
             title: Text('手机'),
             suffix: Text(TextUtil.hideNumber(userProvider.profileModel.tel)),

@@ -2,6 +2,8 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/utils/network/base_file_model.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -87,20 +89,34 @@ class UserProvider extends ChangeNotifier {
     _isSigned = true;
     notifyListeners();
   }
-///修改昵称
+
+  ///修改昵称
   setNickName(String name) {
     _infoModel.nickName = name;
     notifyListeners();
   }
 
-  setAvatar(File file) {
-    _userInfoModel.avatar = file;
-    notifyListeners();
+  ///修改头像
+  setAvatar(File file) async {
+    Function cancel = BotToast.showLoading();
+    BaseFileModel fileModel = await NetUtil().upload(API.upload.avatar, file);
+    if (fileModel.status == true) {
+      await NetUtil().post(
+        API.user.updateAvatar,
+        params: {
+          'fileUrls': [fileModel.url],
+        },
+        showMessage: true,
+      );
+      await updateProfile();
+      cancel();
+      notifyListeners();
+    }
   }
 
   ///修改手机
-  setTel(String tel){
-    _profileModel.tel=tel;
+  setTel(String tel) {
+    _profileModel.tel = tel;
     notifyListeners();
   }
 }
