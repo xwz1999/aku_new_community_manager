@@ -2,26 +2,39 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_submit_finish_page.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/manage_func.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:get/get.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:get/get.dart';
+import 'package:aku_community_manager/tools/extensions/router_extension_tool.dart';
 
 class FixWorkFinishPage extends StatefulWidget {
-  final FixModel model;
-  FixWorkFinishPage({Key key, @required this.model}) : super(key: key);
+  final FixedDetailModel model;
+  final BussinessAndFixModel fixModel;
+  final bool dispatchType;
+  FixWorkFinishPage(
+      {Key key,
+      @required this.model,
+      @required this.dispatchType,
+      @required this.fixModel})
+      : super(key: key);
 
   @override
   _FixWorkFinishPageState createState() => _FixWorkFinishPageState();
@@ -34,6 +47,9 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
 
   TextEditingController _humanController = TextEditingController();
   TextEditingController _materialPriceController = TextEditingController();
+
+  double humanPrice;
+  double materialPrice;
   @override
   void dispose() {
     _descriptionController?.dispose();
@@ -57,7 +73,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
             spacing: 24,
             children: [
               Text(
-                widget.model.title,
+                widget.fixModel.reportDetail,
                 style: TextStyle(
                   color: AppStyle.primaryTextColor,
                   fontSize: 28.w,
@@ -73,13 +89,15 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                   mainAxisSpacing: 16.w,
                 ),
                 itemBuilder: (context, index) {
-                  final img = widget.model.imgs[index];
+                  // final img = widget.model.imgs[index];
                   return ClipRRect(
-                    borderRadius: BorderRadius.circular(4.w),
-                    child: (img is String) ? Image.asset(img) : Image.file(img),
-                  );
+                      borderRadius: BorderRadius.circular(4.w),
+                      child: FadeInImage.assetNetwork(
+                        placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                        image: widget.model.repairDetail.imgUrls[index].url,
+                      ));
                 },
-                itemCount: widget.model.imgs.length,
+                itemCount: widget.model.repairDetail.imgUrls.length,
               ),
             ],
           ),
@@ -262,87 +280,87 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
               )
             ],
           ),
-          // widget.model.detail.type == FIX_PAYMENT_TYPE.FREE
-          //     ? SizedBox()
-          //     :
-          AkuTitleBox(
-            title: '费用明细',
-            spacing: 16,
-            children: [
-              Row(
-                children: [
-                  AkuBox.h(96),
-                  Text('人工费'),
-                  Expanded(
-                    child: TextField(
-                      controller: _humanController,
-                      onChanged: (_) => setState(() {}),
-                      keyboardType: TextInputType.number,
-                      textAlign: TextAlign.end,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: '请输入',
-                        hintStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28.sp,
-                          color: AppStyle.minorTextColor,
+          widget.dispatchType
+              ? SizedBox()
+              : AkuTitleBox(
+                  title: '费用明细',
+                  spacing: 16,
+                  children: [
+                    Row(
+                      children: [
+                        AkuBox.h(96),
+                        Text('人工费'),
+                        Expanded(
+                          child: TextField(
+                            controller: _humanController,
+                            onChanged: (_) => setState(() {}),
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.end,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: '请输入',
+                              hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 28.sp,
+                                color: AppStyle.minorTextColor,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              Divider(height: 1.w),
-              Row(
-                children: [
-                  AkuBox.h(96),
-                  Text('材料费'),
-                  Expanded(
-                    child: TextField(
-                      onChanged: (_) => setState(() {}),
-                      controller: _materialPriceController,
-                      textAlign: TextAlign.end,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: '请输入',
-                        hintStyle: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28.sp,
-                          color: AppStyle.minorTextColor,
+                    Divider(height: 1.w),
+                    Row(
+                      children: [
+                        AkuBox.h(96),
+                        Text('材料费'),
+                        Expanded(
+                          child: TextField(
+                            onChanged: (_) => setState(() {}),
+                            controller: _materialPriceController,
+                            textAlign: TextAlign.end,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: '请输入',
+                              hintStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 28.sp,
+                                color: AppStyle.minorTextColor,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              Divider(height: 1.w),
-              Row(
-                children: [
-                  AkuBox.h(96),
-                  Text('总计费用'),
-                  Spacer(),
-                  Builder(
-                    builder: (context) {
-                      double humanPrice =
-                          double.tryParse(_humanController.text);
-                      double materialPrice =
-                          double.tryParse(_materialPriceController.text);
+                    Divider(height: 1.w),
+                    Row(
+                      children: [
+                        AkuBox.h(96),
+                        Text('总计费用'),
+                        Spacer(),
+                        Builder(
+                          builder: (context) {
+                            humanPrice = double.tryParse(_humanController.text);
+                            materialPrice =
+                                double.tryParse(_materialPriceController.text);
 
-                      if (TextUtil.isEmpty(_humanController.text) ||
-                          TextUtil.isEmpty(_materialPriceController.text)) {
-                        return Text('人工费或材料费不能为空');
-                      } else if (humanPrice == null || materialPrice == null)
-                        return Text('输入有误');
-                      else
-                        return Text(
-                            '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
+                            if (TextUtil.isEmpty(_humanController.text) ||
+                                TextUtil.isEmpty(
+                                    _materialPriceController.text)) {
+                              return Text('人工费或材料费不能为空');
+                            } else if (humanPrice == null ||
+                                materialPrice == null)
+                              return Text('输入有误');
+                            else
+                              return Text(
+                                  '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
         ],
       ),
       bottom: AkuMaterialButton(
@@ -356,19 +374,35 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
         ),
         height: 96.w,
         color: AppStyle.primaryColor,
-        onPressed: () {
-          widget.model.detail.result = FixResult(
-            detail: _descriptionController.text,
-            material: _materialController.text,
-            imgs: _imgs,
-          );
-          widget.model.type = FIX_ENUM.DONE;
-          if (widget.model.detail.type == FIX_PAYMENT_TYPE.PAY)
-            widget.model.detail.priceDetail = FixPriceDetail(
-              humanPrice: double.parse(_humanController.text),
-              materialPrice: double.parse(_materialController.text),
-            );
-          Get.back();
+        onPressed: () async {
+          // widget.model.detail.result = FixResult(
+          //   detail: _descriptionController.text,
+          //   material: _materialController.text,
+          //   imgs: _imgs,
+          // );
+          // widget.model.type = FIX_ENUM.DONE;
+          // if (widget.model.detail.type == FIX_PAYMENT_TYPE.PAY)
+          //   widget.model.detail.priceDetail = FixPriceDetail(
+          //     humanPrice: double.parse(_humanController.text),
+          //     materialPrice: double.parse(_materialController.text),
+          //   );
+          // Get.back();
+
+          BaseModel baseModel = await ManageFunc.handleResult(
+              widget.model.repairDetail.dispatchId,
+              _descriptionController.text,
+              _materialController.text,
+              humanPrice,
+              materialPrice,
+              humanPrice + materialPrice,
+              1, []);
+          if (baseModel.status) {
+            FixSubmitFinishPage(
+              model:widget.fixModel,
+            ).to();
+          } else {
+            BotToast.showText(text: baseModel.message);
+          }
         },
       ),
     );

@@ -104,4 +104,30 @@ class _Manage {
 class _Upload {
   ///上传个人资料头像照片
   String get avatar => '/user/upload/butlerAppHeadSculpture';
+  ///报事报修：根据报事报修id查询报修详情
+  String get repairDetail => '/user/repair/findById';
+
+  ///报事报修：查询派工单详情表-派工类型
+  String get dispatchListDetailType => '/manage/dataDictionary/findSysDispatchListDetailType';
+
+  ///报事报修：查询所有的工单时限信息(id and name)
+  String get workOrderTimeLimit => '/user/repair/findWorkOrderTimeLimit';
+
+  ///报事报修：查询所有的工单类型明细信息（工单子类信息）
+  String get workOrderTypeDetail => '/user/repair/findWorkOrderTypeDetail';
+
+  ///报事报修：报事报修：派单
+  String get repairDispatch => '/user/repair/dispatch';
+
+  ///报事报修：改派
+  String get repairReassignment => '/user/repair/reassignment';
+
+  ///报事报修：报事报修：接单
+  String get recevingOrders => '/user/repair/receivingOrders';
+
+  ///报事报修：申请延时
+  String get applyDelayed => '/user/repair/applyDelayed';
+
+///报事报修：处理完成
+String get handleResult => '/user/repair/handleResult';
 }

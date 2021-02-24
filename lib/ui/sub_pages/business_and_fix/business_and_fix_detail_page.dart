@@ -1,29 +1,39 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_detail_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_order_type_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/work_time_limit_model.dart';
+import 'package:aku_community_manager/tools/aku_map.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/manage_func.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
 
 class BusinessAndFixDetailPage extends StatefulWidget {
-  final FixModel model;
+  final BussinessAndFixModel model;
   BusinessAndFixDetailPage({Key key, this.model}) : super(key: key);
 
   @override
@@ -37,103 +47,91 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     return userProvider.userInfoModel.role;
   }
 
-  bool get isHandOut => widget.model.type == FIX_ENUM.HAND_OUT;
-  FixDetailModel get detailModel => widget.model.detail;
+  bool get isHandOut => widget.model.status == 1;
+  FixedDetailModel _detailModel;
+  bool _onload = true;
+  EasyRefreshController _easyRefreshController;
 
-  String get fixType {
-    switch (detailModel.type) {
-      case FIX_PAYMENT_TYPE.FREE:
-        return '无偿服务';
-        break;
-      case FIX_PAYMENT_TYPE.PAY:
-        return '有偿服务';
-        break;
-      default:
-        return '';
-        break;
-    }
+  List<DispatchDetialModel> _dispatchModels;
+  List<WorkTimeLimitModel> _timeLimitModels;
+  List<WorkOrderTypeModel> _workTypeModels;
+  DispatchReportModel _reportModel = DispatchReportModel.zero();
+
+  @override
+  void initState() {
+    super.initState();
+    _easyRefreshController = EasyRefreshController();
   }
 
-  String get dateLimit {
-    switch (detailModel.limit) {
-      case FIX_DATE_LIMIT.HOUR_24:
-        return '24小时内处理';
-        break;
-      case FIX_DATE_LIMIT.HOUR_12:
-        return '12小时内处理';
-        break;
-      case FIX_DATE_LIMIT.HOUR_8:
-        return '8小时内处理';
-        break;
-      default:
-        return '';
-        break;
-    }
+  @override
+  void dispose() {
+    _easyRefreshController?.dispose();
+    super.dispose();
   }
 
-  String get subType {
-    switch (detailModel.subType) {
-      case FIX_SUB_TYPE.NORMAL:
-        return '一般单';
-        break;
-      case FIX_SUB_TYPE.HURRY:
-        return '加急单';
-        break;
-      default:
-        return '';
-        break;
-    }
+  Widget fixTypeWidget() {
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    return Text(
+      AkuMap.fixStatus(userProvider.infoModel.canOperation,
+          userProvider.infoModel.canPickUpTicket, widget.model.status),
+      style: TextStyle(
+        color: widget.model.status < 4
+            ? Color(0XFFFF4501)
+            : AppStyle.minorTextColor,
+      ),
+    );
   }
 
-  Widget get fixTypeWidget {
-    if (userRole == USER_ROLE.MANAGER) {
-      return Text(
-        FixModel.managerRoleMap[widget.model.type],
-        style: TextStyle(
-          color: widget.model.type != FIX_ENUM.DONE
-              ? Color(0XFFFF4501)
-              : AppStyle.minorTextColor,
-        ),
-      );
-    } else {
-      return Text(
-        FixModel.otherRoleMap[widget.model.type],
-        style: TextStyle(
-          color: widget.model.type != FIX_ENUM.DONE
-              ? Color(0XFFFF4501)
-              : AppStyle.minorTextColor,
-        ),
-      );
-    }
+  Widget _empty() {
+    return Container();
   }
 
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '报修详情',
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 16.w),
-        children: [
-          _buildInfo(),
-          _buildType(widget.model.type == FIX_ENUM.HAND_OUT),
-          _buildProcess(),
-          detailModel.result == null ? SizedBox() : _buildResult(),
-          detailModel.review == null ? SizedBox() : _buildRating(),
-        ],
+      body: EasyRefresh(
+        firstRefresh: true,
+        controller: _easyRefreshController,
+        header: MaterialHeader(),
+        onRefresh: () async {
+          _detailModel = await ManageFunc.repairDetail(widget.model.id);
+          _reportModel.dispatchListId = widget.model.id;
+          _reportModel.workOrderTyoe = 1;
+          _onload = false;
+          setState(() {});
+        },
+        child: _onload
+            ? _empty()
+            : ListView(
+                padding: EdgeInsets.symmetric(vertical: 16.w),
+                children: [
+                  _buildInfo(),
+                  _buildType(widget.model.status == 1),
+                  _buildProcess(),
+                  _detailModel.handlingSituation == null
+                      ? SizedBox()
+                      : _buildResult(),
+                  _detailModel.evaluateInfo == null
+                      ? SizedBox()
+                      : _buildRating(),
+                ],
+              ),
       ),
       bottom: Builder(
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (widget.model.type == FIX_ENUM.HAND_OUT) {
+          if (userProvider.infoModel.canOperation&&widget.model.status<2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
-              onPressed: detailModel.type != null &&
-                      detailModel.subType != null &&
-                      detailModel.limit != null
+              onPressed: _reportModel.type != null &&
+                      _reportModel.workOrderTyoe != null &&
+                      _reportModel.workOrderTimeLimit != null
                   ? () {
-                      Get.to(FixerDepartmentPage(model: widget.model));
+                      Get.to(FixerDepartmentPage(model: _reportModel));
                     }
                   : null,
               child: Text(
@@ -143,14 +141,14 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               ),
             );
-          } else if (widget.model.type == FIX_ENUM.WAIT_PICKUP) {
-            if (userProvider.userInfoModel.role == USER_ROLE.MANAGER) {
+          } else if (widget.model.status == 2) {
+            if (userProvider.infoModel.canOperation) {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
                 onPressed: () {
                   Get.to(FixerDepartmentPage(
-                    model: widget.model,
+                    model: _reportModel,
                     changeType: true,
                   ));
                 },
@@ -165,15 +163,14 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
-                onPressed: () {
-                  final userProvider =
-                      Provider.of<UserProvider>(context, listen: false);
-                  detailModel.fixStatuses.add(FixStatus(
-                    title: '${userProvider.userInfoModel.nickName}已接单',
-                    date: DateTime.now(),
-                  ));
-                  widget.model.type = FIX_ENUM.PROCESSING;
-                  Get.back();
+                onPressed: () async {
+                  BaseModel baseModel =
+                      await ManageFunc.recevingOrders(widget.model.dispatchId);
+                  if (baseModel.status) {
+                    Get.back();
+                  } else {
+                    BotToast.showText(text: baseModel.message);
+                  }
                 },
                 child: Text(
                   '立即接单',
@@ -183,8 +180,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               );
             }
-          } else if (widget.model.type == FIX_ENUM.PROCESSING &&
-              userProvider.userInfoModel.role == USER_ROLE.FIXER)
+          } else if ((widget.model.status==3) &&
+              userProvider.infoModel.canPickUpTicket)
             return Container(
               height: 96.w,
               alignment: Alignment.center,
@@ -212,7 +209,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                       ),
                     ),
                     onPressed: () {
-                      Get.to(FixMoreTimePage(model: widget.model));
+                      Get.to(
+                          FixMoreTimePage(dispatchId: widget.model.dispatchId));
                     },
                     child: Text(
                       '申请延时',
@@ -228,7 +226,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     radius: 4.w,
                     color: AppStyle.primaryColor,
                     onPressed: () {
-                      Get.to(FixWorkFinishPage(model: widget.model));
+                      Get.to(FixWorkFinishPage(
+                          fixModel: widget.model,
+                          model: _detailModel,
+                          dispatchType:
+                              _detailModel.dispatchType.dispatchType == 1));
                     },
                     child: Text(
                       '处理完成',
@@ -251,27 +253,27 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   _buildInfo() {
     return AkuTitleBox(
       title: '报修信息',
-      suffix: fixTypeWidget,
+      suffix: fixTypeWidget(),
       children: [
         AkuBox.h(16),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
           '报修人',
-          widget.model.detail.userName,
+          _detailModel.repairDetail.name,
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PHONE_PNG,
           '联系电话',
-          widget.model.detail.userPhoneNumber,
+          _detailModel.repairDetail.tel,
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_AREA_PNG,
           '报修区域',
-          widget.model.detail.fixArea,
+          AkuMap.fixAreaType[_detailModel.repairDetail.type],
         ),
         AkuBox.h(8),
         Text(
-          widget.model.title,
+          widget.model.reportDetail,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontWeight: FontWeight.bold,
@@ -285,10 +287,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             crossAxisSpacing: 16.w,
             mainAxisSpacing: 16.w,
           ),
-          children: widget.model.imgs.map((e) {
+          children: _detailModel.repairDetail.imgUrls.map((e) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
-              child: (e is String) ? Image.asset(e) : Image.file(e),
+              child: FadeInImage.assetNetwork(
+                  placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: e.url),
             );
           }).toList(),
           shrinkWrap: true,
@@ -304,54 +307,93 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
       children: [
         _buildTypeTile(
           '派单类型',
-          fixType,
+          canTap
+              ? _dispatchModels == null
+                  ? null
+                  : _dispatchModels[_dispatchModels.indexWhere(
+                          (element) => element.showValue == _reportModel.type)]
+                      .showName
+              : AkuMap.dispatchType[_detailModel.dispatchType.dispatchType],
           canTap,
           helpContent: '请选择服务类型',
-          onTap: () {
+          onTap: () async {
+            List models = await ManageFunc.dispatchListDetailType();
+            _dispatchModels =
+                models.map((e) => DispatchDetialModel.fromJson(e)).toList();
             showItemSheet(
               title: '派单类型',
-              items: ['无偿服务', '有偿服务'],
-              selectItem: fixPaymentMap[detailModel.type],
+              items: _dispatchModels.map((e) => e.showName).toList(),
+              ids: _dispatchModels.map((e) => e.showValue).toList(),
+              selectItem: _reportModel.type,
               onTap: (result) {
-                detailModel.type = fixPaymentStringMap[result];
+                _reportModel.type = result;
               },
             ).then((_) {
+              if (_reportModel.type == -1) {
+                _dispatchModels = null;
+              }
               setState(() {});
             });
           },
         ),
         _buildTypeTile(
           '工单时限',
-          dateLimit,
+          canTap
+              ? _timeLimitModels == null
+                  ? null
+                  : _timeLimitModels[_timeLimitModels.indexWhere((element) =>
+                          element.id == _reportModel.workOrderTimeLimit)]
+                      ?.name
+              : _detailModel.dispatchType.workOrderLimitName,
           canTap,
           helpContent: '请选择工单时限',
-          onTap: () {
+          onTap: () async {
+            List models = await ManageFunc.workOrderTimeType();
+            _timeLimitModels =
+                models.map((e) => WorkTimeLimitModel.fromJson(e)).toList();
             showItemSheet(
               title: '工单时限',
-              items: ['24小时内处理', '12小时内处理', '8小时内处理'],
-              selectItem: fixDateLimitMap[detailModel.limit],
+              items: _timeLimitModels.map((e) => e.name).toList(),
+              ids: _timeLimitModels.map((e) => e.id).toList(),
+              selectItem: _reportModel.workOrderTimeLimit,
               onTap: (result) {
-                detailModel.limit = fixDateLimitStringMap[result];
+                _reportModel.workOrderTimeLimit = result;
               },
             ).then((_) {
+              if (_reportModel.workOrderTimeLimit == -1) {
+                _timeLimitModels = null;
+              }
               setState(() {});
             });
           },
         ),
         _buildTypeTile(
           '工单子类',
-          subType,
+          canTap
+              ? _workTypeModels == null
+                  ? null
+                  : _workTypeModels[_workTypeModels.indexWhere((element) =>
+                          element.id == _reportModel.workOrderTypeDetail)]
+                      .name
+              : _detailModel.dispatchType.workOrderSubclassName,
           canTap,
           helpContent: '请选择工单子类',
-          onTap: () {
+          onTap: () async {
+            List models = await ManageFunc.workOrderTypeDetail(widget.model.id);
+            _workTypeModels =
+                models.map((e) => WorkOrderTypeModel.fromJson(e)).toList();
             showItemSheet(
               title: '工单子类',
-              items: ['一般单', '加急单'],
-              selectItem: fixSubTypeMap[detailModel.subType],
+              items: _workTypeModels.map((e) => e.name).toList(),
+              ids: _workTypeModels.map((e) => e.id).toList(),
+              selectItem: _reportModel.workOrderTypeDetail,
               onTap: (result) {
-                detailModel.subType = fixSubTypeStringMap[result];
+                _reportModel.workOrderTypeDetail = result;
               },
             ).then((_) {
+              if (_reportModel.workOrderTypeDetail == -1) {
+                _workTypeModels = null;
+              }
               setState(() {});
             });
           },
@@ -363,10 +405,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   _buildProcess() {
     return AkuTitleBox(
       title: '报修进程',
-      children: detailModel.fixStatuses.map((e) {
+      children: _detailModel.processRecord.map((e) {
         return _buildProcessTile(
-          e.title,
-          DateUtil.formatDate(e.date, format: 'yyyy-MM-dd HH:mm:ss'),
+          AkuMap.operationType[e.operationType],
+          DateUtil.formatDateStr(e.operationDate,
+              format: 'yyyy-MM-dd HH:mm:ss'),
         );
       }).toList(),
     );
@@ -386,7 +429,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         AkuBox.h(8),
         Text(
-          detailModel.result.detail,
+          _detailModel.handlingSituation.detail,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontSize: 28.w,
@@ -403,7 +446,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         AkuBox.h(8),
         Text(
-          detailModel.result.material,
+          _detailModel.handlingSituation.materialList,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontSize: 28.w,
@@ -425,19 +468,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
           ),
-          children: detailModel.result.imgs.map((e) {
+          children: _detailModel.handlingSituation.imgUrls.map((e) {
             return ClipRRect(
-              borderRadius: BorderRadius.circular(4.w),
-              child: (e is String)
-                  ? Image.asset(
-                      e,
-                      fit: BoxFit.cover,
-                    )
-                  : Image.file(
-                      e,
-                      fit: BoxFit.cover,
-                    ),
-            );
+                borderRadius: BorderRadius.circular(4.w),
+                child: FadeInImage.assetNetwork(
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: e.url));
           }).toList(),
         ),
       ],
@@ -459,7 +494,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               ),
             ),
             Spacer(),
-            _buildStar(detailModel.review.rate),
+            _buildStar(5),
           ],
         ),
         AkuBox.h(24),
@@ -472,7 +507,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         AkuBox.h(8),
         Text(
-          detailModel.review.content,
+          _detailModel.evaluateInfo,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontSize: 28.w,

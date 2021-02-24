@@ -1,4 +1,5 @@
 class AkuMap {
+  ///根据权限返回不同的派单状态
   static String fixStatus(bool canOpention, bool canPickup, int status) {
     if (canOpention) {
       switch (status) {
@@ -57,4 +58,22 @@ class AkuMap {
       }
     }
   }
+
+  ///报事报修服务类型
+  static Map<int, String> fixAreaType = {1: '公区维修', 2: '家庭维修'};
+
+  ///报事报修处理进程-操作类型
+  static Map<int, String> operationType = {
+    1: '提交报修',
+    2: '派单',
+    3: '开始处理',
+    4: '处理完成',
+    5: '确认',
+    6: '回访',
+    7: '回退',
+    8: '作废',
+    9: '取消'
+  };
+
+  static Map<int, String> dispatchType = {1: '无偿服务', 2: '有偿服务'};
 }

@@ -1,11 +1,13 @@
 // Flutter imports:
-import 'package:aku_community_manager/models/manager/bussiness_and_fix_model.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -62,7 +64,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        // Get.to(BusinessAndFixDetailPage(model: widget.model));
+        Get.to(BusinessAndFixDetailPage(model: widget.model));
       },
       child: Container(
         padding: EdgeInsets.all(24.w),
