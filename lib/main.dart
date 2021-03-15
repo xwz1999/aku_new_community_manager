@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +24,7 @@ void main() async {
   await AmapCore.init('');
   await AmapLocation.instance.init(iosKey: '');
   JPush jpush = new JPush();
+  DevUtil.setDev(true);
   jpush.addEventHandler(
     // 接收通知回调方法。
     onReceiveNotification: (Map<String, dynamic> message) async {
@@ -57,7 +59,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => FixProvider()),
         ChangeNotifierProvider(create: (context) => GreenManageProvider()),
         ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
-        
         ChangeNotifierProvider(create: (context) => GreenManageProvider()),
         ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
         ChangeNotifierProvider(create: (context) => AnouncementProvider()),

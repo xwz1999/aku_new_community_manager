@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -40,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 300), () {
-      if (mounted) PowerLogger.init(context);
+      if (mounted) PowerLogger.init(context, debug: DevUtil.isDev);
     });
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _originOp();
