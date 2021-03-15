@@ -1,8 +1,12 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/aku_ui.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
@@ -22,6 +26,9 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
+  int _messageCount = 0;
+  int _commentCount = 0;
+  EasyRefreshController _refreshController = EasyRefreshController();
   Widget _messageTypeImage(String type) {
     String path;
     Color ca;
@@ -45,12 +52,10 @@ class _MessageState extends State<Message> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(44.w),
         gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              ca,
-              cb,
-            ]),
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [ca, cb],
+        ),
       ),
       child: Image.asset(
         path,
@@ -127,32 +132,54 @@ class _MessageState extends State<Message> {
     );
   }
 
+  Future _updateMessageCenter() async {
+    Response response = await NetUtil().dio.get(API.message.messageCenter);
+    if (response == null || response.data == null) return;
+    _messageCount = response.data['sysCount'] ?? 0;
+    _commentCount = response.data['commentCount'] ?? 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '消息',
       titleStyle: AppStyle().barTitleStyle,
-      body: ListView(
-        padding: EdgeInsets.only(top: 16.w),
-        children: [
-          _messageListTile('2020-10-23 9:00', _messageTypeImage('系统消息'), '系统消息',
-              '你有一条新的报事报修待处理', 5, onpressed: () {
-            Get.to(SystemMessage());
-          }),
-          Divider(
-            height: 1.w,
-          ),
-          _messageListTile(
-            '2020-10-23 10:00',
-            _messageTypeImage('评论消息'),
-            '评论消息',
-            '你有一条新的评论回复',
-            7,
-            onpressed: () {
-              Get.to(CommentMessage());
-            },
-          ),
-        ],
+      body: EasyRefresh(
+        controller: _refreshController,
+        firstRefresh: true,
+        onRefresh: () async {
+          await _updateMessageCenter();
+          setState(() {});
+        },
+        header: MaterialHeader(),
+        child: ListView(
+          padding: EdgeInsets.only(top: 16.w),
+          children: [
+            _messageListTile(
+              '',
+              _messageTypeImage('系统消息'),
+              '系统消息',
+              '你有一条新的报事报修待处理',
+              _messageCount,
+              onpressed: () {
+                Get.to(SystemMessage());
+              },
+            ),
+            Divider(
+              height: 1.w,
+            ),
+            _messageListTile(
+              '',
+              _messageTypeImage('评论消息'),
+              '评论消息',
+              '你有一条新的评论回复',
+              _commentCount,
+              onpressed: () {
+                Get.to(CommentMessage());
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

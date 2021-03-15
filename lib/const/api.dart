@@ -15,6 +15,7 @@ class API {
   static _User user = _User();
   static _Manage manage = _Manage();
   static _Upload upload = _Upload();
+  static _Message message = _Message();
 }
 
 class _Auth {
@@ -154,4 +155,13 @@ class _Upload {
 
   ///上传物品信息照片
   String get uploadArtical => '/user/upload/uploadArticle';
+}
+
+class _Message {
+  ///消息中心
+  String get messageCenter => '/user/message/messageCenter';
+  ///消息中心：查询所有的系统通知
+  String get systemList => '/user/message/sysMessageList';
+  ///消息中心：查询所有的评论通知
+  String get commentList => '/user/message/sysCommentMessageList';
 }
