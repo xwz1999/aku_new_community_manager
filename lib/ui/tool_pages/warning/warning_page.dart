@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,6 +16,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_sub_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WarningPage extends StatefulWidget {
   WarningPage({Key key}) : super(key: key);
@@ -61,60 +64,53 @@ class _WarningPageState extends State<WarningPage> {
 
           ///首部地址栏
           Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              margin: EdgeInsets.all(32.w),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16.w),
-                color: Color(0xE8FFFFFF),
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 4.w),
-                    blurRadius: 6.w,
-                    spreadRadius: 4.w,
-                    color: Color(0x1A5C5959),
+            top: 32.w,
+            left: 32.w,
+            right: 32.w,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16.w),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  color: Color(0xAAFFFFFF),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 32.w,
+                    vertical: 24.w,
                   ),
-                ],
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 32.w,
-                vertical: 24.w,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '当前位置(仅供参考)',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: AppStyle.primaryTextColor,
-                      fontSize: 28.sp,
-                    ),
-                  ),
-                  AkuBox.h(20),
-                  Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        R.ASSETS_MANAGE_LOCATION_PNG,
-                        height: 29.w,
-                        width: 21.w,
-                      ),
-                      AkuBox.w(10),
-                      Expanded(
-                        child: Text(
-                          _location?.address ?? '加载中',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: AppStyle.minorTextColor,
-                            fontSize: 28.sp,
-                          ),
+                      Text(
+                        '当前位置(仅供参考)',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: AppStyle.primaryTextColor,
+                          fontSize: 28.sp,
                         ),
+                      ),
+                      AkuBox.h(20),
+                      Row(
+                        children: [
+                          Image.asset(
+                            R.ASSETS_MANAGE_LOCATION_PNG,
+                            height: 29.w,
+                            width: 21.w,
+                          ),
+                          AkuBox.w(10),
+                          Expanded(
+                            child: Text(
+                              _location?.address ?? '加载中',
+                              style: TextStyle(
+                                color: AppStyle.minorTextColor,
+                                fontSize: 28.sp,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
           ),
@@ -166,7 +162,8 @@ class _WarningPageState extends State<WarningPage> {
                 child: AkuCupertinoButton(
                   minWidth: 0,
                   onPressed: () {
-                    Get.to(WarningSubPage());
+                    launch('tel:110');
+                    // Get.to(WarningSubPage());
                   },
                   child: Container(
                     height: 172.w,
