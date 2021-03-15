@@ -1,8 +1,12 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/message/system_message_item_model.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/aku_ui.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
@@ -19,6 +23,8 @@ class SystemMessage extends StatefulWidget {
 }
 
 class _SystemMessageState extends State<SystemMessage> {
+  EasyRefreshController _refreshController = EasyRefreshController();
+
   Widget _messageList(String date, String name, String phone, String area) {
     return Column(
       children: [
@@ -163,12 +169,18 @@ class _SystemMessageState extends State<SystemMessage> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '系统消息',
-      body: ListView(
-        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
-        children: [
-          _messageList('2020-10-23 10:00', '杨建', '17867665666', '共区'),
-          _messageList('2020-10-22 10:00', '刘能', '17855823545', '共区'),
-        ],
+      body: BeeListView(
+        controller: _refreshController,
+        builder: (items) {
+          return ListView(
+            padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
+            children: [],
+          );
+        },
+        path: API.message.systemList,
+        convert: (model) => model.tableList
+            .map((e) => SystemMessageItemModel.fromJson(e))
+            .toList(),
       ),
     );
   }

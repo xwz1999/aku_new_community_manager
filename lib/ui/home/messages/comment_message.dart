@@ -1,8 +1,12 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/message/comment_message_item_model.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
@@ -18,6 +22,7 @@ class CommentMessage extends StatefulWidget {
 }
 
 class _CommentMessageState extends State<CommentMessage> {
+  EasyRefreshController _refreshController = EasyRefreshController();
   Widget _messageList(
     String date,
     String name,
@@ -112,9 +117,7 @@ class _CommentMessageState extends State<CommentMessage> {
                 ],
               ),
               SizedBox(height: 16.w),
-              Divider(
-                height: 1.w,
-              ),
+              Divider(height: 1.w),
               AkuButton(
                 onPressed: () {},
                 child: Container(
@@ -145,12 +148,18 @@ class _CommentMessageState extends State<CommentMessage> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '评论消息',
-      body: ListView(
-        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
-        children: [
-          _messageList('2020-10-23 10:00', '杨建', '四星'),
-          _messageList('2020-10-24 11:00', '刘能', '四星'),
-        ],
+      body: BeeListView(
+        controller: _refreshController,
+        path: API.message.commentList,
+        convert: (model) => model.tableList
+            .map((e) => CommentMessageItemModel.fromJson(e))
+            .toList(),
+        builder: (items) {
+          return ListView(
+            padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
+            children: [],
+          );
+        },
       ),
     );
   }
