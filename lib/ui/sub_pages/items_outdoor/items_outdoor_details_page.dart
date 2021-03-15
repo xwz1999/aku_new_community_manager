@@ -106,7 +106,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                         AkuBox.h(16),
                         ...<Widget>[
                           _buildTile(
-                              R.ASSETS_OUTDOOR_IC_HOME_PNG, '小区名称', 'XXXX'),
+                              R.ASSETS_OUTDOOR_IC_HOME_PNG, '小区名称', '五象新区人才公寓'),
                           _buildTile(
                             R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                             '详细地址',
