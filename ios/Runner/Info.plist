@@ -5,29 +5,29 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>NSContactsUsageDescription</key>
-	<string>我们需要访问您的通讯录权限</string>
+	<string>we need contact access rights.</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>我们需要访问日历权限</string>
+	<string>we need calendar access rights.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>我们需要访问您的照片，当您评价商品或编辑头像时，请同意</string>
+	<string>we need photo access rights.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>我们需要访问您的照片，当您评价商品或编辑头像时，请同意</string>
+	<string>we need photo access rights.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>我们需要访问您的相机，当您评价商品、编辑头像、发布录像或直播时，请同意</string>
+	<string>we need camera access rights.</string>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>我们需要音乐访问权限</string>
+	<string>we need music access rights.</string>
 	<key>NSMotionUsageDescription</key>
-	<string>我们需要访问健康权限</string>
+	<string>we need motion access rights.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>我们需要访问语音识别权限</string>
+	<string>we need speech recognition access rights.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>我们需要访问定位权限，去更新天气信息,和一键报警</string>
+	<string>we need location access rights.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>我们需要访问定位权限，去更新天气信息,和一键报警</string>
+	<string>we need location access rights.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>我们需要访问定位权限，去更新天气信息,和一键报警</string>
-	<key>CFBundleDisplayName</key>
-	<string>小蜜蜂智慧社区管家端</string>
+	<string>we need location access rights.</string>
+	<key>CFBundleName</key>
+	<string>bee</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
