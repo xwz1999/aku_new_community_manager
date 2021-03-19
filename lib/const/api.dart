@@ -128,6 +128,12 @@ class _Manage {
 
   ///物品出户：不放行
   String get goodsOutNotRelease => '/user/articleOut/noRelease';
+
+  ///装修管理：查询装修管理信息list列表
+  String get decorationList => '/user/decoration/list';
+
+  ///装修管理：根据装修主键id查询装修详情
+  String get decorationFindByld => '/user/decoration/findById';
 }
 
 class _Upload {
@@ -160,8 +166,10 @@ class _Upload {
 class _Message {
   ///消息中心
   String get messageCenter => '/user/message/messageCenter';
+
   ///消息中心：查询所有的系统通知
   String get systemList => '/user/message/sysMessageList';
+
   ///消息中心：查询所有的评论通知
   String get commentList => '/user/message/sysCommentMessageList';
 }

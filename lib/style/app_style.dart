@@ -7,6 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:aku_community_manager/const/resource.dart';
 
+//默认小区名称
+const kEstateName = '深圳华茂悦峰';
+
 class AppStyle {
   //颜色，渐变主颜色和次级颜色
   static const primaryColor = Color(0xFFFDCF12);

@@ -111,15 +111,9 @@ class _DecorationManagerDetailStatePage
       title: '装修信息',
       spacing: 24,
       suffix: Text(
-        DecorationUIUtil(context).getTagName(
-          widget.model.type,
-          widget.model.statusType,
-        ),
+        DecorationUIUtil(context).getTagName(1, 2),
         style: TextStyle(
-          color: DecorationUIUtil(context).getTagColor(
-            widget.model.type,
-            widget.model.statusType,
-          ),
+          color: DecorationUIUtil(context).getTagColor(1),
           fontSize: 24.w,
         ),
       ),

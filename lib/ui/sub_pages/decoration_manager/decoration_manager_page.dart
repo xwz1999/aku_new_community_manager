@@ -1,5 +1,9 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 // Package imports:
 import 'package:provider/provider.dart';
@@ -24,21 +28,17 @@ class DecorationManagerPage extends StatefulWidget {
 class _DecorationManagerPageState extends State<DecorationManagerPage>
     with TickerProviderStateMixin {
   TabController _tabController;
+  EasyRefreshController _refreshController;
   USER_ROLE get role =>
       Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
 
   List<String> get tabs {
-    switch (role) {
-      case USER_ROLE.MANAGER:
-        return ['待指派', '已指派', '已执行', '全部'];
-        break;
-
-      case USER_ROLE.PROPERTY:
-        return ['待执行', '已执行', '全部'];
-        break;
-      default:
-        return ['装修中', '装修完成', '全部'];
-        break;
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    if (userProvider?.infoModel?.canSendTicket != null &&
+        userProvider.infoModel.canSendTicket) {
+      return ['待指派', '已指派', '已执行', '全部'];
+    } else {
+      return ['待执行', '已执行', '全部'];
     }
   }
 
@@ -47,6 +47,13 @@ class _DecorationManagerPageState extends State<DecorationManagerPage>
     super.initState();
 
     _tabController = TabController(length: tabs.length, vsync: this);
+    _refreshController = EasyRefreshController();
+  }
+
+  @override
+  void dispose() {
+    _refreshController?.dispose();
+    super.dispose();
   }
 
   @override
@@ -68,41 +75,59 @@ class _DecorationManagerPageState extends State<DecorationManagerPage>
   }
 
   List<Widget> _getViews() {
-    switch (role) {
-      case USER_ROLE.MANAGER:
-        return [
-          _getSingleListView(
-              DecorationData.getModels(DecorationType.WAIT_HAND_OUT)),
-          _getSingleListView(DecorationData.getModels(DecorationType.HAND_OUT)),
-          _getSingleListView(DecorationData.getModels(DecorationType.DONE)),
-          _getSingleListView(DecorationData.allModels),
-        ];
-        break;
-      case USER_ROLE.PROPERTY:
-        return [
-          _getSingleListView(DecorationData.getModels(DecorationType.HAND_OUT)),
-          _getSingleListView(DecorationData.getModels(DecorationType.DONE)),
-          _getSingleListView(DecorationData.allPropertyModels),
-        ];
-      default:
-        return [
-          _getSingleListView(
-              DecorationData.getTypeModels(DecorationStatusType.PROGRESS)),
-          _getSingleListView(
-              DecorationData.getTypeModels(DecorationStatusType.DONE)),
-          _getSingleListView(DecorationData.allPropertyModels),
-        ];
-        break;
+    final userProvider = Provider.of<UserProvider>(context);
+    if (userProvider?.infoModel?.canSendTicket != null &&
+        userProvider.infoModel.canSendTicket) {
+      return [...List.generate(4, (index) => _getSingleListView(index))];
+    } else {
+      return [...List.generate(3, (index) => _getSingleListView(index))];
     }
+    // switch (role) {
+    //   case USER_ROLE.MANAGER:
+    //     return [
+    //       _getSingleListView(
+    //           DecorationData.getModels(DecorationType.WAIT_HAND_OUT)),
+    //       _getSingleListView(DecorationData.getModels(DecorationType.HAND_OUT)),
+    //       _getSingleListView(DecorationData.getModels(DecorationType.DONE)),
+    //       _getSingleListView(DecorationData.allModels),
+    //     ];
+    //     break;
+    //   case USER_ROLE.PROPERTY:
+    //     return [
+    //       _getSingleListView(DecorationData.getModels(DecorationType.HAND_OUT)),
+    //       _getSingleListView(DecorationData.getModels(DecorationType.DONE)),
+    //       _getSingleListView(DecorationData.allPropertyModels),
+    //     ];
+    //   default:
+    //     return [
+    //       _getSingleListView(
+    //           DecorationData.getTypeModels(DecorationStatusType.PROGRESS)),
+    //       _getSingleListView(
+    //           DecorationData.getTypeModels(DecorationStatusType.DONE)),
+    //       _getSingleListView(DecorationData.allPropertyModels),
+    //     ];
+    //     break;
+    // }
   }
 
-  _getSingleListView(List<DecorationModel> models) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return DecorationManagerCard(model: models[index]);
-      },
-      itemCount: models.length,
-      padding: EdgeInsets.symmetric(horizontal: 32.w),
-    );
+  _getSingleListView(int index) {
+    return BeeListView(
+        extraParams: {'operationStatus': index},
+        path: API.manage.decorationList,
+        controller: _refreshController,
+        convert: (models) {
+          return models.tableList
+              .map((e) => DecorationListModel.fromJson(e))
+              .toList();
+        },
+        builder: (items) {
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              return DecorationManagerCard(model: items[index]);
+            },
+            itemCount: items.length,
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+          );
+        });
   }
 }
