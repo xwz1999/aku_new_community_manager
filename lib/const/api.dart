@@ -134,6 +134,9 @@ class _Manage {
 
   ///装修管理：根据装修主键id查询装修详情
   String get decorationFindByld => '/user/decoration/findById';
+
+  ///物品出户：根据房产id查询业主名称和手机号（联系业主）
+  String get goodsOutContactOwner => '/user/articleOut/contactOwner';
 }
 
 class _Upload {
@@ -172,4 +175,10 @@ class _Message {
 
   ///消息中心：查询所有的评论通知
   String get commentList => '/user/message/sysCommentMessageList';
+
+  ///公告管理：管家app，查询所有的社区公告
+  String get announcementList => '/user/announcement/list';
+
+  ///公告管理（管家app）：根据社区公告主键id查询社区公告信息
+  String get announcementFindByld => '/user/announcement/findById';
 }

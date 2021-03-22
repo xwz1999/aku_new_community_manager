@@ -132,7 +132,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   ),
                   Divider(height: 1.w),
                   MaterialButton(
-                    onPressed: () {
+                    onPressed: () async {
                       launch('tel:${_model.applicantTel}');
                     },
                     elevation: 0,

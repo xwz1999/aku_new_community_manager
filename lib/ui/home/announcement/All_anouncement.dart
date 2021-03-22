@@ -2,18 +2,24 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/announce/announcement_detail_model.dart';
+import 'package:aku_community_manager/models/announce/announcement_list_model.dart';
+import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/aku_ui.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/anouncement/anouncement_model.dart';
-import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/announcement/anouncement_details.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -26,15 +32,20 @@ class AllAnouncement extends StatefulWidget {
 }
 
 class AllAnouncementState extends State<AllAnouncement> {
-  static Widget anounceCard(AnouncementCardModel model) {
+  EasyRefreshController _refreshController = EasyRefreshController();
+
+  static Widget anounceCard(AnnouncementListModel model, {String body}) {
     return Column(
       children: [
         AkuButton(
-          onPressed: () {
+          onPressed: () async {
+            BaseModel baseModel = await NetUtil().get(
+                API.message.announcementFindByld,
+                params: {'announcementId': model.id});
+            AnnouncementDetailModel detailModel =
+                AnnouncementDetailModel.fromJson(baseModel.data);
             Get.to(AnouncementDetails(
-              title: model.title,
-              date: model.date,
-              body: model.body == null ? '' : model.body,
+              model: detailModel,
             ));
           },
           child: Container(
@@ -83,7 +94,7 @@ class AllAnouncementState extends State<AllAnouncement> {
                             width: 24.w,
                           ),
                           Text(
-                            model.date,
+                            model.releaseTime,
                             style: AppStyle().minorStyle,
                           ),
                           Spacer(),
@@ -119,7 +130,7 @@ class AllAnouncementState extends State<AllAnouncement> {
             )),
         ...(cards
             .map(
-              (e) => anounceCard(e),
+              (e) => Container(),
             )
             .toList()),
       ],
@@ -128,19 +139,26 @@ class AllAnouncementState extends State<AllAnouncement> {
 
   @override
   Widget build(BuildContext context) {
-    final AnouncementProvider _anouncementProvider =
-        Provider.of<AnouncementProvider>(context);
     return AkuScaffold(
       title: '全部公告',
-      body: ListView(
-        padding: EdgeInsets.only(left: 32.w, right: 32.w),
-        children: [
-          _anouncementList('2020-10-22',
-              _anouncementProvider.anouncementCardModels.sublist(0, 2)),
-          _anouncementList('2020-10-20',
-              _anouncementProvider.anouncementCardModels.sublist(2, 2)),
-        ],
-      ),
+      body: BeeListView(
+          path: API.message.announcementList,
+          controller: _refreshController,
+          convert: (models) {
+            return models.tableList
+                .map((e) => AnnouncementListModel.fromJson(e))
+                .toList();
+          },
+          builder: (items) {
+            return ListView.separated(
+                itemBuilder: (context, index) {
+                  return anounceCard(items[index]);
+                },
+                separatorBuilder: (_, __) {
+                  return AkuBox.h(10);
+                },
+                itemCount: items.length);
+          }),
     );
   }
 }
