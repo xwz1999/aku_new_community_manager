@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:provider/provider.dart';
@@ -53,32 +54,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()),
-        ChangeNotifierProvider(create: (context) => AppProvider()),
-        ChangeNotifierProvider(create: (context) => FixProvider()),
-        ChangeNotifierProvider(create: (context) => GreenManageProvider()),
-        ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
-        ChangeNotifierProvider(create: (context) => GreenManageProvider()),
-        ChangeNotifierProvider(create: (context) => InspectionManageProvider()),
-        ChangeNotifierProvider(create: (context) => AnouncementProvider()),
-      ],
-      child: GetMaterialApp(
-        title: '小蜜蜂管家',
-        home: SplashPage(),
-        builder: BotToastInit(),
-        navigatorObservers: [
-          BotToastNavigatorObserver(),
+        providers: [
+          ChangeNotifierProvider(create: (context) => UserProvider()),
+          ChangeNotifierProvider(create: (context) => AppProvider()),
+          ChangeNotifierProvider(create: (context) => FixProvider()),
+          ChangeNotifierProvider(create: (context) => GreenManageProvider()),
+          ChangeNotifierProvider(
+              create: (context) => InspectionManageProvider()),
+          ChangeNotifierProvider(create: (context) => GreenManageProvider()),
+          ChangeNotifierProvider(
+              create: (context) => InspectionManageProvider()),
+          ChangeNotifierProvider(create: (context) => AnouncementProvider()),
         ],
-        localizationsDelegates: [
-          GlobalCupertinoLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-        ],
-        supportedLocales: [
-          const Locale('zh'),
-        ],
-      ),
-    );
+        child: ScreenUtilInit(
+            designSize: Size(750, 1334),
+            builder: () {
+              return GetMaterialApp(
+                title: '小蜜蜂管家',
+                home: SplashPage(),
+                builder: BotToastInit(),
+                navigatorObservers: [
+                  BotToastNavigatorObserver(),
+                ],
+                localizationsDelegates: [
+                  GlobalCupertinoLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                ],
+                supportedLocales: [
+                  const Locale('zh'),
+                ],
+              );
+            }));
   }
 }

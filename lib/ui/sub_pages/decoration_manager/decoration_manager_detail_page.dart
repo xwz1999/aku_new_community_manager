@@ -624,6 +624,7 @@ class _DecorationManagerDetailStatePage
                 ),
               ],
             ),
+            collapsed: null,
           ),
         );
       }).toList(),

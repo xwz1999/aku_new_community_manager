@@ -3,11 +3,10 @@ import 'dart:io';
 
 // Package imports:
 import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response, FormData, MultipartFile;
 import 'package:power_logger/power_logger.dart';
 
 // Project imports:

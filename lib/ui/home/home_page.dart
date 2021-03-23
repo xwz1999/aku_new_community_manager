@@ -143,8 +143,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final _anouncementProvider = Provider.of<AnouncementProvider>(context);
-    ScreenUtil.init(context,
-        designSize: Size(750, 1334), allowFontScaling: true);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       child: Scaffold(
         drawer: PersonalDraw(),
