@@ -52,10 +52,8 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
               : () {},
           child: Container(
             alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(
-                left: 24.w, right: 24.w, bottom: widget.extra ? 48.w : 40.w),
+            padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 40.w),
             width: double.infinity,
-            height: widget.extra ? 362.w : 270.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.w),
                 color: Color(0xFFFFFFFF)),
@@ -67,7 +65,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                 child: Row(
                   children: [
                     Text(
-                      '1号巡检任务',
+                      '${widget.cardModel.name}',
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: widget.extra ? 32.sp : 36.sp,
@@ -83,12 +81,30 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                   ],
                 ),
               ),
-              widget.extra
-                  ? Divider(
-                      height: 1.w,
-                    )
-                  : SizedBox(),
-              widget.extra ? 24.w.heightBox : SizedBox(),
+              ...widget.extra
+                  ? <Widget>[Divider(height: 1.w), 24.w.heightBox]
+                  : [
+                      Row(
+                        children: [
+                          Image.asset(
+                            R.ASSETS_MANAGE_IC_RENWU_PNG,
+                            width: 40.w,
+                            height: 40.w,
+                          ),
+                          4.w.widthBox,
+                          Text(
+                            '巡检名称',
+                            style: _textstyle,
+                          ),
+                          Spacer(),
+                          Text(
+                            widget.cardModel.name,
+                            style: AppStyle().primaryStyle,
+                          )
+                        ],
+                      ),
+                      12.w.heightBox,
+                    ],
               Row(
                 children: [
                   Image.asset(
@@ -108,7 +124,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                   )
                 ],
               ),
-              Spacer(),
+              12.w.heightBox,
               Row(
                 children: [
                   Image.asset(
@@ -120,13 +136,13 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                   Text('规定巡检时间', style: _textstyle),
                   Spacer(),
                   Text(
-                    '${DateUtil.formatDateStr(widget.cardModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
+                    '${DateUtil.formatDateStr(widget.cardModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${widget.cardModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
                     style: AppStyle().primaryStyle,
                   ),
                 ],
               ),
-              Spacer(),
-              ...widget.cardModel.actualBeginDate == null
+              12.w.heightBox,
+              ...widget.cardModel?.actualBeginDate == null
                   ? [SizedBox()]
                   : [
                       Row(
@@ -148,10 +164,11 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                           ),
                         ],
                       ),
-                      Spacer(),
+                      12.w.heightBox,
                     ],
-              widget.cardModel.actualEndDate == null
-                  ? Row(
+              widget.cardModel?.actualEndDate == null
+                  ? SizedBox()
+                  : Row(
                       children: [
                         Image.asset(
                           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
@@ -170,7 +187,6 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                         ),
                       ],
                     )
-                  : SizedBox(),
             ]),
           ),
         ),

@@ -1,11 +1,16 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_list_model.dart';
+import 'package:aku_community_manager/provider/app_provider.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Package imports:
@@ -20,17 +25,30 @@ class InspectionManagePage extends StatefulWidget {
   _InspectionManagePageState createState() => _InspectionManagePageState();
 }
 
-class _InspectionManagePageState extends State<InspectionManagePage> {
-  EasyRefreshController _easyRefreshController;
+class _InspectionManagePageState extends State<InspectionManagePage>
+    with TickerProviderStateMixin {
+  List<String> get _tabs {
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    if (_userProvider.infoModel.canOperation) {
+      return ['待巡检', '已巡检', '巡检中', '全部'];
+    } else {
+      return ['待巡检', '已巡检', '巡检中', '全部'];
+    }
+  }
+
+  int _selectIndex = 0;
+
+  TabController _tabController;
   @override
   void initState() {
-    _easyRefreshController = EasyRefreshController();
+    _tabController = TabController(length: _tabs.length, vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    _easyRefreshController?.dispose();
+    _tabController?.dispose();
     super.dispose();
   }
 
@@ -38,24 +56,18 @@ class _InspectionManagePageState extends State<InspectionManagePage> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '巡检管理',
-      body: BeeListView(
-        path: API.manage.inspectionList,
-        controller: _easyRefreshController,
-        convert: (models) {
-          return models.tableList
-              .map((e) => InspectionListModel.fromJson(e))
-              .toList();
-        },
-        builder: (items) {
-          return ListView.separated(
-              itemBuilder: (context, index) {
-                return InspectionManageCard(cardModel: items[index]);
-              },
-              separatorBuilder: (_, __) {
-                return 8.w.heightBox;
-              },
-              itemCount: items.length);
-        },
+      appBarBottom: PreferredSize(
+        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        preferredSize: Size.fromHeight(96.w),
+      ),
+      body: TabBarView(
+        controller: _tabController,
+        children: List.generate(
+          _tabs.length,
+          (index) => InspectionMangeView(
+            inspectionStatus: index,
+          ),
+        ),
       ),
     );
   }
