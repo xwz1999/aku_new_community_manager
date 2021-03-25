@@ -9,6 +9,19 @@ export 'package:aku_community_manager/const/resource.dart';
 
 //默认小区名称
 const kEstateName = '深圳华茂悦峰';
+//颜色，渐变主颜色和次级颜色
+const kPrimaryColor = Color(0xFFFDCF12);
+const kMinorColor = Color(0xFFFFDF5D);
+const kSubColor = Color(0xFF3F8FFE);
+//字体
+///主字体颜色
+const primaryTextColor = Color(0xFF333333);
+
+///次字体颜色
+const minorTextColor = Color(0xFF999999);
+
+///背景色
+const backgroundColor = Color(0xFFF9F9F9);
 
 class AppStyle {
   //颜色，渐变主颜色和次级颜色

@@ -137,6 +137,9 @@ class _Manage {
 
   ///物品出户：根据房产id查询业主名称和手机号（联系业主）
   String get goodsOutContactOwner => '/user/articleOut/contactOwner';
+
+  ///巡检管理：查询所有的巡检管理信息
+  String get inspectionList => '/user/inspection/list';
 }
 
 class _Upload {

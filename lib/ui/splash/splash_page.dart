@@ -41,7 +41,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 300), () {
-      if (mounted) PowerLogger.init(context, debug: DevUtil.isDev);
+      if (mounted) PowerLogger.start(context, debug: DevUtil.isDev);
     });
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _originOp();

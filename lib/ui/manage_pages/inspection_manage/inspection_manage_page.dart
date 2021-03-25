@@ -1,14 +1,16 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_list_model.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 // Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/provider/manage_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class InspectionManagePage extends StatefulWidget {
@@ -19,17 +21,41 @@ class InspectionManagePage extends StatefulWidget {
 }
 
 class _InspectionManagePageState extends State<InspectionManagePage> {
+  EasyRefreshController _easyRefreshController;
+  @override
+  void initState() {
+    _easyRefreshController = EasyRefreshController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _easyRefreshController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final _inspectionManageModel =
-        Provider.of<InspectionManageProvider>(context);
     return AkuScaffold(
       title: '巡检管理',
-      body: ListView(
-        padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
-        children: _inspectionManageModel.inspectionManageModels
-            .map((e) => InspectionManageCard(e).inspectionManageCard())
-            .toList(),
+      body: BeeListView(
+        path: API.manage.inspectionList,
+        controller: _easyRefreshController,
+        convert: (models) {
+          return models.tableList
+              .map((e) => InspectionListModel.fromJson(e))
+              .toList();
+        },
+        builder: (items) {
+          return ListView.separated(
+              itemBuilder: (context, index) {
+                return InspectionManageCard(cardModel: items[index]);
+              },
+              separatorBuilder: (_, __) {
+                return 8.w.heightBox;
+              },
+              itemCount: items.length);
+        },
       ),
     );
   }
