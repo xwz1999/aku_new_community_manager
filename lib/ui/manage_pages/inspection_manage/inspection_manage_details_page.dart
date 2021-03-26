@@ -1,6 +1,8 @@
 // Flutter imports:
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
+import 'package:aku_ui/aku_ui.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,23 +34,25 @@ class _InspectionManageDetailsPageState
     extends State<InspectionManageDetailsPage> {
   TextStyle _textstyle =
       TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp);
-  Map<int, String> _inspectionStatus = {
-    1: '待巡检',
-    2: '已巡检',
-  };
+  Map<int, String> _inspectionStatus = {1: '待巡检', 2: '已巡检', 3: '巡检中', 4: '未巡检'};
   Color _inspectionColor(int status) {
     switch (status) {
       case 1:
-        return Color(0xFF4501);
+        return Color(0xFFFF4501);
         break;
       case 2:
-        return Color(0x999999);
+        return Color(0xFF999999);
+      case 3:
+        return Color(0xFFFF4501);
+      case 4:
+        return Color(0xFFFF4501);
       default:
-        return Colors.black;
+        return Colors.blue;
     }
   }
 
   InspectionDetailModel _detailModel;
+  List<InspectionPointModel> _pointModels;
   bool _onload = true;
   EasyRefreshController _refreshController;
   @override
@@ -70,40 +74,52 @@ class _InspectionManageDetailsPageState
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '巡检详情',
-      body: EasyRefresh(
-        controller: _refreshController,
-        firstRefresh: true,
-        onRefresh: () async {
-          _detailModel = await ManageFunc.getInspectionDetail(widget.executeId);
-          _onload = false;
-          setState(() {});
-        },
-        child: _onload
-            ? SizedBox()
-            : Column(
-                children: [
-                  _inspectionHeadCard(),
-                  16.w.heightBox,
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 32.w, vertical: 24.w),
-                    decoration: BoxDecoration(color: Color(0xFFFFFF)),
-                    child: Column(
-                      children: <Widget>[
-                        '巡检站点'.text.black.size(32.sp).bold.make(),
-                        _buildInspectionTile(
-                          '',
-                          1,
-                          1,
-                        ),
-                      ].sepWidget(separate: 16.w.heightBox),
-                    ),
-                  )
-                ],
-              ),
-      ),
-    );
+        title: '巡检详情',
+        body: EasyRefresh(
+          controller: _refreshController,
+          firstRefresh: true,
+          header:
+              MaterialHeader(valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
+          onRefresh: () async {
+            _detailModel =
+                await ManageFunc.getInspectionDetail(widget.executeId);
+            ManageFunc.getInspectionPoint(widget.executeId).then((value) {
+              _pointModels =
+                  value.map((e) => InspectionPointModel.fromJson(e)).toList();
+            });
+            _onload = false;
+            setState(() {});
+          },
+          child: _onload
+              ? SizedBox()
+              : Column(
+                  children: [
+                    _inspectionHeadCard(),
+                    16.w.heightBox,
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 32.w, vertical: 24.w),
+                      decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
+                      width: double.infinity,
+                      constraints: BoxConstraints(
+                        minHeight: 85.w,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          '巡检站点'.text.black.size(32.sp).bold.make(),
+                        ].sepWidget(separate: 16.w.heightBox),
+                      ),
+                    )
+                  ],
+                ),
+        ),
+        bottom: AkuButton(
+          onPressed: () {},
+          padding: EdgeInsets.symmetric(vertical: 26.w),
+          color: kPrimaryColor,
+          child: '开始巡检'.text.black.bold.size(32.sp).make(),
+        ).pOnly(bottom: MediaQuery.of(context).padding.bottom));
   }
 
   Widget _inspectionHeadCard() {
@@ -143,6 +159,7 @@ class _InspectionManageDetailsPageState
               ),
             ),
             Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
                   R.ASSETS_MANAGE_IC_RENWU_PNG,
@@ -150,15 +167,22 @@ class _InspectionManageDetailsPageState
                   height: 40.w,
                 ),
                 4.w.widthBox,
-                Text(
-                  '巡检名称',
-                  style: _textstyle,
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      '巡检名称',
+                      style: _textstyle,
+                    ),
+                  ],
                 ),
-                Spacer(),
+                36.w.widthBox,
                 Text(
                   _detailModel.name,
+                  maxLines: 2,
+                  textAlign: TextAlign.right,
                   style: AppStyle().primaryStyle,
-                )
+                ).expand()
               ],
             ),
             12.w.heightBox,
@@ -258,9 +282,10 @@ class _InspectionManageDetailsPageState
     return Row(
       children: [
         CircleAvatar(
-          child: '巡$index'.text.color(Color(0x3F8FFE)).size(28.sp).bold.make(),
+          child:
+              '巡$index'.text.color(Color(0xFF3F8FFE)).size(28.sp).bold.make(),
           radius: 48.w,
-          backgroundColor: Color(0xE9F2FF),
+          backgroundColor: Color(0xFFE9F2FF),
         ),
         24.w.widthBox,
         Column(
@@ -278,13 +303,14 @@ class _InspectionManageDetailsPageState
             .make(),
         14.w.widthBox,
         Icon(
-          CupertinoIcons.chevron_right_circle,
-          size: 14.w,
+          CupertinoIcons.chevron_right,
+          size: 28.w,
+          color: Color(0xFF999999),
         ),
       ],
     )
         .box
-        .color(Color(0xF9F9F9))
+        .color(Color(0xFFF9F9F9))
         .withRounded(value: 4.w)
         .padding(EdgeInsets.all(24.w))
         .make()

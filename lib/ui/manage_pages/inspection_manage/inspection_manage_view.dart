@@ -43,14 +43,15 @@ class _InspectionMangeViewState extends State<InspectionMangeView> {
       },
       builder: (items) {
         return ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 32.w),
-            itemBuilder: (context, index) {
-              return InspectionManageCard(cardModel: items[index]);
-            },
-            separatorBuilder: (_, __) {
-              return 8.w.heightBox;
-            },
-            itemCount: items.length);
+          padding: EdgeInsets.symmetric(horizontal: 32.w),
+          itemBuilder: (context, index) {
+            return InspectionManageCard(cardModel: items[index]);
+          },
+          separatorBuilder: (context, index) {
+            return 8.w.heightBox;
+          },
+          itemCount: items.length,
+        );
       },
     );
   }

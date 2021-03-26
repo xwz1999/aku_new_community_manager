@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
@@ -32,5 +33,13 @@ class ManageFunc {
       "executeId": executeId,
     });
     return InspectionDetailModel.fromJson(baseModel.data);
+  }
+
+  static Future<List> getInspectionPoint(int id) async {
+    BaseModel baseModel =
+        await NetUtil().get(API.manage.inspectionPointByPlanId, params: {
+      "planId": id,
+    });
+    return baseModel.data as List;
   }
 }

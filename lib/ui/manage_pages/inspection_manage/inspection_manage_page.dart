@@ -63,7 +63,7 @@ class _InspectionManagePageState extends State<InspectionManagePage>
         children: List.generate(
           _tabs.length,
           (index) => InspectionMangeView(
-            inspectionStatus: index,
+            inspectionStatus: index + 1,
           ),
         ),
       ),
