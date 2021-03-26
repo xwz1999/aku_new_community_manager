@@ -47,170 +47,163 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        16.w.heightBox,
-        AkuButton(
-          onPressed: () {
-            Get.to(
-              InspectionManageDetailsPage(
-                inspectionStatus: widget.cardModel.status,
-                executeId: widget.cardModel.id,
-              ),
-            );
-          },
-          child: Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 40.w),
+    return AkuButton(
+      onPressed: () {
+        Get.to(
+          InspectionManageDetailsPage(
+            inspectionStatus: widget.cardModel.status,
+            executeId: widget.cardModel.id,
+          ),
+        );
+      },
+      child: Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: 24.w, right: 24.w, bottom: 40.w),
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.w), color: Color(0xFFFFFFFF)),
+        child: Column(children: [
+          Container(
+            height: 93.w,
             width: double.infinity,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.w),
-                color: Color(0xFFFFFFFF)),
-            child: Column(children: [
-              Container(
-                height: 93.w,
-                width: double.infinity,
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  children: [
-                    Text(
-                      '${widget.cardModel.name}',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                          color: AppStyle.primaryTextColor,
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.bold),
-                    ).expand(),
-                    _inspectionStatus[widget.cardModel.status]
-                        .text
-                        .color(_inspectionColor(widget.cardModel.status))
-                        .bold
-                        .size(28.sp)
-                        .make()
-                  ],
-                ),
+            alignment: Alignment.centerLeft,
+            child: Row(
+              children: [
+                Text(
+                  '${widget.cardModel.name}',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: AppStyle.primaryTextColor,
+                      fontSize: 32.sp,
+                      fontWeight: FontWeight.bold),
+                ).expand(),
+                _inspectionStatus[widget.cardModel.status]
+                    .text
+                    .color(_inspectionColor(widget.cardModel.status))
+                    .bold
+                    .size(28.sp)
+                    .make()
+              ],
+            ),
+          ),
+          Divider(height: 1.w),
+          24.w.heightBox,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Image.asset(
+                R.ASSETS_MANAGE_IC_RENWU_PNG,
+                width: 40.w,
+                height: 40.w,
               ),
-              Divider(height: 1.w),
-              24.w.heightBox,
+              4.w.widthBox,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    R.ASSETS_MANAGE_IC_RENWU_PNG,
-                    width: 40.w,
-                    height: 40.w,
+                  Text(
+                    '巡检编号',
+                    style: _textstyle,
                   ),
-                  4.w.widthBox,
+                ],
+              ),
+              36.w.widthBox,
+              Text(
+                widget.cardModel.code,
+                maxLines: 2,
+                textAlign: TextAlign.right,
+                style: AppStyle().primaryStyle,
+              ).expand()
+            ],
+          ),
+          12.w.heightBox,
+          ...isManager
+              ? [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Image.asset(
+                        R.ASSETS_MANAGE_IC_RENWU_PNG,
+                        width: 40.w,
+                        height: 40.w,
+                      ),
+                      4.w.widthBox,
                       Text(
-                        '巡检编号',
+                        '巡检人',
                         style: _textstyle,
                       ),
+                      Spacer(),
+                      Text(
+                        widget.cardModel.inspectorName,
+                        style: AppStyle().primaryStyle,
+                      )
                     ],
                   ),
-                  36.w.widthBox,
-                  Text(
-                    widget.cardModel.code,
-                    maxLines: 2,
-                    textAlign: TextAlign.right,
-                    style: AppStyle().primaryStyle,
-                  ).expand()
-                ],
+                  12.w.heightBox,
+                ]
+              : [SizedBox()],
+          Row(
+            children: [
+              Image.asset(
+                R.ASSETS_INSPECTION_IC_XUNJIAN_PNG,
+                width: 40.w,
+                height: 40.w,
               ),
-              12.w.heightBox,
-              ...isManager
-                  ? [
-                      Row(
-                        children: [
-                          Image.asset(
-                            R.ASSETS_MANAGE_IC_RENWU_PNG,
-                            width: 40.w,
-                            height: 40.w,
-                          ),
-                          4.w.widthBox,
-                          Text(
-                            '巡检人',
-                            style: _textstyle,
-                          ),
-                          Spacer(),
-                          Text(
-                            widget.cardModel.inspectorName,
-                            style: AppStyle().primaryStyle,
-                          )
-                        ],
-                      ),
-                      12.w.heightBox,
-                    ]
-                  : [SizedBox()],
-              Row(
-                children: [
-                  Image.asset(
-                    R.ASSETS_INSPECTION_IC_XUNJIAN_PNG,
-                    width: 40.w,
-                    height: 40.w,
-                  ),
-                  4.w.widthBox,
-                  Text('规定巡检时间', style: _textstyle),
-                  Spacer(),
-                  Text(
-                    '${DateUtil.formatDateStr(widget.cardModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${widget.cardModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
-                    style: AppStyle().primaryStyle,
-                  ),
-                ],
+              4.w.widthBox,
+              Text('规定巡检时间', style: _textstyle),
+              Spacer(),
+              Text(
+                '${DateUtil.formatDateStr(widget.cardModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${widget.cardModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
+                style: AppStyle().primaryStyle,
               ),
-              12.w.heightBox,
-              ...widget?.cardModel?.actualBeginDate == null
-                  ? [SizedBox()]
-                  : [
-                      Row(
-                        children: [
-                          Image.asset(
-                            R.ASSETS_MANAGE_IC_TIME_PNG,
-                            width: 40.w,
-                            height: 40.w,
-                          ),
-                          4.w.widthBox,
-                          Text(
-                            '开始巡检时间',
-                            style: _textstyle,
-                          ),
-                          Spacer(),
-                          Text(
-                            '${DateUtil.formatDateStr(widget.cardModel.actualBeginDate, format: "yyyy-MM-dd HH:mm")}',
-                            style: AppStyle().primaryStyle,
-                          ),
-                        ],
-                      ),
-                      12.w.heightBox,
-                    ],
-              widget?.cardModel?.actualEndDate == null
-                  ? SizedBox()
-                  : Row(
-                      children: [
-                        Image.asset(
-                          R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
-                          width: 40.w,
-                          height: 40.w,
-                        ),
-                        4.w.widthBox,
-                        Text(
-                          '结束巡检时间',
-                          style: _textstyle,
-                        ),
-                        Spacer(),
-                        Text(
-                          '${DateUtil.formatDateStr(widget.cardModel.actualEndDate, format: "yyyy-MM-dd HH:mm")}',
-                          style: AppStyle().primaryStyle,
-                        ),
-                      ],
-                    )
-            ]),
+            ],
           ),
-        ),
-      ],
+          12.w.heightBox,
+          ...widget?.cardModel?.actualBeginDate == null
+              ? [SizedBox()]
+              : [
+                  Row(
+                    children: [
+                      Image.asset(
+                        R.ASSETS_MANAGE_IC_TIME_PNG,
+                        width: 40.w,
+                        height: 40.w,
+                      ),
+                      4.w.widthBox,
+                      Text(
+                        '开始巡检时间',
+                        style: _textstyle,
+                      ),
+                      Spacer(),
+                      Text(
+                        '${DateUtil.formatDateStr(widget.cardModel.actualBeginDate, format: "yyyy-MM-dd HH:mm")}',
+                        style: AppStyle().primaryStyle,
+                      ),
+                    ],
+                  ),
+                  12.w.heightBox,
+                ],
+          widget?.cardModel?.actualEndDate == null
+              ? SizedBox()
+              : Row(
+                  children: [
+                    Image.asset(
+                      R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
+                      width: 40.w,
+                      height: 40.w,
+                    ),
+                    4.w.widthBox,
+                    Text(
+                      '结束巡检时间',
+                      style: _textstyle,
+                    ),
+                    Spacer(),
+                    Text(
+                      '${DateUtil.formatDateStr(widget.cardModel.actualEndDate, format: "yyyy-MM-dd HH:mm")}',
+                      style: AppStyle().primaryStyle,
+                    ),
+                  ],
+                )
+        ]),
+      ),
     );
   }
 }

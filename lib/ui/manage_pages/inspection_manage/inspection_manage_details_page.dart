@@ -83,10 +83,18 @@ class _InspectionManageDetailsPageState
           onRefresh: () async {
             _detailModel =
                 await ManageFunc.getInspectionDetail(widget.executeId);
-            ManageFunc.getInspectionPoint(widget.executeId).then((value) {
-              _pointModels =
-                  value.map((e) => InspectionPointModel.fromJson(e)).toList();
-            });
+            await ManageFunc.getInspectionPoint(_detailModel.inspectionPlanId)
+                .then(
+              (value) {
+                if (value == null) {
+                  _pointModels = [];
+                } else {
+                  _pointModels = value
+                      .map((e) => InspectionPointModel.fromJson(e))
+                      .toList();
+                }
+              },
+            );
             _onload = false;
             setState(() {});
           },
@@ -108,6 +116,11 @@ class _InspectionManageDetailsPageState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           '巡检站点'.text.black.size(32.sp).bold.make(),
+                          ..._pointModels
+                                  ?.map((e) => _buildInspectionTile(
+                                      e.name, e.checkNum, e.id))
+                                  ?.toList() ??
+                              []
                         ].sepWidget(separate: 16.w.heightBox),
                       ),
                     )
@@ -118,7 +131,12 @@ class _InspectionManageDetailsPageState
           onPressed: () {},
           padding: EdgeInsets.symmetric(vertical: 26.w),
           color: kPrimaryColor,
-          child: '开始巡检'.text.black.bold.size(32.sp).make(),
+          child: (widget.inspectionStatus == 1 ? '开始巡检' : '立即扫码')
+              .text
+              .black
+              .bold
+              .size(32.sp)
+              .make(),
         ).pOnly(bottom: MediaQuery.of(context).padding.bottom));
   }
 
@@ -217,7 +235,7 @@ class _InspectionManageDetailsPageState
                 Text('规定巡检时间', style: _textstyle),
                 Spacer(),
                 Text(
-                  '${DateUtil.formatDateStr(_detailModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${_detailModel?.endDate == null ? '' : DateUtil.formatDateStr(_detailModel.endDate, format: "HH:mm")}',
+                  '${DateUtil.formatDateStr(_detailModel.beginDate, format: "yyyy-MM-dd HH:mm")}${_detailModel?.endDate == null ? '' : '～'}${_detailModel?.endDate == null ? '' : DateUtil.formatDateStr(_detailModel.endDate, format: "HH:mm")}',
                   style: AppStyle().primaryStyle,
                 ),
               ],

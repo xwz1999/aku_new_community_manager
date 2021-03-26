@@ -43,12 +43,12 @@ class _InspectionMangeViewState extends State<InspectionMangeView> {
       },
       builder: (items) {
         return ListView.separated(
-          padding: EdgeInsets.symmetric(horizontal: 32.w),
+          padding: EdgeInsets.fromLTRB(32.w, 16.w, 32.w, 16.w),
           itemBuilder: (context, index) {
             return InspectionManageCard(cardModel: items[index]);
           },
           separatorBuilder: (context, index) {
-            return 8.w.heightBox;
+            return 16.w.heightBox;
           },
           itemCount: items.length,
         );
