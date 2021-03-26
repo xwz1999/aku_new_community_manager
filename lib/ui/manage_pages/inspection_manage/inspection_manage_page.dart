@@ -37,8 +37,6 @@ class _InspectionManagePageState extends State<InspectionManagePage>
     }
   }
 
-  int _selectIndex = 0;
-
   TabController _tabController;
   @override
   void initState() {

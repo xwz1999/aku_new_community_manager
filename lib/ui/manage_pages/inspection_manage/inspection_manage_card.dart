@@ -1,8 +1,10 @@
 import 'package:aku_community_manager/models/manager/inspection/inspection_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_details_page.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class InspectionManageCard extends StatefulWidget {
@@ -43,11 +45,12 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
         AkuButton(
           onPressed: widget.extra
               ? () {
-                  // Get.to(
-                  //   InspectionManageDetailsPage(
-                  //     widget.cardModel: widget.cardModel,
-                  //   ),
-                  // );
+                  Get.to(
+                    InspectionManageDetailsPage(
+                      inspectionStatus: widget.cardModel.status,
+                      executeId: widget.cardModel.id,
+                    ),
+                  );
                 }
               : () {},
           child: Container(

@@ -140,6 +140,9 @@ class _Manage {
 
   ///巡检管理：查询所有的巡检管理信息
   String get inspectionList => '/user/inspection/list';
+
+  ///巡检管理：根据巡检执行情况主键id查询巡检详情
+  String get inspectionFindDetailByld => '/user/inspection/findDetailById';
 }
 
 class _Upload {
