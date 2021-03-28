@@ -48,7 +48,7 @@ dependencies:
   permission_handler: ^5.0.1+1
   
   velocity_x: ^2.6.0
-  
+  dotted_border: ^2.0.0-nullsafety.0
   dio:
 
   power_logger: ^0.1.3
