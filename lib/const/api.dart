@@ -146,6 +146,13 @@ class _Manage {
 
   ///巡检管理：根据巡检计划主键id查询巡检点部分信息（开始巡检前调用）
   String get inspectionPointByPlanId => '/user/inspection/findPointByPlanId';
+
+  ///巡检管理：开始巡检
+  String get inspectionStart => '/user/inspection/startInspection';
+
+  ///巡检管理：根据巡检执行情况主键id查询巡检点部分信息（开始巡检后调用）
+  String get inspecntionFindPointByExecuteId =>
+      '/user/inspection/findPointByExecuteId';
 }
 
 class _Upload {

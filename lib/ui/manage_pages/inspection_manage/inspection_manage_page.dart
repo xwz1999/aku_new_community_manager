@@ -31,9 +31,9 @@ class _InspectionManagePageState extends State<InspectionManagePage>
     UserProvider _userProvider =
         Provider.of<UserProvider>(context, listen: false);
     if (_userProvider.infoModel.canOperation) {
-      return ['待巡检', '已巡检', '巡检中', '全部'];
+      return ['待巡检', '已巡检', '巡检中', '未巡检'];
     } else {
-      return ['待巡检', '已巡检', '巡检中', '全部'];
+      return ['待巡检', '已巡检', '巡检中', '未巡检'];
     }
   }
 

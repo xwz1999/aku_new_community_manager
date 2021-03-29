@@ -1,8 +1,12 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/aku_ui.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +22,9 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class InspectionManageDetailsPage extends StatefulWidget {
   final int executeId;
-  final int inspectionStatus;
   InspectionManageDetailsPage({
     Key key,
     @required this.executeId,
-    @required this.inspectionStatus,
   }) : super(key: key);
 
   @override
@@ -83,23 +85,16 @@ class _InspectionManageDetailsPageState
           onRefresh: () async {
             _detailModel =
                 await ManageFunc.getInspectionDetail(widget.executeId);
-            await ManageFunc.getInspectionPoint(_detailModel.inspectionPlanId)
-                .then(
-              (value) {
-                if (value == null) {
-                  _pointModels = [];
-                } else {
-                  _pointModels = value
-                      .map((e) => InspectionPointModel.fromJson(e))
-                      .toList();
-                }
-              },
-            );
+            _pointModels = await (_detailModel.status == 1
+                ? ManageFunc.getInspectionPointByPlanId(
+                    planId: _detailModel.inspectionPlanId)
+                : ManageFunc.getInspectionPointByExcuteId(
+                    excuteId: widget.executeId));
             _onload = false;
             setState(() {});
           },
           child: _onload
-              ? SizedBox()
+              ? _emptyWidget()
               : Column(
                   children: [
                     _inspectionHeadCard(),
@@ -127,17 +122,32 @@ class _InspectionManageDetailsPageState
                   ],
                 ),
         ),
-        bottom: AkuButton(
-          onPressed: () {},
-          padding: EdgeInsets.symmetric(vertical: 26.w),
-          color: kPrimaryColor,
-          child: (widget.inspectionStatus == 1 ? '开始巡检' : '立即扫码')
-              .text
-              .black
-              .bold
-              .size(32.sp)
-              .make(),
-        ).pOnly(bottom: MediaQuery.of(context).padding.bottom));
+        bottom: (!_onload) &&
+                (_detailModel.status != 2) &&
+                (_detailModel.status != 4)
+            ? AkuButton(
+                onPressed: _detailModel.status == 1
+                    ? () async {
+                        BaseModel _baseModel = await NetUtil().get(
+                            API.manage.inspectionStart,
+                            params: {"executeId": widget.executeId});
+                        if (_baseModel.status) {
+                          setState(() {});
+                        } else {
+                          BotToast.showText(text: _baseModel.message);
+                        }
+                      }
+                    : () {},
+                padding: EdgeInsets.symmetric(vertical: 26.w),
+                color: kPrimaryColor,
+                child: (_detailModel.status == 1 ? '开始巡检' : '立即扫码')
+                    .text
+                    .black
+                    .bold
+                    .size(32.sp)
+                    .make(),
+              ).pOnly(bottom: MediaQuery.of(context).padding.bottom)
+            : SizedBox());
   }
 
   Widget _inspectionHeadCard() {
@@ -167,9 +177,9 @@ class _InspectionManageDetailsPageState
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  _inspectionStatus[widget.inspectionStatus]
+                  _inspectionStatus[_detailModel.status]
                       .text
-                      .color(_inspectionColor(widget.inspectionStatus))
+                      .color(_inspectionColor(_detailModel.status))
                       .bold
                       .size(28.sp)
                       .make()
@@ -313,11 +323,11 @@ class _InspectionManageDetailsPageState
           ],
         ),
         Spacer(),
-        _inspectionStatus[widget.inspectionStatus]
+        _inspectionStatus[_detailModel.status]
             .text
             .size(24.sp)
             .bold
-            .color(_inspectionColor(widget.inspectionStatus))
+            .color(_inspectionColor(_detailModel.status))
             .make(),
         14.w.widthBox,
         Icon(

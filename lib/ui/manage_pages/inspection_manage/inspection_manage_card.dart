@@ -51,7 +51,6 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
       onPressed: () {
         Get.to(
           InspectionManageDetailsPage(
-            inspectionStatus: widget.cardModel.status,
             executeId: widget.cardModel.id,
           ),
         );

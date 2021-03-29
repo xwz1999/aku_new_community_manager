@@ -5,6 +5,7 @@ import 'package:aku_community_manager/models/manager/inspection/inspection_point
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class ManageFunc {
   static Future<DecorationDetailModel> getDetcorationDetail(int id) async {
@@ -35,11 +36,25 @@ class ManageFunc {
     return InspectionDetailModel.fromJson(baseModel.data);
   }
 
-  static Future<List> getInspectionPoint(int id) async {
+  static Future<List<InspectionPointModel>> getInspectionPointByPlanId(
+      {@required int planId}) async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.inspectionPointByPlanId, params: {
-      "planId": id,
+      "planId": planId,
     });
-    return baseModel.data as List;
+    return (baseModel.data as List)
+        .map((e) => InspectionPointModel.fromJson(e))
+        .toList();
+  }
+
+  static Future<List<InspectionPointModel>> getInspectionPointByExcuteId(
+      {@required int excuteId}) async {
+    BaseModel baseModel = await NetUtil()
+        .get(API.manage.inspecntionFindPointByExecuteId, params: {
+      "planId": excuteId,
+    });
+    return (baseModel.data as List)
+        .map((e) => InspectionPointModel.fromJson(e))
+        .toList();
   }
 }

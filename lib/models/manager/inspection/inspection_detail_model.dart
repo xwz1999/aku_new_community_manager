@@ -7,6 +7,8 @@ class InspectionDetailModel {
   String endDate;
   String actualBeginDate;
   String actualEndDate;
+  int sort;
+  int status;
 
   InspectionDetailModel(
       {this.id,
@@ -16,7 +18,9 @@ class InspectionDetailModel {
       this.beginDate,
       this.endDate,
       this.actualBeginDate,
-      this.actualEndDate});
+      this.actualEndDate,
+      this.sort,
+      this.status});
 
   InspectionDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -27,6 +31,8 @@ class InspectionDetailModel {
     endDate = json['endDate'];
     actualBeginDate = json['actualBeginDate'];
     actualEndDate = json['actualEndDate'];
+    sort = json['sort'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -39,6 +45,8 @@ class InspectionDetailModel {
     data['endDate'] = this.endDate;
     data['actualBeginDate'] = this.actualBeginDate;
     data['actualEndDate'] = this.actualEndDate;
+    data['sort'] = this.sort;
+    data['status'] = this.status;
     return data;
   }
 }
