@@ -2,6 +2,8 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_code_parase.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
@@ -13,6 +15,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -139,8 +142,21 @@ class _InspectionManageDetailsPageState
                           BotToast.showText(text: _baseModel.message);
                         }
                       }
-                    : () {
-                        Get.to(() => QrScannerPage());
+                    : () async {
+                        Barcode result = await Get.to(() => QrScannerPage());
+                        BaseModel baseModel =
+                            await ManageFunc.getInspectionFindCheckDetailByQr(
+                                _detailModel.id,
+                                QRCodeParase.getExecutePointId(result.code));
+                        if (baseModel.status) {
+                          Get.to(() => InspectionPointInputPage());
+                        } else {
+                          showCupertinoDialog(
+                              context: context,
+                              builder: (context) {
+                                return _errorDialog();
+                              });
+                        }
                       },
                 padding: EdgeInsets.symmetric(vertical: 26.w),
                 color: kPrimaryColor,
@@ -152,6 +168,34 @@ class _InspectionManageDetailsPageState
                     .make(),
               ).pOnly(bottom: MediaQuery.of(context).padding.bottom)
             : SizedBox());
+  }
+
+  Widget _errorDialog() {
+    return CupertinoAlertDialog(
+      title: '扫码异常'
+          .text
+          .isIntrinsic
+          .color(kTextPrimaryColor)
+          .bold
+          .size(36.sp)
+          .make(),
+      content: '请扫描此次巡检点二维码'
+          .text
+          .isIntrinsic
+          .color(kTextPrimaryColor)
+          .size(30.sp)
+          .make(),
+      actions: [
+        CupertinoDialogAction(
+            child: '确定'
+                .text
+                .isIntrinsic
+                .color(Color(0xFFFF4501))
+                .bold
+                .size(36.sp)
+                .make())
+      ],
+    );
   }
 
   Widget _inspectionHeadCard() {
