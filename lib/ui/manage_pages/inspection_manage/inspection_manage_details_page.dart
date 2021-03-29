@@ -2,6 +2,7 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
@@ -11,6 +12,7 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -137,7 +139,9 @@ class _InspectionManageDetailsPageState
                           BotToast.showText(text: _baseModel.message);
                         }
                       }
-                    : () {},
+                    : () {
+                        Get.to(() => QrScannerPage());
+                      },
                 padding: EdgeInsets.symmetric(vertical: 26.w),
                 color: kPrimaryColor,
                 child: (_detailModel.status == 1 ? '开始巡检' : '立即扫码')
