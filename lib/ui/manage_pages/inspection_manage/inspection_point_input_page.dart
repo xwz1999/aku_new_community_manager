@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -13,11 +11,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class InspectionPointInputPage extends StatefulWidget {
-  final bool hasScan;
   final InspectionQRCodeModel qrModel;
   final String inspectionName;
-  InspectionPointInputPage(
-      {Key key, this.hasScan = true, this.qrModel, this.inspectionName})
+  InspectionPointInputPage({Key key, this.qrModel, this.inspectionName})
       : super(key: key);
 
   @override
@@ -48,16 +44,11 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           16.w.heightBox,
           _inspectionHeadCard(),
           16.w.heightBox,
-          ...widget.hasScan
-              ? [
-                  ..._model.checkVoList
-                      .map((e) =>
-                          _meterCard(e.name, _model.checkVoList.indexOf(e)))
-                      .toList(),
-                  _selfPhotoCard(),
-                  _scenePhotoCard(),
-                ]
-              : []
+          ..._model.checkVoList
+              .map((e) => _meterCard(e.name, _model.checkVoList.indexOf(e)))
+              .toList(),
+          _selfPhotoCard(),
+          _scenePhotoCard(),
         ],
       ),
       bottom: AkuButton(

@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
@@ -78,5 +79,14 @@ class ManageFunc {
     });
 
     return response.data;
+  }
+
+  static Future<InspectionCheckDetialModel> getInspectionPointCheckDetail(
+      int executePointId) async {
+    BaseModel baseModel =
+        await NetUtil().get(API.manage.inspectionPointCheckDetail, params: {
+      "executePointId": executePointId,
+    });
+    return InspectionCheckDetialModel.fromJson(baseModel.data);
   }
 }

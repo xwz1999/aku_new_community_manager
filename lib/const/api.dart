@@ -160,6 +160,10 @@ class _Manage {
 
   ///巡检管理：提交巡检点信息
   String get submitPointDetail => '/user/inspection/submitPointDetail';
+
+  ///巡检管理：查询巡检执行点信息（点击已巡检查看详情）
+  String get inspectionPointCheckDetail =>
+      '/user/inspection/findCheckDetailById';
 }
 
 class _Upload {
