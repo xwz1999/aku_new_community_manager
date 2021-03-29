@@ -1,29 +1,23 @@
 import 'dart:io';
 
-import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:common_utils/common_utils.dart';
+import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class InspectionPointInputPage extends StatefulWidget {
   final bool hasScan;
-  final InspectionDetailModel detailModel;
-  final int inspectionStatus;
-  final InspectionPointModel pointModel;
+  final InspectionQRCodeModel qrModel;
+  final String inspectionName;
   InspectionPointInputPage(
-      {Key key,
-      this.hasScan,
-      this.detailModel,
-      this.inspectionStatus,
-      this.pointModel})
+      {Key key, this.hasScan = true, this.qrModel, this.inspectionName})
       : super(key: key);
 
   @override
@@ -32,26 +26,16 @@ class InspectionPointInputPage extends StatefulWidget {
 }
 
 class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
-  TextEditingController _cleaningExtraController;
-  TextEditingController _meterExtraController;
-  TextEditingController _meterCountContrlller;
-  int _cleaningStatus;
-  int _meterStatus;
-  File _selfPhoto;
-  File _scenePhoto;
+  InspectionPointSubmitModel _submitModel;
+  InspectionQRCodeModel _model;
   @override
   void initState() {
     super.initState();
-    _cleaningExtraController = TextEditingController();
-    _meterExtraController = TextEditingController();
-    _meterCountContrlller = TextEditingController();
+    _model = widget.qrModel;
   }
 
   @override
   void dispose() {
-    _cleaningExtraController?.dispose();
-    _meterExtraController?.dispose();
-    _meterCountContrlller?.dispose();
     super.dispose();
   }
 
@@ -64,12 +48,25 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           16.w.heightBox,
           _inspectionHeadCard(),
           16.w.heightBox,
-          _cleaningCard(),
-          _meterCard(),
-          _selfPhotoCard(),
-          _scenePhotoCard(),
+          ...widget.hasScan
+              ? [
+                  ..._model.checkVoList
+                      .map((e) =>
+                          _meterCard(e.name, _model.checkVoList.indexOf(e)))
+                      .toList(),
+                  _selfPhotoCard(),
+                  _scenePhotoCard(),
+                ]
+              : []
         ],
       ),
+      bottom: AkuButton(
+        width: double.infinity,
+        height: 100.w,
+        child: '立即提交'.text.color(kTextPrimaryColor).bold.size(32.sp).make(),
+        color: kPrimaryColor,
+        padding: EdgeInsets.symmetric(vertical: 26.w),
+      ).pOnly(bottom: MediaQuery.of(context).padding.bottom),
     );
   }
 
@@ -84,7 +81,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         32.w.heightBox,
         AkuPickImageWidget(
           onChanged: (file) {
-            _scenePhoto = file;
+            _submitModel.inspectionFaceImg = file;
           },
         ),
       ],
@@ -102,19 +99,22 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         32.w.heightBox,
         AkuPickImageWidget(
           onChanged: (file) {
-            _selfPhoto = file;
+            _submitModel.inspectionSpaceImg = file;
           },
         ),
       ],
     ).box.color(Colors.white).make();
   }
 
-  Widget _meterCard() {
+  Widget _meterCard(
+    String title,
+    int index,
+  ) {
     return Column(
       children: [
         Row(
           children: [
-            '2.检查小区南门抄表数据'.text.color(kTextPrimaryColor).size(32.sp).make()
+            '2.$title'.text.color(kTextPrimaryColor).size(32.sp).make()
           ],
         ),
         32.w.heightBox,
@@ -123,48 +123,48 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             AkuSingleCheckButton(
               text: '正常',
               value: 0,
-              gropValue: _meterStatus,
+              gropValue: _submitModel.executeCheckList[index].status,
               onPressed: () {
-                _cleaningStatus = 0;
+                _submitModel.executeCheckList[index].status = 0;
               },
             ),
             80.w.widthBox,
             AkuSingleCheckButton(
               text: '异常',
               value: 0,
-              gropValue: _meterStatus,
+              gropValue: _submitModel.executeCheckList[index].status,
               onPressed: () {
-                _cleaningStatus = 1;
+                _submitModel.executeCheckList[index].status = 1;
               },
             ),
           ],
         ),
         36.w.heightBox,
-        Row(
-          children: [
-            '抄表值'.text.color(kTextPrimaryColor).size(28.sp).make(),
-            Spacer(),
-            TextField(
-              controller: _meterCountContrlller,
-              textAlign: TextAlign.end,
-              inputFormatters: [
-                FilteringTextInputFormatter.allow(RegExp('[0-9]*'))
-              ],
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: '请输入抄表值',
-                hintStyle: TextStyle(
-                  fontSize: 28.sp,
-                  color: kTextSubColor,
-                ),
-                contentPadding: EdgeInsets.zero,
-                isDense: true,
-              ),
-            )
-          ],
-        ),
-        28.w.heightBox,
-        Divider(),
+        // Row(
+        //   children: [
+        //     '抄表值'.text.color(kTextPrimaryColor).size(28.sp).make(),
+        //     Spacer(),
+        //     TextField(
+        //       controller: _meterCountContrlller,
+        //       textAlign: TextAlign.end,
+        //       inputFormatters: [
+        //         FilteringTextInputFormatter.allow(RegExp('[0-9]*'))
+        //       ],
+        //       decoration: InputDecoration(
+        //         border: InputBorder.none,
+        //         hintText: '请输入抄表值',
+        //         hintStyle: TextStyle(
+        //           fontSize: 28.sp,
+        //           color: kTextSubColor,
+        //         ),
+        //         contentPadding: EdgeInsets.zero,
+        //         isDense: true,
+        //       ),
+        //     )
+        //   ],
+        // ),
+        // 28.w.heightBox,
+        // Divider(),
         Container(
           width: 686.w,
           height: 120.w,
@@ -177,7 +177,9 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           ),
           child: TextField(
             minLines: 5,
-            controller: _meterExtraController,
+            onChanged: (value) {
+              _submitModel.executeCheckList[index].remarks = value;
+            },
             decoration: InputDecoration(
               hintText: '请输入备注信息',
               hintStyle: TextStyle(
@@ -195,71 +197,6 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         .box
         .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
         .color(Colors.white)
-        .make();
-  }
-
-  Widget _cleaningCard() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            '1.${widget.pointModel.name}'.text.black.size(32.sp).bold.make()
-          ],
-        ),
-        32.w.heightBox,
-        Row(
-          children: [
-            AkuSingleCheckButton(
-              text: '正常',
-              value: 0,
-              gropValue: _cleaningStatus,
-              onPressed: () {
-                _cleaningStatus = 0;
-              },
-            ),
-            80.w.widthBox,
-            AkuSingleCheckButton(
-              text: '异常',
-              value: 0,
-              gropValue: _cleaningStatus,
-              onPressed: () {
-                _cleaningStatus = 1;
-              },
-            ),
-          ],
-        ),
-        32.w.heightBox,
-        Container(
-          width: 686.w,
-          height: 120.w,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.w),
-            border: Border.all(
-              width: 2.w,
-              color: Color(0xFFE8E8E8),
-            ),
-          ),
-          child: TextField(
-            minLines: 5,
-            controller: _cleaningExtraController,
-            decoration: InputDecoration(
-              hintText: '请输入备注信息',
-              hintStyle: TextStyle(
-                fontSize: 28.sp,
-                color: kTextSubColor,
-              ),
-              contentPadding: EdgeInsets.zero,
-              border: InputBorder.none,
-              isDense: true,
-            ),
-          ),
-        ),
-      ],
-    )
-        .box
-        .color(Colors.white)
-        .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
         .make();
   }
 
@@ -283,18 +220,18 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
               child: Row(
                 children: [
                   Text(
-                    '${widget.detailModel.name}',
+                    '巡检点信息',
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 36.sp,
                         fontWeight: FontWeight.bold),
                   ),
-                  Spacer(),
-                  InspectionUtils.status[widget.inspectionStatus].text
-                      .color(InspectionUtils.color(widget.inspectionStatus))
-                      .bold
-                      .size(28.sp)
-                      .make()
+                  // Spacer(),
+                  // InspectionUtils.status[widget.detailModel.status].text
+                  //     .color(InspectionUtils.color(widget.detailModel.status))
+                  //     .bold
+                  //     .size(28.sp)
+                  //     .make()
                 ],
               ),
             ),
@@ -318,7 +255,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 36.w.widthBox,
                 Text(
-                  widget.detailModel.name,
+                  widget.inspectionName,
                   maxLines: 2,
                   textAlign: TextAlign.right,
                   style: AppStyle().primaryStyle,
@@ -335,12 +272,12 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 4.w.widthBox,
                 Text(
-                  '巡检编号',
+                  '巡检点编号',
                   style: InspectionUtils.textstyle,
                 ),
                 Spacer(),
                 Text(
-                  widget.detailModel.code,
+                  widget.qrModel.code,
                   style: AppStyle().primaryStyle,
                 )
               ],
@@ -355,62 +292,36 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 4.w.widthBox,
                 Text(
-                  '规定巡检时间',
+                  '巡检点名称',
                   style: InspectionUtils.textstyle,
                 ),
                 Spacer(),
                 Text(
-                  '${DateUtil.formatDateStr(widget.detailModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${widget.detailModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.detailModel.endDate, format: "HH:mm")}',
+                  '${widget.qrModel.name}',
                   style: AppStyle().primaryStyle,
                 ),
               ],
             ),
             12.w.heightBox,
-            ...widget.detailModel?.actualBeginDate == null
-                ? <Widget>[SizedBox()]
-                : [
-                    Row(
-                      children: [
-                        Image.asset(
-                          R.ASSETS_MANAGE_IC_TIME_PNG,
-                          width: 40.w,
-                          height: 40.w,
-                        ),
-                        4.w.widthBox,
-                        Text(
-                          '开始巡检时间',
-                          style: InspectionUtils.textstyle,
-                        ),
-                        Spacer(),
-                        Text(
-                          '${DateUtil.formatDateStr(widget.detailModel.actualBeginDate, format: "yyyy-MM-dd HH:mm")}',
-                          style: AppStyle().primaryStyle,
-                        ),
-                      ],
-                    ),
-                    12.w.heightBox,
-                  ],
-            widget.detailModel?.actualEndDate == null
-                ? SizedBox()
-                : Row(
-                    children: [
-                      Image.asset(
-                        R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
-                        width: 40.w,
-                        height: 40.w,
-                      ),
-                      4.w.widthBox,
-                      Text(
-                        '结束巡检时间',
-                        style: InspectionUtils.textstyle,
-                      ),
-                      Spacer(),
-                      Text(
-                        '${DateUtil.formatDateStr(widget.detailModel.actualEndDate, format: "yyyy-MM-dd HH:mm")}',
-                        style: AppStyle().primaryStyle,
-                      ),
-                    ],
-                  )
+            Row(
+              children: [
+                Image.asset(
+                  R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
+                  width: 40.w,
+                  height: 40.w,
+                ),
+                4.w.widthBox,
+                Text(
+                  '巡检模式',
+                  style: InspectionUtils.textstyle,
+                ),
+                Spacer(),
+                Text(
+                  '${widget.qrModel.type}',
+                  style: AppStyle().primaryStyle,
+                ),
+              ],
+            )
           ]),
         ),
       ],

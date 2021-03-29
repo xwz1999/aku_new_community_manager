@@ -2,6 +2,7 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
@@ -64,5 +65,18 @@ class ManageFunc {
         API.manage.inspectionFindCheckDetailByQR,
         params: {"executeId": executeId, "executePointId": excutePointId});
     return baseModel;
+  }
+
+  static Future getSubmitPoint(InspectionPointSubmitModel model) async {
+    Response response = await NetUtil()
+        .dio
+        .post(API.manage.submitPointDetail, queryParameters: {
+      "executePointId": model.executePointId,
+      "executeCheckList": model.executeCheckList,
+      "inspectionFaceImg": [],
+      "inspectionSpaceImg": []
+    });
+
+    return response.data;
   }
 }

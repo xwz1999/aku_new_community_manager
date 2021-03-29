@@ -157,6 +157,9 @@ class _Manage {
   ///巡检管理：扫码二维码查询巡检信息
   String get inspectionFindCheckDetailByQR =>
       '/user/inspection/findCheckDetailByQR';
+
+  ///巡检管理：提交巡检点信息
+  String get submitPointDetail => '/user/inspection/submitPointDetail';
 }
 
 class _Upload {

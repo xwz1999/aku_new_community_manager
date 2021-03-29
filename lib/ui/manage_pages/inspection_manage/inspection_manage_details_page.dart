@@ -2,6 +2,7 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_code_parase.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
@@ -149,7 +150,12 @@ class _InspectionManageDetailsPageState
                                 _detailModel.id,
                                 QRCodeParase.getExecutePointId(result.code));
                         if (baseModel.status) {
-                          Get.to(() => InspectionPointInputPage());
+                          Get.to(() => InspectionPointInputPage(
+                                hasScan: true,
+                                inspectionName: _detailModel.name,
+                                qrModel: InspectionQRCodeModel.fromJson(
+                                    baseModel.data),
+                              ));
                         } else {
                           showCupertinoDialog(
                               context: context,
