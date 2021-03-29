@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
               ExtendedWidgetSpan(
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(AgreementPage());
+                    Get.to(() => AgreementPage());
                   },
                   child: Text(
                     '《服务协议》',
@@ -173,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
               ExtendedWidgetSpan(
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(PrivacyPage());
+                    Get.to(() => PrivacyPage());
                   },
                   child: Text(
                     '《隐私政策》',

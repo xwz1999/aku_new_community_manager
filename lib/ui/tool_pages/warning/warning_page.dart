@@ -37,7 +37,7 @@ class _WarningPageState extends State<WarningPage> {
         AkuMaterialButton(
           padding: EdgeInsets.symmetric(horizontal: 32.w),
           onPressed: () {
-            Get.to(WarningDetailPage());
+            Get.to(() => WarningDetailPage());
           },
           child: Text(
             '功能说明',
@@ -163,7 +163,7 @@ class _WarningPageState extends State<WarningPage> {
                   minWidth: 0,
                   onPressed: () {
                     launch('tel:110');
-                    // Get.to(WarningSubPage());
+                    // Get.to(()=>WarningSubPage());
                   },
                   child: Container(
                     height: 172.w,

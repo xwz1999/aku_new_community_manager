@@ -60,7 +60,7 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
         AkuMaterialButton(
           minWidth: 178.w,
           onPressed: () {
-            Get.to(AllBorrowGoods());
+            Get.to(() => AllBorrowGoods());
           },
           child: Text(
             '全部物品',

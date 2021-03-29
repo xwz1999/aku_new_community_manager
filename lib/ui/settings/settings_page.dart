@@ -60,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
           AkuTile(
             title: Text('意见反馈'),
             arrow: true,
-            onTap: () => Get.to(SettingFeedBackPage()),
+            onTap: () => Get.to(() => SettingFeedBackPage()),
           ),
           Divider(height: 1.w),
           AkuTile(
@@ -72,13 +72,13 @@ class _SettingsPageState extends State<SettingsPage> {
           AkuTile(
             title: Text('隐私政策'),
             arrow: true,
-            onTap: () => Get.to(PrivacyPage()),
+            onTap: () => Get.to(() => PrivacyPage()),
           ),
           Divider(height: 1.w),
           AkuTile(
             title: Text('用户协议'),
             arrow: true,
-            onTap: () => Get.to(AgreementPage()),
+            onTap: () => Get.to(() => AgreementPage()),
           ),
           AkuBox.h(320),
           userProvider.isLogin

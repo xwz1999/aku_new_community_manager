@@ -162,7 +162,7 @@ class _MessageState extends State<Message> {
               '你有一条新的报事报修待处理',
               _messageCount,
               onpressed: () {
-                Get.to(SystemMessage());
+                Get.to(() => SystemMessage());
               },
             ),
             Divider(
@@ -175,7 +175,7 @@ class _MessageState extends State<Message> {
               '你有一条新的评论回复',
               _commentCount,
               onpressed: () {
-                Get.to(CommentMessage());
+                Get.to(() => CommentMessage());
               },
             ),
           ],

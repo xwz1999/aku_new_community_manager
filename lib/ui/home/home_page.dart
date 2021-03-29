@@ -57,11 +57,11 @@ class _HomePageState extends State<HomePage> {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
           if (userProvider.isLogin) {
-            Get.to(page);
+            Get.to(() => page);
             if (text != '全部应用')
               appProvider.addRecentApp(AppApplication(text, assetPath, page));
           } else
-            Get.to(LoginPage());
+            Get.to(() => LoginPage());
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                           //搜索框按钮
                           color: Color(0xFFFFFFFF),
                           onPressed: () {
-                            Get.to(SearchWorkOrderPage());
+                            Get.to(() => SearchWorkOrderPage());
                           },
                           radius: 8.w,
                           child: Row(children: [
@@ -242,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                         minWidth: 78.w,
                         padding: EdgeInsets.zero,
                         onPressed: () {
-                          Get.to(ScanPage());
+                          Get.to(() => ScanPage());
                         },
                         child: Column(children: [
                           Image.asset(
@@ -269,9 +269,9 @@ class _HomePageState extends State<HomePage> {
                         height: double.infinity,
                         onPressed: () {
                           if (userProvider.isLogin)
-                            Get.to(Message());
+                            Get.to(() => Message());
                           else
-                            Get.to(LoginPage());
+                            Get.to(() => LoginPage());
                         },
                         child: Column(children: [
                           Image.asset(
@@ -296,9 +296,9 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     if (!userProvider.isLogin)
-                      Get.to(LoginPage());
+                      Get.to(() => LoginPage());
                     else
-                      Get.to(UserInfoPage());
+                      Get.to(() => UserInfoPage());
                   },
                   child: Container(
                     margin: EdgeInsets.only(
@@ -372,7 +372,7 @@ class _HomePageState extends State<HomePage> {
                   AkuButton(
                     //全部公告按钮
                     onPressed: () {
-                      Get.to(AllAnouncement());
+                      Get.to(() => AllAnouncement());
                     },
                     child: Row(
                       children: [

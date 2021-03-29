@@ -41,7 +41,7 @@ class _WarningSubPageState extends State<WarningSubPage> {
       actions: [
         AkuMaterialButton(
           onPressed: () {
-            Get.to(WarningDetailPage());
+            Get.to(() => WarningDetailPage());
           },
           padding: EdgeInsets.symmetric(horizontal: 32.w),
           child: Text('功能说明'),

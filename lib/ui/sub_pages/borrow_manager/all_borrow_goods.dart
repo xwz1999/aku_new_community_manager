@@ -33,7 +33,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
         //     ? AkuMaterialButton(
         //         minWidth: 120.w,
         //         onPressed: () {
-        //           Get.to(AddBorrowObjectPage());
+        //           Get.to(()=>AddBorrowObjectPage());
         //         },
         //         child: Text(
         //           '新增',

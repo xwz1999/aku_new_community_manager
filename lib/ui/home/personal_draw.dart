@@ -67,8 +67,8 @@ class _PersonalDrawState extends State<PersonalDraw> {
             InkWell(
               onTap: () {
                 userProvider.isLogin
-                    ? Get.to(UserInfoPage())
-                    : Get.to(LoginPage());
+                    ? Get.to(() => UserInfoPage())
+                    : Get.to(() => LoginPage());
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 80.w, top: 40.w),
@@ -122,13 +122,13 @@ class _PersonalDrawState extends State<PersonalDraw> {
               '个人信息',
               onPressed: () {
                 userProvider.isLogin
-                    ? Get.to(UserInfoPage())
-                    : Get.to(LoginPage());
+                    ? Get.to(() => UserInfoPage())
+                    : Get.to(() => LoginPage());
               },
             ),
             _myListTile(R.ASSETS_USER_IC_KEFU_PNG, '联系客服'),
             _myListTile(R.ASSETS_USER_IC_SETUP_PNG, '设置', onPressed: () {
-              Get.to(SettingsPage());
+              Get.to(() => SettingsPage());
             }),
           ],
         ),
