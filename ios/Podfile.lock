@@ -23,7 +23,7 @@ PODS:
     - AMapSearch-NO-IDFA (~> 7.3.0)
     - Flutter
     - foundation_fluttify
-  - AMapFoundation-NO-IDFA (1.6.4)
+  - AMapFoundation-NO-IDFA (1.6.5.1)
   - AMapLocation-NO-IDFA (2.6.7):
     - AMapFoundation-NO-IDFA (~> 1.6.4)
   - AMapSearch-NO-IDFA (7.3.0):
@@ -123,12 +123,12 @@ SPEC CHECKSUMS:
   amap_location_fluttify: baa3007e3f215456ab2ea2f4ccccf5bc1a9a164b
   amap_map_fluttify: 6b64256d6ccea7813e1b6423fcf7b5ef10d3c984
   amap_search_fluttify: f83f950b4f8e8688bc8b100684c33868335f2e06
-  AMapFoundation-NO-IDFA: 68a24362b110b8e0a3677605d0fd36bdf521f2bb
+  AMapFoundation-NO-IDFA: 0cf5f6c6de2725bcd868ed5aa756d12bc1a8f463
   AMapLocation-NO-IDFA: 2a3edfee336b38481b892e1ecc85df0f6b365851
   AMapSearch-NO-IDFA: 85555dc9ba312949d39a259baa4ef4e0619fa944
   core_location_fluttify: 9466a411ea7d22c6349c7e6a767ae4623f01eb1d
   device_info: d7d233b645a32c40dfdc212de5cf646ca482f175
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   foundation_fluttify: 0c45145e3fad1fb99188e4979daed5b24cd9b278
   image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   JCore: a29e4b0ee54e1301446dc02d8e1c350404108b34
