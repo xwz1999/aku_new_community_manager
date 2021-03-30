@@ -66,25 +66,36 @@ class MyApp extends StatelessWidget {
               create: (context) => InspectionManageProvider()),
           ChangeNotifierProvider(create: (context) => AnouncementProvider()),
         ],
-        child: ScreenUtilInit(
-            designSize: Size(750, 1334),
-            builder: () {
-              return GetMaterialApp(
-                title: '小蜜蜂管家',
-                home: SplashPage(),
-                builder: BotToastInit(),
-                navigatorObservers: [
-                  BotToastNavigatorObserver(),
-                ],
-                localizationsDelegates: [
-                  GlobalCupertinoLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                ],
-                supportedLocales: [
-                  const Locale('zh'),
-                ],
-              );
-            }));
+        child: GestureDetector(
+          onTap: () {
+            //点击输入框外部隐藏键盘⌨️
+            //只能响应点击非手势识别的组件
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus &&
+                currentFocus.focusedChild != null) {
+              FocusManager.instance.primaryFocus.unfocus();
+            }
+          },
+          child: ScreenUtilInit(
+              designSize: Size(750, 1334),
+              builder: () {
+                return GetMaterialApp(
+                  title: '小蜜蜂管家',
+                  home: SplashPage(),
+                  builder: BotToastInit(),
+                  navigatorObservers: [
+                    BotToastNavigatorObserver(),
+                  ],
+                  localizationsDelegates: [
+                    GlobalCupertinoLocalizations.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                  ],
+                  supportedLocales: [
+                    const Locale('zh'),
+                  ],
+                );
+              }),
+        ));
   }
 }

@@ -233,34 +233,34 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SizedBox(width: 15.w),
-                    Container(
-                      margin: EdgeInsets.only(top: 5.w, bottom: 5.w),
-                      child: MaterialButton(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        //扫一扫按钮
-                        height: double.infinity,
-                        minWidth: 78.w,
-                        padding: EdgeInsets.zero,
-                        onPressed: () {
-                          Get.to(() => ScanPage());
-                        },
-                        child: Column(children: [
-                          Image.asset(
-                            R.ASSETS_HOME_IC_SCAN_PNG,
-                            height: 48.w,
-                            width: 48.w,
-                          ),
-                          Text(
-                            '扫一扫',
-                            style: TextStyle(
-                              color: AppStyle.primaryTextColor,
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ]),
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(top: 5.w, bottom: 5.w),
+                    //   child: MaterialButton(
+                    //     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    //     //扫一扫按钮
+                    //     height: double.infinity,
+                    //     minWidth: 78.w,
+                    //     padding: EdgeInsets.zero,
+                    //     onPressed: () {
+                    //       Get.to(() => ScanPage());
+                    //     },
+                    //     child: Column(children: [
+                    //       Image.asset(
+                    //         R.ASSETS_HOME_IC_SCAN_PNG,
+                    //         height: 48.w,
+                    //         width: 48.w,
+                    //       ),
+                    //       Text(
+                    //         '扫一扫',
+                    //         style: TextStyle(
+                    //           color: AppStyle.primaryTextColor,
+                    //           fontSize: 20.sp,
+                    //           fontWeight: FontWeight.normal,
+                    //         ),
+                    //       ),
+                    //     ]),
+                    //   ),
+                    // ),
                     Container(
                       margin: EdgeInsets.only(top: 5.w, bottom: 5.w),
                       child: AkuMaterialButton(
