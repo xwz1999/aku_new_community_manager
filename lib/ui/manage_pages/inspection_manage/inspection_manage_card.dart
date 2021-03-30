@@ -92,7 +92,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Image.asset(
-                R.ASSETS_MANAGE_IC_RENWU_PNG,
+                R.ASSETS_INSPECTION_IC_DATE_PNG,
                 width: 40.w,
                 height: 40.w,
               ),
@@ -121,7 +121,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                   Row(
                     children: [
                       Image.asset(
-                        R.ASSETS_MANAGE_IC_RENWU_PNG,
+                        R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
                         width: 40.w,
                         height: 40.w,
                       ),
@@ -143,7 +143,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
           Row(
             children: [
               Image.asset(
-                R.ASSETS_INSPECTION_IC_XUNJIAN_PNG,
+                R.ASSETS_MANAGE_IC_TIME_PNG,
                 width: 40.w,
                 height: 40.w,
               ),
@@ -186,7 +186,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
               : Row(
                   children: [
                     Image.asset(
-                      R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
+                      R.ASSETS_MANAGE_IC_TIME_PNG,
                       width: 40.w,
                       height: 40.w,
                     ),

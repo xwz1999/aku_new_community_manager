@@ -230,7 +230,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  R.ASSETS_MANAGE_IC_RENWU_PNG,
+                  R.ASSETS_INSPECTION_IC_INSPECTION_NAME_PNG,
                   width: 40.w,
                   height: 40.w,
                 ),
@@ -257,7 +257,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             Row(
               children: [
                 Image.asset(
-                  R.ASSETS_MANAGE_IC_RENWU_PNG,
+                  R.ASSETS_INSPECTION_IC_DATE_PNG,
                   width: 40.w,
                   height: 40.w,
                 ),
@@ -277,7 +277,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             Row(
               children: [
                 Image.asset(
-                  R.ASSETS_INSPECTION_IC_XUNJIAN_PNG,
+                  R.ASSETS_INSPECTION_IC_STATION_PNG,
                   width: 40.w,
                   height: 40.w,
                 ),
@@ -297,7 +297,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             Row(
               children: [
                 Image.asset(
-                  R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
+                  R.ASSETS_INSPECTION_IC_PATTERN_PNG,
                   width: 40.w,
                   height: 40.w,
                 ),

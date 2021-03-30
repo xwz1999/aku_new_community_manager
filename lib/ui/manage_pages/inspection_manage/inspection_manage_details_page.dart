@@ -223,7 +223,7 @@ class _InspectionManageDetailsPageState
               child: Row(
                 children: [
                   Text(
-                    '${_detailModel.name}',
+                    '巡检信息',
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 36.sp,
@@ -243,7 +243,7 @@ class _InspectionManageDetailsPageState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Image.asset(
-                  R.ASSETS_MANAGE_IC_RENWU_PNG,
+                  R.ASSETS_INSPECTION_IC_INSPECTION_NAME_PNG,
                   width: 40.w,
                   height: 40.w,
                 ),
@@ -290,12 +290,12 @@ class _InspectionManageDetailsPageState
             Row(
               children: [
                 Image.asset(
-                  R.ASSETS_INSPECTION_IC_XUNJIAN_PNG,
+                  R.ASSETS_MANAGE_IC_TIME_PNG,
                   width: 40.w,
                   height: 40.w,
                 ),
                 4.w.widthBox,
-                Text('规定巡检时间', style: _textstyle),
+                Text('巡检时间', style: _textstyle),
                 Spacer(),
                 Text(
                   '${DateUtil.formatDateStr(_detailModel.beginDate, format: "yyyy-MM-dd HH:mm")}${_detailModel?.endDate == null ? '' : '～'}${_detailModel?.endDate == null ? '' : DateUtil.formatDateStr(_detailModel.endDate, format: "HH:mm")}',
@@ -333,7 +333,7 @@ class _InspectionManageDetailsPageState
                 : Row(
                     children: [
                       Image.asset(
-                        R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
+                        R.ASSETS_MANAGE_IC_TIME_PNG,
                         width: 40.w,
                         height: 40.w,
                       ),
