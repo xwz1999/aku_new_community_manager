@@ -40,6 +40,7 @@ class _QrScannerPageState extends State<QrScannerPage> {
             viewController.scannedDataStream.listen((event) {
               setState(() {
                 result = event;
+                viewController.stopCamera();
                 Get.back(result: result);
               });
             });

@@ -2,12 +2,17 @@ import 'package:aku_community_manager/models/manager/inspection/inspection_point
 import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
+import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/aku_ui.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class InspectionPointInputPage extends StatefulWidget {
@@ -24,10 +29,31 @@ class InspectionPointInputPage extends StatefulWidget {
 class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
   InspectionPointSubmitModel _submitModel;
   InspectionQRCodeModel _model;
+  bool get canSubmit {
+    if (_submitModel.inspectionFaceImg == null &&
+        _submitModel.inspectionSpaceImg == null) {
+      return false;
+    } else {
+      if (_submitModel.executeCheckList.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   @override
   void initState() {
     super.initState();
     _model = widget.qrModel;
+    _submitModel = InspectionPointSubmitModel(
+      widget.qrModel.id,
+      [],
+    );
+    _submitModel.executeCheckList = List.generate(
+      widget.qrModel.checkVoList.length,
+      (index) => ExecuteCheckList(widget.qrModel.checkVoList[index].id, -1, ''),
+    );
   }
 
   @override
@@ -52,10 +78,31 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         ],
       ),
       bottom: AkuButton(
+        onPressed: canSubmit
+            ? () async {
+                _submitModel.inspectionFaceImgPath =
+                    await ManageFunc.uploadFace(_submitModel.inspectionFaceImg);
+                _submitModel.inspectionSpaceImg = await ManageFunc.uploadSpace(
+                    _submitModel.inspectionSpaceImg);
+                BaseModel baseModel =
+                    await ManageFunc.getSubmitPoint(_submitModel);
+                if (baseModel.status) {
+                  BotToast.showText(text: baseModel.message);
+                  Get.back();
+                } else {
+                  BotToast.showText(text: baseModel.message);
+                }
+              }
+            : () {},
         width: double.infinity,
         height: 100.w,
-        child: '立即提交'.text.color(kTextPrimaryColor).bold.size(32.sp).make(),
-        color: kPrimaryColor,
+        child: '立即提交'
+            .text
+            .color(canSubmit ? kTextPrimaryColor : kTextSubColor)
+            .bold
+            .size(32.sp)
+            .make(),
+        color: canSubmit ? Color(0xFFFFC40C) : Color(0xFFFFE67D),
         padding: EdgeInsets.symmetric(vertical: 26.w),
       ).pOnly(bottom: MediaQuery.of(context).padding.bottom),
     );
@@ -63,6 +110,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
 
   Widget _scenePhotoCard() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -73,14 +121,20 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         AkuPickImageWidget(
           onChanged: (file) {
             _submitModel.inspectionFaceImg = file;
+            setState(() {});
           },
         ),
       ],
-    ).box.color(Colors.white).make();
+    )
+        .box
+        .color(Colors.white)
+        .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
+        .make();
   }
 
   Widget _selfPhotoCard() {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -91,10 +145,15 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         AkuPickImageWidget(
           onChanged: (file) {
             _submitModel.inspectionSpaceImg = file;
+            setState(() {});
           },
-        ),
+        )
       ],
-    ).box.color(Colors.white).make();
+    )
+        .box
+        .color(Colors.white)
+        .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
+        .make();
   }
 
   Widget _meterCard(
@@ -117,15 +176,17 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
               gropValue: _submitModel.executeCheckList[index].status,
               onPressed: () {
                 _submitModel.executeCheckList[index].status = 0;
+                setState(() {});
               },
             ),
             80.w.widthBox,
             AkuSingleCheckButton(
               text: '异常',
-              value: 0,
+              value: 1,
               gropValue: _submitModel.executeCheckList[index].status,
               onPressed: () {
                 _submitModel.executeCheckList[index].status = 1;
+                setState(() {});
               },
             ),
           ],
@@ -168,6 +229,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           ),
           child: TextField(
             minLines: 5,
+            maxLines: 10,
+            autofocus: false,
             onChanged: (value) {
               _submitModel.executeCheckList[index].remarks = value;
             },
@@ -177,7 +240,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 fontSize: 28.sp,
                 color: kTextSubColor,
               ),
-              contentPadding: EdgeInsets.zero,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
               border: InputBorder.none,
               isDense: true,
             ),

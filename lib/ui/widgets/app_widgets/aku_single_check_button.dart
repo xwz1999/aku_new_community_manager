@@ -20,6 +20,7 @@ class _AkuSingleCheckButtonState extends State<AkuSingleCheckButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       decoration: BoxDecoration(
           color: isSelect ? Color(0xFFFFF8E0) : Colors.white,
           border: Border.all(
@@ -29,13 +30,12 @@ class _AkuSingleCheckButtonState extends State<AkuSingleCheckButton> {
       width: 180.w,
       height: 72.w,
       child: widget.text.text
-          .color(isSelect ? Color(0xFF999999) : Color(0xFF333333))
+          .color(isSelect ? Color(0xFF333333) : Color(0xFF999999))
           .bold
           .size(32.sp)
           .make(),
     ).onInkTap(() {
       widget.onPressed();
-      setState(() {});
     });
   }
 }

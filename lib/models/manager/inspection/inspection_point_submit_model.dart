@@ -5,12 +5,18 @@ class InspectionPointSubmitModel {
   List<ExecuteCheckList> executeCheckList;
   File inspectionFaceImg;
   File inspectionSpaceImg;
-  InspectionPointSubmitModel();
+  String inspectionFaceImgPath;
+  String inspectionSpaceImgPath;
+  InspectionPointSubmitModel(this.executePointId, this.executeCheckList,
+      {this.inspectionFaceImg,
+      this.inspectionSpaceImg,
+      this.inspectionFaceImgPath,
+      this.inspectionSpaceImgPath});
 }
 
 class ExecuteCheckList {
   int id;
   int status;
   String remarks;
-  ExecuteCheckList();
+  ExecuteCheckList(this.id, this.status, this.remarks);
 }

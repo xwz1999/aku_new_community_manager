@@ -191,6 +191,12 @@ class _Upload {
 
   ///上传物品信息照片
   String get uploadArtical => '/user/upload/uploadArticle';
+
+  ///上传巡更人员拍摄现场
+  String get uploadInspectionSpace => '/user/upload/uploadInspectionSpace';
+
+  ///上传巡更人员自拍人脸
+  String get uploadInspectionFace => '/user/upload/uploadInspectionFace';
 }
 
 class _Message {

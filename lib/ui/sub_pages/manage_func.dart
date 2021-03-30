@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
@@ -53,7 +55,7 @@ class ManageFunc {
       {@required int excuteId}) async {
     BaseModel baseModel = await NetUtil()
         .get(API.manage.inspecntionFindPointByExecuteId, params: {
-      "planId": excuteId,
+      "executeId": excuteId,
     });
     return (baseModel.data as List)
         .map((e) => InspectionPointModel.fromJson(e))
@@ -69,16 +71,15 @@ class ManageFunc {
   }
 
   static Future getSubmitPoint(InspectionPointSubmitModel model) async {
-    Response response = await NetUtil()
-        .dio
-        .post(API.manage.submitPointDetail, queryParameters: {
+    BaseModel baseModel =
+        await NetUtil().post(API.manage.submitPointDetail, params: {
       "executePointId": model.executePointId,
       "executeCheckList": model.executeCheckList,
       "inspectionFaceImg": [],
       "inspectionSpaceImg": []
     });
 
-    return response.data;
+    return baseModel;
   }
 
   static Future<InspectionCheckDetialModel> getInspectionPointCheckDetail(
@@ -88,5 +89,17 @@ class ManageFunc {
       "executePointId": executePointId,
     });
     return InspectionCheckDetialModel.fromJson(baseModel.data);
+  }
+
+  static Future uploadFace(File file) async {
+    BaseModel baseModel = await NetUtil()
+        .post(API.upload.uploadInspectionFace, params: {"file": file});
+    return baseModel.data as String;
+  }
+
+  static Future uploadSpace(File file) async {
+    BaseModel baseModel = await NetUtil()
+        .post(API.upload.uploadInspectionSpace, params: {"file": file});
+    return baseModel.data as String;
   }
 }

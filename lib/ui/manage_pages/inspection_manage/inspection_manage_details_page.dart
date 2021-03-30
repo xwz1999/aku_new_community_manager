@@ -138,7 +138,8 @@ class _InspectionManageDetailsPageState
                             API.manage.inspectionStart,
                             params: {"executeId": widget.executeId});
                         if (_baseModel.status) {
-                          setState(() {});
+                          BotToast.showText(text: _baseModel.message);
+                          _refreshController.callRefresh();
                         } else {
                           BotToast.showText(text: _baseModel.message);
                         }
@@ -192,6 +193,9 @@ class _InspectionManageDetailsPageState
           .make(),
       actions: [
         CupertinoDialogAction(
+            onPressed: () {
+              Get.back();
+            },
             child: '确定'
                 .text
                 .isIntrinsic
@@ -359,11 +363,11 @@ class _InspectionManageDetailsPageState
     return Row(
       children: [
         CircleAvatar(
-          child: '巡$index'
+          child: '巡${index + 1}'
               .text
               .color(model.completeDate == null
-                  ? Color(0xFFA6CBFF)
-                  : Color(0xFF3F8FFE))
+                  ? Color(0xFF3F8FFE)
+                  : Color(0xFFA6CBFF))
               .size(28.sp)
               .bold
               .make(),
@@ -372,6 +376,7 @@ class _InspectionManageDetailsPageState
         ),
         24.w.widthBox,
         Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             model.name.text
                 .color(model.completeDate == null

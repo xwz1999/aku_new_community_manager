@@ -151,7 +151,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
               Text('规定巡检时间', style: _textstyle),
               Spacer(),
               Text(
-                '${widget.cardModel.beginDate.akuDate()}${widget.cardModel?.endDate == null ? '' : '～'}${widget.cardModel?.endDate == null ? '' : widget.cardModel.endDate.akuDate()}',
+                '${widget.cardModel.beginDate.akuDate()}${widget.cardModel?.endDate == null ? '' : '～'}${widget.cardModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
                 style: AppStyle().primaryStyle,
               ),
             ],

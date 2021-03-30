@@ -36,6 +36,16 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
     _easyRefreshController = EasyRefreshController();
   }
 
+  String inspectionPattern(int type) {
+    switch (type) {
+      case 1:
+        return '巡检模式1';
+        break;
+      default:
+        return '';
+    }
+  }
+
   @override
   void dispose() {
     _easyRefreshController?.dispose();
@@ -92,6 +102,8 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: Placeholder(),
               )
             : DottedBorder(
+                borderType: BorderType.RRect,
+                dashPattern: [6, 3],
                 color: Color(0xFF999999),
                 strokeWidth: 2.w,
                 radius: Radius.circular(8.w),
@@ -106,6 +118,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                         R.ASSETS_MANAGE_IC_IMAGE_PNG,
                         width: 60.w,
                         height: 60.w,
+                        color: Color(0xFF999999),
                       ),
                       4.w.heightBox,
                       '上传图片'.text.color(kTextSubColor).size(22.sp).bold.make(),
@@ -138,6 +151,8 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: Placeholder(),
               )
             : DottedBorder(
+                borderType: BorderType.RRect,
+                dashPattern: [6, 3],
                 color: Color(0xFF999999),
                 strokeWidth: 2.w,
                 radius: Radius.circular(8.w),
@@ -152,6 +167,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                         R.ASSETS_MANAGE_IC_IMAGE_PNG,
                         width: 60.w,
                         height: 60.w,
+                        color: Color(0xFF999999),
                       ),
                       4.w.heightBox,
                       '上传图片'.text.color(kTextSubColor).size(22.sp).bold.make(),
@@ -222,6 +238,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                           .size(32.sp)
                           .bold
                           .make()),
+                  80.w.widthBox,
                   Container(
                       width: 180.w,
                       height: 72.w,
@@ -323,7 +340,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 ),
                 36.w.widthBox,
                 Text(
-                  model.name,
+                  widget.executeName,
                   maxLines: 2,
                   textAlign: TextAlign.right,
                   style: AppStyle().primaryStyle,
@@ -385,30 +402,35 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 ),
                 Spacer(),
                 Text(
-                  '${model.type}',
+                  '${inspectionPattern(model.type)}',
                   style: AppStyle().primaryStyle,
                 ),
               ],
             ),
-            Row(
-              children: [
-                Image.asset(
-                  R.ASSETS_MANAGE_IC_TIME_PNG,
-                  width: 40.w,
-                  height: 40.w,
-                ),
-                4.w.widthBox,
-                Text(
-                  '扫码时间',
-                  style: InspectionUtils.textstyle,
-                ),
-                Spacer(),
-                Text(
-                  '${DateUtil.formatDateStr(model.completeDate, format: "yyyy-MM-dd HH:mm")}',
-                  style: AppStyle().primaryStyle,
-                ),
-              ],
-            )
+            ...model.completeDate == null
+                ? []
+                : [
+                    12.w.heightBox,
+                    Row(
+                      children: [
+                        Image.asset(
+                          R.ASSETS_MANAGE_IC_TIME_PNG,
+                          width: 40.w,
+                          height: 40.w,
+                        ),
+                        4.w.widthBox,
+                        Text(
+                          '扫码时间',
+                          style: InspectionUtils.textstyle,
+                        ),
+                        Spacer(),
+                        Text(
+                          '${DateUtil.formatDateStr(model.completeDate, format: "yyyy-MM-dd HH:mm")}',
+                          style: AppStyle().primaryStyle,
+                        ),
+                      ],
+                    ),
+                  ]
           ]),
         ),
       ],
