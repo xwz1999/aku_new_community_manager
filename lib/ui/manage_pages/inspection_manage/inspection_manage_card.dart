@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:aku_community_manager/utils/extension/aku_date.dart';
 
 class InspectionManageCard extends StatefulWidget {
   final InspectionListModel cardModel;
@@ -150,7 +151,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
               Text('规定巡检时间', style: _textstyle),
               Spacer(),
               Text(
-                '${DateUtil.formatDateStr(widget.cardModel.beginDate, format: "yyyy-MM-dd HH:mm")}～${widget.cardModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
+                '${widget.cardModel.beginDate.akuDate()}${widget.cardModel?.endDate == null ? '' : '～'}${widget.cardModel?.endDate == null ? '' : widget.cardModel.endDate.akuDate()}',
                 style: AppStyle().primaryStyle,
               ),
             ],

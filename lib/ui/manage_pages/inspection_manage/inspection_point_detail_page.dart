@@ -4,6 +4,7 @@ import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspecti
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,10 +13,12 @@ import 'package:velocity_x/velocity_x.dart';
 class InspectionPointDetailPage extends StatefulWidget {
   final int executePointId;
   final String executeName;
+  final hasScan;
   InspectionPointDetailPage({
     Key key,
     this.executePointId,
     this.executeName,
+    @required this.hasScan,
   }) : super(key: key);
 
   @override
@@ -65,7 +68,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                       .map((e) => _bodyCard(e))
                       .toList(),
                   _selfPhotoCard(),
-                  _selfPhotoCard(),
+                  _scenePhotoCard(),
                 ],
               ),
       ),
@@ -82,11 +85,80 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
           ],
         ),
         32.w.heightBox,
-        Container(
-          width: 320.w,
-          height: 320.w,
-          child: Placeholder(),
-        )
+        widget.hasScan
+            ? Container(
+                width: 320.w,
+                height: 320.w,
+                child: Placeholder(),
+              )
+            : DottedBorder(
+                color: Color(0xFF999999),
+                strokeWidth: 2.w,
+                radius: Radius.circular(8.w),
+                child: Container(
+                  width: 160.w,
+                  height: 160.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        R.ASSETS_MANAGE_IC_IMAGE_PNG,
+                        width: 60.w,
+                        height: 60.w,
+                      ),
+                      4.w.heightBox,
+                      '上传图片'.text.color(kTextSubColor).size(22.sp).bold.make(),
+                    ],
+                  ),
+                ),
+              )
+      ],
+    )
+        .box
+        .color(Colors.white)
+        .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
+        .make();
+  }
+
+  Widget _scenePhotoCard() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            '3.巡更人员拍摄现场'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
+          ],
+        ),
+        32.w.heightBox,
+        widget.hasScan
+            ? Container(
+                width: 320.w,
+                height: 320.w,
+                child: Placeholder(),
+              )
+            : DottedBorder(
+                color: Color(0xFF999999),
+                strokeWidth: 2.w,
+                radius: Radius.circular(8.w),
+                child: Container(
+                  width: 160.w,
+                  height: 160.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        R.ASSETS_MANAGE_IC_IMAGE_PNG,
+                        width: 60.w,
+                        height: 60.w,
+                      ),
+                      4.w.heightBox,
+                      '上传图片'.text.color(kTextSubColor).size(22.sp).bold.make(),
+                    ],
+                  ),
+                ),
+              )
       ],
     )
         .box
@@ -104,37 +176,92 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
           ],
         ),
         32.w.heightBox,
-        Row(
-          children: [
-            Container(
-              width: 180.w,
-              height: 72.w,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4.w),
-                color: Color(0xFFFFF8E0),
-                border: Border.all(color: Color(0xFFFFC40C), width: 3.w),
+        widget.hasScan
+            ? Row(
+                children: [
+                  Container(
+                    width: 180.w,
+                    height: 72.w,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4.w),
+                      color: Color(0xFFFFF8E0),
+                      border: Border.all(color: Color(0xFFFFC40C), width: 3.w),
+                    ),
+                    child: model.status == 1
+                        ? '正常'
+                            .text
+                            .color(kTextPrimaryColor)
+                            .size(32.sp)
+                            .bold
+                            .make()
+                        : '异常'
+                            .text
+                            .color(kTextPrimaryColor)
+                            .size(32.sp)
+                            .bold
+                            .make(),
+                  ),
+                ],
+              )
+            : Row(
+                children: [
+                  Container(
+                      width: 180.w,
+                      height: 72.w,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.w),
+                        color: Color(0xFFF9F9F9),
+                        border:
+                            Border.all(color: Color(0xFF999999), width: 3.w),
+                      ),
+                      child: '正常'
+                          .text
+                          .color(kTextSubColor)
+                          .size(32.sp)
+                          .bold
+                          .make()),
+                  Container(
+                      width: 180.w,
+                      height: 72.w,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4.w),
+                        color: Color(0xFFF9F9F9),
+                        border:
+                            Border.all(color: Color(0xFF999999), width: 3.w),
+                      ),
+                      child: '异常'
+                          .text
+                          .color(kTextSubColor)
+                          .size(32.sp)
+                          .bold
+                          .make()),
+                ],
               ),
-              child: model.status == 1
-                  ? '正常'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
-                  : '异常'.text.color(kTextPrimaryColor).size(32.sp).bold.make(),
-            ),
-          ],
-        ),
-        36.w.heightBox,
-        Container(
-            width: 686.w,
-            height: 120.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.w),
-              border: Border.all(
-                width: 2.w,
-                color: Color(0xFFE8E8E8),
-              ),
-            ),
-            padding: EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
-            child:
-                model.remakes.text.color(kTextPrimaryColor).size(28.sp).make()),
+        ...!widget.hasScan
+            ? []
+            : [
+                36.w.heightBox,
+                Container(
+                  width: 686.w,
+                  height: 120.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.w),
+                    border: Border.all(
+                      width: 2.w,
+                      color: Color(0xFFE8E8E8),
+                    ),
+                  ),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
+                  child: model.remakes.text
+                      .color(kTextPrimaryColor)
+                      .size(28.sp)
+                      .make(),
+                ),
+              ],
       ],
     )
         .box

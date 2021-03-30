@@ -119,10 +119,9 @@ class _InspectionManageDetailsPageState
                         children: <Widget>[
                           '巡检站点'.text.black.size(32.sp).bold.make(),
                           ..._pointModels
-                                  ?.map((e) => _buildInspectionTile(
-                                      e.name, e.checkNum, e.id))
-                                  ?.toList() ??
-                              []
+                              .map((e) => _buildInspectionTile(
+                                  e, _pointModels.indexOf(e)))
+                              .toList()
                         ].sepWidget(separate: 16.w.heightBox),
                       ),
                     )
@@ -356,32 +355,42 @@ class _InspectionManageDetailsPageState
     );
   }
 
-  Widget _buildInspectionTile(
-    String inspectionStation,
-    int inspectionCount,
-    int index,
-  ) {
+  Widget _buildInspectionTile(InspectionPointModel model, int index) {
     return Row(
       children: [
         CircleAvatar(
-          child:
-              '巡$index'.text.color(Color(0xFF3F8FFE)).size(28.sp).bold.make(),
+          child: '巡$index'
+              .text
+              .color(model.completeDate == null
+                  ? Color(0xFFA6CBFF)
+                  : Color(0xFF3F8FFE))
+              .size(28.sp)
+              .bold
+              .make(),
           radius: 48.w,
           backgroundColor: Color(0xFFE9F2FF),
         ),
         24.w.widthBox,
         Column(
           children: [
-            inspectionStation.text.black.size(28.sp).bold.make(),
-            '$inspectionCount项检查'.text.color(kTextSubColor).size(24.sp).make()
+            model.name.text
+                .color(model.completeDate == null
+                    ? kTextPrimaryColor
+                    : kTextSubColor)
+                .size(28.sp)
+                .bold
+                .make(),
+            '${model.checkNum}项检查'.text.color(kTextSubColor).size(24.sp).make()
           ],
         ),
         Spacer(),
-        _inspectionStatus[_detailModel.status]
+        (model.completeDate == null ? '待巡检' : '已巡检')
             .text
             .size(24.sp)
             .bold
-            .color(_inspectionColor(_detailModel.status))
+            .color(model.completeDate == null
+                ? Color(0xFFFF4501)
+                : Color(0xFF52C41A))
             .make(),
         14.w.widthBox,
         Icon(
@@ -398,7 +407,8 @@ class _InspectionManageDetailsPageState
         .make()
         .onInkTap(() {
       Get.to(() => InspectionPointDetailPage(
-            executePointId: index,
+            hasScan: model.completeDate == null ? false : true,
+            executePointId: model.id,
             executeName: _detailModel.name,
           ));
     });
