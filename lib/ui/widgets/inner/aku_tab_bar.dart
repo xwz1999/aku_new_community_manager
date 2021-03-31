@@ -19,6 +19,7 @@ class _AkuTabBarState extends State<AkuTabBar> {
   @override
   Widget build(BuildContext context) {
     return TabBar(
+      isScrollable: true,
       labelColor: AppStyle.primaryTextColor,
       unselectedLabelColor: AppStyle.minorTextColor,
       labelStyle: TextStyle(
