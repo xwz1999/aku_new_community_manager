@@ -74,9 +74,9 @@ class ManageFunc {
     BaseModel baseModel =
         await NetUtil().post(API.manage.submitPointDetail, params: {
       "executePointId": model.executePointId,
-      "executeCheckList": model.executeCheckList,
-      "inspectionFaceImg": [],
-      "inspectionSpaceImg": []
+      // "executeCheckList": ExecuteCheckList(id, status, remarks).toJson(),
+      "inspectionFaceImg": model.inspectionFaceImgPath,
+      "inspectionSpaceImg": model.inspectionSpaceImgPath
     });
 
     return baseModel;

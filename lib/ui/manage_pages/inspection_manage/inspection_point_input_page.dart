@@ -7,7 +7,6 @@ import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widg
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -80,10 +79,13 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
       bottom: AkuButton(
         onPressed: canSubmit
             ? () async {
-                _submitModel.inspectionFaceImgPath =
-                    await ManageFunc.uploadFace(_submitModel.inspectionFaceImg);
-                _submitModel.inspectionSpaceImg = await ManageFunc.uploadSpace(
-                    _submitModel.inspectionSpaceImg);
+                _submitModel.inspectionFaceImgPath.add(
+                    await ManageFunc.uploadFace(
+                        _submitModel.inspectionFaceImg));
+
+                _submitModel.inspectionSpaceImgPath.add(
+                    await ManageFunc.uploadSpace(
+                        _submitModel.inspectionSpaceImg));
                 BaseModel baseModel =
                     await ManageFunc.getSubmitPoint(_submitModel);
                 if (baseModel.status) {

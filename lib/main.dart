@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/style/apptheme.dart';
 import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -81,6 +82,7 @@ class MyApp extends StatelessWidget {
               builder: () {
                 return GetMaterialApp(
                   title: '小蜜蜂管家',
+                  theme: AppTheme.themeData,
                   home: SplashPage(),
                   builder: BotToastInit(),
                   navigatorObservers: [
