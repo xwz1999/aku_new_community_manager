@@ -110,6 +110,10 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
             controller: _textEditingController,
             autoFocus: true,
             decoration: UnderlineDecoration(
+              textStyle: TextStyle(
+                color: kTextPrimaryColor,
+                fontSize: 32.sp,
+              ),
               lineHeight: 1.w,
               colorBuilder: FixedColorBuilder(Color(0xFFE8E8E8)),
             ),

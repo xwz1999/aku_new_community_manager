@@ -12,13 +12,15 @@ class InspectionPointSubmitModel {
       this.inspectionSpaceImg,
       this.inspectionFaceImgPath,
       this.inspectionSpaceImgPath});
-  // Map<String, dynamic> executeCheckListToJson() {
-  //   final Map<String,dynamic>
-  //   if (this.executeCheckList != null) {
-  //     this.executeCheckList.map((e) => e.toJson()).toList();
-  //     return
-  //   } else {}
-  // }
+  Map<String, dynamic> executeCheckListToJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    if (this.executeCheckList != null) {
+      data["executeCheckList"] =
+          this.executeCheckList.map((e) => e.toJson()).toList();
+      return data;
+    }
+  }
 }
 
 class ExecuteCheckList {
