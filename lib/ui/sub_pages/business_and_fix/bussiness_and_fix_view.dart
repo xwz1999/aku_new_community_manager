@@ -18,6 +18,17 @@ class BussinessAndFixView extends StatefulWidget {
 class _BussinessAndFixViewState extends State<BussinessAndFixView>
     with AutomaticKeepAliveClientMixin {
   EasyRefreshController _easyRefreshController;
+  @override
+  void initState() {
+    super.initState();
+    _easyRefreshController = EasyRefreshController();
+  }
+
+  @override
+  void dispose() {
+    _easyRefreshController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

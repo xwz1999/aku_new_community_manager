@@ -89,6 +89,7 @@ class _BeeListViewState<T> extends State<BeeListView> {
   @override
   Widget build(BuildContext context) {
     return EasyRefresh(
+      enableControlFinishLoad: true,
       controller: widget.controller,
       header: MaterialHeader(
         valueColor: AlwaysStoppedAnimation(AppStyle.primaryColor),
@@ -111,10 +112,15 @@ class _BeeListViewState<T> extends State<BeeListView> {
           widget.path,
           params: _params,
         );
-        _models.addAll(widget.convert(_model) as List<T>);
-        // if (_pageNum >= _model.pageCount) {
-        widget.controller.finishLoad();
-        // }
+        if (_pageNum <= _model.pageCount) {
+          _models.addAll(widget.convert(_model) as List<T>);
+        }
+        if (_pageNum >= _model.pageCount) {
+          widget.controller.finishLoad(
+            success: true,
+            noMore: true,
+          );
+        }
         setState(() {});
       },
       child: widget.builder(_models),
