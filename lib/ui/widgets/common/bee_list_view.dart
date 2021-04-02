@@ -112,8 +112,9 @@ class _BeeListViewState<T> extends State<BeeListView> {
           params: _params,
         );
         _models.addAll(widget.convert(_model) as List<T>);
-        if (_pageNum >= _model.pageCount)
-          widget.controller.finishLoad(noMore: true);
+        // if (_pageNum >= _model.pageCount) {
+        widget.controller.finishLoad();
+        // }
         setState(() {});
       },
       child: widget.builder(_models),

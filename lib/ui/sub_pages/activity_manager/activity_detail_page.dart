@@ -54,7 +54,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                 children: [
                   FadeInImage.assetNetwork(
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: _detailModel.firstImg?.url ?? '',
+                    image: API.image(_detailModel.firstImg?.url ?? ''),
                     fit: BoxFit.cover,
                   ),
                   Padding(

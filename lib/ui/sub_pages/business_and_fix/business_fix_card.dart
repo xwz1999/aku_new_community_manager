@@ -1,5 +1,8 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
+import 'package:aku_community_manager/models/user/user_info_model.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +14,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
@@ -29,9 +30,9 @@ class BusinessFixCard extends StatefulWidget {
 }
 
 class _BusinessFixCardState extends State<BusinessFixCard> {
-  USER_ROLE get userRole {
+  UserInfoModel get userInfoModel {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    return userProvider.userInfoModel.role;
+    return userProvider.infoModel;
   }
 
   String get dateStart => DateUtil.formatDateStr(widget.model.repairDate,
@@ -61,10 +62,9 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        Get.to(BusinessAndFixDetailPage(model: widget.model));
+        Get.to(() => BusinessAndFixDetailPage(model: widget.model));
       },
       child: Container(
         padding: EdgeInsets.all(24.w),
@@ -86,12 +86,10 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                   ),
                 ),
                 Text(
-                  AkuMap.fixStatus(
-                      userProvider.infoModel.canOperation,
-                      userProvider.infoModel.canPickUpTicket,
-                      widget.model.status),
+                  AkuMap.fixStatus(userInfoModel.canOperation,
+                      userInfoModel.canPickUpTicket, widget.model.status),
                   style: TextStyle(
-                    color: widget.model.status <4
+                    color: widget.model.status < 4
                         ? Color(0XFFFF4501)
                         : AppStyle.minorTextColor,
                   ),
@@ -141,7 +139,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             ),
             clipBehavior: Clip.antiAlias,
             child: FadeInImage.assetNetwork(
-                placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: imgObj),
+                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                image: API.image(imgObj ?? '')),
           );
         },
         itemCount: widget.model.imgUrls.length,
@@ -150,118 +149,115 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
   }
 
   _buildBottomCard() {
-    switch (userRole) {
-      case USER_ROLE.FIXER:
-        if (widget.model.status > 4) return SizedBox();
-        return Column(
-          children: [
-            Divider(
-              height: 48.w,
-            ),
-            Row(
-              children: [
-                Spacer(),
-                widget.model.status == 3
-                    ? MaterialButton(
-                        padding: EdgeInsets.zero,
-                        height: 64.w,
-                        minWidth: 160.w,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.w),
-                          side: BorderSide(
-                            width: 2.w,
-                            color: AppStyle.primaryColor,
-                          ),
+    if (userInfoModel.canPickUpTicket) {
+      if (widget.model.status > 4) return SizedBox();
+      return Column(
+        children: [
+          Divider(
+            height: 48.w,
+          ),
+          Row(
+            children: [
+              Spacer(),
+              widget.model.status == 3
+                  ? MaterialButton(
+                      padding: EdgeInsets.zero,
+                      height: 64.w,
+                      minWidth: 160.w,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4.w),
+                        side: BorderSide(
+                          width: 2.w,
+                          color: AppStyle.primaryColor,
                         ),
-                        child: Text(
-                          '申请延时',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28.sp,
-                          ),
+                      ),
+                      child: Text(
+                        '申请延时',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28.sp,
                         ),
-                        onPressed: () {
-                          // Get.to(FixMoreTimePage(model: widget.model));
-                        },
-                      )
-                    : SizedBox(),
-                widget.model.status == 3 ? AkuBox.w(24) : SizedBox(),
-                widget.model.status == 3
-                    ? AkuMaterialButton(
-                        onPressed: () {
-                          // Get.to(FixWorkFinishPage(model: widget.model));
-                        },
-                        radius: 4.w,
-                        color: AppStyle.primaryColor,
-                        minWidth: 160.w,
-                        height: 64.w,
-                        child: Text(
-                          '处理完成',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28.sp,
-                          ),
+                      ),
+                      onPressed: () {
+                        // Get.to(FixMoreTimePage(model: widget.model));
+                      },
+                    )
+                  : SizedBox(),
+              widget.model.status == 3 ? AkuBox.w(24) : SizedBox(),
+              widget.model.status == 3
+                  ? AkuMaterialButton(
+                      onPressed: () {
+                        // Get.to(FixWorkFinishPage(model: widget.model));
+                      },
+                      radius: 4.w,
+                      color: AppStyle.primaryColor,
+                      minWidth: 160.w,
+                      height: 64.w,
+                      child: Text(
+                        '处理完成',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28.sp,
                         ),
-                      )
-                    : SizedBox(),
-                widget.model.status == 2
-                    ? AkuMaterialButton(
-                        onPressed: () {
-                          // final userProvider =
-                          //     Provider.of<UserProvider>(context, listen: false);
-                          // widget.model.detail.fixStatuses.add(FixStatus(
-                          //   title: '${userProvider.userInfoModel.nickName}已接单',
-                          //   date: DateTime.now(),
-                          // ));
-                          // widget.model.type = FIX_ENUM.PROCESSING;
-                          // Get.back();
-                        },
-                        radius: 4.w,
-                        color: AppStyle.primaryColor,
-                        minWidth: 160.w,
-                        height: 64.w,
-                        child: Text(
-                          '立即接单',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 28.sp,
-                          ),
+                      ),
+                    )
+                  : SizedBox(),
+              widget.model.status == 2
+                  ? AkuMaterialButton(
+                      onPressed: () {
+                        // final userProvider =
+                        //     Provider.of<UserProvider>(context, listen: false);
+                        // widget.model.detail.fixStatuses.add(FixStatus(
+                        //   title: '${userProvider.userInfoModel.nickName}已接单',
+                        //   date: DateTime.now(),
+                        // ));
+                        // widget.model.type = FIX_ENUM.PROCESSING;
+                        // Get.back();
+                      },
+                      radius: 4.w,
+                      color: AppStyle.primaryColor,
+                      minWidth: 160.w,
+                      height: 64.w,
+                      child: Text(
+                        '立即接单',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28.sp,
                         ),
-                      )
-                    : SizedBox(),
-              ],
-            ),
-          ],
-        );
-        break;
-      default:
-        return Column(
-          children: [
-            widget.homeDisplay ? Divider(height: 24.w) : Divider(height: 48.w),
-            Align(
-              alignment: Alignment.centerRight,
-              child: AkuMaterialButton(
-                height: 64.w,
-                onPressed: () {
-                  // Get.to(BusinessAndFixDetailPage(model: widget.model));
-                },
-                radius: 4,
-                color: AppStyle.primaryColor,
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Text(
-                  '查看详情',
-                  style: TextStyle(
-                    color: AppStyle.primaryTextColor,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 28.sp,
-                    height: 40 / 28,
-                  ),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
+          ),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          widget.homeDisplay ? Divider(height: 24.w) : Divider(height: 48.w),
+          Align(
+            alignment: Alignment.centerRight,
+            child: AkuMaterialButton(
+              height: 64.w,
+              onPressed: () {
+                Get.to(() => BusinessAndFixDetailPage(model: widget.model));
+              },
+              radius: 4,
+              color: AppStyle.primaryColor,
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Text(
+                '查看详情',
+                style: TextStyle(
+                  color: AppStyle.primaryTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.sp,
+                  height: 40 / 28,
                 ),
               ),
             ),
-          ],
-        );
-        break;
+          ),
+        ],
+      );
     }
   }
 }

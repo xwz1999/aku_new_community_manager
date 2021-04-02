@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_detail_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
@@ -123,7 +124,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (userProvider.infoModel.canOperation&&widget.model.status<2) {
+          if (userProvider.infoModel.canOperation && widget.model.status < 2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
@@ -180,7 +181,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               );
             }
-          } else if ((widget.model.status==3) &&
+          } else if ((widget.model.status == 3) &&
               userProvider.infoModel.canPickUpTicket)
             return Container(
               height: 96.w,
@@ -291,7 +292,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             return ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
               child: FadeInImage.assetNetwork(
-                  placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: e.url),
+                  placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                  image: API.image(e.url)),
             );
           }).toList(),
           shrinkWrap: true,
@@ -472,7 +474,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             return ClipRRect(
                 borderRadius: BorderRadius.circular(4.w),
                 child: FadeInImage.assetNetwork(
-                    placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: e.url));
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                    image: API.image(e.url)));
           }).toList(),
         ),
       ],

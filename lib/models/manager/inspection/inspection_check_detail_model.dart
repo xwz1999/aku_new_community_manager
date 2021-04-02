@@ -6,8 +6,8 @@ class InspectionCheckDetialModel {
   int type;
   String completeDate;
   List<CheckFBIVoList> checkFBIVoList;
-  List<String> faceImg;
-  List<String> spaceImg;
+  List<FaceImg> faceImg;
+  List<FaceImg> spaceImg;
 
   InspectionCheckDetialModel(
       {this.id,
@@ -33,8 +33,18 @@ class InspectionCheckDetialModel {
         checkFBIVoList.add(new CheckFBIVoList.fromJson(v));
       });
     }
-    faceImg = json['faceImg'].cast<String>();
-    spaceImg = json['spaceImg'].cast<String>();
+    if (json['faceImg'] != null) {
+      faceImg = new List<FaceImg>();
+      json['faceImg'].forEach((v) {
+        faceImg.add(new FaceImg.fromJson(v));
+      });
+    }
+    if (json['spaceImg'] != null) {
+      spaceImg = new List<FaceImg>();
+      json['spaceImg'].forEach((v) {
+        spaceImg.add(new FaceImg.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -49,8 +59,12 @@ class InspectionCheckDetialModel {
       data['checkFBIVoList'] =
           this.checkFBIVoList.map((v) => v.toJson()).toList();
     }
-    data['faceImg'] = this.faceImg;
-    data['spaceImg'] = this.spaceImg;
+    if (this.faceImg != null) {
+      data['faceImg'] = this.faceImg.map((v) => v.toJson()).toList();
+    }
+    if (this.spaceImg != null) {
+      data['spaceImg'] = this.spaceImg.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }
@@ -76,6 +90,34 @@ class CheckFBIVoList {
     data['name'] = this.name;
     data['status'] = this.status;
     data['remakes'] = this.remakes;
+    return data;
+  }
+}
+
+class FaceImg {
+  String url;
+  int size;
+  int longs;
+  int paragraph;
+  int sort;
+
+  FaceImg({this.url, this.size, this.longs, this.paragraph, this.sort});
+
+  FaceImg.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+    size = json['size'];
+    longs = json['longs'];
+    paragraph = json['paragraph'];
+    sort = json['sort'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['url'] = this.url;
+    data['size'] = this.size;
+    data['longs'] = this.longs;
+    data['paragraph'] = this.paragraph;
+    data['sort'] = this.sort;
     return data;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
@@ -99,7 +100,10 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
             ? Container(
                 width: 320.w,
                 height: 320.w,
-                child: Placeholder(),
+                child: FadeInImage.assetNetwork(
+                    fit: BoxFit.fill,
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                    image: API.image(_detialModel.faceImg?.first?.url ?? '')),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,
@@ -148,7 +152,10 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
             ? Container(
                 width: 320.w,
                 height: 320.w,
-                child: Placeholder(),
+                child: FadeInImage.assetNetwork(
+                    fit: BoxFit.fill,
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                    image: API.image(_detialModel.spaceImg?.first?.url ?? '')),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,

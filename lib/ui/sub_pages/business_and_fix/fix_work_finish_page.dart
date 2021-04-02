@@ -95,9 +95,10 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                   return ClipRRect(
                       borderRadius: BorderRadius.circular(4.w),
                       child: FadeInImage.assetNetwork(
-                        placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                        image: widget.model.repairDetail.imgUrls[index].url,
-                      ));
+                          placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                          image: API.image(
+                            widget.model.repairDetail.imgUrls[index].url,
+                          )));
                 },
                 itemCount: widget.model.repairDetail.imgUrls.length,
               ),
@@ -389,8 +390,8 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
           //     materialPrice: double.parse(_materialController.text),
           //   );
           // Get.back();
-          List<String> urls = await NetUtil()
-              .uploadFiles(_imgs, API.upload.uploadArtical);
+          List<String> urls =
+              await NetUtil().uploadFiles(_imgs, API.upload.uploadArtical);
           BaseModel baseModel = await ManageFunc.handleResult(
               widget.model.repairDetail.dispatchId,
               _descriptionController.text,

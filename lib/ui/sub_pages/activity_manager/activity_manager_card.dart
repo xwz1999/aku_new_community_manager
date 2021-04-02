@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/activity_item_model.dart';
 import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,7 @@ class ActivityManagerCard extends StatelessWidget {
                   tag: model.title,
                   child: FadeInImage.assetNetwork(
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: model.firstImg?.url ?? '',
+                    image: API.image(model.firstImg?.url ?? ''),
                     fit: BoxFit.cover,
                   ),
                 ),
