@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
+import 'package:aku_community_manager/models/manager/item_num_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,7 +40,8 @@ import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  final ItemNumModel itemNumModel;
+  HomePage({Key key, @required this.itemNumModel}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -530,11 +532,11 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Row(
                           children: [
-                            _card(AllModel(context).waitThings?.length, '未处理事项',
+                            _card(widget.itemNumModel.unProcessedNum??0, '未处理事项',
                                 Color(0xFFFF4E0D), 0),
                             GridientDiveder().verticalDivider(166.5.w),
-                            _card(AllModel(context).processingThings?.length,
-                                '处理中事项', Color(0xFFFFC40C), 1),
+                            _card(widget.itemNumModel.processingNum??0, '处理中事项',
+                                Color(0xFFFFC40C), 1),
                           ],
                         ),
                         Row(children: [
@@ -544,12 +546,12 @@ class _HomePageState extends State<HomePage> {
                         ]),
                         Row(
                           children: [
-                            _card(AllModel(context).doneThings?.length, '已处理事项',
+                            _card(widget.itemNumModel.processedNum??0, '已处理事项',
                                 Color(0xFF3F8FFE), 2),
                             GridientDiveder(isReverse: true).verticalDivider(
                               166.5.w,
                             ),
-                            _card(AllModel(context).allThings?.length, '全部事项',
+                            _card(widget.itemNumModel.allNum??0, '全部事项',
                                 Color(0xFF333333), 3),
                           ],
                         ),

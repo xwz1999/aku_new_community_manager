@@ -164,6 +164,9 @@ class _Manage {
   ///巡检管理：查询巡检执行点信息（点击已巡检查看详情）
   String get inspectionPointCheckDetail =>
       '/user/inspection/findCheckDetailById';
+
+  ///待办事项：查询处理事项的数量
+  String get findItemNum => '/user/backlog/findItemNum';
 }
 
 class _Upload {

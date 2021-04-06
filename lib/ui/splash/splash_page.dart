@@ -1,12 +1,16 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/item_num_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/utils/dev_util.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:amap_map_fluttify/amap_map_fluttify.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:power_logger/power_logger.dart';
@@ -45,8 +49,16 @@ class _SplashPageState extends State<SplashPage> {
     });
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _originOp();
-      Get.off(HomePage());
+      ItemNumModel itemNumModel = await _getItemNum();
+      Get.off(HomePage(
+        itemNumModel: itemNumModel,
+      ));
     });
+  }
+
+  Future _getItemNum() async {
+    Response response = await NetUtil().dio.get(API.manage.findItemNum);
+    return ItemNumModel.fromJson(response.data);
   }
 
   @override
