@@ -1,7 +1,10 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/models/manager/item_num_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -10,7 +13,7 @@ import 'package:aku_ui/aku_ui.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -40,14 +43,17 @@ import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 
 class HomePage extends StatefulWidget {
-  final ItemNumModel itemNumModel;
-  HomePage({Key key, @required this.itemNumModel}) : super(key: key);
+  HomePage({
+    Key key,
+  }) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  ItemNumModel _itemNumModel;
+
   ///自定义bar的菜单按钮
   Widget _menuButton(String assetPath, String text, Widget page) {
     final appProvider = Provider.of<AppProvider>(context);
@@ -133,14 +139,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() {
+  void initState() async {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
+    _itemNumModel = await _getItemNum();
   }
 
   int _currentIndicator = 0;
+
+  Future _getItemNum() async {
+    Response response = await NetUtil().dio.get(API.manage.findItemNum);
+    return ItemNumModel.fromJson(response.data);
+  }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
@@ -532,10 +545,10 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Row(
                           children: [
-                            _card(widget.itemNumModel.unProcessedNum??0, '未处理事项',
+                            _card(_itemNumModel.unProcessedNum ?? 0, '未处理事项',
                                 Color(0xFFFF4E0D), 0),
                             GridientDiveder().verticalDivider(166.5.w),
-                            _card(widget.itemNumModel.processingNum??0, '处理中事项',
+                            _card(_itemNumModel.processingNum ?? 0, '处理中事项',
                                 Color(0xFFFFC40C), 1),
                           ],
                         ),
@@ -546,12 +559,12 @@ class _HomePageState extends State<HomePage> {
                         ]),
                         Row(
                           children: [
-                            _card(widget.itemNumModel.processedNum??0, '已处理事项',
+                            _card(_itemNumModel.processedNum ?? 0, '已处理事项',
                                 Color(0xFF3F8FFE), 2),
                             GridientDiveder(isReverse: true).verticalDivider(
                               166.5.w,
                             ),
-                            _card(widget.itemNumModel.allNum??0, '全部事项',
+                            _card(_itemNumModel.allNum ?? 0, '全部事项',
                                 Color(0xFF333333), 3),
                           ],
                         ),

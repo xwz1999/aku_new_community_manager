@@ -49,16 +49,8 @@ class _SplashPageState extends State<SplashPage> {
     });
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _originOp();
-      ItemNumModel itemNumModel = await _getItemNum();
-      Get.off(HomePage(
-        itemNumModel: itemNumModel,
-      ));
+      Get.off(HomePage());
     });
-  }
-
-  Future _getItemNum() async {
-    Response response = await NetUtil().dio.get(API.manage.findItemNum);
-    return ItemNumModel.fromJson(response.data);
   }
 
   @override

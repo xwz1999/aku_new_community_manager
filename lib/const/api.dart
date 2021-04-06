@@ -167,6 +167,9 @@ class _Manage {
 
   ///待办事项：查询处理事项的数量
   String get findItemNum => '/user/backlog/findItemNum';
+
+  ///待办事项：查询所有的待办事务
+  String get backlogList => '/user/backlog/list';
 }
 
 class _Upload {
