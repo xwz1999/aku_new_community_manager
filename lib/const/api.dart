@@ -224,5 +224,6 @@ class _Message {
   ///消息中心：根据工单主键id同步查询报事报修评论（同步）
   String get getCommentByDispatchId => '/user/message/findCommentByDispatchId';
 
-
+  ///消息中心：根据报事报修主键id 同步查询报事报修消息信息（同步）
+  String get getSystemByDispatchId => '/user/message/findRepairByRepairId';
 }

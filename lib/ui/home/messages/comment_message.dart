@@ -38,6 +38,7 @@ class _CommentMessageState extends State<CommentMessage> {
             .toList(),
         builder: (items) {
           return ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
               itemBuilder: (context, index) {
                 return CommentMessageCard(itemModel: items[index]);
               },
