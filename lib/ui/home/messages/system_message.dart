@@ -1,18 +1,17 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_item_model.dart';
+import 'package:aku_community_manager/ui/home/messages/systen_message_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 // Package imports:
-import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class SystemMessage extends StatefulWidget {
@@ -33,10 +32,15 @@ class _SystemMessageState extends State<SystemMessage> {
       body: BeeListView(
         controller: _refreshController,
         builder: (items) {
-          return ListView(
-            padding: EdgeInsets.only(left: 32.w, right: 32.w, bottom: 40.w),
-            children: [],
-          );
+          return ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 32.w),
+              itemBuilder: (context, index) {
+                return SystemMessageCard(model: items[index]);
+              },
+              separatorBuilder: (context, index) {
+                return 10.w.heightBox;
+              },
+              itemCount: items.length);
         },
         path: API.message.systemList,
         convert: (model) => model.tableList

@@ -7,12 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_common_widgets.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 

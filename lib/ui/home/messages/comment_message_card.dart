@@ -80,7 +80,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
             baseColor: kPrimaryColor.withOpacity(0.3),
             highlightColor: kPrimaryColor.withOpacity(0.1),
             child: Text(
-              '',
+              'date',
               style: TextStyle(color: AppStyle.minorTextColor, fontSize: 24.sp),
             ),
           ),

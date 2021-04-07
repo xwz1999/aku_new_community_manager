@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_detail_model.dart';
+import 'package:aku_community_manager/models/message/system_message_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
@@ -10,8 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SystemMessageCard extends StatefulWidget {
-  final int repairId;
-  SystemMessageCard({Key key, this.repairId}) : super(key: key);
+  final SystemMessageItemModel model;
+  SystemMessageCard({Key key, this.model}) : super(key: key);
 
   @override
   _SystemMessageCardState createState() => _SystemMessageCardState();
@@ -24,8 +25,9 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 300), () async {
-      _systemModel = await getSystemMessage(widget.repairId);
+      _systemModel = await getSystemMessage(widget.model.relationId);
       _onLoad = false;
+      setState(() {});
     });
   }
 
