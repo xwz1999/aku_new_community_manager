@@ -69,6 +69,7 @@ dev_dependencies:
   import_sorter:
   grinder:
   flutter_asset_generator: ^0.6.1
+  shimmer: ^2.0.0-nullsafety.0
 
 flutter:
   uses-material-design: true

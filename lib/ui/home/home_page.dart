@@ -7,6 +7,8 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 // Package imports:
 import 'package:aku_ui/aku_ui.dart';
@@ -38,7 +40,6 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
-import 'package:aku_community_manager/ui/tool_pages/scan_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 
@@ -53,6 +54,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ItemNumModel _itemNumModel;
+  bool _onload = true;
 
   ///自定义bar的菜单按钮
   Widget _menuButton(String assetPath, String text, Widget page) {
@@ -139,12 +141,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     ));
-    _itemNumModel = await _getItemNum();
+    Future.delayed(Duration(milliseconds: 300), () async {
+      _itemNumModel = await _getItemNum();
+      _onload = false;
+      setState(() {});
+    });
   }
 
   int _currentIndicator = 0;
@@ -365,214 +371,224 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
-        body: ListView(
-          padding: EdgeInsets.all(32.w),
-          children: [
-            Container(
-              //公告标题行
-              width: double.infinity,
-              height: 45.w,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+        body: _onload
+            ? Center(
+                child: Shimmer.fromColors(
+                    child: 'LOADING······'.text.black.size(50.sp).make(),
+                    baseColor: Colors.white,
+                    highlightColor: kPrimaryColor),
+              )
+            : ListView(
+                padding: EdgeInsets.all(32.w),
                 children: [
-                  Text(
-                    '今日公告',
-                    style: TextStyle(
-                      color: Color(0xFF4A4B51),
-                      fontSize: 32.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Spacer(),
-                  AkuButton(
-                    //全部公告按钮
-                    onPressed: () {
-                      Get.to(() => AllAnouncement());
-                    },
+                  Container(
+                    //公告标题行
+                    width: double.infinity,
+                    height: 45.w,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          '全部公告',
+                          '今日公告',
                           style: TextStyle(
-                            color: AppStyle.minorTextColor,
-                            fontSize: 24.sp,
+                            color: Color(0xFF4A4B51),
+                            fontSize: 32.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 22.w,
-                          color: AppStyle.minorTextColor,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(height: 16.w),
-            //公告栏
-            Container(
-              color: Color(0xFFFFFFFF),
-              width: double.infinity,
-              height: 172.w,
-              child: Stack(children: [
-                CarouselSlider(
-                  // items: _anouncementProvider.anouncementCardModels
-                  //     .map((e) => AllAnouncementState.anounceCard(e))
-                  //     .toList(),
-                  items: [],
-                  options: CarouselOptions(
-                    viewportFraction: 1.0,
-                    aspectRatio: 686 / 172,
-                    autoPlay: true,
-                    onPageChanged: (index, _) {
-                      setState(() {
-                        _currentIndicator = index;
-                      });
-                    },
-                  ),
-                ),
-                Positioned(
-                  top: 144.w,
-                  left: 0,
-                  bottom: 16.w,
-                  right: 0,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children:
-                        _anouncementProvider.anouncementCardModels.map((e) {
-                      int index =
-                          _anouncementProvider.anouncementCardModels.indexOf(e);
-                      return Container(
-                        width: 12.w,
-                        height: 12.w,
-                        margin: EdgeInsets.symmetric(horizontal: 12.w),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: _currentIndicator == index
-                              ? Color(0xFFFFC40C)
-                              : Color(0xFFE8E8E8),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ]),
-            ),
-            SizedBox(height: 16.w),
-            //待办事项标题行
-            !userProvider.isLogin
-                ? SizedBox()
-                : Row(
-                    children: [
-                      Text(
-                        '待办事项',
-                        style: TextStyle(
-                          color: Color(0xFF4A4B51),
-                          fontSize: 32.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Spacer(),
-                      AkuButton(
-                        padding: EdgeInsets.symmetric(vertical: 16.w),
-                        onPressed: () {
-                          Get.to(BusinessPage(initIndex: 3));
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              '全部事项',
-                              style: TextStyle(
+                        Spacer(),
+                        AkuButton(
+                          //全部公告按钮
+                          onPressed: () {
+                            Get.to(() => AllAnouncement());
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                '全部公告',
+                                style: TextStyle(
                                   color: AppStyle.minorTextColor,
                                   fontSize: 24.sp,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios,
-                              size: 22.w,
-                              color: AppStyle.minorTextColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-            SizedBox(height: 16.w),
-            //待办事项栏
-            !userProvider.isLogin
-                ? SizedBox()
-                : Container(
-                    height: 480.w,
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) {
-                        return AkuBox.w(16);
-                      },
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: 526.w,
-                          child: Builder(
-                            builder: (context) {
-                              final item = AllModel(context).waitThings[index];
-                              if (item is DecorationListModel) {
-                                return DecorationManagerCard(model: item);
-                              } else if (item is BussinessAndFixModel) {
-                                return BusinessFixCard(
-                                    model: item, homeDisplay: true);
-                              } else
-                                return SizedBox();
-                            },
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                size: 22.w,
+                                color: AppStyle.minorTextColor,
+                              )
+                            ],
                           ),
-                        );
-                      },
-                      itemCount: AllModel(context).waitThings.length,
-                    ),
-                  ),
-            SizedBox(height: 24.w),
-            //底部信息栏
-            !userProvider.isLogin
-                ? SizedBox()
-                : Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.w),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            _card(_itemNumModel.unProcessedNum ?? 0, '未处理事项',
-                                Color(0xFFFF4E0D), 0),
-                            GridientDiveder().verticalDivider(166.5.w),
-                            _card(_itemNumModel.processingNum ?? 0, '处理中事项',
-                                Color(0xFFFFC40C), 1),
-                          ],
-                        ),
-                        Row(children: [
-                          GridientDiveder().horizontalDivider(343.w),
-                          GridientDiveder(isReverse: true)
-                              .horizontalDivider(343.w)
-                        ]),
-                        Row(
-                          children: [
-                            _card(_itemNumModel.processedNum ?? 0, '已处理事项',
-                                Color(0xFF3F8FFE), 2),
-                            GridientDiveder(isReverse: true).verticalDivider(
-                              166.5.w,
-                            ),
-                            _card(_itemNumModel.allNum ?? 0, '全部事项',
-                                Color(0xFF333333), 3),
-                          ],
                         ),
                       ],
                     ),
                   ),
-          ],
-        ),
+                  SizedBox(height: 16.w),
+                  //公告栏
+                  Container(
+                    color: Color(0xFFFFFFFF),
+                    width: double.infinity,
+                    height: 172.w,
+                    child: Stack(children: [
+                      CarouselSlider(
+                        // items: _anouncementProvider.anouncementCardModels
+                        //     .map((e) => AllAnouncementState.anounceCard(e))
+                        //     .toList(),
+                        items: [],
+                        options: CarouselOptions(
+                          viewportFraction: 1.0,
+                          aspectRatio: 686 / 172,
+                          autoPlay: true,
+                          onPageChanged: (index, _) {
+                            setState(() {
+                              _currentIndicator = index;
+                            });
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        top: 144.w,
+                        left: 0,
+                        bottom: 16.w,
+                        right: 0,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: _anouncementProvider.anouncementCardModels
+                              .map((e) {
+                            int index = _anouncementProvider
+                                .anouncementCardModels
+                                .indexOf(e);
+                            return Container(
+                              width: 12.w,
+                              height: 12.w,
+                              margin: EdgeInsets.symmetric(horizontal: 12.w),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _currentIndicator == index
+                                    ? Color(0xFFFFC40C)
+                                    : Color(0xFFE8E8E8),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ]),
+                  ),
+                  SizedBox(height: 16.w),
+                  //待办事项标题行
+                  !userProvider.isLogin
+                      ? SizedBox()
+                      : Row(
+                          children: [
+                            Text(
+                              '待办事项',
+                              style: TextStyle(
+                                color: Color(0xFF4A4B51),
+                                fontSize: 32.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Spacer(),
+                            AkuButton(
+                              padding: EdgeInsets.symmetric(vertical: 16.w),
+                              onPressed: () {
+                                Get.to(BusinessPage(initIndex: 3));
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '全部事项',
+                                    style: TextStyle(
+                                        color: AppStyle.minorTextColor,
+                                        fontSize: 24.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    size: 22.w,
+                                    color: AppStyle.minorTextColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                  SizedBox(height: 16.w),
+                  //待办事项栏
+                  !userProvider.isLogin
+                      ? SizedBox()
+                      : Container(
+                          height: 480.w,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return AkuBox.w(16);
+                            },
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                width: 526.w,
+                                child: Builder(
+                                  builder: (context) {
+                                    final item =
+                                        AllModel(context).waitThings[index];
+                                    if (item is DecorationListModel) {
+                                      return DecorationManagerCard(model: item);
+                                    } else if (item is BussinessAndFixModel) {
+                                      return BusinessFixCard(
+                                          model: item, homeDisplay: true);
+                                    } else
+                                      return SizedBox();
+                                  },
+                                ),
+                              );
+                            },
+                            itemCount: AllModel(context).waitThings.length,
+                          ),
+                        ),
+                  SizedBox(height: 24.w),
+                  //底部信息栏
+                  !userProvider.isLogin
+                      ? SizedBox()
+                      : Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.w),
+                            color: Colors.white,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  _card(_itemNumModel.unProcessedNum ?? 0,
+                                      '未处理事项', Color(0xFFFF4E0D), 0),
+                                  GridientDiveder().verticalDivider(166.5.w),
+                                  _card(_itemNumModel.processingNum ?? 0,
+                                      '处理中事项', Color(0xFFFFC40C), 1),
+                                ],
+                              ),
+                              Row(children: [
+                                GridientDiveder().horizontalDivider(343.w),
+                                GridientDiveder(isReverse: true)
+                                    .horizontalDivider(343.w)
+                              ]),
+                              Row(
+                                children: [
+                                  _card(_itemNumModel.processedNum ?? 0,
+                                      '已处理事项', Color(0xFF3F8FFE), 2),
+                                  GridientDiveder(isReverse: true)
+                                      .verticalDivider(
+                                    166.5.w,
+                                  ),
+                                  _card(_itemNumModel.allNum ?? 0, '全部事项',
+                                      Color(0xFF333333), 3),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                ],
+              ),
       ),
       value: SystemUiOverlayStyle.dark,
     );

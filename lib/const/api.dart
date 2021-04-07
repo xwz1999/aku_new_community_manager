@@ -220,4 +220,9 @@ class _Message {
 
   ///公告管理（管家app）：根据社区公告主键id查询社区公告信息
   String get announcementFindByld => '/user/announcement/findById';
+
+  ///消息中心：根据工单主键id同步查询报事报修评论（同步）
+  String get getCommentByDispatchId => '/user/message/findCommentByDispatchId';
+
+
 }
