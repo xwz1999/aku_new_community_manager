@@ -84,13 +84,13 @@ class ManageFunc {
     return baseModel;
   }
 
-  static Future<InspectionCheckDetialModel> getInspectionPointCheckDetail(
+  static Future getInspectionPointCheckDetail(
       int executePointId) async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.inspectionPointCheckDetail, params: {
       "executePointId": executePointId,
     });
-    return InspectionCheckDetialModel.fromJson(baseModel.data);
+    return baseModel;
   }
 
   static Future uploadFace(File file) async {

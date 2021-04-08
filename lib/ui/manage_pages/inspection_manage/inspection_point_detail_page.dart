@@ -4,6 +4,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -58,13 +59,18 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
     return AkuScaffold(
       title: '巡检点',
       body: EasyRefresh(
+        enableControlFinishLoad: true,
         header:
             MaterialHeader(valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
         firstRefresh: true,
         onRefresh: () async {
-          _detialModel = await ManageFunc.getInspectionPointCheckDetail(
+          BaseModel baseModel = await ManageFunc.getInspectionPointCheckDetail(
               widget.executePointId);
-          _onload = false;
+          if (baseModel.data != null) {
+            _detialModel = InspectionCheckDetialModel.fromJson(baseModel.data);
+            _onload = false;
+            _easyRefreshController.finishLoad(success: false, noMore: true);
+          }
           setState(() {});
         },
         controller: _easyRefreshController,
