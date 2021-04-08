@@ -38,7 +38,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
   List<FixerItemModel> _fixerItems = [];
 
   bool get canDispatch {
-    if (_reportModel?.operato==null) {
+    if (_reportModel?.operato == null) {
       return false;
     } else if (_reportModel.type == -1) {
       return false;
@@ -47,6 +47,8 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
     } else if (_reportModel.workOrderTyoe == -1) {
       return false;
     } else if (_reportModel.workOrderTypeDetail == -1) {
+      return false;
+    } else if (_reportModel.remark == null) {
       return false;
     }
     return true;
@@ -127,9 +129,9 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
         child: Text(
           '立即派单',
           style: TextStyle(
-            color: _pickedFixers.isEmpty
-                ? AppStyle.minorTextColor
-                : AppStyle.primaryTextColor,
+            color: canDispatch
+                ? AppStyle.primaryTextColor
+                : AppStyle.minorTextColor,
             fontSize: 32.w,
             fontWeight: FontWeight.bold,
           ),

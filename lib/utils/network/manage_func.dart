@@ -41,7 +41,7 @@ class ManageFunc {
   ///派单
   static Future repairDispatch(DispatchReportModel model) async {
     BaseModel baseModel =
-        await NetUtil().get(API.manage.repairDispatch, params: {
+        await NetUtil().post(API.manage.repairDispatch, params: {
       'dispatchListId': model.dispatchListId,
       'workOrderType': model.workOrderTyoe,
       'workOrderTypeDetail': model.workOrderTypeDetail,

@@ -34,14 +34,14 @@ class NetUtil {
     );
     if (_dio == null) _dio = Dio(options);
     dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (RequestOptions options) async => options,
-      onResponse: (Response response) async {
+      onRequest: (RequestOptions options,RequestInterceptorHandler handler) async => handler.next(options),
+      onResponse: (Response response,ResponseInterceptorHandler handler) async {
         LoggerData.addData(response);
-        return response;
+        return handler.next(response);
       },
-      onError: (DioError error) async {
+      onError: (DioError error,ErrorInterceptorHandler handler) async {
         _parseErr(error);
-        return error;
+        return handler.next(error);
       },
     ));
   }
@@ -154,17 +154,17 @@ class NetUtil {
     }
 
     switch (err.type) {
-      case DioErrorType.CONNECT_TIMEOUT:
-      case DioErrorType.SEND_TIMEOUT:
-      case DioErrorType.RECEIVE_TIMEOUT:
+      case DioErrorType.connectTimeout:
+      case DioErrorType.sendTimeout:
+      case DioErrorType.receiveTimeout:
         _makeToast('连接超时');
         break;
-      case DioErrorType.RESPONSE:
+      case DioErrorType.response:
         _makeToast('服务器出错');
         break;
-      case DioErrorType.CANCEL:
+      case DioErrorType.cancel:
         break;
-      case DioErrorType.DEFAULT:
+      case DioErrorType.other:
         _makeToast('未知错误');
         break;
     }

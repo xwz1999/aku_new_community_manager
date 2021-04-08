@@ -13,6 +13,7 @@ import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:power_logger/power_logger.dart';
 
 // Project imports:
