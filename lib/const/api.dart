@@ -47,6 +47,9 @@ class _User {
 
   ///个人资料：修改管家用户头像
   String get updateAvatar => '/user/personalData/updateHeadPortrait';
+
+  ///意见反馈：管家app意见反馈提交（建议）
+  String get feedbackSubmit => '/user/feedback/submit';
 }
 
 class _Manage {
@@ -203,6 +206,9 @@ class _Upload {
 
   ///上传巡更人员自拍人脸
   String get uploadInspectionFace => '/user/upload/uploadInspectionFace';
+
+  ///上传咨询建议照片
+  String get uploadAdvices => '/user/upload/uploadAdvice';
 }
 
 class _Message {

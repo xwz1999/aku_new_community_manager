@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -7,6 +10,7 @@ import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widg
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +32,11 @@ class InspectionPointInputPage extends StatefulWidget {
 class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
   InspectionPointSubmitModel _submitModel;
   InspectionQRCodeModel _model;
+  List<File> _selfPhotos;
+  List<File> _scenePhots;
   bool get canSubmit {
-    if (_submitModel.inspectionFaceImg == null &&
-        _submitModel.inspectionSpaceImg == null) {
+    if (_selfPhotos == null &&
+        _scenePhots == null) {
       return false;
     } else {
       if (_submitModel.executeCheckList.isNotEmpty) {
@@ -79,13 +85,11 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
       bottom: AkuButton(
         onPressed: canSubmit
             ? () async {
-                _submitModel.inspectionFaceImgPath.add(
-                    await ManageFunc.uploadFace(
-                        _submitModel.inspectionFaceImg));
+                _submitModel.inspectionFaceImgPath = await NetUtil()
+                    .uploadFiles(_selfPhotos, API.upload.uploadInspectionFace);
 
-                _submitModel.inspectionSpaceImgPath.add(
-                    await ManageFunc.uploadSpace(
-                        _submitModel.inspectionSpaceImg));
+                _submitModel.inspectionSpaceImgPath = await NetUtil()
+                    .uploadFiles(_scenePhots, API.upload.uploadInspectionSpace);
                 BaseModel baseModel =
                     await ManageFunc.getSubmitPoint(_submitModel);
                 if (baseModel.status) {
@@ -121,8 +125,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         ),
         32.w.heightBox,
         AkuPickImageWidget(
-          onChanged: (file) {
-            _submitModel.inspectionFaceImg = file;
+          onChanged: (files) {
+            _selfPhotos = files;
             setState(() {});
           },
         ),
@@ -145,8 +149,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         ),
         32.w.heightBox,
         AkuPickImageWidget(
-          onChanged: (file) {
-            _submitModel.inspectionSpaceImg = file;
+          onChanged: (files) {
+            _scenePhots = files;
             setState(() {});
           },
         )

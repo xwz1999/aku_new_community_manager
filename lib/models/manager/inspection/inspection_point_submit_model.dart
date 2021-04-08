@@ -3,13 +3,10 @@ import 'dart:io';
 class InspectionPointSubmitModel {
   int executePointId;
   List<ExecuteCheckList> executeCheckList;
-  File inspectionFaceImg;
-  File inspectionSpaceImg;
   List<String> inspectionFaceImgPath;
   List<String> inspectionSpaceImgPath;
   InspectionPointSubmitModel(this.executePointId, this.executeCheckList,
-      {this.inspectionFaceImg,
-      this.inspectionSpaceImg,
+      {
       this.inspectionFaceImgPath,
       this.inspectionSpaceImgPath});
   Map<String, dynamic> executeCheckListToJson() {

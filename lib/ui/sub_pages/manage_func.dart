@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
@@ -91,17 +90,5 @@ class ManageFunc {
       "executePointId": executePointId,
     });
     return baseModel;
-  }
-
-  static Future uploadFace(File file) async {
-    BaseModel baseModel = await NetUtil()
-        .post(API.upload.uploadInspectionFace, params: {"file": file});
-    return baseModel.data as String;
-  }
-
-  static Future uploadSpace(File file) async {
-    BaseModel baseModel = await NetUtil()
-        .post(API.upload.uploadInspectionSpace, params: {"file": file});
-    return baseModel.data as String;
   }
 }

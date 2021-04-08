@@ -1,4 +1,11 @@
 // Flutter imports:
+import 'dart:io';
+
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,6 +15,7 @@ import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:get/get.dart';
 
 class SettingFeedBackPage extends StatefulWidget {
   SettingFeedBackPage({Key key}) : super(key: key);
@@ -17,6 +25,9 @@ class SettingFeedBackPage extends StatefulWidget {
 }
 
 class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
+  List<File> _files;
+  List<String> _imgeUrls;
+  String _content;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -35,9 +46,13 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
             ),
             padding: EdgeInsets.all(24.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextField(
+                  onChanged: (value) {
+                    _content = value;
+                  },
                   minLines: 5,
                   maxLines: 99,
                   decoration: InputDecoration(
@@ -50,6 +65,12 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
                     ),
                   ),
                 ),
+                AkuPickImageWidget(
+                  size: 202.w,
+                  onChanged: (newFile) {
+                    _files = newFile;
+                  },
+                )
               ],
             ),
             decoration: BoxDecoration(
@@ -60,7 +81,21 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
         ],
       ),
       bottom: AkuMaterialButton(
-        onPressed: () {},
+        onPressed: () async {
+          _imgeUrls =
+              await NetUtil().uploadFiles(_files, API.upload.uploadAdvices);
+          BaseModel baseModel =
+              await NetUtil().post(API.user.feedbackSubmit, params: {
+            "content": _content,
+            "fileUrls": _imgeUrls,
+          });
+          if (baseModel.status) {
+            BotToast.showText(text: baseModel.message);
+            Get.back();
+          } else {
+            BotToast.showText(text: baseModel.message);
+          }
+        },
         child: Text('提交'),
         color: AppStyle.minorColor,
       ),
