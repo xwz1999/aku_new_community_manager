@@ -37,4 +37,14 @@ class AnnouncementDetailModel {
     data['imgUrls'] = this.imgUrls;
     return data;
   }
+
+  AnnouncementDetailModel.zero() {
+    this.content = '';
+    this.fileDocName = '';
+    this.fileDocUrl = '';
+    this.id = -1;
+    this.imgUrls = [];
+    this.releaseTime = '';
+    this.title = '';
+  }
 }

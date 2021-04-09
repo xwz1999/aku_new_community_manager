@@ -19,7 +19,6 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/anouncement/anouncement_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/announcement/anouncement_details.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -44,9 +43,11 @@ class AllAnouncementState extends State<AllAnouncement> {
                 params: {'announcementId': model.id});
             AnnouncementDetailModel detailModel =
                 AnnouncementDetailModel.fromJson(baseModel.data);
-            Get.to(AnouncementDetails(
-              model: detailModel,
-            ));
+            Get.to(
+              AnouncementDetails(
+                model: detailModel,
+              ),
+            );
           },
           child: Container(
             color: Color(0xFFFFFFFF),
@@ -116,7 +117,7 @@ class AllAnouncementState extends State<AllAnouncement> {
 
   Widget _anouncementList(
     String date,
-    List<AnouncementCardModel> cards,
+    List<AnnouncementListModel> cards,
   ) {
     return Column(
       children: [

@@ -431,10 +431,9 @@ class _HomePageState extends State<HomePage> {
                     height: 172.w,
                     child: Stack(children: [
                       CarouselSlider(
-                        // items: _anouncementProvider.anouncementCardModels
-                        //     .map((e) => AllAnouncementState.anounceCard(e))
-                        //     .toList(),
-                        items: [],
+                        items: _anouncementProvider.anouncementCardModels
+                            .map((e) => AllAnouncementState.anounceCard(e))
+                            .toList(),
                         options: CarouselOptions(
                           viewportFraction: 1.0,
                           aspectRatio: 686 / 172,

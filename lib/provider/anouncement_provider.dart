@@ -1,14 +1,15 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/announce/announcement_detail_model.dart';
+import 'package:aku_community_manager/models/announce/announcement_list_model.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/anouncement/anouncement_model.dart';
 
 class AnouncementProvider extends ChangeNotifier {
-  List<AnouncementCardModel> _anouncementCardModel =
-      AnouncementCardModel.initList();
-  List<AnouncementCardModel> get anouncementCardModels => _anouncementCardModel;
-  addAnouncementCardModel(AnouncementCardModel model) {
+  List<AnnouncementListModel> _anouncementCardModel = [];
+  List<AnnouncementListModel> get anouncementCardModels =>
+      _anouncementCardModel;
+  addAnouncementCardModel(AnnouncementListModel model) {
     _anouncementCardModel.insert(0, model);
     notifyListeners();
   }
