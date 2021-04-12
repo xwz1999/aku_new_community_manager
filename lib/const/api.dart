@@ -179,6 +179,9 @@ class _Manage {
 
   ///借还管理：删除物品明细信息
   String get borrowDelete => '/user/borrow/delete';
+
+  ///借还管理：新增物品明细
+  String get borrowinsertArticleDetail => '/user/borrow/insertArticleDetail';
 }
 
 class _Upload {

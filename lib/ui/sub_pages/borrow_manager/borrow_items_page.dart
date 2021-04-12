@@ -40,7 +40,11 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {
-                  // Get.to(AddBorrowItemPage(object: widget.object));
+                  Get.to(
+                    AddBorrowItemPage(
+                      articleId: widget.id,
+                    ),
+                  );
                 },
                 child: Text(
                   '新增',

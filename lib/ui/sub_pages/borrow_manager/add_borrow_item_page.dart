@@ -1,38 +1,52 @@
 // Dart imports:
 import 'dart:io';
-import 'dart:math';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/base_file_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:get/instance_manager.dart';
 
 class AddBorrowItemPage extends StatefulWidget {
-  final BorrowObject object;
-  AddBorrowItemPage({Key key, @required this.object}) : super(key: key);
+  final int articleId;
+  AddBorrowItemPage({
+    Key key,
+    this.articleId,
+  }) : super(key: key);
 
   @override
   _AddBorrowItemPageState createState() => _AddBorrowItemPageState();
 }
 
 class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
-  TextEditingController _textEditingController = TextEditingController();
-  String code = '';
+  TextEditingController _textEditingController;
+  TextEditingController _codeEditingCOntroller;
   File file;
   @override
   void initState() {
     super.initState();
-    code = (10000000 + Random().nextInt(999999)).toString();
+    _textEditingController = TextEditingController();
+    _codeEditingCOntroller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController?.dispose();
+    _codeEditingCOntroller?.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,20 +56,24 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
       actions: [
         AkuMaterialButton(
           minWidth: 120.w,
-          onPressed: () {
-            if (TextUtil.isEmpty(_textEditingController.text)) {
-              BotToast.showText(text: '名称不能为空');
-            } else if (file == null) {
-              BotToast.showText(text: '图片不能为空');
+          onPressed: () async {
+            BaseFileModel baseFileModel =
+                await NetUtil().upload(API.upload.uploadArticleDetail, file);
+            if (baseFileModel.status) {
+              await NetUtil().post(
+                API.manage.borrowinsertArticleDetail,
+                params: {
+                  "articleId": widget.articleId,
+                  "name": _textEditingController.text,
+                  "code": _codeEditingCOntroller.text,
+                  "fileUrls": [baseFileModel.url]
+                },
+                showMessage: true,
+              );
+
+              Get.back();
             } else {
-              widget.object.items.insert(
-                  0,
-                  SingleBorrowGoods(
-                    name: _textEditingController.text,
-                    code: code,
-                    assetpath: file,
-                    status: BORROW_STATUS.NOT_BORROW,
-                  ));
+              BotToast.showText(text: baseFileModel.message);
             }
           },
           child: Text(
@@ -92,14 +110,22 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
                 Divider(height: 1.w),
                 _buildRow(
                     '物品单号',
-                    Text(
-                      code,
+                    TextField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp(r"[0-9]*"))
+                      ],
                       style: TextStyle(
-                        color: AppStyle.minorTextColor,
+                        color: AppStyle.primaryTextColor,
                         fontSize: 28.sp,
                         fontWeight: FontWeight.bold,
                       ),
+                      controller: _codeEditingCOntroller,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: '请输入物品单号',
+                      ),
                     )),
+                Divider(height: 1.w),
                 _buildRow(
                   '物品图片',
                   file == null
