@@ -21,9 +21,7 @@ class ToDoModel {
             : null;
         break;
       default:
-        dynamicModel = json['dataList'] != null
-            ? []
-            : null;
+        dynamicModel = [];
     }
   }
 

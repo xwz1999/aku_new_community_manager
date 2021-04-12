@@ -56,17 +56,17 @@ class _BusinessPageState extends State<BusinessPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          _buildTabPage(AllModel(context).waitThings),
-          _buildTabPage(AllModel(context).processingThings),
-          _buildTabPage(AllModel(context).doneThings),
-          _buildTabPage(AllModel(context).allThings),
-        ],
+        children: List.generate(
+          _tabs.length,
+          (index) => BussinessView(
+            backlogStatus: index + 1,
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildTabPage(List list) {
+  Widget _buildTabPage(int status) {
     // return ListView.builder(
     //   padding: EdgeInsets.symmetric(horizontal: 32.w),
     //   itemBuilder: (context, index) {
@@ -80,6 +80,8 @@ class _BusinessPageState extends State<BusinessPage>
     //   },
     //   itemCount: list.length,
     // );
-    return BussinessView();
+    return BussinessView(
+      backlogStatus: status,
+    );
   }
 }
