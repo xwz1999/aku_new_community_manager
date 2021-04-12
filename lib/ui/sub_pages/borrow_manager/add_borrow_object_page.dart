@@ -2,6 +2,10 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/base_file_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -31,48 +35,48 @@ class AddBorrowObjectPage extends StatefulWidget {
 
 class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
   TextEditingController _textEditingController = TextEditingController();
-  TextEditingController _numberController = TextEditingController();
+  // TextEditingController _numberController = TextEditingController();
   File file;
-  List<BorrowObject> get objects => BorrowData.borrowObjects;
+  // List<BorrowObject> get objects => BorrowData.borrowObjects;
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context);
+    // final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
-      title: '物品详情',
-      actions: [
-        userProvider.userInfoModel.role != USER_ROLE.MANAGER
-            ? AkuMaterialButton(
-                minWidth: 120.w,
-                onPressed: () {
-                  if (TextUtil.isEmpty(_textEditingController.text)) {
-                    BotToast.showText(text: '名称不能为空');
-                  } else if (file == null) {
-                    BotToast.showText(text: '图片不能为空');
-                  } else if (int.tryParse(_numberController.text) == null) {
-                    BotToast.showText(text: '数量错误');
-                  } else {
-                    objects.insert(
-                      0,
-                      BorrowObject.init(
-                        name: _textEditingController.text,
-                        allNumber: int.parse(_numberController.text),
-                        assetPath: file,
-                      ),
-                    );
-                    Get.back();
-                  }
-                },
-                child: Text(
-                  '完成',
-                  style: TextStyle(
-                    fontSize: 28.w,
-                    color: AppStyle.primaryTextColor,
-                  ),
-                ),
-              )
-            : SizedBox(),
-      ],
+      title: '新增总类',
+      // actions: [
+      //   userProvider.userInfoModel.role != USER_ROLE.MANAGER
+      //       ? AkuMaterialButton(
+      //           minWidth: 120.w,
+      //           onPressed: () {
+      //             if (TextUtil.isEmpty(_textEditingController.text)) {
+      //               BotToast.showText(text: '名称不能为空');
+      //             } else if (file == null) {
+      //               BotToast.showText(text: '图片不能为空');
+      //             } else if (int.tryParse(_numberController.text) == null) {
+      //               BotToast.showText(text: '数量错误');
+      //             } else {
+      //               objects.insert(
+      //                 0,
+      //                 BorrowObject.init(
+      //                   name: _textEditingController.text,
+      //                   allNumber: int.parse(_numberController.text),
+      //                   assetPath: file,
+      //                 ),
+      //               );
+      //               Get.back();
+      //             }
+      //           },
+      //           child: Text(
+      //             '完成',
+      //             style: TextStyle(
+      //               fontSize: 28.w,
+      //               color: AppStyle.primaryTextColor,
+      //             ),
+      //           ),
+      //         )
+      //       : SizedBox(),
+      // ],
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
@@ -99,24 +103,24 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                       ),
                     )),
                 Divider(height: 1.w),
-                _buildRow(
-                    '物品数量',
-                    TextField(
-                      onChanged: (_) {
-                        setState(() {});
-                      },
-                      style: TextStyle(
-                        color: AppStyle.primaryTextColor,
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      controller: _numberController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: '请输入物品数量',
-                      ),
-                    )),
-                Divider(height: 1.w),
+                // _buildRow(
+                //     '物品数量',
+                //     TextField(
+                //       onChanged: (_) {
+                //         setState(() {});
+                //       },
+                //       style: TextStyle(
+                //         color: AppStyle.primaryTextColor,
+                //         fontSize: 28.sp,
+                //         fontWeight: FontWeight.bold,
+                //       ),
+                //       controller: _numberController,
+                //       decoration: InputDecoration(
+                //         border: InputBorder.none,
+                //         hintText: '请输入物品数量',
+                //       ),
+                //     )),
+                // Divider(height: 1.w),
                 AkuBox.h(24),
                 _buildRow(
                   '物品图片',
@@ -174,21 +178,29 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
             padding: EdgeInsets.symmetric(horizontal: 64.w),
             child: AkuBottomButton(
               title: '确定',
-              onTap: TextUtil.isEmpty(_textEditingController.text) ||
-                      TextUtil.isEmpty(_numberController.text) ||
-                      file == null ||
-                      int.tryParse(_numberController.text) == null
-                  ? null
-                  : () {
-                      BorrowData.borrowObjects.add(
-                        BorrowObject.init(
-                          name: _textEditingController.text,
-                          allNumber: int.parse(_numberController.text),
-                          assetPath: file,
-                        ),
-                      );
-                      Get.back();
-                    },
+              onTap:
+                  TextUtil.isEmpty(_textEditingController.text) || file == null
+                      // TextUtil.isEmpty(_numberController.text) ||
+                      // file == null ||
+                      // int.tryParse(_numberController.text) == null
+                      ? null
+                      : () async {
+                          BaseFileModel baseFileModel = await NetUtil()
+                              .upload(API.upload.uploadArtical, file);
+                          if (baseFileModel.status) {
+                            await NetUtil().post(
+                              API.manage.insertArticle,
+                              params: {
+                                "name": _textEditingController.text,
+                                "fileUrls": [baseFileModel.url]
+                              },
+                              showMessage: true,
+                            );
+                          } else {
+                            BotToast.showText(text: baseFileModel.message);
+                          }
+                          Get.back();
+                        },
             ),
           ),
         ],

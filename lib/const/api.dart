@@ -173,6 +173,10 @@ class _Manage {
 
   ///待办事项：查询所有的待办事务
   String get backlogList => '/user/backlog/list';
+
+  ///借还管理：新增总类
+  String get insertArticle => '/user/borrow/insertArticle';
+  
 }
 
 class _Upload {
