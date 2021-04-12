@@ -60,7 +60,8 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                       params: {
                         'id': _detailModel.id,
                         'name': _textEditingController.text,
-                        'fileUrls': _detailModel.imgUrls,
+                        'status': _detailModel.status,
+                        'fileUrls': [_detailModel.imgUrls.first.url],
                       },
                       showMessage: true,
                     );
