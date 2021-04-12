@@ -3,6 +3,11 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/models/manager/item_num_model.dart';
+import 'package:aku_community_manager/models/todo_bussiness/todo_model.dart';
+import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
+import 'package:aku_community_manager/ui/home/business/business_view.dart';
+import 'package:aku_community_manager/ui/home/business/bussiness_func.dart';
+import 'package:aku_community_manager/ui/home/business/todo_outdoor_card.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +59,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ItemNumModel _itemNumModel;
+  List _todoModelList;
   bool _onload = true;
 
   ///自定义bar的菜单按钮
@@ -148,6 +154,8 @@ class _HomePageState extends State<HomePage> {
     ));
     Future.delayed(Duration(milliseconds: 300), () async {
       _itemNumModel = await _getItemNum();
+      var dataList = await BussinessFunc.getBussinessModelList(1);
+      _todoModelList = dataList.map((e) => ToDoModel.fromJson(e)).toList();
       _onload = false;
       setState(() {});
     });
@@ -529,20 +537,28 @@ class _HomePageState extends State<HomePage> {
                                 width: 526.w,
                                 child: Builder(
                                   builder: (context) {
-                                    final item =
-                                        AllModel(context).waitThings[index];
-                                    if (item is DecorationListModel) {
-                                      return DecorationManagerCard(model: item);
-                                    } else if (item is BussinessAndFixModel) {
+                                    if (_todoModelList[index]
+                                            .dynamicModel
+                                            .runtimeType ==
+                                        BussinessAndFixModel) {
                                       return BusinessFixCard(
-                                          model: item, homeDisplay: true);
+                                          model: _todoModelList[index]
+                                              .dynamicModel);
+                                    } else if (_todoModelList[index]
+                                            .dynamicModel
+                                            .runtimeType ==
+                                        ToDoOutDoorModel) {
+                                      return ToDoOutDoorCard(
+                                        model:
+                                            _todoModelList[index].dynamicModel,
+                                      );
                                     } else
                                       return SizedBox();
                                   },
                                 ),
                               );
                             },
-                            itemCount: AllModel(context).waitThings.length,
+                            itemCount: _todoModelList.length,
                           ),
                         ),
                   SizedBox(height: 24.w),
