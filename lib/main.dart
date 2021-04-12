@@ -14,7 +14,6 @@ import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/fix_provider.dart';
 import 'package:aku_community_manager/provider/manage_provider.dart';
@@ -65,7 +64,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => GreenManageProvider()),
           ChangeNotifierProvider(
               create: (context) => InspectionManageProvider()),
-          ChangeNotifierProvider(create: (context) => AnouncementProvider()),
         ],
         child: GestureDetector(
           onTap: () {

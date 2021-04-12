@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/announce/announcement_list_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/models/manager/item_num_model.dart';
@@ -8,6 +9,7 @@ import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.d
 import 'package:aku_community_manager/ui/home/business/business_view.dart';
 import 'package:aku_community_manager/ui/home/business/bussiness_func.dart';
 import 'package:aku_community_manager/ui/home/business/todo_outdoor_card.dart';
+import 'package:aku_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,6 @@ import 'package:provider/provider.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/all_model.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/provider/anouncement_provider.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -60,6 +61,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   ItemNumModel _itemNumModel;
   List _todoModelList;
+  List _anounceMentList;
   bool _onload = true;
 
   ///自定义bar的菜单按钮
@@ -156,6 +158,7 @@ class _HomePageState extends State<HomePage> {
       _itemNumModel = await _getItemNum();
       var dataList = await BussinessFunc.getBussinessModelList(1);
       _todoModelList = dataList.map((e) => ToDoModel.fromJson(e)).toList();
+      _anounceMentList = await _getAnouncement();
       _onload = false;
       setState(() {});
     });
@@ -168,10 +171,21 @@ class _HomePageState extends State<HomePage> {
     return ItemNumModel.fromJson(response.data);
   }
 
+  Future _getAnouncement() async {
+    BaseListModel baseListModel =
+        (await NetUtil().getList(API.message.announcementList, params: {
+      "pageNum": 1,
+      "size": 3,
+    }));
+    List<AnnouncementListModel> anounceModels = baseListModel.tableList
+        .map((e) => AnnouncementListModel.fromJson(e))
+        .toList();
+    return anounceModels;
+  }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final _anouncementProvider = Provider.of<AnouncementProvider>(context);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       child: Scaffold(
         drawer: PersonalDraw(),
@@ -439,7 +453,7 @@ class _HomePageState extends State<HomePage> {
                     height: 172.w,
                     child: Stack(children: [
                       CarouselSlider(
-                        items: _anouncementProvider.anouncementCardModels
+                        items: _anounceMentList
                             .map((e) => AllAnouncementState.anounceCard(e))
                             .toList(),
                         options: CarouselOptions(
@@ -461,10 +475,9 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: _anouncementProvider.anouncementCardModels
+                          children: _anounceMentList
                               .map((e) {
-                            int index = _anouncementProvider
-                                .anouncementCardModels
+                            int index = _anounceMentList
                                 .indexOf(e);
                             return Container(
                               width: 12.w,
