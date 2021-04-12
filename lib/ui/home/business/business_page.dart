@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
+import 'package:aku_community_manager/ui/home/business/business_view.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -66,18 +67,19 @@ class _BusinessPageState extends State<BusinessPage>
   }
 
   Widget _buildTabPage(List list) {
-    return ListView.builder(
-      padding: EdgeInsets.symmetric(horizontal: 32.w),
-      itemBuilder: (context, index) {
-        final item = list[index];
-        if (item is DecorationListModel) {
-          return DecorationManagerCard(model: item);
-        } else if (item is BussinessAndFixModel) {
-          return BusinessFixCard(model: item);
-        } else
-          return SizedBox();
-      },
-      itemCount: list.length,
-    );
+    // return ListView.builder(
+    //   padding: EdgeInsets.symmetric(horizontal: 32.w),
+    //   itemBuilder: (context, index) {
+    //     final item = list[index];
+    //     if (item is DecorationListModel) {
+    //       return DecorationManagerCard(model: item);
+    //     } else if (item is BussinessAndFixModel) {
+    //       return BusinessFixCard(model: item);
+    //     } else
+    //       return SizedBox();
+    //   },
+    //   itemCount: list.length,
+    // );
+    return BussinessView();
   }
 }

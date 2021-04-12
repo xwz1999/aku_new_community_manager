@@ -1,7 +1,9 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/borrow/borrow_item_model.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_object_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -28,22 +30,19 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '全部物品',
-      actions: [
-        // userProvider.userInfoModel.role == USER_ROLE.MANAGER
-        //     ? AkuMaterialButton(
-        //         minWidth: 120.w,
-        //         onPressed: () {
-        //           Get.to(()=>AddBorrowObjectPage());
-        //         },
-        //         child: Text(
-        //           '新增',
-        //           style: TextStyle(
-        //             fontSize: 28.w,
-        //             color: AppStyle.primaryTextColor,
-        //           ),
-        //         ),
-        //       )
-        //     : SizedBox(),
+      actions: [ AkuMaterialButton(
+                minWidth: 120.w,
+                onPressed: () {
+                  Get.to(()=>AddBorrowObjectPage());
+                },
+                child: Text(
+                  '新增',
+                  style: TextStyle(
+                    fontSize: 28.w,
+                    color: AppStyle.primaryTextColor,
+                  ),
+                ),
+              )
       ],
       body: BeeListView(
         path: API.manage.borrowList,
