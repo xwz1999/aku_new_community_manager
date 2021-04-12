@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/borrow/borrow_item_model.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_object_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
@@ -16,6 +17,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_items_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:provider/provider.dart';
 
 class AllBorrowGoods extends StatefulWidget {
   AllBorrowGoods({Key key}) : super(key: key);
@@ -28,12 +30,15 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
   EasyRefreshController _refreshController = EasyRefreshController();
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '全部物品',
-      actions: [ AkuMaterialButton(
+      actions: [
+        userProvider.infoModel.canOperation
+            ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {
-                  Get.to(()=>AddBorrowObjectPage());
+                  Get.to(() => AddBorrowObjectPage());
                 },
                 child: Text(
                   '新增',
@@ -43,6 +48,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
                   ),
                 ),
               )
+            : SizedBox()
       ],
       body: BeeListView(
         path: API.manage.borrowList,

@@ -35,48 +35,12 @@ class AddBorrowObjectPage extends StatefulWidget {
 
 class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
   TextEditingController _textEditingController = TextEditingController();
-  // TextEditingController _numberController = TextEditingController();
   File file;
-  // List<BorrowObject> get objects => BorrowData.borrowObjects;
 
   @override
   Widget build(BuildContext context) {
-    // final userProvider = Provider.of<UserProvider>(context);
     return AkuScaffold(
       title: '新增总类',
-      // actions: [
-      //   userProvider.userInfoModel.role != USER_ROLE.MANAGER
-      //       ? AkuMaterialButton(
-      //           minWidth: 120.w,
-      //           onPressed: () {
-      //             if (TextUtil.isEmpty(_textEditingController.text)) {
-      //               BotToast.showText(text: '名称不能为空');
-      //             } else if (file == null) {
-      //               BotToast.showText(text: '图片不能为空');
-      //             } else if (int.tryParse(_numberController.text) == null) {
-      //               BotToast.showText(text: '数量错误');
-      //             } else {
-      //               objects.insert(
-      //                 0,
-      //                 BorrowObject.init(
-      //                   name: _textEditingController.text,
-      //                   allNumber: int.parse(_numberController.text),
-      //                   assetPath: file,
-      //                 ),
-      //               );
-      //               Get.back();
-      //             }
-      //           },
-      //           child: Text(
-      //             '完成',
-      //             style: TextStyle(
-      //               fontSize: 28.w,
-      //               color: AppStyle.primaryTextColor,
-      //             ),
-      //           ),
-      //         )
-      //       : SizedBox(),
-      // ],
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
