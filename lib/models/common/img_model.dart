@@ -7,6 +7,12 @@ class ImgModel {
 
   ImgModel({this.url, this.size, this.longs, this.paragraph, this.sort});
 
+  static String first(List<ImgModel> models) {
+    if (models == null) return '';
+    if (models.isEmpty) return '';
+    return models.first.url;
+  }
+
   ImgModel.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     size = json['size'];

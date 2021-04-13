@@ -415,6 +415,7 @@ class _InspectionManageDetailsPageState
             hasScan: model.completeDate == null ? false : true,
             executePointId: model.id,
             executeName: _detailModel.name,
+            status: _detailModel.status,
           ));
     });
   }

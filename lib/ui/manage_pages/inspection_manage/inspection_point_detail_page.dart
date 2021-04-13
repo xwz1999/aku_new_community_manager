@@ -1,4 +1,5 @@
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/common/img_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
@@ -15,12 +16,14 @@ import 'package:velocity_x/velocity_x.dart';
 class InspectionPointDetailPage extends StatefulWidget {
   final int executePointId;
   final String executeName;
-  final hasScan;
+  final bool hasScan;
+  final int status;
   InspectionPointDetailPage({
     Key key,
     this.executePointId,
     this.executeName,
     @required this.hasScan,
+    this.status,
   }) : super(key: key);
 
   @override
@@ -109,7 +112,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: FadeInImage.assetNetwork(
                     fit: BoxFit.fill,
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(_detialModel.faceImg?.first?.url ?? '')),
+                    image: API.image(ImgModel.first(_detialModel.faceImg))),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,
@@ -161,7 +164,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: FadeInImage.assetNetwork(
                     fit: BoxFit.fill,
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(_detialModel.spaceImg?.first?.url ?? '')),
+                    image: API.image(ImgModel.first(_detialModel.spaceImg))),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,
@@ -330,6 +333,12 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                         fontSize: 36.sp,
                         fontWeight: FontWeight.bold),
                   ),
+                  Spacer(),
+                  InspectionUtils.status[widget.status].text
+                      .color(InspectionUtils.color(widget.status))
+                      .bold
+                      .size(28.sp)
+                      .make()
                 ],
               ),
             ),

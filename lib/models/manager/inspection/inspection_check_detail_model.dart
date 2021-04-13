@@ -1,3 +1,5 @@
+import 'package:aku_community_manager/models/common/img_model.dart';
+
 class InspectionCheckDetialModel {
   int id;
   int executeId;
@@ -6,8 +8,8 @@ class InspectionCheckDetialModel {
   int type;
   String completeDate;
   List<CheckFBIVoList> checkFBIVoList;
-  List<FaceImg> faceImg;
-  List<FaceImg> spaceImg;
+  List<ImgModel> faceImg;
+  List<ImgModel> spaceImg;
 
   InspectionCheckDetialModel(
       {this.id,
@@ -34,15 +36,15 @@ class InspectionCheckDetialModel {
       });
     }
     if (json['faceImg'] != null) {
-      faceImg = new List<FaceImg>();
+      faceImg = new List<ImgModel>();
       json['faceImg'].forEach((v) {
-        faceImg.add(new FaceImg.fromJson(v));
+        faceImg.add(new ImgModel.fromJson(v));
       });
     }
     if (json['spaceImg'] != null) {
-      spaceImg = new List<FaceImg>();
+      spaceImg = new List<ImgModel>();
       json['spaceImg'].forEach((v) {
-        spaceImg.add(new FaceImg.fromJson(v));
+        spaceImg.add(new ImgModel.fromJson(v));
       });
     }
   }
