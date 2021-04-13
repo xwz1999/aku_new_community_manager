@@ -41,7 +41,7 @@ dependencies:
 
   expandable: ^5.0.1
 
-  url_launcher: ^5.7.10
+  url_launcher: ^6.0.3
 
   amap_map_fluttify: ^0.29.0
 
@@ -50,7 +50,9 @@ dependencies:
   velocity_x: ^2.6.0
   dotted_border: ^2.0.0-nullsafety.0
   dio: ^4.0.0
-
+  #谷歌崩溃分析
+  firebase_core: ^1.0.3
+  firebase_crashlytics: ^2.0.0
   power_logger: ^1.0.1-nullsafety.1
   logger: ^1.0.0
   aku_ui:

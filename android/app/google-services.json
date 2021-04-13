@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "749352579370",
+    "project_id": "aku-community-manage",
+    "storage_bucket": "aku-community-manage.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749352579370:android:e6f76e5f1c56841db32e53",
+        "android_client_info": {
+          "package_name": "com.akucommunity.aku_community_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749352579370-ag1vqd24nsrdj0oogldg6rqiq2mcpre7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQrr7LDVBo-fGFijTrQT9vp5oYi9UucXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749352579370-ag1vqd24nsrdj0oogldg6rqiq2mcpre7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
