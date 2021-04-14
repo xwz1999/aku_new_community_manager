@@ -4,6 +4,7 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -40,7 +41,13 @@ class _SplashPageState extends State<SplashPage> {
     await Permission.locationWhenInUse.request();
   }
 
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  Future _initialization() async {
+    await Firebase.initializeApp();
+    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+    FlutterError.onError = (details) {
+      FirebaseCrashlytics.instance.recordFlutterError(details);
+    };
+  }
 
   Future _initOp() async {
     await _originOp();
@@ -64,7 +71,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: _initialization,
+        future: _initialization(),
         builder: (context, snapshot) {
           return Center(
             child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),
