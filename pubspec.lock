@@ -17,34 +17,29 @@ packages:
       url: "http://test.akuhotel.com:8099/aku_fe/aku_ui.git"
     source: git
     version: "0.0.1"
-  amap_core_fluttify:
-    dependency: transitive
-    description:
-      name: amap_core_fluttify
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.12.0"
-  amap_location_fluttify:
-    dependency: transitive
-    description:
-      name: amap_location_fluttify
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.18.0"
-  amap_map_fluttify:
+  amap_flutter_base:
     dependency: "direct main"
     description:
-      name: amap_map_fluttify
+      name: amap_flutter_base
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.29.0"
-  amap_search_fluttify:
-    dependency: transitive
+    version: "1.0.2"
+  amap_flutter_location:
+    dependency: "direct main"
     description:
-      name: amap_search_fluttify
+      name: amap_flutter_location
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.14.0"
+    version: "1.0.1"
+  amap_flutter_map:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: nullsafety
+      resolved-ref: "5c50cf60d2157cc2779a171ca65c327d571389a7"
+      url: "http://159.75.73.143:8080/third_packages/amap_flutter_map"
+    source: git
+    version: "2.0.2-nullsafety"
   analyzer:
     dependency: transitive
     description:
@@ -164,13 +159,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
-  core_location_fluttify:
-    dependency: transitive
-    description:
-      name: core_location_fluttify
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.4.1"
   crypto:
     dependency: transitive
     description:
@@ -262,6 +250,41 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "5.2.1"
+  firebase_core:
+    dependency: "direct main"
+    description:
+      name: firebase_core
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3"
+  firebase_core_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_core_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.0.0"
+  firebase_core_web:
+    dependency: transitive
+    description:
+      name: firebase_core_web
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.2"
+  firebase_crashlytics:
+    dependency: "direct main"
+    description:
+      name: firebase_crashlytics
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
+  firebase_crashlytics_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_crashlytics_platform_interface
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -324,13 +347,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  foundation_fluttify:
-    dependency: transitive
-    description:
-      name: foundation_fluttify
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.9.10+1"
   get:
     dependency: "direct main"
     description:
@@ -528,21 +544,7 @@ packages:
       name: path_provider
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.6.9"
-  path_provider_macos:
-    dependency: transitive
-    description:
-      name: path_provider_macos
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.0.4+8"
-  path_provider_platform_interface:
-    dependency: transitive
-    description:
-      name: path_provider_platform_interface
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "1.0.4"
+    version: "1.2.0"
   pedantic:
     dependency: transitive
     description:
@@ -556,14 +558,14 @@ packages:
       name: permission_handler
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.0.1+1"
+    version: "6.1.1"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.1"
+    version: "3.1.2"
   pin_input_text_field:
     dependency: "direct main"
     description:
@@ -584,7 +586,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.3"
+    version: "2.0.0"
   power_logger:
     dependency: "direct main"
     description:
@@ -660,6 +662,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:
@@ -694,42 +703,42 @@ packages:
       name: url_launcher
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.7.10"
+    version: "6.0.3"
   url_launcher_linux:
     dependency: transitive
     description:
       name: url_launcher_linux
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.1+4"
+    version: "2.0.0"
   url_launcher_macos:
     dependency: transitive
     description:
       name: url_launcher_macos
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.1+9"
+    version: "2.0.0"
   url_launcher_platform_interface:
     dependency: transitive
     description:
       name: url_launcher_platform_interface
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.9"
+    version: "2.0.2"
   url_launcher_web:
     dependency: transitive
     description:
       name: url_launcher_web
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.1.5+1"
+    version: "2.0.0"
   url_launcher_windows:
     dependency: transitive
     description:
       name: url_launcher_windows
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.1+3"
+    version: "2.0.0"
   vector_math:
     dependency: transitive
     description:

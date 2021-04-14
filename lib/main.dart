@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,8 +21,8 @@ import 'package:aku_community_manager/ui/splash/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await AmapCore.init('');
-  await AmapLocation.instance.init(iosKey: '');
+  // await AmapCore.init('');
+  // await AmapLocation.instance.init(iosKey: '');
   JPush jpush = new JPush();
   DevUtil.setDev(true);
   jpush.addEventHandler(

@@ -1,22 +1,30 @@
 // Flutter imports:
 import 'dart:ui';
 
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_cupertino_button.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:amap_map_fluttify/amap_map_fluttify.dart';
 import 'package:get/get.dart';
 
 // Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/permission_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
-import 'package:aku_community_manager/ui/tool_pages/warning/warning_sub_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:amap_flutter_base/amap_flutter_base.dart';
+import 'package:amap_flutter_map/amap_flutter_map.dart';
+
+class PermissonUtil {
+  static Future getLocationPermisson() async {
+    return await Permission.locationWhenInUse.request().isGranted;
+  }
+}
 
 class WarningPage extends StatefulWidget {
   WarningPage({Key key}) : super(key: key);
@@ -26,11 +34,22 @@ class WarningPage extends StatefulWidget {
 }
 
 class _WarningPageState extends State<WarningPage> {
-  AmapController _amapController;
-  Location _location;
+  AMapController _mapController;
+  @override
+  void initState() {
+    super.initState();
+    PermissonUtil.getLocationPermisson();
+  }
+
+  @override
+  void dispose() {
+    _mapController?.disponse();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context, listen: false);
     return AkuScaffold(
       title: '一键报警',
       actions: [
@@ -50,16 +69,24 @@ class _WarningPageState extends State<WarningPage> {
       ],
       body: Stack(
         children: [
-          AmapView(
-            zoomLevel: 15,
-            showZoomControl: false,
-            showCompass: false,
-            showScaleControl: false,
-            onMapCreated: (controller) async {
-              _amapController = controller;
-              _amapController.showMyLocation(MyLocationOption());
-              _getLocation();
+          AMapWidget(
+            onMapCreated: (controller) {
+              LatLng _target = LatLng(
+                appProvider.location['latitude'],
+                appProvider.location['longitude'],
+              );
+
+              _mapController = controller;
+              _mapController.moveCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(target: _target, zoom: 18),
+                ),
+              );
             },
+            myLocationStyleOptions: MyLocationStyleOptions(true,
+                circleFillColor:
+                    Theme.of(context).primaryColor.withOpacity(0.2),
+                circleStrokeColor: Theme.of(context).primaryColor),
           ),
 
           ///首部地址栏
@@ -99,7 +126,9 @@ class _WarningPageState extends State<WarningPage> {
                           AkuBox.w(10),
                           Expanded(
                             child: Text(
-                              _location?.address ?? '加载中',
+                              (appProvider.location == null)
+                                  ? '加载中……'
+                                  : appProvider.location['address'],
                               style: TextStyle(
                                 color: AppStyle.minorTextColor,
                                 fontSize: 28.sp,
@@ -210,7 +239,15 @@ class _WarningPageState extends State<WarningPage> {
             child: AkuCupertinoButton(
               minWidth: 0,
               onPressed: () {
-                _getLocation();
+                LatLng _target = LatLng(
+                  appProvider.location['latitude'],
+                  appProvider.location['longitude'],
+                );
+                _mapController.moveCamera(
+                  CameraUpdate.newCameraPosition(
+                    CameraPosition(target: _target, zoom: 18),
+                  ),
+                );
               },
               child: Container(
                 alignment: Alignment.center,
@@ -241,17 +278,17 @@ class _WarningPageState extends State<WarningPage> {
     );
   }
 
-  _getLocation() {
-    _location = null;
-    setState(() {});
-    PermissionTool.getLocationPermission().then((state) {
-      if (state) {
-        AmapLocation.instance.fetchLocation().then((location) {
-          _amapController.setCenterCoordinate(location.latLng);
-          _location = location;
-          setState(() {});
-        });
-      }
-    });
-  }
+  // _getLocation() {
+  //   _location = null;
+  //   setState(() {});
+  //   PermissionTool.getLocationPermission().then((state) {
+  //     if (state) {
+  //       AmapLocation.instance.fetchLocation().then((location) {
+  //         _amapController.setCenterCoordinate(location.latLng);
+  //         _location = location;
+  //         setState(() {});
+  //       });
+  //     }
+  //   });
+  // }
 }

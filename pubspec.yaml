@@ -42,10 +42,13 @@ dependencies:
   expandable: ^5.0.1
 
   url_launcher: ^6.0.3
-
-  amap_map_fluttify: ^0.29.0
-
-  permission_handler: ^5.0.1+1
+  amap_flutter_map:
+    git:
+      url: http://159.75.73.143:8080/third_packages/amap_flutter_map
+      ref: nullsafety
+  amap_flutter_location: ^1.0.1
+  amap_flutter_base: ^1.0.2
+  permission_handler: ^6.1.1
   
   velocity_x: ^2.6.0
   dotted_border: ^2.0.0-nullsafety.0

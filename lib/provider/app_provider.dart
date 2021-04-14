@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:amap_flutter_location/amap_flutter_location.dart';
+import 'package:amap_flutter_location/amap_location_option.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
@@ -25,5 +27,27 @@ class AppProvider extends ChangeNotifier {
   clearRecentApp() {
     _recentUsedApp.clear();
     notifyListeners();
+  }
+
+  Map<String, Object> _location;
+  Map<String, Object> get location => _location;
+  AMapFlutterLocation _flutterLocation;
+
+  startLocation() {
+    _flutterLocation = AMapFlutterLocation();
+    _flutterLocation.onLocationChanged().listen((event) {
+      _location = event;
+      if (_location != null) {
+        stopLocation();
+      }
+    });
+    _flutterLocation.setLocationOption(
+        AMapLocationOption(onceLocation: true, needAddress: true));
+    _flutterLocation.startLocation();
+  }
+
+  stopLocation() {
+    _flutterLocation.stopLocation();
+    _flutterLocation.destroy();
   }
 }
