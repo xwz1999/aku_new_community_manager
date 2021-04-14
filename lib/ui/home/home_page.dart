@@ -2,16 +2,15 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/announce/announcement_list_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
-import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/models/manager/item_num_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
-import 'package:aku_community_manager/ui/home/business/business_view.dart';
 import 'package:aku_community_manager/ui/home/business/bussiness_func.dart';
 import 'package:aku_community_manager/ui/home/business/todo_outdoor_card.dart';
 import 'package:aku_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shimmer/shimmer.dart';
@@ -27,8 +26,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/all_model.dart';
-import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -44,7 +41,6 @@ import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
-import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
@@ -475,10 +471,8 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: _anounceMentList
-                              .map((e) {
-                            int index = _anounceMentList
-                                .indexOf(e);
+                          children: _anounceMentList.map((e) {
+                            int index = _anounceMentList.indexOf(e);
                             return Container(
                               width: 12.w,
                               height: 12.w,
