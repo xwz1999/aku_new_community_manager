@@ -7,6 +7,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -44,6 +45,8 @@ class _SplashPageState extends State<SplashPage> {
     await Permission.locationWhenInUse.request();
   }
 
+  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+
   Future _initOp() async {
     await _originOp();
     final appProvider = Provider.of<AppProvider>(context, listen: false);
@@ -65,8 +68,13 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),
+      body: FutureBuilder(
+        future: _initialization,
+        builder: (context, snapshot) {
+          return Center(
+            child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),
+          );
+        },
       ),
     );
   }
