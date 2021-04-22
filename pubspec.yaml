@@ -56,6 +56,8 @@ dependencies:
   #谷歌崩溃分析
   firebase_core: ^1.0.3
   firebase_crashlytics: ^2.0.0
+  #json序列化
+  json_serializable: ^4.1.1
   
   power_logger: ^1.0.1-nullsafety.1
   logger: ^1.0.0
@@ -68,14 +70,15 @@ dependencies:
   jpush_flutter: 
     git: 
       url: http://159.75.73.143:8080/third_packages/jpush_flutter
+  
+  shimmer: ^2.0.0-nullsafety.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   import_sorter:
   grinder:
-  flutter_asset_generator: ^0.6.1
-  shimmer: ^2.0.0-nullsafety.0
+  pedantic:
 
 flutter:
   uses-material-design: true
