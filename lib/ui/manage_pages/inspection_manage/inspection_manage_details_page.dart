@@ -1,22 +1,29 @@
 // Flutter imports:
+import 'dart:async';
+
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_detail_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_code_parase.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
+import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/aku_ui.dart';
+import 'package:amap_flutter_base/amap_flutter_base.dart';
+import 'package:amap_flutter_map/amap_flutter_map.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
@@ -60,19 +67,29 @@ class _InspectionManageDetailsPageState
     }
   }
 
+  AMapController _aMapController;
+  Timer _timer;
+  bool _canUploadLocation = false;
+
   InspectionDetailModel _detailModel;
   List<InspectionPointModel> _pointModels;
   bool _onload = true;
   EasyRefreshController _refreshController;
+  bool _exit = false;
   @override
   void initState() {
     super.initState();
     _refreshController = EasyRefreshController();
+
+    PermissonUtil.getLocationPermisson();
   }
 
   @override
   void dispose() {
     _refreshController?.dispose();
+    _aMapController?.disponse();
+    _timer?.cancel();
+    _timer = null;
     super.dispose();
   }
 
@@ -82,98 +99,133 @@ class _InspectionManageDetailsPageState
 
   @override
   Widget build(BuildContext context) {
-    return AkuScaffold(
-        title: '巡检详情',
-        body: EasyRefresh(
-          controller: _refreshController,
-          firstRefresh: true,
-          header:
-              MaterialHeader(valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
-          onRefresh: () async {
-            _detailModel =
-                await ManageFunc.getInspectionDetail(widget.executeId);
-            _pointModels = await (_detailModel.status == 1
-                ? ManageFunc.getInspectionPointByPlanId(
-                    planId: _detailModel.inspectionPlanId)
-                : ManageFunc.getInspectionPointByExcuteId(
-                    excuteId: widget.executeId));
-            _onload = false;
-            setState(() {});
+    return WillPopScope(
+      onWillPop: () async {
+        await showCupertinoDialog(
+            context: context,
+            builder: (context) {
+              return exitDialog();
+            });
+        return _exit;
+      },
+      child: AkuScaffold(
+          title: '巡检详情',
+          body: EasyRefresh(
+            controller: _refreshController,
+            firstRefresh: true,
+            header: MaterialHeader(
+                valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
+            onRefresh: () async {
+              _detailModel =
+                  await ManageFunc.getInspectionDetail(widget.executeId);
+              _pointModels = await (_detailModel.status == 1
+                  ? ManageFunc.getInspectionPointByPlanId(
+                      planId: _detailModel.inspectionPlanId)
+                  : ManageFunc.getInspectionPointByExcuteId(
+                      excuteId: widget.executeId));
+              _onload = false;
+              setState(() {});
+            },
+            child: _onload
+                ? _emptyWidget()
+                : Column(
+                    children: [
+                      _inspectionHeadCard(),
+                      16.w.heightBox,
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 32.w, vertical: 24.w),
+                        decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
+                        width: double.infinity,
+                        constraints: BoxConstraints(
+                          minHeight: 85.w,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            '巡检站点'.text.black.size(32.sp).bold.make(),
+                            ..._pointModels
+                                .map((e) => _buildInspectionTile(
+                                    e, _pointModels.indexOf(e)))
+                                .toList(),
+                          ].sepWidget(separate: 16.w.heightBox),
+                        ),
+                      ),
+                      16.w.heightBox,
+                      _locationWidget(),
+                    ],
+                  ),
+          ),
+          bottom: (!_onload) &&
+                  (_detailModel.status != 2) &&
+                  (_detailModel.status != 4)
+              ? AkuButton(
+                  onPressed: _detailModel.status == 1
+                      ? () async {
+                          BaseModel _baseModel = await NetUtil().get(
+                              API.manage.inspectionStart,
+                              params: {"executeId": widget.executeId});
+                          if (_baseModel.status) {
+                            BotToast.showText(text: _baseModel.message);
+                            _refreshController.callRefresh();
+                            _startTimer(5000);
+                          } else {
+                            BotToast.showText(text: _baseModel.message);
+                          }
+                        }
+                      : () async {
+                          Barcode result = await Get.to(() => QrScannerPage());
+                          BaseModel baseModel =
+                              await ManageFunc.getInspectionFindCheckDetailByQr(
+                                  _detailModel.id,
+                                  QRCodeParase.getExecutePointId(result.code));
+                          if (baseModel.status) {
+                            Get.to(() => InspectionPointInputPage(
+                                  inspectionName: _detailModel.name,
+                                  qrModel: InspectionQRCodeModel.fromJson(
+                                      baseModel.data),
+                                ));
+                          } else {
+                            showCupertinoDialog(
+                                context: context,
+                                builder: (context) {
+                                  return _errorDialog();
+                                });
+                          }
+                        },
+                  padding: EdgeInsets.symmetric(vertical: 26.w),
+                  color: kPrimaryColor,
+                  child: (_detailModel.status == 1 ? '开始巡检' : '立即扫码')
+                      .text
+                      .black
+                      .bold
+                      .size(32.sp)
+                      .make(),
+                ).pOnly(bottom: MediaQuery.of(context).padding.bottom)
+              : SizedBox()),
+    );
+  }
+
+  Widget exitDialog() {
+    return CupertinoAlertDialog(
+      content:
+          '退出此页面将失去定位信息，确认退出吗？'.text.size(30.sp).black.bold.isIntrinsic.make(),
+      actions: [
+        CupertinoDialogAction(
+          child: '确认'.text.size(28.sp).black.isIntrinsic.bold.make(),
+          onPressed: () {
+            _exit = true;
+            Get.back();
           },
-          child: _onload
-              ? _emptyWidget()
-              : Column(
-                  children: [
-                    _inspectionHeadCard(),
-                    16.w.heightBox,
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 32.w, vertical: 24.w),
-                      decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
-                      width: double.infinity,
-                      constraints: BoxConstraints(
-                        minHeight: 85.w,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          '巡检站点'.text.black.size(32.sp).bold.make(),
-                          ..._pointModels
-                              .map((e) => _buildInspectionTile(
-                                  e, _pointModels.indexOf(e)))
-                              .toList()
-                        ].sepWidget(separate: 16.w.heightBox),
-                      ),
-                    )
-                  ],
-                ),
         ),
-        bottom: (!_onload) &&
-                (_detailModel.status != 2) &&
-                (_detailModel.status != 4)
-            ? AkuButton(
-                onPressed: _detailModel.status == 1
-                    ? () async {
-                        BaseModel _baseModel = await NetUtil().get(
-                            API.manage.inspectionStart,
-                            params: {"executeId": widget.executeId});
-                        if (_baseModel.status) {
-                          BotToast.showText(text: _baseModel.message);
-                          _refreshController.callRefresh();
-                        } else {
-                          BotToast.showText(text: _baseModel.message);
-                        }
-                      }
-                    : () async {
-                        Barcode result = await Get.to(() => QrScannerPage());
-                        BaseModel baseModel =
-                            await ManageFunc.getInspectionFindCheckDetailByQr(
-                                _detailModel.id,
-                                QRCodeParase.getExecutePointId(result.code));
-                        if (baseModel.status) {
-                          Get.to(() => InspectionPointInputPage(
-                                inspectionName: _detailModel.name,
-                                qrModel: InspectionQRCodeModel.fromJson(
-                                    baseModel.data),
-                              ));
-                        } else {
-                          showCupertinoDialog(
-                              context: context,
-                              builder: (context) {
-                                return _errorDialog();
-                              });
-                        }
-                      },
-                padding: EdgeInsets.symmetric(vertical: 26.w),
-                color: kPrimaryColor,
-                child: (_detailModel.status == 1 ? '开始巡检' : '立即扫码')
-                    .text
-                    .black
-                    .bold
-                    .size(32.sp)
-                    .make(),
-              ).pOnly(bottom: MediaQuery.of(context).padding.bottom)
-            : SizedBox());
+        CupertinoDialogAction(
+          child: '取消'.text.size(28.sp).black.light.isIntrinsic.bold.make(),
+          onPressed: () {
+            Get.back();
+          },
+        )
+      ],
+    );
   }
 
   Widget _errorDialog() {
@@ -205,6 +257,17 @@ class _InspectionManageDetailsPageState
                 .make())
       ],
     );
+  }
+
+  _startTimer(int milliseconds) {
+    _timer = Timer.periodic(Duration(milliseconds: milliseconds), (event) {
+      _canUploadLocation = true;
+    });
+  }
+
+  _stopTimer() {
+    _timer?.cancel();
+    _timer = null;
   }
 
   Widget _inspectionHeadCard() {
@@ -419,117 +482,66 @@ class _InspectionManageDetailsPageState
           ));
     });
   }
+
+  Widget _locationWidget() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        '巡检地图'.text.color(Color(0xFF333333)).size(32.sp).bold.make(),
+        16.w.heightBox,
+        SizedBox(
+          width: double.infinity,
+          height: 343.w,
+          child: AMapWidget(
+            rotateGesturesEnabled: false,
+            scaleEnabled: false,
+            scrollGesturesEnabled: false,
+            tiltGesturesEnabled: false,
+            zoomGesturesEnabled: false,
+            onMapCreated: (controller) {
+              _aMapController = controller;
+              LatLng _target = LatLng(appProvider.location['latitude'],
+                  appProvider.location['longitude']);
+              _aMapController.moveCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(target: _target, zoom: 19)));
+            },
+            myLocationStyleOptions: MyLocationStyleOptions(true,
+                circleFillColor: Colors.yellow.withOpacity(0.1),
+                circleStrokeColor: Colors.transparent,
+                icon: BitmapDescriptor.defaultMarkerWithHue(210)),
+            onLocationChanged: (argument) async {
+              _aMapController.moveCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(target: argument.latLng,zoom: 19)));
+              if (_canUploadLocation) {
+                BaseModel baseModel = await _uploadLocation(widget.executeId,
+                    argument.latLng.longitude, argument.latLng.latitude);
+                if (!baseModel.status) {
+                  BotToast.showText(text: baseModel.message);
+                } else {
+                  _canUploadLocation = false;
+                }
+              }
+            },
+          ),
+        ),
+      ],
+    )
+        .box
+        .width(double.infinity)
+        .color(Colors.white)
+        .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
+        .make();
+  }
+
+  Future _uploadLocation(
+      int executeId, double longitude, double latitude) async {
+    BaseModel baseModel = await NetUtil().post(API.manage.uploadLocation,
+        params: {
+          "executeId": executeId,
+          "longitude": longitude,
+          "latitude": latitude
+        });
+    return baseModel;
+  }
 }
-// Widget _inspectionPersons(){
-//   return Container(
-//         width: double.infinity,
-//         color: Color(0xFFFFFFFF),
-//         margin: EdgeInsets.only(top: 16.w),
-//         padding: EdgeInsets.only(
-//             top: 24.w, left: 32.w, right: 86.w, bottom: 40.w),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text(
-//               '巡检人员',
-//               style: TextStyle(
-//                   color: AppStyle.primaryTextColor,
-//                   fontSize: 32.sp,
-//                   fontWeight: FontWeight.bold),
-//             ),
-//             AkuBox.h(16),
-//             GridView(
-//               shrinkWrap: true,
-//               physics: NeverScrollableScrollPhysics(),
-//               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                   crossAxisCount: 3,
-//                   childAspectRatio: 250 / 40,
-//                   mainAxisSpacing: 16.w),
-//               children: widget.cardModel.persons
-//                   .map((e) => _person(widget.cardModel.persons.indexOf(e)))
-//                   .toList(),
-//             ),
-//           ],
-//         ),
-//       ),
-//       AkuBox.h(16),
-//       Container(
-//         color: Color(0xFFFFFFFF),
-//         padding: EdgeInsets.only(top: 24.w, left: 32.w, right: 32.w),
-//         width: double.infinity,
-//         child:
-//             Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-//           Text('巡检站点',
-//               style: TextStyle(
-//                   color: AppStyle.primaryTextColor,
-//                   fontSize: 32.sp,
-//                   fontWeight: FontWeight.bold)),
-//           AkuBox.h(16),
-//           Wrap(
-//             runSpacing: 16.w,
-//             children: widget.cardModel.stations
-//                 .map((e) => _station(widget.cardModel.stations.indexOf(e)))
-//                 .toList(),
-//           ),
-//           AkuBox.h(24),
-//           Image.asset(
-//             R.ASSETS_INSPECTION_INSPECTION_STATION_PNG,
-//             width: 686.w,
-//             height: 343.w,
-//           ),
-//         ]),
-//       );
-
-// Widget _station(index) {
-//   return Row(
-//     mainAxisSize: MainAxisSize.min,
-//     children: [
-//       Container(
-//         padding:
-//             EdgeInsets.only(top: 16.w, left: 24.w, bottom: 15.w, right: 24.w),
-//         color: Color(0xFFF9F9F9),
-//         height: 64.w,
-//         alignment: Alignment.center,
-//         child: Row(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-//             Text(
-//               widget.cardModel.stations[index],
-//               style: TextStyle(
-//                   color: AppStyle.primaryTextColor, fontSize: 24.sp),
-//             ),
-//           ],
-//         ),
-//       ),
-//       AkuBox.w(8),
-//       (widget.cardModel.stations.length - 1) != index
-//           ? Container(
-//               width: 56.w,
-//               height: 3.w,
-//               color: Color(0xFFE8E8E8),
-//             )
-//           : SizedBox(),
-//     ],
-//   );
-// }
-
-// Widget _person(index) {
-//   return Container(
-//     height: 40.w,
-//     child: Row(mainAxisSize: MainAxisSize.min, children: [
-//       Image.asset(
-//         R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
-//         width: 40.w,
-//         height: 40.w,
-//       ),
-//       AkuBox.w(8),
-//       Text(
-//         widget.cardModel.persons[index],
-//         style: TextStyle(
-//           color: AppStyle.primaryTextColor,
-//           fontSize: 28.sp,
-//         ),
-//       ),
-//     ]),
-//   );
-// }

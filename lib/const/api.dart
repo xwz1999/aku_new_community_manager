@@ -182,6 +182,10 @@ class _Manage {
 
   ///借还管理：新增物品明细
   String get borrowinsertArticleDetail => '/user/borrow/insertArticleDetail';
+
+  ///巡检管理：上传巡检定位信息（开始巡检后，每n秒上传一次）
+  String get uploadLocation => '/user/inspection/uploadLocation';
+  
 }
 
 class _Upload {
