@@ -76,6 +76,7 @@ class _InspectionManageDetailsPageState
   bool _onload = true;
   EasyRefreshController _refreshController;
   bool _exit = false;
+  List<LatLng> _points = [];
   @override
   void initState() {
     super.initState();
@@ -215,6 +216,7 @@ class _InspectionManageDetailsPageState
           child: '确认'.text.size(28.sp).black.isIntrinsic.bold.make(),
           onPressed: () {
             _exit = true;
+            _stopTimer();
             Get.back();
           },
         ),
@@ -512,7 +514,7 @@ class _InspectionManageDetailsPageState
                 icon: BitmapDescriptor.defaultMarkerWithHue(210)),
             onLocationChanged: (argument) async {
               _aMapController.moveCamera(CameraUpdate.newCameraPosition(
-                  CameraPosition(target: argument.latLng,zoom: 19)));
+                  CameraPosition(target: argument.latLng, zoom: 19)));
               if (_canUploadLocation) {
                 BaseModel baseModel = await _uploadLocation(widget.executeId,
                     argument.latLng.longitude, argument.latLng.latitude);
@@ -520,6 +522,7 @@ class _InspectionManageDetailsPageState
                   BotToast.showText(text: baseModel.message);
                 } else {
                   _canUploadLocation = false;
+                  //TODO:绘制折线
                 }
               }
             },

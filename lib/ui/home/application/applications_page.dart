@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/facilities/facilities_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -67,6 +68,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, BorrowManagerPage()),
     AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
+    AppApplication('设施检查', R.ASSETS_HOME_IC_FACILITIES_PNG,FacilitiesPage() )
   ];
 
   @override
