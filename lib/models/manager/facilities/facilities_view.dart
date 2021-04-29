@@ -1,3 +1,4 @@
+import 'package:aku_community_manager/models/manager/facilities/facilities_card.dart';
 import 'package:flutter/material.dart';
 
 class FacilitiesView extends StatefulWidget {
@@ -10,6 +11,10 @@ class FacilitiesView extends StatefulWidget {
 class _FacilitiesViewState extends State<FacilitiesView> {
   @override
   Widget build(BuildContext context) {
-    return ListView();
+    return ListView(
+      children: [
+        // FacilitiesCard(),
+      ],
+    );
   }
 }

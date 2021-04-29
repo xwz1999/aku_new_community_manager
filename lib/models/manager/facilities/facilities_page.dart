@@ -44,6 +44,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(
+        controller: _tabController,
         children: List.generate(_tabs.length, (index) => FacilitiesView()),
       ),
     );

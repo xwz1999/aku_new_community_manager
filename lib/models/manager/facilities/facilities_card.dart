@@ -1,7 +1,9 @@
+import 'package:aku_community_manager/models/manager/facilities/facilities_inspect_report_page.dart';
 import 'package:aku_community_manager/models/manager/facilities/facilities_map.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class FacilitiesCard extends StatefulWidget {
@@ -15,6 +17,7 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -35,6 +38,9 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         .withRounded(value: 8.w)
         .color(Colors.white)
         .padding(EdgeInsets.all(24.w))
-        .make();
+        .make()
+        .onInkTap(() {
+      Get.to(() => FacilitiesInspectReportPage());
+    });
   }
 }
