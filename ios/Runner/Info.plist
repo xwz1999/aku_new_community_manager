@@ -10,6 +10,10 @@
 	<string>we need calendar access rights.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>we need photo access rights.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+    <string>we need bluetooth access rights</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+    <string>we need bluetooth access rights</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>we need photo access rights.</string>
 	<key>NSCameraUsageDescription</key>
