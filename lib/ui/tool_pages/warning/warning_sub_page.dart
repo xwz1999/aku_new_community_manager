@@ -81,7 +81,7 @@ class _WarningSubPageState extends State<WarningSubPage> {
               ],
             ),
             Text(
-              '深圳华悦茂峰',
+              '人才公寓',
               style: TextStyle(
                 fontSize: 44.w,
                 color: AppStyle.primaryTextColor,

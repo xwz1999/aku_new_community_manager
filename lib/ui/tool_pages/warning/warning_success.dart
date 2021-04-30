@@ -52,7 +52,7 @@ class _WarningSuccessState extends State<WarningSuccess> {
               width: 420.w,
             ),
             Text(
-              '深圳华悦茂峰',
+              '人才公寓',
               style: TextStyle(
                 fontSize: 44.w,
                 color: AppStyle.primaryTextColor,

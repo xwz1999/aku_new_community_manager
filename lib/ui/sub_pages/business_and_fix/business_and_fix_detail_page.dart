@@ -132,7 +132,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                       _reportModel.workOrderTyoe != null &&
                       _reportModel.workOrderTimeLimit != null
                   ? () {
-                      Get.to(FixerDepartmentPage(model: _reportModel));
+                      Get.to(FixerDepartmentPage(model: _reportModel,dispatchId: _detailModel.repairDetail.dispatchId,));
                     }
                   : null,
               child: Text(
@@ -381,7 +381,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           canTap,
           helpContent: '请选择工单子类',
           onTap: () async {
-            List models = await ManageFunc.workOrderTypeDetail(widget.model.id);
+            List models = await ManageFunc.workOrderTypeDetail(1);
             _workTypeModels =
                 models.map((e) => WorkOrderTypeModel.fromJson(e)).toList();
             showItemSheet(

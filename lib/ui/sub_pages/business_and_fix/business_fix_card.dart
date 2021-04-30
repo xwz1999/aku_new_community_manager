@@ -5,6 +5,8 @@ import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -179,7 +181,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                         ),
                       ),
                       onPressed: () {
-                        // Get.to(FixMoreTimePage(model: widget.model));
+                        Get.to(FixMoreTimePage(
+                            dispatchId: widget.model.dispatchId));
                       },
                     )
                   : SizedBox(),
@@ -187,7 +190,9 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
               widget.model.status == 3
                   ? AkuMaterialButton(
                       onPressed: () {
-                        // Get.to(FixWorkFinishPage(model: widget.model));
+                        Get.to(() => BusinessAndFixDetailPage(
+                              model: widget.model,
+                            ));
                       },
                       radius: 4.w,
                       color: AppStyle.primaryColor,
@@ -202,7 +207,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                       ),
                     )
                   : SizedBox(),
-              widget.model.status == 2
+              (widget.model.status == 2) && (!userInfoModel.canSendTicket)
                   ? AkuMaterialButton(
                       onPressed: () {
                         // final userProvider =

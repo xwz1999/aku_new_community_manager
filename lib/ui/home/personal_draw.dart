@@ -104,7 +104,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                           children: [
                             Icon(Icons.location_on_outlined, size: 33.w),
                             Text(
-                              '深圳华悦茂峰',
+                              '人才公寓',
                               style: TextStyle(
                                   color: AppStyle.primaryTextColor,
                                   fontSize: 24.sp),

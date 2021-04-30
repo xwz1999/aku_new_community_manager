@@ -50,8 +50,8 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
   TextEditingController _humanController = TextEditingController();
   TextEditingController _materialPriceController = TextEditingController();
 
-  double humanPrice;
-  double materialPrice;
+  double humanPrice = 0;
+  double materialPrice = 0;
   @override
   void dispose() {
     _descriptionController?.dispose();
@@ -344,10 +344,6 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                         Spacer(),
                         Builder(
                           builder: (context) {
-                            humanPrice = double.tryParse(_humanController.text);
-                            materialPrice =
-                                double.tryParse(_materialPriceController.text);
-
                             if (TextUtil.isEmpty(_humanController.text) ||
                                 TextUtil.isEmpty(
                                     _materialPriceController.text)) {
@@ -356,8 +352,13 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                                 materialPrice == null)
                               return Text('输入有误');
                             else
-                              return Text(
-                                  '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
+                              humanPrice =
+                                  double.tryParse(_humanController.text);
+                            materialPrice =
+                                double.tryParse(_materialPriceController.text);
+
+                            return Text(
+                                '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
                           },
                         ),
                       ],
