@@ -24,7 +24,12 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 class BusinessFixCard extends StatefulWidget {
   final BussinessAndFixModel model;
   final bool homeDisplay;
-  BusinessFixCard({Key key, @required this.model, this.homeDisplay = false})
+  final bool canSeeBottomButton;
+  BusinessFixCard(
+      {Key key,
+      @required this.model,
+      this.homeDisplay = false,
+      this.canSeeBottomButton = true})
       : super(key: key);
 
   @override
@@ -88,7 +93,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                   ),
                 ),
                 Text(
-                  AkuMap.fixStatus(userInfoModel.canOperation,
+                  AkuMap.fixStatus(userInfoModel.canSendTicket,
                       userInfoModel.canPickUpTicket, widget.model.status),
                   style: TextStyle(
                     color: widget.model.status < 4
@@ -113,7 +118,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             ),
             AkuBox.h(16),
             _buildImgs(),
-            _buildBottomCard(),
+            !widget.canSeeBottomButton ? SizedBox() : _buildBottomCard(),
           ],
         ),
         margin: EdgeInsets.only(top: 16.w),

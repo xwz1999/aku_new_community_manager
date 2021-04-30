@@ -4,6 +4,7 @@ import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_det
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class ManageFunc {
   ///报事报修详情
@@ -39,7 +40,9 @@ class ManageFunc {
   }
 
   ///派单
-  static Future repairDispatch(DispatchReportModel model,int dispatchId) async {
+  static Future repairDispatch(DispatchReportModel model,
+      {@required int dispatchId}) async {
+    print(dispatchId);
     BaseModel baseModel =
         await NetUtil().post(API.manage.repairDispatch, params: {
       'dispatchListId': dispatchId,

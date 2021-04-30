@@ -25,7 +25,8 @@ class FixerDepartmentPage extends StatefulWidget {
   final DispatchReportModel model;
   final bool changeType;
   final int dispatchId;
-  FixerDepartmentPage({Key key, @required this.model, this.changeType = false, this.dispatchId})
+  FixerDepartmentPage(
+      {Key key, @required this.model, this.changeType = false, this.dispatchId})
       : super(key: key);
 
   @override
@@ -91,8 +92,9 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                     BotToast.showText(text: baseModel.message);
                   }
                 } else {
-                  BaseModel baseModel =
-                      await ManageFunc.repairDispatch(_reportModel,widget.dispatchId);
+                  BaseModel baseModel = await ManageFunc.repairDispatch(
+                      _reportModel,
+                      dispatchId: widget.dispatchId);
                   if (baseModel.status) {
                     Get.back();
                     Get.back();

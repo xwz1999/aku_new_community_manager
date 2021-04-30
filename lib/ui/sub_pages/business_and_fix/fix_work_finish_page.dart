@@ -348,15 +348,12 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                                 TextUtil.isEmpty(
                                     _materialPriceController.text)) {
                               return Text('人工费或材料费不能为空');
-                            } else if (humanPrice == null ||
-                                materialPrice == null)
-                              return Text('输入有误');
+                            } 
                             else
                               humanPrice =
                                   double.tryParse(_humanController.text);
                             materialPrice =
                                 double.tryParse(_materialPriceController.text);
-
                             return Text(
                                 '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
                           },

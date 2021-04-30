@@ -124,7 +124,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (userProvider.infoModel.canOperation && widget.model.status < 2) {
+          if (userProvider.infoModel.canSendTicket && widget.model.status < 2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
@@ -143,7 +143,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               ),
             );
           } else if (widget.model.status == 2) {
-            if (userProvider.infoModel.canOperation) {
+            if (userProvider.infoModel.canSendTicket){
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,

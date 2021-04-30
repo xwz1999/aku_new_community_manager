@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
+
 class FixSubmitFinishPage extends StatelessWidget {
   final BussinessAndFixModel model;
   const FixSubmitFinishPage({Key key, this.model}) : super(key: key);
@@ -13,14 +14,18 @@ class FixSubmitFinishPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '处理完成',
-      body:Container(
-        width:double.infinity,
+      body: Container(
+        width: double.infinity,
         child: Column(
           children: [
-            Image.asset(R.ASSETS_MANAGE_SUBMIT_SUCCESS_PNG,width:587.w,height:350.w),
+            Image.asset(R.ASSETS_MANAGE_SUBMIT_SUCCESS_PNG,
+                width: 587.w, height: 350.w),
             '您已处理完成该报修'.text.black.size(40.sp).bold.make(),
             120.w.heightBox,
-            BusinessFixCard(model: this.model),
+            BusinessFixCard(
+              model: this.model,
+              canSeeBottomButton: false,
+            ),
           ],
         ),
       ),
