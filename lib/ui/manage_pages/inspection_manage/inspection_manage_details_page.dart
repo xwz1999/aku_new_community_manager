@@ -77,6 +77,7 @@ class _InspectionManageDetailsPageState
   EasyRefreshController _refreshController;
   bool _exit = false;
   List<LatLng> _points = [];
+  List<Polyline> _polylines = [];
   @override
   void initState() {
     super.initState();
@@ -223,6 +224,7 @@ class _InspectionManageDetailsPageState
         CupertinoDialogAction(
           child: '取消'.text.size(28.sp).black.light.isIntrinsic.bold.make(),
           onPressed: () {
+            _exit = false;
             Get.back();
           },
         )
@@ -268,8 +270,11 @@ class _InspectionManageDetailsPageState
   }
 
   _stopTimer() {
+    _canUploadLocation = false;
     _timer?.cancel();
     _timer = null;
+    _points.clear();
+    _polylines.clear();
   }
 
   Widget _inspectionHeadCard() {
@@ -523,9 +528,31 @@ class _InspectionManageDetailsPageState
                 } else {
                   _canUploadLocation = false;
                   //TODO:绘制折线
+                  _points.add(argument.latLng);
+                  if (_points.length % 5 == 0) {
+                    if (_polylines.isEmpty) {
+                      _polylines.add(Polyline(
+                        points: _points,
+                        color: Colors.red,
+                        width: 10.w,
+                      ));
+                      setState(() {
+                        
+                      });
+                    } else {
+                      _polylines[0] = (Polyline(
+                        points: _points,
+                        color: Colors.red,
+                        width: 10.w,
+                      ));
+                      setState(() {});
+                    }
+                  }
                 }
               }
             },
+            //绘制路线
+            polylines: Set<Polyline>.of(_polylines),
           ),
         ),
       ],
@@ -535,6 +562,17 @@ class _InspectionManageDetailsPageState
         .color(Colors.white)
         .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
         .make();
+  }
+
+  void _creatPolyline() {
+    final Polyline _polyline = Polyline(
+      points: _points,
+      color: Colors.red,
+      width: 5.w,
+    );
+    setState(() {
+      _polylines.add(_polyline);
+    });
   }
 
   Future _uploadLocation(
