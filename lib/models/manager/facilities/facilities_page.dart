@@ -45,7 +45,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: List.generate(_tabs.length, (index) => FacilitiesView()),
+        children: List.generate(_tabs.length, (index) => FacilitiesView(index: index,)),
       ),
     );
   }

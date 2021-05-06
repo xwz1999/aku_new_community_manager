@@ -114,7 +114,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
     );
   }
 
-  Widget _scenePhotoCard() {
+  Widget _selfPhotoCard() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -138,13 +138,13 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         .make();
   }
 
-  Widget _selfPhotoCard() {
+  Widget _scenePhotoCard() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
-            '3.巡更人员自拍人脸'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
+            '3.巡更人员拍摄现场'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
           ],
         ),
         32.w.heightBox,

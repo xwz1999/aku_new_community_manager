@@ -13,7 +13,10 @@ import 'package:aku_community_manager/utils/extension/list_extension.dart';
 class AkuPickImageWidget extends StatefulWidget {
   final double size;
   final Function(List<File> files) onChanged;
-  AkuPickImageWidget({Key key, this.size, this.onChanged}) : super(key: key);
+  final String description;
+  AkuPickImageWidget(
+      {Key key, this.size, this.onChanged, this.description = '上传照片'})
+      : super(key: key);
 
   @override
   _AkuPickImageWidgetState createState() => _AkuPickImageWidgetState();
@@ -56,7 +59,11 @@ class _AkuPickImageWidgetState extends State<AkuPickImageWidget> {
                     color: Color(0xFF999999),
                   ),
                   4.w.heightBox,
-                  '上传图片'.text.color(kTextSubColor).size(22.sp).bold.make(),
+                  widget.description.text
+                      .color(kTextSubColor)
+                      .size(22.sp)
+                      .bold
+                      .make(),
                 ],
               ),
             ),

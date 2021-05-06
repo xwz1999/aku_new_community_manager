@@ -1,6 +1,8 @@
 import 'package:aku_community_manager/models/manager/facilities/facilities_inspect_report_page.dart';
 import 'package:aku_community_manager/models/manager/facilities/facilities_map.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -25,10 +27,37 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
             Spacer(),
             '待检查'
                 .text
-                .color(FacilitiesMap.insepectColor[0])
+                .color(FacilitiesMap.insepectColor[1])
                 .size(28.sp)
                 .bold
                 .make(),
+          ],
+        ),
+        16.w.heightBox,
+        AkuDivider.horizontal(),
+        24.w.heightBox,
+        _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '场地地址', '1号楼4单元门口'),
+        15.w.heightBox,
+        _buildTile(
+            R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '2020-10-1 19:00-20:300'),
+        40.w.heightBox,
+        Row(
+          children: [
+            Spacer(),
+            AkuMaterialButton(
+                radius: 74.w,
+                height: 52.w,
+                padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 24.w),
+                color: Color(0xFFFFC40C),
+                onPressed: () {
+                  Get.to(() => FacilitiesInspectReportPage());
+                },
+                child: '扫码报告'
+                    .text
+                    .size(26.sp)
+                    .color(kTextPrimaryColor)
+                    .bold
+                    .make())
           ],
         ),
       ],
@@ -42,5 +71,22 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         .onInkTap(() {
       Get.to(() => FacilitiesInspectReportPage());
     });
+  }
+
+  Widget _buildTile(String icon, String title, String text,
+      {Color color = kTextSubColor}) {
+    return Row(
+      children: [
+        Image.asset(
+          icon,
+          width: 40.w,
+          height: 40.w,
+        ),
+        20.w.widthBox,
+        title.text.size(24.sp).color(kTextSubColor).make(),
+        Spacer(),
+        text.text.size(24.sp).color(color).make(),
+      ],
+    );
   }
 }
