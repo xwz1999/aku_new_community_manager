@@ -212,7 +212,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                       ),
                     )
                   : SizedBox(),
-              (widget.model.status == 2) && (!userInfoModel.canSendTicket)
+              (widget.model.status == 2) && (userInfoModel.canPickUpTicket)
                   ? AkuMaterialButton(
                       onPressed: () {
                         // final userProvider =
@@ -223,6 +223,9 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                         // ));
                         // widget.model.type = FIX_ENUM.PROCESSING;
                         // Get.back();
+                        Get.to(() => BusinessAndFixDetailPage(
+                              model: widget.model,
+                            ));
                       },
                       radius: 4.w,
                       color: AppStyle.primaryColor,

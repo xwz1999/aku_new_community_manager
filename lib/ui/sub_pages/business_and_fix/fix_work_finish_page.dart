@@ -348,12 +348,12 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                                 TextUtil.isEmpty(
                                     _materialPriceController.text)) {
                               return Text('人工费或材料费不能为空');
-                            } 
-                            else
+                            } else {
                               humanPrice =
                                   double.tryParse(_humanController.text);
-                            materialPrice =
-                                double.tryParse(_materialPriceController.text);
+                              materialPrice = double.tryParse(
+                                  _materialPriceController.text);
+                            }
                             return Text(
                                 '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
                           },
@@ -388,6 +388,13 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
           //     materialPrice: double.parse(_materialController.text),
           //   );
           // Get.back();
+          if (!widget.dispatchType) {
+            if (TextUtil.isEmpty(_humanController.text) ||
+                TextUtil.isEmpty(_materialPriceController.text)) {
+              BotToast.showText(text: '人工费或材料费不能为空');
+              return;
+            }
+          }
           List<String> urls =
               await NetUtil().uploadFiles(_imgs, API.upload.uploadArtical);
           BaseModel baseModel = await ManageFunc.handleResult(

@@ -1,7 +1,7 @@
 class AkuMap {
   ///根据权限返回不同的派单状态
-  static String fixStatus(bool canOpention, bool canPickup, int status) {
-    if (canOpention) {
+  static String fixStatus(bool canSendTicket, bool canPickup, int status) {
+    if (canSendTicket) {
       switch (status) {
         case 1:
           return '待派单';

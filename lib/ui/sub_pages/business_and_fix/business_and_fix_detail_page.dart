@@ -24,7 +24,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -43,10 +42,6 @@ class BusinessAndFixDetailPage extends StatefulWidget {
 }
 
 class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
-  USER_ROLE get userRole {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    return userProvider.userInfoModel.role;
-  }
 
   bool get isHandOut => widget.model.status == 1;
   FixedDetailModel _detailModel;
@@ -98,7 +93,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         header: MaterialHeader(),
         onRefresh: () async {
           _detailModel = await ManageFunc.repairDetail(widget.model.id);
-          _reportModel.dispatchListId = widget.model.id;
+          _reportModel.dispatchListId = widget.model.dispatchId;
           _reportModel.workOrderTyoe = 1;
           _onload = false;
           setState(() {});
@@ -132,7 +127,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                       _reportModel.workOrderTyoe != null &&
                       _reportModel.workOrderTimeLimit != null
                   ? () {
-                      Get.to(FixerDepartmentPage(model: _reportModel,dispatchId: _detailModel.repairDetail.dispatchId,));
+                      Get.to(FixerDepartmentPage(model: _reportModel));
                     }
                   : null,
               child: Text(

@@ -24,9 +24,8 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 class FixerDepartmentPage extends StatefulWidget {
   final DispatchReportModel model;
   final bool changeType;
-  final int dispatchId;
   FixerDepartmentPage(
-      {Key key, @required this.model, this.changeType = false, this.dispatchId})
+      {Key key, @required this.model, this.changeType = false,})
       : super(key: key);
 
   @override
@@ -93,8 +92,8 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                   }
                 } else {
                   BaseModel baseModel = await ManageFunc.repairDispatch(
-                      _reportModel,
-                      dispatchId: widget.dispatchId);
+                      _reportModel
+                     );
                   if (baseModel.status) {
                     Get.back();
                     Get.back();
