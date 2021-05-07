@@ -23,14 +23,14 @@ class InspectionPointSubmitModel {
 class ExecuteCheckList {
   int id;
   int status;
-  String remarks;
-  ExecuteCheckList(this.id, this.status, this.remarks);
+  String remarkes;
+  ExecuteCheckList(this.id, this.status, this.remarkes);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
       "id": this.id,
       "status": this.status,
-      "remarks": this.remarks,
+      "remarks": this.remarkes,
     };
     return data;
   }

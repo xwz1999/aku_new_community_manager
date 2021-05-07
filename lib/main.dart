@@ -33,6 +33,7 @@ void main() async {
     onReceiveNotification: (Map<String, dynamic> message) async {
       print("flutter onReceiveNotification: $message");
       LoggerData.addData(message);
+       await JpushMessageParse(message).shot();
     },
     // 点击通知回调方法。
     onOpenNotification: (Map<String, dynamic> message) async {

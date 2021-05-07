@@ -74,7 +74,7 @@ class ManageFunc {
         await NetUtil().post(API.manage.submitPointDetail, params: {
       "executePointId": model.executePointId,
       "executeCheckList": model.executeCheckList
-          .map((e) => ExecuteCheckList(e.id, e.status, e.remarks).toJson())
+          .map((e) => ExecuteCheckList(e.id, e.status, e.remarkes).toJson())
           .toList(),
       "inspectionFaceImg": model.inspectionFaceImgPath,
       "inspectionSpaceImg": model.inspectionSpaceImgPath

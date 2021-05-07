@@ -238,7 +238,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             maxLines: 10,
             autofocus: false,
             onChanged: (value) {
-              _submitModel.executeCheckList[index].remarks = value;
+              _submitModel.executeCheckList[index].remarkes = value;
             },
             decoration: InputDecoration(
               hintText: '请输入备注信息',
