@@ -78,9 +78,15 @@ android {
            signingConfig signingConfigs.release
        }
        debug {
+            minifyEnabled true
+            useProguard true
+            multiDexEnabled true
            signingConfig signingConfigs.release
        }
        profile{
+            minifyEnabled true
+            useProguard true
+            multiDexEnabled true
            signingConfig signingConfigs.release
        }
    }
