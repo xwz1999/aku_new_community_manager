@@ -62,10 +62,10 @@ class ManageFunc {
   }
 
   static Future<BaseModel> getInspectionFindCheckDetailByQr(
-      int executeId, int excutePointId) async {
+      int executeId, String executePointCode) async {
     BaseModel baseModel = await NetUtil().get(
         API.manage.inspectionFindCheckDetailByQR,
-        params: {"executeId": executeId, "executePointId": excutePointId});
+        params: {"executeId": executeId, "executePointCode": executePointCode});
     return baseModel;
   }
 

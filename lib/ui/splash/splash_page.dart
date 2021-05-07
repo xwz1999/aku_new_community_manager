@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:power_logger/power_logger.dart';
 
@@ -63,6 +64,7 @@ class _SplashPageState extends State<SplashPage> {
     });
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _initOp();
+     
       Get.off(HomePage());
     });
   }

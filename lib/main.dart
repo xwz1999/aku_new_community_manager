@@ -34,7 +34,7 @@ void main() async {
     onReceiveNotification: (Map<String, dynamic> message) async {
       print("flutter onReceiveNotification: $message");
       LoggerData.addData(message);
-       await JpushMessageParse(message).shot();
+      await JpushMessageParse(message).shot();
     },
     // 点击通知回调方法。
     onOpenNotification: (Map<String, dynamic> message) async {
@@ -51,7 +51,9 @@ void main() async {
     production: false,
     debug: true, // 设置是否打印 debug 日志
   );
-  print(jpush.getRegistrationID());
+  String id = await JPush().getRegistrationID();
+  print(id);
+  LoggerData.addData(id);
   runApp(MyApp());
 }
 

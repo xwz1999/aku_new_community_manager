@@ -179,8 +179,7 @@ class _InspectionManageDetailsPageState
                           Barcode result = await Get.to(() => QrScannerPage());
                           BaseModel baseModel =
                               await ManageFunc.getInspectionFindCheckDetailByQr(
-                                  _detailModel.id,
-                                  QRCodeParase.getExecutePointId(result.code));
+                                  _detailModel.id, result.code);
                           if (baseModel.status) {
                             Get.to(() => InspectionPointInputPage(
                                   inspectionName: _detailModel.name,
@@ -536,9 +535,7 @@ class _InspectionManageDetailsPageState
                         color: Colors.red,
                         width: 10.w,
                       ));
-                      setState(() {
-                        
-                      });
+                      setState(() {});
                     } else {
                       _polylines[0] = (Polyline(
                         points: _points,
