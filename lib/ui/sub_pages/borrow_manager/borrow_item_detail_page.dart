@@ -49,7 +49,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
     return AkuScaffold(
       title: '物品详情',
       actions: [
-        userProvider.userInfoModel.role == USER_ROLE.MANAGER
+        userProvider.infoModel.canOperation
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () async {
@@ -138,7 +138,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                         _buildRow(
                             '出借状态',
                             Text(
-                              '未出借',
+                              _detailModel.borrowed ? '已出借' : '未出借',
                               style: TextStyle(
                                 color: _isEditing
                                     ? AppStyle.minorTextColor

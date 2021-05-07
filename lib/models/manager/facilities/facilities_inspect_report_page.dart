@@ -5,6 +5,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -28,12 +29,24 @@ class _FacilitiesInspectReportPageState
       body: ListView(
         children: [
           _basicMessageCard(),
-          _descriptionCard('title', 0),
+          _descriptionCard('场地情况', 0),
           _scenePhotoCard(),
           _selfPhotoCard(),
         ],
       ),
+      bottom: _bottomSubmitButton(),
     );
+  }
+
+  Widget _bottomSubmitButton() {
+    return AkuButton(
+      onPressed: () {},
+      width: double.infinity,
+      height: 100.w,
+      child: '立即提交'.text.color(kTextPrimaryColor).bold.size(32.sp).make(),
+      color: Color(0xFFFFC40C),
+      padding: EdgeInsets.symmetric(vertical: 26.w),
+    ).pOnly(bottom: MediaQuery.of(context).padding.bottom);
   }
 
   Widget _basicMessageCard() {
@@ -85,6 +98,8 @@ class _FacilitiesInspectReportPageState
     );
   }
 
+  int _scene = 0;
+
   Widget _descriptionCard(
     String title,
     int index,
@@ -102,8 +117,9 @@ class _FacilitiesInspectReportPageState
             AkuSingleCheckButton(
               text: '正常',
               value: 0,
-              gropValue: 1,
+              gropValue: _scene,
               onPressed: () {
+                _scene = 0;
                 setState(() {});
               },
             ),
@@ -111,8 +127,9 @@ class _FacilitiesInspectReportPageState
             AkuSingleCheckButton(
               text: '异常',
               value: 1,
-              gropValue: 2,
+              gropValue: _scene,
               onPressed: () {
+                _scene = 1;
                 setState(() {});
               },
             ),

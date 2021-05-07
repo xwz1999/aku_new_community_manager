@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class FacilitiesCard extends StatefulWidget {
-  FacilitiesCard({Key key}) : super(key: key);
+  final int index;
+  FacilitiesCard({Key key, this.index}) : super(key: key);
 
   @override
   _FacilitiesCardState createState() => _FacilitiesCardState();
@@ -25,9 +26,8 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
           children: [
             '户外2号篮球场'.text.color(kTextPrimaryColor).size(32.sp).bold.make(),
             Spacer(),
-            '待检查'
-                .text
-                .color(FacilitiesMap.insepectColor[1])
+            FacilitiesMap.inspectStatus[widget.index + 1].text
+                .color(FacilitiesMap.insepectColor[widget.index + 1])
                 .size(28.sp)
                 .bold
                 .make(),
@@ -37,29 +37,32 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         AkuDivider.horizontal(),
         24.w.heightBox,
         _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '场地地址', '1号楼4单元门口'),
-        15.w.heightBox,
-        _buildTile(
-            R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '2020-10-1 19:00-20:300'),
-        40.w.heightBox,
-        Row(
-          children: [
-            Spacer(),
-            AkuMaterialButton(
-                radius: 74.w,
-                height: 52.w,
-                padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 24.w),
-                color: Color(0xFFFFC40C),
-                onPressed: () {
-                  Get.to(() => FacilitiesInspectReportPage());
-                },
-                child: '扫码报告'
-                    .text
-                    .size(26.sp)
-                    .color(kTextPrimaryColor)
-                    .bold
-                    .make())
-          ],
-        ),
+        ..._midTile(),
+        ...widget.index != 0
+            ? []
+            : [
+                40.w.heightBox,
+                Row(
+                  children: [
+                    Spacer(),
+                    AkuMaterialButton(
+                        radius: 74.w,
+                        height: 52.w,
+                        padding: EdgeInsets.symmetric(
+                            vertical: 8.w, horizontal: 24.w),
+                        color: Color(0xFFFFC40C),
+                        onPressed: () {
+                          Get.to(() => FacilitiesInspectReportPage());
+                        },
+                        child: '扫码报告'
+                            .text
+                            .size(26.sp)
+                            .color(kTextPrimaryColor)
+                            .bold
+                            .make())
+                  ],
+                ),
+              ],
       ],
     )
         .box
@@ -71,6 +74,39 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         .onInkTap(() {
       Get.to(() => FacilitiesInspectReportPage());
     });
+  }
+
+  _midTile() {
+    switch (widget.index) {
+      case 0:
+        return [
+          15.w.heightBox,
+          _buildTile(
+              R.ASSETS_MANAGE_CLOCK_PNG, '任务时间', '2020-10-1 19:00-20:300'),
+        ];
+      case 1:
+        return [
+          15.w.heightBox,
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', '超时',
+              color: Colors.red),
+          15.w.heightBox,
+          _buildTile(
+              R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '2020-10-1 19:00-20:300'),
+        ];
+      case 2:
+        return [
+          15.w.heightBox,
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '场地情况', '正常',
+              color: Color(0xFF3F8FFE)),
+          15.w.heightBox,
+          _buildTile(
+              R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '2020-10-1 19:00-20:300'),
+          15.w.heightBox,
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '检查提交时间', '2020-10-1 19:00'),
+        ];
+      default:
+        return [];
+    }
   }
 
   Widget _buildTile(String icon, String title, String text,

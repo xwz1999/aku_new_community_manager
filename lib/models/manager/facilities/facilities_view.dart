@@ -16,7 +16,9 @@ class _FacilitiesViewState extends State<FacilitiesView> {
     return ListView(
       padding: EdgeInsets.symmetric(vertical: 16.w, horizontal: 32.w),
       children: [
-        FacilitiesCard(),
+        FacilitiesCard(
+          index: widget.index,
+        ),
       ],
     );
   }

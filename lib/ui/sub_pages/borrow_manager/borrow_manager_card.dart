@@ -28,8 +28,6 @@ class BorrowManagerCard extends StatefulWidget {
 }
 
 class _BorrowManagerCardState extends State<BorrowManagerCard> {
-  USER_ROLE get role =>
-      Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
   @override
   Widget build(BuildContext context) {
     return Container(
