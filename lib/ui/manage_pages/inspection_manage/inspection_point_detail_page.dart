@@ -289,7 +289,8 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                   ),
                   padding:
                       EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
-                  child: model.remakes.text
+                  child: (model?.remakes ?? '')
+                      .text
                       .color(kTextPrimaryColor)
                       .size(28.sp)
                       .make(),

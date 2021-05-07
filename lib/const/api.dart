@@ -1,6 +1,6 @@
 class API {
   ///HOST
-  static const String host = 'http://test.akuhotel.com:8804';
+  static const String host = 'http://39.103.177.88:8804';
 
   ///接口基础地址
   static const String baseURL = '$host/IntelligentCommunity/butlerApp';
@@ -185,7 +185,6 @@ class _Manage {
 
   ///巡检管理：上传巡检定位信息（开始巡检后，每n秒上传一次）
   String get uploadLocation => '/user/inspection/uploadLocation';
-  
 }
 
 class _Upload {

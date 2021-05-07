@@ -11,6 +11,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:power_logger/power_logger.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -31,6 +32,7 @@ void main() async {
     // 接收通知回调方法。
     onReceiveNotification: (Map<String, dynamic> message) async {
       print("flutter onReceiveNotification: $message");
+      LoggerData.addData(message);
     },
     // 点击通知回调方法。
     onOpenNotification: (Map<String, dynamic> message) async {
@@ -47,6 +49,7 @@ void main() async {
     production: false,
     debug: true, // 设置是否打印 debug 日志
   );
+  print(jpush.getRegistrationID());
   runApp(MyApp());
 }
 
