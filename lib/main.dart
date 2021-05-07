@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/style/apptheme.dart';
 import 'package:aku_community_manager/utils/dev_util.dart';
+import 'package:aku_community_manager/utils/jpush_message_parse.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
