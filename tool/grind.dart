@@ -13,3 +13,20 @@ build() {
 
 @Task()
 clean() => defaultClean();
+
+@Task()
+buildApk() async {
+  await runAsync('flutter', arguments: [
+    'build',
+    'apk',
+    '--target-platform=android-arm64',
+    '--dart-define',
+    'ISPRODUCT=true'
+  ]);
+}
+
+@Task()
+buildIos() async {
+  await runAsync('flutter',
+      arguments: ['build', 'ios', '--dart-define', 'BUILD_TYPE=PRODUCT']);
+}
