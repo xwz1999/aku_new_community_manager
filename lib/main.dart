@@ -28,7 +28,8 @@ void main() async {
   // await AmapCore.init('');
   // await AmapLocation.instance.init(iosKey: '');
   JPush jpush = new JPush();
-  DevUtil.setDev(true);
+  const isProduct = const bool.fromEnvironment('ISPRODUCT');
+  DevUtil.setDev(!isProduct);
   jpush.addEventHandler(
     // 接收通知回调方法。
     onReceiveNotification: (Map<String, dynamic> message) async {
