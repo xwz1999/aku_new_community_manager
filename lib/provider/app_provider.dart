@@ -1,10 +1,13 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:amap_flutter_location/amap_flutter_location.dart';
 import 'package:amap_flutter_location/amap_location_option.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
+import 'package:dio/dio.dart';
 
 class AppProvider extends ChangeNotifier {
   List<AppApplication> _recentUsedApp = [];
@@ -49,5 +52,19 @@ class AppProvider extends ChangeNotifier {
   stopLocation() {
     _flutterLocation.stopLocation();
     _flutterLocation.destroy();
+  }
+
+  int _sysMessage = 0;
+  int _commentMessage = 0;
+  bool get hasMessage => _sysMessage != 0 || _commentMessage != 0;
+  int get sysMessage => _sysMessage;
+  int get commentMessage => _commentMessage;
+
+  updateMessage() async {
+    Response response = await NetUtil().dio.get(API.message.messageCenter);
+    if (response == null || response.data == null) return;
+    _sysMessage = response.data['sysCount'] ?? 0;
+    _commentMessage = response.data['commentCount'] ?? 0;
+    notifyListeners();
   }
 }

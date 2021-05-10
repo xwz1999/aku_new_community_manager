@@ -1,6 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +16,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/messages/comment_message.dart';
 import 'package:aku_community_manager/ui/home/messages/system_message.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:provider/provider.dart';
 
 class Message extends StatefulWidget {
   Message({Key key}) : super(key: key);
@@ -26,8 +26,6 @@ class Message extends StatefulWidget {
 }
 
 class _MessageState extends State<Message> {
-  int _messageCount = 0;
-  int _commentCount = 0;
   EasyRefreshController _refreshController = EasyRefreshController();
   Widget _messageTypeImage(String type) {
     String path;
@@ -132,15 +130,9 @@ class _MessageState extends State<Message> {
     );
   }
 
-  Future _updateMessageCenter() async {
-    Response response = await NetUtil().dio.get(API.message.messageCenter);
-    if (response == null || response.data == null) return;
-    _messageCount = response.data['sysCount'] ?? 0;
-    _commentCount = response.data['commentCount'] ?? 0;
-  }
-
   @override
   Widget build(BuildContext context) {
+    final appProvider = Provider.of<AppProvider>(context);
     return AkuScaffold(
       title: '消息',
       titleStyle: AppStyle().barTitleStyle,
@@ -148,8 +140,7 @@ class _MessageState extends State<Message> {
         controller: _refreshController,
         firstRefresh: true,
         onRefresh: () async {
-          await _updateMessageCenter();
-          setState(() {});
+          await appProvider.updateMessage();
         },
         header: MaterialHeader(),
         child: ListView(
@@ -160,7 +151,7 @@ class _MessageState extends State<Message> {
               _messageTypeImage('系统消息'),
               '系统消息',
               '你有一条新的报事报修待处理',
-              _messageCount,
+              appProvider.sysMessage,
               onpressed: () {
                 Get.to(() => SystemMessage());
               },
@@ -173,7 +164,7 @@ class _MessageState extends State<Message> {
               _messageTypeImage('评论消息'),
               '评论消息',
               '你有一条新的评论回复',
-              _commentCount,
+              appProvider.commentMessage,
               onpressed: () {
                 Get.to(() => CommentMessage());
               },

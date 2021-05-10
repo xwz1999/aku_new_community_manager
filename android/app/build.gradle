@@ -78,9 +78,19 @@ android {
            signingConfig signingConfigs.release
        }
        debug {
+           minifyEnabled true
+           useProguard true
+           multiDexEnabled true
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
            signingConfig signingConfigs.release
        }
        profile{
+           minifyEnabled true
+           useProguard true
+           multiDexEnabled true
+           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
            signingConfig signingConfigs.release
        }
    }

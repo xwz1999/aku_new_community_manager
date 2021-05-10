@@ -91,7 +91,7 @@ class _SearchWorkOrderpageState extends State<SearchWorkOrderPage> {
                 child: TextField(
                   controller: _textController,
                   decoration: InputDecoration(
-                    hintText: '搜索工单、手机号',
+                    hintText: '搜索应用',
                     hintStyle: TextStyle(
                       color: AppStyle.minorTextColor,
                       fontSize: 28.sp,
