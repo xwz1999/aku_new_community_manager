@@ -16,6 +16,9 @@ class UserInfoModel {
   ///操作权限（借还管理）
   bool get canOperation => jurisdiction.contains(57);
 
+  ///管家
+  bool get manager => canSendTicket && canPickUpTicket;
+
   UserInfoModel({this.id, this.roleId, this.nickName, this.jurisdiction});
 
   UserInfoModel.fromJson(Map<String, dynamic> json) {
