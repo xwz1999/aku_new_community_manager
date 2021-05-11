@@ -30,7 +30,7 @@ class ExecuteCheckList {
     final Map<String, dynamic> data = {
       "id": this.id,
       "status": this.status,
-      "remarks": this.remarkes,
+      "remakes": this.remarkes,
     };
     return data;
   }
