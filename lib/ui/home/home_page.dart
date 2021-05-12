@@ -560,8 +560,9 @@ class _HomePageState extends State<HomePage> {
                         !userProvider.isLogin
                             ? SizedBox()
                             : Container(
-                                height: 480.w,
+                                height: 500.w,
                                 child: ListView.separated(
+                                  padding: EdgeInsets.zero,
                                   separatorBuilder: (context, index) {
                                     return AkuBox.w(16);
                                   },
@@ -576,6 +577,10 @@ class _HomePageState extends State<HomePage> {
                                                   .runtimeType ==
                                               BussinessAndFixModel) {
                                             return BusinessFixCard(
+                                                callRefresh: () {
+                                                  _refreshController
+                                                      .callRefresh();
+                                                },
                                                 model: _todoModelList[index]
                                                     .dynamicModel);
                                           } else if (_todoModelList[index]

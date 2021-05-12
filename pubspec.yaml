@@ -55,6 +55,8 @@ dependencies:
   firebase_crashlytics: ^2.0.0
   #json序列化
   json_serializable: ^4.1.1
+  #瀑布流
+  waterfall_flow: ^3.0.1
 
   power_logger: ^1.0.1-nullsafety.1
   logger: ^1.0.0

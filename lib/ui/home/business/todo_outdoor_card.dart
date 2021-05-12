@@ -8,8 +8,9 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ToDoOutDoorCard extends StatefulWidget {
- final ToDoOutDoorModel model;
-  ToDoOutDoorCard({Key key, this.model}) : super(key: key);
+  final ToDoOutDoorModel model;
+  final VoidCallback callRefresh;
+  ToDoOutDoorCard({Key key, this.model, this.callRefresh}) : super(key: key);
 
   @override
   _ToDoOutDoorCardState createState() => _ToDoOutDoorCardState();
@@ -191,8 +192,11 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
             height: 112.w,
             alignment: Alignment.centerRight,
             child: AkuButton(
-              onPressed: () {
-                Get.to(ItemsOutdoorDetailsPage(id: widget.model.id));
+              onPressed: () async {
+                await Get.to(ItemsOutdoorDetailsPage(id: widget.model.id));
+                if (widget.callRefresh != null) {
+                  widget.callRefresh();
+                }
               },
               child: Container(
                 alignment: Alignment.center,
