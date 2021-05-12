@@ -69,7 +69,7 @@ dependencies:
       url: http://159.75.73.143:8080/third_packages/jpush_flutter
 
   shimmer: ^2.0.0-nullsafety.0
-  badges: ^1.2.0
+  badges: ^2.0.0-nullsafety.1
 
 dev_dependencies:
   flutter_test:

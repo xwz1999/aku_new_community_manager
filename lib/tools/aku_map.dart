@@ -63,17 +63,35 @@ class AkuMap {
   static Map<int, String> fixAreaType = {1: '公区维修', 2: '家庭维修'};
 
   ///报事报修处理进程-操作类型
-  static Map<int, String> operationType = {
-    1: '提交报修',
-    2: '派单',
-    3: '开始处理',
-    4: '处理完成',
-    5: '确认',
-    6: '回访',
-    7: '回退',
-    8: '作废',
-    9: '取消'
-  };
+  static String operationType(int operationType) {
+    switch (operationType) {
+      case 1:
+        return '提交保修';
+      case 2:
+        return '派单';
+      case 3:
+        return '开始处理';
+      case 4:
+        return '处理完成';
+      case 5:
+        return '确认';
+      case 6:
+        return '回访';
+      case 7:
+        return '回退';
+      case 8:
+        return '作废';
+      case 9:
+        return '取消';
+        break;
+      case 10:
+        return '改派';
+      case 11:
+        return '延时';
+      default:
+        return '';
+    }
+  }
 
   static Map<int, String> dispatchType = {1: '无偿服务', 2: '有偿服务'};
 }

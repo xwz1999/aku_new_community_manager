@@ -42,7 +42,6 @@ class BusinessAndFixDetailPage extends StatefulWidget {
 }
 
 class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
-
   bool get isHandOut => widget.model.status == 1;
   FixedDetailModel _detailModel;
   bool _onload = true;
@@ -138,7 +137,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
               ),
             );
           } else if (widget.model.status == 2) {
-            if (userProvider.infoModel.canSendTicket){
+            if (userProvider.infoModel.canSendTicket) {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
@@ -204,9 +203,10 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                         color: AppStyle.primaryColor,
                       ),
                     ),
-                    onPressed: () {
-                      Get.to(
+                    onPressed: () async {
+                      await Get.to(
                           FixMoreTimePage(dispatchId: widget.model.dispatchId));
+                      _easyRefreshController.callRefresh();
                     },
                     child: Text(
                       '申请延时',
@@ -404,7 +404,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
       title: '报修进程',
       children: _detailModel.processRecord.map((e) {
         return _buildProcessTile(
-          AkuMap.operationType[e.operationType],
+          AkuMap.operationType(e.operationType),
           DateUtil.formatDateStr(e.operationDate,
               format: 'yyyy-MM-dd HH:mm:ss'),
         );
