@@ -19,8 +19,7 @@ class ManageFunc {
   ///派单类型
   static Future dispatchListDetailType() async {
     Response response = await NetUtil().dio.get(
-        'http://test.akuhotel.com:8804/IntelligentCommunity' +
-            API.manage.dispatchListDetailType);
+        '${API.host}/IntelligentCommunity' + API.manage.dispatchListDetailType);
     return response.data as List;
   }
 

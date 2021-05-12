@@ -216,9 +216,7 @@ class AgreementPage extends StatelessWidget {
 2020年10月21日
 
       ''',
-          style: TextStyle(
-            fontSize: 30.w,
-          ),
+          style: Theme.of(context).textTheme.subtitle1,
         ),
       ),
     );

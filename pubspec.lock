@@ -23,23 +23,21 @@ packages:
       name: amap_flutter_base
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.2"
+    version: "2.0.0"
   amap_flutter_location:
     dependency: "direct main"
     description:
       name: amap_flutter_location
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.0.1"
+    version: "2.0.0"
   amap_flutter_map:
     dependency: "direct main"
     description:
-      path: "."
-      ref: nullsafety
-      resolved-ref: "5c50cf60d2157cc2779a171ca65c327d571389a7"
-      url: "http://159.75.73.143:8080/third_packages/amap_flutter_map"
-    source: git
-    version: "2.0.2-nullsafety"
+      name: amap_flutter_map
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   analyzer:
     dependency: transitive
     description:
@@ -82,6 +80,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.0"
+  badges:
+    dependency: "direct main"
+    description:
+      name: badges
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.2.0"
   boolean_selector:
     dependency: transitive
     description:

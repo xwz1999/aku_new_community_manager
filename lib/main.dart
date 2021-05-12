@@ -36,6 +36,8 @@ void main() async {
       print("flutter onReceiveNotification: $message");
       LoggerData.addData(message);
       await JpushMessageParse(message).shot();
+      final appProvider = Provider.of<AppProvider>(Get.context, listen: false);
+      appProvider.updateMessage();
     },
     // 点击通知回调方法。
     onOpenNotification: (Map<String, dynamic> message) async {
@@ -88,6 +90,7 @@ class MyApp extends StatelessWidget {
               designSize: Size(750, 1334),
               builder: () {
                 return GetMaterialApp(
+                  debugShowCheckedModeBanner: false,
                   title: '小蜜蜂管家',
                   theme: AppTheme.themeData,
                   home: SplashPage(),
