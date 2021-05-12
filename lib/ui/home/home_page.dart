@@ -560,7 +560,7 @@ class _HomePageState extends State<HomePage> {
                         !userProvider.isLogin
                             ? SizedBox()
                             : Container(
-                                height: 500.w,
+                                height: 450.w,
                                 child: ListView.separated(
                                   padding: EdgeInsets.zero,
                                   separatorBuilder: (context, index) {
@@ -577,6 +577,7 @@ class _HomePageState extends State<HomePage> {
                                                   .runtimeType ==
                                               BussinessAndFixModel) {
                                             return BusinessFixCard(
+                                                homeDisplay: true,
                                                 callRefresh: () {
                                                   _refreshController
                                                       .callRefresh();
@@ -588,6 +589,11 @@ class _HomePageState extends State<HomePage> {
                                                   .runtimeType ==
                                               ToDoOutDoorModel) {
                                             return ToDoOutDoorCard(
+                                              homeDisplay: true,
+                                              callRefresh: () {
+                                                _refreshController
+                                                    .callRefresh();
+                                              },
                                               model: _todoModelList[index]
                                                   .dynamicModel,
                                             );

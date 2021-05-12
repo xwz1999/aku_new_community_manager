@@ -3,6 +3,7 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/tools/aku_map.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
@@ -115,7 +116,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                 ),
               ],
             ),
-            widget.homeDisplay ? AkuBox.h(12) : AkuBox.h(24),
+            AkuBox.h(24),
             Text(
               widget.model.reportDetail,
               maxLines: widget.homeDisplay ? 1 : null,
@@ -133,7 +134,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             !widget.canSeeBottomButton ? SizedBox() : _buildBottomCard(),
           ],
         ),
-        margin: EdgeInsets.only(top: 16.w),
+        margin:
+            widget.homeDisplay ? EdgeInsets.zero : EdgeInsets.only(top: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8.w),
@@ -168,17 +170,46 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
   }
 
   _buildBottomCard() {
-    if (userInfoModel.canPickUpTicket) {
-      if (widget.model.status > 4) return SizedBox();
+    if (widget.model.status > 4) {
       return Column(
         children: [
-          Divider(
-            height: 48.w,
+          Divider(height: 48.w),
+          Align(
+            alignment: Alignment.centerRight,
+            child: AkuMaterialButton(
+              height: 64.w,
+              onPressed: () async {
+                Get.to(() => BusinessAndFixDetailPage(model: widget.model));
+                if (widget.callRefresh != null) {
+                  widget.callRefresh();
+                }
+              },
+              radius: 4,
+              color: AppStyle.primaryColor,
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Text(
+                '查看详情',
+                style: TextStyle(
+                  color: AppStyle.primaryTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.sp,
+                  height: 40 / 28,
+                ),
+              ),
+            ),
           ),
+        ],
+      );
+    } else {
+      return Column(
+        children: [
+          AkuBox.h(24),
+          AkuDivider.horizontal(),
+          AkuBox.h(24),
           Row(
             children: [
               Spacer(),
-              widget.model.status == 3
+              (widget.model.status == 3) && (userInfoModel.canPickUpTicket)
                   ? MaterialButton(
                       padding: EdgeInsets.zero,
                       height: 64.w,
@@ -203,38 +234,32 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                       },
                     )
                   : SizedBox(),
-              widget.model.status == 3 ? AkuBox.w(24) : SizedBox(),
-              widget.model.status == 3
-                  ? AkuMaterialButton(
-                      onPressed: () async {
-                        await Get.to(() => BusinessAndFixDetailPage(
-                              model: widget.model,
-                            ));
-                      },
-                      radius: 4.w,
-                      color: AppStyle.primaryColor,
-                      minWidth: 160.w,
-                      height: 64.w,
-                      child: Text(
-                        '处理完成',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 28.sp,
+              ...widget.model.status == 3 && (userInfoModel.canPickUpTicket)
+                  ? [
+                      AkuBox.w(24),
+                      AkuMaterialButton(
+                        onPressed: () async {
+                          await Get.to(() => BusinessAndFixDetailPage(
+                                model: widget.model,
+                              ));
+                        },
+                        radius: 4.w,
+                        color: AppStyle.primaryColor,
+                        minWidth: 160.w,
+                        height: 64.w,
+                        child: Text(
+                          '处理完成',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 28.sp,
+                          ),
                         ),
-                      ),
-                    )
-                  : SizedBox(),
+                      )
+                    ]
+                  : [SizedBox()],
               (widget.model.status == 2) && (userInfoModel.canPickUpTicket)
                   ? AkuMaterialButton(
                       onPressed: () async {
-                        // final userProvider =
-                        //     Provider.of<UserProvider>(context, listen: false);
-                        // widget.model.detail.fixStatuses.add(FixStatus(
-                        //   title: '${userProvider.userInfoModel.nickName}已接单',
-                        //   date: DateTime.now(),
-                        // ));
-                        // widget.model.type = FIX_ENUM.PROCESSING;
-                        // Get.back();
                         await Get.to(() => BusinessAndFixDetailPage(
                               model: widget.model,
                             ));
@@ -255,37 +280,30 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                       ),
                     )
                   : SizedBox(),
+              (widget.model.status == 1)
+                  ? AkuMaterialButton(
+                      onPressed: () async {
+                        await Get.to(() => BusinessAndFixDetailPage(
+                              model: widget.model,
+                            ));
+                        if (widget.callRefresh != null) {
+                          widget.callRefresh();
+                        }
+                      },
+                      radius: 4.w,
+                      color: AppStyle.primaryColor,
+                      minWidth: 160.w,
+                      height: 64.w,
+                      child: Text(
+                        '${(userInfoModel.canSendTicket) ? '立即派单' : '查看详情'}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 28.sp,
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
             ],
-          ),
-        ],
-      );
-    } else {
-      return Column(
-        children: [
-          widget.homeDisplay ? Divider(height: 24.w) : Divider(height: 48.w),
-          Align(
-            alignment: Alignment.centerRight,
-            child: AkuMaterialButton(
-              height: 64.w,
-              onPressed: () async {
-                Get.to(() => BusinessAndFixDetailPage(model: widget.model));
-                if (widget.callRefresh != null) {
-                  widget.callRefresh();
-                }
-              },
-              radius: 4,
-              color: AppStyle.primaryColor,
-              padding: EdgeInsets.symmetric(horizontal: 24.w),
-              child: Text(
-                '查看详情',
-                style: TextStyle(
-                  color: AppStyle.primaryTextColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.sp,
-                  height: 40 / 28,
-                ),
-              ),
-            ),
           ),
         ],
       );

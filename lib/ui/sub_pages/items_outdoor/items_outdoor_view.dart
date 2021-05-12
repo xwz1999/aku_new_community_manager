@@ -31,6 +31,9 @@ class _ItemsOutdoorViewState extends State<ItemsOutdoorView>
           itemBuilder: (context, index) {
             return ItemsOutdoorCard(
               model: items[index],
+              callRefresh: () {
+                _refreshController.callRefresh();
+              },
             );
           },
           padding: EdgeInsets.only(left: 32.w, right: 32.w),

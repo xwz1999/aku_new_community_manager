@@ -10,7 +10,10 @@ import 'package:velocity_x/velocity_x.dart';
 class ToDoOutDoorCard extends StatefulWidget {
   final ToDoOutDoorModel model;
   final VoidCallback callRefresh;
-  ToDoOutDoorCard({Key key, this.model, this.callRefresh}) : super(key: key);
+  final bool homeDisplay;
+  ToDoOutDoorCard(
+      {Key key, this.model, this.callRefresh, this.homeDisplay = false})
+      : super(key: key);
 
   @override
   _ToDoOutDoorCardState createState() => _ToDoOutDoorCardState();
@@ -23,7 +26,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
         TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp);
     return Container(
       color: Color(0xFFFFFFFF),
-      margin: EdgeInsets.only(top: 16.w),
+      margin: widget.homeDisplay ? EdgeInsets.zero : EdgeInsets.only(top: 16.w),
       padding: EdgeInsets.only(left: 24.w, right: 24.w),
       child: Column(
         children: [
@@ -69,25 +72,29 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
               ],
             ),
           ),
-          Row(
-            children: [
-              Image.asset(
-                R.ASSETS_OUTDOOR_IC_HOME_PNG,
-                width: 40.w,
-                height: 40.w,
-              ),
-              4.w.widthBox,
-              Text(
-                '小区名称',
-                style: _textStyle,
-              ),
-              Spacer(),
-              Text(
-                '五象新区人才公寓',
-                style: AppStyle().primaryStyle,
-              ),
-            ],
-          ),
+          ...widget.homeDisplay
+              ? []
+              : [
+                  Row(
+                    children: [
+                      Image.asset(
+                        R.ASSETS_OUTDOOR_IC_HOME_PNG,
+                        width: 40.w,
+                        height: 40.w,
+                      ),
+                      4.w.widthBox,
+                      Text(
+                        '小区名称',
+                        style: _textStyle,
+                      ),
+                      Spacer(),
+                      Text(
+                        '五象新区人才公寓',
+                        style: AppStyle().primaryStyle,
+                      ),
+                    ],
+                  ),
+                ],
           12.w.heightBox,
           Row(
             children: [
@@ -125,26 +132,30 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
               ),
             ],
           ),
-          12.w.heightBox,
-          Row(
-            children: [
-              Image.asset(
-                R.ASSETS_OUTDOOR_IC_PEOPLE_PNG,
-                width: 40.w,
-                height: 40.w,
-              ),
-              4.w.widthBox,
-              Text(
-                '身份',
-                style: _textStyle,
-              ),
-              Spacer(),
-              Text(
-                widget.model.identityValue,
-                style: AppStyle().primaryStyle,
-              ),
-            ],
-          ),
+          ...widget.homeDisplay
+              ? []
+              : [
+                  12.w.heightBox,
+                  Row(
+                    children: [
+                      Image.asset(
+                        R.ASSETS_OUTDOOR_IC_PEOPLE_PNG,
+                        width: 40.w,
+                        height: 40.w,
+                      ),
+                      4.w.widthBox,
+                      Text(
+                        '身份',
+                        style: _textStyle,
+                      ),
+                      Spacer(),
+                      Text(
+                        widget.model.identityValue,
+                        style: AppStyle().primaryStyle,
+                      ),
+                    ],
+                  ),
+                ],
           12.w.heightBox,
           Row(
             children: [

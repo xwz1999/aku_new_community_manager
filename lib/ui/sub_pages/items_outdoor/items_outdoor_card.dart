@@ -16,7 +16,9 @@ import 'package:velocity_x/velocity_x.dart';
 
 class ItemsOutdoorCard extends StatefulWidget {
   final GoodsOutItemModel model;
-  ItemsOutdoorCard({Key key, @required this.model}) : super(key: key);
+  final VoidCallback callRefresh;
+  ItemsOutdoorCard({Key key, @required this.model, this.callRefresh})
+      : super(key: key);
 
   @override
   _ItemsOutdoorCardState createState() => _ItemsOutdoorCardState();
@@ -199,8 +201,11 @@ class _ItemsOutdoorCardState extends State<ItemsOutdoorCard> {
             height: 112.w,
             alignment: Alignment.centerRight,
             child: AkuButton(
-              onPressed: () {
-                Get.to(ItemsOutdoorDetailsPage(id: widget.model.id));
+              onPressed: () async {
+                await Get.to(ItemsOutdoorDetailsPage(id: widget.model.id));
+                if (widget.callRefresh != null) {
+                  widget.callRefresh();
+                }
               },
               child: Container(
                 alignment: Alignment.center,
