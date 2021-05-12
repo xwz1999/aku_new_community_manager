@@ -47,7 +47,11 @@ class _BussinessAndFixViewState extends State<BussinessAndFixView>
         builder: (items) {
           return ListView.separated(
               itemBuilder: (context, index) {
-                return BusinessFixCard(model: items[index]);
+                return BusinessFixCard(
+                    model: items[index],
+                    callRefresh: () {
+                      _easyRefreshController.callRefresh();
+                    });
               },
               separatorBuilder: (_, __) {
                 return 16.w.heightBox;

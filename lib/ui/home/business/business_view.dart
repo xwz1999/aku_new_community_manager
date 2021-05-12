@@ -47,7 +47,8 @@ class _BussinessViewState extends State<BussinessView>
       controller: _refreshController,
       header: MaterialHeader(),
       onRefresh: () async {
-        var dataList = await BussinessFunc.getBussinessModelList(widget.backlogStatus);
+        var dataList =
+            await BussinessFunc.getBussinessModelList(widget.backlogStatus);
         _modelList = dataList.map((e) => ToDoModel.fromJson(e)).toList();
         setState(() {});
       },
@@ -58,10 +59,18 @@ class _BussinessViewState extends State<BussinessView>
               children: [
                 ..._modelList.map((e) {
                   if (e.dynamicModel.runtimeType == BussinessAndFixModel) {
-                    return BusinessFixCard(model: e.dynamicModel);
+                    return BusinessFixCard(
+                      model: e.dynamicModel,
+                      callRefresh: () {
+                        _refreshController.callRefresh();
+                      },
+                    );
                   } else if (e.dynamicModel.runtimeType == ToDoOutDoorModel) {
                     return ToDoOutDoorCard(
                       model: e.dynamicModel,
+                      callRefresh: () {
+                        _refreshController.callRefresh();
+                      },
                     );
                   }
                 }).toList()
@@ -73,8 +82,6 @@ class _BussinessViewState extends State<BussinessView>
   Widget _emptyWidget() {
     return SizedBox();
   }
-
-  
 
   @override
   bool get wantKeepAlive => true;

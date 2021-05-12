@@ -23,6 +23,7 @@ class FixSubmitFinishPage extends StatelessWidget {
             '您已处理完成该报修'.text.black.size(40.sp).bold.make(),
             120.w.heightBox,
             BusinessFixCard(
+              hasFinished: true,
               model: this.model,
               canSeeBottomButton: false,
             ),

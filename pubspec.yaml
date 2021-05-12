@@ -3,7 +3,7 @@ description: A new Flutter application.
 
 publish_to: "none"
 
-version: 1.0.8+9
+version: 1.5.0+10
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -55,6 +55,8 @@ dependencies:
   firebase_crashlytics: ^2.0.0
   #json序列化
   json_serializable: ^4.1.1
+  #瀑布流
+  waterfall_flow: ^3.0.1
 
   power_logger: ^1.0.1-nullsafety.1
   logger: ^1.0.0
@@ -69,7 +71,7 @@ dependencies:
       url: https://git.oa00.com/flutter_third/jpush-flutter-plugin
 
   shimmer: ^2.0.0-nullsafety.0
-  badges: ^1.2.0
+  badges: ^2.0.0-nullsafety.1
 
 dev_dependencies:
   flutter_test:

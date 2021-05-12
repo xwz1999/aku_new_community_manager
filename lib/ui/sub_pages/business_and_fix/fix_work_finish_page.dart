@@ -289,76 +289,97 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                   title: '费用明细',
                   spacing: 16,
                   children: [
-                    Row(
-                      children: [
-                        AkuBox.h(96),
-                        Text('人工费'),
-                        Expanded(
-                          child: TextField(
-                            controller: _humanController,
-                            onChanged: (_) => setState(() {}),
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.end,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: '请输入',
-                              hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28.sp,
-                                color: AppStyle.minorTextColor,
+                    SizedBox(
+                      height: 96.w,
+                      child: Row(
+                        children: [
+                          Text(
+                            '人工费',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 28.sp),
+                          ),
+                          Expanded(
+                            child: TextField(
+                              controller: _humanController,
+                              onChanged: (_) => setState(() {}),
+                              keyboardType: TextInputType.number,
+                              textAlign: TextAlign.end,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: '请输入',
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 28.sp,
+                                  color: AppStyle.minorTextColor,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Divider(height: 1.w),
-                    Row(
-                      children: [
-                        AkuBox.h(96),
-                        Text('材料费'),
-                        Expanded(
-                          child: TextField(
-                            onChanged: (_) => setState(() {}),
-                            controller: _materialPriceController,
-                            textAlign: TextAlign.end,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: '请输入',
-                              hintStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 28.sp,
-                                color: AppStyle.minorTextColor,
+                    SizedBox(
+                      height: 96.w,
+                      child: Row(
+                        children: [
+                          Text(
+                            '材料费',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 28.sp),
+                          ),
+                          Expanded(
+                            child: TextField(
+                              onChanged: (_) => setState(() {}),
+                              controller: _materialPriceController,
+                              textAlign: TextAlign.end,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: '请输入',
+                                hintStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 28.sp,
+                                  color: AppStyle.minorTextColor,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                     Divider(height: 1.w),
-                    Row(
-                      children: [
-                        AkuBox.h(96),
-                        Text('总计费用'),
-                        Spacer(),
-                        Builder(
-                          builder: (context) {
-                            if (TextUtil.isEmpty(_humanController.text) ||
-                                TextUtil.isEmpty(
-                                    _materialPriceController.text)) {
-                              return Text('人工费或材料费不能为空');
-                            } else {
-                              humanPrice =
-                                  double.tryParse(_humanController.text);
-                              materialPrice = double.tryParse(
-                                  _materialPriceController.text);
-                            }
-                            return Text(
-                                '¥${(humanPrice + materialPrice).toStringAsFixed(2)}');
-                          },
-                        ),
-                      ],
+                    SizedBox(
+                      height: 96.w,
+                      child: Row(
+                        children: [
+                          Text(
+                            '总计费用',
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 28.sp),
+                          ),
+                          Spacer(),
+                          Builder(
+                            builder: (context) {
+                              if (TextUtil.isEmpty(_humanController.text) ||
+                                  TextUtil.isEmpty(
+                                      _materialPriceController.text)) {
+                                return Text('人工费或材料费不能为空');
+                              } else {
+                                humanPrice =
+                                    double.tryParse(_humanController.text);
+                                materialPrice = double.tryParse(
+                                    _materialPriceController.text);
+                              }
+                              return Text(
+                                '¥${(humanPrice + materialPrice).toStringAsFixed(2)}',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 28.sp),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -409,6 +430,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
           if (baseModel.status) {
             FixSubmitFinishPage(
               model: widget.fixModel,
+              
             ).to();
           } else {
             BotToast.showText(text: baseModel.message);

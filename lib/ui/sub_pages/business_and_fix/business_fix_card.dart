@@ -25,11 +25,16 @@ class BusinessFixCard extends StatefulWidget {
   final BussinessAndFixModel model;
   final bool homeDisplay;
   final bool canSeeBottomButton;
+  final VoidCallback callRefresh;
+  //是否是报事保修处理完成页面调用
+  final bool hasFinished;
   BusinessFixCard(
       {Key key,
       @required this.model,
       this.homeDisplay = false,
-      this.canSeeBottomButton = true})
+      this.canSeeBottomButton = true,
+      this.callRefresh,
+      this.hasFinished = false})
       : super(key: key);
 
   @override
@@ -70,8 +75,11 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Get.to(() => BusinessAndFixDetailPage(model: widget.model));
+      onTap: () async {
+        await Get.to(() => BusinessAndFixDetailPage(model: widget.model));
+        if (widget.callRefresh != null) {
+          widget.callRefresh();
+        }
       },
       child: Container(
         padding: EdgeInsets.all(24.w),
@@ -93,13 +101,17 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                   ),
                 ),
                 Text(
-                  AkuMap.fixStatus(userInfoModel.canSendTicket,
-                      userInfoModel.canPickUpTicket, widget.model.status),
-                  style: TextStyle(
-                    color: widget.model.status < 4
-                        ? Color(0XFFFF4501)
-                        : AppStyle.minorTextColor,
-                  ),
+                  widget.hasFinished
+                      ? '已处理'
+                      : AkuMap.fixStatus(userInfoModel.canSendTicket,
+                          userInfoModel.canPickUpTicket, widget.model.status),
+                  style: widget.hasFinished
+                      ? TextStyle(color: AppStyle.minorTextColor)
+                      : TextStyle(
+                          color: widget.model.status < 4
+                              ? Color(0XFFFF4501)
+                              : AppStyle.minorTextColor,
+                        ),
                 ),
               ],
             ),
@@ -194,8 +206,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
               widget.model.status == 3 ? AkuBox.w(24) : SizedBox(),
               widget.model.status == 3
                   ? AkuMaterialButton(
-                      onPressed: () {
-                        Get.to(() => BusinessAndFixDetailPage(
+                      onPressed: () async {
+                        await Get.to(() => BusinessAndFixDetailPage(
                               model: widget.model,
                             ));
                       },
@@ -214,7 +226,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                   : SizedBox(),
               (widget.model.status == 2) && (userInfoModel.canPickUpTicket)
                   ? AkuMaterialButton(
-                      onPressed: () {
+                      onPressed: () async {
                         // final userProvider =
                         //     Provider.of<UserProvider>(context, listen: false);
                         // widget.model.detail.fixStatuses.add(FixStatus(
@@ -223,9 +235,12 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                         // ));
                         // widget.model.type = FIX_ENUM.PROCESSING;
                         // Get.back();
-                        Get.to(() => BusinessAndFixDetailPage(
+                        await Get.to(() => BusinessAndFixDetailPage(
                               model: widget.model,
                             ));
+                        if (widget.callRefresh != null) {
+                          widget.callRefresh();
+                        }
                       },
                       radius: 4.w,
                       color: AppStyle.primaryColor,
@@ -252,8 +267,11 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             alignment: Alignment.centerRight,
             child: AkuMaterialButton(
               height: 64.w,
-              onPressed: () {
+              onPressed: () async {
                 Get.to(() => BusinessAndFixDetailPage(model: widget.model));
+                if (widget.callRefresh != null) {
+                  widget.callRefresh();
+                }
               },
               radius: 4,
               color: AppStyle.primaryColor,
