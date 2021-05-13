@@ -1,8 +1,12 @@
 import 'dart:math';
 
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/package_manage/package_manage_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +17,9 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 class PackageManageCard extends StatefulWidget {
   final int index;
   final PackageManageListModel model;
-  PackageManageCard({Key key, this.index, this.model}) : super(key: key);
+  final VoidCallback callRefresh;
+  PackageManageCard({Key key, this.index, this.model, this.callRefresh})
+      : super(key: key);
 
   @override
   _PackageManageCardState createState() => _PackageManageCardState();
@@ -60,17 +66,28 @@ class _PackageManageCardState extends State<PackageManageCard> {
             _rowTile(
               R.ASSETS_MANAGE_IC_RENWU_PNG,
               '收件人',
-              widget.model.addresseeName.text.size(24.sp).color(kTextSubColor).make(),
+              widget.model.addresseeName.text
+                  .size(24.sp)
+                  .color(kTextSubColor)
+                  .make(),
             ),
             _rowTile(
               R.ASSETS_MESSAGE_IC_PHONE_PNG,
               '联系方式',
-              widget.model.addresseeTel.text.size(24.sp).color(kTextSubColor).make(),
+              widget.model.addresseeTel.text
+                  .size(24.sp)
+                  .color(kTextSubColor)
+                  .make(),
             ),
             _rowTile(
               R.ASSETS_MANAGE_IC_TIME_PNG,
               '送达时间',
-              DateUtil.formatDate(widget.model.receiveDate,format: 'yyyy-MM-dd HH:mm').text.size(24.sp).color(kTextSubColor).make(),
+              DateUtil.formatDate(widget.model.receiveDate,
+                      format: 'yyyy-MM-dd HH:mm')
+                  .text
+                  .size(24.sp)
+                  .color(kTextSubColor)
+                  .make(),
             ),
           ].sepWidget(separate: 12.w.heightBox),
           widget.index == 1 ? SizedBox() : _bottomButtons()
@@ -91,7 +108,10 @@ class _PackageManageCardState extends State<PackageManageCard> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(74.w)),
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () async {
+              await _remindPackage(widget.model.id);
+              widget.callRefresh();
+            },
             elevation: 0,
             focusElevation: 0,
             hoverElevation: 0,
@@ -101,6 +121,14 @@ class _PackageManageCardState extends State<PackageManageCard> {
         ],
       ),
     );
+  }
+
+  Future _remindPackage(int packageCollectionId) async {
+    BaseModel baseModel = await NetUtil().get(API.manage.packageManageRemind,
+        params: {"packageCollectionId": packageCollectionId});
+    if (!baseModel.status) {
+      BotToast.showText(text: baseModel.message);
+    }
   }
 
   Widget _rowTile(String iconPath, String title, Widget content) {

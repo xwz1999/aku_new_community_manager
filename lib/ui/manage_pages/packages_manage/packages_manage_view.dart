@@ -47,6 +47,9 @@ class _PackagesManageViewState extends State<PackagesManageView> {
               return PackageManageCard(
                 index: widget.index,
                 model: items[index],
+                callRefresh: () {
+                  _refreshController.callRefresh();
+                },
               );
             },
             separatorBuilder: (_, __) {

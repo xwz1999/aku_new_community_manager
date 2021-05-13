@@ -188,7 +188,9 @@ class _Manage {
 
   ///管家app 包裹代收：查询所有的包裹代收信息
   String get packageManageList => '/user/packageCollection/list';
-  
+
+  ///管家app 包裹代收：提醒领取
+  String get packageManageRemind => '/user/packageCollection/remind';
 }
 
 class _Upload {
