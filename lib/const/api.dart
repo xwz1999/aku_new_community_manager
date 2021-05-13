@@ -185,6 +185,10 @@ class _Manage {
 
   ///巡检管理：上传巡检定位信息（开始巡检后，每n秒上传一次）
   String get uploadLocation => '/user/inspection/uploadLocation';
+
+  ///管家app 包裹代收：查询所有的包裹代收信息
+  String get packageManageList => '/user/packageCollection/list';
+  
 }
 
 class _Upload {
