@@ -40,8 +40,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
         children: [
           Row(
             children: [
-              '3号柜${Random().nextInt(10)}号箱'
-                  .text
+              widget.model.placePosition.text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
                   .bold
@@ -82,7 +81,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
             _rowTile(
               R.ASSETS_MANAGE_IC_TIME_PNG,
               '送达时间',
-              DateUtil.formatDate(widget.model.receiveDate,
+              DateUtil.formatDate(widget.model.createDate,
                       format: 'yyyy-MM-dd HH:mm')
                   .text
                   .size(24.sp)

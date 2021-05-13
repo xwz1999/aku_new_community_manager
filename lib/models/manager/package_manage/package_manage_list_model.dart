@@ -4,9 +4,10 @@ class PackageManageListModel {
   String addresseeName;
   String addresseeTel;
   String address;
+  String placePosition;
   int status;
-  Null receiveDate;
-  String createDate;
+  DateTime receiveDate;
+  DateTime createDate;
 
   PackageManageListModel(
       {this.id,
@@ -14,6 +15,7 @@ class PackageManageListModel {
       this.addresseeName,
       this.addresseeTel,
       this.address,
+      this.placePosition,
       this.status,
       this.receiveDate,
       this.createDate});
@@ -24,6 +26,7 @@ class PackageManageListModel {
     addresseeName = json['addresseeName'];
     addresseeTel = json['addresseeTel'];
     address = json['address'];
+    placePosition = json['placePosition'];
     status = json['status'];
     receiveDate = json['receiveDate'];
     createDate = json['createDate'];
@@ -36,6 +39,7 @@ class PackageManageListModel {
     data['addresseeName'] = this.addresseeName;
     data['addresseeTel'] = this.addresseeTel;
     data['address'] = this.address;
+    data['placePosition'] = this.placePosition;
     data['status'] = this.status;
     data['receiveDate'] = this.receiveDate;
     data['createDate'] = this.createDate;

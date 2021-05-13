@@ -1,10 +1,12 @@
-
+import 'package:aku_community_manager/ui/manage_pages/packages_manage/add_package_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/packages_manage/packages_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:aku_community_manager/const/resource.dart';
 
 class PackagesManagePage extends StatefulWidget {
   PackagesManagePage({Key key}) : super(key: key);
@@ -27,13 +29,28 @@ class _PackagesManagePageState extends State<PackagesManagePage>
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '包裹管理',
+      actions: [
+        IconButton(
+            icon: SizedBox(
+              width: 40.w,
+              height: 40.w,
+              child: Image.asset(R.ASSETS_MANAGE_ADD_PNG),
+            ),
+            onPressed: () {
+              Get.to(() => AddPackagePage());
+            })
+      ],
       appBarBottom: PreferredSize(
         child: AkuTabBar(controller: _tabController, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: List.generate(_tabs.length, (index) => PackagesManageView(index: index,)),
+        children: List.generate(
+            _tabs.length,
+            (index) => PackagesManageView(
+                  index: index,
+                )),
       ),
     );
   }

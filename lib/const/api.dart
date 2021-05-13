@@ -191,6 +191,9 @@ class _Manage {
 
   ///管家app 包裹代收：提醒领取
   String get packageManageRemind => '/user/packageCollection/remind';
+
+  ///管家app 包裹代收：添加包裹代收信息
+  String get addPackage => '/user/packageCollection/insert';
 }
 
 class _Upload {
