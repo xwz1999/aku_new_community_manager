@@ -6,8 +6,8 @@ class PackageManageListModel {
   String address;
   String placePosition;
   int status;
-  DateTime receiveDate;
-  DateTime createDate;
+  String receiveDate;
+  String createDate;
 
   PackageManageListModel(
       {this.id,

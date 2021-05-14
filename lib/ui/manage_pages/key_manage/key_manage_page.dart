@@ -1,23 +1,24 @@
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_view.dart';
 import 'package:aku_community_manager/ui/manage_pages/packages_manage/add_package_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/packages_manage/packages_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_community_manager/const/resource.dart';
 
-class PackagesManagePage extends StatefulWidget {
-  PackagesManagePage({Key key}) : super(key: key);
+class KeyManagePage extends StatefulWidget {
+  KeyManagePage({Key key}) : super(key: key);
 
   @override
-  _PackagesManagePageState createState() => _PackagesManagePageState();
+  _KeyManagePageState createState() => _KeyManagePageState();
 }
 
-class _PackagesManagePageState extends State<PackagesManagePage>
+class _KeyManagePageState extends State<KeyManagePage>
     with TickerProviderStateMixin {
-  List<String> _tabs = ['未领取', '已领取'];
+  List<String> _tabs = ['钥匙列表', '未归还钥匙'];
   TabController _tabController;
   @override
   void initState() {
@@ -34,17 +35,14 @@ class _PackagesManagePageState extends State<PackagesManagePage>
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '包裹管理',
+      title: '钥匙管理',
       actions: [
-        IconButton(
-            icon: SizedBox(
-              width: 40.w,
-              height: 40.w,
-              child: Image.asset(R.ASSETS_MANAGE_ADD_PNG),
-            ),
-            onPressed: () async {
-              await Get.to(() => AddPackagePage());
-            })
+        InkWell(
+          onTap: () {
+            Get.to(() => AddPackagePage());
+          },
+          child: '申请记录'.text.size(26.sp).color(kTextPrimaryColor).make(),
+        ),
       ],
       appBarBottom: PreferredSize(
         child: AkuTabBar(controller: _tabController, tabs: _tabs),
@@ -54,10 +52,11 @@ class _PackagesManagePageState extends State<PackagesManagePage>
         controller: _tabController,
         children: List.generate(
             _tabs.length,
-            (index) => PackagesManageView(
+            (index) => KeyManageView(
                   index: index,
                 )),
       ),
+      bottom: AkuBottomButton(title: '立即申请'),
     );
   }
 }

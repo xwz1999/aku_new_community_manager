@@ -81,7 +81,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
             _rowTile(
               R.ASSETS_MANAGE_IC_TIME_PNG,
               '送达时间',
-              DateUtil.formatDate(widget.model.createDate,
+              DateUtil.formatDateStr(widget.model.createDate,
                       format: 'yyyy-MM-dd HH:mm')
                   .text
                   .size(24.sp)

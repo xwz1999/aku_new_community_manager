@@ -17,7 +17,9 @@ class PackagesManageView extends StatefulWidget {
 
 class _PackagesManageViewState extends State<PackagesManageView> {
   EasyRefreshController _refreshController;
-  List<PackageManageListModel> _models;
+  void callRefresh(){
+    _refreshController.callRefresh();
+  }
   @override
   void initState() {
     super.initState();
@@ -37,12 +39,15 @@ class _PackagesManageViewState extends State<PackagesManageView> {
       controller: _refreshController,
       extraParams: {"collectionStatus": widget.index + 1},
       convert: (models) {
-        return models.tableList
+        List<PackageManageListModel> modelList = models.tableList
             .map((e) => PackageManageListModel.fromJson(e))
             .toList();
+        print(modelList);
+        return modelList;
       },
       builder: (items) {
         return ListView.separated(
+          padding: EdgeInsets.symmetric(vertical: 24.w,horizontal: 32.w),
             itemBuilder: (context, index) {
               return PackageManageCard(
                 index: widget.index,

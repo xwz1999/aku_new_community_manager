@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
     var loadingWidget = Center(
-      child: CircularProgressIndicator(),
+      // child: CircularProgressIndicator(),
     );
     return AnnotatedRegion<SystemUiOverlayStyle>(
       child: Scaffold(

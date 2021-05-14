@@ -1,6 +1,7 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -100,23 +101,7 @@ class _AddPackagePageState extends State<AddPackagePage> {
           ),
         ),
       ),
-      bottom: _bottomButton(),
-    );
-  }
-
-  Widget _bottomButton() {
-    return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
-      child: MaterialButton(
-        minWidth: double.infinity,
-        height: 86.w,
-        color: kPrimaryColor,
-        elevation: 0,
-        focusElevation: 0,
-        hoverElevation: 0,
-        highlightElevation: 0,
-        padding: EdgeInsets.symmetric(vertical: 24.w),
-        onPressed: () async {
+      bottom: AkuBottomButton(title: '确认提交',onTap: () async {
           canSubmit
               ? await addPackage(
                   code: _codeController.text,
@@ -125,12 +110,11 @@ class _AddPackagePageState extends State<AddPackagePage> {
                   address: _addressController.text,
                   placePosition: _placeController.text)
               : null;
-        },
-        child: '确认提交'.text.size(32.sp).color(kTextPrimaryColor).bold.make(),
-      ),
+        },),
     );
   }
 
+  
   Future addPackage(
       {@required String code,
       @required String addresseeName,
