@@ -90,7 +90,6 @@ class _ItemsOutdoorCardState extends State<ItemsOutdoorCard> {
                 style: _textStyle,
               ),
               Spacer(),
-              //TODO 小区名称
               Text(
                 '五象新区人才公寓',
                 style: AppStyle().primaryStyle,

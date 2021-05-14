@@ -19,7 +19,7 @@ class ItemsOutdoorPage extends StatefulWidget {
 
 class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
     with TickerProviderStateMixin {
-  List<String> _tabs = ['待出户', '已出户', '已驳回', '已作废', '全部'];
+  List<String> _tabs = ['待出户', '已出户', '已驳回', '全部'];
   TabController _tabController;
   EasyRefreshController _refreshController = EasyRefreshController();
   @override
@@ -48,7 +48,6 @@ class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
           ItemsOutdoorView(status: 1),
           ItemsOutdoorView(status: 2),
           ItemsOutdoorView(status: 3),
-          ItemsOutdoorView(status: 4),
           ItemsOutdoorView(status: null),
         ],
       ),

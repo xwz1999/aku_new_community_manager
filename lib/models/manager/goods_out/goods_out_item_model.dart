@@ -27,11 +27,11 @@ class GoodsOutItemModel {
   String get statusValue {
     switch (status) {
       case 1:
-        return '待出门';
+        return '待出户';
       case 2:
-        return '已出门';
+        return '已出户';
       case 3:
-        return '驳回申请';
+        return '已驳回';
       default:
         return '未知';
     }
