@@ -2,17 +2,22 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_detail_model.dart';
 import 'package:aku_community_manager/models/message/system_message_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SystemMessageCard extends StatefulWidget {
   final SystemMessageItemModel model;
-  SystemMessageCard({Key key, this.model}) : super(key: key);
+  SystemMessageCard({
+    Key key,
+    this.model,
+  }) : super(key: key);
 
   @override
   _SystemMessageCardState createState() => _SystemMessageCardState();
@@ -180,7 +185,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 child: Text(
-                  'date',
+                  widget.model.sendDate,
                   style: TextStyle(
                       color: AppStyle.minorTextColor, fontSize: 24.sp),
                 ),
@@ -292,11 +297,12 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                       height: 1.w,
                     ),
                     AkuButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => BusinessAndFixPage());
+                      },
                       child: Container(
                         height: 88.w,
                         alignment: Alignment.center,
-                        padding: EdgeInsets.only(left: 24.w),
                         child: Row(
                           children: [
                             Text(

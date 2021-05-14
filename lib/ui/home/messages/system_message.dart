@@ -35,7 +35,7 @@ class _SystemMessageState extends State<SystemMessage> {
           return ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 32.w),
               itemBuilder: (context, index) {
-                return SystemMessageCard(model: items[index]);
+                return SystemMessageCard(model: items[index],);
               },
               separatorBuilder: (context, index) {
                 return 10.w.heightBox;
