@@ -24,9 +24,6 @@ import 'package:aku_community_manager/ui/splash/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
-  // await AmapCore.init('');
-  // await AmapLocation.instance.init(iosKey: '');
   JPush jpush = new JPush();
   const isProduct = const bool.fromEnvironment('ISPRODUCT');
   DevUtil.setDev(!isProduct);

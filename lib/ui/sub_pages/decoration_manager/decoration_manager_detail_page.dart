@@ -2,6 +2,7 @@
 import 'dart:math';
 
 // Flutter imports:
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -43,9 +44,6 @@ class DecorationManagerDetailPage extends StatefulWidget {
 
 class _DecorationManagerDetailStatePage
     extends State<DecorationManagerDetailPage> {
-  bool get isWaitHandOut => widget.model.type == DecorationType.WAIT_HAND_OUT;
-  USER_ROLE get role =>
-      Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -65,7 +63,7 @@ class _DecorationManagerDetailStatePage
       ),
       bottom: Builder(builder: (context) {
         final CycleCheck cycleCheck = widget.model.cycleCheck;
-        if (role == USER_ROLE.MANAGER) {
+        if (UserTool.userProvider.infoModel.canOperation) {
           switch (widget.model.type) {
             case DecorationType.WAIT_HAND_OUT:
               return AkuBottomButton(
@@ -86,7 +84,7 @@ class _DecorationManagerDetailStatePage
           }
 
           // else if(widget.model.type)
-        } else if (role == USER_ROLE.PROPERTY) {
+        } else if (UserTool.userProvider.infoModel.canOperation) {
           switch (widget.model.type) {
             case DecorationType.HAND_OUT:
               return AkuBottomButton(
@@ -319,7 +317,7 @@ class _DecorationManagerDetailStatePage
         _buildRow(
           title: '接受人',
           subTitle: widget.model.cycleCheck?.authPerson?.name,
-          onTap: isWaitHandOut
+          onTap: UserTool.userProvider.infoModel.canOperation
               ? () {
                   Get.to(DecorationDepartmentPage(
                     model: widget.model,
@@ -334,7 +332,7 @@ class _DecorationManagerDetailStatePage
             widget.model.cycleCheck?.startDate,
             format: 'yyyy-MM-dd',
           ),
-          onTap: isWaitHandOut
+          onTap: UserTool.userProvider.infoModel.canOperation
               ? () {
                   showAkuSheet(
                     child: Column(
@@ -390,7 +388,7 @@ class _DecorationManagerDetailStatePage
           subTitle: widget.model.cycleCheck.checkCycle == null
               ? null
               : '${widget.model.cycleCheck.checkCycle}天',
-          onTap: isWaitHandOut
+          onTap: UserTool.userProvider.infoModel.canOperation
               ? () {
                   showAkuSheet(
                     child: Column(
@@ -500,7 +498,7 @@ class _DecorationManagerDetailStatePage
           onChange: (details) {
             widget.model.cycleCheck.checkDetails = details;
           },
-          canTap: isWaitHandOut,
+          canTap: UserTool.userProvider.infoModel.canOperation,
         )
       ],
     );
