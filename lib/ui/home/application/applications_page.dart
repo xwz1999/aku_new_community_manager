@@ -72,9 +72,9 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
     AppApplication('设施检查', R.ASSETS_HOME_IC_FACILITIES_PNG, FacilitiesPage()),
-    AppApplication('包裹管理', R.ASSETS_PLACEHOLDER_WEBP, PackagesManagePage()),
-    AppApplication('钥匙管理', R.ASSETS_PLACEHOLDER_WEBP, KeyManagePage()),
-    AppApplication('规程管理', R.ASSETS_PLACEHOLDER_WEBP, RulesManagePage())
+    AppApplication('包裹管理', R.ASSETS_HOME_PACKAGE_PNG, PackagesManagePage()),
+    AppApplication('钥匙管理', R.ASSETS_HOME_KEY_PNG, KeyManagePage()),
+    AppApplication('规程管理', R.ASSETS_HOME_RULES_PNG, RulesManagePage())
   ];
 
   @override
