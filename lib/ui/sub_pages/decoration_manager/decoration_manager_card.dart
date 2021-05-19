@@ -29,8 +29,6 @@ class DecorationManagerCard extends StatefulWidget {
 }
 
 class _DecorationManagerCardState extends State<DecorationManagerCard> {
-  USER_ROLE get role =>
-      Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
   @override
   Widget build(BuildContext context) {
     return Container(

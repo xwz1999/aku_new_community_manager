@@ -41,3 +41,13 @@ buildIos() async {
   await runAsync('flutter',
       arguments: ['build', 'ios', '--dart-define', 'BUILD_TYPE=PRODUCT']);
 }
+
+@Task('import 排序')
+void sort() {
+  Pub.run('import_sorter:main');
+}
+
+@Task('代码格式化')
+void format() {
+  DartFmt.format(libDir);
+}
