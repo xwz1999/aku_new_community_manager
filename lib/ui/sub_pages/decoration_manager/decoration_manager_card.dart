@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_detail_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,6 +14,7 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
+import 'package:get/get.dart';
 
 class DecorationManagerCard extends StatefulWidget {
   final DecorationListModel model;
@@ -82,7 +84,7 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
             alignment: Alignment.centerRight,
             child: AkuMaterialButton(
               onPressed: () {
-                // Get.to(DecorationManagerDetailPage(model: widget.model));
+                Get.to(DecorationManagerDetailPage(decorationModel: widget.model));
               },
               height: 64.w,
               minWidth: 160.w,

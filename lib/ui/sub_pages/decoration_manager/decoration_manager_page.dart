@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -27,8 +26,6 @@ class _DecorationManagerPageState extends State<DecorationManagerPage>
     with TickerProviderStateMixin {
   TabController _tabController;
   EasyRefreshController _refreshController;
-  USER_ROLE get role =>
-      Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
 
   List<String> get tabs {
     final userProvider = Provider.of<UserProvider>(context, listen: false);

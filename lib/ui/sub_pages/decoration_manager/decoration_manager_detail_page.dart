@@ -2,6 +2,7 @@
 import 'dart:math';
 
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +21,6 @@ import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_check_row.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_checkbox.dart';
-import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_department_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_follow_check.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_util.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -30,8 +29,8 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
 
 class DecorationManagerDetailPage extends StatefulWidget {
-  final DecorationModel model;
-  DecorationManagerDetailPage({Key key, @required this.model})
+  final DecorationListModel decorationModel;
+  DecorationManagerDetailPage({Key key, this.decorationModel})
       : super(key: key);
 
   @override
@@ -49,45 +48,36 @@ class _DecorationManagerDetailStatePage
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
           _buildInfo(),
-          widget.model.workFinishCheck == null
+          widget.decorationModel.status>3
               ? SizedBox()
               : _buildFinishWorkCheck(),
           _buildCycleCheck(),
-          widget.model.checkInfomations == null
+          UserTool.userProvider.infoModel.manager
               ? SizedBox()
               : _buildCheckDetail(),
         ],
       ),
       bottom: Builder(builder: (context) {
-        final CycleCheck cycleCheck = widget.model.cycleCheck;
         if (UserTool.userProvider.infoModel.canOperation) {
-          switch (widget.model.type) {
-            case DecorationType.WAIT_HAND_OUT:
+          switch (widget.decorationModel.operationStatus) {
+            case 1:
               return AkuBottomButton(
                 title: '立即安排',
-                onTap: cycleCheck.authPerson != null &&
-                        cycleCheck.checkCycle != null &&
-                        cycleCheck.startDate != null
-                    ? () {
-                        widget.model.type = DecorationType.HAND_OUT;
-                        setState(() {});
+                onTap:() {
                       }
-                    : null,
               );
               break;
             default:
               return SizedBox();
               break;
           }
-
-          // else if(widget.model.type)
         } else if (UserTool.userProvider.infoModel.canOperation) {
-          switch (widget.model.type) {
-            case DecorationType.HAND_OUT:
+          switch (widget.decorationModel.operationStatus) {
+            case 2:
               return AkuBottomButton(
                 title: '立即执行',
                 onTap: () {
-                  Get.to(DecorationFollowCheck(model: widget.model));
+                  // Get.to(DecorationFollowCheck(model: widget.model));
                 },
               );
               break;
@@ -115,13 +105,13 @@ class _DecorationManagerDetailStatePage
       children: [
         _buildInfoCard(
           tag: '家',
-          midTop: widget.model.userHomeModel.plot,
-          midBottom: widget.model.userHomeModel.detailAddr,
-          name: '业主：' + widget.model.userHomeModel.userName,
-          phone: widget.model.userHomeModel.phone,
+          midTop: '人才公寓',
+          midBottom: widget.decorationModel.roomName,
+          name: '业主：' + UserTool.userProvider.infoModel.nickName,
+          phone: UserTool.userProvider.profileModel.tel,
           rightTopWidget: Transform.rotate(
             angle: pi / 4,
-            child: widget.model.statusType == DecorationStatusType.DONE
+            child: widget.decorationModel.operationStatus==3
                 ? Image.asset(R.ASSETS_MANAGE_IC_WANCHENG_PNG)
                 : Image.asset(R.ASSETS_MANAGE_IC_ZHUANGXIU_PNG),
           ),
@@ -129,9 +119,9 @@ class _DecorationManagerDetailStatePage
         AkuBox.h(16),
         _buildInfoCard(
           tag: '装',
-          midTop: widget.model.decorationTeamModel.name,
-          name: '负责人：' + widget.model.decorationTeamModel.userName,
-          phone: widget.model.decorationTeamModel.phone,
+          midTop: widget.decorationModel.constructionUnit,
+          name: '负责人：' + '马泽鹏',
+          phone: '13831971345',
         ),
       ],
     );
@@ -254,7 +244,7 @@ class _DecorationManagerDetailStatePage
       ],
     );
   }
-
+///完工检查
   _buildFinishWorkCheck() {
     return AkuTitleBox(
       title: '完工检查',
@@ -262,20 +252,20 @@ class _DecorationManagerDetailStatePage
       children: [
         _buildRow(
           title: '开始装修时间',
-          subTitle: DateUtil.formatDate(
-            widget.model.decorationDate,
+          subTitle: DateUtil.formatDateStr(
+            '2021-5-20 13:14',
             format: 'yyyy-MM-dd',
           ),
         ),
         _buildRow(
           title: '接受人',
-          subTitle: widget.model.workFinishCheck?.authPerson?.name,
+          subTitle: '金礼伟',
         ),
         _buildRow(title: '所属项目', subTitle: '装修管理'),
         _buildRow(
           title: '开始日期',
-          subTitle: DateUtil.formatDate(
-            widget.model.workFinishCheck?.startDate,
+          subTitle: DateUtil.formatDateStr(
+            '2021-5-20 13:14',
             format: 'yyyy-MM-dd',
           ),
         ),
@@ -292,13 +282,18 @@ class _DecorationManagerDetailStatePage
           ),
         ),
         DecorationCheckRow(
-          details: widget.model.workFinishCheck?.checkDetails,
+          details: [
+            CHECK_TYPE.ELECTRIC,
+            CHECK_TYPE.WATER,
+            CHECK_TYPE.WALL,
+            CHECK_TYPE.DOOR_AND_WINDOWS,
+          ],
           onChange: (details) {},
         ),
       ],
     );
   }
-
+///周期检查
   _buildCycleCheck() {
     return AkuTitleBox(
       title: '周期检查',
@@ -306,27 +301,27 @@ class _DecorationManagerDetailStatePage
       children: [
         _buildRow(
           title: '开始装修时间',
-          subTitle: DateUtil.formatDate(
-            widget.model.decorationDate,
+          subTitle: DateUtil.formatDateStr(
+            '2021-05-20 13:14:00',
             format: 'yyyy-MM-dd',
           ),
         ),
         _buildRow(
           title: '接受人',
-          subTitle: widget.model.cycleCheck?.authPerson?.name,
+          subTitle: '黄鑫',
           onTap: UserTool.userProvider.infoModel.canOperation
               ? () {
-                  Get.to(DecorationDepartmentPage(
-                    model: widget.model,
-                  )).then((value) => setState(() {}));
+                  // Get.to(DecorationDepartmentPage(
+                  //   model: widget.model,
+                  // )).then((value) => setState(() {}));
                 }
               : null,
         ),
         _buildRow(title: '所属项目', subTitle: '装修管理'),
         _buildRow(
           title: '开始日期',
-          subTitle: DateUtil.formatDate(
-            widget.model.cycleCheck?.startDate,
+          subTitle: DateUtil.formatDateStr(
+            '2021-05-20 13:14:00',
             format: 'yyyy-MM-dd',
           ),
           onTap: UserTool.userProvider.infoModel.canOperation
@@ -368,7 +363,7 @@ class _DecorationManagerDetailStatePage
                           height: 500.w,
                           child: CupertinoDatePicker(
                             onDateTimeChanged: (dateTime) {
-                              widget.model.cycleCheck.startDate = dateTime;
+                              
                             },
                           ),
                         ),
@@ -382,9 +377,7 @@ class _DecorationManagerDetailStatePage
         ),
         _buildRow(
           title: '检查周期',
-          subTitle: widget.model.cycleCheck.checkCycle == null
-              ? null
-              : '${widget.model.cycleCheck.checkCycle}天',
+          subTitle: '${15}天',
           onTap: UserTool.userProvider.infoModel.canOperation
               ? () {
                   showAkuSheet(
@@ -460,7 +453,7 @@ class _DecorationManagerDetailStatePage
                                   realValue = 30;
                                   break;
                               }
-                              widget.model.cycleCheck.checkCycle = realValue;
+                             
                             },
                           ),
                         ),
@@ -493,19 +486,19 @@ class _DecorationManagerDetailStatePage
             CHECK_TYPE.SECURITY,
           ],
           onChange: (details) {
-            widget.model.cycleCheck.checkDetails = details;
+            
           },
           canTap: UserTool.userProvider.infoModel.canOperation,
         )
       ],
     );
   }
-
+///执行信息
   _buildCheckDetail() {
     return AkuTitleBox(
       title: '执行信息',
       spacing: 24,
-      children: widget.model.checkInfomations.map((e) {
+      children: [].map((e) {
         return Container(
           decoration: BoxDecoration(
             border: Border(
@@ -527,7 +520,7 @@ class _DecorationManagerDetailStatePage
               children: [
                 AkuBox.h(96),
                 Text(
-                  '${DateUtil.formatDate(e.checkDate, format: 'yyyy-MM-dd')} ' +
+                  '${DateUtil.formatDateStr('2021-5-20 13:14', format: 'yyyy-MM-dd')} ' +
                       e.checkType,
                   style: TextStyle(
                     color: AppStyle.primaryTextColor,
@@ -537,7 +530,7 @@ class _DecorationManagerDetailStatePage
                 ),
                 Spacer(),
                 Text(
-                  e.checkAllResult ? '正常' : '异常',
+                  3>2? '正常' : '异常',
                   style: TextStyle(
                     color: e.checkAllResult
                         ? Color(0xFF32B814)
@@ -550,7 +543,7 @@ class _DecorationManagerDetailStatePage
             expanded: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ...e.details.map((e) {
+                ...[].map((e) {
                   return Container(
                     height: 96.w,
                     decoration: BoxDecoration(
@@ -565,11 +558,11 @@ class _DecorationManagerDetailStatePage
                       children: [
                         AkuBox.w(48),
                         Image.asset(
-                          e.assetpath,
+                          R.ASSETS_PLACEHOLDER_WEBP,
                           height: 40.w,
                         ),
                         Text(
-                          e.typeValue,
+                          '233',
                           style: TextStyle(
                             fontSize: 28.sp,
                             color: AppStyle.primaryTextColor,
@@ -578,7 +571,7 @@ class _DecorationManagerDetailStatePage
                         ),
                         Spacer(),
                         DecorationCheckBox(
-                          initValue: e.status,
+                          initValue: true,
                         ),
                         Spacer(),
                       ],
@@ -607,7 +600,7 @@ class _DecorationManagerDetailStatePage
                           ),
                         ),
                         TextSpan(
-                          text: e.info,
+                          text: 'e.info',
                         ),
                       ],
                       style: TextStyle(
