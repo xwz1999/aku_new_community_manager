@@ -1,24 +1,24 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/borrow/borrow_detail_item_model.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_item_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_item_detail_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/borrow/borrow_detail_item_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/add_borrow_item_page.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_item_detail_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class BorrowItemPage extends StatefulWidget {
   final int id;

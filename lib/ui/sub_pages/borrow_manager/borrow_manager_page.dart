@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_view.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,6 +14,7 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/all_borrow_goods.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_card.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 

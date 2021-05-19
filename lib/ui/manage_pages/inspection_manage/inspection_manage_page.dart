@@ -1,15 +1,17 @@
 // Flutter imports:
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_view.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-// Package imports:
-
 // Project imports:
+import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+
+// Package imports:
 
 class InspectionManagePage extends StatefulWidget {
   InspectionManagePage({Key key}) : super(key: key);

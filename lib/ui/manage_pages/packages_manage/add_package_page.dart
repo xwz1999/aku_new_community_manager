@@ -1,17 +1,22 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class AddPackagePage extends StatefulWidget {
   AddPackagePage({Key key}) : super(key: key);
@@ -101,7 +106,9 @@ class _AddPackagePageState extends State<AddPackagePage> {
           ),
         ),
       ),
-      bottom: AkuBottomButton(title: '确认提交',onTap: () async {
+      bottom: AkuBottomButton(
+        title: '确认提交',
+        onTap: () async {
           canSubmit
               ? await addPackage(
                   code: _codeController.text,
@@ -110,11 +117,11 @@ class _AddPackagePageState extends State<AddPackagePage> {
                   address: _addressController.text,
                   placePosition: _placeController.text)
               : null;
-        },),
+        },
+      ),
     );
   }
 
-  
   Future addPackage(
       {@required String code,
       @required String addresseeName,

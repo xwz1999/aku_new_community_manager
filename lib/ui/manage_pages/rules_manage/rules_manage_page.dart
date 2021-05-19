@@ -1,13 +1,18 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/rules_manage/rules_manage_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class RulesManagePage extends StatefulWidget {
   RulesManagePage({Key key}) : super(key: key);
@@ -34,7 +39,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '规程管理',
-      body:  BeeListView(
+      body: BeeListView(
           path: API.manage.rulesManageList,
           controller: _refreshController,
           convert: (models) {

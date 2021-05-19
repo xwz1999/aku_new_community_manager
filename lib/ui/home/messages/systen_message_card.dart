@@ -1,3 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/aku_ui.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_detail_model.dart';
 import 'package:aku_community_manager/models/message/system_message_item_model.dart';
@@ -5,12 +16,6 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:aku_ui/aku_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SystemMessageCard extends StatefulWidget {
   final SystemMessageItemModel model;

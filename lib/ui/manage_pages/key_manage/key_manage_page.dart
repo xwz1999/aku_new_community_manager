@@ -1,3 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_view.dart';
@@ -6,10 +15,6 @@ import 'package:aku_community_manager/ui/manage_pages/packages_manage/add_packag
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class KeyManagePage extends StatefulWidget {
   KeyManagePage({Key key}) : super(key: key);

@@ -1,12 +1,12 @@
-
-import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_view.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 // Package imports:
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
+import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 

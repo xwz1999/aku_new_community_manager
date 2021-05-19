@@ -1,5 +1,6 @@
 // Dart imports:
 import 'dart:io';
+
 @Deprecated('use ‘canOpertion/canSendTicket/canPickUpTicke/canPass’ instead')
 enum USER_ROLE {
   ///管家角色
@@ -17,6 +18,7 @@ enum USER_ROLE {
   ///无角色
   EMPTY,
 }
+
 @Deprecated('use infoModel instead')
 class UserInfoModel {
   String nickName;

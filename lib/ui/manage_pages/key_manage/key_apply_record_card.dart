@@ -1,10 +1,16 @@
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
+
 class KeyApplyRecordCard extends StatefulWidget {
   final int index;
   KeyApplyRecordCard({Key key, this.index}) : super(key: key);
@@ -57,7 +63,7 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
     );
   }
 
-   Widget _getBottomButtons(int status) {
+  Widget _getBottomButtons(int status) {
     MaterialButton button;
     switch (status) {
       case 1:
@@ -124,4 +130,3 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
     );
   }
 }
-

@@ -1,14 +1,20 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/common_widgets/aku_button.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/models/manager/facilities/facilities_map.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/common_widgets/aku_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class FacilitiesInspectReportPage extends StatefulWidget {
   FacilitiesInspectReportPage({Key key}) : super(key: key);

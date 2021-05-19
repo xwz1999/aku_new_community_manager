@@ -1,13 +1,10 @@
 // Flutter imports:
-import 'package:aku_community_manager/style/apptheme.dart';
-import 'package:aku_community_manager/utils/dev_util.dart';
-import 'package:aku_community_manager/utils/jpush_message_parse.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,7 +17,10 @@ import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/fix_provider.dart';
 import 'package:aku_community_manager/provider/manage_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/style/apptheme.dart';
 import 'package:aku_community_manager/ui/splash/splash_page.dart';
+import 'package:aku_community_manager/utils/dev_util.dart';
+import 'package:aku_community_manager/utils/jpush_message_parse.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class KeyManageMap {
@@ -17,5 +18,4 @@ class KeyManageMap {
     5: Color(0xFFE60E0E),
     6: Color(0xFF999999),
   };
-  
 }

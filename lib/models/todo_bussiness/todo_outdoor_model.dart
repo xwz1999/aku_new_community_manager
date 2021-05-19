@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 class ToDoOutDoorModel {
@@ -58,7 +59,7 @@ class ToDoOutDoorModel {
     }
   }
 
-   Color get statusColor {
+  Color get statusColor {
     switch (status) {
       case 2:
         return Color(0xFF999999);
@@ -67,7 +68,7 @@ class ToDoOutDoorModel {
     }
   }
 
-   ///identity	身份（1业主，2亲属，3租客）
+  ///identity	身份（1业主，2亲属，3租客）
   String get identityValue {
     switch (identity) {
       case 1:
@@ -80,6 +81,4 @@ class ToDoOutDoorModel {
         return '未知';
     }
   }
-
-   
 }

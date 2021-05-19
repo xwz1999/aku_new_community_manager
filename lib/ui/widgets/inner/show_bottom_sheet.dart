@@ -77,7 +77,7 @@ Future showItemSheet({
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32.sp,
-              color: items.indexOf(e)==ids.indexOf(selectItem)
+              color: items.indexOf(e) == ids.indexOf(selectItem)
                   ? AppStyle.secondaryColor
                   : AppStyle.primaryTextColor,
             ),

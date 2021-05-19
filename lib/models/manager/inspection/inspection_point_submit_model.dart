@@ -1,3 +1,4 @@
+// Dart imports:
 import 'dart:io';
 
 class InspectionPointSubmitModel {
@@ -6,9 +7,7 @@ class InspectionPointSubmitModel {
   List<String> inspectionFaceImgPath;
   List<String> inspectionSpaceImgPath;
   InspectionPointSubmitModel(this.executePointId, this.executeCheckList,
-      {
-      this.inspectionFaceImgPath,
-      this.inspectionSpaceImgPath});
+      {this.inspectionFaceImgPath, this.inspectionSpaceImgPath});
   Map<String, dynamic> executeCheckListToJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 

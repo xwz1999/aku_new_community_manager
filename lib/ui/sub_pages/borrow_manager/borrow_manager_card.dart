@@ -1,8 +1,4 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/borrow/borrow_status_item_model.dart';
-import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_check_page.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,11 +9,16 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+// Project imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
+import 'package:aku_community_manager/models/manager/borrow/borrow_status_item_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager_check_page.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class BorrowManagerCard extends StatefulWidget {
   final BorrowStatusItemModel model;

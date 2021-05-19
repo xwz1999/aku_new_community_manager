@@ -1,10 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// Project imports:
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_view.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/select_place_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyApplyRecordPage extends StatefulWidget {
   KeyApplyRecordPage({Key key}) : super(key: key);

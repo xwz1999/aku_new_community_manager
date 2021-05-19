@@ -1,24 +1,24 @@
 // Flutter imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/utils/dev_util.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:power_logger/power_logger.dart';
+import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:aku_community_manager/provider/app_provider.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
+import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:aku_community_manager/utils/hive_store.dart';
-import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
   SplashPage({Key key}) : super(key: key);
@@ -64,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
     });
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _initOp();
-     
+
       Get.off(HomePage());
     });
   }

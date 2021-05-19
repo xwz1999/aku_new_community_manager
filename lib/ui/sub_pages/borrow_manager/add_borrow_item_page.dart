@@ -2,23 +2,23 @@
 import 'dart:io';
 
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/utils/network/base_file_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
 
 // Project imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:get/instance_manager.dart';
+import 'package:aku_community_manager/utils/network/base_file_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class AddBorrowItemPage extends StatefulWidget {
   final int articleId;

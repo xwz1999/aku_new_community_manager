@@ -1,14 +1,19 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:velocity_x/velocity_x.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NickNameChangePage extends StatefulWidget {
   NickNameChangePage({Key key}) : super(key: key);

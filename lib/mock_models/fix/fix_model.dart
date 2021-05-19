@@ -17,6 +17,7 @@ enum FIX_ENUM {
   ///已处理
   DONE,
 }
+
 @deprecated
 class FixModel {
   static Map<FIX_ENUM, String> managerRoleMap = {
@@ -206,6 +207,7 @@ Map<String, FIX_DATE_LIMIT> fixDateLimitStringMap = {
   '12小时内处理': FIX_DATE_LIMIT.HOUR_12,
   '8小时内处理': FIX_DATE_LIMIT.HOUR_8,
 };
+
 @deprecated
 class FixDetailModel {
   ///报修人

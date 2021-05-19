@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
+import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';

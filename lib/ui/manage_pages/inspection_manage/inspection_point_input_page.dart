@@ -1,5 +1,17 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:aku_ui/aku_ui.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
@@ -11,12 +23,6 @@ import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_bu
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:aku_ui/aku_ui.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class InspectionPointInputPage extends StatefulWidget {
   final InspectionQRCodeModel qrModel;
@@ -35,8 +41,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
   List<File> _selfPhotos;
   List<File> _scenePhots;
   bool get canSubmit {
-    if (_selfPhotos == null &&
-        _scenePhots == null) {
+    if (_selfPhotos == null && _scenePhots == null) {
       return false;
     } else {
       if (_submitModel.executeCheckList.isNotEmpty) {

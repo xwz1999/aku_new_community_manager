@@ -1,22 +1,22 @@
 // Flutter imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/aku_ui.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/instance_manager.dart';
+import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/messages/comment_message.dart';
 import 'package:aku_community_manager/ui/home/messages/system_message.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:provider/provider.dart';
 
 class Message extends StatefulWidget {
   Message({Key key}) : super(key: key);

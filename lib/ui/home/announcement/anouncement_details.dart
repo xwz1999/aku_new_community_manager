@@ -1,11 +1,11 @@
 // Flutter imports:
-import 'package:aku_community_manager/models/announce/announcement_detail_model.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
+import 'package:aku_community_manager/models/announce/announcement_detail_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 

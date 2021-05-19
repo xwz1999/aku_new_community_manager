@@ -1,12 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/ui/manage_pages/packages_manage/add_package_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/packages_manage/packages_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_community_manager/const/resource.dart';
 
 class PackagesManagePage extends StatefulWidget {
   PackagesManagePage({Key key}) : super(key: key);

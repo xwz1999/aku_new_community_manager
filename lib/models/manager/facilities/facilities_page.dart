@@ -1,10 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/models/manager/facilities/facilities_view.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class FacilitiesPage extends StatefulWidget {
   FacilitiesPage({Key key}) : super(key: key);
@@ -45,7 +50,11 @@ class _FacilitiesPageState extends State<FacilitiesPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: List.generate(_tabs.length, (index) => FacilitiesView(index: index,)),
+        children: List.generate(
+            _tabs.length,
+            (index) => FacilitiesView(
+                  index: index,
+                )),
       ),
     );
   }

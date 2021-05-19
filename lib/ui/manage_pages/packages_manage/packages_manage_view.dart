@@ -1,11 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/package_manage/package_manage_list_model.dart';
 import 'package:aku_community_manager/ui/manage_pages/packages_manage/packages_manage_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class PackagesManageView extends StatefulWidget {
   final int index;
@@ -17,9 +22,10 @@ class PackagesManageView extends StatefulWidget {
 
 class _PackagesManageViewState extends State<PackagesManageView> {
   EasyRefreshController _refreshController;
-  void callRefresh(){
+  void callRefresh() {
     _refreshController.callRefresh();
   }
+
   @override
   void initState() {
     super.initState();
@@ -47,7 +53,7 @@ class _PackagesManageViewState extends State<PackagesManageView> {
       },
       builder: (items) {
         return ListView.separated(
-          padding: EdgeInsets.symmetric(vertical: 24.w,horizontal: 32.w),
+            padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
             itemBuilder: (context, index) {
               return PackageManageCard(
                 index: widget.index,

@@ -1,3 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dio/dio.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_model.dart';
@@ -6,10 +15,6 @@ import 'package:aku_community_manager/ui/home/business/bussiness_func.dart';
 import 'package:aku_community_manager/ui/home/business/todo_outdoor_card.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BussinessView extends StatefulWidget {
   final int backlogStatus;

@@ -1,6 +1,11 @@
-import 'package:aku_community_manager/models/manager/facilities/facilities_card.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+// Project imports:
+import 'package:aku_community_manager/models/manager/facilities/facilities_card.dart';
 
 class FacilitiesView extends StatefulWidget {
   final int index;

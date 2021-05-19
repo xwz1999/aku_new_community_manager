@@ -1,10 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class ManageFunc {
   ///报事报修详情

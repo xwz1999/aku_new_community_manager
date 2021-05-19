@@ -1,5 +1,8 @@
-import 'package:aku_community_manager/models/common/img_model.dart';
+// Package imports:
 import 'package:common_utils/common_utils.dart';
+
+// Project imports:
+import 'package:aku_community_manager/models/common/img_model.dart';
 
 class ActivityItemModel {
   int id;

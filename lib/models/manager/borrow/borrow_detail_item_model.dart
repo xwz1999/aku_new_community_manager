@@ -1,3 +1,4 @@
+// Project imports:
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class BorrowDetailItemModel {

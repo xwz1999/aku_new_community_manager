@@ -1,12 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class KeyApplyInputPage extends StatefulWidget {
   KeyApplyInputPage({Key key}) : super(key: key);
@@ -89,8 +94,7 @@ class _KeyApplyInputPageState extends State<KeyApplyInputPage> {
       ),
       bottom: AkuBottomButton(
         title: '确认提交',
-        onTap: () async {
-        },
+        onTap: () async {},
       ),
     );
   }

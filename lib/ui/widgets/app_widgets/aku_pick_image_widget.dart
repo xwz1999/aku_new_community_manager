@@ -1,13 +1,19 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:dotted_border/dotted_border.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
 
 class AkuPickImageWidget extends StatefulWidget {

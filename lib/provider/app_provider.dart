@@ -1,13 +1,15 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:amap_flutter_location/amap_flutter_location.dart';
-import 'package:amap_flutter_location/amap_location_option.dart';
 import 'package:flutter/material.dart';
 
-// Project imports:
-import 'package:aku_community_manager/ui/home/application/applications_page.dart';
+// Package imports:
+import 'package:amap_flutter_location/amap_flutter_location.dart';
+import 'package:amap_flutter_location/amap_location_option.dart';
 import 'package:dio/dio.dart';
+
+// Project imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/ui/home/application/applications_page.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class AppProvider extends ChangeNotifier {
   List<AppApplication> _recentUsedApp = [];

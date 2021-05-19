@@ -1,5 +1,13 @@
+// Dart imports:
 import 'dart:io';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
@@ -7,8 +15,6 @@ import 'package:aku_community_manager/models/manager/inspection/inspection_point
 import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 class ManageFunc {
   static Future<DecorationDetailModel> getDetcorationDetail(int id) async {
@@ -83,8 +89,7 @@ class ManageFunc {
     return baseModel;
   }
 
-  static Future getInspectionPointCheckDetail(
-      int executePointId) async {
+  static Future getInspectionPointCheckDetail(int executePointId) async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.inspectionPointCheckDetail, params: {
       "executePointId": executePointId,

@@ -1,32 +1,34 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
-import 'package:aku_community_manager/models/manager/fixer_item_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/manage_func.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 
 // Project imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
+import 'package:aku_community_manager/models/manager/fixer_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/manage_func.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class FixerDepartmentPage extends StatefulWidget {
   final DispatchReportModel model;
   final bool changeType;
-  FixerDepartmentPage(
-      {Key key, @required this.model, this.changeType = false,})
-      : super(key: key);
+  FixerDepartmentPage({
+    Key key,
+    @required this.model,
+    this.changeType = false,
+  }) : super(key: key);
 
   @override
   _FixerDepartmentPageState createState() => _FixerDepartmentPageState();
@@ -91,9 +93,8 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                     BotToast.showText(text: baseModel.message);
                   }
                 } else {
-                  BaseModel baseModel = await ManageFunc.repairDispatch(
-                      _reportModel
-                     );
+                  BaseModel baseModel =
+                      await ManageFunc.repairDispatch(_reportModel);
                   if (baseModel.status) {
                     Get.back();
                     Get.back();

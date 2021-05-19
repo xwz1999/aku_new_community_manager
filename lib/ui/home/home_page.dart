@@ -1,42 +1,40 @@
 // Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:aku_ui/aku_ui.dart';
+import 'package:aku_ui/common_widgets/aku_material_button.dart';
+import 'package:badges/badges.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/models/announce/announcement_list_model.dart';
 import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_community_manager/models/manager/item_num_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
-import 'package:aku_community_manager/tools/user_tool.dart';
-import 'package:aku_community_manager/ui/home/business/bussiness_func.dart';
-import 'package:aku_community_manager/ui/home/business/todo_outdoor_card.dart';
-import 'package:aku_community_manager/utils/network/base_list_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:badges/badges.dart';
-import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-// Package imports:
-import 'package:aku_ui/aku_ui.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart' hide Response;
-import 'package:provider/provider.dart';
-
-// Project imports:
-import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/home/announcement/All_anouncement.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/ui/home/business/business_page.dart';
+import 'package:aku_community_manager/ui/home/business/bussiness_func.dart';
+import 'package:aku_community_manager/ui/home/business/todo_outdoor_card.dart';
 import 'package:aku_community_manager/ui/home/messages/message.dart';
 import 'package:aku_community_manager/ui/home/personal_draw.dart';
 import 'package:aku_community_manager/ui/home/search_workorder_page.dart';
@@ -47,6 +45,8 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
+import 'package:aku_community_manager/utils/network/base_list_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
@@ -181,8 +181,8 @@ class _HomePageState extends State<HomePage> {
     final userProvider = Provider.of<UserProvider>(context);
     final appProvider = Provider.of<AppProvider>(context);
     var loadingWidget = Center(
-      // child: CircularProgressIndicator(),
-    );
+        // child: CircularProgressIndicator(),
+        );
     return AnnotatedRegion<SystemUiOverlayStyle>(
       child: Scaffold(
         drawer: PersonalDraw(),

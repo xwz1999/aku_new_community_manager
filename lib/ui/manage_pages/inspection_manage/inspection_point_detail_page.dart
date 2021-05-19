@@ -1,3 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+// Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/common/img_model.dart';
 import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
@@ -6,12 +17,6 @@ import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspecti
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class InspectionPointDetailPage extends StatefulWidget {
   final int executePointId;
