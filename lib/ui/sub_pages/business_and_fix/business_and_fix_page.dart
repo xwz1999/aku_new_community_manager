@@ -35,10 +35,12 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
     //     return ['待接单', '处理中', '已处理', '全部'];
     //     break;
     // }
-    if (userProvider.infoModel.canSendTicket) {
-      return ['待派单', '已派单', '处理中', '已处理', '全部'];
-    } else if (userProvider.infoModel.canPickUpTicket) {
+    if ((userProvider.infoModel.canPickUpTicket) &&
+        (!userProvider.infoModel.canSendTicket)) {
       return ['待接单', '处理中', '已处理', '全部'];
+    } else if ((!userProvider.infoModel.canPickUpTicket) &&
+        (userProvider.infoModel.canSendTicket)) {
+      return ['待派单', '已派单', '处理中', '已处理', '全部'];
     } else {
       return ['未处理', '处理中', '已处理', '全部'];
     }
@@ -70,12 +72,11 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children:
-            List.generate(
-                _tabs.length,
-                (index) => BussinessAndFixView(
-                      status: index == _tabs.length - 1 ? null : index + 1,
-                    )),
+        children: List.generate(
+            _tabs.length,
+            (index) => BussinessAndFixView(
+                  status: index == _tabs.length - 1 ? null : index + 1,
+                )),
       ),
     );
   }

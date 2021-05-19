@@ -194,6 +194,9 @@ class _Manage {
 
   ///管家app 包裹代收：添加包裹代收信息
   String get addPackage => '/user/packageCollection/insert';
+
+  ///管家app 规程管理：查询所有的规程管理信息
+  String get rulesManageList => '/user/regulationManage/list';
 }
 
 class _Upload {
