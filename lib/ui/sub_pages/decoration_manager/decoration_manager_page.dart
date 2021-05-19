@@ -7,8 +7,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/mock_models/decoration/decoration_data.dart';
-import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';

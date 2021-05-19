@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

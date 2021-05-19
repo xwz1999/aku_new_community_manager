@@ -10,13 +10,10 @@ import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:expandable/expandable.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';

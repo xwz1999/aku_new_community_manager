@@ -19,7 +19,6 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 
 class BusinessFixCard extends StatefulWidget {

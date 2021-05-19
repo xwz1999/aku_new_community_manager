@@ -27,7 +27,6 @@ import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_detail_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_code_parase.dart';
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';

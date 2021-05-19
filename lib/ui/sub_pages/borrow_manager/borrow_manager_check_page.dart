@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/mock_models/borrow/borrow_model.dart';
 import 'package:aku_community_manager/models/manager/borrow/borrow_check_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';

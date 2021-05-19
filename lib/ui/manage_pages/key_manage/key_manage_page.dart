@@ -11,7 +11,6 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_view.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/select_place_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/packages_manage/add_package_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';

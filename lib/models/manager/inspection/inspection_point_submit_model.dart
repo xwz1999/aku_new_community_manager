@@ -1,5 +1,4 @@
 // Dart imports:
-import 'dart:io';
 
 class InspectionPointSubmitModel {
   int executePointId;
@@ -16,6 +15,7 @@ class InspectionPointSubmitModel {
           this.executeCheckList.map((e) => e.toJson()).toList();
       return data;
     }
+    return null;
   }
 }
 

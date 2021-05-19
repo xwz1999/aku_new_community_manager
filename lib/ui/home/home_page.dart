@@ -8,13 +8,10 @@ import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
