@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_view.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,7 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class GreenManagePage extends StatefulWidget {
   GreenManagePage({Key key}) : super(key: key);

@@ -9,6 +9,7 @@ import 'package:aku_community_manager/mock_models/decoration/decoration_data.dar
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/mock_models/fix/fix_model.dart';
 import 'package:aku_community_manager/provider/fix_provider.dart';
+
 @Deprecated('this mock model should be removed')
 class AllModel {
   BuildContext context;

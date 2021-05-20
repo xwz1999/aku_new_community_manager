@@ -1,5 +1,8 @@
-import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_card.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_card.dart';
 
 class HygienceManageView extends StatefulWidget {
   final int index;

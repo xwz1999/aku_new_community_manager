@@ -1,6 +1,7 @@
 // Project imports:
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
 import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
+
 @Deprecated('this should be removed')
 class DecorationData {
   static List<DecorationModel> allModels = [
