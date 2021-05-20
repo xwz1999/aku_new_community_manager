@@ -132,6 +132,8 @@ class _PackageManageCardState extends State<PackageManageCard> {
         params: {"packageCollectionId": packageCollectionId});
     if (!baseModel.status) {
       BotToast.showText(text: baseModel.message);
+    } else {
+      BotToast.showText(text: '已成功提醒领取');
     }
   }
 
