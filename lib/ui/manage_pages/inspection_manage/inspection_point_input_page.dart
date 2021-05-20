@@ -2,6 +2,7 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_submit_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -99,7 +100,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                     await ManageFunc.getSubmitPoint(_submitModel);
                 if (baseModel.status) {
                   BotToast.showText(text: baseModel.message);
-                  Get.back();
+                  Get.to(() => InspectionPointSubmitPage());
+                
                 } else {
                   BotToast.showText(text: baseModel.message);
                 }

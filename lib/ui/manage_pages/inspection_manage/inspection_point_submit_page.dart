@@ -52,6 +52,7 @@ class _InspectionPointSubmitPageState extends State<InspectionPointSubmitPage> {
                 padding: EdgeInsets.symmetric(vertical: 22.w, horizontal: 76.w),
                 onPressed: () {
                   Get.back();
+                  Get.back();
                 },
               ),
             ],
