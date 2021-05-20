@@ -17,7 +17,9 @@ class _HygienceManageViewState extends State<HygienceManageView> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        HyginecManageCard(index: widget.index,)
+        HyginecManageCard(
+          index: widget.index,
+        )
       ],
     );
   }

@@ -84,7 +84,8 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
             alignment: Alignment.centerRight,
             child: AkuMaterialButton(
               onPressed: () {
-                Get.to(DecorationManagerDetailPage(decorationModel: widget.model));
+                Get.to(
+                    DecorationManagerDetailPage(decorationModel: widget.model));
               },
               height: 64.w,
               minWidth: 160.w,

@@ -86,7 +86,8 @@ class _ApplicationPageState extends State<ApplicationPage>
         '包裹管理', R.ASSETS_HOME_PACKAGE_PNG, () => PackagesManagePage()),
     AppApplication('钥匙管理', R.ASSETS_HOME_KEY_PNG, () => KeyManagePage()),
     AppApplication('规程管理', R.ASSETS_HOME_RULES_PNG, () => RulesManagePage()),
-    AppApplication('卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage())
+    AppApplication(
+        '卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage())
   ];
 
   @override

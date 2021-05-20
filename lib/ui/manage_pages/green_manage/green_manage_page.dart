@@ -17,29 +17,39 @@ class GreenManagePage extends StatefulWidget {
   _GreenManagePageState createState() => _GreenManagePageState();
 }
 
-class _GreenManagePageState extends State<GreenManagePage> with TickerProviderStateMixin {
-  List<String> _tabs=['待处理','未完成','已完成'];
+class _GreenManagePageState extends State<GreenManagePage>
+    with TickerProviderStateMixin {
+  List<String> _tabs = ['待处理', '未完成', '已完成'];
   TabController _tabController;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
-    _tabController=TabController(length: _tabs.length, vsync: this);
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '绿化管理',
-      appBarBottom: PreferredSize(preferredSize: Size.fromHeight(88.w), child: AkuTabBar(controller: _tabController, tabs: _tabs)),
-      body: TabBarView(controller: _tabController, children: List.generate(_tabs.length, (index) => GreenManageView(
-        index:index,
-      ),),),
+      appBarBottom: PreferredSize(
+          preferredSize: Size.fromHeight(88.w),
+          child: AkuTabBar(controller: _tabController, tabs: _tabs)),
+      body: TabBarView(
+        controller: _tabController,
+        children: List.generate(
+          _tabs.length,
+          (index) => GreenManageView(
+            index: index,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -16,7 +16,11 @@ class _GreenManageViewState extends State<GreenManageView> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [GreenManageCard(index: widget.index,)],
+      children: [
+        GreenManageCard(
+          index: widget.index,
+        )
+      ],
     );
   }
 }

@@ -52,6 +52,7 @@ Map<CHECK_TYPE, String> checkAssetMap = {
   CHECK_TYPE.DOOR_AND_WINDOWS: R.ASSETS_MANAGE_WINDOW_PNG,
   CHECK_TYPE.SECURITY: R.ASSETS_MANAGE_SECURITY_PNG,
 };
+
 @Deprecated('under should be removed')
 class DecorationModel {
   DecorationType type;
@@ -81,7 +82,9 @@ class DecorationModel {
     this.checkInfomations,
   });
 }
+
 @Deprecated('under should be removed')
+
 ///用户家庭信息
 class UserHomeModel {
   String plot;
@@ -95,7 +98,9 @@ class UserHomeModel {
     this.phone,
   });
 }
+
 @Deprecated('under should be removed')
+
 ///装修队伍信息
 class DecorationTeamModel {
   String name;
@@ -107,7 +112,9 @@ class DecorationTeamModel {
     this.phone,
   });
 }
+
 @Deprecated('under should be removed')
+
 ///周期检查
 class CycleCheck {
   FixerModel authPerson;
@@ -129,6 +136,7 @@ class CycleCheck {
     this.checkDetails,
   });
 }
+
 @Deprecated('under should be removed')
 class WorkFinishCheck {
   FixerModel authPerson;
@@ -140,7 +148,9 @@ class WorkFinishCheck {
     this.checkDetails,
   });
 }
+
 @Deprecated('under should be removed')
+
 ///周期检查细节
 class CheckInfomation {
   DateTime checkDate;
@@ -162,6 +172,7 @@ class CheckInfomation {
     return true;
   }
 }
+
 @Deprecated('under should be removed')
 class CheckDetail {
   CHECK_TYPE type;

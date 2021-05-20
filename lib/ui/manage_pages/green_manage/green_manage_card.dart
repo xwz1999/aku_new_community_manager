@@ -127,7 +127,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
     );
   }
 
- List<Widget> _buttomButtons() {
+  List<Widget> _buttomButtons() {
     return widget.index != 0
         ? [SizedBox()]
         : [

@@ -48,7 +48,7 @@ class _DecorationManagerDetailStatePage
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
           _buildInfo(),
-          widget.decorationModel.status>3
+          widget.decorationModel.status > 3
               ? SizedBox()
               : _buildFinishWorkCheck(),
           _buildCycleCheck(),
@@ -61,11 +61,7 @@ class _DecorationManagerDetailStatePage
         if (UserTool.userProvider.infoModel.canOperation) {
           switch (widget.decorationModel.operationStatus) {
             case 1:
-              return AkuBottomButton(
-                title: '立即安排',
-                onTap:() {
-                      }
-              );
+              return AkuBottomButton(title: '立即安排', onTap: () {});
               break;
             default:
               return SizedBox();
@@ -111,7 +107,7 @@ class _DecorationManagerDetailStatePage
           phone: UserTool.userProvider.profileModel.tel,
           rightTopWidget: Transform.rotate(
             angle: pi / 4,
-            child: widget.decorationModel.operationStatus==3
+            child: widget.decorationModel.operationStatus == 3
                 ? Image.asset(R.ASSETS_MANAGE_IC_WANCHENG_PNG)
                 : Image.asset(R.ASSETS_MANAGE_IC_ZHUANGXIU_PNG),
           ),
@@ -244,7 +240,8 @@ class _DecorationManagerDetailStatePage
       ],
     );
   }
-///完工检查
+
+  ///完工检查
   _buildFinishWorkCheck() {
     return AkuTitleBox(
       title: '完工检查',
@@ -293,7 +290,8 @@ class _DecorationManagerDetailStatePage
       ],
     );
   }
-///周期检查
+
+  ///周期检查
   _buildCycleCheck() {
     return AkuTitleBox(
       title: '周期检查',
@@ -362,9 +360,7 @@ class _DecorationManagerDetailStatePage
                         Container(
                           height: 500.w,
                           child: CupertinoDatePicker(
-                            onDateTimeChanged: (dateTime) {
-                              
-                            },
+                            onDateTimeChanged: (dateTime) {},
                           ),
                         ),
                       ],
@@ -453,7 +449,6 @@ class _DecorationManagerDetailStatePage
                                   realValue = 30;
                                   break;
                               }
-                             
                             },
                           ),
                         ),
@@ -485,15 +480,14 @@ class _DecorationManagerDetailStatePage
             CHECK_TYPE.DOOR_AND_WINDOWS,
             CHECK_TYPE.SECURITY,
           ],
-          onChange: (details) {
-            
-          },
+          onChange: (details) {},
           canTap: UserTool.userProvider.infoModel.canOperation,
         )
       ],
     );
   }
-///执行信息
+
+  ///执行信息
   _buildCheckDetail() {
     return AkuTitleBox(
       title: '执行信息',
@@ -530,7 +524,7 @@ class _DecorationManagerDetailStatePage
                 ),
                 Spacer(),
                 Text(
-                  3>2? '正常' : '异常',
+                  3 > 2 ? '正常' : '异常',
                   style: TextStyle(
                     color: e.checkAllResult
                         ? Color(0xFF32B814)
