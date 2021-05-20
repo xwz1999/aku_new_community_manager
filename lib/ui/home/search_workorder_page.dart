@@ -1,4 +1,9 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/facilities/facilities_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/packages_manage/packages_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/rules_manage/rules_manage_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -46,6 +51,14 @@ class _SearchWorkOrderpageState extends State<SearchWorkOrderPage> {
     AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG, BorrowManagerPage()),
     AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, InspectionManagePage()),
     AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, GreenManagePage()),
+    AppApplication(
+        '设施检查', R.ASSETS_HOME_IC_FACILITIES_PNG, () => FacilitiesPage()),
+    AppApplication(
+        '包裹管理', R.ASSETS_HOME_PACKAGE_PNG, () => PackagesManagePage()),
+    AppApplication('钥匙管理', R.ASSETS_HOME_KEY_PNG, () => KeyManagePage()),
+    AppApplication('规程管理', R.ASSETS_HOME_RULES_PNG, () => RulesManagePage()),
+    AppApplication(
+        '卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage())
   ];
 
   List<AppApplication> _displayApps = [];
