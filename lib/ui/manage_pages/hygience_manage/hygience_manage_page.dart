@@ -36,7 +36,7 @@ class _HygienceManagePageState extends State<HygienceManagePage>
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '绿化管理',
+      title: '卫生管理',
       appBarBottom: PreferredSize(
           preferredSize: Size.fromHeight(88.w),
           child: AkuTabBar(controller: _tabController, tabs: _tabs)),

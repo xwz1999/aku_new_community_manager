@@ -1,4 +1,9 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,7 +19,10 @@ import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_m
 
 class HyginecManageCard extends StatefulWidget {
   final int index;
-  HyginecManageCard({Key key, this.index}) : super(key: key);
+  final HygienceListModel model;
+  final VoidCallback callRefresh;
+  HyginecManageCard({Key key, this.index, this.model, this.callRefresh})
+      : super(key: key);
 
   @override
   _HyginecManageCardState createState() => _HyginecManageCardState();
@@ -40,7 +48,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
               child: Row(
                 children: [
                   Text(
-                    'cardModel.title',
+                    widget.model.hygieneAreaName,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 32.w,
@@ -75,7 +83,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    'cardModel.task',
+                    widget.model.content,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -95,7 +103,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    'cardModel.name',
+                    widget.model.directorName,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -113,7 +121,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                           color: AppStyle.primaryTextColor, fontSize: 28.sp)),
                   Spacer(),
                   Text(
-                    '${'cardModel.timestart'}至${'cardModel.timeend'}',
+                    '${widget.model.createDateString}至${widget.model.endDateString}',
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -147,7 +155,16 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                       .color(kTextPrimaryColor)
                       .bold
                       .make(),
-                  onPressed: () {},
+                  onPressed: () async {
+                    BaseModel baseModel = await NetUtil()
+                        .post(API.manage.hygienceComplete, params: {
+                      "id": widget.model.id,
+                    });
+                    if (baseModel.status) {
+                      widget.callRefresh();
+                    }
+                    BotToast.showText(text: baseModel.message);
+                  },
                 )
               ],
             )

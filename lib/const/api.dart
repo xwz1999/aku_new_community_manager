@@ -218,6 +218,12 @@ class _Manage {
 
   ///管家app绿化管理：确认完成
   String get greenManageComplete => '/user/green/complete';
+
+  ///管家app卫生管理：查询所有的卫生管理
+  String get hygienceList => '/user/hygiene/list';
+
+  ///管家app卫生管理：确认完成
+  String get hygienceComplete => '/user/hygiene/complete';
 }
 
 class _Upload {
