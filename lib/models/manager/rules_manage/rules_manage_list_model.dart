@@ -1,3 +1,5 @@
+import 'package:common_utils/common_utils.dart';
+
 class RulesManageListModel {
   int id;
   String title;
@@ -21,4 +23,6 @@ class RulesManageListModel {
     data['releaseDate'] = this.releaseDate;
     return data;
   }
+
+  String get releaseDateString => DateUtil.formatDateStr(this.releaseDate);
 }

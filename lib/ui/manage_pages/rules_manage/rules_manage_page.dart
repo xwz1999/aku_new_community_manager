@@ -1,10 +1,12 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/manage_pages/rules_manage/rules_manage_detail_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
@@ -62,40 +64,45 @@ class _RulesManagePageState extends State<RulesManagePage> {
   }
 
   Widget _buildCard(RulesManageListModel model) {
-    return Container(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            model.title.text
-                .size(32.sp)
-                .color(kTextPrimaryColor)
-                .maxLines(1)
-                .overflow(TextOverflow.ellipsis)
-                .bold
-                .make(),
-            32.w.heightBox,
-            model.content.text
-                .size(24.sp)
-                .color(kTextSubColor)
-                .maxLines(3)
-                .overflow(TextOverflow.ellipsis)
-                .make(),
-            32.w.heightBox,
-            Row(
-              children: [
-                '南宁人才公寓'.text.size(20.sp).color(kTextSubColor).make(),
-                Spacer(),
-                '发布于 ${DateUtil.formatDateStr(model.releaseDate, format: 'MM-dd HH:mm')}'
-                    .text
-                    .size(20.sp)
-                    .color(kTextSubColor)
-                    .make(),
-              ],
-            ),
-          ],
-        ));
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => RulesManageDetailPage(model: model,));
+      },
+      child: Container(
+          color: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              model.title.text
+                  .size(32.sp)
+                  .color(kTextPrimaryColor)
+                  .maxLines(1)
+                  .overflow(TextOverflow.ellipsis)
+                  .bold
+                  .make(),
+              32.w.heightBox,
+              model.content.text
+                  .size(24.sp)
+                  .color(kTextSubColor)
+                  .maxLines(3)
+                  .overflow(TextOverflow.ellipsis)
+                  .make(),
+              32.w.heightBox,
+              Row(
+                children: [
+                  '南宁人才公寓'.text.size(20.sp).color(kTextSubColor).make(),
+                  Spacer(),
+                  '发布于 ${DateUtil.formatDateStr(model.releaseDate, format: 'MM-dd HH:mm')}'
+                      .text
+                      .size(20.sp)
+                      .color(kTextSubColor)
+                      .make(),
+                ],
+              ),
+            ],
+          )),
+    );
   }
 }
