@@ -39,6 +39,9 @@ class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
   Widget build(BuildContext context) {
     return BeeListView(
         path: API.manage.keyRecordList,
+        extraParams: {
+          "recordStatus": widget.index == 0 ? null : widget.index,
+        },
         controller: _refreshController,
         convert: (models) {
           return models.tableList
@@ -47,7 +50,7 @@ class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
         },
         builder: (items) {
           return ListView.separated(
-            padding: EdgeInsets.all(24.w),
+              padding: EdgeInsets.all(24.w),
               itemBuilder: (context, index) {
                 return KeyApplyRecordCard(
                   index: widget.index,

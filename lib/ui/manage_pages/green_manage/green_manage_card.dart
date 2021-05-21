@@ -1,4 +1,9 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/green_manage/green_manage_list_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -15,7 +20,10 @@ import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_
 
 class GreenManageCard extends StatefulWidget {
   final int index;
-  GreenManageCard({Key key, this.index}) : super(key: key);
+  final GreenManageListModel model;
+  final VoidCallback callRefresh;
+  GreenManageCard({Key key, this.index, this.model, this.callRefresh})
+      : super(key: key);
 
   @override
   _GreenManageCardState createState() => _GreenManageCardState();
@@ -41,17 +49,17 @@ class _GreenManageCardState extends State<GreenManageCard> {
               child: Row(
                 children: [
                   Text(
-                    'cardModel.title',
+                    widget.model.greenAreaName,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 32.w,
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  GreenManageMap.statusString(widget.index + 1)
+                  GreenManageMap.statusString(widget.model.status)
                       .text
                       .size(28.sp)
-                      .color(GreenManageMap.statusColor(widget.index + 1))
+                      .color(GreenManageMap.statusColor(widget.model.status))
                       .bold
                       .make(),
                 ],
@@ -76,7 +84,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    'cardModel.task',
+                    widget.model.content,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -96,7 +104,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    'cardModel.name',
+                    widget.model.directorName,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -114,7 +122,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
                           color: AppStyle.primaryTextColor, fontSize: 28.sp)),
                   Spacer(),
                   Text(
-                    '${'cardModel.timestart'}至${'cardModel.timeend'}',
+                    '${widget.model.createDateString}至${widget.model.endDateString}',
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -128,7 +136,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
   }
 
   List<Widget> _buttomButtons() {
-    return widget.index != 0
+    return widget.model.status != 1
         ? [SizedBox()]
         : [
             40.w.heightBox,
@@ -148,7 +156,16 @@ class _GreenManageCardState extends State<GreenManageCard> {
                       .color(kTextPrimaryColor)
                       .bold
                       .make(),
-                  onPressed: () {},
+                  onPressed: () async {
+                    BaseModel baseModel = await NetUtil()
+                        .post(API.manage.greenManageComplete, params: {
+                      "id": widget.model.id,
+                    });
+                    if (baseModel.status) {
+                      widget.callRefresh();
+                    }
+                    BotToast.showText(text: baseModel.message);
+                  },
                 )
               ],
             )

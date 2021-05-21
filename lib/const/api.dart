@@ -212,6 +212,12 @@ class _Manage {
 
   ///管家app钥匙管理：查询所有的申请记录（包含条件搜索）
   String get keyRecordList => '/user/key/record';
+
+  ///管家app绿化管理：查询所有的绿化管理
+  String get greenManageList => '/user/green/list';
+
+  ///管家app绿化管理：确认完成
+  String get greenManageComplete => '/user/green/complete';
 }
 
 class _Upload {

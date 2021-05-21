@@ -18,7 +18,7 @@ class KeyApplyRecordPage extends StatefulWidget {
 
 class _KeyApplyRecordPageState extends State<KeyApplyRecordPage>
     with TickerProviderStateMixin {
-  List<String> _tabs = [ '审核中', '已通过', '已驳回','已归还'];
+  List<String> _tabs = ['全部', '审核中', '已通过', '已驳回','已归还'];
   TabController _tabController;
   @override
   void initState() {
