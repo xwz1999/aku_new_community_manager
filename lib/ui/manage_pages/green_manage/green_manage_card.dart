@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/green_manage/green_manage_list_model.dart';
+import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_details_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
@@ -34,7 +36,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
   Widget build(BuildContext context) {
     return AkuButton(
       onPressed: () {
-        // Get.to(GreenManageDetailsPage(cardModel));
+        Get.to(GreenManageDetailsPage(widget.model));
       },
       child: Container(
         width: double.infinity,

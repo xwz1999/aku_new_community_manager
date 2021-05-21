@@ -1,23 +1,24 @@
-// Flutter imports:
-import 'package:aku_community_manager/models/manager/green_manage/green_manage_list_model.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:aku_ui/aku_ui.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// Project imports:
-import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_ui/common_widgets/aku_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:aku_community_manager/const/resource.dart';
 
-class GreenManageDetailsPage extends StatelessWidget {
+class HygienceManageDetailPage extends StatefulWidget {
+  final HygienceListModel cardModel;
+  HygienceManageDetailPage({Key key, this.cardModel}) : super(key: key);
 
-  final GreenManageListModel cardModel;
+  @override
+  _HygienceManageDetailPageState createState() =>
+      _HygienceManageDetailPageState();
+}
 
-  GreenManageDetailsPage(this.cardModel);
+class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
 
+  HygienceListModel get cardModel => widget.cardModel;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -44,7 +45,7 @@ class GreenManageDetailsPage extends StatelessWidget {
                     height: 93.w,
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      cardModel.greenAreaName,
+                      cardModel.hygieneAreaName,
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: 32.w,
