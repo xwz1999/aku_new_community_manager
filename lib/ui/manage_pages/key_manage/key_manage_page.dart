@@ -10,9 +10,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_view.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/select_place_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class KeyManagePage extends StatefulWidget {
@@ -65,12 +63,12 @@ class _KeyManagePageState extends State<KeyManagePage>
                   index: index,
                 )),
       ),
-      bottom: AkuBottomButton(
-        title: '立即申请',
-        onTap: () {
-          Get.to(() => SelectPlacePage());
-        },
-      ),
+      // bottom: AkuBottomButton(
+      //   title: '立即申请',
+      //   onTap: () {
+      //     Get.to(() => SelectPlacePage());
+      //   },
+      // ),
     );
   }
 }

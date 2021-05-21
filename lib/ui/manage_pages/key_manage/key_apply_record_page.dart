@@ -6,9 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_view.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/select_place_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class KeyApplyRecordPage extends StatefulWidget {
@@ -20,7 +18,7 @@ class KeyApplyRecordPage extends StatefulWidget {
 
 class _KeyApplyRecordPageState extends State<KeyApplyRecordPage>
     with TickerProviderStateMixin {
-  List<String> _tabs = ['全部', '审核中', '已通过', '已驳回'];
+  List<String> _tabs = [ '审核中', '已通过', '已驳回','已归还'];
   TabController _tabController;
   @override
   void initState() {
@@ -37,7 +35,7 @@ class _KeyApplyRecordPageState extends State<KeyApplyRecordPage>
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '钥匙管理',
+      title: '申请记录',
       appBarBottom: PreferredSize(
         child: AkuTabBar(controller: _tabController, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
@@ -50,12 +48,12 @@ class _KeyApplyRecordPageState extends State<KeyApplyRecordPage>
                   index: index,
                 )),
       ),
-      bottom: AkuBottomButton(
-        title: '立即申请',
-        onTap: () {
-          SelectPlacePage();
-        },
-      ),
+      // bottom: AkuBottomButton(
+      //   title: '立即申请',
+      //   onTap: () {
+      //     SelectPlacePage();
+      //   },
+      // ),
     );
   }
 }

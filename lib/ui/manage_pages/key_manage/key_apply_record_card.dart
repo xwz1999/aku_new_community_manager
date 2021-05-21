@@ -1,4 +1,9 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/key_manage/key_manage_record_list_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,7 +18,9 @@ import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_map.
 
 class KeyApplyRecordCard extends StatefulWidget {
   final int index;
-  KeyApplyRecordCard({Key key, this.index}) : super(key: key);
+  final KeyManageRecordListModel model;
+  final VoidCallback callRefresh;
+  KeyApplyRecordCard({Key key, this.index, this.model, this.callRefresh}) : super(key: key);
 
   @override
   _KeyApplyRecordCardState createState() => _KeyApplyRecordCardState();
@@ -32,17 +39,16 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
         children: [
           Row(
             children: [
-              '3-1-203配电箱'
-                  .text
+              widget.model.facilityName.text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
                   .bold
                   .make(),
               Spacer(),
-              KeyManageMap.keyStatus[2].text
+              KeyManageMap.keyRecordStatus[widget.model.status].text
                   .size(28.sp)
                   .bold
-                  .color(KeyManageMap.keyStatusColor[2])
+                  .color(KeyManageMap.keyRecordStatusColor[widget.model.status])
                   .make()
             ],
           ),
@@ -50,12 +56,27 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
           AkuDivider.horizontal(),
           24.w.heightBox,
           ...<Widget>[
-            _rowTile(R.ASSETS_MANAGE_KEY_PNG, '可申请钥匙数/钥匙总数',
-                '2/5'.text.size(24.sp).color(kTextSubColor).make()),
-            _rowTile(R.ASSETS_MANAGE_LOCK_PNG, '对应设备位置',
-                '2栋1楼2-3'.text.size(24.sp).color(kTextSubColor).make()),
-            _rowTile(R.ASSETS_OUTDOOR_IC_ADDRESS_PNG, '存放地址',
-                '物业管理处2号柜'.text.size(24.sp).color(kTextSubColor).make()),
+            _rowTile(
+                R.ASSETS_MANAGE_LOCK_PNG,
+                '对应设备位置',
+                widget.model.correspondingPosition.text
+                    .size(24.sp)
+                    .color(kTextSubColor)
+                    .make()),
+            _rowTile(
+                R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
+                '存放地址',
+                widget.model.storageLocation.text
+                    .size(24.sp)
+                    .color(kTextSubColor)
+                    .make()),
+            _rowTile(
+                R.ASSETS_MANAGE_IC_TIME_PNG,
+                '审核时间',
+                widget.model.auditDateString.text
+                    .size(24.sp)
+                    .color(kTextSubColor)
+                    .make()),
           ].sepWidget(separate: 12.w.heightBox),
           _getBottomButtons(2),
         ],
@@ -67,22 +88,21 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
     MaterialButton button;
     switch (status) {
       case 1:
-        button = _bottomButton('申请钥匙', () {}, Color(0xFFFFC40C), Colors.black);
+        // button = _bottomButton('申请钥匙', () {}, Color(0xFFFFC40C), Colors.black);
         break;
       case 2:
         break;
       case 3:
-        button = _bottomButton('确认领取', () {}, Color(0xFFFFC40C), Colors.black);
+        button = _bottomButton('重新申请', () async {
+          BaseModel baseModel = await NetUtil()
+              .post(API.manage.applyKey, params: {"keyId": widget.model.id});
+          BotToast.showText(text: baseModel.message);
+          widget.callRefresh();
+        }, Colors.white, Colors.black);
         break;
       case 4:
-        button = _bottomButton('归还钥匙', () {}, Colors.black, Colors.white);
         break;
-      case 5:
-        button = _bottomButton('重新提交', () {}, Colors.white, Colors.black);
-        break;
-      case 6:
-        button = _bottomButton('联系物业', () {}, Colors.white, Colors.black);
-        break;
+
       default:
     }
     return button == null

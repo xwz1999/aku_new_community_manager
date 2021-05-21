@@ -197,6 +197,21 @@ class _Manage {
 
   ///管家app 规程管理：查询所有的规程管理信息
   String get rulesManageList => '/user/regulationManage/list';
+
+  ///管家app钥匙管理：查询所有的钥匙信息
+  String get getAllkeyList => '/user/key/list';
+
+  ///管家app钥匙管理：查询所有的未归还钥匙信息
+  String get getNOReturnList => '/user/key/noReturnList';
+
+  ///管家app钥匙管理：申请钥匙
+  String get applyKey => '/user/key/apply';
+
+  ///管家app钥匙管理：归还钥匙
+  String get returnKey => '/user/key/returnKey';
+
+  ///管家app钥匙管理：查询所有的申请记录（包含条件搜索）
+  String get keyRecordList => '/user/key/record';
 }
 
 class _Upload {
