@@ -172,6 +172,29 @@ class TrackRecordVos {
       this.result,
       this.recordDetailVoList});
 
+  String get typeString {
+    switch (this.type) {
+      case 1:
+        return '周期检查';
+      case 2:
+        return '完工检查';
+      default:
+        return '未知';
+    }
+  }
+
+  String get resultString {
+    switch (this.result) {
+      case 1:
+        return '合格';
+      case 2:
+        return '不合格';
+
+      default:
+        return '未知';
+    }
+  }
+
   TrackRecordVos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     trackDate = json['trackDate'];
@@ -221,4 +244,16 @@ class RecordDetailVoList {
     data['isQualified'] = this.isQualified;
     return data;
   }
+
+  String get qualifiedString {
+    switch (this.isQualified) {
+      case 1:
+        return '正常';
+      case 2:
+        return '异常';
+      default:
+        return '未知';
+    }
+  }
+  
 }

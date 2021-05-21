@@ -85,7 +85,7 @@ class _DecorationManagerCardState extends State<DecorationManagerCard> {
             child: AkuMaterialButton(
               onPressed: () {
                 Get.to(
-                    DecorationManagerDetailPage(decorationModel: widget.model));
+                    DecorationManagerDetailPage(id: widget.model.id,status: widget.model.status,operationStatus: widget.model.operationStatus,));
               },
               height: 64.w,
               minWidth: 160.w,

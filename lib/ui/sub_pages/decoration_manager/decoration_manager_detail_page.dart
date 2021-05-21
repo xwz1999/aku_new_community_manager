@@ -2,6 +2,11 @@
 import 'dart:math';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,12 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
@@ -29,9 +34,14 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
 
 class DecorationManagerDetailPage extends StatefulWidget {
-  final DecorationListModel decorationModel;
-  DecorationManagerDetailPage({Key key, this.decorationModel})
-      : super(key: key);
+  final int id;
+  final int status;
+  final int operationStatus;
+  DecorationManagerDetailPage({
+    Key key,
+    this.id,
+    this.status, this.operationStatus,
+  }) : super(key: key);
 
   @override
   _DecorationManagerDetailStatePage createState() =>
@@ -40,26 +50,57 @@ class DecorationManagerDetailPage extends StatefulWidget {
 
 class _DecorationManagerDetailStatePage
     extends State<DecorationManagerDetailPage> {
+  EasyRefreshController _refreshController;
+  DecorationDetailModel _model;
+  bool _onload = true;
+  @override
+  void initState() {
+    super.initState();
+    _refreshController = EasyRefreshController();
+  }
+
+  @override
+  void dispose() {
+    _refreshController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '装修详情',
-      body: ListView(
-        padding: EdgeInsets.symmetric(vertical: 16.w),
-        children: [
-          _buildInfo(),
-          widget.decorationModel.status > 3
-              ? SizedBox()
-              : _buildFinishWorkCheck(),
-          _buildCycleCheck(),
-          UserTool.userProvider.infoModel.manager
-              ? SizedBox()
-              : _buildCheckDetail(),
-        ],
+      body: EasyRefresh(
+        firstRefresh: true,
+        header: MaterialHeader(),
+        onRefresh: () async {
+          BaseModel baseModel =
+              await NetUtil().get(API.manage.decorationFindByld, params: {
+            "decorationId	": widget.id,
+          });
+          if (baseModel.status) {
+            _model = DecorationDetailModel.fromJson(baseModel.data);
+            _onload = false;
+          } else {
+            BotToast.showText(text: baseModel.message);
+          }
+        },
+        child: _onload
+            ? Container()
+            : ListView(
+                padding: EdgeInsets.symmetric(vertical: 16.w),
+                children: [
+                  _buildInfo(),
+                  widget.status > 3 ? SizedBox() : _buildFinishWorkCheck(),
+                  _buildCycleCheck(),
+                  UserTool.userProvider.infoModel.canDecorationTrack
+                      ? SizedBox()
+                      : _buildCheckDetail(),
+                ],
+              ),
       ),
       bottom: Builder(builder: (context) {
-        if (UserTool.userProvider.infoModel.canOperation) {
-          switch (widget.decorationModel.operationStatus) {
+        if (UserTool.userProvider.infoModel.canDecorationDispatch) {
+          switch (widget.status) {
             case 1:
               return AkuBottomButton(title: '立即安排', onTap: () {});
               break;
@@ -67,8 +108,8 @@ class _DecorationManagerDetailStatePage
               return SizedBox();
               break;
           }
-        } else if (UserTool.userProvider.infoModel.canOperation) {
-          switch (widget.decorationModel.operationStatus) {
+        } else if (UserTool.userProvider.infoModel.canDecorationTrack) {
+          switch (widget.status) {
             case 2:
               return AkuBottomButton(
                 title: '立即执行',
@@ -102,12 +143,12 @@ class _DecorationManagerDetailStatePage
         _buildInfoCard(
           tag: '家',
           midTop: '人才公寓',
-          midBottom: widget.decorationModel.roomName,
+          midBottom: _model.decorationFBIVo.roomName,
           name: '业主：' + UserTool.userProvider.infoModel.nickName,
           phone: UserTool.userProvider.profileModel.tel,
           rightTopWidget: Transform.rotate(
             angle: pi / 4,
-            child: widget.decorationModel.operationStatus == 3
+            child: widget.status == 3
                 ? Image.asset(R.ASSETS_MANAGE_IC_WANCHENG_PNG)
                 : Image.asset(R.ASSETS_MANAGE_IC_ZHUANGXIU_PNG),
           ),
@@ -115,9 +156,9 @@ class _DecorationManagerDetailStatePage
         AkuBox.h(16),
         _buildInfoCard(
           tag: '装',
-          midTop: widget.decorationModel.constructionUnit,
-          name: '负责人：' + '马泽鹏',
-          phone: '13831971345',
+          midTop: _model.decorationFBIVo.constructionUnit,
+          name: '负责人：${_model.decorationFBIVo.director}',
+          phone: '${_model.decorationFBIVo.directorTel}',
         ),
       ],
     );
@@ -250,19 +291,19 @@ class _DecorationManagerDetailStatePage
         _buildRow(
           title: '开始装修时间',
           subTitle: DateUtil.formatDateStr(
-            '2021-5-20 13:14',
+            _model.decorationFBIVo.actualBegin,
             format: 'yyyy-MM-dd',
           ),
         ),
         _buildRow(
           title: '接受人',
-          subTitle: '金礼伟',
+          subTitle: _model.decorationFBIVo.director,
         ),
         _buildRow(title: '所属项目', subTitle: '装修管理'),
         _buildRow(
           title: '开始日期',
           subTitle: DateUtil.formatDateStr(
-            '2021-5-20 13:14',
+            _model.trackInspectionFBIVo.startDate,
             format: 'yyyy-MM-dd',
           ),
         ),
@@ -284,6 +325,7 @@ class _DecorationManagerDetailStatePage
             CHECK_TYPE.WATER,
             CHECK_TYPE.WALL,
             CHECK_TYPE.DOOR_AND_WINDOWS,
+            CHECK_TYPE.SECURITY,
           ],
           onChange: (details) {},
         ),
@@ -300,14 +342,14 @@ class _DecorationManagerDetailStatePage
         _buildRow(
           title: '开始装修时间',
           subTitle: DateUtil.formatDateStr(
-            '2021-05-20 13:14:00',
+            _model.decorationFBIVo.actualBegin,
             format: 'yyyy-MM-dd',
           ),
         ),
         _buildRow(
           title: '接受人',
           subTitle: '黄鑫',
-          onTap: UserTool.userProvider.infoModel.canOperation
+          onTap: UserTool.userProvider.infoModel.canDecorationTrack
               ? () {
                   // Get.to(DecorationDepartmentPage(
                   //   model: widget.model,
@@ -322,7 +364,7 @@ class _DecorationManagerDetailStatePage
             '2021-05-20 13:14:00',
             format: 'yyyy-MM-dd',
           ),
-          onTap: UserTool.userProvider.infoModel.canOperation
+          onTap: UserTool.userProvider.infoModel.canDecorationTrack
               ? () {
                   showAkuSheet(
                     child: Column(
@@ -373,8 +415,8 @@ class _DecorationManagerDetailStatePage
         ),
         _buildRow(
           title: '检查周期',
-          subTitle: '${15}天',
-          onTap: UserTool.userProvider.infoModel.canOperation
+          subTitle: '${_model.trackInspectionFBIVo.inspectionCycle}天',
+          onTap: UserTool.userProvider.infoModel.canDecorationTrack
               ? () {
                   showAkuSheet(
                     child: Column(
@@ -481,7 +523,7 @@ class _DecorationManagerDetailStatePage
             CHECK_TYPE.SECURITY,
           ],
           onChange: (details) {},
-          canTap: UserTool.userProvider.infoModel.canOperation,
+          canTap: UserTool.userProvider.infoModel.canDecorationTrack,
         )
       ],
     );
@@ -492,7 +534,7 @@ class _DecorationManagerDetailStatePage
     return AkuTitleBox(
       title: '执行信息',
       spacing: 24,
-      children: [].map((e) {
+      children: _model.trackRecordVos.map((e) {
         return Container(
           decoration: BoxDecoration(
             border: Border(
@@ -515,7 +557,7 @@ class _DecorationManagerDetailStatePage
                 AkuBox.h(96),
                 Text(
                   '${DateUtil.formatDateStr('2021-5-20 13:14', format: 'yyyy-MM-dd')} ' +
-                      e.checkType,
+                      e.typeString,
                   style: TextStyle(
                     color: AppStyle.primaryTextColor,
                     fontWeight: FontWeight.bold,
@@ -526,7 +568,7 @@ class _DecorationManagerDetailStatePage
                 Text(
                   3 > 2 ? '正常' : '异常',
                   style: TextStyle(
-                    color: e.checkAllResult
+                    color: e.result==1
                         ? Color(0xFF32B814)
                         : Color(0xFFFF4501),
                     fontSize: 28.sp,
@@ -537,7 +579,7 @@ class _DecorationManagerDetailStatePage
             expanded: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                ...[].map((e) {
+                ...e.recordDetailVoList.map((e) {
                   return Container(
                     height: 96.w,
                     decoration: BoxDecoration(
@@ -556,7 +598,7 @@ class _DecorationManagerDetailStatePage
                           height: 40.w,
                         ),
                         Text(
-                          '233',
+                          e.qualifiedString,
                           style: TextStyle(
                             fontSize: 28.sp,
                             color: AppStyle.primaryTextColor,
@@ -594,7 +636,7 @@ class _DecorationManagerDetailStatePage
                           ),
                         ),
                         TextSpan(
-                          text: 'e.info',
+                          text: e.description,
                         ),
                       ],
                       style: TextStyle(

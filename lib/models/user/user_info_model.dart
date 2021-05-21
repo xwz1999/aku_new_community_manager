@@ -16,6 +16,12 @@ class UserInfoModel {
   ///操作权限（借还管理）
   bool get canOperation => jurisdiction.contains(57);
 
+  ///装修派工权限
+  bool get canDecorationDispatch => jurisdiction.contains(59);
+
+  ///装修管理跟踪执行权限
+  bool get canDecorationTrack => jurisdiction.contains(60);
+
   ///管家
   bool get manager => canSendTicket && canPickUpTicket;
 
