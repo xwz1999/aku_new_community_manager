@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/utils/weekdays_to_chinese.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,19 @@ class ClockInOutMainPage extends StatefulWidget {
 class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
   EasyRefreshController _refreshController;
   Timer _clockSetState;
+  DateTime _lastPressed;
+  bool get canTap {
+    if (_lastPressed == null ||
+        DateTime.now().difference(_lastPressed) > Duration(seconds: 15)) {
+      //两次点击间隔超过15秒重新计算
+      _lastPressed = DateTime.now();
+      return true;
+    }
+
+    BotToast.showText(text: '15s内不可再次打卡');
+    return false;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -80,30 +94,35 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
   }
 
   Widget _buildClock() {
-    return Container(
-      width: 400.w,
-      height: 400.w,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(200.w),
-        gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF50EAA0), Color(0xFF2EA9A2)]),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          '打卡'.text.size(56.sp).color(Colors.white).bold.make(),
-          20.w.heightBox,
-          DateUtil.formatDate(DateTime.now(), format: 'HH:mm:ss')
-              .text
-              .size(36.sp)
-              .color(Color(0x99FFFFFF))
-              .bold
-              .make()
-        ],
-      ),
+    return GestureDetector(
+      onTap: () {
+        canTap ? BotToast.showText(text: '打卡成功') : null;
+      },
+      child: Container(
+        width: 400.w,
+        height: 400.w,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(200.w),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0xFF50EAA0), Color(0xFF2EA9A2)]),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            '打卡'.text.size(56.sp).color(Colors.white).bold.make(),
+            20.w.heightBox,
+            DateUtil.formatDate(DateTime.now(), format: 'HH:mm:ss')
+                .text
+                .size(36.sp)
+                .color(Color(0x99FFFFFF))
+                .bold
+                .make()
+          ],
+        ),
+      ).material(),
     );
   }
 
