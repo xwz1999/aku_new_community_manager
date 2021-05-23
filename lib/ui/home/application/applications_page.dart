@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -87,7 +88,8 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('钥匙管理', R.ASSETS_HOME_KEY_PNG, () => KeyManagePage()),
     AppApplication('规程管理', R.ASSETS_HOME_RULES_PNG, () => RulesManagePage()),
     AppApplication(
-        '卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage())
+        '卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage()),
+    AppApplication('考勤管理', R.ASSETS_PLACEHOLDER_WEBP, () => ClockInOutPage())
   ];
 
   @override
