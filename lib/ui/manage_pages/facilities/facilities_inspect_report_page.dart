@@ -2,12 +2,17 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_map.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
@@ -17,7 +22,13 @@ import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_bu
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class FacilitiesInspectReportPage extends StatefulWidget {
-  FacilitiesInspectReportPage({Key key}) : super(key: key);
+  final int facilitiesType;
+  final int id;
+  FacilitiesInspectReportPage({
+    Key key,
+    @required this.facilitiesType,
+    @required this.id,
+  }) : super(key: key);
 
   @override
   _FacilitiesInspectReportPageState createState() =>
@@ -28,16 +39,20 @@ class _FacilitiesInspectReportPageState
     extends State<FacilitiesInspectReportPage> {
   List<File> _selfPhotos;
   List<File> _scenePhotos;
+  String _describtion;
+  int _scene = 0;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '检查报告',
       body: ListView(
         children: [
-          _basicMessageCard(),
-          _descriptionCard('场地情况', 0),
+          // _basicMessageCard(),
+          _descriptionCard(
+            widget.facilitiesType == 1 ? '设施情况' : '设备情况',
+          ),
           _scenePhotoCard(),
-          _selfPhotoCard(),
+          // _selfPhotoCard(),
         ],
       ),
       bottom: _bottomSubmitButton(),
@@ -46,7 +61,24 @@ class _FacilitiesInspectReportPageState
 
   Widget _bottomSubmitButton() {
     return AkuButton(
-      onPressed: () {},
+      onPressed: () async {
+        List<String> _scenePhotoUrl = await NetUtil().uploadFiles(
+          _scenePhotos,
+          API.upload.uploadFacilitiCheckPhoto,
+        );
+
+        BaseModel baseModel =
+            await NetUtil().post(API.manage.submitFacilitiesCheckInfo, params: {
+          "id": widget.id,
+          "situation": _scene,
+          "detail": _describtion,
+          "imgUrls": _scenePhotoUrl,
+        });
+        if (baseModel.status) {
+          Get.back();
+        }
+        BotToast.showText(text: baseModel.message);
+      },
       width: double.infinity,
       height: 100.w,
       child: '立即提交'.text.color(kTextPrimaryColor).bold.size(32.sp).make(),
@@ -104,11 +136,9 @@ class _FacilitiesInspectReportPageState
     );
   }
 
-  int _scene = 0;
-
   Widget _descriptionCard(
     String title,
-    int index,
+    // int index,
   ) {
     return Column(
       children: [
@@ -156,7 +186,9 @@ class _FacilitiesInspectReportPageState
             minLines: 5,
             maxLines: 10,
             autofocus: false,
-            onChanged: (value) {},
+            onChanged: (value) {
+              _describtion = value;
+            },
             decoration: InputDecoration(
               hintText: '请详细描述异常情况',
               hintStyle: TextStyle(

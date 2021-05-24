@@ -17,8 +17,12 @@ import 'package:aku_community_manager/tools/aku_divider.dart';
 
 class FacilitiesCard extends StatefulWidget {
   final int index;
+  final int facilitiesType;
   final FacilitiesCheckListModel model;
-  FacilitiesCard({Key key, this.index, this.model}) : super(key: key);
+  final VoidCallback callRefresh;
+  FacilitiesCard(
+      {Key key, this.index, this.model, this.facilitiesType, this.callRefresh})
+      : super(key: key);
 
   @override
   _FacilitiesCardState createState() => _FacilitiesCardState();
@@ -64,8 +68,12 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
                         padding: EdgeInsets.symmetric(
                             vertical: 8.w, horizontal: 24.w),
                         color: Color(0xFFFFC40C),
-                        onPressed: () {
-                          Get.to(() => FacilitiesInspectReportPage());
+                        onPressed: () async {
+                          await Get.to(() => FacilitiesInspectReportPage(
+                                facilitiesType: widget.facilitiesType,
+                                id: widget.model.id,
+                              ));
+                          widget.callRefresh();
                         },
                         child: '填写报告'
                             .text
@@ -84,8 +92,12 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         .color(Colors.white)
         .padding(EdgeInsets.all(24.w))
         .make()
-        .onInkTap(() {
-      Get.to(() => FacilitiesInspectReportPage());
+        .onInkTap(() async {
+      await Get.to(() => FacilitiesInspectReportPage(
+            facilitiesType: widget.facilitiesType,
+            id: widget.model.id,
+          ));
+      widget.callRefresh();
     });
   }
 

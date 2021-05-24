@@ -46,7 +46,8 @@ class _FacilitiesViewState extends State<FacilitiesView> {
         controller: _refreshController,
         convert: (models) {
           return models.tableList
-              .map((e) => FacilitiesCheckListModel.fromJson(e)).toList();
+              .map((e) => FacilitiesCheckListModel.fromJson(e))
+              .toList();
         },
         builder: (items) {
           return ListView.separated(
@@ -54,7 +55,11 @@ class _FacilitiesViewState extends State<FacilitiesView> {
               itemBuilder: (context, index) {
                 return FacilitiesCard(
                   index: widget.index,
-                  model:items[index],
+                  facilitiesType: widget.facilitiesType,
+                  model: items[index],
+                  callRefresh: () {
+                    _refreshController.callRefresh();
+                  },
                 );
               },
               separatorBuilder: (_, __) {
