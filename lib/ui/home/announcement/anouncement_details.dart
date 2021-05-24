@@ -48,7 +48,7 @@ class AnouncementDetails extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('深圳永成物业有限公司', style: AppStyle().primaryStyle),
+                      Text('南宁人才公寓物业管理处', style: AppStyle().primaryStyle),
                       SizedBox(
                         height: 4.w,
                       ),

@@ -1,4 +1,8 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/manager/facilities/facilities_check_list_model.dart';
+import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_inspect_report_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_map.dart';
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,14 +12,13 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/models/manager/facilities/facilities_inspect_report_page.dart';
-import 'package:aku_community_manager/models/manager/facilities/facilities_map.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
 
 class FacilitiesCard extends StatefulWidget {
   final int index;
-  FacilitiesCard({Key key, this.index}) : super(key: key);
+  final FacilitiesCheckListModel model;
+  FacilitiesCard({Key key, this.index, this.model}) : super(key: key);
 
   @override
   _FacilitiesCardState createState() => _FacilitiesCardState();
@@ -29,10 +32,14 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
       children: [
         Row(
           children: [
-            '户外2号篮球场'.text.color(kTextPrimaryColor).size(32.sp).bold.make(),
+            widget.model.facilitiesName.text
+                .color(kTextPrimaryColor)
+                .size(32.sp)
+                .bold
+                .make(),
             Spacer(),
-            FacilitiesMap.inspectStatus[widget.index + 1].text
-                .color(FacilitiesMap.insepectColor[widget.index + 1])
+            FacilitiesMap.inspectStatus[widget.model.status].text
+                .color(FacilitiesMap.insepectColor[widget.model.status])
                 .size(28.sp)
                 .bold
                 .make(),
@@ -41,7 +48,8 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         16.w.heightBox,
         AkuDivider.horizontal(),
         24.w.heightBox,
-        _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '场地地址', '1号楼4单元门口'),
+        _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '场地地址',
+            widget.model.facilitiesAddress),
         ..._midTile(),
         ...widget.index != 0
             ? []
@@ -59,7 +67,7 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
                         onPressed: () {
                           Get.to(() => FacilitiesInspectReportPage());
                         },
-                        child: '扫码报告'
+                        child: '填写报告'
                             .text
                             .size(26.sp)
                             .color(kTextPrimaryColor)
@@ -86,28 +94,33 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
       case 0:
         return [
           15.w.heightBox,
-          _buildTile(
-              R.ASSETS_MANAGE_CLOCK_PNG, '任务时间', '2020-10-1 19:00-20:300'),
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '任务时间',
+              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
         ];
       case 1:
         return [
           15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', '超时',
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail,
               color: Colors.red),
           15.w.heightBox,
-          _buildTile(
-              R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '2020-10-1 19:00-20:300'),
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',
+              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
         ];
       case 2:
         return [
           15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '场地情况', '正常',
+          _buildTile(
+              R.ASSETS_MANAGE_CLOCK_PNG, '场地情况', widget.model.situationString,
               color: Color(0xFF3F8FFE)),
           15.w.heightBox,
-          _buildTile(
-              R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '2020-10-1 19:00-20:300'),
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',
+              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
           15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '检查提交时间', '2020-10-1 19:00'),
+          _buildTile(
+              R.ASSETS_MANAGE_CLOCK_PNG,
+              '检查提交时间',
+              DateUtil.formatDateStr(widget.model.checkDate,
+                  format: 'yyyy-MM-dd HH:mm')),
         ];
       default:
         return [];

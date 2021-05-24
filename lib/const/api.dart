@@ -224,6 +224,12 @@ class _Manage {
 
   ///管家app卫生管理：确认完成
   String get hygienceComplete => '/user/hygiene/complete';
+
+  ///管家app设施设备检查：查询所有的设施设备检查信息
+  String get facilitiesCheckList => '/user/facilitiesCheck/list';
+
+  ///管家app设施设备检查：提交报告
+  String get submitFacilitiesCheckInfo => '/user/facilitiesCheck/submitCheck';
 }
 
 class _Upload {
@@ -260,6 +266,10 @@ class _Upload {
 
   ///上传咨询建议照片
   String get uploadAdvices => '/user/upload/uploadAdvice';
+
+  ///上传设施设备检查照片
+  String get uploadFacilitiCheckPhoto =>
+      '/user/upload/uploadFacilitiesCheckPhoto';
 }
 
 class _Message {

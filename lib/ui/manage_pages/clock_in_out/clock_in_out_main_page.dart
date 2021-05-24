@@ -183,7 +183,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
               children: time == null
                   ? [
                       Center(
-                          child: '未打卡'
+                          child: (type == 0 ? '上班未打卡' : '下班未打卡')
                               .text
                               .size(32.sp)
                               .bold
@@ -212,12 +212,19 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
     );
   }
 
- String get getWorkHours {
-    int _time = UserTool.appProvider.clockInTime
-        .difference(UserTool.appProvider.clockOutTime)
-        .inMinutes;
-    int _hour = _time ~/ 60;
-    int _min = _time % 60;
+  String get getWorkHours {
+    int _hour = 0;
+    int _min = 0;
+    if (UserTool.appProvider.clockInTime != null) {
+      int _time = (UserTool.appProvider.clockOutTime == null
+              ? DateTime.now()
+              : UserTool.appProvider.clockOutTime)
+          .difference(UserTool.appProvider.clockInTime)
+          .inMinutes;
+      print(_time);
+      _hour = _time ~/ 60;
+      _min = _time % 60;
+    }
     return '$_hour小时$_min分钟';
   }
 }
