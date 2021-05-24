@@ -11,6 +11,17 @@ import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
+enum WORKCLOCK {
+  ///未上班打卡状态
+  NOTIN,
+
+  ///已上班打卡
+  IN,
+
+  ///已下班打卡
+  OUT,
+}
+
 class AppProvider extends ChangeNotifier {
   List<AppApplication> _recentUsedApp = [];
   List<AppApplication> get recentUsedApp => _recentUsedApp;
@@ -67,6 +78,54 @@ class AppProvider extends ChangeNotifier {
     if (response == null || response.data == null) return;
     _sysMessage = response.data['sysCount'] ?? 0;
     _commentMessage = response.data['commentCount'] ?? 0;
+    notifyListeners();
+  }
+
+  WORKCLOCK _clockStatus = WORKCLOCK.NOTIN;
+  DateTime _clockInTime;
+  DateTime _clockOutTime;
+  DateTime _dateRecord;
+  WORKCLOCK get clockStatus => _clockStatus;
+  DateTime get clockInTime => _clockInTime;
+  DateTime get clockOutTime => _clockOutTime;
+
+  initClock() {
+    if (_dateRecord == null ||
+        (_dateRecord !=
+            DateTime.utc(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day))) {
+      resetClock();
+    }
+  }
+
+  setClockInTime(DateTime dateTime) {
+    if (_clockStatus == WORKCLOCK.NOTIN) {
+      _dateRecord = DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+      _clockInTime = dateTime;
+      _clockStatus = WORKCLOCK.IN;
+    }
+    notifyListeners();
+  }
+
+  setClockOutTime(DateTime dateTime) {
+    if (_dateRecord != null &&
+        (_dateRecord !=
+            DateTime.utc(DateTime.now().year, DateTime.now().month,
+                DateTime.now().day))) {
+      resetClock();
+    }
+    if (_clockStatus == WORKCLOCK.IN) {
+      _dateRecord = DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+      _clockOutTime = dateTime;
+      _clockStatus = WORKCLOCK.OUT;
+    }
+    notifyListeners();
+  }
+
+  resetClock() {
+    _clockInTime = null;
+    _clockOutTime = null;
+    _clockStatus = WORKCLOCK.NOTIN;
     notifyListeners();
   }
 }

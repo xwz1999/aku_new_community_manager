@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/utils/weekdays_to_chinese.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
@@ -40,6 +42,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
     _clockSetState = Timer.periodic(Duration(seconds: 1), (_timer) {
       setState(() {});
     });
+    UserTool.appProvider.initClock();
   }
 
   @override
@@ -77,26 +80,44 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
             64.w.heightBox,
             Row(
               children: [
-                _buildCard(0),
+                _buildCard(0, time: UserTool.appProvider.clockInTime),
                 Spacer(),
-                _buildCard(1)
+                _buildCard(1, time: UserTool.appProvider.clockOutTime)
               ], //上班打卡为‘type’0.下班打卡为1
             ),
             150.w.heightBox,
             _buildClock(),
             65.w.heightBox,
             '今日工时'.text.size(24.sp).bold.color(kTextSubColor).make(),
-            '共10小时13分钟'.text.size(24.sp).bold.color(kTextSubColor).make(),
+            '共$getWorkHours'.text.size(24.sp).bold.color(kTextSubColor).make(),
           ],
         ),
       ),
     );
   }
 
+  clockInOut() {
+    switch (UserTool.appProvider.clockStatus) {
+      case WORKCLOCK.NOTIN:
+        UserTool.appProvider.setClockInTime(DateTime.now());
+        BotToast.showText(text: '上班打卡成功');
+        break;
+      case WORKCLOCK.IN:
+        UserTool.appProvider.setClockOutTime(DateTime.now());
+        BotToast.showText(text: '下班打卡成功');
+        break;
+      case WORKCLOCK.OUT:
+        BotToast.showText(text: '今日已打卡');
+        break;
+      default:
+        BotToast.showText(text: '未知错误');
+    }
+  }
+
   Widget _buildClock() {
     return GestureDetector(
       onTap: () {
-        canTap ? BotToast.showText(text: '打卡成功') : null;
+        canTap ? clockInOut() : null;
       },
       child: Container(
         width: 400.w,
@@ -126,7 +147,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
     );
   }
 
-  Widget _buildCard(int type, {String time}) {
+  Widget _buildCard(int type, {DateTime time}) {
     return Container(
       width: 296.w,
       height: 131.w,
@@ -138,9 +159,10 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          time.isEmptyOrNull
+          time == null
               ? SizedBox()
               : Container(
+                  margin: EdgeInsets.symmetric(vertical: 14.w),
                   width: 22.w,
                   height: 22.w,
                   decoration: BoxDecoration(
@@ -158,7 +180,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: time.isEmptyOrNull
+              children: time == null
                   ? [
                       Center(
                           child: '未打卡'
@@ -176,7 +198,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
                           .color(kTextSubColor)
                           .make(),
                       12.w.heightBox,
-                      DateUtil.formatDateStr(time, format: 'HH:mm:ss')
+                      DateUtil.formatDate(time, format: 'HH:mm:ss')
                           .text
                           .size(32.sp)
                           .bold
@@ -188,5 +210,14 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
         ],
       ),
     );
+  }
+
+ String get getWorkHours {
+    int _time = UserTool.appProvider.clockInTime
+        .difference(UserTool.appProvider.clockOutTime)
+        .inMinutes;
+    int _hour = _time ~/ 60;
+    int _min = _time % 60;
+    return '$_hour小时$_min分钟';
   }
 }
