@@ -246,6 +246,12 @@ class _Manage {
 
   ///管家app 考勤管理：填写加班/请假申请
   String get clockApply => '/user/attendance/apply';
+
+  ///管家app 客户访谈管理：查询所有客户访谈信息
+  String get interviewList => '/user/interview/list';
+
+  ///管家app 客户访谈管理：访谈回
+  String get interviewFeedBack => '/user/interview/feedBack';
 }
 
 class _Upload {
