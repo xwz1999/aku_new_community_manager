@@ -9,6 +9,7 @@ class API {
   static String get resource => '$host/static';
 
   static String image(String path) => '$resource$path';
+  static String file(String path) => '$resource$path';
 
   static const int networkTimeOut = 10000;
   static _Auth auth = _Auth();
@@ -230,6 +231,21 @@ class _Manage {
 
   ///管家app设施设备检查：提交报告
   String get submitFacilitiesCheckInfo => '/user/facilitiesCheck/submitCheck';
+
+  ///管家app 考勤管理：查询当前用户今日打卡记录
+  String get todayClockRecord => '/user/attendance/todayClockRecord';
+
+  ///管家app 考勤管理：上下班打卡
+  String get clockInOut => '/user/attendance/clock';
+
+  ///管家app 考勤管理：打卡记录
+  String get clockRecord => '/user/attendance/clockRecord';
+
+  ///管家app 考勤管理：加班/请假申请记录
+  String get clockApplyRecord => '/user/attendance/applyRecord';
+
+  ///管家app 考勤管理：填写加班/请假申请
+  String get clockApply => '/user/attendance/apply';
 }
 
 class _Upload {

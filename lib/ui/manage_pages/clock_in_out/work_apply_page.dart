@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_date_picker.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class WorkApplyPage extends StatefulWidget {
@@ -21,25 +23,25 @@ class WorkApplyPage extends StatefulWidget {
 class _WorkApplyPageState extends State<WorkApplyPage> {
   int _type = 1; //请假为1 加班为2
 
-  TextEditingController _nameController;
-  TextEditingController _positionController;
-  TextEditingController _phoneController;
-  DateTime _beginTime ;
-  DateTime _endTime ;
+  // TextEditingController _nameController;
+  // TextEditingController _positionController;
+  TextEditingController _reasonController;
+  DateTime _beginTime;
+  DateTime _endTime;
 
   @override
   void initState() {
     super.initState();
-    _nameController = TextEditingController();
-    _positionController = TextEditingController();
-    _phoneController = TextEditingController();
+    // _nameController = TextEditingController();
+    // _positionController = TextEditingController();
+    _reasonController = TextEditingController();
   }
 
   @override
   void dispose() {
-    _nameController?.dispose();
-    _positionController?.dispose();
-    _phoneController?.dispose();
+    // _nameController?.dispose();
+    // _positionController?.dispose();
+    _reasonController?.dispose();
     super.dispose();
   }
 
@@ -52,15 +54,19 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
         padding: EdgeInsets.all(32.w),
         children: [
           _headType(),
-          _inputRowTile('姓名', _nameController),
-          _inputRowTile('职位', _positionController),
-          _inputRowTile('联系方式', _phoneController),
+          _inputRowTile('理由', _reasonController),
           _timePick(),
         ],
       ),
       bottom: AkuBottomButton(
         title: '确认提交',
-        onTap: () {},
+        onTap: () async {
+          bool _result = await ClockFunc.clockApply(
+              _reasonController.text, _type, _beginTime, _endTime);
+          if (_result) {
+            Get.back();
+          }
+        },
       ),
     );
   }
@@ -151,7 +157,7 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
                         : _beginTime,
                     max: _beginTime == null
                         ? DateTime.now().add(Duration(days: 1))
-                        : (_beginTime).add(Duration(days: 1)),
+                        : (_beginTime).add(Duration(days: 7)),
                     mode: CupertinoDatePickerMode.dateAndTime,
                   );
                   if (date != null) {

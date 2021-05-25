@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:aku_community_manager/models/manager/clock_in_out/today_clock_record_model.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
 import 'package:aku_community_manager/utils/weekdays_to_chinese.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
@@ -19,10 +21,11 @@ class ClockInOutMainPage extends StatefulWidget {
   _ClockInOutMainPageState createState() => _ClockInOutMainPageState();
 }
 
-class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
+class _ClockInOutMainPageState extends State<ClockInOutMainPage> with AutomaticKeepAliveClientMixin {
   EasyRefreshController _refreshController;
   Timer _clockSetState;
   DateTime _lastPressed;
+  TodayClockRecordModel _model;
   bool get canTap {
     if (_lastPressed == null ||
         DateTime.now().difference(_lastPressed) > Duration(seconds: 15)) {
@@ -42,7 +45,6 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
     _clockSetState = Timer.periodic(Duration(seconds: 1), (_timer) {
       setState(() {});
     });
-    UserTool.appProvider.initClock();
   }
 
   @override
@@ -59,7 +61,24 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
       firstRefresh: true,
       header: MaterialHeader(),
       controller: _refreshController,
-      onRefresh: () async {},
+      onRefresh: () async {
+        UserTool.appProvider.initClock();
+        _model = await ClockFunc.initClockInfo();
+        if (_model != null) {
+          UserTool.appProvider.resetClock(); //若成功获取今日打卡信息，则先重置打卡状态
+          if (_model.startClockDate != null) {
+            //若有上班打卡信息 则将打卡状态转换为已上班打卡
+            UserTool.appProvider.setClockInTime(_model.clockInTime);
+          }
+
+          if (_model.endClockDate != null) {
+            //若有下班打卡信息，则将打卡状态转换为已下班打卡
+            UserTool.appProvider.setClockOutTime(_model.clockOutTime);
+          }
+        }
+
+        setState(() {});
+      },
       child: Container(
         margin: EdgeInsets.all(32.w),
         padding: EdgeInsets.all(32.w),
@@ -96,14 +115,18 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
     );
   }
 
+  ///打卡函数 根据WORKCLOCK当前状态判断是上班打卡还是下班打卡
   clockInOut() {
+    DateTime _currentTime = DateTime.now();
     switch (UserTool.appProvider.clockStatus) {
       case WORKCLOCK.NOTIN:
-        UserTool.appProvider.setClockInTime(DateTime.now());
+        ClockFunc.clockIn(_model.id, _currentTime);
+        UserTool.appProvider.setClockInTime(_currentTime);
         BotToast.showText(text: '上班打卡成功');
         break;
       case WORKCLOCK.IN:
-        UserTool.appProvider.setClockOutTime(DateTime.now());
+        ClockFunc.clockOut(_model.id, _currentTime);
+        UserTool.appProvider.setClockOutTime(_currentTime);
         BotToast.showText(text: '下班打卡成功');
         break;
       case WORKCLOCK.OUT:
@@ -227,4 +250,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> {
     }
     return '$_hour小时$_min分钟';
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

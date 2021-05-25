@@ -4,14 +4,24 @@ class RulesManageListModel {
   int id;
   String title;
   String content;
+  String fileDocUrl;
+  String fileDocName;
   String releaseDate;
 
-  RulesManageListModel({this.id, this.title, this.content, this.releaseDate});
+  RulesManageListModel(
+      {this.id,
+      this.title,
+      this.content,
+      this.fileDocUrl,
+      this.fileDocName,
+      this.releaseDate});
 
   RulesManageListModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
     content = json['content'];
+    fileDocUrl = json['fileDocUrl'];
+    fileDocName = json['fileDocName'];
     releaseDate = json['releaseDate'];
   }
 
@@ -20,6 +30,8 @@ class RulesManageListModel {
     data['id'] = this.id;
     data['title'] = this.title;
     data['content'] = this.content;
+    data['fileDocUrl'] = this.fileDocUrl;
+    data['fileDocName'] = this.fileDocName;
     data['releaseDate'] = this.releaseDate;
     return data;
   }

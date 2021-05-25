@@ -71,6 +71,8 @@ dependencies:
   shimmer: ^2.0.0-nullsafety.0
   badges: ^2.0.0-nullsafety.1
   equatable: ^2.0.0
+  #打开文件
+  open_file: ^3.2.1
 
 dev_dependencies:
   flutter_test:
