@@ -40,7 +40,7 @@ class _FacilitiesInspectReportPageState
   List<File> _selfPhotos;
   List<File> _scenePhotos;
   String _describtion;
-  int _scene = 0;
+  int _scene = 1;//设施设备状况 1为正常 2为异常
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -144,7 +144,7 @@ class _FacilitiesInspectReportPageState
       children: [
         Row(
           children: [
-            '2.$title'.text.color(kTextPrimaryColor).size(32.sp).make()
+            '$title'.text.color(kTextPrimaryColor).size(32.sp).make()
           ],
         ),
         32.w.heightBox,
@@ -152,20 +152,20 @@ class _FacilitiesInspectReportPageState
           children: [
             AkuSingleCheckButton(
               text: '正常',
-              value: 0,
+              value: 1,
               gropValue: _scene,
               onPressed: () {
-                _scene = 0;
+                _scene = 1;
                 setState(() {});
               },
             ),
             80.w.widthBox,
             AkuSingleCheckButton(
               text: '异常',
-              value: 1,
+              value: 2,
               gropValue: _scene,
               onPressed: () {
-                _scene = 1;
+                _scene = 2;
                 setState(() {});
               },
             ),
