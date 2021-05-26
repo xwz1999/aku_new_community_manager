@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -90,17 +91,23 @@ class AppProvider extends ChangeNotifier {
   DateTime get clockOutTime => _clockOutTime;
 
   initClock() {
+    DateUtil.isToday(_dateRecord.millisecondsSinceEpoch.abs());
+    // if (_dateRecord == null ||
+    //     (_dateRecord !=
+    //         DateTime.utc(DateTime.now().year, DateTime.now().month,
+    //             DateTime.now().day))) {
+    //   resetClock();
+    // }
+
     if (_dateRecord == null ||
-        (_dateRecord !=
-            DateTime.utc(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day))) {
+        (!DateUtils.isSameDay(_dateRecord, DateTime.now()))) {
       resetClock();
     }
   }
 
   setClockInTime(DateTime dateTime) {
     if (_clockStatus == WORKCLOCK.NOTIN) {
-      _dateRecord = DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+      _dateRecord = dateTime;
       _clockInTime = dateTime;
       _clockStatus = WORKCLOCK.IN;
     }
@@ -108,14 +115,18 @@ class AppProvider extends ChangeNotifier {
   }
 
   setClockOutTime(DateTime dateTime) {
+    // if (_dateRecord != null &&
+    //     (_dateRecord !=
+    //         DateTime.utc(DateTime.now().year, DateTime.now().month,
+    //             DateTime.now().day))) {
+    //   resetClock();
+    // }
     if (_dateRecord != null &&
-        (_dateRecord !=
-            DateTime.utc(DateTime.now().year, DateTime.now().month,
-                DateTime.now().day))) {
+        (!DateUtils.isSameDay(_dateRecord, DateTime.now()))) {
       resetClock();
     }
     if (_clockStatus == WORKCLOCK.IN) {
-      _dateRecord = DateTime.utc(dateTime.year, dateTime.month, dateTime.day);
+      _dateRecord = dateTime;
       _clockOutTime = dateTime;
       _clockStatus = WORKCLOCK.OUT;
     }
