@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_select_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/interview/interview_page.dart';
 import 'package:flutter/material.dart';
 
@@ -62,7 +63,8 @@ class _SearchWorkOrderpageState extends State<SearchWorkOrderPage> {
     AppApplication(
         '卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage()),
     AppApplication('考勤管理', R.ASSETS_PLACEHOLDER_WEBP, () => ClockInOutPage()),
-    AppApplication('访谈管理', R.ASSETS_PLACEHOLDER_WEBP, () => InterviewPage())
+    AppApplication('访谈管理', R.ASSETS_PLACEHOLDER_WEBP, () => InterviewPage()),
+    AppApplication('家政服务', R.ASSETS_PLACEHOLDER_WEBP, () => HouseKeepingPage()),
   ];
 
   List<AppApplication> _displayApps = [];

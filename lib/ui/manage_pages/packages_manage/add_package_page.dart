@@ -16,6 +16,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class AddPackagePage extends StatefulWidget {
   AddPackagePage({Key key}) : super(key: key);
@@ -91,7 +92,7 @@ class _AddPackagePageState extends State<AddPackagePage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32.w),
+          padding: EdgeInsets.all(32.w),
           child: Column(
             children: [
               _inputRowTile('收件人姓名', _nameController),
@@ -101,7 +102,7 @@ class _AddPackagePageState extends State<AddPackagePage> {
               _inputRowTile('包裹单号', _codeController,
                   formatters: [FilteringTextInputFormatter.digitsOnly]),
               _inputRowTile('放置位置', _placeController),
-            ],
+            ].sepWidget(separate: 40.w.heightBox),
           ),
         ),
       ),
@@ -153,14 +154,13 @@ class _AddPackagePageState extends State<AddPackagePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          40.w.heightBox,
           title.text.size(28.sp).color(kTextPrimaryColor).make(),
           32.w.heightBox,
           TextField(
             inputFormatters: formatters,
+            controller: controller,
             textAlign: TextAlign.start,
             onChanged: (value) {
-              controller.text = value;
               setState(() {});
             },
             decoration: InputDecoration(

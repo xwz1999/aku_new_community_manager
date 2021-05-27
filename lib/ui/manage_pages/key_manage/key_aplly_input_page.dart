@@ -12,6 +12,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class KeyApplyInputPage extends StatefulWidget {
   KeyApplyInputPage({Key key}) : super(key: key);
@@ -80,7 +81,7 @@ class _KeyApplyInputPageState extends State<KeyApplyInputPage> {
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 32.w),
+          padding: EdgeInsets.all( 32.w),
           child: Column(
             children: [
               _inputRowTile('申请人姓名', _nameController),
@@ -88,7 +89,7 @@ class _KeyApplyInputPageState extends State<KeyApplyInputPage> {
                   formatters: [FilteringTextInputFormatter.digitsOnly]),
               _inputRowTile('身份', _roleController),
               _inputRowTile('对应设备位置', _placeController),
-            ],
+            ].sepWidget(separate: 40.w.heightBox),
           ),
         ),
       ),
@@ -106,14 +107,13 @@ class _KeyApplyInputPageState extends State<KeyApplyInputPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          40.w.heightBox,
           title.text.size(28.sp).color(kTextPrimaryColor).make(),
           32.w.heightBox,
           TextField(
             inputFormatters: formatters,
+            controller: controller,
             textAlign: TextAlign.start,
             onChanged: (value) {
-              controller.text = value;
               setState(() {});
             },
             decoration: InputDecoration(

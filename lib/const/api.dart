@@ -250,8 +250,26 @@ class _Manage {
   ///管家app 客户访谈管理：查询所有客户访谈信息
   String get interviewList => '/user/interview/list';
 
-  ///管家app 客户访谈管理：访谈回
+  ///管家app 客户访谈管理：访谈回复
   String get interviewFeedBack => '/user/interview/feedBack';
+
+  ///管家app 一键报警：添加管家app报警记录
+  String get insertAlarmRecord => '/user/alarm/insertAlarmRecord';
+
+  ///管家app 家政服务：查询所有的家政服务信息
+  String get houseKeepingList => '/user/housekeeping/list';
+
+  ///管家app 楼栋查询：查询所有楼栋id和name(管家app)
+  String get allBuilding => '/user/personalData/findAll';
+
+  ///管家app 单元查询：根据楼栋id查询对应的单元id和name(管家app)
+  String get allUnit => '/user/personalData/findByBuildingId';
+
+  ///管家app 单元查询：根据单元id查询对应的房产id和name(管家app)
+  String get allHous => '/user/personalData/findByBuildingUnitId';
+
+  ///管家app 家政服务管理：添加家政服务信息
+  String get addHouseKeeping => '/user/housekeeping/insert';
 }
 
 class _Upload {

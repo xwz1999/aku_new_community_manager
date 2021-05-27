@@ -2,6 +2,8 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -191,7 +193,10 @@ class _WarningPageState extends State<WarningPage> {
                 alignment: Alignment.center,
                 child: AkuCupertinoButton(
                   minWidth: 0,
-                  onPressed: () {
+                  onPressed: () async {
+                     await NetUtil()
+                        .post(API.manage.insertAlarmRecord, showMessage: true);
+
                     launch('tel:110');
                     // Get.to(()=>WarningSubPage());
                   },
