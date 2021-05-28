@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/models/manager/clock_in_out/clock_record_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -39,7 +40,9 @@ class _ClockInOutRecordCardState extends State<ClockInOutRecordCard> {
                   .make(),
             ],
           ),
-          40.w.heightBox,
+          16.w.heightBox,
+          AkuDivider.horizontal(),
+          24.w.heightBox,
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -95,14 +98,14 @@ class _ClockInOutRecordCardState extends State<ClockInOutRecordCard> {
                         width: 16.w,
                         height: 16.w,
                         decoration: BoxDecoration(
-                          color: widget.model.startClockDate == null
+                          color: widget.model.endClockDate == null
                               ? Color(0xFFE60E0E)
                               : Color(0xFF3F8FFE),
                           borderRadius: BorderRadius.circular(8.w),
                         ),
                       ),
                       8.w.widthBox,
-                      (widget.model.startClockDate == null ? '下班未打卡' : '下班打卡时间')
+                      (widget.model.endClockDate == null ? '下班未打卡' : '下班打卡时间')
                           .text
                           .size(28.sp)
                           .color(kTextPrimaryColor)
@@ -110,7 +113,7 @@ class _ClockInOutRecordCardState extends State<ClockInOutRecordCard> {
                           .make(),
                     ],
                   ),
-                  ...widget.model.startClockDate == null
+                  ...widget.model.endClockDate == null
                       ? []
                       : [
                           16.w.heightBox,

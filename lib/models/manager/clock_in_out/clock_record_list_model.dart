@@ -46,13 +46,13 @@ class ClockRecordListModel {
   }
 
   String get startClockString =>
-      DateUtil.formatDateStr(this.startClockDate, format: 'HH:mm:ss');
+      DateUtil.formatDateStr(this.startClockDate??'', format: 'HH:mm:ss');
 
   String get endClockString =>
-      DateUtil.formatDateStr(this.endClockDate, format: 'HH:mm:ss');
+      DateUtil.formatDateStr(this.endClockDate??'', format: 'HH:mm:ss');
 
   String get clockDateString =>
-      DateUtil.formatDateStr(this.startClockDate, format: 'yyyy.MM.dd');
+      DateUtil.formatDateStr(this.createDate??'', format: 'yyyy.MM.dd');
   String get weekDay => WeekDaysToChinese.fromInt(
-      DateUtil.getDateTime(this.startClockDate).weekday);
+      DateUtil.getDateTime(this.createDate??'')?.weekday);
 }
