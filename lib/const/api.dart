@@ -270,6 +270,12 @@ class _Manage {
 
   ///管家app 家政服务管理：添加家政服务信息
   String get addHouseKeeping => '/user/housekeeping/insert';
+
+  ///管家app 装修管理：查询所有的装修管理信息
+  String get newRenovationList => '/user/userDecorationNew/list';
+
+  ///管家app 新版装修：提交检查报告
+  String get submitRenovation => '/user/userDecorationNew/submitReport';
 }
 
 class _Upload {

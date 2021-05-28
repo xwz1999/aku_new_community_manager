@@ -91,13 +91,10 @@ class AppProvider extends ChangeNotifier {
   DateTime get clockOutTime => _clockOutTime;
 
   initClock() {
-    DateUtil.isToday(_dateRecord.millisecondsSinceEpoch.abs());
-    // if (_dateRecord == null ||
-    //     (_dateRecord !=
-    //         DateTime.utc(DateTime.now().year, DateTime.now().month,
-    //             DateTime.now().day))) {
-    //   resetClock();
-    // }
+    if (_dateRecord == null ||
+        (DateUtil.isToday(_dateRecord.millisecondsSinceEpoch.abs()))) {
+      resetClock();
+    }
 
     if (_dateRecord == null ||
         (!DateUtils.isSameDay(_dateRecord, DateTime.now()))) {
