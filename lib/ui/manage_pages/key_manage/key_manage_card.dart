@@ -101,7 +101,7 @@ class _KeyManageCardState extends State<KeyManageCard> {
       case 2:
         button = _bottomButton('归还钥匙', () async {
           BaseModel baseModel = await NetUtil()
-              .post(API.manage.returnKey, params: {"keyId": widget.model.id});
+              .get(API.manage.returnKey, params: {"keyId": widget.model.id});
           BotToast.showText(text: baseModel.message);
           widget.callRefresh();
         }, Color(0xFFFFC40C), Colors.black);

@@ -19,7 +19,7 @@ class _FacilitiesSelectPageState extends State<FacilitiesSelectPage> {
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '借还管理',
+      title: '设施检查',
       body: ListView(
         padding: EdgeInsets.symmetric(vertical: 40.w, horizontal: 36.w),
         children: [

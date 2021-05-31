@@ -20,7 +20,7 @@ class FacilitiesPage extends StatefulWidget {
 class _FacilitiesPageState extends State<FacilitiesPage>
     with TickerProviderStateMixin {
   List<String> get _tabs {
-    return ['待检查', '未完成', '已完成'];
+    return ['待检查', '已完成', '未完成'];
   }
 
   TabController _tabController;

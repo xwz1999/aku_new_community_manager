@@ -109,16 +109,8 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
           _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '任务时间',
               '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
         ];
+
       case 1:
-        return [
-          15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail,
-              color: Colors.red),
-          15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',
-              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
-        ];
-      case 2:
         return [
           15.w.heightBox,
           _buildTile(
@@ -133,6 +125,15 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
               '检查提交时间',
               DateUtil.formatDateStr(widget.model.checkDate,
                   format: 'yyyy-MM-dd HH:mm')),
+        ];
+      case 2:
+        return [
+          15.w.heightBox,
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail,
+              color: Colors.red),
+          15.w.heightBox,
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',
+              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
         ];
       default:
         return [];

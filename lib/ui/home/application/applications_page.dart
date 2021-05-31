@@ -232,6 +232,7 @@ class _ApplicationPageState extends State<ApplicationPage>
             child: Material(
               color: Colors.white,
               child: PageView(
+                physics: NeverScrollableScrollPhysics(),
                 controller: _pageController,
                 scrollDirection: Axis.vertical,
                 onPageChanged: (index) {
@@ -244,7 +245,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                     ),
-                    physics: NeverScrollableScrollPhysics(),
+                    // physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final application = _recommandApplications[index];
                       return _buildBottomAppCard(application);
@@ -255,7 +256,7 @@ class _ApplicationPageState extends State<ApplicationPage>
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                     ),
-                    physics: NeverScrollableScrollPhysics(),
+                    // physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final application = _wisdomApplications[index];
                       return _buildBottomAppCard(application);
