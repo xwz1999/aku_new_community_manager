@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/agreements/about_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -55,6 +56,9 @@ class _SettingsPageState extends State<SettingsPage> {
           AkuTile(
             title: Text('关于我们'),
             arrow: true,
+            onTap: () {
+              Get.to(() => AboutPage());
+            },
           ),
           Divider(height: 1.w),
           AkuTile(
