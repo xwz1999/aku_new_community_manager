@@ -82,6 +82,7 @@ dev_dependencies:
   #json序列化
   json_serializable: ^4.1.1
   build_runner: ^2.0.3
+  json_model: 
 
 flutter:
   uses-material-design: true

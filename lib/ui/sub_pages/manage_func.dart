@@ -95,4 +95,12 @@ class ManageFunc {
     });
     return baseModel;
   }
+
+  static Future getInspectionPointCheckDetailUnbegin(int planPointId) async{
+    BaseModel baseModel =
+        await NetUtil().get(API.manage.inspectionPointCheckDetailUnbegin, params: {
+      "planPointId": planPointId,
+    });
+    return baseModel;
+  }
 }

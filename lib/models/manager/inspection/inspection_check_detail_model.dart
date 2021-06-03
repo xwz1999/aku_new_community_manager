@@ -70,6 +70,16 @@ class InspectionCheckDetialModel {
     }
     return data;
   }
+
+   String get inspectionPattern {
+    switch (this.type) {
+      case 1:
+        return '巡检模式1';
+        break;
+      default:
+        return '未知';
+    }
+  }
 }
 
 class CheckFBIVoList {
@@ -123,4 +133,6 @@ class FaceImg {
     data['sort'] = this.sort;
     return data;
   }
+
+  
 }

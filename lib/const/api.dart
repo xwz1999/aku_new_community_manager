@@ -169,6 +169,10 @@ class _Manage {
   String get inspectionPointCheckDetail =>
       '/user/inspection/findCheckDetailById';
 
+  ///巡检管理：查询计划巡检点信息（当前巡检执行计划状态为1.待巡检，4.未巡检）
+  String get inspectionPointCheckDetailUnbegin =>
+      '/user/inspection/findCheckDetailById2';
+
   ///待办事项：查询处理事项的数量
   String get findItemNum => '/user/backlog/findItemNum';
 

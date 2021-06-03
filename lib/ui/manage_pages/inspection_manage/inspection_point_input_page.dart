@@ -101,7 +101,6 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 if (baseModel.status) {
                   BotToast.showText(text: baseModel.message);
                   Get.to(() => InspectionPointSubmitPage());
-                
                 } else {
                   BotToast.showText(text: baseModel.message);
                 }
@@ -385,7 +384,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 Spacer(),
                 Text(
-                  '${widget.qrModel.type}',
+                  '${widget.qrModel.inspectionPattern}',
                   style: AppStyle().primaryStyle,
                 ),
               ],

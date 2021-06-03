@@ -46,15 +46,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
     _easyRefreshController = EasyRefreshController();
   }
 
-  String inspectionPattern(int type) {
-    switch (type) {
-      case 1:
-        return '巡检模式1';
-        break;
-      default:
-        return '';
-    }
-  }
+ 
 
   @override
   void dispose() {
@@ -72,8 +64,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
             MaterialHeader(valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
         firstRefresh: true,
         onRefresh: () async {
-          BaseModel baseModel = await ManageFunc.getInspectionPointCheckDetail(
-              widget.executePointId);
+          BaseModel baseModel = await _getModels;
           if (baseModel.data != null) {
             _detialModel = InspectionCheckDetialModel.fromJson(baseModel.data);
             _onload = false;
@@ -98,6 +89,22 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
               ),
       ),
     );
+  }
+
+  Future get _getModels async {
+    switch (widget.status) {
+      case 1:
+        return ManageFunc.getInspectionPointCheckDetailUnbegin(
+            widget.executePointId);
+      case 2:
+      case 3:
+        return ManageFunc.getInspectionPointCheckDetail(widget.executePointId);
+      case 4:
+        return ManageFunc.getInspectionPointCheckDetailUnbegin(
+            widget.executePointId);
+      default:
+        return ManageFunc.getInspectionPointCheckDetail(widget.executePointId);
+    }
   }
 
   Widget _selfPhotoCard() {
@@ -430,7 +437,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 ),
                 Spacer(),
                 Text(
-                  '${inspectionPattern(model.type)}',
+                  '${model.inspectionPattern}',
                   style: AppStyle().primaryStyle,
                 ),
               ],

@@ -527,7 +527,7 @@ class _InspectionManageDetailsPageState
                   BotToast.showText(text: baseModel.message);
                 } else {
                   _canUploadLocation = false;
-                  //TODO:绘制折线
+                  //绘制折线
                   _points.add(argument.latLng);
                   if (_points.length % 5 == 0) {
                     if (_polylines.isEmpty) {
