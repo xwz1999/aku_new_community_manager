@@ -150,7 +150,6 @@ class NetUtil {
   }
 
   _parseErr(DioError err) {
-    final userProvider = Provider.of<UserProvider>(Get.context, listen: false);
     LoggerData.addData(err);
     _makeToast(String message) {
       BotToast.showText(text: '$message\_${err?.response?.statusCode ?? ''}');

@@ -21,7 +21,8 @@ class ClockInOutMainPage extends StatefulWidget {
   _ClockInOutMainPageState createState() => _ClockInOutMainPageState();
 }
 
-class _ClockInOutMainPageState extends State<ClockInOutMainPage> with AutomaticKeepAliveClientMixin {
+class _ClockInOutMainPageState extends State<ClockInOutMainPage>
+    with AutomaticKeepAliveClientMixin {
   EasyRefreshController _refreshController;
   Timer _clockSetState;
   DateTime _lastPressed;
@@ -57,6 +58,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage> with AutomaticK
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return EasyRefresh(
       firstRefresh: true,
       header: MaterialHeader(),

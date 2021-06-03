@@ -32,6 +32,7 @@ class _NewRenovationState extends State<NewRenovationView>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BeeListView(
         path: API.manage.newRenovationList,
         controller: _refreshController,

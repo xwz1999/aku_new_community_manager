@@ -60,7 +60,6 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
     return AkuScaffold(
       title: '报事报修',
       appBarBottom: PreferredSize(

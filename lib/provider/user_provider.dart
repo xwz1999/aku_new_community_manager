@@ -2,6 +2,7 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,7 +13,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/models/user/user_profile_model.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/utils/hive_store.dart';
@@ -20,9 +20,7 @@ import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
-import 'package:aku_community_manager/models/user/user_info_model.dart'
-    as USER_INFO;
-
+    
 //登录状态管理
 class UserProvider extends ChangeNotifier {
   bool _isLogin = false;
@@ -45,8 +43,8 @@ class UserProvider extends ChangeNotifier {
 
   UserProfileModel _profileModel;
   UserProfileModel get profileModel => _profileModel;
-  USER_INFO.UserInfoModel _infoModel;
-  USER_INFO.UserInfoModel get infoModel => _infoModel;
+  UserInfoModel _infoModel;
+  UserInfoModel get infoModel => _infoModel;
 
   ///更新用户profile
   Future<UserProfileModel> updateProfile() async {
@@ -59,13 +57,13 @@ class UserProvider extends ChangeNotifier {
       return UserProfileModel.fromJson(model.data);
   }
 
-  Future<USER_INFO.UserInfoModel> updateUserInfo() async {
+  Future<UserInfoModel> updateUserInfo() async {
     BaseModel model = await NetUtil().get(API.user.info);
 
     if (model == null)
       return null;
     else {
-      var userModel = USER_INFO.UserInfoModel.fromJson(model.data);
+      var userModel = UserInfoModel.fromJson(model.data);
       JPush().setAlias(userModel.id.toString());
       return userModel;
     }
@@ -92,15 +90,9 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  UserInfoModel _userInfoModel = UserInfoModel.empty();
 
-  UserInfoModel get userInfoModel => _userInfoModel;
 
-  setUserInfo(UserInfoModel model) {
-    _userInfoModel = model;
-    _isSigned = true;
-    notifyListeners();
-  }
+  
 
   ///修改昵称
   setNickName(String name) {

@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/mock_models/users/user_info_model.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/sub_pages/borrow_manager/all_borrow_goods.dart';
@@ -23,8 +22,7 @@ class BorrowManagerPage extends StatefulWidget {
 
 class _BorrowManagerPageState extends State<BorrowManagerPage>
     with TickerProviderStateMixin {
-  USER_ROLE get role =>
-      Provider.of<UserProvider>(context, listen: false).userInfoModel.role;
+  
   TabController _tabController;
   List<String> get _tabs {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
