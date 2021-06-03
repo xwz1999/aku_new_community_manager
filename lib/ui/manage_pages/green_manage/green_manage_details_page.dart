@@ -1,9 +1,9 @@
 // Flutter imports:
 import 'package:aku_community_manager/models/manager/green_manage/green_manage_list_model.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/aku_ui.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:

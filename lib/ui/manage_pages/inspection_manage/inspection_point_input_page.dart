@@ -3,10 +3,10 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_submit_page.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/aku_ui.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

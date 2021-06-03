@@ -1,10 +1,10 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
-import 'package:aku_ui/aku_ui.dart';
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:badges/badges.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';

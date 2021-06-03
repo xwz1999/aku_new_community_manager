@@ -4,10 +4,10 @@ import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_sele
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/interview/interview_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/decoration_manager/new_renovation/new_renovation_page.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

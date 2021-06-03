@@ -1,14 +1,16 @@
-import 'package:aku_community_manager/models/manager/interview/interview_list_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
-import 'package:aku_community_manager/ui/manage_pages/interview/interview_detail_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/interview/interview_feedback_page.dart';
-import 'package:aku_ui/aku_ui.dart';
+
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import 'package:aku_community_manager/models/manager/interview/interview_list_model.dart';
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/interview/interview_detail_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/interview/interview_feedback_page.dart';
 
 class InterviewCard extends StatefulWidget {
   final InterviewListModel model;

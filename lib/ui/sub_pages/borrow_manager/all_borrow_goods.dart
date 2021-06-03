@@ -1,8 +1,8 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

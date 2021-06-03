@@ -2,11 +2,11 @@
 import 'dart:io';
 
 // Flutter imports:
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';

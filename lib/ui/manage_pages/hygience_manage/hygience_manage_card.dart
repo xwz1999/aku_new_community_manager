@@ -2,13 +2,13 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
 import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_detail_page.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 

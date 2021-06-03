@@ -1,8 +1,7 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

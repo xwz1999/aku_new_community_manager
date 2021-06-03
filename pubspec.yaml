@@ -58,12 +58,9 @@ dependencies:
 
   power_logger: ^1.0.1-nullsafety.1
   logger: ^1.0.0
-  aku_ui:
-    git:
-      url: https://git.oa00.com/flutter_pub/aku_ui
 
-  hive: ^1.4.4+1
-  hive_flutter: ^0.3.1
+  hive: ^2.0.4
+  hive_flutter: ^1.0.0
   jpush_flutter:
     git:
       url: https://git.oa00.com/flutter_third/jpush-flutter-plugin

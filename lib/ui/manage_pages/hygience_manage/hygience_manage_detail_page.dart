@@ -1,8 +1,8 @@
 import 'package:aku_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_ui/common_widgets/aku_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/const/resource.dart';

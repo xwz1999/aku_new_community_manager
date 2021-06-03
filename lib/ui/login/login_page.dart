@@ -2,11 +2,11 @@
 import 'dart:ui';
 
 // Flutter imports:
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:aku_ui/common_widgets/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:extended_text/extended_text.dart';
 import 'package:get/route_manager.dart';
