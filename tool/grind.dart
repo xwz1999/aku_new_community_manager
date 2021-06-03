@@ -51,3 +51,8 @@ void sort() {
 void format() {
   DartFmt.format(libDir);
 }
+
+@Task('生成model')
+void gen() async {
+  await Pub.run('build_runner', arguments: ['build']);
+}
