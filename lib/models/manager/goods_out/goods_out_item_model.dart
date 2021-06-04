@@ -12,19 +12,19 @@ import 'package:common_utils/common_utils.dart';
 /// * articleOutName	出户物品
 /// * expectedTime	预计出户时间
 class GoodsOutItemModel {
-  int id;
+  int? id;
 
   ///状态(1.待出门，2.已出门，3.驳回申请)
-  int status;
-  String roomName;
-  String applicantName;
+  int? status;
+  String? roomName;
+  String? applicantName;
 
   ///	身份（1业主，2亲属，3租客）
-  int identity;
-  String articleOutName;
-  String expectedTime;
+  int? identity;
+  String? articleOutName;
+  String? expectedTime;
 
-  DateTime get expected => DateUtil.getDateTime(expectedTime);
+  DateTime? get expected => DateUtil.getDateTime(expectedTime!);
 
   ///状态(1.待出门，2.已出门，3.驳回申请)
   String get statusValue {
@@ -64,7 +64,7 @@ class GoodsOutItemModel {
   }
 
   GoodsOutItemModel(
-      {this.id,
+      {required this.id,
       this.status,
       this.roomName,
       this.applicantName,

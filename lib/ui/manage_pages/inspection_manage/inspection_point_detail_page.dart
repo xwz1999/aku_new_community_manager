@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -20,15 +22,15 @@ import 'package:aku_community_manager/utils/network/base_model.dart';
 
 class InspectionPointDetailPage extends StatefulWidget {
   final int executePointId;
-  final String executeName;
+  final String? executeName;
   final bool hasScan;
   final int status;
   InspectionPointDetailPage({
-    Key key,
-    this.executePointId,
+    Key? key,
+    required this.executePointId,
     this.executeName,
-    @required this.hasScan,
-    this.status,
+    /*required*/ required this.hasScan,
+    required this.status,
   }) : super(key: key);
 
   @override
@@ -38,8 +40,8 @@ class InspectionPointDetailPage extends StatefulWidget {
 
 class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
   bool _onload = true;
-  EasyRefreshController _easyRefreshController;
-  InspectionCheckDetialModel _detialModel;
+  EasyRefreshController? _easyRefreshController;
+  late InspectionCheckDetialModel _detialModel;
   @override
   void initState() {
     super.initState();
@@ -64,11 +66,11 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
             MaterialHeader(valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
         firstRefresh: true,
         onRefresh: () async {
-          BaseModel baseModel = await _getModels;
+          BaseModel baseModel = await (_getModels );
           if (baseModel.data != null) {
             _detialModel = InspectionCheckDetialModel.fromJson(baseModel.data);
             _onload = false;
-            _easyRefreshController.finishLoad(success: false, noMore: true);
+            _easyRefreshController!.finishLoad(success: false, noMore: true);
           }
           setState(() {});
         },
@@ -80,7 +82,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                   16.w.heightBox,
                   _inspectionHeadCard(_detialModel),
                   16.w.heightBox,
-                  ..._detialModel.checkFBIVoList
+                  ..._detialModel.checkFBIVoList!
                       .map((e) => _bodyCard(e))
                       .toList(),
                   _selfPhotoCard(),
@@ -124,7 +126,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: FadeInImage.assetNetwork(
                     fit: BoxFit.fill,
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(ImgModel.first(_detialModel.faceImg))),
+                    image: API.image(ImgModel.first(_detialModel.faceImg)!)),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,
@@ -176,7 +178,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: FadeInImage.assetNetwork(
                     fit: BoxFit.fill,
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(ImgModel.first(_detialModel.spaceImg))),
+                    image: API.image(ImgModel.first(_detialModel.spaceImg)!)),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,
@@ -301,7 +303,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                   ),
                   padding:
                       EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
-                  child: (model?.remakes ?? '')
+                  child: (model.remakes ?? '')
                       .text
                       .color(kTextPrimaryColor)
                       .size(28.sp)
@@ -347,7 +349,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  InspectionUtils.status[widget.status].text
+                  InspectionUtils.status[widget.status]!.text
                       .color(InspectionUtils.color(widget.status))
                       .bold
                       .size(28.sp)
@@ -375,7 +377,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 ),
                 36.w.widthBox,
                 Text(
-                  widget.executeName,
+                  widget.executeName!,
                   maxLines: 2,
                   textAlign: TextAlign.right,
                   style: AppStyle().primaryStyle,
@@ -397,7 +399,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 ),
                 Spacer(),
                 Text(
-                  model.code,
+                  model.code!,
                   style: AppStyle().primaryStyle,
                 )
               ],
@@ -460,7 +462,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                         ),
                         Spacer(),
                         Text(
-                          '${DateUtil.formatDateStr(model.completeDate, format: "yyyy-MM-dd HH:mm")}',
+                          '${DateUtil.formatDateStr(model.completeDate!, format: "yyyy-MM-dd HH:mm")}',
                           style: AppStyle().primaryStyle,
                         ),
                       ],

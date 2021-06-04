@@ -22,8 +22,8 @@ import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_m
 class HyginecManageCard extends StatefulWidget {
   final int index;
   final HygienceListModel model;
-  final VoidCallback callRefresh;
-  HyginecManageCard({Key key, this.index, this.model, this.callRefresh})
+  final VoidCallback? callRefresh;
+  HyginecManageCard({Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
               child: Row(
                 children: [
                   Text(
-                    widget.model.hygieneAreaName,
+                    widget.model.hygieneAreaName!,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 32.w,
@@ -85,7 +85,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    widget.model.content,
+                    widget.model.content!,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -105,7 +105,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    widget.model.directorName,
+                    widget.model.directorName!,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -162,10 +162,10 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                         .post(API.manage.hygienceComplete, params: {
                       "id": widget.model.id,
                     });
-                    if (baseModel.status) {
-                      widget.callRefresh();
+                    if (baseModel.status!) {
+                      widget.callRefresh!();
                     }
-                    BotToast.showText(text: baseModel.message);
+                    BotToast.showText(text: baseModel.message!);
                   },
                 )
               ],

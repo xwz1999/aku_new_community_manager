@@ -17,11 +17,11 @@ import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
 
 class AkuPickImageWidget extends StatefulWidget {
-  final double size;
+  final double? size;
   final Function(List<File> files) onChanged;
   final String description;
   AkuPickImageWidget(
-      {Key key, this.size, this.onChanged, this.description = '上传照片'})
+      {Key? key, this.size, required this.onChanged, this.description = '上传照片'})
       : super(key: key);
 
   @override
@@ -34,12 +34,12 @@ class _AkuPickImageWidgetState extends State<AkuPickImageWidget> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        ..._files?.map((e) => showImage(e))?.toList(),
+        ..._files.map((e) => showImage(e)).toList(),
         GestureDetector(
           onTap: () async {
             await akuPickImage().then(
               (value) => _files.add(
-                File(value.path),
+                File(value!.path),
               ),
             );
             widget.onChanged(_files);

@@ -23,8 +23,8 @@ import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_
 class GreenManageCard extends StatefulWidget {
   final int index;
   final GreenManageListModel model;
-  final VoidCallback callRefresh;
-  GreenManageCard({Key key, this.index, this.model, this.callRefresh})
+  final VoidCallback? callRefresh;
+  GreenManageCard({Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -51,17 +51,17 @@ class _GreenManageCardState extends State<GreenManageCard> {
               child: Row(
                 children: [
                   Text(
-                    widget.model.greenAreaName,
+                    widget.model.greenAreaName!,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 32.w,
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  GreenManageMap.statusString(widget.model.status)
+                  GreenManageMap.statusString(widget.model.status!)
                       .text
                       .size(28.sp)
-                      .color(GreenManageMap.statusColor(widget.model.status))
+                      .color(GreenManageMap.statusColor(widget.model.status!))
                       .bold
                       .make(),
                 ],
@@ -86,7 +86,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    widget.model.content,
+                    widget.model.content!,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -106,7 +106,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
                       )),
                   Spacer(),
                   Text(
-                    widget.model.directorName,
+                    widget.model.directorName!,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -163,10 +163,10 @@ class _GreenManageCardState extends State<GreenManageCard> {
                         .post(API.manage.greenManageComplete, params: {
                       "id": widget.model.id,
                     });
-                    if (baseModel.status) {
-                      widget.callRefresh();
+                    if (baseModel.status!) {
+                      widget.callRefresh!();
                     }
-                    BotToast.showText(text: baseModel.message);
+                    BotToast.showText(text: baseModel.message!);
                   },
                 )
               ],

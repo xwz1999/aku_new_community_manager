@@ -1,11 +1,11 @@
 class DispatchReportModel {
-  int dispatchListId;
-  int workOrderTyoe;
-  int workOrderTypeDetail;
-  int workOrderTimeLimit;
-  int type;
-  int operato;
-  String remark;
+  int? dispatchListId;
+  int? workOrderTyoe;
+  int? workOrderTypeDetail;
+  int? workOrderTimeLimit;
+  int? type;
+  int? operato;
+  String? remark;
 
   DispatchReportModel.zero() {
     dispatchListId = -1;
@@ -17,7 +17,7 @@ class DispatchReportModel {
     remark = '';
   }
   DispatchReportModel(
-      {this.dispatchListId,
+      {required this.dispatchListId,
       this.operato,
       this.remark,
       this.type,

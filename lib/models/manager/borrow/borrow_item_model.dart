@@ -2,17 +2,17 @@
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class BorrowItemModel {
-  int id;
-  String name;
-  int borrowNum;
-  int remainingNum;
-  int quantity;
-  List<ImgModel> imgUrls;
+  int? id;
+  String? name;
+  int? borrowNum;
+  int? remainingNum;
+  int? quantity;
+  List<ImgModel>? imgUrls;
 
-  ImgModel get firstImg => imgUrls.isEmpty ? null : imgUrls.first;
+  ImgModel? get firstImg => imgUrls!.isEmpty ? null : imgUrls!.first;
 
   BorrowItemModel(
-      {this.id,
+      {required this.id,
       this.name,
       this.borrowNum,
       this.remainingNum,
@@ -26,9 +26,9 @@ class BorrowItemModel {
     remainingNum = json['remainingNum'];
     quantity = json['quantity'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgModel>();
+      imgUrls = [];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgModel.fromJson(v));
+        imgUrls!.add(new ImgModel.fromJson(v));
       });
     } else
       imgUrls = [];
@@ -42,7 +42,7 @@ class BorrowItemModel {
     data['remainingNum'] = this.remainingNum;
     data['quantity'] = this.quantity;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }

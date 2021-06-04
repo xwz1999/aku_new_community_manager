@@ -8,19 +8,19 @@ class AkuCupertinoButton extends CupertinoButton {
   final EdgeInsetsGeometry padding;
   final double radius;
   final double minHeight;
-  final Color nullColor;
+  final Color? nullColor;
   final double minWidth;
 
   AkuCupertinoButton({
-    Key key,
-    @required this.onPressed,
-    @required this.child,
+    Key? key,
+    /*required*/ required this.onPressed,
+    /*required*/ required this.child,
     this.color = Colors.transparent,
     this.padding = EdgeInsets.zero,
     this.radius = 0,
     this.minHeight = 0,
     this.nullColor,
-    this.minWidth,
+    required this.minWidth,
   }) : super(
           key: key,
           child: Container(

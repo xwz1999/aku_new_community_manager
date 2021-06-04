@@ -8,12 +8,12 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 
 class AkuTitleBox extends StatelessWidget {
   final String title;
-  final Widget suffix;
+  final Widget? suffix;
   final double spacing;
-  final List<Widget> children;
+  final List<Widget>? children;
   const AkuTitleBox({
-    Key key,
-    @required this.title,
+    Key? key,
+    /*required*/ required this.title,
     this.suffix,
     this.spacing = 0,
     this.children,
@@ -44,7 +44,7 @@ class AkuTitleBox extends StatelessWidget {
             ],
           ),
           AkuBox.h(spacing),
-          ...children,
+          ...children!,
         ],
       ),
     );

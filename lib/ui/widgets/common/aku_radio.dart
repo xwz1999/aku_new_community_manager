@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 
 class AkuRadio extends StatefulWidget {
-  final double size;
+  final double? size;
   final int grouvalue;
   final int value;
-  final AkuValueChange onchanged;
-  AkuRadio({Key key, this.size, this.grouvalue, this.value, this.onchanged})
+  final AkuValueChange? onchanged;
+  AkuRadio({Key? key, this.size, required this.grouvalue, required this.value, this.onchanged})
       : super(key: key);
 
   @override
@@ -21,7 +21,7 @@ class _AkuRadioState extends State<AkuRadio> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onchanged(widget.value);
+        widget.onchanged!(widget.value);
       },
       child: Container(
         alignment: Alignment.center,
@@ -29,7 +29,7 @@ class _AkuRadioState extends State<AkuRadio> {
         height: widget.size,
         decoration: BoxDecoration(
             border: Border.all(color: Color(0xFFE8E8E8), width: 2.w),
-            borderRadius: BorderRadius.circular(widget.size / 2),
+            borderRadius: BorderRadius.circular(widget.size! / 2),
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -39,7 +39,7 @@ class _AkuRadioState extends State<AkuRadio> {
         child: widget.grouvalue == widget.value
             ? Icon(
                 Icons.check,
-                size: widget.size * 0.8,
+                size: widget.size! * 0.8,
               )
             : SizedBox(),
       ),

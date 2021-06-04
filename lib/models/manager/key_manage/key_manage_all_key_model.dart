@@ -1,16 +1,16 @@
 class KeyMangeAllKeyModel {
-  int id;
-  String code;
-  String facilityName;
-  int totalNum;
-  int loanableNum;
-  String correspondingPosition;
-  String storageLocation;
-  int status;
-  String createDate;
+  int? id;
+  String? code;
+  String? facilityName;
+  int? totalNum;
+  int? loanableNum;
+  String? correspondingPosition;
+  String? storageLocation;
+  int? status;
+  String? createDate;
 
   KeyMangeAllKeyModel(
-      {this.id,
+      {required this.id,
       this.code,
       this.facilityName,
       this.totalNum,

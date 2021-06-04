@@ -15,14 +15,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class FacilitiesView extends StatefulWidget {
   final int index;
   final int facilitiesType;
-  FacilitiesView({Key key, this.index, this.facilitiesType}) : super(key: key);
+  FacilitiesView({Key? key, required this.index, required this.facilitiesType}) : super(key: key);
 
   @override
   _FacilitiesViewState createState() => _FacilitiesViewState();
 }
 
 class _FacilitiesViewState extends State<FacilitiesView> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _FacilitiesViewState extends State<FacilitiesView> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -45,7 +45,7 @@ class _FacilitiesViewState extends State<FacilitiesView> {
         },
         controller: _refreshController,
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => FacilitiesCheckListModel.fromJson(e))
               .toList();
         },
@@ -58,7 +58,7 @@ class _FacilitiesViewState extends State<FacilitiesView> {
                   facilitiesType: widget.facilitiesType,
                   model: items[index],
                   callRefresh: () {
-                    _refreshController.callRefresh();
+                    _refreshController!.callRefresh();
                   },
                 );
               },

@@ -1,8 +1,8 @@
 class ItemNumModel {
-  int unProcessedNum;
-  int processedNum;
-  int processingNum;
-  int allNum;
+  int? unProcessedNum;
+  int? processedNum;
+  int? processingNum;
+  int? allNum;
 
   ItemNumModel(
       {this.unProcessedNum,

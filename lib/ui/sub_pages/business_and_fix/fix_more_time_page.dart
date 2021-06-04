@@ -17,7 +17,7 @@ import 'package:aku_community_manager/utils/network/manage_func.dart';
 
 class FixMoreTimePage extends StatefulWidget {
   final int dispatchId;
-  FixMoreTimePage({Key key, @required this.dispatchId}) : super(key: key);
+  FixMoreTimePage({Key? key, /*required*/ required this.dispatchId}) : super(key: key);
 
   @override
   _FixMoreTimePageState createState() => _FixMoreTimePageState();
@@ -26,7 +26,7 @@ class FixMoreTimePage extends StatefulWidget {
 class _FixMoreTimePageState extends State<FixMoreTimePage> {
   String _nowSelect = '24h';
   List<String> _delayList = ['24h', '48h', '72h', '未知'];
-  TextEditingController _textEditingController;
+  TextEditingController? _textEditingController;
   @override
   void initState() {
     super.initState();
@@ -168,14 +168,14 @@ class _FixMoreTimePageState extends State<FixMoreTimePage> {
                       //       date: DateTime.now()),
                       // );
                       // Get.back();
-                      BaseModel baseModel = await ManageFunc.applyDelayed(
+                      BaseModel baseModel = await (ManageFunc.applyDelayed(
                           widget.dispatchId,
                           _delayList.indexOf(_nowSelect) + 1,
-                          _textEditingController.text ?? '');
-                      if (baseModel.status) {
+                          _textEditingController?.text??'' ));
+                      if (baseModel.status!) {
                         Get.back();
                       } else {
-                        BotToast.showText(text: baseModel.message);
+                        BotToast.showText(text: baseModel.message!);
                       }
                     },
                     radius: 8.w,

@@ -14,7 +14,7 @@ class ManageFunc {
   ///报事报修详情
   static Future repairDetail(int id) async {
     Response response =
-        await NetUtil().dio.get(API.manage.repairDetail, queryParameters: {
+        await NetUtil().dio!.get(API.manage.repairDetail, queryParameters: {
       'repairId': id,
     });
     return FixedDetailModel.fromJson(response.data);
@@ -22,15 +22,15 @@ class ManageFunc {
 
   ///派单类型
   static Future dispatchListDetailType() async {
-    Response response = await NetUtil().dio.get(
+    Response response = await NetUtil().dio!.get(
         '${API.host}/IntelligentCommunity' + API.manage.dispatchListDetailType);
-    return response.data as List;
+    return response.data as List?;
   }
 
   ///工单时限
   static Future workOrderTimeType() async {
     BaseModel baseModel = await NetUtil().get(API.manage.workOrderTimeLimit);
-    return baseModel.data as List;
+    return baseModel.data as List?;
   }
 
   ///工单子类列表
@@ -39,7 +39,7 @@ class ManageFunc {
         await NetUtil().get(API.manage.workOrderTypeDetail, params: {
       'workOrderTypeId': id,
     });
-    return baseModel.data as List;
+    return baseModel.data as List?;
   }
 
   ///派单
@@ -60,14 +60,14 @@ class ManageFunc {
   }
 
   ///改派
-  static Future repairReassignment(int id, int operato) async {
+  static Future repairReassignment(int id, int? operato) async {
     BaseModel baseModel = await NetUtil().get(API.manage.repairReassignment,
         params: {'dispatchListId': id, 'operator': operato});
     return baseModel;
   }
 
   ///接单
-  static Future recevingOrders(int id) async {
+  static Future recevingOrders(int? id) async {
     BaseModel basemodel = await NetUtil()
         .get(API.manage.recevingOrders, params: {'dispatchListId': id});
     return basemodel;
@@ -86,14 +86,14 @@ class ManageFunc {
 
   ///报事报修：处理完成
   static Future handleResult(
-      int dispatchListId,
+      int? dispatchListId,
       String detail,
       String materialList,
-      double laborCost,
-      double materialCost,
+      double? laborCost,
+      double? materialCost,
       double totalCost,
       int repairResult,
-      List<String> fileUrls) async {
+      List<String?> fileUrls) async {
     BaseModel baseModel =
         await NetUtil().post(API.manage.handleResult, params: {
       'dispatchListId': dispatchListId,

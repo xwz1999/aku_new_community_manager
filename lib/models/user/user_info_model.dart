@@ -1,31 +1,31 @@
 class UserInfoModel {
-  int id;
-  String roleId;
-  String nickName;
-  List<int> jurisdiction;
+  int? id;
+  String? roleId;
+  String? nickName;
+  List<int>? jurisdiction;
 
   ///派单(派单人)
-  bool get canSendTicket => jurisdiction.contains(52);
+  bool get canSendTicket => jurisdiction!.contains(52);
 
   ///接单（维修人）
-  bool get canPickUpTicket => jurisdiction.contains(53);
+  bool get canPickUpTicket => jurisdiction!.contains(53);
 
   ///放行（保安）
-  bool get canPass => jurisdiction.contains(55);
+  bool get canPass => jurisdiction!.contains(55);
 
   ///操作权限（借还管理）
-  bool get canOperation => jurisdiction.contains(57);
+  bool get canOperation => jurisdiction!.contains(57);
 
   ///装修派工权限
-  bool get canDecorationDispatch => jurisdiction.contains(59);
+  bool get canDecorationDispatch => jurisdiction!.contains(59);
 
   ///装修管理跟踪执行权限
-  bool get canDecorationTrack => jurisdiction.contains(60);
+  bool get canDecorationTrack => jurisdiction!.contains(60);
 
   ///管家
   bool get manager => canSendTicket && canPickUpTicket;
 
-  UserInfoModel({this.id, this.roleId, this.nickName, this.jurisdiction});
+  UserInfoModel({required this.id, this.roleId, this.nickName, this.jurisdiction});
 
   UserInfoModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

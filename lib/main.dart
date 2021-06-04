@@ -26,19 +26,19 @@ void main() async {
   DevUtil.setDev(!isProduct);
   jpush.addEventHandler(
     // 接收通知回调方法。
-    onReceiveNotification: (Map<String, dynamic> message) async {
+    onReceiveNotification: (Map<String, dynamic>? message) async {
       print("flutter onReceiveNotification: $message");
       LoggerData.addData(message);
-      await JpushMessageParse(message).shot();
-      final appProvider = Provider.of<AppProvider>(Get.context, listen: false);
+      await JpushMessageParse(message!).shot();
+      final appProvider = Provider.of<AppProvider>(Get.context!, listen: false);
       appProvider.updateMessage();
     },
     // 点击通知回调方法。
-    onOpenNotification: (Map<String, dynamic> message) async {
+    onOpenNotification: (Map<String, dynamic>? message) async {
       print("flutter onOpenNotification: $message");
     },
     // 接收自定义消息回调方法。
-    onReceiveMessage: (Map<String, dynamic> message) async {
+    onReceiveMessage: (Map<String, dynamic>? message) async {
       print("flutter onReceiveMessage: $message");
     },
   );
@@ -48,7 +48,7 @@ void main() async {
     production: false,
     debug: true, // 设置是否打印 debug 日志
   );
-  String id = await JPush().getRegistrationID();
+  String? id = await JPush().getRegistrationID();
   print(id);
   LoggerData.addData(id);
   runApp(MyApp());
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
             FocusScopeNode currentFocus = FocusScope.of(context);
             if (!currentFocus.hasPrimaryFocus &&
                 currentFocus.focusedChild != null) {
-              FocusManager.instance.primaryFocus.unfocus();
+              FocusManager.instance.primaryFocus!.unfocus();
             }
           },
           child: ScreenUtilInit(

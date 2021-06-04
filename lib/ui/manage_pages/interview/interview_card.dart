@@ -14,7 +14,7 @@ import 'package:aku_community_manager/ui/manage_pages/interview/interview_feedba
 
 class InterviewCard extends StatefulWidget {
   final InterviewListModel model;
-  InterviewCard({Key key, this.model}) : super(key: key);
+  InterviewCard({Key? key, required this.model}) : super(key: key);
 
   @override
   _InterviewCardState createState() => _InterviewCardState();
@@ -63,14 +63,14 @@ class _InterviewCardState extends State<InterviewCard> {
               _rowTile(
                   R.ASSETS_MANAGE_IC_RENWU_PNG,
                   '客户电话',
-                  widget.model.tel.text
+                  widget.model.tel!.text
                       .size(24.sp)
                       .color(kTextSubColor)
                       .make()),
               _rowTile(
                   R.ASSETS_MANAGE_IC_TIME_PNG,
                   '创建时间',
-                  widget.model.createDate.text
+                  widget.model.createDate!.text
                       .size(24.sp)
                       .color(kTextSubColor)
                       .make()),
@@ -80,7 +80,7 @@ class _InterviewCardState extends State<InterviewCard> {
                       _rowTile(
                           R.ASSETS_MANAGE_IC_TIME_PNG,
                           '访谈时间',
-                          widget.model.interviewDate.text
+                          widget.model.interviewDate!.text
                               .size(24.sp)
                               .color(kTextSubColor)
                               .make()),
@@ -91,28 +91,28 @@ class _InterviewCardState extends State<InterviewCard> {
                       _rowTile(
                           R.ASSETS_MANAGE_IC_TIME_PNG,
                           '回复时间',
-                          widget.model.feedbackDate.text
+                          widget.model.feedbackDate!.text
                               .size(24.sp)
                               .color(kTextSubColor)
                               .make()),
                     ],
             ].sepWidget(separate: 12.w.heightBox),
-            _getBottomButtons(widget.model.status),
+            _getBottomButtons(widget.model.status!)!,
           ],
         ),
       ),
     );
   }
 
-  Widget _getBottomButtons(int status) {
-    MaterialButton button;
+  Widget? _getBottomButtons(int status) {
+    MaterialButton? button;
     switch (status) {
       case 1:
         button = _bottomButton('访谈回复', () async {
           await Get.to(() => InterviewFeedBackPage(
                 model: widget.model,
               ));
-        }, Color(0xFFFFC40C), Colors.black);
+        }, Color(0xFFFFC40C), Colors.black) as MaterialButton?;
         break;
       case 2:
         button = null;
@@ -144,7 +144,7 @@ class _InterviewCardState extends State<InterviewCard> {
         side: !hasBorder ? BorderSide.none : BorderSide(color: Colors.black),
       ),
       color: color,
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       elevation: 0,
       focusElevation: 0,
       hoverElevation: 0,

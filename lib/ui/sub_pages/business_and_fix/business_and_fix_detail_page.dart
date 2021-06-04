@@ -34,7 +34,7 @@ import 'package:aku_community_manager/utils/network/manage_func.dart';
 
 class BusinessAndFixDetailPage extends StatefulWidget {
   final BussinessAndFixModel model;
-  BusinessAndFixDetailPage({Key key, this.model}) : super(key: key);
+  BusinessAndFixDetailPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _BusinessAndFixDetailPageState createState() =>
@@ -43,13 +43,13 @@ class BusinessAndFixDetailPage extends StatefulWidget {
 
 class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   bool get isHandOut => widget.model.status == 1;
-  FixedDetailModel _detailModel;
+  late FixedDetailModel _detailModel;
   bool _onload = true;
-  EasyRefreshController _easyRefreshController;
+  EasyRefreshController? _easyRefreshController;
 
-  List<DispatchDetialModel> _dispatchModels;
-  List<WorkTimeLimitModel> _timeLimitModels;
-  List<WorkOrderTypeModel> _workTypeModels;
+  List<DispatchDetialModel>? _dispatchModels;
+  List<WorkTimeLimitModel>? _timeLimitModels;
+  List<WorkOrderTypeModel>? _workTypeModels;
   DispatchReportModel _reportModel = DispatchReportModel.zero();
 
   @override
@@ -68,10 +68,10 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
     return Text(
-      AkuMap.fixStatus(userProvider.infoModel.canOperation,
-          userProvider.infoModel.canPickUpTicket, widget.model.status),
+      AkuMap.fixStatus(userProvider.infoModel!.canOperation,
+          userProvider.infoModel!.canPickUpTicket, widget.model.status!),
       style: TextStyle(
-        color: widget.model.status < 4
+        color: widget.model.status! < 4
             ? Color(0XFFFF4501)
             : AppStyle.minorTextColor,
       ),
@@ -91,8 +91,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         controller: _easyRefreshController,
         header: MaterialHeader(),
         onRefresh: () async {
-          _detailModel = await ManageFunc.repairDetail(widget.model.id);
-          _reportModel.dispatchListId = widget.model.dispatchId;
+          _detailModel = await (ManageFunc.repairDetail(widget.model.id!) );
+          _reportModel.dispatchListId = widget.model.dispatchId!;
           _reportModel.workOrderTyoe = 1;
           _onload = false;
           setState(() {});
@@ -118,7 +118,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-          if (userProvider.infoModel.canSendTicket && widget.model.status < 2) {
+              //派单权限 + 待派单状态=立即派单
+          if (userProvider.infoModel!.canSendTicket && widget.model.status! < 2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
@@ -136,13 +137,14 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               ),
             );
+            //派单权限+已派单状态=改派
           } else if (widget.model.status == 2) {
-            if (userProvider.infoModel.canSendTicket) {
+            if (userProvider.infoModel!.canSendTicket) {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
                 onPressed: () {
-                  Get.to(FixerDepartmentPage(
+                  Get.to(()=>FixerDepartmentPage(
                     model: _reportModel,
                     changeType: true,
                   ));
@@ -154,17 +156,18 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                   ),
                 ),
               );
+              //接单权限+已派单状态=接单
             } else {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
                 onPressed: () async {
                   BaseModel baseModel =
-                      await ManageFunc.recevingOrders(widget.model.dispatchId);
-                  if (baseModel.status) {
+                      await (ManageFunc.recevingOrders(widget.model.dispatchId) );
+                  if (baseModel.status!) {
                     Get.back();
                   } else {
-                    BotToast.showText(text: baseModel.message);
+                    BotToast.showText(text: baseModel.message!);
                   }
                 },
                 child: Text(
@@ -175,8 +178,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 ),
               );
             }
+            //已接单状态+接单权限=申请延时
           } else if ((widget.model.status == 3) &&
-              userProvider.infoModel.canPickUpTicket)
+              userProvider.infoModel!.canPickUpTicket)
             return Container(
               height: 96.w,
               alignment: Alignment.center,
@@ -205,8 +209,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     ),
                     onPressed: () async {
                       await Get.to(
-                          FixMoreTimePage(dispatchId: widget.model.dispatchId));
-                      _easyRefreshController.callRefresh();
+                         ()=> FixMoreTimePage(dispatchId: widget.model.dispatchId!));
+                      _easyRefreshController!.callRefresh();
                     },
                     child: Text(
                       '申请延时',
@@ -222,11 +226,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     radius: 4.w,
                     color: AppStyle.primaryColor,
                     onPressed: () {
-                      Get.to(FixWorkFinishPage(
+                      Get.to(()=>FixWorkFinishPage(
                           fixModel: widget.model,
                           model: _detailModel,
                           dispatchType:
-                              _detailModel.dispatchType.dispatchType == 1));
+                              _detailModel.dispatchType!.dispatchType == 1));
                     },
                     child: Text(
                       '处理完成',
@@ -255,21 +259,21 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
           '报修人',
-          _detailModel.repairDetail.name,
+          _detailModel.repairDetail!.name!,
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PHONE_PNG,
           '联系电话',
-          _detailModel.repairDetail.tel,
+          _detailModel.repairDetail!.tel!,
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_AREA_PNG,
           '报修区域',
-          AkuMap.fixAreaType[_detailModel.repairDetail.type],
+          AkuMap.fixAreaType[_detailModel.repairDetail!.type!]!,
         ),
         AkuBox.h(8),
         Text(
-          widget.model.reportDetail,
+          widget.model.reportDetail!,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontWeight: FontWeight.bold,
@@ -283,12 +287,12 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             crossAxisSpacing: 16.w,
             mainAxisSpacing: 16.w,
           ),
-          children: _detailModel.repairDetail.imgUrls.map((e) {
+          children: _detailModel.repairDetail!.imgUrls!.map((e) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
               child: FadeInImage.assetNetwork(
                   placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                  image: API.image(e.url)),
+                  image: API.image(e.url!)),
             );
           }).toList(),
           shrinkWrap: true,
@@ -307,20 +311,20 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           canTap
               ? _dispatchModels == null
                   ? null
-                  : _dispatchModels[_dispatchModels.indexWhere(
+                  : _dispatchModels![_dispatchModels!.indexWhere(
                           (element) => element.showValue == _reportModel.type)]
                       .showName
-              : AkuMap.dispatchType[_detailModel.dispatchType.dispatchType],
+              : AkuMap.dispatchType[_detailModel.dispatchType!.dispatchType!],
           canTap,
           helpContent: '请选择服务类型',
           onTap: () async {
-            List models = await ManageFunc.dispatchListDetailType();
+            List models = await (ManageFunc.dispatchListDetailType());
             _dispatchModels =
                 models.map((e) => DispatchDetialModel.fromJson(e)).toList();
             showItemSheet(
               title: '派单类型',
-              items: _dispatchModels.map((e) => e.showName).toList(),
-              ids: _dispatchModels.map((e) => e.showValue).toList(),
+              items: _dispatchModels!.map((e) => e.showName).toList(),
+              ids: _dispatchModels!.map((e) => e.showValue).toList(),
               selectItem: _reportModel.type,
               onTap: (result) {
                 _reportModel.type = result;
@@ -338,20 +342,20 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           canTap
               ? _timeLimitModels == null
                   ? null
-                  : _timeLimitModels[_timeLimitModels.indexWhere((element) =>
+                  : _timeLimitModels![_timeLimitModels!.indexWhere((element) =>
                           element.id == _reportModel.workOrderTimeLimit)]
-                      ?.name
-              : _detailModel.dispatchType.workOrderLimitName,
+                      .name
+              : _detailModel.dispatchType!.workOrderLimitName,
           canTap,
           helpContent: '请选择工单时限',
           onTap: () async {
-            List models = await ManageFunc.workOrderTimeType();
+            List models = await (ManageFunc.workOrderTimeType());
             _timeLimitModels =
                 models.map((e) => WorkTimeLimitModel.fromJson(e)).toList();
             showItemSheet(
               title: '工单时限',
-              items: _timeLimitModels.map((e) => e.name).toList(),
-              ids: _timeLimitModels.map((e) => e.id).toList(),
+              items: _timeLimitModels!.map((e) => e.name).toList(),
+              ids: _timeLimitModels!.map((e) => e.id).toList(),
               selectItem: _reportModel.workOrderTimeLimit,
               onTap: (result) {
                 _reportModel.workOrderTimeLimit = result;
@@ -369,20 +373,20 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           canTap
               ? _workTypeModels == null
                   ? null
-                  : _workTypeModels[_workTypeModels.indexWhere((element) =>
+                  : _workTypeModels![_workTypeModels!.indexWhere((element) =>
                           element.id == _reportModel.workOrderTypeDetail)]
                       .name
-              : _detailModel.dispatchType.workOrderSubclassName,
+              : _detailModel.dispatchType!.workOrderSubclassName,
           canTap,
           helpContent: '请选择工单子类',
           onTap: () async {
-            List models = await ManageFunc.workOrderTypeDetail(1);
+            List models = await (ManageFunc.workOrderTypeDetail(1) );
             _workTypeModels =
                 models.map((e) => WorkOrderTypeModel.fromJson(e)).toList();
             showItemSheet(
               title: '工单子类',
-              items: _workTypeModels.map((e) => e.name).toList(),
-              ids: _workTypeModels.map((e) => e.id).toList(),
+              items: _workTypeModels!.map((e) => e.name).toList(),
+              ids: _workTypeModels!.map((e) => e.id).toList(),
               selectItem: _reportModel.workOrderTypeDetail,
               onTap: (result) {
                 _reportModel.workOrderTypeDetail = result;
@@ -402,10 +406,10 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
   _buildProcess() {
     return AkuTitleBox(
       title: '报修进程',
-      children: _detailModel.processRecord.map((e) {
+      children: _detailModel.processRecord!.map((e) {
         return _buildProcessTile(
           AkuMap.operationType(e.operationType),
-          DateUtil.formatDateStr(e.operationDate,
+          DateUtil.formatDateStr(e.operationDate!,
               format: 'yyyy-MM-dd HH:mm:ss'),
         );
       }).toList(),
@@ -426,7 +430,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         AkuBox.h(8),
         Text(
-          _detailModel.handlingSituation.detail,
+          _detailModel.handlingSituation!.detail!,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontSize: 28.w,
@@ -443,7 +447,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         AkuBox.h(8),
         Text(
-          _detailModel.handlingSituation.materialList,
+          _detailModel.handlingSituation!.materialList!,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontSize: 28.w,
@@ -465,12 +469,12 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 4,
           ),
-          children: _detailModel.handlingSituation.imgUrls.map((e) {
+          children: _detailModel.handlingSituation!.imgUrls!.map((e) {
             return ClipRRect(
                 borderRadius: BorderRadius.circular(4.w),
                 child: FadeInImage.assetNetwork(
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(e.url)));
+                    image: API.image(e.url!)));
           }).toList(),
         ),
       ],
@@ -505,7 +509,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         ),
         AkuBox.h(8),
         Text(
-          _detailModel.evaluateInfo,
+          _detailModel.evaluateInfo!,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontSize: 28.w,
@@ -545,8 +549,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     );
   }
 
-  Widget _buildTypeTile(String title, String content, bool canTap,
-      {VoidCallback onTap, String helpContent}) {
+  Widget _buildTypeTile(String title, String? content, bool canTap,
+      {VoidCallback? onTap, String? helpContent}) {
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -563,7 +567,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             ),
             Spacer(),
             Text(
-              TextUtil.isEmpty(content) ? helpContent : content,
+              TextUtil.isEmpty(content) ? helpContent! : content!,
               style: TextStyle(
                 fontSize: 28.sp,
                 fontWeight: FontWeight.bold,

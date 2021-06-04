@@ -4,7 +4,7 @@ import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.d
 
 class ToDoModel {
   dynamic dynamicModel;
-  int type;
+  int? type;
 
   ToDoModel({this.dynamicModel, this.type});
 

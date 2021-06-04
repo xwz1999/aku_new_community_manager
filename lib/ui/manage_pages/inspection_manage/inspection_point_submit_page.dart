@@ -12,7 +12,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class InspectionPointSubmitPage extends StatefulWidget {
-  InspectionPointSubmitPage({Key key}) : super(key: key);
+  InspectionPointSubmitPage({Key? key}) : super(key: key);
 
   @override
   _InspectionPointSubmitPageState createState() =>

@@ -17,7 +17,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class ActivityDetailPage extends StatefulWidget {
   final int id;
-  ActivityDetailPage({Key key, @required this.id}) : super(key: key);
+  ActivityDetailPage({Key? key, /*required*/ required this.id}) : super(key: key);
 
   @override
   _ActivityDetailPageState createState() => _ActivityDetailPageState();
@@ -25,13 +25,13 @@ class ActivityDetailPage extends StatefulWidget {
 
 class _ActivityDetailPageState extends State<ActivityDetailPage> {
   static const String format = 'yyyy年MM月dd日HH:mm';
-  ActivityDetailModel _detailModel;
+  ActivityDetailModel? _detailModel;
   String get startDate =>
-      DateUtil.formatDate(_detailModel.activityStart, format: format);
+      DateUtil.formatDate(_detailModel!.activityStart, format: format);
   String get endDate =>
-      DateUtil.formatDate(_detailModel.activityEnd, format: format);
+      DateUtil.formatDate(_detailModel!.activityEnd, format: format);
   String get checkInDate =>
-      DateUtil.formatDate(_detailModel.registrationEnd, format: format);
+      DateUtil.formatDate(_detailModel!.registrationEnd, format: format);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                 children: [
                   FadeInImage.assetNetwork(
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(_detailModel.firstImg?.url ?? ''),
+                    image: API.image(_detailModel!.firstImg?.url ?? ''),
                     fit: BoxFit.cover,
                   ),
                   Padding(
@@ -66,7 +66,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          _detailModel.title,
+                          _detailModel!.title!,
                           style: TextStyle(
                             color: AppStyle.primaryTextColor,
                             fontSize: 36.sp,
@@ -75,7 +75,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                         ),
                         AkuBox.h(16),
                         Text(
-                          _detailModel.content,
+                          _detailModel!.content!,
                           style: TextStyle(
                             color: AppStyle.primaryTextColor,
                             fontSize: 28.sp,
@@ -84,7 +84,7 @@ class _ActivityDetailPageState extends State<ActivityDetailPage> {
                         AkuBox.h(40),
                         _buildTile('开始时间', startDate),
                         _buildTile('结束时间', endDate),
-                        _buildTile('地点', _detailModel.location),
+                        _buildTile('地点', _detailModel!.location!),
                         _buildTile('参与人数', '不限'),
                         _buildTile('报名截止', checkInDate),
                       ],

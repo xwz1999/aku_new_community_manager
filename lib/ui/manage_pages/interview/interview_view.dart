@@ -9,14 +9,14 @@ import 'package:velocity_x/velocity_x.dart';
 
 class InterviewView extends StatefulWidget {
   final int index;
-  InterviewView({Key key, this.index}) : super(key: key);
+  InterviewView({Key? key, required this.index}) : super(key: key);
 
   @override
   _InterviewViewState createState() => _InterviewViewState();
 }
 
 class _InterviewViewState extends State<InterviewView> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   @override
   void initState() {
     super.initState();
@@ -25,7 +25,7 @@ class _InterviewViewState extends State<InterviewView> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -38,7 +38,7 @@ class _InterviewViewState extends State<InterviewView> {
           "interviewStatus": widget.index + 1,
         },
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => InterviewListModel.fromJson(e))
               .toList();
         },

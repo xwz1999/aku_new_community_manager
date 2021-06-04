@@ -19,9 +19,9 @@ class FacilitiesCard extends StatefulWidget {
   final int index;
   final int facilitiesType;
   final FacilitiesCheckListModel model;
-  final VoidCallback callRefresh;
+  final VoidCallback? callRefresh;
   FacilitiesCard(
-      {Key key, this.index, this.model, this.facilitiesType, this.callRefresh})
+      {Key? key, required this.index, required this.model, required this.facilitiesType, this.callRefresh})
       : super(key: key);
 
   @override
@@ -36,14 +36,14 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
       children: [
         Row(
           children: [
-            widget.model.facilitiesName.text
+            widget.model.facilitiesName!.text
                 .color(kTextPrimaryColor)
                 .size(32.sp)
                 .bold
                 .make(),
             Spacer(),
-            FacilitiesMap.inspectStatus[widget.model.status].text
-                .color(FacilitiesMap.insepectColor[widget.model.status])
+            FacilitiesMap.inspectStatus[widget.model.status!]!.text
+                .color(FacilitiesMap.insepectColor[widget.model.status!]!)
                 .size(28.sp)
                 .bold
                 .make(),
@@ -53,7 +53,7 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         AkuDivider.horizontal(),
         24.w.heightBox,
         _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '场地地址',
-            widget.model.facilitiesAddress),
+            widget.model.facilitiesAddress!),
         ..._midTile(),
         ...widget.index != 0
             ? []
@@ -71,9 +71,9 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
                         onPressed: () async {
                           await Get.to(() => FacilitiesInspectReportPage(
                                 facilitiesType: widget.facilitiesType,
-                                id: widget.model.id,
+                                id: widget.model.id!,
                               ));
-                          widget.callRefresh();
+                          widget.callRefresh!();
                         },
                         child: '填写报告'
                             .text
@@ -95,9 +95,9 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         .onInkTap(() async {
       await Get.to(() => FacilitiesInspectReportPage(
             facilitiesType: widget.facilitiesType,
-            id: widget.model.id,
+            id: widget.model.id!,
           ));
-      widget.callRefresh();
+      widget.callRefresh!();
     });
   }
 
@@ -107,7 +107,7 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         return [
           15.w.heightBox,
           _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '任务时间',
-              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
+              '${DateUtil.formatDateStr(widget.model.beginDate!, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate!, format: 'HH;mm')}'),
         ];
 
       case 1:
@@ -118,22 +118,22 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
               color: Color(0xFF3F8FFE)),
           15.w.heightBox,
           _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',
-              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
+              '${DateUtil.formatDateStr(widget.model.beginDate!, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate!, format: 'HH;mm')}'),
           15.w.heightBox,
           _buildTile(
               R.ASSETS_MANAGE_CLOCK_PNG,
               '检查提交时间',
-              DateUtil.formatDateStr(widget.model.checkDate,
+              DateUtil.formatDateStr(widget.model.checkDate!,
                   format: 'yyyy-MM-dd HH:mm')),
         ];
       case 2:
         return [
           15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail,
+          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail!,
               color: Colors.red),
           15.w.heightBox,
           _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',
-              '${DateUtil.formatDateStr(widget.model.beginDate, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate, format: 'HH;mm')}'),
+              '${DateUtil.formatDateStr(widget.model.beginDate!, format: 'yyyy-MM-dd HH:mm')}-${DateUtil.formatDateStr(widget.model.endDate!, format: 'HH;mm')}'),
         ];
       default:
         return [];

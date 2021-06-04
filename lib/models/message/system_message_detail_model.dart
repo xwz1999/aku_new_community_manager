@@ -1,10 +1,10 @@
 class SystemMessageDetailModel {
-  int id;
-  String name;
-  String tel;
-  int type;
+  int? id;
+  String? name;
+  String? tel;
+  int? type;
 
-  SystemMessageDetailModel({this.id, this.name, this.tel, this.type});
+  SystemMessageDetailModel({required this.id, this.name, this.tel, this.type});
 
   SystemMessageDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

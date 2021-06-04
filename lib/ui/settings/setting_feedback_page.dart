@@ -19,16 +19,16 @@ import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class SettingFeedBackPage extends StatefulWidget {
-  SettingFeedBackPage({Key key}) : super(key: key);
+  SettingFeedBackPage({Key? key}) : super(key: key);
 
   @override
   _SettingFeedBackPageState createState() => _SettingFeedBackPageState();
 }
 
 class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
-  List<File> _files;
-  List<String> _imgeUrls;
-  String _content;
+  late List<File> _files;
+  List<String?>? _imgeUrls;
+  String? _content;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -90,11 +90,11 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
             "content": _content,
             "fileUrls": _imgeUrls,
           });
-          if (baseModel.status) {
-            BotToast.showText(text: baseModel.message);
+          if (baseModel.status!) {
+            BotToast.showText(text: baseModel.message!);
             Get.back();
           } else {
-            BotToast.showText(text: baseModel.message);
+            BotToast.showText(text: baseModel.message!);
           }
         },
         child: Text('提交'),

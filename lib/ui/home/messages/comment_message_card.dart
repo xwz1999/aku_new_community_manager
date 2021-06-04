@@ -17,14 +17,14 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class CommentMessageCard extends StatefulWidget {
   final CommentMessageItemModel itemModel;
-  CommentMessageCard({Key key, @required this.itemModel}) : super(key: key);
+  CommentMessageCard({Key? key, /*required*/ required this.itemModel}) : super(key: key);
 
   @override
   _CommentMessageCardState createState() => _CommentMessageCardState();
 }
 
 class _CommentMessageCardState extends State<CommentMessageCard> {
-  CommentMessageDetailModel _model;
+  CommentMessageDetailModel? _model;
   bool _onload = true;
 
   @override
@@ -50,7 +50,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
     switch (level) {
       case 1:
         return '半星';
-        break;
+        
       case 2:
         return '一星';
       case 3:
@@ -200,7 +200,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
     );
   }
 
-  Widget _messageList(CommentMessageDetailModel model) {
+  Widget _messageList(CommentMessageDetailModel? model) {
     return _onload
         ? _loadingWidget()
         : Column(
@@ -265,7 +265,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
                         ),
                         Spacer(),
                         Text(
-                          '${model.name}',
+                          '${model!.name}',
                           style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.sp),
@@ -288,7 +288,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
                                 color: AppStyle.minorTextColor,
                                 fontSize: 28.sp)),
                         Spacer(),
-                        Text(getComment(model.level),
+                        Text(getComment(model.level!),
                             style: TextStyle(
                                 color: AppStyle.primaryTextColor,
                                 fontSize: 28.sp)),

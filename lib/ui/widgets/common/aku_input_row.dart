@@ -6,10 +6,10 @@ import 'package:velocity_x/velocity_x.dart';
 class AkuInputRow extends StatefulWidget {
 
   final String title;
-  final List<TextInputFormatter> formatters;
-  final TextEditingController controller;
-  final String hintText;
-  AkuInputRow({Key key, this.title, this.formatters, this.controller, this.hintText}) : super(key: key);
+  final List<TextInputFormatter>? formatters;
+  final TextEditingController? controller;
+  final String? hintText;
+  AkuInputRow({Key? key, required this.title, this.formatters, this.controller, this.hintText}) : super(key: key);
 
   @override
   _AkuInputRowState createState() => _AkuInputRowState();

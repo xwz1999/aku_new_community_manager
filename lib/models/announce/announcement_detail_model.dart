@@ -1,14 +1,14 @@
 class AnnouncementDetailModel {
-  int id;
-  String title;
-  String content;
-  String fileDocUrl;
-  String fileDocName;
-  String releaseTime;
-  List<String> imgUrls;
+  int? id;
+  String? title;
+  String? content;
+  String? fileDocUrl;
+  String? fileDocName;
+  String? releaseTime;
+  List<String>? imgUrls;
 
   AnnouncementDetailModel(
-      {this.id,
+      {required this.id,
       this.title,
       this.content,
       this.fileDocUrl,

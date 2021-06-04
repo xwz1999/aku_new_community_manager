@@ -18,10 +18,10 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
 
 class KeyManageCard extends StatefulWidget {
-  final int index;
+  final int/*!*/ index;
   final KeyMangeAllKeyModel model;
-  final VoidCallback callRefresh;
-  KeyManageCard({Key key, this.index, this.model, this.callRefresh})
+  final VoidCallback? callRefresh;
+  KeyManageCard({Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -41,16 +41,16 @@ class _KeyManageCardState extends State<KeyManageCard> {
         children: [
           Row(
             children: [
-              widget.model.facilityName.text
+              widget.model.facilityName!.text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
                   .bold
                   .make(),
               Spacer(),
-              KeyManageMap.keyStatus[widget.model.status].text
+              KeyManageMap.keyStatus[widget.model.status!]!.text
                   .size(28.sp)
                   .bold
-                  .color(KeyManageMap.keyStatusColor[widget.model.status])
+                  .color(KeyManageMap.keyStatusColor[widget.model.status!]!)
                   .make()
             ],
           ),
@@ -69,14 +69,14 @@ class _KeyManageCardState extends State<KeyManageCard> {
             _rowTile(
                 R.ASSETS_MANAGE_LOCK_PNG,
                 '对应设备位置',
-                widget.model.correspondingPosition.text
+                widget.model.correspondingPosition!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
             _rowTile(
                 R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                 '存放地址',
-                widget.model.storageLocation.text
+                widget.model.storageLocation!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make())
@@ -87,29 +87,29 @@ class _KeyManageCardState extends State<KeyManageCard> {
     );
   }
 
-  Widget _getBottomButtons(int status) {
-    MaterialButton button;
+  Widget _getBottomButtons(int? status) {
+    MaterialButton? button;
     switch (status) {
       case 1:
         button = _bottomButton('申请钥匙', () async {
           BaseModel baseModel = await NetUtil()
               .post(API.manage.applyKey, params: {"keyId": widget.model.id});
-          BotToast.showText(text: baseModel.message);
-          widget.callRefresh();
-        }, Color(0xFFFFC40C), Colors.black);
+          BotToast.showText(text: baseModel.message!);
+          widget.callRefresh!();
+        }, Color(0xFFFFC40C), Colors.black) as MaterialButton?;
         break;
       case 2:
         button = _bottomButton('归还钥匙', () async {
           BaseModel baseModel = await NetUtil()
               .get(API.manage.returnKey, params: {"keyId": widget.model.id});
-          BotToast.showText(text: baseModel.message);
-          widget.callRefresh();
-        }, Color(0xFFFFC40C), Colors.black);
+          BotToast.showText(text: baseModel.message!);
+          widget.callRefresh!();
+        }, Color(0xFFFFC40C), Colors.black) as MaterialButton?;
         break;
       case 3:
         button = _bottomButton('联系物业', () async {
           await launch('tel:057-87760023');
-        }, Colors.white, Colors.black, hasBorder: true);
+        }, Colors.white, Colors.black, hasBorder: true) as MaterialButton?;
         break;
       // case 4:
       //   button = _bottomButton('归还钥匙', () {}, Colors.black, Colors.white);
@@ -146,7 +146,7 @@ class _KeyManageCardState extends State<KeyManageCard> {
         side: !hasBorder ? BorderSide.none : BorderSide(color: Colors.black),
       ),
       color: color,
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       elevation: 0,
       focusElevation: 0,
       hoverElevation: 0,

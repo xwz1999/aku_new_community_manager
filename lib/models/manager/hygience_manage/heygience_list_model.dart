@@ -1,17 +1,17 @@
 import 'package:common_utils/common_utils.dart';
 
 class HygienceListModel {
-  int id;
-  String hygieneAreaName;
-  String content;
-  String directorName;
-  int status;
-  String completeDate;
-  String endDate;
-  String createDate;
+  int? id;
+  String? hygieneAreaName;
+  String? content;
+  String? directorName;
+  int? status;
+  String? completeDate;
+  String? endDate;
+  String? createDate;
 
   HygienceListModel(
-      {this.id,
+      {required this.id,
       this.hygieneAreaName,
       this.content,
       this.directorName,
@@ -44,11 +44,11 @@ class HygienceListModel {
     return data;
   }
    String get createDateString =>
-      DateUtil.formatDateStr(this.createDate, format: 'yy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.createDate!, format: 'yy-MM-dd HH:mm');
 
   String get endDateString =>
-      DateUtil.formatDateStr(this.endDate, format: 'yy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.endDate!, format: 'yy-MM-dd HH:mm');
 
   String get completeDateString =>
-      DateUtil.formatDateStr(this.completeDate, format: 'yy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.completeDate!, format: 'yy-MM-dd HH:mm');
 }

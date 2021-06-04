@@ -18,7 +18,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class BorrowManagerCheckPage extends StatefulWidget {
   final int id;
-  BorrowManagerCheckPage({Key key, @required this.id}) : super(key: key);
+  BorrowManagerCheckPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _BorrowManagerCheckPageState createState() => _BorrowManagerCheckPageState();
@@ -26,7 +26,7 @@ class BorrowManagerCheckPage extends StatefulWidget {
 
 class _BorrowManagerCheckPageState extends State<BorrowManagerCheckPage> {
   int borrowStatus = 1;
-  BorrowCheckItemModel _model;
+  BorrowCheckItemModel? _model;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -76,7 +76,7 @@ class _BorrowManagerCheckPageState extends State<BorrowManagerCheckPage> {
                         _buildRow(
                           '物品名称',
                           Text(
-                            _model.articleName,
+                            _model!.articleName!,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.sp,
@@ -88,7 +88,7 @@ class _BorrowManagerCheckPageState extends State<BorrowManagerCheckPage> {
                         _buildRow(
                           '物品单号',
                           Text(
-                            _model.code,
+                            _model!.code!,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.sp,
@@ -126,7 +126,7 @@ class _BorrowManagerCheckPageState extends State<BorrowManagerCheckPage> {
                           '物品图片',
                           FadeInImage.assetNetwork(
                             placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                            image: API.image(_model.firstImg?.url ?? ''),
+                            image: API.image(_model!.firstImg?.url ?? ''),
                             height: 184.w,
                             width: 184.w,
                           ),
@@ -177,7 +177,7 @@ class _BorrowManagerCheckPageState extends State<BorrowManagerCheckPage> {
             1: '完好',
             2: '损坏',
             3: '丢失',
-          }[status],
+          }[status]!,
           style: TextStyle(
             color: borrowStatus == status
                 ? AppStyle.secondaryColor

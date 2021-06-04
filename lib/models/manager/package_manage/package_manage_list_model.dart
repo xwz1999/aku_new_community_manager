@@ -1,16 +1,16 @@
 class PackageManageListModel {
-  int id;
-  String code;
-  String addresseeName;
-  String addresseeTel;
-  String address;
-  String placePosition;
-  int status;
-  String receiveDate;
-  String createDate;
+  int? id;
+  String? code;
+  String? addresseeName;
+  String? addresseeTel;
+  String? address;
+  String? placePosition;
+  int? status;
+  String? receiveDate;
+  String? createDate;
 
   PackageManageListModel(
-      {this.id,
+      {required this.id,
       this.code,
       this.addresseeName,
       this.addresseeTel,

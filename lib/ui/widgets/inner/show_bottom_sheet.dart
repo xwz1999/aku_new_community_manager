@@ -12,7 +12,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 
 ///show bottom sheet
 Future showAkuSheet({
-  Widget child,
+  required Widget child,
 }) async {
   await Get.bottomSheet(
     Material(
@@ -56,11 +56,11 @@ Future showNormalSheet(String title, List<Widget> children) async {
 }
 
 Future showItemSheet({
-  String title,
-  List<String> items,
-  List<int> ids,
-  int selectItem,
-  Function(int result) onTap,
+  required String title,
+  required List<String?> items,
+  List<int?>? ids,
+  int? selectItem,
+  Function(int? result)? onTap,
 }) async {
   await showNormalSheet(
       title,
@@ -70,14 +70,14 @@ Future showItemSheet({
           minWidth: double.infinity,
           onPressed: () {
             Get.back();
-            onTap(ids[items.indexOf(e)]);
+            onTap!(ids![items.indexOf(e)]);
           },
           child: Text(
-            e,
+            e!,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 32.sp,
-              color: items.indexOf(e) == ids.indexOf(selectItem)
+              color: items.indexOf(e) == ids!.indexOf(selectItem)
                   ? AppStyle.secondaryColor
                   : AppStyle.primaryTextColor,
             ),

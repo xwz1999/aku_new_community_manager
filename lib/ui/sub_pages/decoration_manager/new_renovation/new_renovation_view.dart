@@ -9,7 +9,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class NewRenovationView extends StatefulWidget {
   final int index;
-  NewRenovationView({Key key, this.index}) : super(key: key);
+  NewRenovationView({Key? key, required this.index}) : super(key: key);
 
   @override
   _NewRenovationState createState() => _NewRenovationState();
@@ -17,7 +17,7 @@ class NewRenovationView extends StatefulWidget {
 
 class _NewRenovationState extends State<NewRenovationView>
     with AutomaticKeepAliveClientMixin {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   @override
   void initState() {
     super.initState();
@@ -26,7 +26,7 @@ class _NewRenovationState extends State<NewRenovationView>
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -38,7 +38,7 @@ class _NewRenovationState extends State<NewRenovationView>
         controller: _refreshController,
         extraParams: {"userDecorationNewStatus": widget.index},
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => NewRenovationListModel.fromJson(e))
               .toList();
         },
@@ -49,7 +49,7 @@ class _NewRenovationState extends State<NewRenovationView>
                 return NewRenovationCard(
                   model: items[index],
                   callRefresh: () {
-                    _refreshController.callRefresh();
+                    _refreshController!.callRefresh();
                   },
                 );
               },

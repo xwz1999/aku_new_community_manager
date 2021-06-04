@@ -11,7 +11,7 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 class BusinessPage extends StatefulWidget {
   ///DEFAULT IS 0
   final int initIndex;
-  BusinessPage({Key key, this.initIndex = 0}) : super(key: key);
+  BusinessPage({Key? key, this.initIndex = 0}) : super(key: key);
 
   @override
   _BusinessPageState createState() => _BusinessPageState();
@@ -20,7 +20,7 @@ class BusinessPage extends StatefulWidget {
 class _BusinessPageState extends State<BusinessPage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['待处理', '处理中', '已处理', '全部'];
-  TabController _tabController;
+ late TabController _tabController;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _BusinessPageState extends State<BusinessPage>
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -61,7 +61,7 @@ class _BusinessPageState extends State<BusinessPage>
     );
   }
 
-  Widget _buildTabPage(int status) {
+  // Widget _buildTabPage(int status) {
     // return ListView.builder(
     //   padding: EdgeInsets.symmetric(horizontal: 32.w),
     //   itemBuilder: (context, index) {
@@ -75,8 +75,8 @@ class _BusinessPageState extends State<BusinessPage>
     //   },
     //   itemCount: list.length,
     // );
-    return BussinessView(
-      backlogStatus: status,
-    );
-  }
+  //   return BussinessView(
+  //     backlogStatus: status,
+  //   );
+  // }
 }

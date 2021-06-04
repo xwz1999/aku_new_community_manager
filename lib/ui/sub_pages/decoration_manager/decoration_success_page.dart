@@ -10,7 +10,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class DecorationSuccessPage extends StatefulWidget {
-  DecorationSuccessPage({Key key}) : super(key: key);
+  DecorationSuccessPage({Key? key}) : super(key: key);
 
   @override
   _DecorationSuccessPageState createState() => _DecorationSuccessPageState();

@@ -46,9 +46,9 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Map<String, Object> _location;
-  Map<String, Object> get location => _location;
-  AMapFlutterLocation _flutterLocation;
+  Map<String, Object>? _location;
+  Map<String, Object>? get location => _location;
+  late AMapFlutterLocation _flutterLocation;
 
   startLocation() {
     _flutterLocation = AMapFlutterLocation();
@@ -75,24 +75,24 @@ class AppProvider extends ChangeNotifier {
   int get commentMessage => _commentMessage;
 
   updateMessage() async {
-    Response response = await NetUtil().dio.get(API.message.messageCenter);
-    if (response == null || response.data == null) return;
+    Response response = await NetUtil().dio!.get(API.message.messageCenter);
+    if (response.data == null) return;
     _sysMessage = response.data['sysCount'] ?? 0;
     _commentMessage = response.data['commentCount'] ?? 0;
     notifyListeners();
   }
 
   WORKCLOCK _clockStatus = WORKCLOCK.NOTIN;
-  DateTime _clockInTime;
-  DateTime _clockOutTime;
-  DateTime _dateRecord;
+  DateTime? _clockInTime;
+  DateTime? _clockOutTime;
+  DateTime? _dateRecord;
   WORKCLOCK get clockStatus => _clockStatus;
-  DateTime get clockInTime => _clockInTime;
-  DateTime get clockOutTime => _clockOutTime;
+  DateTime? get clockInTime => _clockInTime;
+  DateTime? get clockOutTime => _clockOutTime;
 
   initClock() {
     if (_dateRecord == null ||
-        (DateUtil.isToday(_dateRecord.millisecondsSinceEpoch.abs()))) {
+        (DateUtil.isToday(_dateRecord!.millisecondsSinceEpoch.abs()))) {
       resetClock();
     }
 

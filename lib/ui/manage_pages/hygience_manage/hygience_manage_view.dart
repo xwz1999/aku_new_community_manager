@@ -12,14 +12,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HygienceManageView extends StatefulWidget {
   final int index;
-  HygienceManageView({Key key, this.index}) : super(key: key);
+  HygienceManageView({Key? key, required this.index}) : super(key: key);
 
   @override
   _HygienceManageViewState createState() => _HygienceManageViewState();
 }
 
 class _HygienceManageViewState extends State<HygienceManageView> {
-  EasyRefreshController _refreshController;
+ late EasyRefreshController _refreshController;
   @override
   void initState() {
     super.initState();
@@ -41,7 +41,7 @@ class _HygienceManageViewState extends State<HygienceManageView> {
           "hygieneStatus":widget.index+1,
         },
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => HygienceListModel.fromJson(e))
               .toList();
         },

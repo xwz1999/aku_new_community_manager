@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:async';
+
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +22,8 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class SystemMessageCard extends StatefulWidget {
   final SystemMessageItemModel model;
   SystemMessageCard({
-    Key key,
-    this.model,
+    Key? key,
+    required this.model,
   }) : super(key: key);
 
   @override
@@ -29,13 +31,13 @@ class SystemMessageCard extends StatefulWidget {
 }
 
 class _SystemMessageCardState extends State<SystemMessageCard> {
-  SystemMessageDetailModel _systemModel;
+  late SystemMessageDetailModel _systemModel;
   bool _onLoad = true;
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 300), () async {
-      _systemModel = await getSystemMessage(widget.model.relationId);
+      _systemModel = await getSystemMessage(widget.model.relationId!);
       _onLoad = false;
       setState(() {});
     });
@@ -190,7 +192,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 child: Text(
-                  widget.model.sendDate,
+                  widget.model.sendDate!,
                   style: TextStyle(
                       color: AppStyle.minorTextColor, fontSize: 24.sp),
                 ),
@@ -246,7 +248,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                         ),
                         Spacer(),
                         Text(
-                          model.name,
+                          model.name!,
                           style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.sp),
@@ -269,7 +271,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                                 color: AppStyle.minorTextColor,
                                 fontSize: 28.sp)),
                         Spacer(),
-                        Text(model.tel,
+                        Text(model.tel!,
                             style: TextStyle(
                                 color: AppStyle.primaryTextColor,
                                 fontSize: 28.sp)),

@@ -5,7 +5,7 @@ class AkuMap {
       switch (status) {
         case 1:
           return '待派单';
-          break;
+          
         case 2:
           return '已派单';
         case 3:
@@ -63,7 +63,7 @@ class AkuMap {
   static Map<int, String> fixAreaType = {1: '公区维修', 2: '家庭维修'};
 
   ///报事报修处理进程-操作类型
-  static String operationType(int operationType) {
+  static String operationType(int? operationType) {
     switch (operationType) {
       case 1:
         return '提交保修';
@@ -83,7 +83,7 @@ class AkuMap {
         return '作废';
       case 9:
         return '取消';
-        break;
+        
       case 10:
         return '改派';
       case 11:

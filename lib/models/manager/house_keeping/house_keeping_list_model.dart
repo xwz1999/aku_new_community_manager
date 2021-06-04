@@ -1,15 +1,15 @@
 class HouseKeepingListModel {
-  int id;
-  String roomName;
-  int num;
-  String leaderName;
-  String leaderTel;
-  String content;
-  String createName;
-  String createDate;
+  int? id;
+  String? roomName;
+  int? num;
+  String? leaderName;
+  String? leaderTel;
+  String? content;
+  String? createName;
+  String? createDate;
 
   HouseKeepingListModel(
-      {this.id,
+      {required this.id,
       this.roomName,
       this.num,
       this.leaderName,

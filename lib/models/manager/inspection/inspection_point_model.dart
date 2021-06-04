@@ -1,10 +1,10 @@
 class InspectionPointModel {
-  int id;
-  String name;
-  int checkNum;
-  String completeDate;
+  int? id;
+  String? name;
+  int? checkNum;
+  String? completeDate;
 
-  InspectionPointModel({this.id, this.name, this.checkNum, this.completeDate});
+  InspectionPointModel({required this.id, this.name, this.checkNum, this.completeDate});
 
   InspectionPointModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

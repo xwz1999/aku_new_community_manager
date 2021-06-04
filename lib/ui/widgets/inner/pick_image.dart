@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-Future<File> akuPickImage() async {
+Future<File?> akuPickImage() async {
   return await showCupertinoModalPopup(
-    context: Get.context,
+    context: Get.context!,
     builder: (context) {
       return CupertinoActionSheet(
         title: Text('选择图片'),
@@ -25,7 +25,7 @@ Future<File> akuPickImage() async {
                 maxWidth: 600,
               )
                   .then((file) {
-                Get.back(result: File(file.path));
+                Get.back(result: File(file!.path));
               });
             },
             child: Text('拍照'),
@@ -39,7 +39,7 @@ Future<File> akuPickImage() async {
                 maxWidth: 600,
               )
                   .then((file) {
-                Get.back(result: File(file.path));
+                Get.back(result: File(file!.path));
               });
             },
             child: Text('相册'),

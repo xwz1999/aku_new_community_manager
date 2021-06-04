@@ -63,7 +63,7 @@ class AppTheme {
         unselectedLabelStyle: TextStyle(),
       ),
       radioTheme: RadioThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((states) {
+        fillColor: MaterialStateProperty.resolveWith<Color?>((states) {
           if (states.contains(MaterialState.selected)) return Color(0xFFFFD000);
           return null;
         }),

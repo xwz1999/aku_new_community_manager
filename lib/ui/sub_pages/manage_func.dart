@@ -1,7 +1,6 @@
 // Dart imports:
 
 // Flutter imports:
-import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:dio/dio.dart';
@@ -18,7 +17,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class ManageFunc {
   static Future<DecorationDetailModel> getDetcorationDetail(int id) async {
     Response response = await NetUtil()
-        .dio
+        .dio!
         .get(API.manage.decorationFindByld, queryParameters: {
       'decorationId': id,
     });
@@ -36,7 +35,7 @@ class ManageFunc {
   }
 
   static Future<InspectionDetailModel> getInspectionDetail(
-      int executeId) async {
+      int/*!*/ executeId) async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.inspectionFindDetailByld, params: {
       "executeId": executeId,
@@ -45,7 +44,7 @@ class ManageFunc {
   }
 
   static Future<List<InspectionPointModel>> getInspectionPointByPlanId(
-      {@required int planId}) async {
+      {required int planId}) async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.inspectionPointByPlanId, params: {
       "planId": planId,
@@ -56,7 +55,7 @@ class ManageFunc {
   }
 
   static Future<List<InspectionPointModel>> getInspectionPointByExcuteId(
-      {@required int excuteId}) async {
+      {required int/*!*/ excuteId}) async {
     BaseModel baseModel = await NetUtil()
         .get(API.manage.inspecntionFindPointByExecuteId, params: {
       "executeId": excuteId,
@@ -78,7 +77,7 @@ class ManageFunc {
     BaseModel baseModel =
         await NetUtil().post(API.manage.submitPointDetail, params: {
       "executePointId": model.executePointId,
-      "executeCheckList": model.executeCheckList
+      "executeCheckList": model.executeCheckList!
           .map((e) => ExecuteCheckList(e.id, e.status, e.remarkes).toJson())
           .toList(),
       "inspectionFaceImg": model.inspectionFaceImgPath,

@@ -15,7 +15,7 @@ class InspectionUtils {
     switch (status) {
       case 1:
         return Color(0xFFFF4501);
-        break;
+        
       case 2:
         return Color(0xFF999999);
       case 3:

@@ -12,14 +12,14 @@ import 'package:velocity_x/velocity_x.dart';
 
 class GreenManageView extends StatefulWidget {
   final int index;
-  GreenManageView({Key key, this.index}) : super(key: key);
+  GreenManageView({Key? key, required this.index}) : super(key: key);
 
   @override
   _GreenManageViewState createState() => _GreenManageViewState();
 }
 
 class _GreenManageViewState extends State<GreenManageView> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   @override
   void initState() {
     super.initState();
@@ -28,7 +28,7 @@ class _GreenManageViewState extends State<GreenManageView> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -41,7 +41,7 @@ class _GreenManageViewState extends State<GreenManageView> {
         },
         controller: _refreshController,
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => GreenManageListModel.fromJson(e))
               .toList();
         },
@@ -53,7 +53,7 @@ class _GreenManageViewState extends State<GreenManageView> {
                   index: widget.index,
                   model: items[index],
                   callRefresh: () {
-                    _refreshController.callRefresh();
+                    _refreshController!.callRefresh();
                   },
                 );
               },

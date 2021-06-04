@@ -14,7 +14,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class KeyApplyRecordView extends StatefulWidget {
   final int index;
-  KeyApplyRecordView({Key key, this.index}) : super(key: key);
+  KeyApplyRecordView({Key? key, required this.index}) : super(key: key);
 
   @override
   _KeyApplyRecordViewState createState() => _KeyApplyRecordViewState();
@@ -22,7 +22,7 @@ class KeyApplyRecordView extends StatefulWidget {
 
 class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
     with TickerProviderStateMixin {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -44,7 +44,7 @@ class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
         },
         controller: _refreshController,
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => KeyManageRecordListModel.fromJson(e))
               .toList();
         },
@@ -56,7 +56,7 @@ class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
                   index: widget.index,
                   model: items[index],
                   callRefresh: () {
-                    _refreshController.callRefresh();
+                    _refreshController!.callRefresh();
                   },
                 );
               },

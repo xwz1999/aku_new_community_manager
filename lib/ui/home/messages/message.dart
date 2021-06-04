@@ -19,7 +19,7 @@ import 'package:aku_community_manager/ui/home/messages/system_message.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class Message extends StatefulWidget {
-  Message({Key key}) : super(key: key);
+  Message({Key? key}) : super(key: key);
 
   @override
   _MessageState createState() => _MessageState();
@@ -28,9 +28,9 @@ class Message extends StatefulWidget {
 class _MessageState extends State<Message> {
   EasyRefreshController _refreshController = EasyRefreshController();
   Widget _messageTypeImage(String type) {
-    String path;
-    Color ca;
-    Color cb;
+    late String path;
+    Color? ca;
+    Color? cb;
     switch (type) {
       case '系统消息':
         path = R.ASSETS_MESSAGE_IC_TONGZHI_PNG;
@@ -52,7 +52,7 @@ class _MessageState extends State<Message> {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [ca, cb],
+          colors: [ca!, cb!],
         ),
       ),
       child: Image.asset(
@@ -65,7 +65,7 @@ class _MessageState extends State<Message> {
 
   Widget _messageListTile(
       String date, Widget messageImage, String title, String text, int number,
-      {VoidCallback onpressed}) {
+      {required VoidCallback onpressed}) {
     return AkuButton(
       color: Color(0xFFFFFFFF),
       onPressed: onpressed,

@@ -15,7 +15,7 @@ import 'package:aku_community_manager/ui/manage_pages/key_manage/key_aplly_input
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class SelectPlacePage extends StatefulWidget {
-  SelectPlacePage({Key key}) : super(key: key);
+  SelectPlacePage({Key? key}) : super(key: key);
 
   @override
   _SelectPlacePageState createState() => _SelectPlacePageState();

@@ -13,7 +13,7 @@ import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:aku_community_manager/utils/network/base_list_model.dart';
 
 class ActivityManagerPage extends StatefulWidget {
-  ActivityManagerPage({Key key}) : super(key: key);
+  ActivityManagerPage({Key? key}) : super(key: key);
 
   @override
   _ActivityManagerPageState createState() => _ActivityManagerPageState();
@@ -36,7 +36,7 @@ class _ActivityManagerPageState extends State<ActivityManagerPage> {
         },
         controller: _refreshController,
         convert: (BaseListModel model) {
-          return model.tableList
+          return model.tableList!
               .map((e) => ActivityItemModel.fromJson(e))
               .toList();
         },

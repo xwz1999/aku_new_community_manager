@@ -1,14 +1,14 @@
 class DecorationListModel {
-  int id;
-  String roomName;
-  String constructionUnit;
-  int operationStatus;
-  int status;
-  int tracker;
-  String applicationDate;
+  int? id;
+  String? roomName;
+  String? constructionUnit;
+  int? operationStatus;
+  int? status;
+  int? tracker;
+  String? applicationDate;
 
   DecorationListModel(
-      {this.id,
+      {required this.id,
       this.roomName,
       this.constructionUnit,
       this.operationStatus,

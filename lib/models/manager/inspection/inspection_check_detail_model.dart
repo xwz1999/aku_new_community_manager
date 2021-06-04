@@ -2,18 +2,18 @@
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class InspectionCheckDetialModel {
-  int id;
-  int executeId;
-  String code;
-  String name;
-  int type;
-  String completeDate;
-  List<CheckFBIVoList> checkFBIVoList;
-  List<ImgModel> faceImg;
-  List<ImgModel> spaceImg;
+  int? id;
+  int? executeId;
+  String? code;
+  String? name;
+  int? type;
+  String? completeDate;
+  List<CheckFBIVoList>? checkFBIVoList;
+  List<ImgModel>? faceImg;
+  List<ImgModel>? spaceImg;
 
   InspectionCheckDetialModel(
-      {this.id,
+      {required this.id,
       this.executeId,
       this.code,
       this.name,
@@ -31,21 +31,21 @@ class InspectionCheckDetialModel {
     type = json['type'];
     completeDate = json['completeDate'];
     if (json['checkFBIVoList'] != null) {
-      checkFBIVoList = new List<CheckFBIVoList>();
+      checkFBIVoList = <CheckFBIVoList>[];
       json['checkFBIVoList'].forEach((v) {
-        checkFBIVoList.add(new CheckFBIVoList.fromJson(v));
+        checkFBIVoList!.add(new CheckFBIVoList.fromJson(v));
       });
     }
     if (json['faceImg'] != null) {
-      faceImg = new List<ImgModel>();
+      faceImg = <ImgModel>[];
       json['faceImg'].forEach((v) {
-        faceImg.add(new ImgModel.fromJson(v));
+        faceImg!.add(new ImgModel.fromJson(v));
       });
     }
     if (json['spaceImg'] != null) {
-      spaceImg = new List<ImgModel>();
+      spaceImg = <ImgModel>[];
       json['spaceImg'].forEach((v) {
-        spaceImg.add(new ImgModel.fromJson(v));
+        spaceImg!.add(new ImgModel.fromJson(v));
       });
     }
   }
@@ -60,22 +60,22 @@ class InspectionCheckDetialModel {
     data['completeDate'] = this.completeDate;
     if (this.checkFBIVoList != null) {
       data['checkFBIVoList'] =
-          this.checkFBIVoList.map((v) => v.toJson()).toList();
+          this.checkFBIVoList!.map((v) => v.toJson()).toList();
     }
     if (this.faceImg != null) {
-      data['faceImg'] = this.faceImg.map((v) => v.toJson()).toList();
+      data['faceImg'] = this.faceImg!.map((v) => v.toJson()).toList();
     }
     if (this.spaceImg != null) {
-      data['spaceImg'] = this.spaceImg.map((v) => v.toJson()).toList();
+      data['spaceImg'] = this.spaceImg!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 
-   String get inspectionPattern {
+  String get inspectionPattern {
     switch (this.type) {
       case 1:
         return '巡检模式1';
-        break;
+        
       default:
         return '未知';
     }
@@ -83,10 +83,10 @@ class InspectionCheckDetialModel {
 }
 
 class CheckFBIVoList {
-  int id;
-  String name;
-  int status;
-  String remakes;
+  int? id;
+  String? name;
+  int? status;
+  String? remakes;
 
   CheckFBIVoList({this.id, this.name, this.status, this.remakes});
 
@@ -108,11 +108,11 @@ class CheckFBIVoList {
 }
 
 class FaceImg {
-  String url;
-  int size;
-  int longs;
-  int paragraph;
-  int sort;
+  String? url;
+  int? size;
+  int? longs;
+  int? paragraph;
+  int? sort;
 
   FaceImg({this.url, this.size, this.longs, this.paragraph, this.sort});
 
@@ -133,6 +133,4 @@ class FaceImg {
     data['sort'] = this.sort;
     return data;
   }
-
-  
 }

@@ -7,7 +7,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class ClockInOutRecordCard extends StatefulWidget {
   final ClockRecordListModel model;
-  ClockInOutRecordCard({Key key, this.model}) : super(key: key);
+  ClockInOutRecordCard({Key? key, required this.model}) : super(key: key);
 
   @override
   _ClockInOutRecordCardState createState() => _ClockInOutRecordCardState();

@@ -11,7 +11,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class GreenManagePage extends StatefulWidget {
-  GreenManagePage({Key key}) : super(key: key);
+  GreenManagePage({Key? key}) : super(key: key);
 
   @override
   _GreenManagePageState createState() => _GreenManagePageState();
@@ -19,8 +19,8 @@ class GreenManagePage extends StatefulWidget {
 
 class _GreenManagePageState extends State<GreenManagePage>
     with TickerProviderStateMixin {
-  List<String> _tabs = ['待处理', '未完成', '已完成'];
-  TabController _tabController;
+  List<String> _tabs = ['待处理', '已完成', '未完成'];
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -30,7 +30,7 @@ class _GreenManagePageState extends State<GreenManagePage>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -40,7 +40,7 @@ class _GreenManagePageState extends State<GreenManagePage>
       title: '绿化管理',
       appBarBottom: PreferredSize(
           preferredSize: Size.fromHeight(88.w),
-          child: AkuTabBar(controller: _tabController, tabs: _tabs)),
+          child: AkuTabBar(controller: _tabController!, tabs: _tabs)),
       body: TabBarView(
         controller: _tabController,
         children: List.generate(

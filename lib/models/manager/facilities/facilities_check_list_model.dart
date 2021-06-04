@@ -1,20 +1,20 @@
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class FacilitiesCheckListModel {
-  int id;
-  String code;
-  String facilitiesName;
-  String facilitiesAddress;
-  int status;
-  String beginDate;
-  String endDate;
-  int situation;
-  String detail;
-  String checkDate;
-  List<ImgModel> imgList;
+  int? id;
+  String? code;
+  String? facilitiesName;
+  String? facilitiesAddress;
+  int? status;
+  String? beginDate;
+  String? endDate;
+  int? situation;
+  String? detail;
+  String? checkDate;
+  List<ImgModel>? imgList;
 
   FacilitiesCheckListModel(
-      {this.id,
+      {required this.id,
       this.code,
       this.facilitiesName,
       this.facilitiesAddress,
@@ -49,9 +49,9 @@ class FacilitiesCheckListModel {
     detail = json['detail'];
     checkDate = json['checkDate'];
     if (json['imgList'] != null) {
-      imgList = new List<ImgModel>();
+      imgList = <ImgModel>[];
       json['imgList'].forEach((v) {
-        imgList.add(new ImgModel.fromJson(v));
+        imgList!.add(new ImgModel.fromJson(v));
       });
     } else
       imgList = [];

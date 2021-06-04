@@ -13,15 +13,15 @@ import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspecti
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class InspectionMangeView extends StatefulWidget {
-  final int inspectionStatus;
-  InspectionMangeView({Key key, this.inspectionStatus}) : super(key: key);
+  final int/*!*/ inspectionStatus;
+  InspectionMangeView({Key? key, required this.inspectionStatus}) : super(key: key);
 
   @override
   _InspectionMangeViewState createState() => _InspectionMangeViewState();
 }
 
 class _InspectionMangeViewState extends State<InspectionMangeView> {
-  EasyRefreshController _easyRefreshController;
+  EasyRefreshController? _easyRefreshController;
   @override
   void initState() {
     _easyRefreshController = EasyRefreshController();
@@ -41,7 +41,7 @@ class _InspectionMangeViewState extends State<InspectionMangeView> {
       controller: _easyRefreshController,
       extraParams: {"inspectionStatus": widget.inspectionStatus},
       convert: (models) {
-        return models.tableList
+        return models.tableList!
             .map((e) => InspectionListModel.fromJson(e))
             .toList();
       },

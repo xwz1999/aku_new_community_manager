@@ -22,7 +22,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
 import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
 
 class UserInfoPage extends StatefulWidget {
-  UserInfoPage({Key key}) : super(key: key);
+  UserInfoPage({Key? key}) : super(key: key);
 
   @override
   _UserInfoPageState createState() => _UserInfoPageState();
@@ -39,7 +39,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
         children: [
           AkuTile(
             onTap: () async {
-              File file = await akuPickImage();
+              File? file = await akuPickImage();
               if (file != null) await userProvider.setAvatar(file);
             },
             title: Text('头像'),
@@ -52,7 +52,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
               setState(() {});
             },
             title: Text('昵称'),
-            suffix: Text(userProvider.infoModel.nickName),
+            suffix: Text(userProvider.infoModel!.nickName!),
           ),
           AkuTile(
             onTap: () async {
@@ -60,7 +60,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
               setState(() {});
             },
             title: Text('手机'),
-            suffix: Text(TextUtil.hideNumber(userProvider.profileModel.tel)),
+            suffix: Text(TextUtil.hideNumber(userProvider.profileModel!.tel!)),
           ),
         ].sepWidget(separate: AkuDivider.horizontal()),
       ),

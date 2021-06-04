@@ -13,7 +13,7 @@ import 'package:aku_community_manager/const/resource.dart';
 
 class RulesManageDetailPage extends StatefulWidget {
   final RulesManageListModel model;
-  RulesManageDetailPage({Key key, this.model}) : super(key: key);
+  RulesManageDetailPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _RulesManageDetailPageState createState() => _RulesManageDetailPageState();
@@ -30,7 +30,7 @@ class _RulesManageDetailPageState extends State<RulesManageDetailPage> {
               children:[ ListView(
           padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
           children: [
-            _detailModel.title.text
+            _detailModel.title!.text
                 .size(32.sp)
                 .color(kTextPrimaryColor)
                 .bold
@@ -39,7 +39,7 @@ class _RulesManageDetailPageState extends State<RulesManageDetailPage> {
             24.w.heightBox,
             SizedBox(
               width: double.infinity,
-              child: _detailModel.content.text
+              child: _detailModel.content!.text
                   .size(28.sp)
                   .color(kTextPrimaryColor)
                   .make(),
@@ -70,7 +70,7 @@ class _RulesManageDetailPageState extends State<RulesManageDetailPage> {
             Row(
               children: [
                 Spacer(),
-                '发布于 ${DateUtil.formatDateStr(_detailModel.releaseDate, format: 'MM-dd HH:mm')}'
+                '发布于 ${DateUtil.formatDateStr(_detailModel.releaseDate!, format: 'MM-dd HH:mm')}'
                     .text
                     .size(24.sp)
                     .color(kTextSubColor)
@@ -86,7 +86,7 @@ class _RulesManageDetailPageState extends State<RulesManageDetailPage> {
             left: 32.w,
             right: 32.w,
             child: docView(
-          widget.model?.fileDocName ?? '', widget.model?.fileDocUrl ?? '') ),
+          widget.model.fileDocName ?? '', widget.model.fileDocUrl ?? '') ),
         ]
         
       ),
@@ -117,7 +117,7 @@ class _RulesManageDetailPageState extends State<RulesManageDetailPage> {
                 BotToast.showText(text: '文件为空！');
               }
             : () async {
-                String result = await Get.dialog(BeeDownloadView(file: path));
+                String? result = await Get.dialog(BeeDownloadView(file: path));
                 if (result != null) OpenFile.open(result);
               },
         shape: RoundedRectangleBorder(

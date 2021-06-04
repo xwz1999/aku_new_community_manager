@@ -20,7 +20,7 @@ import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class AddBorrowObjectPage extends StatefulWidget {
-  AddBorrowObjectPage({Key key}) : super(key: key);
+  AddBorrowObjectPage({Key? key}) : super(key: key);
 
   @override
   _AddBorrowObjectPageState createState() => _AddBorrowObjectPageState();
@@ -28,7 +28,7 @@ class AddBorrowObjectPage extends StatefulWidget {
 
 class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
   TextEditingController _textEditingController = TextEditingController();
-  File file;
+  File? file;
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +120,7 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                           ),
                         )
                       : Image.file(
-                          file,
+                          file!,
                           height: 184.w,
                           width: 184.w,
                           fit: BoxFit.cover,
@@ -143,8 +143,8 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                       ? null
                       : () async {
                           BaseFileModel baseFileModel = await NetUtil()
-                              .upload(API.upload.uploadArtical, file);
-                          if (baseFileModel.status) {
+                              .upload(API.upload.uploadArtical, file!);
+                          if (baseFileModel.status!) {
                             await NetUtil().post(
                               API.manage.insertArticle,
                               params: {
@@ -154,7 +154,7 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                               showMessage: true,
                             );
                           } else {
-                            BotToast.showText(text: baseFileModel.message);
+                            BotToast.showText(text: baseFileModel.message!);
                           }
                           Get.back();
                         },

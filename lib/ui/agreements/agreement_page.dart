@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class AgreementPage extends StatelessWidget {
-  const AgreementPage({Key key}) : super(key: key);
+  const AgreementPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

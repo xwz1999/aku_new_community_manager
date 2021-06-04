@@ -1,13 +1,13 @@
 class ImgModel {
-  String url;
-  String size;
-  int longs;
-  int paragraph;
-  int sort;
+  String? url;
+  String? size;
+  int? longs;
+  int? paragraph;
+  int? sort;
 
   ImgModel({this.url, this.size, this.longs, this.paragraph, this.sort});
 
-  static String first(List<ImgModel> models) {
+  static String? first(List<ImgModel>? models) {
     if (models == null) return '';
     if (models.isEmpty) return '';
     return models.first.url;

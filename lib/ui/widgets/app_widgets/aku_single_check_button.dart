@@ -11,7 +11,7 @@ class AkuSingleCheckButton<T> extends StatefulWidget {
   final T gropValue;
   final VoidCallback onPressed;
   AkuSingleCheckButton(
-      {Key key, this.text, this.value, this.gropValue, this.onPressed})
+      {Key? key, required this.text, required this.value, required this.gropValue, required this.onPressed})
       : super(key: key);
 
   @override

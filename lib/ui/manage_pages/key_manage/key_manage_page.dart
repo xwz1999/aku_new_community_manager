@@ -14,7 +14,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class KeyManagePage extends StatefulWidget {
-  KeyManagePage({Key key}) : super(key: key);
+  KeyManagePage({Key? key}) : super(key: key);
 
   @override
   _KeyManagePageState createState() => _KeyManagePageState();
@@ -23,7 +23,7 @@ class KeyManagePage extends StatefulWidget {
 class _KeyManagePageState extends State<KeyManagePage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['钥匙列表', '未归还钥匙'];
-  TabController _tabController;
+  TabController? _tabController;
   @override
   void initState() {
     super.initState();
@@ -52,7 +52,7 @@ class _KeyManagePageState extends State<KeyManagePage>
         ),
       ],
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(

@@ -14,7 +14,7 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 // Package imports:
 
 class InspectionManagePage extends StatefulWidget {
-  InspectionManagePage({Key key}) : super(key: key);
+  InspectionManagePage({Key? key}) : super(key: key);
 
   @override
   _InspectionManagePageState createState() => _InspectionManagePageState();
@@ -25,14 +25,14 @@ class _InspectionManagePageState extends State<InspectionManagePage>
   List<String> get _tabs {
     UserProvider _userProvider =
         Provider.of<UserProvider>(context, listen: false);
-    if (_userProvider.infoModel.canOperation) {
+    if (_userProvider.infoModel!.canOperation) {
       return ['待巡检', '已巡检', '巡检中', '未巡检', '全部'];
     } else {
       return ['待巡检', '已巡检', '巡检中', '未巡检', '全部'];
     }
   }
 
-  TabController _tabController;
+  TabController? _tabController;
   @override
   void initState() {
     _tabController = TabController(length: _tabs.length, vsync: this);
@@ -50,7 +50,7 @@ class _InspectionManagePageState extends State<InspectionManagePage>
     return AkuScaffold(
       title: '巡检管理',
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
         preferredSize: Size.fromHeight(96.w),
       ),
       body: TabBarView(

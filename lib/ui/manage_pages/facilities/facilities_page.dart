@@ -11,7 +11,7 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class FacilitiesPage extends StatefulWidget {
   final int facilitiesType;
-  FacilitiesPage({Key key, this.facilitiesType}) : super(key: key);
+  FacilitiesPage({Key? key, required this.facilitiesType}) : super(key: key);
 
   @override
   _FacilitiesPageState createState() => _FacilitiesPageState();
@@ -23,7 +23,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     return ['待检查', '已完成', '未完成'];
   }
 
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -42,7 +42,7 @@ class _FacilitiesPageState extends State<FacilitiesPage>
     return AkuScaffold(
       title: '设施检查',
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(

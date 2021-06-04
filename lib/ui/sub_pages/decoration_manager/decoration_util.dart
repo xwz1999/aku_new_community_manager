@@ -13,7 +13,7 @@ class DecorationUIUtil {
       Provider.of<UserProvider>(context, listen: false);
 
   DecorationUIUtil(this.context);
-  String getTagName(int operationStatus, int status, {int tracker}) {
+  String getTagName(int operationStatus, int status, {int? tracker}) {
     // Map<DecorationType, String> managerMap = {
     //   DecorationType.WAIT_HAND_OUT: '待指派',
     //   DecorationType.HAND_OUT: '已指派',
@@ -48,11 +48,10 @@ class DecorationUIUtil {
         } else {
           return '未知';
         }
-        break;
       case 2:
         if (status < 5) {
-          if (userProvider?.infoModel?.canOperation != null &&
-              userProvider.infoModel.canOperation) {
+          if (userProvider.infoModel?.canOperation != null &&
+              userProvider.infoModel!.canOperation) {
             return '已指派';
           } else {
             return '待执行';
@@ -60,14 +59,12 @@ class DecorationUIUtil {
         } else {
           return '未知';
         }
-        break;
       case 3:
         if (status >= 5) {
           return '已完成';
         } else {
           return '未知';
         }
-        break;
       default:
         return '未知';
     }
@@ -111,7 +108,7 @@ class DecorationUIUtil {
     7: '装修结束',
     8: '已作废',
   };
-  String getDecorationStatus(int status) {
+  String? getDecorationStatus(int status) {
     return stautsToString[status];
   }
 }

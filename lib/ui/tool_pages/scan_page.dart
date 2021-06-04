@@ -15,7 +15,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 // import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class ScanPage extends StatefulWidget {
-  ScanPage({Key key}) : super(key: key);
+  ScanPage({Key? key}) : super(key: key);
 
   @override
   _ScanPageState createState() => _ScanPageState();
@@ -23,8 +23,8 @@ class ScanPage extends StatefulWidget {
 
 class _ScanPageState extends State<ScanPage> {
   GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-  String tempText;
-  Timer _timer;
+  String? tempText;
+  Timer? _timer;
   bool _barMove = false;
 
   @override

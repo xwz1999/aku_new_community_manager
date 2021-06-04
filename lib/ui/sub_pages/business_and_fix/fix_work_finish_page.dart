@@ -31,10 +31,10 @@ class FixWorkFinishPage extends StatefulWidget {
   final BussinessAndFixModel fixModel;
   final bool dispatchType;
   FixWorkFinishPage(
-      {Key key,
-      @required this.model,
-      @required this.dispatchType,
-      @required this.fixModel})
+      {Key? key,
+      /*required*/ required this.model,
+      /*required*/ required this.dispatchType,
+      /*required*/ required this.fixModel})
       : super(key: key);
 
   @override
@@ -49,14 +49,14 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
   TextEditingController _humanController = TextEditingController();
   TextEditingController _materialPriceController = TextEditingController();
 
-  double humanPrice = 0;
-  double materialPrice = 0;
+  double? humanPrice = 0;
+  double? materialPrice = 0;
   @override
   void dispose() {
-    _descriptionController?.dispose();
-    _materialController?.dispose();
-    _materialPriceController?.dispose();
-    _humanController?.dispose();
+    _descriptionController.dispose();
+    _materialController.dispose();
+    _materialPriceController.dispose();
+    _humanController.dispose();
     super.dispose();
   }
 
@@ -74,7 +74,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
             spacing: 24,
             children: [
               Text(
-                widget.fixModel.reportDetail,
+                widget.fixModel.reportDetail!,
                 style: TextStyle(
                   color: AppStyle.primaryTextColor,
                   fontSize: 28.w,
@@ -96,10 +96,10 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                       child: FadeInImage.assetNetwork(
                           placeholder: R.ASSETS_PLACEHOLDER_WEBP,
                           image: API.image(
-                            widget.model.repairDetail.imgUrls[index].url,
+                            widget.model.repairDetail!.imgUrls![index].url!,
                           )));
                 },
-                itemCount: widget.model.repairDetail.imgUrls.length,
+                itemCount: widget.model.repairDetail!.imgUrls!.length,
               ),
             ],
           ),
@@ -371,7 +371,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                                     _materialPriceController.text);
                               }
                               return Text(
-                                '¥${(humanPrice + materialPrice).toStringAsFixed(2)}',
+                                '¥${(humanPrice! + materialPrice!).toStringAsFixed(2)}',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 28.sp),
                               );
@@ -415,23 +415,23 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
               return;
             }
           }
-          List<String> urls =
+          List<String?> urls =
               await NetUtil().uploadFiles(_imgs, API.upload.uploadArtical);
-          BaseModel baseModel = await ManageFunc.handleResult(
-              widget.model.repairDetail.dispatchId,
+          BaseModel baseModel = await (ManageFunc.handleResult(
+              widget.model.repairDetail!.dispatchId,
               _descriptionController.text,
               _materialController.text,
               humanPrice,
               materialPrice,
-              humanPrice + materialPrice,
+              humanPrice! + materialPrice!,
               1,
-              urls);
-          if (baseModel.status) {
+              urls) );
+          if (baseModel.status!) {
             FixSubmitFinishPage(
               model: widget.fixModel,
             ).to();
           } else {
-            BotToast.showText(text: baseModel.message);
+            BotToast.showText(text: baseModel.message!);
           }
         },
       ),

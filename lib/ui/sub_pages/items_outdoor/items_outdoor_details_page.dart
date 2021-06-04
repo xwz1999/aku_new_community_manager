@@ -27,7 +27,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class ItemsOutdoorDetailsPage extends StatefulWidget {
   final int id;
-  ItemsOutdoorDetailsPage({Key key, @required this.id}) : super(key: key);
+  ItemsOutdoorDetailsPage({Key? key, /*required*/ required this.id}) : super(key: key);
 
   @override
   _ItemsOutdoorDetailsPageState createState() =>
@@ -35,9 +35,9 @@ class ItemsOutdoorDetailsPage extends StatefulWidget {
 }
 
 class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
-  GoodsOutDetailModel _model;
+  GoodsOutDetailModel? _model;
 
-  _buildTile(String path, String title, String subTitle) {
+  _buildTile(String path, String title, String? subTitle) {
     return Row(
       children: [
         Image.asset(
@@ -47,7 +47,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
         ),
         AkuBox.w(4),
         Text(
-          title ?? '',
+          title,
           style: TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp),
         ),
         Spacer(),
@@ -94,9 +94,9 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                             ),
                             Spacer(),
                             Text(
-                              _model.statusValue,
+                              _model!.statusValue,
                               style: TextStyle(
-                                color: _model.statusColor,
+                                color: _model!.statusColor,
                                 fontSize: 24.sp,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -110,19 +110,19 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                           _buildTile(
                             R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                             '详细地址',
-                            _model.roomName,
+                            _model!.roomName,
                           ),
                           _buildTile(R.ASSETS_OUTDOOR_IC_HOME_PNG, '出户人',
-                              _model.applicantName),
+                              _model!.applicantName),
                           _buildTile(R.ASSETS_OUTDOOR_IC_HOME_PNG, '身份',
-                              _model.identityValue),
+                              _model!.identityValue),
                           _buildTile(R.ASSETS_OUTDOOR_IC_HOME_PNG, '联系方式',
-                              _model.applicantTel),
+                              _model!.applicantTel),
                           _buildTile(
                             R.ASSETS_OUTDOOR_IC_HOME_PNG,
                             '出户时间',
                             DateUtil.formatDate(
-                              _model.expected,
+                              _model!.expected,
                               format: 'yyyy-MM-dd HH:mm',
                             ),
                           ),
@@ -133,7 +133,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   Divider(height: 1.w),
                   MaterialButton(
                     onPressed: () async {
-                      launch('tel:${_model.applicantTel}');
+                      launch('tel:${_model!.applicantTel}');
                     },
                     elevation: 0,
                     child: Row(
@@ -185,7 +185,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                             ),
                             Spacer(),
                             Text(
-                              _model.articleOutName ?? '',
+                              _model!.articleOutName ?? '',
                               style: AppStyle().primaryStyle,
                             ),
                           ],
@@ -205,7 +205,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                             ),
                             Spacer(),
                             Text(
-                              _model.weightValue,
+                              _model!.weightValue,
                               style: AppStyle().primaryStyle,
                             ),
                           ],
@@ -225,7 +225,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                             ),
                             Spacer(),
                             Text(
-                              _model.approachValue,
+                              _model!.approachValue,
                               style: AppStyle().primaryStyle,
                             )
                           ],
@@ -249,13 +249,13 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                         AkuBox.h(16),
                         Wrap(
                           spacing: 16.w,
-                          children: _model.imgUrls
+                          children: _model!.imgUrls!
                               .map(
                                 (e) => ClipRRect(
                                     borderRadius: BorderRadius.circular(4.w),
                                     child: FadeInImage.assetNetwork(
                                       placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                                      image: API.image(e?.url ?? ''),
+                                      image: API.image(e.url ?? ''),
                                       width: 218.w,
                                       height: 218.w,
                                     )),
@@ -274,9 +274,9 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
 
   Widget _bottomCard() {
     final userProvider = Provider.of<UserProvider>(context);
-    switch (_model.status) {
+    switch (_model!.status) {
       case 1:
-        return userProvider.infoModel.canPass
+        return userProvider.infoModel!.canPass
             ? Container(
                 height: 98.w,
                 decoration: BoxDecoration(
@@ -296,7 +296,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   children: [
                     AkuButton(
                       onPressed: () {
-                        Get.to(OutdoorNotpassPage(id: _model.id));
+                        Get.to(OutdoorNotpassPage(id: _model!.id!));
                       },
                       child: Container(
                         width: 304.w,
@@ -316,7 +316,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                     Spacer(),
                     AkuMaterialButton(
                       onPressed: () {
-                        Get.to(OutdoorPassPage(id: _model.id));
+                        Get.to(OutdoorPassPage(id: _model!.id!));
                       },
                       radius: 4.w,
                       color: Color(0xFFFFC40C),
@@ -331,7 +331,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                 ),
               )
             : SizedBox();
-        break;
+        
       case 2:
         return Container(
           height: 226.w,
@@ -359,7 +359,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   Spacer(),
                   Text(
                     DateUtil.formatDate(
-                      _model.expected,
+                      _model!.expected,
                       format: 'yyyy-MM-dd HH:mm',
                     ),
                     style: AppStyle().primaryStyle,
@@ -381,7 +381,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   ),
                   Spacer(),
                   Text(
-                    _model.exportValue,
+                    _model!.exportValue,
                     style: AppStyle().primaryStyle,
                   ),
                 ],
@@ -389,7 +389,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
             ],
           ),
         );
-        break;
+        
       case 3:
         return Container(
           height: 226.w,
@@ -417,7 +417,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   Spacer(),
                   Text(
                     DateUtil.formatDate(
-                      _model.expected,
+                      _model!.expected,
                       format: 'yyyy-MM-dd HH:mm',
                     ),
                     style: AppStyle().primaryStyle,
@@ -439,7 +439,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                   ),
                   Spacer(),
                   Text(
-                    _model.remarks,
+                    _model!.remarks!,
                     style: TextStyle(
                         color: Color(0xFFFF4501),
                         fontSize: 28.sp,
@@ -450,7 +450,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
             ],
           ),
         );
-        break;
+        
       default:
         return SizedBox();
     }

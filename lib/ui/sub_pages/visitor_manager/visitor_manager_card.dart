@@ -17,7 +17,7 @@ import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manag
 
 class VisitorManagerCard extends StatefulWidget {
   final VisitorItemModel model;
-  VisitorManagerCard({Key key, @required this.model}) : super(key: key);
+  VisitorManagerCard({Key? key, /*required*/ required this.model}) : super(key: key);
 
   @override
   _VisitorManagerCardState createState() => _VisitorManagerCardState();
@@ -56,10 +56,10 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
   //   }
   // }
 
-  VisitorStatus get _visitorStatusEnum {
+  VisitorStatus? get _visitorStatusEnum {
     switch (widget.model.visitorStatus) {
       case 1:
-        if (widget.model.effective.difference(DateTime.now()).isNegative)
+        if (widget.model.effective!.difference(DateTime.now()).isNegative)
           return VisitorStatus.OUTDATE;
         return VisitorStatus.NOT_VISIT;
       case 2:
@@ -87,7 +87,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.model.roomName,
+                    widget.model.roomName!,
                     style: TextStyle(
                         color: AppStyle.primaryTextColor,
                         fontSize: 32.sp,
@@ -103,7 +103,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
                       ),
                       AkuBox.w(8),
                       Text(
-                        widget.model.name,
+                        widget.model.name!,
                         style: _textStyle,
                       ),
                       AkuBox.w(137),
@@ -154,7 +154,7 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
     );
   }
 
-  String _statusImage(VisitorStatus status) {
+  String _statusImage(VisitorStatus? status) {
     switch (status) {
       case VisitorStatus.NOT_VISIT:
         return R.ASSETS_MANAGE_IC_WEIDAO_PNG;

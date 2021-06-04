@@ -17,15 +17,15 @@ import 'package:aku_community_manager/ui/tool_pages/warning/warning_success.dart
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class WarningSubPage extends StatefulWidget {
-  WarningSubPage({Key key}) : super(key: key);
+  WarningSubPage({Key? key}) : super(key: key);
 
   @override
   _WarningSubPageState createState() => _WarningSubPageState();
 }
 
 class _WarningSubPageState extends State<WarningSubPage> {
-  Timer _timer;
-  Timer _countTimer;
+  Timer? _timer;
+  Timer? _countTimer;
   int _count = 3;
   @override
   void dispose() {

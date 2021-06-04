@@ -2,19 +2,19 @@ import 'package:aku_community_manager/style/app_style.dart';
 import 'package:flutter/material.dart';
 
 class InterviewListModel {
-  int id;
-  String name;
-  String tel;
-  String content;
-  int status;
-  String interviewDate;
-  String feedbackContent;
-  String feedbackDate;
-  String createName;
-  String createDate;
+  int? id;
+  String? name;
+  String? tel;
+  String? content;
+  int? status;
+  String? interviewDate;
+  String? feedbackContent;
+  String? feedbackDate;
+  String? createName;
+  String? createDate;
 
   InterviewListModel(
-      {this.id,
+      {required this.id,
       this.name,
       this.tel,
       this.content,

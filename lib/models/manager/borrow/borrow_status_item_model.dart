@@ -9,26 +9,26 @@ import 'package:aku_community_manager/models/common/img_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 
 class BorrowStatusItemModel {
-  int id;
-  int articleDetailId;
-  String articleName;
+  int? id;
+  int? articleDetailId;
+  String? articleName;
 
   ///借取状态（1.出借中，2.已还，3.待检查）
-  int borrowStatus;
+  int? borrowStatus;
 
   ///物品状态（1.正常，2.损坏，3.丢失）
-  int status;
-  int borrowTime;
-  String beginDate;
-  String endDate;
-  String borrowName;
-  String borrowTel;
-  String createDate;
-  List<ImgModel> imgUrls;
-  ImgModel get firstImg => imgUrls.isEmpty ? null : imgUrls.first;
-  DateTime get create => DateUtil.getDateTime(createDate);
-  DateTime get begin => DateUtil.getDateTime(beginDate);
-  DateTime get end => DateUtil.getDateTime(endDate);
+  int? status;
+  int? borrowTime;
+  String? beginDate;
+  String? endDate;
+  String? borrowName;
+  String? borrowTel;
+  String? createDate;
+  List<ImgModel>? imgUrls;
+  ImgModel? get firstImg => imgUrls!.isEmpty ? null : imgUrls!.first;
+  DateTime? get create => DateUtil.getDateTime(createDate!);
+  DateTime? get begin => DateUtil.getDateTime(beginDate!);
+  DateTime? get end => DateUtil.getDateTime(endDate!);
 
   ///借取状态（1.出借中，2.已还，3.待检查）
   String get borrowStatusValue {
@@ -69,7 +69,7 @@ class BorrowStatusItemModel {
   }
 
   BorrowStatusItemModel(
-      {this.id,
+      {required this.id,
       this.articleDetailId,
       this.articleName,
       this.borrowStatus,
@@ -95,9 +95,9 @@ class BorrowStatusItemModel {
     borrowTel = json['borrowTel'];
     createDate = json['createDate'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgModel>();
+      imgUrls = [];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgModel.fromJson(v));
+        imgUrls!.add(new ImgModel.fromJson(v));
       });
     } else
       imgUrls = [];
@@ -117,7 +117,7 @@ class BorrowStatusItemModel {
     data['borrowTel'] = this.borrowTel;
     data['createDate'] = this.createDate;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }

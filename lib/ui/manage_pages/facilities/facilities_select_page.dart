@@ -9,7 +9,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 class FacilitiesSelectPage extends StatefulWidget {
-  FacilitiesSelectPage({Key key}) : super(key: key);
+  FacilitiesSelectPage({Key? key}) : super(key: key);
 
   @override
   _FacilitiesSelectPageState createState() => _FacilitiesSelectPageState();

@@ -7,7 +7,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class WarningDetailPage extends StatefulWidget {
-  WarningDetailPage({Key key}) : super(key: key);
+  WarningDetailPage({Key? key}) : super(key: key);
 
   @override
   _WarningDetailPageState createState() => _WarningDetailPageState();

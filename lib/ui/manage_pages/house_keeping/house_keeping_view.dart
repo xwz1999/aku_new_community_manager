@@ -9,14 +9,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HouseKeepingView extends StatefulWidget {
   final int index;
-  HouseKeepingView({Key key, this.index}) : super(key: key);
+  HouseKeepingView({Key? key, required this.index}) : super(key: key);
 
   @override
   _HouseKeepingViewState createState() => _HouseKeepingViewState();
 }
 
 class _HouseKeepingViewState extends State<HouseKeepingView> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
 
   @override
   void initState() {
@@ -26,7 +26,7 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -36,7 +36,7 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
         path: API.manage.houseKeepingList,
         controller: _refreshController,
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => HouseKeepingListModel.fromJson(e))
               .toList();
         },

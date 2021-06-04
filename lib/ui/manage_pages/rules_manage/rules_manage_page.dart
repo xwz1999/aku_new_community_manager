@@ -17,14 +17,14 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class RulesManagePage extends StatefulWidget {
-  RulesManagePage({Key key}) : super(key: key);
+  RulesManagePage({Key? key}) : super(key: key);
 
   @override
   _RulesManagePageState createState() => _RulesManagePageState();
 }
 
 class _RulesManagePageState extends State<RulesManagePage> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -45,7 +45,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
           path: API.manage.rulesManageList,
           controller: _refreshController,
           convert: (models) {
-            return models.tableList
+            return models.tableList!
                 .map((e) => RulesManageListModel.fromJson(e))
                 .toList();
           },
@@ -75,7 +75,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              model.title.text
+              model.title!.text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
                   .maxLines(1)
@@ -83,7 +83,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
                   .bold
                   .make(),
               32.w.heightBox,
-              model.content.text
+              model.content!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .maxLines(3)
@@ -94,7 +94,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
                 children: [
                   '南宁人才公寓'.text.size(20.sp).color(kTextSubColor).make(),
                   Spacer(),
-                  '发布于 ${DateUtil.formatDateStr(model.releaseDate, format: 'MM-dd HH:mm')}'
+                  '发布于 ${DateUtil.formatDateStr(model.releaseDate!, format: 'MM-dd HH:mm')}'
                       .text
                       .size(20.sp)
                       .color(kTextSubColor)

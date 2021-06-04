@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NewRenovationPage extends StatefulWidget {
-  NewRenovationPage({Key key}) : super(key: key);
+  NewRenovationPage({Key? key}) : super(key: key);
 
   @override
   _NewRenovationState createState() => _NewRenovationState();
@@ -13,7 +13,7 @@ class NewRenovationPage extends StatefulWidget {
 
 class _NewRenovationState extends State<NewRenovationPage>
     with TickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   List<String> _tabs = ['检查中', '检查通过','检查不通过'];
   @override
   void initState() {
@@ -23,7 +23,7 @@ class _NewRenovationState extends State<NewRenovationPage>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -31,7 +31,7 @@ class _NewRenovationState extends State<NewRenovationPage>
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '装修管理',
-      appBarBottom: PreferredSize(preferredSize: Size.fromHeight(88.w),child: AkuTabBar(controller: _tabController, tabs: _tabs),),
+      appBarBottom: PreferredSize(preferredSize: Size.fromHeight(88.w),child: AkuTabBar(controller: _tabController!, tabs: _tabs),),
       body: TabBarView(
         controller: _tabController,
         children: List.generate(_tabs.length, (index) => NewRenovationView(index:index+6))),

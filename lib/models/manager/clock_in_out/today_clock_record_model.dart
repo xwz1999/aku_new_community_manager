@@ -1,17 +1,17 @@
 import 'package:common_utils/common_utils.dart';
 
 class TodayClockRecordModel {
-  int id;
-  String startClockDate;
-  String endClockDate;
-  String cardReplacementDate;
-  String operatorName;
-  String clockName;
-  String clockTel;
-  String createDate;
+  int? id;
+  String? startClockDate;
+  String? endClockDate;
+  String? cardReplacementDate;
+  String? operatorName;
+  String? clockName;
+  String? clockTel;
+  String? createDate;
 
   TodayClockRecordModel(
-      {this.id,
+      {required this.id,
       this.startClockDate,
       this.endClockDate,
       this.cardReplacementDate,
@@ -44,6 +44,6 @@ class TodayClockRecordModel {
     return data;
   }
 
-  DateTime get clockInTime => DateUtil.getDateTime(this.startClockDate);
-  DateTime get clockOutTime => DateUtil.getDateTime(this.endClockDate);
+  DateTime? get clockInTime => DateUtil.getDateTime(this.startClockDate!);
+  DateTime? get clockOutTime => DateUtil.getDateTime(this.endClockDate!);
 }

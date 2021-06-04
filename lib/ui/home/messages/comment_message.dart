@@ -15,7 +15,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class CommentMessage extends StatefulWidget {
-  CommentMessage({Key key}) : super(key: key);
+  CommentMessage({Key? key}) : super(key: key);
 
   @override
   _CommentMessageState createState() => _CommentMessageState();
@@ -31,7 +31,7 @@ class _CommentMessageState extends State<CommentMessage> {
       body: BeeListView(
         controller: _refreshController,
         path: API.message.commentList,
-        convert: (model) => model.tableList
+        convert: (model) => model.tableList!
             .map((e) => CommentMessageItemModel.fromJson(e))
             .toList(),
         builder: (items) {

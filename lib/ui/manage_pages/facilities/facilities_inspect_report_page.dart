@@ -3,7 +3,6 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_map.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
@@ -25,9 +24,9 @@ class FacilitiesInspectReportPage extends StatefulWidget {
   final int facilitiesType;
   final int id;
   FacilitiesInspectReportPage({
-    Key key,
-    @required this.facilitiesType,
-    @required this.id,
+    Key? key,
+    /*required*/ required this.facilitiesType,
+    /*required*/ required this.id,
   }) : super(key: key);
 
   @override
@@ -37,9 +36,9 @@ class FacilitiesInspectReportPage extends StatefulWidget {
 
 class _FacilitiesInspectReportPageState
     extends State<FacilitiesInspectReportPage> {
-  List<File> _selfPhotos;
-  List<File> _scenePhotos;
-  String _describtion;
+  // List<File>? _selfPhotos;
+  late List<File> _scenePhotos;
+  String? _describtion;
   int _scene = 1;//设施设备状况 1为正常 2为异常
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,7 @@ class _FacilitiesInspectReportPageState
   Widget _bottomSubmitButton() {
     return AkuButton(
       onPressed: () async {
-        List<String> _scenePhotoUrl = await NetUtil().uploadFiles(
+        List<String?> _scenePhotoUrl = await NetUtil().uploadFiles(
           _scenePhotos,
           API.upload.uploadFacilitiCheckPhoto,
         );
@@ -74,10 +73,10 @@ class _FacilitiesInspectReportPageState
           "detail": _describtion,
           "imgUrls": _scenePhotoUrl,
         });
-        if (baseModel.status) {
+        if (baseModel.status!) {
           Get.back();
         }
-        BotToast.showText(text: baseModel.message);
+        BotToast.showText(text: baseModel.message!);
       },
       width: double.infinity,
       height: 100.w,
@@ -87,54 +86,54 @@ class _FacilitiesInspectReportPageState
     ).pOnly(bottom: MediaQuery.of(context).padding.bottom);
   }
 
-  Widget _basicMessageCard() {
-    return Column(
-      children: [
-        Row(
-          children: [
-            '基础信息'.text.size(32.sp).color(kTextPrimaryColor).bold.make(),
-            Spacer(),
-            '检查中'
-                .text
-                .size(30.sp)
-                .color(FacilitiesMap.insepectColor[2])
-                .bold
-                .make()
-          ],
-        ),
-        16.w.heightBox,
-        _buildTile(R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '检查人', '杨建'),
-        12.w.heightBox,
-        _buildTile(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', '15013103152'),
-        12.w.heightBox,
-        _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '检查场地', '户外3号篮球场'),
-        12.w.heightBox,
-        _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '20200202020202020'),
-      ],
-    )
-        .box
-        .width(double.infinity)
-        .padding(EdgeInsets.symmetric(vertical: 34.w, horizontal: 32.w))
-        .color(Colors.white)
-        .make();
-  }
+  // Widget _basicMessageCard() {
+  //   return Column(
+  //     children: [
+  //       Row(
+  //         children: [
+  //           '基础信息'.text.size(32.sp).color(kTextPrimaryColor).bold.make(),
+  //           Spacer(),
+  //           '检查中'
+  //               .text
+  //               .size(30.sp)
+  //               .color(FacilitiesMap.insepectColor[2]!)
+  //               .bold
+  //               .make()
+  //         ],
+  //       ),
+  //       16.w.heightBox,
+  //       _buildTile(R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '检查人', '杨建'),
+  //       12.w.heightBox,
+  //       _buildTile(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', '15013103152'),
+  //       12.w.heightBox,
+  //       _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '检查场地', '户外3号篮球场'),
+  //       12.w.heightBox,
+  //       _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', '20200202020202020'),
+  //     ],
+  //   )
+  //       .box
+  //       .width(double.infinity)
+  //       .padding(EdgeInsets.symmetric(vertical: 34.w, horizontal: 32.w))
+  //       .color(Colors.white)
+  //       .make();
+  // }
 
-  Widget _buildTile(String icon, String title, String text,
-      {Color color = kTextSubColor}) {
-    return Row(
-      children: [
-        Image.asset(
-          icon,
-          width: 40.w,
-          height: 40.w,
-        ),
-        20.w.widthBox,
-        title.text.size(24.sp).color(kTextSubColor).make(),
-        Spacer(),
-        text.text.size(24.sp).color(color).make(),
-      ],
-    );
-  }
+  // Widget _buildTile(String icon, String title, String text,
+  //     {Color color = kTextSubColor}) {
+  //   return Row(
+  //     children: [
+  //       Image.asset(
+  //         icon,
+  //         width: 40.w,
+  //         height: 40.w,
+  //       ),
+  //       20.w.widthBox,
+  //       title.text.size(24.sp).color(kTextSubColor).make(),
+  //       Spacer(),
+  //       text.text.size(24.sp).color(color).make(),
+  //     ],
+  //   );
+  // }
 
   Widget _descriptionCard(
     String title,
@@ -210,30 +209,30 @@ class _FacilitiesInspectReportPageState
         .make();
   }
 
-  Widget _selfPhotoCard() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            '3.巡更人员自拍人脸'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
-          ],
-        ),
-        32.w.heightBox,
-        AkuPickImageWidget(
-          description: '上传自拍',
-          onChanged: (files) {
-            _selfPhotos = files;
-            setState(() {});
-          },
-        ),
-      ],
-    )
-        .box
-        .color(Colors.white)
-        .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
-        .make();
-  }
+  // Widget _selfPhotoCard() {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Row(
+  //         children: [
+  //           '3.巡更人员自拍人脸'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
+  //         ],
+  //       ),
+  //       32.w.heightBox,
+  //       AkuPickImageWidget(
+  //         description: '上传自拍',
+  //         onChanged: (files) {
+  //           _selfPhotos = files;
+  //           setState(() {});
+  //         },
+  //       ),
+  //     ],
+  //   )
+  //       .box
+  //       .color(Colors.white)
+  //       .padding(EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w))
+  //       .make();
+  // }
 
   Widget _scenePhotoCard() {
     return Column(

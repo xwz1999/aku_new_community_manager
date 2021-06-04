@@ -21,7 +21,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class BorrowManagerCard extends StatefulWidget {
   final BorrowStatusItemModel model;
-  BorrowManagerCard({Key key, this.model}) : super(key: key);
+  BorrowManagerCard({Key? key, required this.model}) : super(key: key);
 
   @override
   _BorrowManagerCardState createState() => _BorrowManagerCardState();
@@ -61,7 +61,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
           ),
           AkuBox.h(24),
           Text(
-            widget.model.articleName,
+            widget.model.articleName!,
             style: TextStyle(
               color: AppStyle.primaryTextColor,
               fontSize: 32.sp,
@@ -83,11 +83,11 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                 child: Column(
                   children: [
                     _buildRow(R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '借用人员',
-                        widget.model.borrowName),
+                        widget.model.borrowName!),
                     _buildRow(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话',
-                        widget.model.borrowTel),
+                        widget.model.borrowTel!),
                     _buildRow(R.ASSETS_MANAGE_IC_TIME_PNG, '借用时常',
-                        '${(widget.model.borrowTime / 24).toStringAsFixed(0)}天'),
+                        '${(widget.model.borrowTime! / 24).toStringAsFixed(0)}天'),
                     _buildRow(
                       R.ASSETS_MANAGE_INFO_PNG,
                       '物品状态',
@@ -107,7 +107,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
 
   List<Widget> _buildCard() {
     final userProvider = Provider.of<UserProvider>(context);
-    if (!userProvider.infoModel.canOperation)
+    if (!userProvider.infoModel!.canOperation)
       return [];
     else if (widget.model.borrowStatus == 2) {
       return [];
@@ -175,7 +175,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                     color: AppStyle.primaryColor,
                     radius: 4.w,
                     onPressed: () async {
-                      await Get.to(BorrowManagerCheckPage(id: widget.model.id));
+                      await Get.to(BorrowManagerCheckPage(id: widget.model.id!));
                     },
                     child: Text(
                       '检查信息',

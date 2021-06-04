@@ -1,11 +1,12 @@
+
 class FixedDetailModel {
-  HandlingSituation handlingSituation;
-  DispatchType dispatchType;
-  CostDetail costDetail;
-  RepairDetail repairDetail;
-  String evaluateInfo;
-  int type;
-  List<ProcessRecord> processRecord;
+  HandlingSituation? handlingSituation;
+  DispatchType? dispatchType;
+  CostDetail? costDetail;
+  RepairDetail? repairDetail;
+  String? evaluateInfo;
+  int? type;
+  List<ProcessRecord>? processRecord;
 
   FixedDetailModel(
       {this.handlingSituation,
@@ -32,9 +33,9 @@ class FixedDetailModel {
     evaluateInfo = json['evaluateInfo'];
     type = json['type'];
     if (json['processRecord'] != null) {
-      processRecord = new List<ProcessRecord>();
+      processRecord = <ProcessRecord>[];
       json['processRecord'].forEach((v) {
-        processRecord.add(new ProcessRecord.fromJson(v));
+        processRecord!.add(new ProcessRecord.fromJson(v));
       });
     }
   }
@@ -42,32 +43,32 @@ class FixedDetailModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.handlingSituation != null) {
-      data['handlingSituation'] = this.handlingSituation.toJson();
+      data['handlingSituation'] = this.handlingSituation!.toJson();
     }
     if (this.dispatchType != null) {
-      data['dispatchType'] = this.dispatchType.toJson();
+      data['dispatchType'] = this.dispatchType!.toJson();
     }
     if (this.costDetail != null) {
-      data['costDetail'] = this.costDetail.toJson();
+      data['costDetail'] = this.costDetail!.toJson();
     }
     if (this.repairDetail != null) {
-      data['repairDetail'] = this.repairDetail.toJson();
+      data['repairDetail'] = this.repairDetail!.toJson();
     }
     data['evaluateInfo'] = this.evaluateInfo;
     data['type'] = this.type;
     if (this.processRecord != null) {
       data['processRecord'] =
-          this.processRecord.map((v) => v.toJson()).toList();
+          this.processRecord!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class HandlingSituation {
-  int id;
-  String detail;
-  String materialList;
-  List<ImgUrls> imgUrls;
+  int? id;
+  String? detail;
+  String? materialList;
+  List<ImgUrls>? imgUrls;
 
   HandlingSituation({this.id, this.detail, this.materialList, this.imgUrls});
 
@@ -76,9 +77,9 @@ class HandlingSituation {
     detail = json['detail'];
     materialList = json['materialList'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgUrls>();
+      imgUrls = <ImgUrls>[];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgUrls.fromJson(v));
+        imgUrls!.add(new ImgUrls.fromJson(v));
       });
     }
   }
@@ -89,18 +90,18 @@ class HandlingSituation {
     data['detail'] = this.detail;
     data['materialList'] = this.materialList;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class ImgUrls {
-  String url;
-  String size;
-  int longs;
-  int paragraph;
-  int sort;
+  String? url;
+  String? size;
+  int? longs;
+  int? paragraph;
+  int? sort;
 
   ImgUrls({this.url, this.size, this.longs, this.paragraph, this.sort});
 
@@ -124,9 +125,9 @@ class ImgUrls {
 }
 
 class DispatchType {
-  int dispatchType;
-  String workOrderLimitName;
-  String workOrderSubclassName;
+  int? dispatchType;
+  String? workOrderLimitName;
+  String? workOrderSubclassName;
 
   DispatchType(
       {this.dispatchType, this.workOrderLimitName, this.workOrderSubclassName});
@@ -147,9 +148,9 @@ class DispatchType {
 }
 
 class CostDetail {
-  int laborCost;
-  int materialCost;
-  int totalCost;
+  int? laborCost;
+  int? materialCost;
+  int? totalCost;
 
   CostDetail({this.laborCost, this.materialCost, this.totalCost});
 
@@ -169,13 +170,13 @@ class CostDetail {
 }
 
 class RepairDetail {
-  int id;
-  int dispatchId;
-  String name;
-  String tel;
-  int type;
-  int status;
-  List<ImgUrls> imgUrls;
+  int? id;
+  int? dispatchId;
+  String? name;
+  String? tel;
+  int? type;
+  int? status;
+  List<ImgUrls>? imgUrls;
 
   RepairDetail(
       {this.id,
@@ -194,9 +195,9 @@ class RepairDetail {
     type = json['type'];
     status = json['status'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgUrls>();
+      imgUrls = <ImgUrls>[];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgUrls.fromJson(v));
+        imgUrls!.add(new ImgUrls.fromJson(v));
       });
     }
   }
@@ -210,16 +211,16 @@ class RepairDetail {
     data['type'] = this.type;
     data['status'] = this.status;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class ProcessRecord {
-  int id;
-  int operationType;
-  String operationDate;
+  int? id;
+  int? operationType;
+  String? operationDate;
 
   ProcessRecord({this.id, this.operationType, this.operationDate});
 

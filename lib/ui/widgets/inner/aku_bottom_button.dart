@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 
 class AkuBottomButton extends StatefulWidget {
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final String title;
-  AkuBottomButton({Key key, this.onTap, @required this.title})
+  AkuBottomButton({Key? key,  this.onTap,  required this.title})
       : super(key: key);
 
   @override

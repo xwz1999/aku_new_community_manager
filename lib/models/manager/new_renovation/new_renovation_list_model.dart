@@ -3,28 +3,28 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 class NewRenovationListModel {
-  int id;
-  String roomName;
-  int status;
-  String constructionUnit;
-  String director;
-  String directorTel;
-  String expectedBegin;
-  String expectedEnd;
-  String actualBegin;
-  String actualEnd;
-  String rejectReason;
-  String reviewerName;
-  String auditDate;
-  String trackerName;
-  String applicationCheckDate;
-  int isQualified;
-  String createName;
-  String createDate;
-  List<CheckVoList> checkVoList;
+  int? id;
+  String? roomName;
+  int? status;
+  String? constructionUnit;
+  String? director;
+  String? directorTel;
+  String? expectedBegin;
+  String? expectedEnd;
+  String? actualBegin;
+  String? actualEnd;
+  String? rejectReason;
+  String? reviewerName;
+  String? auditDate;
+  String? trackerName;
+  String? applicationCheckDate;
+  int? isQualified;
+  String? createName;
+  String? createDate;
+  List<CheckVoList>? checkVoList;
 
   NewRenovationListModel(
-      {this.id,
+      {required this.id,
       this.roomName,
       this.status,
       this.constructionUnit,
@@ -64,9 +64,9 @@ class NewRenovationListModel {
     createName = json['createName'];
     createDate = json['createDate'];
     if (json['checkVoList'] != null) {
-      checkVoList = new List<CheckVoList>();
+      checkVoList = <CheckVoList>[];
       json['checkVoList'].forEach((v) {
-        checkVoList.add(new CheckVoList.fromJson(v));
+        checkVoList!.add(new CheckVoList.fromJson(v));
       });
     }
   }
@@ -92,16 +92,16 @@ class NewRenovationListModel {
     data['createName'] = this.createName;
     data['createDate'] = this.createDate;
     if (this.checkVoList != null) {
-      data['checkVoList'] = this.checkVoList.map((v) => v.toJson()).toList();
+      data['checkVoList'] = this.checkVoList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 
   String get expectBginString =>
-      DateUtil.formatDateStr(this.expectedBegin, format: 'yyyy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.expectedBegin!, format: 'yyyy-MM-dd HH:mm');
 
   String get expectEndString =>
-      DateUtil.formatDateStr(this.expectedEnd, format: 'yyyy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.expectedEnd!, format: 'yyyy-MM-dd HH:mm');
 
   String get actualBginString => DateUtil.formatDateStr(this.actualBegin ?? '',
       format: 'yyyy-MM-dd HH:mm');
@@ -109,7 +109,7 @@ class NewRenovationListModel {
   String get actualEndString =>
       DateUtil.formatDateStr(this.actualEnd ?? '', format: 'yyyy-MM-dd HH:mm');
   String get expectSlot =>
-      '${expectBginString}-${DateUtil.formatDateStr(this.expectedEnd, format: 'HH:mm')}';
+      '${expectBginString}-${DateUtil.formatDateStr(this.expectedEnd!, format: 'HH:mm')}';
   String get actualSlot =>
       '${actualBginString}-${DateUtil.formatDateStr(this.actualEnd ?? '', format: 'HH:mm')}';
 
@@ -173,12 +173,12 @@ class NewRenovationListModel {
 }
 
 class CheckVoList {
-  int id;
-  int decorationNewId;
-  String detail;
-  int isQualified;
-  String createName;
-  String createDate;
+  int? id;
+  int? decorationNewId;
+  String? detail;
+  int? isQualified;
+  String? createName;
+  String? createDate;
 
   CheckVoList(
       {this.id,

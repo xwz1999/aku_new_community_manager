@@ -2,21 +2,21 @@
 import 'package:common_utils/common_utils.dart';
 
 class VisitorItemModel {
-  int id;
-  String roomName;
-  String name;
-  int isDrive;
-  String carNum;
-  String effectiveTime;
-  String visitDate;
-  int visitorStatus;
+  int? id;
+  String? roomName;
+  String? name;
+  int? isDrive;
+  String? carNum;
+  String? effectiveTime;
+  String? visitDate;
+  int? visitorStatus;
 
-  DateTime get effective => DateUtil.getDateTime(effectiveTime);
-  DateTime get visit =>
-      visitDate == null ? null : DateUtil.getDateTime(visitDate);
+  DateTime? get effective => DateUtil.getDateTime(effectiveTime!);
+  DateTime? get visit =>
+      visitDate == null ? null : DateUtil.getDateTime(visitDate!);
 
   VisitorItemModel(
-      {this.id,
+      {required this.id,
       this.roomName,
       this.name,
       this.isDrive,

@@ -34,14 +34,14 @@ import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class SearchWorkOrderPage extends StatefulWidget {
-  SearchWorkOrderPage({Key key}) : super(key: key);
+  SearchWorkOrderPage({Key? key}) : super(key: key);
 
   @override
   _SearchWorkOrderpageState createState() => _SearchWorkOrderpageState();
 }
 
 class _SearchWorkOrderpageState extends State<SearchWorkOrderPage> {
-  TextEditingController _textController;
+  TextEditingController? _textController;
   List<AppApplication> _wisdomApplications = [
     AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, ()=>WarningPage()),
     AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, ()=>VisitorManagerPage()),

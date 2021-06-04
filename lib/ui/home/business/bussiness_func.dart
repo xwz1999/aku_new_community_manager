@@ -8,9 +8,9 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class BussinessFunc {
   static Future getBussinessModelList(int backlogStatus) async {
     Response response =
-        await NetUtil().dio.get(API.manage.backlogList, queryParameters: {
+        await NetUtil().dio!.get(API.manage.backlogList, queryParameters: {
       "backlogStatus": backlogStatus,
     });
-    return response.data['data'] as List;
+    return response.data['data'] as List?;
   }
 }

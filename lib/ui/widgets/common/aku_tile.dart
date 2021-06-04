@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class AkuTile extends StatefulWidget {
-  final Widget prefix;
-  final Widget suffix;
+  final Widget? prefix;
+  final Widget? suffix;
   final Widget title;
   final bool arrow;
   final Color color;
-  final double height;
+  final double? height;
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   AkuTile({
-    Key key,
+    Key? key,
     this.prefix,
     this.suffix,
-    this.title,
+    required this.title,
     this.arrow = true,
     this.onTap,
     this.color = Colors.white,

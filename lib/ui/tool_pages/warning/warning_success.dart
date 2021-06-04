@@ -15,14 +15,14 @@ import 'package:aku_community_manager/ui/tool_pages/warning/warning_detail_page.
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class WarningSuccess extends StatefulWidget {
-  WarningSuccess({Key key}) : super(key: key);
+  WarningSuccess({Key? key}) : super(key: key);
 
   @override
   _WarningSuccessState createState() => _WarningSuccessState();
 }
 
 class _WarningSuccessState extends State<WarningSuccess> {
-  Timer _timer;
+  Timer? _timer;
   @override
   void dispose() {
     _timer?.cancel();

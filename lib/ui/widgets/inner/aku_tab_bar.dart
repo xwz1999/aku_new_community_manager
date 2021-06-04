@@ -8,7 +8,7 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 class AkuTabBar extends StatefulWidget {
   final TabController controller;
   final List<String> tabs;
-  AkuTabBar({Key key, @required this.controller, @required this.tabs})
+  AkuTabBar({Key? key, /*required*/ required this.controller, /*required*/ required this.tabs})
       : super(key: key);
 
   @override

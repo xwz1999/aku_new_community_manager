@@ -1,17 +1,17 @@
 class InspectionDetailModel {
-  int id;
-  int inspectionPlanId;
-  String code;
-  String name;
-  String beginDate;
-  String endDate;
-  String actualBeginDate;
-  String actualEndDate;
-  int sort;
-  int status;
+  int? id;
+  int? inspectionPlanId;
+  String? code;
+  String? name;
+  String? beginDate;
+  String? endDate;
+  String? actualBeginDate;
+  String? actualEndDate;
+  int? sort;
+  int? status;
 
   InspectionDetailModel(
-      {this.id,
+      {required this.id,
       this.inspectionPlanId,
       this.code,
       this.name,

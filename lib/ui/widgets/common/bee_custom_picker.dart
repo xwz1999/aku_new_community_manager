@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class BeeCustomPicker extends StatefulWidget {
-  final Widget body;
+  final Widget? body;
   final VoidCallback onPressed;
-  BeeCustomPicker({Key key, this.body,@required this.onPressed}) : super(key: key);
+  BeeCustomPicker({Key? key, this.body,/*required*/ required this.onPressed}) : super(key: key);
 
   @override
   _BeeCustomPickerState createState() => _BeeCustomPickerState();

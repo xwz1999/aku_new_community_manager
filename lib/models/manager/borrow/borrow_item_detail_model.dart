@@ -2,13 +2,13 @@
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class BorrowItemDetailModel {
-  int id;
-  String name;
-  String code;
-  int borrowStatus;
-  int status;
-  List<ImgModel> imgUrls;
-  ImgModel get firstImg => imgUrls.isEmpty ? null : imgUrls.first;
+  int? id;
+  String? name;
+  String? code;
+  int? borrowStatus;
+  int? status;
+  List<ImgModel>? imgUrls;
+  ImgModel? get firstImg => imgUrls!.isEmpty ? null : imgUrls!.first;
   bool get borrowed => borrowStatus == 2;
   String get statusValue {
     switch (status) {
@@ -24,7 +24,7 @@ class BorrowItemDetailModel {
   }
 
   BorrowItemDetailModel(
-      {this.id,
+      {required this.id,
       this.name,
       this.code,
       this.borrowStatus,
@@ -38,9 +38,9 @@ class BorrowItemDetailModel {
     borrowStatus = json['borrowStatus'];
     status = json['status'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgModel>();
+      imgUrls = [];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgModel.fromJson(v));
+        imgUrls!.add(new ImgModel.fromJson(v));
       });
     } else
       imgUrls = [];
@@ -54,7 +54,7 @@ class BorrowItemDetailModel {
     data['borrowStatus'] = this.borrowStatus;
     data['status'] = this.status;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }

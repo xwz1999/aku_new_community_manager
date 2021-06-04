@@ -1,17 +1,17 @@
 class FixerItemModel {
-  int id;
-  String name;
-  List<RepairmanVos> repairmanVos;
+  int? id;
+  String? name;
+  List<RepairmanVos>? repairmanVos;
 
-  FixerItemModel({this.id, this.name, this.repairmanVos});
+  FixerItemModel({required this.id, this.name, this.repairmanVos});
 
   FixerItemModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     if (json['repairmanVos'] != null) {
-      repairmanVos = new List<RepairmanVos>();
+      repairmanVos = <RepairmanVos>[];
       json['repairmanVos'].forEach((v) {
-        repairmanVos.add(new RepairmanVos.fromJson(v));
+        repairmanVos!.add(new RepairmanVos.fromJson(v));
       });
     } else
       repairmanVos = [];
@@ -22,16 +22,16 @@ class FixerItemModel {
     data['id'] = this.id;
     data['name'] = this.name;
     if (this.repairmanVos != null) {
-      data['repairmanVos'] = this.repairmanVos.map((v) => v.toJson()).toList();
+      data['repairmanVos'] = this.repairmanVos!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class RepairmanVos {
-  int id;
-  String name;
-  String tel;
+  int? id;
+  String? name;
+  String? tel;
 
   RepairmanVos({this.id, this.name, this.tel});
 

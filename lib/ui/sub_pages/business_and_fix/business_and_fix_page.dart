@@ -12,7 +12,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class BusinessAndFixPage extends StatefulWidget {
-  BusinessAndFixPage({Key key}) : super(key: key);
+  BusinessAndFixPage({Key? key}) : super(key: key);
 
   @override
   _BusinessAndFixPageState createState() => _BusinessAndFixPageState();
@@ -20,7 +20,7 @@ class BusinessAndFixPage extends StatefulWidget {
 
 class _BusinessAndFixPageState extends State<BusinessAndFixPage>
     with TickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
 
   List<String> get _tabs {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -35,11 +35,11 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
     //     return ['待接单', '处理中', '已处理', '全部'];
     //     break;
     // }
-    if ((userProvider.infoModel.canPickUpTicket) &&
-        (!userProvider.infoModel.canSendTicket)) {
+    if ((userProvider.infoModel!.canPickUpTicket) &&
+        (!userProvider.infoModel!.canSendTicket)) {
       return ['待接单', '处理中', '已处理', '全部'];
-    } else if ((!userProvider.infoModel.canPickUpTicket) &&
-        (userProvider.infoModel.canSendTicket)) {
+    } else if ((!userProvider.infoModel!.canPickUpTicket) &&
+        (userProvider.infoModel!.canSendTicket)) {
       return ['待派单', '已派单', '处理中', '已处理', '全部'];
     } else {
       return ['未处理', '处理中', '已处理', '全部'];
@@ -65,7 +65,7 @@ class _BusinessAndFixPageState extends State<BusinessAndFixPage>
       appBarBottom: PreferredSize(
         preferredSize: Size.fromHeight(88.w),
         child: AkuTabBar(
-          controller: _tabController,
+          controller: _tabController!,
           tabs: _tabs,
         ),
       ),

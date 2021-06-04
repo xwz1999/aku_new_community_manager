@@ -15,7 +15,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class SystemMessage extends StatefulWidget {
-  SystemMessage({Key key}) : super(key: key);
+  SystemMessage({Key? key}) : super(key: key);
 
   @override
   _SystemMessageState createState() => _SystemMessageState();
@@ -44,7 +44,7 @@ class _SystemMessageState extends State<SystemMessage> {
               itemCount: items.length);
         },
         path: API.message.systemList,
-        convert: (model) => model.tableList
+        convert: (model) => model.tableList!
             .map((e) => SystemMessageItemModel.fromJson(e))
             .toList(),
       ),

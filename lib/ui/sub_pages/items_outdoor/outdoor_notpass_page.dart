@@ -17,7 +17,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class OutdoorNotpassPage extends StatefulWidget {
   final int id;
-  OutdoorNotpassPage({Key key, @required this.id}) : super(key: key);
+  OutdoorNotpassPage({Key? key, /*required*/ required this.id}) : super(key: key);
 
   @override
   _OutdoorNotpassPageState createState() => _OutdoorNotpassPageState();
@@ -27,7 +27,7 @@ class _OutdoorNotpassPageState extends State<OutdoorNotpassPage> {
   String _currentTime = DateUtil.formatDate(DateTime.now());
   List<String> _rejectReason = ['业主不同意', '申报物品与实际不符', '该房子处于法院查封状态', '其他'];
   int _select = 0;
-  TextEditingController _textEditingController;
+  TextEditingController? _textEditingController;
   @override
   void initState() {
     super.initState();
@@ -193,7 +193,7 @@ class _OutdoorNotpassPageState extends State<OutdoorNotpassPage> {
           if (_select <= 2) {
             remark = _rejectReason[_select];
           } else {
-            remark = _textEditingController.text;
+            remark = _textEditingController!.text;
           }
           await NetUtil().post(
             API.manage.goodsOutNotRelease,

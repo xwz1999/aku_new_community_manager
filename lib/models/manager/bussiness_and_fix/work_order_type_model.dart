@@ -1,8 +1,8 @@
 class WorkOrderTypeModel {
-  int id;
-  String name;
+  int? id;
+  String? name;
 
-  WorkOrderTypeModel({this.id, this.name});
+  WorkOrderTypeModel({required this.id, this.name});
 
   WorkOrderTypeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

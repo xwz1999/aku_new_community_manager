@@ -6,11 +6,11 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class BeeDatePicker {
-  static Future<DateTime> pick(
+  static Future<DateTime?> pick(
     DateTime initDate, {
     CupertinoDatePickerMode mode = CupertinoDatePickerMode.date,
-    DateTime min,
-    DateTime max,
+     DateTime? min,
+     DateTime? max,
   }) async {
     return await Get.bottomSheet(_BeeDatePicker(
       date: initDate,
@@ -20,7 +20,7 @@ class BeeDatePicker {
     ));
   }
 
-  static Future<DateTime> timePicker(DateTime initDate) async {
+  static Future<DateTime?> timePicker(DateTime initDate) async {
     return await Get.bottomSheet(_BeeDatePicker(
       date: initDate,
       min: initDate,
@@ -35,13 +35,13 @@ class _BeeDatePicker extends StatefulWidget {
   final bool use24H;
   final DateTime max;
   final DateTime min;
-  final CupertinoDatePickerMode mode;
+  final CupertinoDatePickerMode? mode;
   _BeeDatePicker({
-    Key key,
-    @required this.date,
+    Key? key,
+    /*required*/ required this.date,
     this.use24H = false,
-    this.max,
-    this.min,
+    required this.max,
+    required this.min,
     this.mode,
   }) : super(key: key);
 

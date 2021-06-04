@@ -6,7 +6,7 @@ import 'package:aku_community_manager/style/app_style.dart';
 
 class AkuChipBox extends StatelessWidget {
   final String title;
-  const AkuChipBox({Key key, @required this.title}) : super(key: key);
+  const AkuChipBox({Key? key, /*required*/ required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

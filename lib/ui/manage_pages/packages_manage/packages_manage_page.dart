@@ -13,7 +13,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class PackagesManagePage extends StatefulWidget {
-  PackagesManagePage({Key key}) : super(key: key);
+  PackagesManagePage({Key? key}) : super(key: key);
 
   @override
   _PackagesManagePageState createState() => _PackagesManagePageState();
@@ -22,7 +22,7 @@ class PackagesManagePage extends StatefulWidget {
 class _PackagesManagePageState extends State<PackagesManagePage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['未领取', '已领取'];
-  TabController _tabController;
+  TabController? _tabController;
   @override
   void initState() {
     super.initState();
@@ -51,7 +51,7 @@ class _PackagesManagePageState extends State<PackagesManagePage>
             })
       ],
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(

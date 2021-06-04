@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 extension SeparateExt on List<Widget> {
-  List<Widget> sepWidget({Widget separate}) {
-    if (this == null) return null;
+  List<Widget> sepWidget({Widget? separate}) {
+    // if (this == null) return null;
     if (this.isEmpty) return [];
     return List.generate(this.length * 2 - 1, (index) {
       if (index.isEven)

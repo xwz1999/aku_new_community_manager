@@ -7,7 +7,7 @@ class AkuRowTile extends StatelessWidget {
   final String assetPath;
   final String title;
   final Widget content;
-  const AkuRowTile({Key key, this.assetPath, this.title, this.content})
+  const AkuRowTile({Key? key, required this.assetPath, required this.title, required this.content})
       : super(key: key);
 
   @override

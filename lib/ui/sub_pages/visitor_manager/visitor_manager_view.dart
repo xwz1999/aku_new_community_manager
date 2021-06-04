@@ -12,8 +12,8 @@ import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manag
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class VisitorManagerView extends StatefulWidget {
-  final int status;
-  VisitorManagerView({Key key, @required this.status}) : super(key: key);
+  final int? status;
+  VisitorManagerView({Key? key,   this.status}) : super(key: key);
 
   @override
   _VisitorManagerViewState createState() => _VisitorManagerViewState();
@@ -29,7 +29,7 @@ class _VisitorManagerViewState extends State<VisitorManagerView>
       path: API.manage.visitorList,
       controller: _refreshController,
       convert: (model) {
-        return model.tableList
+        return model.tableList!
             .map((e) => VisitorItemModel.fromJson(e))
             .toList();
       },

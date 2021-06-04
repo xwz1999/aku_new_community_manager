@@ -18,8 +18,8 @@ import 'package:aku_community_manager/utils/extension/aku_date.dart';
 class InspectionManageCard extends StatefulWidget {
   final InspectionListModel cardModel;
   InspectionManageCard({
-    Key key,
-    this.cardModel,
+    Key? key,
+    required this.cardModel,
   }) : super(key: key);
 
   @override
@@ -30,11 +30,11 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
   TextStyle _textstyle =
       TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp);
   Map<int, String> _inspectionStatus = {1: '待巡检', 2: '已巡检', 3: '巡检中', 4: '未巡检'};
-  Color _inspectionColor(int status) {
+  Color _inspectionColor(int? status) {
     switch (status) {
       case 1:
         return Color(0xFFFF4501);
-        break;
+        
       case 2:
         return Color(0xFF999999);
       case 3:
@@ -48,7 +48,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
 
   bool get isManager {
     UserProvider userProvider = Provider.of<UserProvider>(context);
-    return userProvider.infoModel.canOperation;
+    return userProvider.infoModel!.canOperation;
   }
 
   @override
@@ -57,7 +57,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
       onPressed: () {
         Get.to(
           InspectionManageDetailsPage(
-            executeId: widget.cardModel.id,
+            executeId: widget.cardModel.id!,
           ),
         );
       },
@@ -82,7 +82,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                       fontSize: 32.sp,
                       fontWeight: FontWeight.bold),
                 ).expand(),
-                _inspectionStatus[widget.cardModel.status]
+                _inspectionStatus[widget.cardModel.status!]!
                     .text
                     .color(_inspectionColor(widget.cardModel.status))
                     .bold
@@ -113,7 +113,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
               ),
               36.w.widthBox,
               Text(
-                widget.cardModel.code,
+                widget.cardModel.code!,
                 maxLines: 2,
                 textAlign: TextAlign.right,
                 style: AppStyle().primaryStyle,
@@ -137,7 +137,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                       ),
                       Spacer(),
                       Text(
-                        widget.cardModel.inspectorName,
+                        widget.cardModel.inspectorName!,
                         style: AppStyle().primaryStyle,
                       )
                     ],
@@ -156,13 +156,13 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
               Text('规定巡检时间', style: _textstyle),
               Spacer(),
               Text(
-                '${widget.cardModel.beginDate.akuDate()}${widget.cardModel?.endDate == null ? '' : '～'}${widget.cardModel?.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate, format: "HH:mm")}',
+                '${widget.cardModel.beginDate!.akuDate()}${widget.cardModel.endDate == null ? '' : '～'}${widget.cardModel.endDate == null ? '' : DateUtil.formatDateStr(widget.cardModel.endDate!, format: "HH:mm")}',
                 style: AppStyle().primaryStyle,
               ),
             ],
           ),
           12.w.heightBox,
-          ...widget?.cardModel?.actualBeginDate == null
+          ...widget.cardModel.actualBeginDate == null
               ? [SizedBox()]
               : [
                   Row(
@@ -179,14 +179,14 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                       ),
                       Spacer(),
                       Text(
-                        '${DateUtil.formatDateStr(widget.cardModel.actualBeginDate, format: "yyyy-MM-dd HH:mm")}',
+                        '${DateUtil.formatDateStr(widget.cardModel.actualBeginDate!, format: "yyyy-MM-dd HH:mm")}',
                         style: AppStyle().primaryStyle,
                       ),
                     ],
                   ),
                   12.w.heightBox,
                 ],
-          widget?.cardModel?.actualEndDate == null
+          widget.cardModel.actualEndDate == null
               ? SizedBox()
               : Row(
                   children: [
@@ -202,7 +202,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
                     ),
                     Spacer(),
                     Text(
-                      '${DateUtil.formatDateStr(widget.cardModel.actualEndDate, format: "yyyy-MM-dd HH:mm")}',
+                      '${DateUtil.formatDateStr(widget.cardModel.actualEndDate!, format: "yyyy-MM-dd HH:mm")}',
                       style: AppStyle().primaryStyle,
                     ),
                   ],

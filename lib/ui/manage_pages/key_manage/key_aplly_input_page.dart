@@ -15,34 +15,34 @@ import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class KeyApplyInputPage extends StatefulWidget {
-  KeyApplyInputPage({Key key}) : super(key: key);
+  KeyApplyInputPage({Key? key}) : super(key: key);
 
   @override
   _KeyApplyInputPageState createState() => _KeyApplyInputPageState();
 }
 
 class _KeyApplyInputPageState extends State<KeyApplyInputPage> {
-  TextEditingController _nameController;
-  TextEditingController _phoneController;
-  TextEditingController _roleController;
-  TextEditingController _placeController;
+  TextEditingController? _nameController;
+  TextEditingController? _phoneController;
+  TextEditingController? _roleController;
+  TextEditingController? _placeController;
   bool get canSubmit {
-    if (TextUtil.isEmpty(_nameController.text)) {
+    if (TextUtil.isEmpty(_nameController!.text)) {
       BotToast.showText(text: '申请人姓名不能为空！');
       return false;
     }
-    if (TextUtil.isEmpty(_phoneController.text)) {
+    if (TextUtil.isEmpty(_phoneController!.text)) {
       BotToast.showText(text: '申请人联系方式不能为空！');
       return false;
-    } else if (!_phoneFormat(_phoneController.text)) {
+    } else if (!_phoneFormat(_phoneController!.text)) {
       BotToast.showText(text: '收件人联系方式格式错误！');
       return false;
     }
-    if (TextUtil.isEmpty(_roleController.text)) {
+    if (TextUtil.isEmpty(_roleController!.text)) {
       BotToast.showText(text: '身份不能为空！');
       return false;
     }
-    if (TextUtil.isEmpty(_placeController.text)) {
+    if (TextUtil.isEmpty(_placeController!.text)) {
       BotToast.showText(text: '对应设备不能为空！');
       return false;
     }
@@ -100,8 +100,8 @@ class _KeyApplyInputPageState extends State<KeyApplyInputPage> {
     );
   }
 
-  Widget _inputRowTile(String title, TextEditingController controller,
-      {String hintText, List<TextInputFormatter> formatters}) {
+  Widget _inputRowTile(String title, TextEditingController? controller,
+      {String? hintText, List<TextInputFormatter>? formatters}) {
     return Container(
       width: double.infinity,
       child: Column(

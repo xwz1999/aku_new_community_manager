@@ -21,10 +21,10 @@ import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class AddBorrowItemPage extends StatefulWidget {
-  final int articleId;
+  final int/*!*/ articleId;
   AddBorrowItemPage({
-    Key key,
-    this.articleId,
+    Key? key,
+    required this.articleId,
   }) : super(key: key);
 
   @override
@@ -32,9 +32,9 @@ class AddBorrowItemPage extends StatefulWidget {
 }
 
 class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
-  TextEditingController _textEditingController;
-  TextEditingController _codeEditingCOntroller;
-  File file;
+  TextEditingController? _textEditingController;
+  TextEditingController? _codeEditingCOntroller;
+  File? file;
   @override
   void initState() {
     super.initState();
@@ -58,14 +58,14 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
           minWidth: 120.w,
           onPressed: () async {
             BaseFileModel baseFileModel =
-                await NetUtil().upload(API.upload.uploadArticleDetail, file);
-            if (baseFileModel.status) {
+                await NetUtil().upload(API.upload.uploadArticleDetail, file!);
+            if (baseFileModel.status!) {
               await NetUtil().post(
                 API.manage.borrowinsertArticleDetail,
                 params: {
                   "articleId": widget.articleId,
-                  "name": _textEditingController.text,
-                  "code": _codeEditingCOntroller.text,
+                  "name": _textEditingController!.text,
+                  "code": _codeEditingCOntroller!.text,
                   "fileUrls": [baseFileModel.url]
                 },
                 showMessage: true,
@@ -73,7 +73,7 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
 
               Get.back();
             } else {
-              BotToast.showText(text: baseFileModel.message);
+              BotToast.showText(text: baseFileModel.message!);
             }
           },
           child: Text(
@@ -167,7 +167,7 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
                           ),
                         )
                       : Image.file(
-                          file,
+                          file!,
                           height: 184.w,
                           width: 184.w,
                           fit: BoxFit.cover,

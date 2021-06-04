@@ -7,8 +7,8 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 
 class DecorationCheckBox extends StatefulWidget {
   final bool initValue;
-  final Function(bool state) onChange;
-  DecorationCheckBox({Key key, this.initValue = true, this.onChange})
+  final Function(bool state)? onChange;
+  DecorationCheckBox({Key? key, this.initValue = true, this.onChange})
       : super(key: key);
 
   @override
@@ -16,7 +16,7 @@ class DecorationCheckBox extends StatefulWidget {
 }
 
 class _DecorationCheckBoxState extends State<DecorationCheckBox> {
-  bool _nowValue;
+  bool? _nowValue;
   @override
   void initState() {
     super.initState();
@@ -48,11 +48,11 @@ class _DecorationCheckBoxState extends State<DecorationCheckBox> {
   }
 
   _buildBox(
-      {bool rawChecked,
-      Color color,
-      Color subColor,
-      String title,
-      IconData icon}) {
+      {bool? rawChecked,
+      Color? color,
+      Color? subColor,
+      required String title,
+      IconData? icon}) {
     final checked = _nowValue == rawChecked;
     return GestureDetector(
       onTap: widget.onChange == null
@@ -61,7 +61,7 @@ class _DecorationCheckBoxState extends State<DecorationCheckBox> {
               setState(() {
                 _nowValue = rawChecked;
               });
-              widget.onChange(_nowValue);
+              widget.onChange!(_nowValue!);
             },
       child: Material(
         color: Colors.transparent,
@@ -77,9 +77,9 @@ class _DecorationCheckBoxState extends State<DecorationCheckBox> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20.w),
                 border: Border.all(
-                  color: checked ? color : Color(0xFFE8E8E8),
+                  color: checked ? color! : Color(0xFFE8E8E8),
                 ),
-                color: checked ? subColor : subColor.withOpacity(0),
+                color: checked ? subColor : subColor!.withOpacity(0),
               ),
             ),
             AkuBox.w(16),
@@ -91,7 +91,7 @@ class _DecorationCheckBoxState extends State<DecorationCheckBox> {
     );
   }
 
-  _buildText(String title, Color color, bool checked) {
+  _buildText(String title, Color? color, bool checked) {
     return Text(
       title,
       style: TextStyle(
@@ -102,7 +102,7 @@ class _DecorationCheckBoxState extends State<DecorationCheckBox> {
     );
   }
 
-  _buildIcon(IconData icon, Color color, bool checked) {
+  _buildIcon(IconData? icon, Color? color, bool checked) {
     return Icon(
       icon,
       color: checked ? color : Color(0xFFE8E8E8),

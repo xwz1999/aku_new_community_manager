@@ -37,8 +37,8 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class InspectionManageDetailsPage extends StatefulWidget {
   final int executeId;
   InspectionManageDetailsPage({
-    Key key,
-    @required this.executeId,
+    Key? key,
+    required this.executeId,
   }) : super(key: key);
 
   @override
@@ -51,11 +51,11 @@ class _InspectionManageDetailsPageState
   TextStyle _textstyle =
       TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp);
   Map<int, String> _inspectionStatus = {1: '待巡检', 2: '已巡检', 3: '巡检中', 4: '未巡检'};
-  Color _inspectionColor(int status) {
+  Color _inspectionColor(int? status) {
     switch (status) {
       case 1:
         return Color(0xFFFF4501);
-        break;
+        
       case 2:
         return Color(0xFF999999);
       case 3:
@@ -67,14 +67,14 @@ class _InspectionManageDetailsPageState
     }
   }
 
-  AMapController _aMapController;
-  Timer _timer;
+  AMapController? _aMapController;
+  Timer? _timer;
   bool _canUploadLocation = false;
 
-  InspectionDetailModel _detailModel;
-  List<InspectionPointModel> _pointModels;
+  InspectionDetailModel? _detailModel;
+  late List<InspectionPointModel> _pointModels;
   bool _onload = true;
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   bool _exit = false;
   List<LatLng> _points = [];
   List<Polyline> _polylines = [];
@@ -120,9 +120,9 @@ class _InspectionManageDetailsPageState
             onRefresh: () async {
               _detailModel =
                   await ManageFunc.getInspectionDetail(widget.executeId);
-              _pointModels = await (_detailModel.status == 1
+              _pointModels = await (_detailModel!.status == 1
                   ? ManageFunc.getInspectionPointByPlanId(
-                      planId: _detailModel.inspectionPlanId)
+                      planId: _detailModel!.inspectionPlanId!)
                   : ManageFunc.getInspectionPointByExcuteId(
                       excuteId: widget.executeId));
               _onload = false;
@@ -159,30 +159,30 @@ class _InspectionManageDetailsPageState
                   ),
           ),
           bottom: (!_onload) &&
-                  (_detailModel.status != 2) &&
-                  (_detailModel.status != 4)
+                  (_detailModel!.status != 2) &&
+                  (_detailModel!.status != 4)
               ? AkuButton(
-                  onPressed: _detailModel.status == 1
+                  onPressed: _detailModel!.status == 1
                       ? () async {
                           BaseModel _baseModel = await NetUtil().get(
                               API.manage.inspectionStart,
                               params: {"executeId": widget.executeId});
-                          if (_baseModel.status) {
-                            BotToast.showText(text: _baseModel.message);
-                            _refreshController.callRefresh();
+                          if (_baseModel.status!) {
+                            BotToast.showText(text: _baseModel.message!);
+                            _refreshController!.callRefresh();
                             _startTimer(5000);
                           } else {
-                            BotToast.showText(text: _baseModel.message);
+                            BotToast.showText(text: _baseModel.message!);
                           }
                         }
                       : () async {
-                          Barcode result = await Get.to(() => QrScannerPage());
+                          Barcode result = await (Get.to(() => QrScannerPage()) );
                           BaseModel baseModel =
                               await ManageFunc.getInspectionFindCheckDetailByQr(
-                                  _detailModel.id, result.code);
-                          if (baseModel.status) {
+                                  _detailModel!.id!, result.code);
+                          if (baseModel.status!) {
                             Get.to(() => InspectionPointInputPage(
-                                  inspectionName: _detailModel.name,
+                                  inspectionName: _detailModel!.name,
                                   qrModel: InspectionQRCodeModel.fromJson(
                                       baseModel.data),
                                 ));
@@ -196,7 +196,7 @@ class _InspectionManageDetailsPageState
                         },
                   padding: EdgeInsets.symmetric(vertical: 26.w),
                   color: kPrimaryColor,
-                  child: (_detailModel.status == 1 ? '开始巡检' : '立即扫码')
+                  child: (_detailModel!.status == 1 ? '开始巡检' : '立即扫码')
                       .text
                       .black
                       .bold
@@ -303,9 +303,9 @@ class _InspectionManageDetailsPageState
                         fontWeight: FontWeight.bold),
                   ),
                   Spacer(),
-                  _inspectionStatus[_detailModel.status]
+                  _inspectionStatus[_detailModel!.status!]!
                       .text
-                      .color(_inspectionColor(_detailModel.status))
+                      .color(_inspectionColor(_detailModel!.status))
                       .bold
                       .size(28.sp)
                       .make()
@@ -332,7 +332,7 @@ class _InspectionManageDetailsPageState
                 ),
                 36.w.widthBox,
                 Text(
-                  _detailModel.name,
+                  _detailModel!.name!,
                   maxLines: 2,
                   textAlign: TextAlign.right,
                   style: AppStyle().primaryStyle,
@@ -354,7 +354,7 @@ class _InspectionManageDetailsPageState
                 ),
                 Spacer(),
                 Text(
-                  _detailModel.code,
+                  _detailModel!.code!,
                   style: AppStyle().primaryStyle,
                 )
               ],
@@ -371,7 +371,7 @@ class _InspectionManageDetailsPageState
                 Text('巡检时间', style: _textstyle),
                 Spacer(),
                 Text(
-                  '${DateUtil.formatDateStr(_detailModel.beginDate, format: "yyyy-MM-dd HH:mm")}${_detailModel?.endDate == null ? '' : '～'}${_detailModel?.endDate == null ? '' : DateUtil.formatDateStr(_detailModel.endDate, format: "HH:mm")}',
+                  '${DateUtil.formatDateStr(_detailModel!.beginDate!, format: "yyyy-MM-dd HH:mm")}${_detailModel?.endDate == null ? '' : '～'}${_detailModel?.endDate == null ? '' : DateUtil.formatDateStr(_detailModel!.endDate!, format: "HH:mm")}',
                   style: AppStyle().primaryStyle,
                 ),
               ],
@@ -394,7 +394,7 @@ class _InspectionManageDetailsPageState
                         ),
                         Spacer(),
                         Text(
-                          '${DateUtil.formatDateStr(_detailModel.actualBeginDate, format: "yyyy-MM-dd HH:mm")}',
+                          '${DateUtil.formatDateStr(_detailModel!.actualBeginDate!, format: "yyyy-MM-dd HH:mm")}',
                           style: AppStyle().primaryStyle,
                         ),
                       ],
@@ -417,7 +417,7 @@ class _InspectionManageDetailsPageState
                       ),
                       Spacer(),
                       Text(
-                        '${DateUtil.formatDateStr(_detailModel.actualEndDate, format: "yyyy-MM-dd HH:mm")}',
+                        '${DateUtil.formatDateStr(_detailModel!.actualEndDate!, format: "yyyy-MM-dd HH:mm")}',
                         style: AppStyle().primaryStyle,
                       ),
                     ],
@@ -447,7 +447,7 @@ class _InspectionManageDetailsPageState
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            model.name.text
+            model.name!.text
                 .color(model.completeDate == null
                     ? kTextPrimaryColor
                     : kTextSubColor)
@@ -482,9 +482,9 @@ class _InspectionManageDetailsPageState
         .onInkTap(() {
       Get.to(() => InspectionPointDetailPage(
             hasScan: model.completeDate == null ? false : true,
-            executePointId: model.id,
-            executeName: _detailModel.name,
-            status: _detailModel.status,
+            executePointId: model.id!,
+            executeName: _detailModel!.name,
+            status: _detailModel!.status!,
           ));
     });
   }
@@ -507,9 +507,9 @@ class _InspectionManageDetailsPageState
             zoomGesturesEnabled: false,
             onMapCreated: (controller) {
               _aMapController = controller;
-              LatLng _target = LatLng(appProvider.location['latitude'],
-                  appProvider.location['longitude']);
-              _aMapController.moveCamera(CameraUpdate.newCameraPosition(
+              LatLng _target = LatLng(appProvider.location!['latitude'] as double,
+                  appProvider.location!['longitude'] as double);
+              _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
                   CameraPosition(target: _target, zoom: 19)));
             },
             myLocationStyleOptions: MyLocationStyleOptions(true,
@@ -517,13 +517,13 @@ class _InspectionManageDetailsPageState
                 circleStrokeColor: Colors.transparent,
                 icon: BitmapDescriptor.defaultMarkerWithHue(210)),
             onLocationChanged: (argument) async {
-              _aMapController.moveCamera(CameraUpdate.newCameraPosition(
+              _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
                   CameraPosition(target: argument.latLng, zoom: 19)));
               if (_canUploadLocation) {
-                BaseModel baseModel = await _uploadLocation(widget.executeId,
-                    argument.latLng.longitude, argument.latLng.latitude);
-                if (!baseModel.status) {
-                  BotToast.showText(text: baseModel.message);
+                BaseModel baseModel = await (_uploadLocation(widget.executeId,
+                    argument.latLng.longitude, argument.latLng.latitude) );
+                if (!baseModel.status!) {
+                  BotToast.showText(text: baseModel.message!);
                 } else {
                   _canUploadLocation = false;
                   //绘制折线
@@ -561,16 +561,16 @@ class _InspectionManageDetailsPageState
         .make();
   }
 
-  void _creatPolyline() {
-    final Polyline _polyline = Polyline(
-      points: _points,
-      color: Colors.red,
-      width: 5.w,
-    );
-    setState(() {
-      _polylines.add(_polyline);
-    });
-  }
+  // void _creatPolyline() {
+  //   final Polyline _polyline = Polyline(
+  //     points: _points,
+  //     color: Colors.red,
+  //     width: 5.w,
+  //   );
+  //   setState(() {
+  //     _polylines.add(_polyline);
+  //   });
+  // }
 
   Future _uploadLocation(
       int executeId, double longitude, double latitude) async {

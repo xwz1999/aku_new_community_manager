@@ -21,7 +21,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class BorrowItemPage extends StatefulWidget {
   final int id;
-  BorrowItemPage({Key key, @required this.id}) : super(key: key);
+  BorrowItemPage({Key? key, /*required*/ required this.id}) : super(key: key);
 
   @override
   _BorrowItemPageState createState() => _BorrowItemPageState();
@@ -35,7 +35,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
     return AkuScaffold(
       title: '物品查看',
       actions: [
-        userProvider.infoModel.canOperation
+        userProvider.infoModel!.canOperation
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {
@@ -59,7 +59,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
         path: API.manage.borrowDetailList,
         controller: _refreshController,
         extraParams: {'articleId': widget.id},
-        convert: (model) => model.tableList
+        convert: (model) => model.tableList!
             .map((e) => BorrowDetailItemModel.fromJson(e))
             .toList(),
         builder: (items) {
@@ -79,7 +79,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
     final userProvider = Provider.of<UserProvider>(context);
     return GestureDetector(
       onTap: () {
-        Get.to(BorrowItemDetailPage(id: item.id));
+        Get.to(BorrowItemDetailPage(id: item.id!));
       },
       child: Container(
         margin: EdgeInsets.only(top: 16.w),
@@ -90,7 +90,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                 AkuBox.h(93),
                 AkuBox.w(24),
                 Text(
-                  item.name,
+                  item.name!,
                   style: TextStyle(
                     color: AppStyle.primaryTextColor,
                     fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                   ),
                 ),
                 Spacer(),
-                userProvider.infoModel.canOperation
+                userProvider.infoModel!.canOperation
                     ? AkuMaterialButton(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         onPressed: () {
@@ -176,7 +176,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                   child: Column(
                     children: [
                       _buildRow(
-                          R.ASSETS_MANAGE_IC_RENWU_PNG, '物品单号', item.code),
+                          R.ASSETS_MANAGE_IC_RENWU_PNG, '物品单号', item.code!),
                       _buildRow(
                         R.ASSETS_MANAGE_BORROW_PNG,
                         '出借状态',

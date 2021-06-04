@@ -17,14 +17,14 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class OutdoorPassPage extends StatefulWidget {
   final int id;
 
-  OutdoorPassPage({Key key, this.id}) : super(key: key);
+  OutdoorPassPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _OutdoorPassPageState createState() => _OutdoorPassPageState();
 }
 
 class _OutdoorPassPageState extends State<OutdoorPassPage> {
-  int _doorValue;
+  int? _doorValue;
   @override
   Widget build(BuildContext context) {
     String _currentTime =
@@ -85,7 +85,7 @@ class _OutdoorPassPageState extends State<OutdoorPassPage> {
                         PopupMenuItem(child: Text('北门'), value: 4),
                       ];
                     },
-                    onSelected: (value) {
+                    onSelected: (dynamic value) {
                       _doorValue = value;
                       setState(() {});
                     },
@@ -99,7 +99,7 @@ class _OutdoorPassPageState extends State<OutdoorPassPage> {
                                 2: '南门',
                                 3: '西门',
                                 4: '北门',
-                              }[_doorValue],
+                              }[_doorValue!]!,
                         style: _doorValue == null
                             ? AppStyle().secondaryTextStyle
                             : AppStyle().primaryStyle,

@@ -24,7 +24,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class LoginSMSPage extends StatefulWidget {
   final String phone;
-  LoginSMSPage({Key key, this.phone}) : super(key: key);
+  LoginSMSPage({Key? key, required this.phone}) : super(key: key);
 
   @override
   _LoginSMSPageState createState() => _LoginSMSPageState();
@@ -33,7 +33,7 @@ class LoginSMSPage extends StatefulWidget {
 class _LoginSMSPageState extends State<LoginSMSPage> {
   TextEditingController _textEditingController = TextEditingController();
   int _count = 60;
-  Timer _countTimer;
+  Timer? _countTimer;
   bool get canResend => _count <= 0;
   String get countString {
     if (_count <= 0)
@@ -71,7 +71,7 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
 
   @override
   void dispose() {
-    _textEditingController?.dispose();
+    _textEditingController.dispose();
     _countTimer?.cancel();
     super.dispose();
   }
@@ -119,7 +119,7 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
             onChanged: (text) async {
               if (text.length == 6) {
                 Function cancel = BotToast.showLoading();
-                Response response = await NetUtil().dio.post(
+                Response response = await NetUtil().dio!.post(
                   API.auth.login,
                   data: {'tel': widget.phone, 'code': text},
                 );

@@ -24,7 +24,7 @@ import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class AllAnouncement extends StatefulWidget {
-  AllAnouncement({Key key}) : super(key: key);
+  AllAnouncement({Key? key}) : super(key: key);
 
   @override
   AllAnouncementState createState() => AllAnouncementState();
@@ -33,7 +33,7 @@ class AllAnouncement extends StatefulWidget {
 class AllAnouncementState extends State<AllAnouncement> {
   EasyRefreshController _refreshController = EasyRefreshController();
 
-  static Widget anounceCard(AnnouncementListModel model, {String body}) {
+  static Widget anounceCard(AnnouncementListModel model, {String? body}) {
     return Column(
       children: [
         AkuButton(
@@ -84,7 +84,7 @@ class AllAnouncementState extends State<AllAnouncement> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        model.title,
+                        model.title!,
                         style: AppStyle().primaryStyle,
                       ),
                       SizedBox(height: 12.w),
@@ -95,7 +95,7 @@ class AllAnouncementState extends State<AllAnouncement> {
                             width: 24.w,
                           ),
                           Text(
-                            model.releaseTime,
+                            model.releaseTime!,
                             style: AppStyle().minorStyle,
                           ),
                           Spacer(),
@@ -115,28 +115,28 @@ class AllAnouncementState extends State<AllAnouncement> {
     );
   }
 
-  Widget _anouncementList(
-    String date,
-    List<AnnouncementListModel> cards,
-  ) {
-    return Column(
-      children: [
-        Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            height: 48.w + 33.w,
-            child: Text(
-              date,
-              style: AppStyle().minorStyle,
-            )),
-        ...(cards
-            .map(
-              (e) => Container(),
-            )
-            .toList()),
-      ],
-    );
-  }
+  // Widget _anouncementList(
+  //   String date,
+  //   List<AnnouncementListModel> cards,
+  // ) {
+  //   return Column(
+  //     children: [
+  //       Container(
+  //           alignment: Alignment.center,
+  //           width: double.infinity,
+  //           height: 48.w + 33.w,
+  //           child: Text(
+  //             date,
+  //             style: AppStyle().minorStyle,
+  //           )),
+  //       ...(cards
+  //           .map(
+  //             (e) => Container(),
+  //           )
+  //           .toList()),
+  //     ],
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +146,7 @@ class AllAnouncementState extends State<AllAnouncement> {
           path: API.message.announcementList,
           controller: _refreshController,
           convert: (models) {
-            return models.tableList
+            return models.tableList!
                 .map((e) => AnnouncementListModel.fromJson(e))
                 .toList();
           },

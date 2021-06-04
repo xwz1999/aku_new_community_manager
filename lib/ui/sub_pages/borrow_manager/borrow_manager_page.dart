@@ -14,7 +14,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class BorrowManagerPage extends StatefulWidget {
-  BorrowManagerPage({Key key}) : super(key: key);
+  BorrowManagerPage({Key? key}) : super(key: key);
 
   @override
   _BorrowManagerPageState createState() => _BorrowManagerPageState();
@@ -23,13 +23,13 @@ class BorrowManagerPage extends StatefulWidget {
 class _BorrowManagerPageState extends State<BorrowManagerPage>
     with TickerProviderStateMixin {
   
-  TabController _tabController;
+  TabController? _tabController;
   List<String> get _tabs {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     return [
       '全部',
       '出借中',
-      ...userProvider.infoModel.canOperation ? ['待检查'] : [],
+      ...userProvider.infoModel!.canOperation ? ['待检查'] : [],
       '已归还'
     ];
   }
@@ -46,7 +46,7 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
       title: '物品清单',
       appBarBottom: PreferredSize(
           child: AkuTabBar(
-            controller: _tabController,
+            controller: _tabController!,
             tabs: _tabs,
           ),
           preferredSize: Size.fromHeight(96.w)),
@@ -77,7 +77,7 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
     return [
       BorrowManagerView(),
       BorrowManagerView(status: 1),
-      ...userProvider.infoModel.canOperation
+      ...userProvider.infoModel!.canOperation
           ? [BorrowManagerView(status: 3)]
           : [],
       BorrowManagerView(status: 2),

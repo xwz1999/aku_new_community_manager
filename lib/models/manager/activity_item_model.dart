@@ -5,30 +5,30 @@ import 'package:common_utils/common_utils.dart';
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class ActivityItemModel {
-  int id;
-  String title;
-  String sponsorName;
-  String location;
-  String registrationStartTime;
-  String registrationEndTime;
-  String createDate;
-  List<ImgModel> imgUrls;
+  int? id;
+  String? title;
+  String? sponsorName;
+  String? location;
+  String? registrationStartTime;
+  String? registrationEndTime;
+  String? createDate;
+  List<ImgModel>? imgUrls;
 
-  ImgModel get firstImg {
-    if (imgUrls.isEmpty)
+  ImgModel? get firstImg {
+    if (imgUrls!.isEmpty)
       return null;
     else
-      return imgUrls.first;
+      return imgUrls!.first;
   }
 
-  DateTime get create => DateUtil.getDateTime(createDate);
+  DateTime? get create => DateUtil.getDateTime(createDate!);
 
-  DateTime get registrationStart => DateUtil.getDateTime(registrationStartTime);
+  DateTime? get registrationStart => DateUtil.getDateTime(registrationStartTime!);
 
-  DateTime get registrationEnd => DateUtil.getDateTime(registrationEndTime);
+  DateTime? get registrationEnd => DateUtil.getDateTime(registrationEndTime!);
 
   ActivityItemModel(
-      {this.id,
+      {required this.id,
       this.title,
       this.sponsorName,
       this.location,
@@ -46,9 +46,9 @@ class ActivityItemModel {
     registrationEndTime = json['registrationEndTime'];
     createDate = json['createDate'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgModel>();
+      imgUrls =<ImgModel>[];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgModel.fromJson(v));
+        imgUrls!.add(new ImgModel.fromJson(v));
       });
     }
   }
@@ -63,7 +63,7 @@ class ActivityItemModel {
     data['registrationEndTime'] = this.registrationEndTime;
     data['createDate'] = this.createDate;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }

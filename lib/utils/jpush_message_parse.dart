@@ -12,7 +12,7 @@ import 'package:velocity_x/velocity_x.dart';
 
 class JpushMessageParse {
   final Map<String, dynamic> message;
-  String subTitle;
+  String? subTitle;
   String type = '0';
   JpushMessageParse(Map<String, dynamic> rawMessage)
       : message = Map<String, dynamic>.from(rawMessage);
@@ -20,7 +20,7 @@ class JpushMessageParse {
   Future shot() async {
     subTitle = message['alert'];
     Map<dynamic, dynamic> rawExtras = message['extras'];
-    String androidExtra = rawExtras['cn.jpush.android.EXTRA'];
+    String? androidExtra = rawExtras['cn.jpush.android.EXTRA'];
     if (androidExtra == null) {
       return;
     } else {
@@ -28,7 +28,7 @@ class JpushMessageParse {
       type = _innerMap['type'] ?? '0';
       switch (type) {
         case '1':
-          await fireAlert(subTitle);
+          await fireAlert(subTitle!);
           break;
         default:
       }

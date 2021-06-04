@@ -8,15 +8,15 @@ import 'package:common_utils/common_utils.dart';
 class ClockFunc {
   static Future initClockInfo() async {
     BaseModel baseModel = await NetUtil().get(API.manage.todayClockRecord);
-    if (baseModel.status && baseModel.data != null) {
+    if (baseModel.status! && baseModel.data != null) {
       return TodayClockRecordModel.fromJson(baseModel.data);
     } else {
-      BotToast.showText(text: baseModel.message);
+      BotToast.showText(text: baseModel.message!);
     }
   }
 
   static Future clockIn(int id, DateTime dateTime) async {
-    BaseModel baseModel = await NetUtil().post(
+       await NetUtil().post(
       API.manage.clockInOut,
       params: {
         "id": id,
@@ -28,7 +28,7 @@ class ClockFunc {
   }
 
   static Future clockOut(int id, DateTime dateTime) async {
-    BaseModel baseModel = await NetUtil().post(API.manage.clockInOut,
+     await NetUtil().post(API.manage.clockInOut,
         params: {
           "id": id,
           "endClockDate":

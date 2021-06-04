@@ -8,7 +8,7 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 
 class ClockInOutApplyCard extends StatefulWidget {
   final ClockApplyRecordListModel model;
-  ClockInOutApplyCard({Key key, this.model}) : super(key: key);
+  ClockInOutApplyCard({Key? key, required this.model}) : super(key: key);
 
   @override
   _ClockInOutApplyCardState createState() => _ClockInOutApplyCardState();
@@ -75,7 +75,7 @@ class _ClockInOutApplyCardState extends State<ClockInOutApplyCard> {
                 160.w.widthBox,
                 Row(
                   children: [
-                    widget.model.reason.text
+                    widget.model.reason!.text
                         .size(24.sp)
                         .maxLines(2)
                         .overflow(TextOverflow.ellipsis)

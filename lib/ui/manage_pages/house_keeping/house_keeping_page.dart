@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HouseKeepingPage extends StatefulWidget {
-  HouseKeepingPage({Key key}) : super(key: key);
+  HouseKeepingPage({Key? key}) : super(key: key);
 
   @override
   _HouseKeepingPageState createState() => _HouseKeepingPageState();
@@ -16,7 +16,7 @@ class HouseKeepingPage extends StatefulWidget {
 class _HouseKeepingPageState extends State<HouseKeepingPage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['未处理', '已处理'];
-  TabController _tabController;
+  late TabController _tabController;
   @override
   void initState() {
     super.initState();
@@ -25,7 +25,7 @@ class _HouseKeepingPageState extends State<HouseKeepingPage>
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
@@ -53,7 +53,7 @@ class _HouseKeepingPageState extends State<HouseKeepingPage>
               Get.to(() => HouseKeepingAddPage());
             })
       ],
-      body: HouseKeepingView(),
+      body: HouseKeepingView(index: 0,),
     );
   }
 }

@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/const/resource.dart';
 
 class HygienceManageDetailPage extends StatefulWidget {
-  final HygienceListModel cardModel;
-  HygienceManageDetailPage({Key key, this.cardModel}) : super(key: key);
+  final HygienceListModel? cardModel;
+  HygienceManageDetailPage({Key? key, this.cardModel}) : super(key: key);
 
   @override
   _HygienceManageDetailPageState createState() =>
@@ -18,7 +18,7 @@ class HygienceManageDetailPage extends StatefulWidget {
 
 class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
 
-  HygienceListModel get cardModel => widget.cardModel;
+  HygienceListModel? get cardModel => widget.cardModel;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -45,7 +45,7 @@ class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
                     height: 93.w,
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      cardModel.hygieneAreaName,
+                      cardModel!.hygieneAreaName!,
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: 32.w,
@@ -71,7 +71,7 @@ class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
                           )),
                       Spacer(),
                       Text(
-                        cardModel.content,
+                        cardModel!.content!,
                         style: AppStyle().primaryStyle,
                       ),
                     ],
@@ -91,7 +91,7 @@ class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
                               fontSize: 28.sp)),
                       Spacer(),
                       Text(
-                        '${cardModel.createDateString}至${cardModel.endDateString}',
+                        '${cardModel!.createDateString}至${cardModel!.endDateString}',
                         style: AppStyle().primaryStyle,
                       ),
                     ],
@@ -112,7 +112,7 @@ class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
                           )),
                       Spacer(),
                       Text(
-                        cardModel.directorName,
+                        cardModel!.directorName!,
                         style: AppStyle().primaryStyle,
                       ),
                     ],
@@ -137,7 +137,7 @@ class _HygienceManageDetailPageState extends State<HygienceManageDetailPage> {
                         fontWeight: FontWeight.bold)),
                 AkuBox.h(16),
                 Text(
-                  cardModel.content,
+                  cardModel!.content!,
                   style: TextStyle(
                       color: AppStyle.primaryTextColor, fontSize: 28.w),
                 ),

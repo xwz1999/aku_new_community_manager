@@ -20,7 +20,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class AllBorrowGoods extends StatefulWidget {
-  AllBorrowGoods({Key key}) : super(key: key);
+  AllBorrowGoods({Key? key}) : super(key: key);
 
   @override
   _AllBorrowGoodsState createState() => _AllBorrowGoodsState();
@@ -34,7 +34,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
     return AkuScaffold(
       title: '全部物品',
       actions: [
-        userProvider.infoModel.canOperation
+        userProvider.infoModel!.canOperation
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {
@@ -54,7 +54,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
         path: API.manage.borrowList,
         controller: _refreshController,
         convert: (model) =>
-            model.tableList.map((e) => BorrowItemModel.fromJson(e)).toList(),
+            model.tableList!.map((e) => BorrowItemModel.fromJson(e)).toList(),
         builder: (items) {
           return ListView.builder(
             padding: EdgeInsets.symmetric(
@@ -72,7 +72,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
 
   _buildCard(BorrowItemModel object) {
     return GestureDetector(
-      onTap: () => Get.to(BorrowItemPage(id: object.id)),
+      onTap: () => Get.to(BorrowItemPage(id: object.id!)),
       child: Container(
         padding: EdgeInsets.all(24.w),
         margin: EdgeInsets.only(top: 16.w),
@@ -91,7 +91,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
             Expanded(
                 child: Column(
               children: [
-                _buildRow(R.ASSETS_MANAGE_ARTICLE_PNG, '物品名称', object.name),
+                _buildRow(R.ASSETS_MANAGE_ARTICLE_PNG, '物品名称', object.name!),
                 AkuBox.h(12),
                 _buildRow(R.ASSETS_MANAGE_BORROW_PNG, '借出数量',
                     object.borrowNum.toString()),

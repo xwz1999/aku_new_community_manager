@@ -15,7 +15,7 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix
 
 class BussinessView extends StatefulWidget {
   final int backlogStatus;
-  BussinessView({Key key, this.backlogStatus}) : super(key: key);
+  BussinessView({Key? key, required this.backlogStatus}) : super(key: key);
 
   @override
   _BussinessViewState createState() => _BussinessViewState();
@@ -23,9 +23,9 @@ class BussinessView extends StatefulWidget {
 
 class _BussinessViewState extends State<BussinessView>
     with AutomaticKeepAliveClientMixin {
-  List _modelList;
-  EasyRefreshController _refreshController;
-  ScrollController _scrollController;
+  List _modelList = [];
+  late EasyRefreshController _refreshController;
+  late ScrollController _scrollController;
   @override
   void initState() {
     super.initState();
@@ -35,8 +35,8 @@ class _BussinessViewState extends State<BussinessView>
 
   @override
   void dispose() {
-    _refreshController?.dispose();
-    _scrollController?.dispose();
+    _refreshController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -54,31 +54,33 @@ class _BussinessViewState extends State<BussinessView>
         _modelList = dataList.map((e) => ToDoModel.fromJson(e)).toList();
         setState(() {});
       },
-      child: _modelList == null
+      child: _modelList.isEmpty
           ? _emptyWidget()
           : ListView(
               padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.w),
-              children: [
-                ..._modelList.map((e) {
-                  if (e.dynamicModel.runtimeType == BussinessAndFixModel) {
-                    return BusinessFixCard(
-                      model: e.dynamicModel,
-                      callRefresh: () {
-                        _refreshController.callRefresh();
-                      },
-                    );
-                  } else if (e.dynamicModel.runtimeType == ToDoOutDoorModel) {
-                    return ToDoOutDoorCard(
-                      model: e.dynamicModel,
-                      callRefresh: () {
-                        _refreshController.callRefresh();
-                      },
-                    );
-                  }
-                }).toList()
-              ],
+              children: _modelList.map((e) => _buildCard(e)).toList(),
             ),
     );
+  }
+
+  Widget _buildCard(dynamic e) {
+    if (e.dynamicModel.runtimeType == BussinessAndFixModel) {
+      return BusinessFixCard(
+        model: e.dynamicModel,
+        callRefresh: () {
+          _refreshController.callRefresh();
+        },
+      );
+    } else if (e.dynamicModel.runtimeType == ToDoOutDoorModel) {
+      return ToDoOutDoorCard(
+        model: e.dynamicModel,
+        callRefresh: () {
+          _refreshController.callRefresh();
+        },
+      );
+    } else {
+      return Container();
+    }
   }
 
   Widget _emptyWidget() {

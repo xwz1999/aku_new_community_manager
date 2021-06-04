@@ -30,14 +30,14 @@ class PermissonUtil {
 }
 
 class WarningPage extends StatefulWidget {
-  WarningPage({Key key}) : super(key: key);
+  WarningPage({Key? key}) : super(key: key);
 
   @override
   _WarningPageState createState() => _WarningPageState();
 }
 
 class _WarningPageState extends State<WarningPage> {
-  AMapController _mapController;
+  AMapController? _mapController;
   @override
   void initState() {
     super.initState();
@@ -75,12 +75,12 @@ class _WarningPageState extends State<WarningPage> {
           AMapWidget(
             onMapCreated: (controller) {
               LatLng _target = LatLng(
-                appProvider.location['latitude'],
-                appProvider.location['longitude'],
+                appProvider.location!['latitude'] as double,
+                appProvider.location!['longitude'] as double,
               );
 
               _mapController = controller;
-              _mapController.moveCamera(
+              _mapController!.moveCamera(
                 CameraUpdate.newCameraPosition(
                   CameraPosition(target: _target, zoom: 18),
                 ),
@@ -131,7 +131,7 @@ class _WarningPageState extends State<WarningPage> {
                             child: Text(
                               (appProvider.location == null)
                                   ? '加载中……'
-                                  : appProvider.location['address'],
+                                  : appProvider.location!['address'] as String,
                               style: TextStyle(
                                 color: AppStyle.minorTextColor,
                                 fontSize: 28.sp,
@@ -246,10 +246,10 @@ class _WarningPageState extends State<WarningPage> {
               minWidth: 0,
               onPressed: () {
                 LatLng _target = LatLng(
-                  appProvider.location['latitude'],
-                  appProvider.location['longitude'],
+                  appProvider.location!['latitude'] as double,
+                  appProvider.location!['longitude'] as double,
                 );
-                _mapController.moveCamera(
+                _mapController!.moveCamera(
                   CameraUpdate.newCameraPosition(
                     CameraPosition(target: _target, zoom: 18),
                   ),

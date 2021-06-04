@@ -1,7 +1,7 @@
 class DispatchDetialModel {
-  String showName;
-  int showValue;
-  String remarks;
+  String? showName;
+  int? showValue;
+  String? remarks;
 
   DispatchDetialModel({this.showName, this.showValue, this.remarks});
 

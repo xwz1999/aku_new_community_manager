@@ -5,14 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InterviewPage extends StatefulWidget {
-  InterviewPage({Key key}) : super(key: key);
+  InterviewPage({Key? key}) : super(key: key);
 
   @override
   _InterviewPageState createState() => _InterviewPageState();
 }
 
 class _InterviewPageState extends State<InterviewPage> with TickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   @override
   void initState() { 
     super.initState();
@@ -23,7 +23,7 @@ class _InterviewPageState extends State<InterviewPage> with TickerProviderStateM
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '访谈管理',
-      appBarBottom: PreferredSize(preferredSize: Size.fromHeight(88.w),child: AkuTabBar(controller: _tabController, tabs: _tabs),),
+      appBarBottom: PreferredSize(preferredSize: Size.fromHeight(88.w),child: AkuTabBar(controller: _tabController!, tabs: _tabs),),
       body:TabBarView(
         controller: _tabController,
         children: List.generate(_tabs.length, (index) => InterviewView(index:index))),

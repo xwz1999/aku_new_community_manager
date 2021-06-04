@@ -1,8 +1,8 @@
 class WorkTimeLimitModel {
-  int id;
-  String name;
+  int? id;
+  String? name;
 
-  WorkTimeLimitModel({this.id, this.name});
+  WorkTimeLimitModel({required this.id, this.name});
 
   WorkTimeLimitModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

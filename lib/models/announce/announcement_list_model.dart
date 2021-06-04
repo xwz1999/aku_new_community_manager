@@ -1,10 +1,10 @@
 class AnnouncementListModel {
-  int id;
-  String title;
-  String releaseTime;
-  List<String> imgUrls;
+  int? id;
+  String? title;
+  String? releaseTime;
+  List<String>? imgUrls;
 
-  AnnouncementListModel({this.id, this.title, this.releaseTime, this.imgUrls});
+  AnnouncementListModel({required this.id, this.title, this.releaseTime, this.imgUrls});
 
   AnnouncementListModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

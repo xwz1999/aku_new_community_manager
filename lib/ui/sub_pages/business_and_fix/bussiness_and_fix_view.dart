@@ -13,8 +13,8 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class BussinessAndFixView extends StatefulWidget {
-  final int status;
-  BussinessAndFixView({Key key, this.status}) : super(key: key);
+  final int? status;
+  BussinessAndFixView({Key? key,  this.status}) : super(key: key);
 
   @override
   _BussinessAndFixViewState createState() => _BussinessAndFixViewState();
@@ -22,7 +22,7 @@ class BussinessAndFixView extends StatefulWidget {
 
 class _BussinessAndFixViewState extends State<BussinessAndFixView>
     with AutomaticKeepAliveClientMixin {
-  EasyRefreshController _easyRefreshController;
+  EasyRefreshController? _easyRefreshController;
   @override
   void initState() {
     super.initState();
@@ -45,7 +45,7 @@ class _BussinessAndFixViewState extends State<BussinessAndFixView>
         },
         controller: _easyRefreshController,
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => BussinessAndFixModel.fromJson(e))
               .toList();
         },
@@ -55,7 +55,7 @@ class _BussinessAndFixViewState extends State<BussinessAndFixView>
                 return BusinessFixCard(
                     model: items[index],
                     callRefresh: () {
-                      _easyRefreshController.callRefresh();
+                      _easyRefreshController!.callRefresh();
                     });
               },
               separatorBuilder: (_, __) {

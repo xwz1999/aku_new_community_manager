@@ -10,25 +10,25 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class AkuBackButton extends StatefulWidget {
   final Brightness brightness;
-  final IconData icon;
+  final IconData? icon;
   final bool text;
 
   AkuBackButton({
-    Key key,
+    Key? key,
     this.brightness = Brightness.light,
     this.icon = Icons.arrow_back_ios,
     this.text = false,
   }) : super(key: key);
 
   AkuBackButton.close({
-    Key key,
+    Key? key,
     this.brightness = Brightness.light,
     this.icon = Icons.clear,
     this.text = false,
   }) : super(key: key);
 
   AkuBackButton.text({
-    Key key,
+    Key? key,
     this.brightness = Brightness.light,
     this.icon,
     this.text = true,

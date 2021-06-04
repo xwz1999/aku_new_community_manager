@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class PrivacyPage extends StatelessWidget {
-  const PrivacyPage({Key key}) : super(key: key);
+  const PrivacyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

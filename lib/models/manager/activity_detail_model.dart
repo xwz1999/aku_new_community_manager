@@ -5,29 +5,29 @@ import 'package:common_utils/common_utils.dart';
 import 'package:aku_community_manager/models/common/img_model.dart';
 
 class ActivityDetailModel {
-  int id;
-  String title;
-  String content;
-  String activityStartTime;
-  String activityEndTime;
-  String location;
-  String registrationEndTime;
-  List<ImgModel> imgUrls;
-  ImgModel get firstImg {
-    if (imgUrls.isEmpty)
+  int? id;
+  String? title;
+  String? content;
+  String? activityStartTime;
+  String? activityEndTime;
+  String? location;
+  String? registrationEndTime;
+  List<ImgModel>? imgUrls;
+  ImgModel? get firstImg {
+    if (imgUrls!.isEmpty)
       return null;
     else
-      return imgUrls.first;
+      return imgUrls!.first;
   }
 
-  DateTime get registrationEnd => DateUtil.getDateTime(registrationEndTime);
+  DateTime? get registrationEnd => DateUtil.getDateTime(registrationEndTime!);
 
-  DateTime get activityStart => DateUtil.getDateTime(activityStartTime);
+  DateTime? get activityStart => DateUtil.getDateTime(activityStartTime!);
 
-  DateTime get activityEnd => DateUtil.getDateTime(activityEndTime);
+  DateTime? get activityEnd => DateUtil.getDateTime(activityEndTime!);
 
   ActivityDetailModel(
-      {this.id,
+      {required this.id,
       this.title,
       this.content,
       this.activityStartTime,
@@ -45,9 +45,9 @@ class ActivityDetailModel {
     location = json['location'];
     registrationEndTime = json['registrationEndTime'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgModel>();
+      imgUrls = <ImgModel>[];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgModel.fromJson(v));
+        imgUrls!.add(new ImgModel.fromJson(v));
       });
     }
   }
@@ -62,7 +62,7 @@ class ActivityDetailModel {
     data['location'] = this.location;
     data['registrationEndTime'] = this.registrationEndTime;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     return data;
   }

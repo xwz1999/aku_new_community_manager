@@ -44,7 +44,7 @@ class AppApplication {
 }
 
 class ApplicationPage extends StatefulWidget {
-  ApplicationPage({Key key}) : super(key: key);
+  ApplicationPage({Key? key}) : super(key: key);
 
   @override
   _ApplicationPageState createState() => _ApplicationPageState();

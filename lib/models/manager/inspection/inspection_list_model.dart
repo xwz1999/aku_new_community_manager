@@ -1,16 +1,16 @@
 class InspectionListModel {
-  int id;
-  String code;
-  String name;
-  String beginDate;
-  String endDate;
-  String actualBeginDate;
-  String actualEndDate;
-  int status;
-  String inspectorName;
+  int? id;
+  String? code;
+  String? name;
+  String? beginDate;
+  String? endDate;
+  String? actualBeginDate;
+  String? actualEndDate;
+  int? status;
+  String? inspectorName;
 
   InspectionListModel(
-      {this.id,
+      {required this.id,
       this.code,
       this.name,
       this.beginDate,

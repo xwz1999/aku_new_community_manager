@@ -11,8 +11,8 @@ import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class BorrowManagerView extends StatefulWidget {
-  final int status;
-  BorrowManagerView({Key key, this.status}) : super(key: key);
+  final int? status;
+  BorrowManagerView({Key? key,  this.status}) : super(key: key);
 
   @override
   _BorrowManagerViewState createState() => _BorrowManagerViewState();
@@ -28,7 +28,7 @@ class _BorrowManagerViewState extends State<BorrowManagerView>
       path: API.manage.borrowStatusList,
       extraParams: {'borrowStatus': widget.status},
       controller: _refreshController,
-      convert: (model) => model.tableList
+      convert: (model) => model.tableList!
           .map((e) => BorrowStatusItemModel.fromJson(e))
           .toList(),
       builder: (items) {

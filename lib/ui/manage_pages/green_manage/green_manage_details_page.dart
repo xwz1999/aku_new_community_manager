@@ -44,7 +44,7 @@ class GreenManageDetailsPage extends StatelessWidget {
                     height: 93.w,
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      cardModel.greenAreaName,
+                      cardModel.greenAreaName!,
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: 32.w,
@@ -70,7 +70,7 @@ class GreenManageDetailsPage extends StatelessWidget {
                           )),
                       Spacer(),
                       Text(
-                        cardModel.content,
+                        cardModel.content!,
                         style: AppStyle().primaryStyle,
                       ),
                     ],
@@ -111,7 +111,7 @@ class GreenManageDetailsPage extends StatelessWidget {
                           )),
                       Spacer(),
                       Text(
-                        cardModel.directorName,
+                        cardModel.directorName!,
                         style: AppStyle().primaryStyle,
                       ),
                     ],
@@ -136,7 +136,7 @@ class GreenManageDetailsPage extends StatelessWidget {
                         fontWeight: FontWeight.bold)),
                 AkuBox.h(16),
                 Text(
-                  cardModel.content,
+                  cardModel.content!,
                   style: TextStyle(
                       color: AppStyle.primaryTextColor, fontSize: 28.w),
                 ),

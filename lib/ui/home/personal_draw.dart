@@ -16,14 +16,14 @@ import 'package:aku_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 
 class PersonalDraw extends StatefulWidget {
-  PersonalDraw({Key key}) : super(key: key);
+  PersonalDraw({Key? key}) : super(key: key);
 
   @override
   _PersonalDrawState createState() => _PersonalDrawState();
 }
 
 class _PersonalDrawState extends State<PersonalDraw> {
-  Widget _myListTile(String path, String text, {VoidCallback onPressed}) {
+  Widget _myListTile(String path, String text, { VoidCallback? onPressed}) {
     return AkuButton(
       onPressed: onPressed,
       child: Container(
@@ -84,7 +84,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                         //登录按钮
                         userProvider.isLogin
                             ? Text(
-                                userProvider.infoModel.nickName,
+                                userProvider.infoModel!.nickName!,
                                 style: TextStyle(
                                   color: AppStyle.primaryTextColor,
                                   fontSize: 28.sp,

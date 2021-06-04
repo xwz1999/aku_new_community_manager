@@ -10,7 +10,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class HygienceManagePage extends StatefulWidget {
-  HygienceManagePage({Key key}) : super(key: key);
+  HygienceManagePage({Key? key}) : super(key: key);
 
   @override
   _HygienceManagePageState createState() => _HygienceManagePageState();
@@ -19,7 +19,7 @@ class HygienceManagePage extends StatefulWidget {
 class _HygienceManagePageState extends State<HygienceManagePage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['待处理', '未完成', '已完成'];
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _HygienceManagePageState extends State<HygienceManagePage>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -39,7 +39,7 @@ class _HygienceManagePageState extends State<HygienceManagePage>
       title: '卫生管理',
       appBarBottom: PreferredSize(
           preferredSize: Size.fromHeight(88.w),
-          child: AkuTabBar(controller: _tabController, tabs: _tabs)),
+          child: AkuTabBar(controller: _tabController!, tabs: _tabs)),
       body: TabBarView(
         controller: _tabController,
         children: List.generate(

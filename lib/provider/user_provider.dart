@@ -31,8 +31,8 @@ class UserProvider extends ChangeNotifier {
   Future setLogin(int token) async {
     _isLogin = true;
     NetUtil().auth(token);
-    await HiveStore.appBox.put('token', token);
-    await HiveStore.appBox.put('login', true);
+    await HiveStore.appBox!.put('token', token);
+    await HiveStore.appBox!.put('login', true);
     _profileModel = await updateProfile();
     _infoModel = await updateUserInfo();
     // await setCurrentHouse((_userDetailModel?.estateNames?.isEmpty ?? true)
@@ -41,26 +41,26 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  UserProfileModel _profileModel;
-  UserProfileModel get profileModel => _profileModel;
-  UserInfoModel _infoModel;
-  UserInfoModel get infoModel => _infoModel;
+  UserProfileModel? _profileModel;
+  UserProfileModel? get profileModel => _profileModel;
+  UserInfoModel? _infoModel;
+  UserInfoModel? get infoModel => _infoModel;
 
   ///更新用户profile
-  Future<UserProfileModel> updateProfile() async {
-    final appProvider = Provider.of<AppProvider>(Get.context, listen: false);
+  Future<UserProfileModel?> updateProfile() async {
+    final appProvider = Provider.of<AppProvider>(Get.context!, listen: false);
     appProvider.updateMessage();
-    BaseModel model = await NetUtil().get(API.user.profile);
-    if (model == null)
+    BaseModel? model = await NetUtil().get(API.user.profile);
+    if (model.data == null)
       return null;
     else
       return UserProfileModel.fromJson(model.data);
   }
 
-  Future<UserInfoModel> updateUserInfo() async {
-    BaseModel model = await NetUtil().get(API.user.info);
+  Future<UserInfoModel?> updateUserInfo() async {
+    BaseModel? model = await NetUtil().get(API.user.info);
 
-    if (model == null)
+    if (model.data == null)
       return null;
     else {
       var userModel = UserInfoModel.fromJson(model.data);
@@ -74,8 +74,8 @@ class UserProvider extends ChangeNotifier {
     await NetUtil().get(API.auth.logout, showMessage: true);
     NetUtil().logout();
     _isLogin = false;
-    await HiveStore.appBox.delete('token');
-    await HiveStore.appBox.put('login', false);
+    await HiveStore.appBox!.delete('token');
+    await HiveStore.appBox!.put('login', false);
     notifyListeners();
   }
 
@@ -96,7 +96,7 @@ class UserProvider extends ChangeNotifier {
 
   ///修改昵称
   setNickName(String name) {
-    _infoModel.nickName = name;
+    _infoModel!.nickName = name;
     notifyListeners();
   }
 
@@ -120,7 +120,7 @@ class UserProvider extends ChangeNotifier {
 
   ///修改手机
   setTel(String tel) {
-    _profileModel.tel = tel;
+    _profileModel!.tel = tel;
     notifyListeners();
   }
 }

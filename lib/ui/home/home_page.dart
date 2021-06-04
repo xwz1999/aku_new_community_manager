@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:async';
+
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +49,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -55,11 +57,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  ItemNumModel _itemNumModel;
-  List _todoModelList;
-  List _anounceMentList;
+  late ItemNumModel _itemNumModel;
+  List? _todoModelList;
+  late List _anounceMentList;
   bool _onload = true;
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
 
   ///自定义bar的菜单按钮
   Widget _menuButton(String assetPath, String text, Widget page) {
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
 
   ///底部信息栏卡片
   Widget _card(
-    int number,
+    int? number,
     String text,
     Color color,
     int index,
@@ -157,7 +159,7 @@ class _HomePageState extends State<HomePage> {
   int _currentIndicator = 0;
 
   Future _getItemNum() async {
-    Response response = await NetUtil().dio.get(API.manage.findItemNum);
+    Response response = await NetUtil().dio!.get(API.manage.findItemNum);
     return ItemNumModel.fromJson(response.data);
   }
 
@@ -167,7 +169,7 @@ class _HomePageState extends State<HomePage> {
       "pageNum": 1,
       "size": 3,
     }));
-    List<AnnouncementListModel> anounceModels = baseListModel.tableList
+    List<AnnouncementListModel> anounceModels = baseListModel.tableList!
         .map((e) => AnnouncementListModel.fromJson(e))
         .toList();
     return anounceModels;
@@ -352,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                     height: 67.w,
                     child: Text(
                       userProvider.isLogin
-                          ? 'HI，${userProvider.infoModel.nickName}'
+                          ? 'HI，${userProvider.infoModel!.nickName}'
                           : '登录/注册',
                       style: TextStyle(
                         color: AppStyle.primaryTextColor,
@@ -408,7 +410,7 @@ class _HomePageState extends State<HomePage> {
               var dataList = await BussinessFunc.getBussinessModelList(1);
               _todoModelList =
                   dataList.map((e) => ToDoModel.fromJson(e)).toList();
-              _anounceMentList = await _getAnouncement();
+              _anounceMentList = await _getAnouncement() ;
               _onload = false;
               setState(() {});
             }
@@ -569,29 +571,29 @@ class _HomePageState extends State<HomePage> {
                                       width: 526.w,
                                       child: Builder(
                                         builder: (context) {
-                                          if (_todoModelList[index]
+                                          if (_todoModelList![index]
                                                   .dynamicModel
                                                   .runtimeType ==
                                               BussinessAndFixModel) {
                                             return BusinessFixCard(
                                                 homeDisplay: true,
                                                 callRefresh: () {
-                                                  _refreshController
+                                                  _refreshController!
                                                       .callRefresh();
                                                 },
-                                                model: _todoModelList[index]
+                                                model: _todoModelList![index]
                                                     .dynamicModel);
-                                          } else if (_todoModelList[index]
+                                          } else if (_todoModelList![index]
                                                   .dynamicModel
                                                   .runtimeType ==
                                               ToDoOutDoorModel) {
                                             return ToDoOutDoorCard(
                                               homeDisplay: true,
                                               callRefresh: () {
-                                                _refreshController
+                                                _refreshController!
                                                     .callRefresh();
                                               },
-                                              model: _todoModelList[index]
+                                              model: _todoModelList![index]
                                                   .dynamicModel,
                                             );
                                           } else
@@ -600,7 +602,7 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     );
                                   },
-                                  itemCount: _todoModelList.length,
+                                  itemCount: _todoModelList!.length,
                                 ),
                               ),
                         SizedBox(height: 24.w),

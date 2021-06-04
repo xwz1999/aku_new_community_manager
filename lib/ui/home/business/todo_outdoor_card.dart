@@ -14,10 +14,10 @@ import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_d
 
 class ToDoOutDoorCard extends StatefulWidget {
   final ToDoOutDoorModel model;
-  final VoidCallback callRefresh;
+  final VoidCallback? callRefresh;
   final bool homeDisplay;
   ToDoOutDoorCard(
-      {Key key, this.model, this.callRefresh, this.homeDisplay = false})
+      {Key? key, required this.model, this.callRefresh, this.homeDisplay = false})
       : super(key: key);
 
   @override
@@ -31,9 +31,9 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
         TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp);
     return GestureDetector(
       onTap: () async {
-        await Get.to(ItemsOutdoorDetailsPage(id: widget.model.id));
+        await Get.to(ItemsOutdoorDetailsPage(id: widget.model.id!));
         if (widget.callRefresh != null) {
-          widget.callRefresh();
+          widget.callRefresh!();
         }
       },
       child: Container(
@@ -65,7 +65,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                     ),
                   ),
                   16.w.widthBox,
-                  //TODO 创建时间
+                  //
                   // Text(
                   //   widget.model.create,
                   //   style: TextStyle(
@@ -120,7 +120,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                 Text('详细地址', style: _textStyle),
                 Spacer(),
                 Text(
-                  widget.model.roomName,
+                  widget.model.roomName!,
                   style: AppStyle().primaryStyle,
                 ),
               ],
@@ -140,7 +140,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                 ),
                 Spacer(),
                 Text(
-                  widget.model.applicantName,
+                  widget.model.applicantName!,
                   style: AppStyle().primaryStyle,
                 ),
               ],
@@ -183,7 +183,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                 ),
                 Spacer(),
                 Text(
-                  widget.model.articleOutName,
+                  widget.model.articleOutName!,
                   style: AppStyle().primaryStyle,
                 ),
               ],
@@ -203,7 +203,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                 ),
                 Spacer(),
                 Text(
-                  widget.model.expectedTime,
+                  widget.model.expectedTime!,
                   style: AppStyle().primaryStyle,
                 ),
               ],
@@ -217,9 +217,9 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
               alignment: Alignment.centerRight,
               child: AkuButton(
                 onPressed: () async {
-                  await Get.to(ItemsOutdoorDetailsPage(id: widget.model.id));
+                  await Get.to(ItemsOutdoorDetailsPage(id: widget.model.id!));
                   if (widget.callRefresh != null) {
-                    widget.callRefresh();
+                    widget.callRefresh!();
                   }
                 },
                 child: Container(

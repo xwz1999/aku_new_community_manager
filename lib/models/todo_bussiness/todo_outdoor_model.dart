@@ -2,17 +2,17 @@
 import 'package:flutter/material.dart';
 
 class ToDoOutDoorModel {
-  int id;
-  int status;
-  String roomName;
-  String applicantName;
-  int identity;
-  String articleOutName;
-  String expectedTime;
-  String applicantDate;
+  int? id;
+  int? status;
+  String? roomName;
+  String? applicantName;
+  int? identity;
+  String? articleOutName;
+  String? expectedTime;
+  String? applicantDate;
 
   ToDoOutDoorModel(
-      {this.id,
+      {required this.id,
       this.status,
       this.roomName,
       this.applicantName,

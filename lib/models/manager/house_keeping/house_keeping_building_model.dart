@@ -1,6 +1,6 @@
 class HouseKeepingBuildingModel {
-  int value;
-  String label;
+  int? value;
+  String? label;
 
   HouseKeepingBuildingModel({this.value, this.label});
 

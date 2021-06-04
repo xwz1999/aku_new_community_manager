@@ -9,7 +9,7 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 
 class HouseKeepingDetailPage extends StatefulWidget {
   final HouseKeepingListModel model;
-  HouseKeepingDetailPage({Key key, this.model}) : super(key: key);
+  HouseKeepingDetailPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _HouseKeepingDetailPageState createState() => _HouseKeepingDetailPageState();
@@ -53,7 +53,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
             _rowTile(
                 R.ASSETS_MANAGE_IC_RENWU_PNG,
                 '房产名称',
-                widget.model.roomName.text
+                widget.model.roomName!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
@@ -69,14 +69,14 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
             _rowTile(
                 R.ASSETS_MANAGE_IC_RENWU_PNG,
                 '负责人姓名',
-                widget.model.leaderName.text
+                widget.model.leaderName!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
             _rowTile(
                 R.ASSETS_MESSAGE_IC_PHONE_PNG,
                 '负责人手机',
-                widget.model.leaderTel.text
+                widget.model.leaderTel!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
@@ -105,12 +105,12 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
           16.w.heightBox,
           AkuDivider.horizontal(),
           20.w.heightBox,
-          widget.model.content.text.size(28.sp).color(kTextPrimaryColor).make(),
+          widget.model.content!.text.size(28.sp).color(kTextPrimaryColor).make(),
           40.w.heightBox,
           Row(
             children: [
               Spacer(),
-              widget.model.createDate.text
+              widget.model.createDate!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),

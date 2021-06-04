@@ -10,7 +10,7 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 
 class NewRenovationDetailPage extends StatefulWidget {
   final NewRenovationListModel model;
-  NewRenovationDetailPage({Key key, this.model}) : super(key: key);
+  NewRenovationDetailPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _NewRenovationDetailPageState createState() =>
@@ -64,21 +64,21 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
                   Row(
                     children: [
                       Spacer(),
-                      widget.model.auditDate.text
+                      widget.model.auditDate!.text
                           .size(24.sp)
                           .color(kTextSubColor)
                           .make(),
                     ],
                   ),
                 ],
-          ...widget.model.checkVoList.isEmpty ? [] : [..._checkWidge()]
+          ...widget.model.checkVoList!.isEmpty ? [] : [..._checkWidge()]
         ],
       ),
     );
   }
 
   List<Widget> _checkWidge() {
-    return widget.model.checkVoList
+    return widget.model.checkVoList!
         .map((e) => Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -92,7 +92,7 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
                   20.w.heightBox,
                   Row(
                     children: [
-                      '完工检查${widget.model.checkVoList.indexOf(e)}'
+                      '完工检查${widget.model.checkVoList!.indexOf(e)}'
                           .text
                           .size(32.sp)
                           .color(kTextPrimaryColor)
@@ -110,7 +110,7 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
                   Row(
                     children: [
                       Spacer(),
-                      (e.createDate)
+                      e.createDate!
                           .text
                           .size(24.sp)
                           .color(kTextSubColor)
@@ -135,7 +135,7 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
           Row(
             children: [
               Text(
-                widget.model.roomName,
+                widget.model.roomName!,
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeight.bold,
@@ -157,7 +157,7 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
             AkuRowTile(
               assetPath: R.ASSETS_MANAGE_IC_RENWU_PNG,
               title: '装修公司',
-              content: widget.model.constructionUnit.text
+              content: widget.model.constructionUnit!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),
@@ -165,7 +165,7 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
             AkuRowTile(
               assetPath: R.ASSETS_MANAGE_IC_RENWU_PNG,
               title: '负责人姓名',
-              content: widget.model.director.text
+              content: widget.model.director!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),
@@ -173,7 +173,7 @@ class _NewRenovationDetailPageState extends State<NewRenovationDetailPage> {
             AkuRowTile(
               assetPath: R.ASSETS_MANAGE_IC_RENWU_PNG,
               title: '负责人电话',
-              content: widget.model.directorTel.text
+              content: widget.model.directorTel!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),

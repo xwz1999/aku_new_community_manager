@@ -1,17 +1,17 @@
 import 'package:common_utils/common_utils.dart';
 
 class KeyManageRecordListModel {
-  int id;
-  String code;
-  int status;
-  String facilityName;
-  String correspondingPosition;
-  String storageLocation;
-  String auditDate;
-  String reason;
+  int? id;
+  String? code;
+  int? status;
+  String? facilityName;
+  String? correspondingPosition;
+  String? storageLocation;
+  String? auditDate;
+  String? reason;
 
   KeyManageRecordListModel(
-      {this.id,
+      {required this.id,
       this.code,
       this.status,
       this.facilityName,
@@ -44,5 +44,5 @@ class KeyManageRecordListModel {
     return data;
   }
 
-   String get auditDateString => DateUtil.formatDateStr(this.auditDate,format: 'yyyy-MM-dd HH:mm');
+   String get auditDateString => DateUtil.formatDateStr(this.auditDate!,format: 'yyyy-MM-dd HH:mm');
 }

@@ -13,10 +13,10 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 
 class NewRenovationCard extends StatefulWidget {
   final NewRenovationListModel model;
-  final VoidCallback callRefresh;
+  final VoidCallback? callRefresh;
   NewRenovationCard({
-    Key key,
-    this.model,
+    Key? key,
+    required this.model,
     this.callRefresh,
   }) : super(key: key);
 
@@ -44,7 +44,7 @@ class _NewRenovationCardState extends State<NewRenovationCard> {
             Row(
               children: [
                 Text(
-                  widget.model.roomName,
+                  widget.model.roomName!,
                   style: TextStyle(
                     fontSize: 32.sp,
                     fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class _NewRenovationCardState extends State<NewRenovationCard> {
               AkuRowTile(
                 assetPath: R.ASSETS_MANAGE_IC_RENWU_PNG,
                 title: '装修公司',
-                content: widget.model.constructionUnit.text
+                content: widget.model.constructionUnit!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make(),
@@ -74,7 +74,7 @@ class _NewRenovationCardState extends State<NewRenovationCard> {
               AkuRowTile(
                 assetPath: R.ASSETS_MANAGE_IC_RENWU_PNG,
                 title: '负责人姓名',
-                content: widget.model.director.text
+                content: widget.model.director!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make(),
@@ -82,7 +82,7 @@ class _NewRenovationCardState extends State<NewRenovationCard> {
               AkuRowTile(
                 assetPath: R.ASSETS_MANAGE_IC_RENWU_PNG,
                 title: '负责人电话',
-                content: widget.model.directorTel.text
+                content: widget.model.directorTel!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make(),
@@ -139,9 +139,9 @@ class _NewRenovationCardState extends State<NewRenovationCard> {
               text: '提交报告',
               onPressed: () async {
                 Get.to(() => NewRenovationFinishSubmitPage(
-                      id: widget.model.id,
+                      id: widget.model.id!,
                       callRefresh: () {
-                        widget.callRefresh();
+                        widget.callRefresh!();
                       },
                     ));
               })

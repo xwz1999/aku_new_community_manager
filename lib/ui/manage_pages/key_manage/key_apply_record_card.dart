@@ -19,8 +19,8 @@ import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_map.
 class KeyApplyRecordCard extends StatefulWidget {
   final int index;
   final KeyManageRecordListModel model;
-  final VoidCallback callRefresh;
-  KeyApplyRecordCard({Key key, this.index, this.model, this.callRefresh}) : super(key: key);
+  final VoidCallback? callRefresh;
+  KeyApplyRecordCard({Key? key, required this.index, required this.model, this.callRefresh}) : super(key: key);
 
   @override
   _KeyApplyRecordCardState createState() => _KeyApplyRecordCardState();
@@ -39,16 +39,16 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
         children: [
           Row(
             children: [
-              widget.model.facilityName.text
+              widget.model.facilityName!.text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
                   .bold
                   .make(),
               Spacer(),
-              KeyManageMap.keyRecordStatus[widget.model.status].text
+              KeyManageMap.keyRecordStatus[widget.model.status!]!.text
                   .size(28.sp)
                   .bold
-                  .color(KeyManageMap.keyRecordStatusColor[widget.model.status])
+                  .color(KeyManageMap.keyRecordStatusColor[widget.model.status!]!)
                   .make()
             ],
           ),
@@ -59,14 +59,14 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
             _rowTile(
                 R.ASSETS_MANAGE_LOCK_PNG,
                 '对应设备位置',
-                widget.model.correspondingPosition.text
+                widget.model.correspondingPosition!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
             _rowTile(
                 R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                 '存放地址',
-                widget.model.storageLocation.text
+                widget.model.storageLocation!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
@@ -85,7 +85,7 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
   }
 
   Widget _getBottomButtons(int status) {
-    MaterialButton button;
+    MaterialButton? button;
     switch (status) {
       case 1:
         // button = _bottomButton('申请钥匙', () {}, Color(0xFFFFC40C), Colors.black);
@@ -96,9 +96,9 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
         button = _bottomButton('重新申请', () async {
           BaseModel baseModel = await NetUtil()
               .post(API.manage.applyKey, params: {"keyId": widget.model.id});
-          BotToast.showText(text: baseModel.message);
-          widget.callRefresh();
-        }, Colors.white, Colors.black);
+          BotToast.showText(text: baseModel.message!);
+          widget.callRefresh!();
+        }, Colors.white, Colors.black) as MaterialButton?;
         break;
       case 4:
         break;
@@ -125,7 +125,7 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
       padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 24.w),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(74.w)),
       color: color,
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       elevation: 0,
       focusElevation: 0,
       hoverElevation: 0,

@@ -15,7 +15,7 @@ import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_det
 
 class ActivityManagerCard extends StatelessWidget {
   final ActivityItemModel model;
-  const ActivityManagerCard({Key key, @required this.model}) : super(key: key);
+  const ActivityManagerCard({Key? key, /*required*/ required this.model}) : super(key: key);
   String get startDate =>
       DateUtil.formatDate(model.registrationStart, format: 'yyyy-MM-dd');
   String get endDate =>
@@ -26,7 +26,7 @@ class ActivityManagerCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
       child: GestureDetector(
         onTap: () {
-          Get.to(ActivityDetailPage(id: model.id));
+          Get.to(ActivityDetailPage(id: model.id!));
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -38,7 +38,7 @@ class ActivityManagerCard extends StatelessWidget {
                 height: 228.w,
                 width: double.infinity,
                 child: Hero(
-                  tag: model.title,
+                  tag: model.title!,
                   child: FadeInImage.assetNetwork(
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
                     image: API.image(model.firstImg?.url ?? ''),
@@ -54,7 +54,7 @@ class ActivityManagerCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    model.title,
+                    model.title!,
                     style: TextStyle(
                       color: AppStyle.primaryTextColor,
                       fontSize: 28.sp,
@@ -62,8 +62,8 @@ class ActivityManagerCard extends StatelessWidget {
                     ),
                   ),
                   AkuBox.h(12),
-                  _buildTile('主办方:', model.sponsorName),
-                  _buildTile('地点:', model.location),
+                  _buildTile('主办方:', model.sponsorName!),
+                  _buildTile('地点:', model.location!),
                   _buildTile('报名时间:', '$startDate\至$endDate'),
                 ],
               ),

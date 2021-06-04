@@ -17,7 +17,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class HouseKeepingAddPage extends StatefulWidget {
-  HouseKeepingAddPage({Key key}) : super(key: key);
+  HouseKeepingAddPage({Key? key}) : super(key: key);
 
   @override
   _HouseKeepingAddPageState createState() => _HouseKeepingAddPageState();
@@ -27,10 +27,10 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
   HouseKeepingBuildingModel _buidling = HouseKeepingBuildingModel.init();
   HouseKeepingBuildingModel _united = HouseKeepingBuildingModel.init();
   HouseKeepingBuildingModel _houseProperty = HouseKeepingBuildingModel.init();
-  TextEditingController _nameController;
-  TextEditingController _telController;
-  TextEditingController _numController;
-  TextEditingController _contentController;
+  TextEditingController? _nameController;
+  TextEditingController? _telController;
+  TextEditingController? _numController;
+  TextEditingController? _contentController;
   @override
   void initState() {
     super.initState();
@@ -42,10 +42,10 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
 
   @override
   void dispose() {
-    _nameController.dispose();
-    _telController.dispose();
-    _numController.dispose();
-    _contentController.dispose();
+    _nameController!.dispose();
+    _telController!.dispose();
+    _numController!.dispose();
+    _contentController!.dispose();
     super.dispose();
   }
 
@@ -87,14 +87,14 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
       API.manage.addHouseKeeping,
       params: {
         "estateId": _houseProperty.value,
-        "num": int.parse(_numController.text),
-        "leaderName": _nameController.text,
-        "leaderTel": _telController.text,
-        "content": _contentController.text,
+        "num": int.parse(_numController!.text),
+        "leaderName": _nameController!.text,
+        "leaderTel": _telController!.text,
+        "content": _contentController!.text,
       },
       showMessage: true,
     );
-    if (baseModel.status) {
+    if (baseModel.status!) {
       Get.back();
     }
   }
@@ -126,7 +126,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
             onTap: () async {
               List<HouseKeepingBuildingModel> _models = [];
 
-              Response response = await NetUtil().dio.get(
+              Response response = await NetUtil().dio!.get(
                     API.manage.allBuilding,
                   );
               if (response.statusCode == 200) {
@@ -155,7 +155,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
                             .color(kTextSubColor)
                             .bold
                             .make()
-                        : _buidling.label.text
+                        : _buidling.label!.text
                             .size(28.sp)
                             .color(kTextPrimaryColor)
                             .make(),
@@ -184,7 +184,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
                 return;
               }
 
-              Response response = await NetUtil().dio.get(API.manage.allUnit,
+              Response response = await NetUtil().dio!.get(API.manage.allUnit,
                   queryParameters: {"buildingId": _buidling.value});
               if (response.statusCode == 200) {
                 _models = (response.data as List)
@@ -208,7 +208,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
                             .color(kTextSubColor)
                             .bold
                             .make()
-                        : _united.label.text
+                        : _united.label!.text
                             .size(28.sp)
                             .color(kTextPrimaryColor)
                             .make(),
@@ -237,7 +237,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
                 return;
               }
 
-              Response response = await NetUtil().dio.get(API.manage.allHous,
+              Response response = await NetUtil().dio!.get(API.manage.allHous,
                   queryParameters: {"unitId": _united.value});
               if (response.statusCode == 200) {
                 _models = (response.data as List)
@@ -261,7 +261,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
                             .color(kTextSubColor)
                             .bold
                             .make()
-                        : _houseProperty.label.text
+                        : _houseProperty.label!.text
                             .size(28.sp)
                             .color(kTextPrimaryColor)
                             .make(),
@@ -277,7 +277,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
   }
 
   Future _showBottomSheet(String title, List<HouseKeepingBuildingModel> models,
-      {Function(HouseKeepingBuildingModel model) onTap}) async {
+      {Function(HouseKeepingBuildingModel model)? onTap}) async {
     await Get.bottomSheet(
       CupertinoActionSheet(
         title: title.text
@@ -290,11 +290,11 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
             .map(
               (e) => CupertinoActionSheetAction(
                 onPressed: () {
-                  onTap(e);
+                  onTap!(e);
                   Get.back();
                   setState(() {});
                 },
-                child: e.label.text
+                child: e.label!.text
                     .size(28.sp)
                     .color(kTextPrimaryColor)
                     .isIntrinsic
@@ -306,8 +306,8 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
     );
   }
 
-  Widget _inputRowTile(String title, TextEditingController controller,
-      {String hintText, List<TextInputFormatter> formatters}) {
+  Widget _inputRowTile(String title, TextEditingController? controller,
+      {String? hintText, List<TextInputFormatter>? formatters}) {
     return Container(
       width: double.infinity,
       child: Column(

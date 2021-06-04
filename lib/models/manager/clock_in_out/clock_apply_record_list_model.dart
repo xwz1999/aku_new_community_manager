@@ -3,20 +3,20 @@ import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 class ClockApplyRecordListModel {
-  int id;
-  String reason;
-  int status;
-  int type;
-  String startDate;
-  String endDate;
-  String createName;
-  String createTel;
-  String createDate;
-  String reviewerName;
-  String reviewerDate;
+  int? id;
+  String? reason;
+  int? status;
+  int? type;
+  String? startDate;
+  String? endDate;
+  String? createName;
+  String? createTel;
+  String? createDate;
+  String? reviewerName;
+  String? reviewerDate;
 
   ClockApplyRecordListModel(
-      {this.id,
+      {required this.id,
       this.reason,
       this.status,
       this.type,
@@ -96,9 +96,9 @@ class ClockApplyRecordListModel {
   }
 
   String get startTimeString =>
-      DateUtil.formatDateStr(this.startDate, format: 'yyyy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.startDate!, format: 'yyyy-MM-dd HH:mm');
   String get endTimeString =>
-      DateUtil.formatDateStr(this.endDate, format: 'yyyy-MM-dd HH:mm');
+      DateUtil.formatDateStr(this.endDate!, format: 'yyyy-MM-dd HH:mm');
   String get applyTimeString =>
-      DateUtil.formatDateStr(this.createDate, format: 'yyyy-MM-dd HH:mm:ss');
+      DateUtil.formatDateStr(this.createDate!, format: 'yyyy-MM-dd HH:mm:ss');
 }

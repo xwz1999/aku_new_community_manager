@@ -1,4 +1,5 @@
 // Flutter imports:
+
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
@@ -25,8 +26,8 @@ class FixerDepartmentPage extends StatefulWidget {
   final DispatchReportModel model;
   final bool changeType;
   FixerDepartmentPage({
-    Key key,
-    @required this.model,
+    Key? key,
+    required this.model,
     this.changeType = false,
   }) : super(key: key);
 
@@ -35,23 +36,26 @@ class FixerDepartmentPage extends StatefulWidget {
 }
 
 class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
-  DispatchReportModel _reportModel;
-  List<RepairmanVos> _pickedFixers = [];
+  DispatchReportModel? _reportModel;
+  // List<RepairmanVos> _pickedFixers = [];
 
   List<FixerItemModel> _fixerItems = [];
 
   bool get canDispatch {
+    if (widget.changeType && _reportModel?.operato != null) {
+      return true;
+    }
     if (_reportModel?.operato == null) {
       return false;
-    } else if (_reportModel.type == -1) {
+    } else if (_reportModel!.type == -1) {
       return false;
-    } else if (_reportModel.workOrderTimeLimit == -1) {
+    } else if (_reportModel!.workOrderTimeLimit == -1) {
       return false;
-    } else if (_reportModel.workOrderTyoe == -1) {
+    } else if (_reportModel!.workOrderTyoe == -1) {
       return false;
-    } else if (_reportModel.workOrderTypeDetail == -1) {
+    } else if (_reportModel!.workOrderTypeDetail == -1) {
       return false;
-    } else if (_reportModel.remark == null) {
+    } else if (_reportModel!.remark == null) {
       return false;
     }
     return true;
@@ -85,21 +89,22 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
         onPressed: canDispatch
             ? () async {
                 if (widget.changeType) {
-                  BaseModel baseModel = await ManageFunc.repairReassignment(
-                      _reportModel.dispatchListId, _reportModel.operato);
-                  if (baseModel.status) {
+                  BaseModel baseModel = await (ManageFunc.repairReassignment(
+                      _reportModel!.dispatchListId!, _reportModel!.operato));
+                  if (baseModel.status!) {
+                    BotToast.showText(text: '改派成功');
                     Get.back();
                   } else {
-                    BotToast.showText(text: baseModel.message);
+                    BotToast.showText(text: baseModel.message!);
                   }
                 } else {
                   BaseModel baseModel =
-                      await ManageFunc.repairDispatch(_reportModel);
-                  if (baseModel.status) {
+                      await (ManageFunc.repairDispatch(_reportModel!));
+                  if (baseModel.status!) {
                     Get.back();
                     Get.back();
                   } else {
-                    BotToast.showText(text: baseModel.message);
+                    BotToast.showText(text: baseModel.message!);
                   }
                 }
               }
@@ -162,7 +167,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: Text(
-              model.name,
+              model.name!,
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontSize: 32.sp,
@@ -179,7 +184,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                 height: 1.w,
                 thickness: 1.w,
               ),
-              ...model.repairmanVos.map((e) {
+              ...model.repairmanVos!.map((e) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -193,7 +198,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                         // } else {
                         //   _pickedFixers.remove(e);
                         // }
-                        _reportModel.operato = e.id;
+                        _reportModel!.operato = e.id;
                         setState(() {});
                       },
                       child: Row(
@@ -202,17 +207,17 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                           Checkbox(
                             checkColor: AppStyle.primaryTextColor,
                             activeColor: AppStyle.primaryColor,
-                            value: _reportModel.operato == e.id,
+                            value: _reportModel!.operato == e.id,
                             onChanged: (state) {
                               // if (_pickedFixers.indexOf(e) == -1) {
                               //   _pickedFixers.add(e);
                               // } else {
                               //   _pickedFixers.remove(e);
                               // }
-                              if (_reportModel.operato == e.id) {
-                                _reportModel.operato = -1;
+                              if (_reportModel!.operato == e.id) {
+                                _reportModel!.operato = -1;
                               } else {
-                                _reportModel.operato = e.id;
+                                _reportModel!.operato = e.id;
                               }
                               setState(() {});
                             },
@@ -225,7 +230,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                             width: 40.w,
                           ),
                           Text(
-                            e.name,
+                            e.name!,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.w,
@@ -239,7 +244,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                             width: 40.w,
                           ),
                           Text(
-                            e.tel,
+                            e.tel!,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.w,
@@ -250,7 +255,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                         ],
                       ),
                     ),
-                    model.repairmanVos.last == e
+                    model.repairmanVos!.last == e
                         ? SizedBox()
                         : Divider(
                             indent: 32.w,

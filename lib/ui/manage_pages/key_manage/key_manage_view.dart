@@ -14,14 +14,14 @@ import 'package:velocity_x/velocity_x.dart';
 
 class KeyManageView extends StatefulWidget {
   final int index;
-  KeyManageView({Key key, this.index}) : super(key: key);
+  KeyManageView({Key? key, required this.index}) : super(key: key);
 
   @override
   _KeyManageViewState createState() => _KeyManageViewState();
 }
 
 class _KeyManageViewState extends State<KeyManageView> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
 
   @override
   void initState() {
@@ -31,7 +31,7 @@ class _KeyManageViewState extends State<KeyManageView> {
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshController!.dispose();
     super.dispose();
   }
 
@@ -43,7 +43,7 @@ class _KeyManageViewState extends State<KeyManageView> {
             : API.manage.getNOReturnList,
         controller: _refreshController,
         convert: (models) {
-          return models.tableList
+          return models.tableList!
               .map((e) => KeyMangeAllKeyModel.fromJson(e))
               .toList();
         },
@@ -55,7 +55,7 @@ class _KeyManageViewState extends State<KeyManageView> {
                   index: widget.index,
                   model: items[index],
                   callRefresh: () {
-                    _refreshController.callRefresh();
+                    _refreshController!.callRefresh();
                   },
                 );
               },

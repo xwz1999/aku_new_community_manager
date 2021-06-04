@@ -17,18 +17,18 @@ enum VisitorStatus {
 }
 
 class VisitorCardsModel {
-  String adress;
-  String name;
-  String plate;
-  String time;
-  VisitorStatus status;
+  String? adress;
+  String? name;
+  String? plate;
+  String? time;
+  VisitorStatus? status;
   VisitorCardsModel(
       {this.adress, this.name, this.status, this.plate, this.time});
 }
 
 class VisitorManagerPage extends StatefulWidget {
   final initIndex;
-  VisitorManagerPage({Key key, this.initIndex = 0}) : super(key: key);
+  VisitorManagerPage({Key? key, this.initIndex = 0}) : super(key: key);
 
   @override
   _VisitorManagerPageState createState() => _VisitorManagerPageState();
@@ -38,7 +38,7 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['全部', '未到访', '已到访', '已过期'];
 
-  TabController _tabController;
+  TabController? _tabController;
 
   @override
   void initState() {
@@ -60,7 +60,7 @@ class _VisitorManagerPageState extends State<VisitorManagerPage>
         appBarBottom: PreferredSize(
             child: AkuTabBar(
               tabs: _tabs,
-              controller: _tabController,
+              controller: _tabController!,
             ),
             preferredSize: Size.fromHeight(88.w)),
         body: TabBarView(

@@ -7,15 +7,15 @@ class BeeTextField extends StatefulWidget {
   final TextEditingController controller;
   final VoidCallback onChange;
   final String hintText;
-  final int minLines;
-  final int maxLines;
+  final int? minLines;
+  final int? maxLines;
   BeeTextField(
-      {Key key,
-      @required this.controller,
-      this.onChange,
-      @required this.hintText,
-      this.minLines,
-      this.maxLines})
+      {Key? key,
+       required this.controller,
+      required this.onChange,
+      required this.hintText,
+       this.minLines,
+       this.maxLines})
       : super(key: key);
 
   @override
@@ -39,9 +39,8 @@ class _BeeTextFieldState extends State<BeeTextField> {
         maxLines: widget.maxLines ?? 10,
         autofocus: false,
         onChanged: (value) {
-          if (widget.onChange != null) {
             widget.onChange();
-          }
+          
         },
         decoration: InputDecoration(
           hintText: widget.hintText,

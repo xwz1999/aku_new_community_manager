@@ -14,14 +14,14 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 
 class InterviewFeedBackPage extends StatefulWidget {
   final InterviewListModel model;
-  InterviewFeedBackPage({Key key, this.model}) : super(key: key);
+  InterviewFeedBackPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _InterviewFeedBackPageState createState() => _InterviewFeedBackPageState();
 }
 
 class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
-  TextEditingController _textEditingController;
+  TextEditingController? _textEditingController;
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
 
   @override
   void dispose() {
-    _textEditingController.dispose();
+    _textEditingController!.dispose();
     super.dispose();
   }
 
@@ -53,11 +53,11 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
             API.manage.interviewFeedBack,
             params: {
               "id": widget.model.id,
-              "feedbackContent": _textEditingController.text,
+              "feedbackContent": _textEditingController!.text,
             },
             showMessage: true,
           );
-          if (baseModel.status) {
+          if (baseModel.status!) {
             Get.back();
           }
         },
@@ -90,8 +90,8 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
   }
 
   Widget _inputWidget(
-    TextEditingController controller,
-    {String hintText,}
+    TextEditingController? controller,
+    {String? hintText,}
   ) {
     return Container(
       width: double.infinity,
@@ -108,7 +108,9 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
         autofocus: false,
         controller: controller,
         onChanged: (value) {
-          controller.text = value;
+          setState(() {
+            
+          });
         },
         decoration: InputDecoration(
           hintText: hintText??'',
@@ -158,11 +160,11 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
                     .color(kTextSubColor)
                     .make()),
             _rowTile(R.ASSETS_MANAGE_IC_RENWU_PNG, '客户电话',
-                widget.model.tel.text.size(24.sp).color(kTextSubColor).make()),
+                widget.model.tel!.text.size(24.sp).color(kTextSubColor).make()),
             _rowTile(
                 R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                 '创建时间',
-                widget.model.createDate.text
+                widget.model.createDate!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
@@ -172,7 +174,7 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
                     _rowTile(
                         R.ASSETS_MANAGE_IC_TIME_PNG,
                         '访谈时间',
-                        widget.model.interviewDate.text
+                        widget.model.interviewDate!.text
                             .size(24.sp)
                             .color(kTextSubColor)
                             .make()),
@@ -183,7 +185,7 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
                     _rowTile(
                         R.ASSETS_MANAGE_IC_TIME_PNG,
                         '回复时间',
-                        widget.model.feedbackDate.text
+                        widget.model.feedbackDate!.text
                             .size(24.sp)
                             .color(kTextSubColor)
                             .make()),

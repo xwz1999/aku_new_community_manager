@@ -22,26 +22,26 @@ import 'package:aku_community_manager/models/common/img_model.dart';
 // *	export	出口(1.东门，2.南门，3.西门，4.北门)【status=2时显示】
 // *	remarks	备注（不放行理由，驳回申请时使用）【status=3时显示】
 class GoodsOutDetailModel {
-  int id;
+  int? id;
 
   ///status	状态(1.待出门，2.已出门，3.驳回申请)
-  int status;
-  String roomName;
-  String applicantName;
+  int? status;
+  String? roomName;
+  String? applicantName;
 
   ///identity	身份（1业主，2亲属，3租客）
-  int identity;
-  String applicantTel;
-  String expectedTime;
-  String articleOutName;
-  int weight;
+  int? identity;
+  String? applicantTel;
+  String? expectedTime;
+  String? articleOutName;
+  int? weight;
 
   ///approach	搬运方式（1.自己搬运，2.搬家公司）
-  int approach;
-  List<ImgModel> imgUrls;
-  String reviewDate;
-  int export;
-  String remarks;
+  int? approach;
+  List<ImgModel>? imgUrls;
+  String? reviewDate;
+  int? export;
+  String? remarks;
 
   String get exportValue {
     switch (export) {
@@ -58,8 +58,8 @@ class GoodsOutDetailModel {
     }
   }
 
-  DateTime get review => DateUtil.getDateTime(reviewDate);
-  DateTime get expected => DateUtil.getDateTime(expectedTime);
+  DateTime? get review => DateUtil.getDateTime(reviewDate!);
+  DateTime? get expected => DateUtil.getDateTime(expectedTime!);
 
   ///approach	搬运方式（1.自己搬运，2.搬家公司）
   String get approachValue {
@@ -125,7 +125,7 @@ class GoodsOutDetailModel {
   }
 
   GoodsOutDetailModel(
-      {this.id,
+      {required this.id,
       this.status,
       this.roomName,
       this.applicantName,
@@ -152,9 +152,9 @@ class GoodsOutDetailModel {
     weight = json['weight'];
     approach = json['approach'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgModel>();
+      imgUrls = <ImgModel>[];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgModel.fromJson(v));
+        imgUrls!.add(new ImgModel.fromJson(v));
       });
     } else
       imgUrls = [];
@@ -176,7 +176,7 @@ class GoodsOutDetailModel {
     data['weight'] = this.weight;
     data['approach'] = this.approach;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     data['reviewDate'] = this.reviewDate;
     data['export'] = this.export;

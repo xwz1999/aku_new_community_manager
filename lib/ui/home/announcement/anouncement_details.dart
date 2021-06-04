@@ -12,8 +12,8 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 class AnouncementDetails extends StatelessWidget {
   final AnnouncementDetailModel model;
   const AnouncementDetails({
-    Key key,
-    @required this.model,
+    Key? key,
+    /*required*/ required this.model,
   }) : super(key: key);
 
   @override
@@ -30,13 +30,13 @@ class AnouncementDetails extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                model.title,
+                model.title!,
                 style: AppStyle().barTitleStyle,
               ),
               SizedBox(
                 height: 16.w,
               ),
-              Text(model.content,
+              Text(model.content!,
                   style: TextStyle(
                       color: AppStyle.primaryTextColor, fontSize: 28.sp)),
               SizedBox(
@@ -52,7 +52,7 @@ class AnouncementDetails extends StatelessWidget {
                       SizedBox(
                         height: 4.w,
                       ),
-                      Text(model.releaseTime, style: AppStyle().primaryStyle),
+                      Text(model.releaseTime!, style: AppStyle().primaryStyle),
                     ],
                   ),
                   SizedBox(

@@ -10,11 +10,11 @@ import 'package:aku_community_manager/provider/user_provider.dart';
 class UserTool {
   ///应用信息
   static AppProvider get appProvider =>
-      Provider.of<AppProvider>(Get.context, listen: false);
+      Provider.of<AppProvider>(Get.context!, listen: false);
 
   ///用户信息
   static UserProvider get userProvider =>
-      Provider.of<UserProvider>(Get.context, listen: false);
+      Provider.of<UserProvider>(Get.context!, listen: false);
 
   UserTool();
 }

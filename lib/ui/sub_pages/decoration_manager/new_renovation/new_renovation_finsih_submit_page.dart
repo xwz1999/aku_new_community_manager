@@ -13,8 +13,8 @@ import 'package:velocity_x/velocity_x.dart';
 
 class NewRenovationFinishSubmitPage extends StatefulWidget {
   final int id;
-  final VoidCallback callRefresh;
-  NewRenovationFinishSubmitPage({Key key, @required this.id, this.callRefresh}) : super(key: key);
+  final VoidCallback? callRefresh;
+  NewRenovationFinishSubmitPage({Key? key, /*required*/ required this.id, this.callRefresh}) : super(key: key);
 
   @override
   _NewRenovationFinishSubmitPageState createState() =>
@@ -24,7 +24,7 @@ class NewRenovationFinishSubmitPage extends StatefulWidget {
 class _NewRenovationFinishSubmitPageState
     extends State<NewRenovationFinishSubmitPage> {
   int _isQualified = 1;
-  TextEditingController _detailController;
+  late TextEditingController _detailController;
   @override
   void initState() {
     super.initState();

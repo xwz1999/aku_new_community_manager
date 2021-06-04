@@ -16,14 +16,14 @@ import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class NickNameChangePage extends StatefulWidget {
-  NickNameChangePage({Key key}) : super(key: key);
+  NickNameChangePage({Key? key}) : super(key: key);
 
   @override
   _NickNameChangePageState createState() => _NickNameChangePageState();
 }
 
 class _NickNameChangePageState extends State<NickNameChangePage> {
-  TextEditingController _textEditingController;
+  TextEditingController? _textEditingController;
   @override
   void initState() {
     super.initState();
@@ -54,7 +54,7 @@ class _NickNameChangePageState extends State<NickNameChangePage> {
                 controller: _textEditingController,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.zero,
-                  hintText: '${userProvider.infoModel.nickName}',
+                  hintText: '${userProvider.infoModel!.nickName}',
                   hintStyle:
                       TextStyle(color: Color(0xFF999999), fontSize: 34.sp),
                   border: UnderlineInputBorder(
@@ -69,13 +69,13 @@ class _NickNameChangePageState extends State<NickNameChangePage> {
                 onPressed: () async {
                   BaseModel baseModel = await NetUtil().post(
                       API.user.updateNickName,
-                      params: {'nickName': _textEditingController.text});
+                      params: {'nickName': _textEditingController!.text});
 
                   if (baseModel.status == true) {
-                    userProvider.setNickName(_textEditingController.text);
+                    userProvider.setNickName(_textEditingController!.text);
                     Get.back();
                   } else {
-                    BotToast.showText(text: baseModel.message);
+                    BotToast.showText(text: baseModel.message!);
                   }
                 },
                 child: '保存'.text.black.size(32.sp).make(),

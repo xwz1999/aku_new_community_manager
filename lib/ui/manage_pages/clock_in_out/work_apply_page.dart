@@ -1,3 +1,4 @@
+
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
@@ -14,7 +15,7 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class WorkApplyPage extends StatefulWidget {
-  WorkApplyPage({Key key}) : super(key: key);
+  WorkApplyPage({Key? key}) : super(key: key);
 
   @override
   _WorkApplyPageState createState() => _WorkApplyPageState();
@@ -25,9 +26,9 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
 
   // TextEditingController _nameController;
   // TextEditingController _positionController;
-  TextEditingController _reasonController;
-  DateTime _beginTime;
-  DateTime _endTime;
+  TextEditingController? _reasonController;
+  DateTime? _beginTime;
+  DateTime? _endTime;
 
   @override
   void initState() {
@@ -61,8 +62,8 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
       bottom: AkuBottomButton(
         title: '确认提交',
         onTap: () async {
-          bool _result = await ClockFunc.clockApply(
-              _reasonController.text, _type, _beginTime, _endTime);
+          bool _result = await (ClockFunc.clockApply(
+              _reasonController!.text, _type, _beginTime!, _endTime!) );
           if (_result) {
             Get.back();
           }
@@ -122,7 +123,7 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 height: 120.w,
                 onPressed: () async {
-                  DateTime date = await BeeDatePicker.pick(
+                  DateTime? date = await BeeDatePicker.pick(
                     DateTime.now(),
                     mode: CupertinoDatePickerMode.dateAndTime,
                     min: DateTime.now().subtract(Duration(seconds: 1)),
@@ -150,14 +151,14 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 height: 120.w,
                 onPressed: () async {
-                  DateTime date = await BeeDatePicker.pick(
-                    _beginTime == null ? DateTime.now() : _beginTime,
+                  DateTime? date = await BeeDatePicker.pick(
+                    _beginTime == null ? DateTime.now() : _beginTime!,
                     min: _beginTime == null
                         ? DateTime.now().subtract(Duration(seconds: 1))
-                        : _beginTime,
+                        : _beginTime!,
                     max: _beginTime == null
                         ? DateTime.now().add(Duration(days: 1))
-                        : (_beginTime).add(Duration(days: 7)),
+                        : _beginTime!.add(Duration(days: 7)),
                     mode: CupertinoDatePickerMode.dateAndTime,
                   );
                   if (date != null) {
@@ -186,8 +187,8 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
     );
   }
 
-  Widget _inputRowTile(String title, TextEditingController controller,
-      {String hintText, List<TextInputFormatter> formatters}) {
+  Widget _inputRowTile(String title, TextEditingController? controller,
+      {String? hintText, List<TextInputFormatter>? formatters}) {
     return Container(
       width: double.infinity,
       child: Column(
@@ -200,7 +201,7 @@ class _WorkApplyPageState extends State<WorkApplyPage> {
             inputFormatters: formatters,
             textAlign: TextAlign.start,
             onChanged: (value) {
-              controller.text = value;
+              controller!.text = value;
               setState(() {});
             },
             decoration: InputDecoration(

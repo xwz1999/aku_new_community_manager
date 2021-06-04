@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
@@ -11,7 +10,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class ItemsOutdoorPage extends StatefulWidget {
-  ItemsOutdoorPage({Key key}) : super(key: key);
+  ItemsOutdoorPage({Key? key}) : super(key: key);
 
   @override
   _ItemsOutdoorPageState createState() => _ItemsOutdoorPageState();
@@ -20,8 +19,7 @@ class ItemsOutdoorPage extends StatefulWidget {
 class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['待出户', '已出户', '已驳回', '全部'];
-  TabController _tabController;
-  EasyRefreshController _refreshController = EasyRefreshController();
+  TabController? _tabController;
   @override
   void initState() {
     super.initState();
@@ -40,7 +38,7 @@ class _ItemsOutdoorPageState extends State<ItemsOutdoorPage>
       title: '物品出户',
       appBarBottom: PreferredSize(
         preferredSize: Size.fromHeight(88.w),
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
       ),
       body: TabBarView(
         controller: _tabController,

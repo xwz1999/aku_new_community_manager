@@ -1,9 +1,9 @@
 class CommentMessageDetailModel {
-  int id;
-  String name;
-  int level;
+  int? id;
+  String? name;
+  int? level;
 
-  CommentMessageDetailModel({this.id, this.name, this.level});
+  CommentMessageDetailModel({required this.id, this.name, this.level});
 
   CommentMessageDetailModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

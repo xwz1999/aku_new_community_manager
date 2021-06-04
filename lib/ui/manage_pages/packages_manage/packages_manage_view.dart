@@ -14,16 +14,16 @@ import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class PackagesManageView extends StatefulWidget {
   final int index;
-  PackagesManageView({Key key, this.index}) : super(key: key);
+  PackagesManageView({Key? key, required this.index}) : super(key: key);
 
   @override
   _PackagesManageViewState createState() => _PackagesManageViewState();
 }
 
 class _PackagesManageViewState extends State<PackagesManageView> {
-  EasyRefreshController _refreshController;
+  EasyRefreshController? _refreshController;
   void callRefresh() {
-    _refreshController.callRefresh();
+    _refreshController!.callRefresh();
   }
 
   @override
@@ -45,7 +45,7 @@ class _PackagesManageViewState extends State<PackagesManageView> {
       controller: _refreshController,
       extraParams: {"collectionStatus": widget.index + 1},
       convert: (models) {
-        List<PackageManageListModel> modelList = models.tableList
+        List<PackageManageListModel> modelList = models.tableList!
             .map((e) => PackageManageListModel.fromJson(e))
             .toList();
         print(modelList);
@@ -59,7 +59,7 @@ class _PackagesManageViewState extends State<PackagesManageView> {
                 index: widget.index,
                 model: items[index],
                 callRefresh: () {
-                  _refreshController.callRefresh();
+                  _refreshController!.callRefresh();
                 },
               );
             },

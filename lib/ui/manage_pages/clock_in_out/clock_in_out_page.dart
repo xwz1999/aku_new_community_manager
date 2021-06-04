@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ClockInOutPage extends StatefulWidget {
-  ClockInOutPage({Key key}) : super(key: key);
+  ClockInOutPage({Key? key}) : super(key: key);
 
   @override
   _ClockInOutPageState createState() => _ClockInOutPageState();
@@ -18,7 +18,7 @@ class ClockInOutPage extends StatefulWidget {
 
 class _ClockInOutPageState extends State<ClockInOutPage>
     with TickerProviderStateMixin {
-  TabController _tabController;
+  TabController? _tabController;
   List<String> _tabs = ['考勤打卡', '打卡记录', '申请情况'];
   @override
   void initState() {
@@ -28,7 +28,7 @@ class _ClockInOutPageState extends State<ClockInOutPage>
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _tabController!.dispose();
     super.dispose();
   }
 
@@ -48,7 +48,7 @@ class _ClockInOutPageState extends State<ClockInOutPage>
 
       ],
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(

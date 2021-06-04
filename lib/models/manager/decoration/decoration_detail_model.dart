@@ -1,8 +1,8 @@
 class DecorationDetailModel {
-  TrackInspectionFBIVo trackInspectionFBIVo;
-  DecorationFBIVo decorationFBIVo;
-  List<ChecksContentVos> checksContentVos;
-  List<TrackRecordVos> trackRecordVos;
+  TrackInspectionFBIVo? trackInspectionFBIVo;
+  DecorationFBIVo? decorationFBIVo;
+  List<ChecksContentVos>? checksContentVos;
+  List<TrackRecordVos>? trackRecordVos;
 
   DecorationDetailModel(
       {this.trackInspectionFBIVo,
@@ -18,15 +18,15 @@ class DecorationDetailModel {
         ? new DecorationFBIVo.fromJson(json['decorationFBIVo'])
         : null;
     if (json['checksContentVos'] != null) {
-      checksContentVos = new List<ChecksContentVos>();
+      checksContentVos = <ChecksContentVos>[];
       json['checksContentVos'].forEach((v) {
-        checksContentVos.add(new ChecksContentVos.fromJson(v));
+        checksContentVos!.add(new ChecksContentVos.fromJson(v));
       });
     }
     if (json['trackRecordVos'] != null) {
-      trackRecordVos = new List<TrackRecordVos>();
+      trackRecordVos = <TrackRecordVos>[];
       json['trackRecordVos'].forEach((v) {
-        trackRecordVos.add(new TrackRecordVos.fromJson(v));
+        trackRecordVos!.add(new TrackRecordVos.fromJson(v));
       });
     }
   }
@@ -34,29 +34,29 @@ class DecorationDetailModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.trackInspectionFBIVo != null) {
-      data['trackInspectionFBIVo'] = this.trackInspectionFBIVo.toJson();
+      data['trackInspectionFBIVo'] = this.trackInspectionFBIVo!.toJson();
     }
     if (this.decorationFBIVo != null) {
-      data['decorationFBIVo'] = this.decorationFBIVo.toJson();
+      data['decorationFBIVo'] = this.decorationFBIVo!.toJson();
     }
     if (this.checksContentVos != null) {
       data['checksContentVos'] =
-          this.checksContentVos.map((v) => v.toJson()).toList();
+          this.checksContentVos!.map((v) => v.toJson()).toList();
     }
     if (this.trackRecordVos != null) {
       data['trackRecordVos'] =
-          this.trackRecordVos.map((v) => v.toJson()).toList();
+          this.trackRecordVos!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class TrackInspectionFBIVo {
-  int id;
-  int trackId;
-  String trackName;
-  String startDate;
-  int inspectionCycle;
+  int? id;
+  int? trackId;
+  String? trackName;
+  String? startDate;
+  int? inspectionCycle;
 
   TrackInspectionFBIVo(
       {this.id,
@@ -85,16 +85,16 @@ class TrackInspectionFBIVo {
 }
 
 class DecorationFBIVo {
-  int id;
-  String roomName;
-  String residentName;
-  String residentTel;
-  String constructionUnit;
-  String director;
-  String directorTel;
-  String actualBegin;
-  String expectedEnd;
-  int tracker;
+  int? id;
+  String? roomName;
+  String? residentName;
+  String? residentTel;
+  String? constructionUnit;
+  String? director;
+  String? directorTel;
+  String? actualBegin;
+  String? expectedEnd;
+  int? tracker;
 
   DecorationFBIVo(
       {this.id,
@@ -138,8 +138,8 @@ class DecorationFBIVo {
 }
 
 class ChecksContentVos {
-  int id;
-  String name;
+  int? id;
+  String? name;
 
   ChecksContentVos({this.id, this.name});
 
@@ -157,12 +157,12 @@ class ChecksContentVos {
 }
 
 class TrackRecordVos {
-  int id;
-  String trackDate;
-  int type;
-  String description;
-  int result;
-  List<RecordDetailVoList> recordDetailVoList;
+  int? id;
+  String? trackDate;
+  int? type;
+  String? description;
+  int? result;
+  List<RecordDetailVoList>? recordDetailVoList;
 
   TrackRecordVos(
       {this.id,
@@ -202,9 +202,9 @@ class TrackRecordVos {
     description = json['description'];
     result = json['result'];
     if (json['recordDetailVoList'] != null) {
-      recordDetailVoList = new List<RecordDetailVoList>();
+      recordDetailVoList =  <RecordDetailVoList>[];
       json['recordDetailVoList'].forEach((v) {
-        recordDetailVoList.add(new RecordDetailVoList.fromJson(v));
+        recordDetailVoList!.add(new RecordDetailVoList.fromJson(v));
       });
     }
   }
@@ -218,16 +218,16 @@ class TrackRecordVos {
     data['result'] = this.result;
     if (this.recordDetailVoList != null) {
       data['recordDetailVoList'] =
-          this.recordDetailVoList.map((v) => v.toJson()).toList();
+          this.recordDetailVoList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class RecordDetailVoList {
-  int id;
-  String checksContent;
-  int isQualified;
+  int? id;
+  String? checksContent;
+  int? isQualified;
 
   RecordDetailVoList({this.id, this.checksContent, this.isQualified});
 
@@ -255,5 +255,4 @@ class RecordDetailVoList {
         return '未知';
     }
   }
-  
 }

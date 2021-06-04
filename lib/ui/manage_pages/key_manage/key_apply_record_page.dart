@@ -10,7 +10,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class KeyApplyRecordPage extends StatefulWidget {
-  KeyApplyRecordPage({Key key}) : super(key: key);
+  KeyApplyRecordPage({Key? key}) : super(key: key);
 
   @override
   _KeyApplyRecordPageState createState() => _KeyApplyRecordPageState();
@@ -19,7 +19,7 @@ class KeyApplyRecordPage extends StatefulWidget {
 class _KeyApplyRecordPageState extends State<KeyApplyRecordPage>
     with TickerProviderStateMixin {
   List<String> _tabs = ['全部', '审核中', '已通过', '已驳回','已归还'];
-  TabController _tabController;
+  TabController? _tabController;
   @override
   void initState() {
     super.initState();
@@ -37,7 +37,7 @@ class _KeyApplyRecordPageState extends State<KeyApplyRecordPage>
     return AkuScaffold(
       title: '申请记录',
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
         preferredSize: Size.fromHeight(88.w),
       ),
       body: TabBarView(

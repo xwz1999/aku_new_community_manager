@@ -26,9 +26,9 @@ import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class InspectionPointInputPage extends StatefulWidget {
-  final InspectionQRCodeModel qrModel;
-  final String inspectionName;
-  InspectionPointInputPage({Key key, this.qrModel, this.inspectionName})
+  final InspectionQRCodeModel? qrModel;
+  final String? inspectionName;
+  InspectionPointInputPage({Key? key, this.qrModel, this.inspectionName})
       : super(key: key);
 
   @override
@@ -37,15 +37,15 @@ class InspectionPointInputPage extends StatefulWidget {
 }
 
 class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
-  InspectionPointSubmitModel _submitModel;
-  InspectionQRCodeModel _model;
-  List<File> _selfPhotos;
-  List<File> _scenePhots;
+  late InspectionPointSubmitModel _submitModel;
+  InspectionQRCodeModel? _model;
+  List<File>? _selfPhotos;
+  List<File>? _scenePhots;
   bool get canSubmit {
     if (_selfPhotos == null && _scenePhots == null) {
       return false;
     } else {
-      if (_submitModel.executeCheckList.isNotEmpty) {
+      if (_submitModel.executeCheckList!.isNotEmpty) {
         return true;
       } else {
         return false;
@@ -58,12 +58,12 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
     super.initState();
     _model = widget.qrModel;
     _submitModel = InspectionPointSubmitModel(
-      widget.qrModel.id,
+      widget.qrModel!.id!,
       [],
     );
     _submitModel.executeCheckList = List.generate(
-      widget.qrModel.checkVoList.length,
-      (index) => ExecuteCheckList(widget.qrModel.checkVoList[index].id, -1, ''),
+      widget.qrModel!.checkVoList!.length,
+      (index) => ExecuteCheckList(widget.qrModel!.checkVoList![index].id, -1, ''),
     );
   }
 
@@ -81,8 +81,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           16.w.heightBox,
           _inspectionHeadCard(),
           16.w.heightBox,
-          ..._model.checkVoList
-              .map((e) => _meterCard(e.name, _model.checkVoList.indexOf(e)))
+          ..._model!.checkVoList!
+              .map((e) => _meterCard(e.name, _model!.checkVoList!.indexOf(e)))
               .toList(),
           _selfPhotoCard(),
           _scenePhotoCard(),
@@ -92,17 +92,17 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
         onPressed: canSubmit
             ? () async {
                 _submitModel.inspectionFaceImgPath = await NetUtil()
-                    .uploadFiles(_selfPhotos, API.upload.uploadInspectionFace);
+                    .uploadFiles(_selfPhotos!, API.upload.uploadInspectionFace);
 
                 _submitModel.inspectionSpaceImgPath = await NetUtil()
-                    .uploadFiles(_scenePhots, API.upload.uploadInspectionSpace);
+                    .uploadFiles(_scenePhots!, API.upload.uploadInspectionSpace);
                 BaseModel baseModel =
-                    await ManageFunc.getSubmitPoint(_submitModel);
-                if (baseModel.status) {
-                  BotToast.showText(text: baseModel.message);
+                    await (ManageFunc.getSubmitPoint(_submitModel) );
+                if (baseModel.status!) {
+                  BotToast.showText(text: baseModel.message!);
                   Get.to(() => InspectionPointSubmitPage());
                 } else {
-                  BotToast.showText(text: baseModel.message);
+                  BotToast.showText(text: baseModel.message!);
                 }
               }
             : () {},
@@ -169,7 +169,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
   }
 
   Widget _meterCard(
-    String title,
+    String? title,
     int index,
   ) {
     return Column(
@@ -185,9 +185,9 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             AkuSingleCheckButton(
               text: '正常',
               value: 0,
-              gropValue: _submitModel.executeCheckList[index].status,
+              gropValue: _submitModel.executeCheckList![index].status,
               onPressed: () {
-                _submitModel.executeCheckList[index].status = 0;
+                _submitModel.executeCheckList![index].status = 0;
                 setState(() {});
               },
             ),
@@ -195,9 +195,9 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             AkuSingleCheckButton(
               text: '异常',
               value: 1,
-              gropValue: _submitModel.executeCheckList[index].status,
+              gropValue: _submitModel.executeCheckList![index].status,
               onPressed: () {
-                _submitModel.executeCheckList[index].status = 1;
+                _submitModel.executeCheckList![index].status = 1;
                 setState(() {});
               },
             ),
@@ -244,7 +244,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             maxLines: 10,
             autofocus: false,
             onChanged: (value) {
-              _submitModel.executeCheckList[index].remarkes = value;
+              _submitModel.executeCheckList![index].remarkes = value;
             },
             decoration: InputDecoration(
               hintText: '请输入备注信息',
@@ -322,7 +322,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 36.w.widthBox,
                 Text(
-                  widget.inspectionName,
+                  widget.inspectionName!,
                   maxLines: 2,
                   textAlign: TextAlign.right,
                   style: AppStyle().primaryStyle,
@@ -344,7 +344,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 Spacer(),
                 Text(
-                  widget.qrModel.code,
+                  widget.qrModel!.code!,
                   style: AppStyle().primaryStyle,
                 )
               ],
@@ -364,7 +364,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 Spacer(),
                 Text(
-                  '${widget.qrModel.name}',
+                  '${widget.qrModel!.name}',
                   style: AppStyle().primaryStyle,
                 ),
               ],
@@ -384,7 +384,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                 ),
                 Spacer(),
                 Text(
-                  '${widget.qrModel.inspectionPattern}',
+                  '${widget.qrModel!.inspectionPattern}',
                   style: AppStyle().primaryStyle,
                 ),
               ],

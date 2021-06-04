@@ -11,15 +11,15 @@ class AkuButton extends StatefulWidget {
   final double radius;
   final EdgeInsets padding;
   @required
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color color;
   final double width;
   AkuButton({
-    Key key,
-    this.child,
+    Key? key,
+    required this.child,
     this.height = 0,
     this.radius = 0,
-    this.onPressed,
+     this.onPressed,
     this.padding = EdgeInsets.zero,
     this.color = Colors.transparent,
     this.width = 0,
@@ -35,7 +35,7 @@ class _AkuButtonState extends State<AkuButton> {
   Widget build(BuildContext context) {
     return isIOS
         ? AkuCupertinoButton(
-            onPressed: widget.onPressed,
+            onPressed: widget.onPressed!,
             child: widget.child,
             radius: widget.radius,
             minHeight: widget.height,

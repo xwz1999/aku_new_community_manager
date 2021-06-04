@@ -19,39 +19,39 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class AddPackagePage extends StatefulWidget {
-  AddPackagePage({Key key}) : super(key: key);
+  AddPackagePage({Key? key}) : super(key: key);
 
   @override
   _AddPackagePageState createState() => _AddPackagePageState();
 }
 
 class _AddPackagePageState extends State<AddPackagePage> {
-  TextEditingController _nameController;
-  TextEditingController _phoneController;
-  TextEditingController _addressController;
-  TextEditingController _codeController;
-  TextEditingController _placeController;
+  TextEditingController? _nameController;
+  TextEditingController? _phoneController;
+  TextEditingController? _addressController;
+  TextEditingController? _codeController;
+  TextEditingController? _placeController;
   bool get canSubmit {
-    if (TextUtil.isEmpty(_nameController.text)) {
+    if (TextUtil.isEmpty(_nameController!.text)) {
       BotToast.showText(text: '收件人姓名不能为空！');
       return false;
     }
-    if (TextUtil.isEmpty(_phoneController.text)) {
+    if (TextUtil.isEmpty(_phoneController!.text)) {
       BotToast.showText(text: '收件人联系方式不能为空！');
       return false;
-    } else if (!_phoneFormat(_phoneController.text)) {
+    } else if (!_phoneFormat(_phoneController!.text)) {
       BotToast.showText(text: '收件人联系方式格式错误！');
       return false;
     }
-    if (TextUtil.isEmpty(_addressController.text)) {
+    if (TextUtil.isEmpty(_addressController!.text)) {
       BotToast.showText(text: '楼层地址不能为空！');
       return false;
     }
-    if (TextUtil.isEmpty(_codeController.text)) {
+    if (TextUtil.isEmpty(_codeController!.text)) {
       BotToast.showText(text: '包裹单号不能为空！');
       return false;
     }
-    if (TextUtil.isEmpty(_placeController.text)) {
+    if (TextUtil.isEmpty(_placeController!.text)) {
       BotToast.showText(text: '放置位置不能为空！');
       return false;
     }
@@ -111,11 +111,11 @@ class _AddPackagePageState extends State<AddPackagePage> {
         onTap: () async {
           canSubmit
               ? await addPackage(
-                  code: _codeController.text,
-                  addresseeName: _nameController.text,
-                  addresseeTel: _phoneController.text,
-                  address: _addressController.text,
-                  placePosition: _placeController.text)
+                  code: _codeController!.text,
+                  addresseeName: _nameController!.text,
+                  addresseeTel: _phoneController!.text,
+                  address: _addressController!.text,
+                  placePosition: _placeController!.text)
               : null;
         },
       ),
@@ -123,11 +123,11 @@ class _AddPackagePageState extends State<AddPackagePage> {
   }
 
   Future addPackage(
-      {@required String code,
-      @required String addresseeName,
-      @required String addresseeTel,
-      @required String address,
-      @required String placePosition}) async {
+      {required String code,
+      required String addresseeName,
+      required String addresseeTel,
+      required String address,
+      required String placePosition}) async {
     BaseModel baseModel = await NetUtil().post(
       API.manage.addPackage,
       params: {
@@ -139,16 +139,16 @@ class _AddPackagePageState extends State<AddPackagePage> {
       },
     );
 
-    if (!baseModel.status) {
-      BotToast.showText(text: baseModel.message);
+    if (!baseModel.status!) {
+      BotToast.showText(text: baseModel.message!);
       return;
     }
-    BotToast.showText(text: baseModel.message);
+    BotToast.showText(text: baseModel.message!);
     Get.back();
   }
 
-  Widget _inputRowTile(String title, TextEditingController controller,
-      {String hintText, List<TextInputFormatter> formatters}) {
+  Widget _inputRowTile(String title, TextEditingController? controller,
+      {String? hintText, List<TextInputFormatter>? formatters}) {
     return Container(
       width: double.infinity,
       child: Column(

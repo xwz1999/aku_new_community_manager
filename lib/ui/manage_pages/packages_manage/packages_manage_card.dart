@@ -22,8 +22,8 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class PackageManageCard extends StatefulWidget {
   final int index;
   final PackageManageListModel model;
-  final VoidCallback callRefresh;
-  PackageManageCard({Key key, this.index, this.model, this.callRefresh})
+  final VoidCallback? callRefresh;
+  PackageManageCard({Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
         children: [
           Row(
             children: [
-              widget.model.placePosition.text
+              widget.model.placePosition!.text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
                   .bold
@@ -65,12 +65,12 @@ class _PackageManageCardState extends State<PackageManageCard> {
             _rowTile(
               R.ASSETS_MANAGE_IC_RENWU_PNG,
               '包裹代收',
-              widget.model.code.text.size(24.sp).color(kTextSubColor).make(),
+              widget.model.code!.text.size(24.sp).color(kTextSubColor).make(),
             ),
             _rowTile(
               R.ASSETS_MANAGE_IC_RENWU_PNG,
               '收件人',
-              widget.model.addresseeName.text
+              widget.model.addresseeName!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),
@@ -78,7 +78,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
             _rowTile(
               R.ASSETS_MESSAGE_IC_PHONE_PNG,
               '联系方式',
-              widget.model.addresseeTel.text
+              widget.model.addresseeTel!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),
@@ -86,7 +86,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
             _rowTile(
               R.ASSETS_MANAGE_IC_TIME_PNG,
               '送达时间',
-              DateUtil.formatDateStr(widget.model.createDate,
+              DateUtil.formatDateStr(widget.model.createDate!,
                       format: 'yyyy-MM-dd HH:mm')
                   .text
                   .size(24.sp)
@@ -113,8 +113,8 @@ class _PackageManageCardState extends State<PackageManageCard> {
                 borderRadius: BorderRadius.circular(74.w)),
             color: Colors.black,
             onPressed: () async {
-              await _remindPackage(widget.model.id);
-              widget.callRefresh();
+              await _remindPackage(widget.model.id!);
+              widget.callRefresh!();
             },
             elevation: 0,
             focusElevation: 0,
@@ -130,8 +130,8 @@ class _PackageManageCardState extends State<PackageManageCard> {
   Future _remindPackage(int packageCollectionId) async {
     BaseModel baseModel = await NetUtil().get(API.manage.packageManageRemind,
         params: {"packageCollectionId": packageCollectionId});
-    if (!baseModel.status) {
-      BotToast.showText(text: baseModel.message);
+    if (!baseModel.status!) {
+      BotToast.showText(text: baseModel.message!);
     } else {
       BotToast.showText(text: '已成功提醒领取');
     }

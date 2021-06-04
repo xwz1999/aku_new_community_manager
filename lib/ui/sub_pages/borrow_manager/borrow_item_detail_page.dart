@@ -19,7 +19,7 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class BorrowItemDetailPage extends StatefulWidget {
   final int id;
-  BorrowItemDetailPage({Key key, this.id}) : super(key: key);
+  BorrowItemDetailPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _BorrowItemDetailPageState createState() => _BorrowItemDetailPageState();
@@ -27,8 +27,8 @@ class BorrowItemDetailPage extends StatefulWidget {
 
 class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
   bool _isEditing = false;
-  TextEditingController _textEditingController;
-  BorrowItemDetailModel _detailModel;
+  TextEditingController? _textEditingController;
+  BorrowItemDetailModel? _detailModel;
   @override
   void initState() {
     super.initState();
@@ -47,7 +47,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
     return AkuScaffold(
       title: '物品详情',
       actions: [
-        userProvider.infoModel.canOperation
+        userProvider.infoModel!.canOperation
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () async {
@@ -56,10 +56,10 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                     await NetUtil().post(
                       API.manage.borrowEdit,
                       params: {
-                        'id': _detailModel.id,
-                        'name': _textEditingController.text,
-                        'status': _detailModel.status,
-                        'fileUrls': [_detailModel.imgUrls.first.url],
+                        'id': _detailModel!.id,
+                        'name': _textEditingController!.text,
+                        'status': _detailModel!.status,
+                        'fileUrls': [_detailModel!.imgUrls!.first.url],
                       },
                       showMessage: true,
                     );
@@ -89,7 +89,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
             params: {'articleDetailId': widget.id},
           );
           _detailModel = BorrowItemDetailModel.fromJson(model.data);
-          _textEditingController.text = _detailModel.name;
+          _textEditingController!.text = _detailModel!.name!;
           setState(() {});
         },
         child: _detailModel == null
@@ -113,7 +113,6 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                               controller: _textEditingController,
                               enabled: _isEditing,
                               onChanged: (text) {
-                                //TODO edit
                                 // widget.item.name = text;
                               },
                               decoration: InputDecoration(
@@ -124,7 +123,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                         _buildRow(
                             '物品单号',
                             Text(
-                              _detailModel.code,
+                              _detailModel!.code!,
                               style: TextStyle(
                                 color: _isEditing
                                     ? AppStyle.minorTextColor
@@ -136,7 +135,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                         _buildRow(
                             '出借状态',
                             Text(
-                              _detailModel.borrowed ? '已出借' : '未出借',
+                              _detailModel!.borrowed ? '已出借' : '未出借',
                               style: TextStyle(
                                 color: _isEditing
                                     ? AppStyle.minorTextColor
@@ -149,7 +148,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
                           '物品图片',
                           FadeInImage.assetNetwork(
                             placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                            image: API.image(_detailModel.firstImg?.url ?? ''),
+                            image: API.image(_detailModel!.firstImg?.url ?? ''),
                             height: 184.w,
                             width: 184.w,
                           ),

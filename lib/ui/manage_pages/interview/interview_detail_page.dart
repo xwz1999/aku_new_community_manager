@@ -8,8 +8,8 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 
 class InterviewDetailPage extends StatefulWidget {
-  final InterviewListModel model;
-  InterviewDetailPage({Key key, this.model}) : super(key: key);
+  final InterviewListModel/*!*/ model;
+  InterviewDetailPage({Key? key, required this.model}) : super(key: key);
 
   @override
   _InterviewDetailPageState createState() => _InterviewDetailPageState();
@@ -64,11 +64,11 @@ class _InterviewDetailPageState extends State<InterviewDetailPage> {
                     .color(kTextSubColor)
                     .make()),
             _rowTile(R.ASSETS_MANAGE_IC_RENWU_PNG, '客户电话',
-                widget.model.tel.text.size(24.sp).color(kTextSubColor).make()),
+                widget.model.tel!.text.size(24.sp).color(kTextSubColor).make()),
             _rowTile(
                 R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                 '创建时间',
-                widget.model.createDate.text
+                widget.model.createDate!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
@@ -78,7 +78,7 @@ class _InterviewDetailPageState extends State<InterviewDetailPage> {
                     _rowTile(
                         R.ASSETS_MANAGE_IC_TIME_PNG,
                         '访谈时间',
-                        widget.model.interviewDate.text
+                        widget.model.interviewDate!.text
                             .size(24.sp)
                             .color(kTextSubColor)
                             .make()),
@@ -89,7 +89,7 @@ class _InterviewDetailPageState extends State<InterviewDetailPage> {
                     _rowTile(
                         R.ASSETS_MANAGE_IC_TIME_PNG,
                         '回复时间',
-                        widget.model.feedbackDate.text
+                        widget.model.feedbackDate!.text
                             .size(24.sp)
                             .color(kTextSubColor)
                             .make()),
@@ -119,12 +119,12 @@ class _InterviewDetailPageState extends State<InterviewDetailPage> {
           16.w.heightBox,
           AkuDivider.horizontal(),
           20.w.heightBox,
-          widget.model.content.text.size(28.sp).color(kTextPrimaryColor).make(),
+          widget.model.content!.text.size(28.sp).color(kTextPrimaryColor).make(),
           40.w.heightBox,
           Row(
             children: [
               Spacer(),
-              widget.model.interviewDate.text
+              widget.model.interviewDate!.text
                   .size(24.sp)
                   .color(kTextSubColor)
                   .make(),
@@ -148,7 +148,7 @@ class _InterviewDetailPageState extends State<InterviewDetailPage> {
                     ],
                   ),
                   12.w.heightBox,
-                  widget.model.feedbackContent.text
+                  widget.model.feedbackContent!.text
                       .size(28.sp)
                       .color(kTextPrimaryColor)
                       .make(),
@@ -156,7 +156,7 @@ class _InterviewDetailPageState extends State<InterviewDetailPage> {
                   Row(
                     children: [
                       Spacer(),
-                      widget.model.feedbackDate.text
+                      widget.model.feedbackDate!.text
                           .size(24.sp)
                           .color(kTextSubColor)
                           .make(),

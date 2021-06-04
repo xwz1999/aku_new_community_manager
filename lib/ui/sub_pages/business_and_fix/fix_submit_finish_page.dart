@@ -13,7 +13,7 @@ import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class FixSubmitFinishPage extends StatelessWidget {
   final BussinessAndFixModel model;
-  const FixSubmitFinishPage({Key key, this.model}) : super(key: key);
+  const FixSubmitFinishPage({Key? key, required this.model}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

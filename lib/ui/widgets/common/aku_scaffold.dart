@@ -10,10 +10,10 @@ import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
 class AkuScaffold extends StatefulWidget {
   ///AppBar 使用该值 `title`,`titleStyle`,`leading`,
   ///`brightness`,`appBarColor`,`actions`将失效
-  final PreferredSizeWidget appBar;
+  final PreferredSizeWidget? appBar;
 
   ///title
-  final String title;
+  final String? title;
 
   ///title style
   ///
@@ -26,20 +26,20 @@ class AkuScaffold extends StatefulWidget {
   ///   fontSize: 36.sp,
   ///)
   ///```
-  final TextStyle titleStyle;
+  final TextStyle? titleStyle;
 
   ///leading
   ///
   ///默认使用 `AkuBackButton`
-  final Widget leading;
+  final Widget? leading;
 
   ///brightness
   final Brightness brightness;
 
   ///body
-  final Widget body;
+  final Widget? body;
 
-  final Widget bottom;
+  final Widget? bottom;
 
   ///背景色
   ///
@@ -50,9 +50,9 @@ class AkuScaffold extends StatefulWidget {
 
   final List<Widget> actions;
 
-  final PreferredSizeWidget appBarBottom;
+  final PreferredSizeWidget? appBarBottom;
   AkuScaffold({
-    Key key,
+    Key? key,
     this.appBar,
     this.title,
     this.titleStyle,

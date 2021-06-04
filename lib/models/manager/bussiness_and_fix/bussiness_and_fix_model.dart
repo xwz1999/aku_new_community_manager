@@ -1,14 +1,14 @@
 class BussinessAndFixModel {
-  int id;
-  int dispatchId;
-  String reportDetail;
-  String repairDate;
-  int status;
-  List<ImgUrls> imgUrls;
-  int type;
+  int? id;
+  int? dispatchId;
+  String? reportDetail;
+  String? repairDate;
+  int? status;
+  List<ImgUrls>? imgUrls;
+  int? type;
 
   BussinessAndFixModel(
-      {this.id,
+      {required this.id,
       this.dispatchId,
       this.reportDetail,
       this.repairDate,
@@ -23,9 +23,9 @@ class BussinessAndFixModel {
     repairDate = json['repairDate'];
     status = json['status'];
     if (json['imgUrls'] != null) {
-      imgUrls = new List<ImgUrls>();
+      imgUrls = [];
       json['imgUrls'].forEach((v) {
-        imgUrls.add(new ImgUrls.fromJson(v));
+        imgUrls!.add(new ImgUrls.fromJson(v));
       });
     }
     type = json['type'];
@@ -39,7 +39,7 @@ class BussinessAndFixModel {
     data['repairDate'] = this.repairDate;
     data['status'] = this.status;
     if (this.imgUrls != null) {
-      data['imgUrls'] = this.imgUrls.map((v) => v.toJson()).toList();
+      data['imgUrls'] = this.imgUrls!.map((v) => v.toJson()).toList();
     }
     data['type'] = this.type;
     return data;
@@ -47,11 +47,11 @@ class BussinessAndFixModel {
 }
 
 class ImgUrls {
-  String url;
-  String size;
-  int longs;
-  int paragraph;
-  int sort;
+  String? url;
+  String? size;
+  int? longs;
+  int? paragraph;
+  int? sort;
 
   ImgUrls({this.url, this.size, this.longs, this.paragraph, this.sort});
 

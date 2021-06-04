@@ -10,7 +10,7 @@ import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart'
 
 class HouseKeepingCard extends StatefulWidget {
   final HouseKeepingListModel model;
-  HouseKeepingCard({Key key, this.model}) : super(key: key);
+  HouseKeepingCard({Key? key, required this.model}) : super(key: key);
 
   @override
   _HouseKeepingCardState createState() => _HouseKeepingCardState();
@@ -44,7 +44,7 @@ class _HouseKeepingCardState extends State<HouseKeepingCard> {
             _rowTile(
                 R.ASSETS_MANAGE_IC_RENWU_PNG,
                 '房产名称',
-                widget.model.roomName.text
+                widget.model.roomName!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
@@ -60,14 +60,14 @@ class _HouseKeepingCardState extends State<HouseKeepingCard> {
             _rowTile(
                 R.ASSETS_MANAGE_IC_RENWU_PNG,
                 '负责人姓名',
-                widget.model.leaderName.text
+                widget.model.leaderName!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),
             _rowTile(
                 R.ASSETS_MESSAGE_IC_PHONE_PNG,
                 '负责人手机',
-                widget.model.leaderTel.text
+                widget.model.leaderTel!.text
                     .size(24.sp)
                     .color(kTextSubColor)
                     .make()),

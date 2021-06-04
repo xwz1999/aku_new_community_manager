@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 
 class BusinessCard extends StatefulWidget {
-  BusinessCard({Key key}) : super(key: key);
+  BusinessCard({Key? key}) : super(key: key);
 
   @override
   _BusinessCardState createState() => _BusinessCardState();

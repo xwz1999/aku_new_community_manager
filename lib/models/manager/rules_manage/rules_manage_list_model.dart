@@ -1,15 +1,15 @@
 import 'package:common_utils/common_utils.dart';
 
 class RulesManageListModel {
-  int id;
-  String title;
-  String content;
-  String fileDocUrl;
-  String fileDocName;
-  String releaseDate;
+  int? id;
+  String? title;
+  String? content;
+  String? fileDocUrl;
+  String? fileDocName;
+  String? releaseDate;
 
   RulesManageListModel(
-      {this.id,
+      {required this.id,
       this.title,
       this.content,
       this.fileDocUrl,
@@ -36,5 +36,5 @@ class RulesManageListModel {
     return data;
   }
 
-  String get releaseDateString => DateUtil.formatDateStr(this.releaseDate);
+  String get releaseDateString => DateUtil.formatDateStr(this.releaseDate!);
 }

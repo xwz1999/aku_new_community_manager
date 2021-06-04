@@ -15,7 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class ClockInOutMainPage extends StatefulWidget {
-  ClockInOutMainPage({Key key}) : super(key: key);
+  ClockInOutMainPage({Key? key}) : super(key: key);
 
   @override
   _ClockInOutMainPageState createState() => _ClockInOutMainPageState();
@@ -23,13 +23,13 @@ class ClockInOutMainPage extends StatefulWidget {
 
 class _ClockInOutMainPageState extends State<ClockInOutMainPage>
     with AutomaticKeepAliveClientMixin {
-  EasyRefreshController _refreshController;
-  Timer _clockSetState;
-  DateTime _lastPressed;
-  TodayClockRecordModel _model;
+  EasyRefreshController? _refreshController;
+  Timer? _clockSetState;
+  DateTime? _lastPressed;
+  TodayClockRecordModel? _model;
   bool get canTap {
     if (_lastPressed == null ||
-        DateTime.now().difference(_lastPressed) > Duration(seconds: 15)) {
+        DateTime.now().difference(_lastPressed!) > Duration(seconds: 15)) {
       //两次点击间隔超过15秒重新计算
       _lastPressed = DateTime.now();
       return true;
@@ -65,17 +65,17 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
       controller: _refreshController,
       onRefresh: () async {
         UserTool.appProvider.initClock();
-        _model = await ClockFunc.initClockInfo();
+        _model = await (ClockFunc.initClockInfo() );
         if (_model != null) {
           UserTool.appProvider.resetClock(); //若成功获取今日打卡信息，则先重置打卡状态
-          if (_model.startClockDate != null) {
+          if (_model!.startClockDate != null) {
             //若有上班打卡信息 则将打卡状态转换为已上班打卡
-            UserTool.appProvider.setClockInTime(_model.clockInTime);
+            UserTool.appProvider.setClockInTime(_model!.clockInTime!);
           }
 
-          if (_model.endClockDate != null) {
+          if (_model!.endClockDate != null) {
             //若有下班打卡信息，则将打卡状态转换为已下班打卡
-            UserTool.appProvider.setClockOutTime(_model.clockOutTime);
+            UserTool.appProvider.setClockOutTime(_model!.clockOutTime!);
           }
         }
 
@@ -122,12 +122,12 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
     DateTime _currentTime = DateTime.now();
     switch (UserTool.appProvider.clockStatus) {
       case WORKCLOCK.NOTIN:
-        ClockFunc.clockIn(_model.id, _currentTime);
+        ClockFunc.clockIn(_model!.id!, _currentTime);
         UserTool.appProvider.setClockInTime(_currentTime);
         BotToast.showText(text: '上班打卡成功');
         break;
       case WORKCLOCK.IN:
-        ClockFunc.clockOut(_model.id, _currentTime);
+        ClockFunc.clockOut(_model!.id!, _currentTime);
         UserTool.appProvider.setClockOutTime(_currentTime);
         BotToast.showText(text: '下班打卡成功');
         break;
@@ -172,7 +172,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
     );
   }
 
-  Widget _buildCard(int type, {DateTime time}) {
+  Widget _buildCard(int type, {DateTime? time}) {
     return Container(
       width: 296.w,
       height: 131.w,
@@ -243,8 +243,8 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
     if (UserTool.appProvider.clockInTime != null) {
       int _time = (UserTool.appProvider.clockOutTime == null
               ? DateTime.now()
-              : UserTool.appProvider.clockOutTime)
-          .difference(UserTool.appProvider.clockInTime)
+              : UserTool.appProvider.clockOutTime)!
+          .difference(UserTool.appProvider.clockInTime!)
           .inMinutes;
       print(_time);
       _hour = _time ~/ 60;
