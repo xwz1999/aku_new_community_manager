@@ -2,6 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
+import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
@@ -125,12 +126,14 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
                 );
                 if (response.data['status'] == true) {
                   await userProvider.setLogin(response.data['token']);
+                  cancel();
                   Get.offAll(HomePage());
                 } else {
                   _textEditingController.clear();
+                  cancel();
                   BotToast.showText(text: '登陆失败');
+                  Get.off(LoginPage());
                 }
-                cancel();
               }
 
               // final userProvider =
