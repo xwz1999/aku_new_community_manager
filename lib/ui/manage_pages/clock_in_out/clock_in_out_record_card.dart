@@ -32,6 +32,12 @@ class _ClockInOutRecordCardState extends State<ClockInOutRecordCard> {
                   .color(kTextPrimaryColor)
                   .bold
                   .make(),
+              10.w.widthBox,
+              widget.model.statusString.text
+                  .size(28.sp)
+                  .bold
+                  .color(widget.model.statusColor)
+                  .make(),
               Spacer(),
               widget.model.weekDay.text
                   .size(32.sp)
@@ -132,8 +138,40 @@ class _ClockInOutRecordCardState extends State<ClockInOutRecordCard> {
               ),
             ],
           ),
+          ..._cardReplacement(),
         ],
       ),
     );
+  }
+
+  _cardReplacement() {
+    return widget.model.cardReplacementDate == null
+        ? []
+        : [
+            12.w.heightBox,
+            AkuDivider.horizontal(),
+            12.w.heightBox,
+            Row(
+              children: [
+                Container(
+                  width: 16.w,
+                  height: 16.w,
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor,
+                    borderRadius: BorderRadius.circular(8.w),
+                  ),
+                ),
+                20.w.widthBox,
+                ('已补卡').text.size(28.sp).color(kTextPrimaryColor).bold.make(),
+                Spacer(),
+                ('补卡人：${widget.model.operatorName}')
+                    .text
+                    .size(28.sp)
+                    .color(kTextPrimaryColor)
+                    .bold
+                    .make(),
+              ],
+            )
+          ];
   }
 }
