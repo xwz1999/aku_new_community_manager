@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +18,8 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class CommentMessageCard extends StatefulWidget {
   final CommentMessageItemModel itemModel;
-  CommentMessageCard({Key? key, /*required*/ required this.itemModel}) : super(key: key);
+  CommentMessageCard({Key? key, /*required*/ required this.itemModel})
+      : super(key: key);
 
   @override
   _CommentMessageCardState createState() => _CommentMessageCardState();
@@ -50,7 +52,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
     switch (level) {
       case 1:
         return '半星';
-        
+
       case 2:
         return '一星';
       case 3:
@@ -288,10 +290,21 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
                                 color: AppStyle.minorTextColor,
                                 fontSize: 28.sp)),
                         Spacer(),
-                        Text(getComment(model.level!),
-                            style: TextStyle(
-                                color: AppStyle.primaryTextColor,
-                                fontSize: 28.sp)),
+                        // Text(getComment(model.level!),
+                        //     style: TextStyle(
+                        //         color: AppStyle.primaryTextColor,
+                        //         fontSize: 28.sp)),
+                        RatingBar.builder(
+                            initialRating: model.level!.toDouble(),
+                            itemSize: 40.w,
+                            allowHalfRating: true,
+                            itemBuilder: (context, index) {
+                              return Image.asset(
+                                R.ASSETS_MESSAGE_IC_STAR_PNG,
+                                color: kPrimaryColor,
+                              );
+                            },
+                            onRatingUpdate: (rate) {})
                       ],
                     ).pSymmetric(h: 24.w),
                     SizedBox(height: 16.w),

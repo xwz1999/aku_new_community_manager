@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:aku_community_manager/provider/message_provider.dart';
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -30,8 +32,7 @@ void main() async {
       print("flutter onReceiveNotification: $message");
       LoggerData.addData(message);
       await JpushMessageParse(message!).shot();
-      final appProvider = Provider.of<AppProvider>(Get.context!, listen: false);
-      appProvider.updateMessage();
+      UserTool.messageProvider.updateMessage();
     },
     // 点击通知回调方法。
     onOpenNotification: (Map<String, dynamic>? message) async {
@@ -62,13 +63,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => UserProvider()),
           ChangeNotifierProvider(create: (context) => AppProvider()),
-          // ChangeNotifierProvider(create: (context) => FixProvider()),
-          // ChangeNotifierProvider(create: (context) => GreenManageProvider()),
-          // ChangeNotifierProvider(
-          //     create: (context) => InspectionManageProvider()),
-          // ChangeNotifierProvider(create: (context) => GreenManageProvider()),
-          // ChangeNotifierProvider(
-          //     create: (context) => InspectionManageProvider()),
+          ChangeNotifierProvider(create: (context) => MessageProvider()),
         ],
         child: GestureDetector(
           onTap: () {

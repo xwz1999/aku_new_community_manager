@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:amap_flutter_location/amap_flutter_location.dart';
 import 'package:amap_flutter_location/amap_location_option.dart';
-import 'package:dio/dio.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
 
 enum WORKCLOCK {
   ///未上班打卡状态
@@ -68,19 +65,7 @@ class AppProvider extends ChangeNotifier {
     _flutterLocation.destroy();
   }
 
-  int _sysMessage = 0;
-  int _commentMessage = 0;
-  bool get hasMessage => _sysMessage != 0 || _commentMessage != 0;
-  int get sysMessage => _sysMessage;
-  int get commentMessage => _commentMessage;
-
-  updateMessage() async {
-    Response response = await NetUtil().dio!.get(API.message.messageCenter);
-    if (response.data == null) return;
-    _sysMessage = response.data['sysCount'] ?? 0;
-    _commentMessage = response.data['commentCount'] ?? 0;
-    notifyListeners();
-  }
+  
 
   WORKCLOCK _clockStatus = WORKCLOCK.NOTIN;
   DateTime? _clockInTime;

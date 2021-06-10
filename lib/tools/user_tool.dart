@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,9 @@ class UserTool {
   ///用户信息
   static UserProvider get userProvider =>
       Provider.of<UserProvider>(Get.context!, listen: false);
+
+  ///消息中心
+  static MessageProvider get messageProvider => Provider.of<MessageProvider>(Get.context!,listen: false);
 
   UserTool();
 }

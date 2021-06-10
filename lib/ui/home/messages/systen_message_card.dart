@@ -224,7 +224,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                       SizedBox(height: 8.w),
                     ]),
                     Text(
-                      '你有一条新的报事报修，请立即处理',
+                      '你有一条新的${model.sysMesTypeString}，请立即处理',
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: 28.sp,

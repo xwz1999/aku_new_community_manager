@@ -343,4 +343,10 @@ class _Message {
 
   ///消息中心：根据报事报修主键id 同步查询报事报修消息信息（同步）
   String get getSystemByDispatchId => '/user/message/findRepairByRepairId';
+
+  ///消息中心：评论消息全部已读(进入评论消息列表后调用)
+  String get allReadCommentMes => '/user/message/allReadComment';
+
+  ///消息中心：系统消息全部已读(进入系统消息列表后调用)
+  String get allReadSysMes => '/user/message/allReadSys';
 }

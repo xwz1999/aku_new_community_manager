@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'dart:async';
 
+import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
@@ -178,7 +179,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
-    final appProvider = Provider.of<AppProvider>(context);
+
+    final messageProvider = Provider.of<MessageProvider>(Get.context!);
     var loadingWidget = Center(
         // child: CircularProgressIndicator(),
         );
@@ -306,7 +308,7 @@ class _HomePageState extends State<HomePage> {
                         top: 4,
                         end: 4,
                       ),
-                      showBadge: appProvider.hasMessage,
+                      showBadge: messageProvider.hasMessage,
                       child: Container(
                         margin: EdgeInsets.only(top: 5.w, bottom: 5.w),
                         child: AkuMaterialButton(

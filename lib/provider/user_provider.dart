@@ -3,6 +3,7 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:aku_community_manager/models/user/user_info_model.dart';
+import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -14,7 +15,6 @@ import 'package:provider/provider.dart';
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/user/user_profile_model.dart';
-import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/utils/hive_store.dart';
 import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
@@ -48,8 +48,8 @@ class UserProvider extends ChangeNotifier {
 
   ///更新用户profile
   Future<UserProfileModel?> updateProfile() async {
-    final appProvider = Provider.of<AppProvider>(Get.context!, listen: false);
-    appProvider.updateMessage();
+    final messageProvider = Provider.of<MessageProvider>(Get.context!,listen: false);
+    messageProvider.updateMessage();
     BaseModel? model = await NetUtil().get(API.user.profile);
     if (model.data == null)
       return null;

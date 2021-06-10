@@ -1,5 +1,9 @@
 // Flutter imports:
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,7 +16,6 @@ import 'package:provider/provider.dart';
 
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/messages/comment_message.dart';
 import 'package:aku_community_manager/ui/home/messages/system_message.dart';
@@ -132,7 +135,8 @@ class _MessageState extends State<Message> {
 
   @override
   Widget build(BuildContext context) {
-    final appProvider = Provider.of<AppProvider>(context);
+    final messageProvider =
+        Provider.of<MessageProvider>(Get.context!, listen: false);
     return AkuScaffold(
       title: '消息',
       titleStyle: AppStyle().barTitleStyle,
@@ -140,33 +144,43 @@ class _MessageState extends State<Message> {
         controller: _refreshController,
         firstRefresh: true,
         onRefresh: () async {
-          await appProvider.updateMessage();
+          await messageProvider.updateMessage();
         },
         header: MaterialHeader(),
         child: ListView(
           padding: EdgeInsets.only(top: 16.w),
           children: [
             _messageListTile(
-              '',
+              messageProvider.sysDate,
               _messageTypeImage('系统消息'),
               '系统消息',
-              '你有一条新的报事报修待处理',
-              appProvider.sysMessage,
-              onpressed: () {
-                Get.to(() => SystemMessage());
+              '你有一条新的${messageProvider.sysMesTypeString}待处理',
+              messageProvider.sysMessage,
+              onpressed: () async {
+                BaseModel baseModel =
+                    await NetUtil().get(API.message.allReadSysMes);
+                if (baseModel.status ?? false) {
+                  messageProvider.updateMessage();
+                  Get.to(() => SystemMessage());
+                }
               },
             ),
             Divider(
               height: 1.w,
             ),
             _messageListTile(
-              '',
+              messageProvider.commentDate,
               _messageTypeImage('评论消息'),
               '评论消息',
               '你有一条新的评论回复',
-              appProvider.commentMessage,
-              onpressed: () {
-                Get.to(() => CommentMessage());
+              messageProvider.commentMessage,
+              onpressed: () async {
+                BaseModel baseModel =
+                    await NetUtil().get(API.message.allReadCommentMes);
+                if (baseModel.status ?? false) {
+                  messageProvider.updateMessage();
+                  Get.to(() => CommentMessage());
+                }
               },
             ),
           ],
