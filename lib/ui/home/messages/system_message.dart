@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -24,6 +25,7 @@ class SystemMessage extends StatefulWidget {
 class _SystemMessageState extends State<SystemMessage> {
   EasyRefreshController _refreshController = EasyRefreshController();
 
+  String? _sendDate;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -34,9 +36,7 @@ class _SystemMessageState extends State<SystemMessage> {
           return ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 32.w),
               itemBuilder: (context, index) {
-                return SystemMessageCard(
-                  model: items[index],
-                );
+                return _buildCard(items[index]);
               },
               separatorBuilder: (context, index) {
                 return 10.w.heightBox;
@@ -49,5 +49,19 @@ class _SystemMessageState extends State<SystemMessage> {
             .toList(),
       ),
     );
+  }
+
+  Widget _buildCard(SystemMessageItemModel model) {
+    String _date =
+        DateUtil.formatDateStr(model.sendDate!, format: 'yyyy-MM-dd');
+    if (_sendDate == null || _sendDate != _date) {
+      _sendDate = _date;
+      return SystemMessageCard(
+        relationId: model.relationId!,
+        date: _date,
+      );
+    } else {
+      return SystemMessageCard(relationId: model.relationId!, date: null);
+    }
   }
 }

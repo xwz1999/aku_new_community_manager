@@ -13,17 +13,18 @@ import 'package:velocity_x/velocity_x.dart';
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_detail_model.dart';
-import 'package:aku_community_manager/models/message/system_message_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_page.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
 class SystemMessageCard extends StatefulWidget {
-  final SystemMessageItemModel model;
+  final int relationId;
+  final String? date;
   SystemMessageCard({
     Key? key,
-    required this.model,
+    required this.relationId,
+    required this.date,
   }) : super(key: key);
 
   @override
@@ -31,13 +32,13 @@ class SystemMessageCard extends StatefulWidget {
 }
 
 class _SystemMessageCardState extends State<SystemMessageCard> {
-  late SystemMessageDetailModel _systemModel;
+  SystemMessageDetailModel? _systemModel;
   bool _onLoad = true;
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(milliseconds: 300), () async {
-      _systemModel = await getSystemMessage(widget.model.relationId!);
+      _systemModel = await getSystemMessage(widget.relationId);
       _onLoad = false;
       setState(() {});
     });
@@ -182,21 +183,23 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
     );
   }
 
-  Widget _messageList(SystemMessageDetailModel model) {
-    return _onLoad
+  Widget _messageList(SystemMessageDetailModel? model) {
+    return (_systemModel == null || _onLoad)
         ? _loadingWidget()
         : Column(
             children: [
-              Container(
-                margin: EdgeInsets.only(top: 24.w, bottom: 24.w),
-                alignment: Alignment.center,
-                width: double.infinity,
-                child: Text(
-                  widget.model.sendDate!,
-                  style: TextStyle(
-                      color: AppStyle.minorTextColor, fontSize: 24.sp),
-                ),
-              ),
+              widget.date == null
+                  ? SizedBox()
+                  : Container(
+                      margin: EdgeInsets.only(top: 24.w, bottom: 24.w),
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      child: Text(
+                        widget.date!,
+                        style: TextStyle(
+                            color: AppStyle.minorTextColor, fontSize: 24.sp),
+                      ),
+                    ),
               Container(
                 padding: EdgeInsets.only(top: 24.w, left: 24.w, right: 24.w),
                 color: Color(0xFFFFFFFF),
@@ -224,7 +227,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                       SizedBox(height: 8.w),
                     ]),
                     Text(
-                      '你有一条新的${model.sysMesTypeString}，请立即处理',
+                      '你有一条新的${model!.sysMesTypeString}，请立即处理',
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: 28.sp,
