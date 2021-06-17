@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:aku_community_manager/ui/home/messages/system_message_green_card.dart';
+import 'package:aku_community_manager/ui/home/messages/system_message_hygience_card.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +13,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/home/messages/systen_message_card.dart';
+import 'package:aku_community_manager/ui/home/messages/system_message_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
@@ -36,7 +38,7 @@ class _SystemMessageState extends State<SystemMessage> {
           return ListView.separated(
               padding: EdgeInsets.symmetric(horizontal: 32.w),
               itemBuilder: (context, index) {
-                return _buildCard(items[index]);
+                return _buildCard(items[index], index);
               },
               separatorBuilder: (context, index) {
                 return 10.w.heightBox;
@@ -51,17 +53,31 @@ class _SystemMessageState extends State<SystemMessage> {
     );
   }
 
-  Widget _buildCard(SystemMessageItemModel model) {
-    String _date =
+  Widget _buildCard(SystemMessageItemModel model, int index) {
+    String? _date =
         DateUtil.formatDateStr(model.sendDate!, format: 'yyyy-MM-dd');
-    if (_sendDate == null || _sendDate != _date) {
-      _sendDate = _date;
-      return SystemMessageCard(
-        relationId: model.relationId!,
-        date: _date,
-      );
+    if (_sendDate != null && _sendDate == _date && index != 0) {
+      _date = null;
     } else {
-      return SystemMessageCard(relationId: model.relationId!, date: null);
+      _sendDate = _date;
+    }
+    switch (model.type) {
+      case 1:
+        return SystemMessageCard(
+          relationId: model.relationId!,
+          date: _date,
+          type: 1,
+        );
+      case 2:
+        return Container();
+      case 3:
+        return SystemMessageGreenCard(
+            relationId: model.relationId!, date: _date, type: 3);
+      case 4:
+        return SystemMessageHygienceCard(
+            relationId: model.relationId!, date: _date, type: 4);
+      default:
+        return Container();
     }
   }
 }

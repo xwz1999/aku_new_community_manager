@@ -21,19 +21,15 @@ class SystemMessageDetailModel {
     data['type'] = this.type;
     return data;
   }
-  String get sysMesTypeString {
+
+  String get typeString {
     switch (this.type) {
       case 1:
-        return '报事报修';
+        return '无偿服务';
       case 2:
-        return '装修';
-      case 3:
-        return '绿化任务';
-      case 4:
-        return '卫生任务';
+        return '有偿服务';
       default:
-        return '未知';
+        return '';
     }
   }
 }
-

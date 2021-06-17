@@ -349,4 +349,11 @@ class _Message {
 
   ///消息中心：系统消息全部已读(进入系统消息列表后调用)
   String get allReadSysMes => '/user/message/allReadSys';
+
+  ///消息中心：根据绿化任务主键id 同步查询绿化任务消息信息（同步）
+  String get getSysGreenMessageById => '/user/message/findGreenTaskByGreenId';
+
+  ///消息中心：根据卫生任务主键id 同步查询卫生任务消息信息（同步）
+  String get getSysHygienceMessageById =>
+      '/user/message/findHygieneTaskByGreenId';
 }

@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'dart:async';
 
+import 'package:aku_community_manager/ui/home/messages/message_map.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
@@ -21,10 +22,11 @@ import 'package:aku_community_manager/utils/network/net_util.dart';
 class SystemMessageCard extends StatefulWidget {
   final int relationId;
   final String? date;
+  final int type;
   SystemMessageCard({
     Key? key,
     required this.relationId,
-    required this.date,
+    required this.date, required this.type,
   }) : super(key: key);
 
   @override
@@ -46,7 +48,9 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
 
   @override
   Widget build(BuildContext context) {
-    return _messageList(_systemModel);
+    return (_systemModel == null || _onLoad)
+        ? _loadingWidget()
+        : _messageList(_systemModel);
   }
 
   Future getSystemMessage(int repairId) async {
@@ -184,10 +188,10 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
   }
 
   Widget _messageList(SystemMessageDetailModel? model) {
-    return (_systemModel == null || _onLoad)
-        ? _loadingWidget()
-        : Column(
+    return Column(
             children: [
+
+              widget.date==null?16.w.heightBox:SizedBox(),
               widget.date == null
                   ? SizedBox()
                   : Container(
@@ -201,22 +205,22 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                       ),
                     ),
               Container(
-                padding: EdgeInsets.only(top: 24.w, left: 24.w, right: 24.w),
+                padding: EdgeInsets.only(top:24.w,left: 24.w, right: 24.w),
                 color: Color(0xFFFFFFFF),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(children: [
-                      Container(
-                        width: 16.w,
-                        height: 16.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.w),
-                            color: Color(0xFFFF4501)),
-                      ),
-                      SizedBox(
-                        width: 16.w,
-                      ),
+                      // Container(
+                      //   width: 16.w,
+                      //   height: 16.w,
+                      //   decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(8.w),
+                      //       color: Color(0xFFFF4501)),
+                      // ),
+                      // SizedBox(
+                      //   width: 16.w,
+                      // ),
                       Text(
                         '系统通知',
                         style: TextStyle(
@@ -227,7 +231,7 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                       SizedBox(height: 8.w),
                     ]),
                     Text(
-                      '你有一条新的${model!.sysMesTypeString}，请立即处理',
+                      '你有一条新的${MessageMap.sysType(widget.type)}，请立即处理',
                       style: TextStyle(
                           color: AppStyle.primaryTextColor,
                           fontSize: 28.sp,
@@ -245,13 +249,13 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                           width: 4.w,
                         ),
                         Text(
-                          '保修人',
+                          '报修人员',
                           style: TextStyle(
                               color: AppStyle.minorTextColor, fontSize: 28.sp),
                         ),
                         Spacer(),
                         Text(
-                          model.name!,
+                          model!.name!,
                           style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.sp),
@@ -291,12 +295,12 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                         SizedBox(
                           width: 4.w,
                         ),
-                        Text('报修区域',
+                        Text('服务类型',
                             style: TextStyle(
                                 color: AppStyle.minorTextColor,
                                 fontSize: 28.sp)),
                         Spacer(),
-                        Text('area',
+                        Text('${model.typeString}',
                             style: TextStyle(
                                 color: AppStyle.primaryTextColor,
                                 fontSize: 28.sp)),
@@ -330,7 +334,6 @@ class _SystemMessageCardState extends State<SystemMessageCard> {
                   ],
                 ),
               ),
-              16.w.heightBox,
             ],
           );
   }
