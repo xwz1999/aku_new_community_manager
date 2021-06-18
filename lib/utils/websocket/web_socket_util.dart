@@ -4,7 +4,7 @@ import 'package:power_logger/power_logger.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-const String baseUri = 'wss://test.kaidalai.cn/websocket';
+const String baseUri = 'wss://test.kaidalai.cn/websocket/butlerApp';
 enum SOCKETSTATUS {
   CONNECTED, //已连接
   BREAKOFF, //已断开
@@ -22,7 +22,7 @@ class WebSocketUtil {
   IOWebSocketChannel? _webSocket;
 
   ///用户设置不同的服务器地址
-  String user = 'admin';
+  String _user = 'admin';
 
   ///连接状态
   SOCKETSTATUS _socketStatus = SOCKETSTATUS.CLOSED;
@@ -54,9 +54,13 @@ class WebSocketUtil {
   ///关闭连接回调；
   Function? onClosed;
 
+  ///屏蔽控制台输出
+  bool _consolePrint = false;
+
   ///注册websocket
   void initWebSocket(
       {Duration? heartDuration,
+      bool? consolePrint,
       Function? onStart,
       Function(String message)? onReceiveMes,
       Function? onClosed,
@@ -65,6 +69,9 @@ class WebSocketUtil {
     this.onReceiveMes = onReceiveMes;
     this.onClosed = onClosed;
     this.onError = onError;
+    if (consolePrint != null) {
+      this._consolePrint = consolePrint;
+    }
     if (heartDuration != null) {
       this._heartDuration = heartDuration;
     }
@@ -73,15 +80,15 @@ class WebSocketUtil {
 
   ///设置用户
   void setUser(String user) {
-    this.user = user;
+    this._user = user;
   }
 
   ///开启websocket
   void startWebSocket() {
     closeWebSocket();
     try {
-      _webSocket = IOWebSocketChannel.connect(Uri.parse('$baseUri/$user'));
-      print('webSocket已连接服务器：$baseUri/$user');
+      _webSocket = IOWebSocketChannel.connect(Uri.parse('$baseUri/$_user'));
+      print('webSocket已连接服务器：$baseUri/$_user');
       _socketStatus = SOCKETSTATUS.CONNECTED;
       endReconnect();
       onStart?.call();
@@ -100,7 +107,7 @@ class WebSocketUtil {
   //接收消息回调
   webSocketReceiveMessage(message) {
     if (message == '心跳正常') {
-      print('心跳正常————————${DateTime.now()}');
+      _dPrint('心跳正常————————${DateTime.now()}');
     } else {
       onReceiveMes?.call(message);
     }
@@ -111,6 +118,7 @@ class WebSocketUtil {
     closeWebSocket();
     onClosed?.call();
   }
+
   //连接出错回调
   webSocketOnError(e) {
     WebSocketChannelException ex = e;
@@ -160,7 +168,6 @@ class WebSocketUtil {
     _heartTimer = null;
   }
 
-  ///
   ///关闭websocket
   void closeWebSocket() {
     if (_webSocket != null) {
@@ -177,7 +184,7 @@ class WebSocketUtil {
     if (_webSocket != null) {
       switch (_socketStatus) {
         case SOCKETSTATUS.CONNECTED:
-          print('发送中：' + message);
+          _dPrint('发送中：' + message);
           _webSocket!.sink.add(message);
           break;
         case SOCKETSTATUS.CLOSED:
@@ -189,6 +196,13 @@ class WebSocketUtil {
         default:
           break;
       }
+    }
+  }
+
+  //封装print
+  void _dPrint(dynamic data) {
+    if (!this._consolePrint) {
+      print(data);
     }
   }
 }
