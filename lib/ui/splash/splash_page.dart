@@ -64,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(Duration(milliseconds: 2000), () async {
       await _initOp();
 
-      Get.off(HomePage());
+      Get.off(()=>HomePage());
     });
   }
 

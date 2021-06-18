@@ -1,6 +1,9 @@
 // Flutter imports:
+
 import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/utils/websocket/fier_dialog.dart';
+import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,6 +29,13 @@ void main() async {
   JPush jpush = new JPush();
   const isProduct = const bool.fromEnvironment('ISPRODUCT');
   DevUtil.setDev(!isProduct);
+  WebSocketUtil().initWebSocket(
+      // heartDuration: Duration(seconds: 5),
+      onError: (e) {
+    LoggerData.addData(e);
+  }, onReceiveMes: (message) async {
+    await FireDialog.fireAlert(message);
+  });
   jpush.addEventHandler(
     // 接收通知回调方法。
     onReceiveNotification: (Map<String, dynamic>? message) async {

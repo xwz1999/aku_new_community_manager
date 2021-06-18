@@ -4,6 +4,7 @@ import 'dart:io';
 // Flutter imports:
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/provider/message_provider.dart';
+import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -20,7 +21,6 @@ import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
-    
 //登录状态管理
 class UserProvider extends ChangeNotifier {
   bool _isLogin = false;
@@ -35,6 +35,8 @@ class UserProvider extends ChangeNotifier {
     await HiveStore.appBox!.put('login', true);
     _profileModel = await updateProfile();
     _infoModel = await updateUserInfo();
+    WebSocketUtil().setUser(infoModel!.id.toString());
+    WebSocketUtil().startWebSocket();
     // await setCurrentHouse((_userDetailModel?.estateNames?.isEmpty ?? true)
     //     ? ''
     //     : _userDetailModel?.estateNames?.first);
@@ -48,7 +50,8 @@ class UserProvider extends ChangeNotifier {
 
   ///更新用户profile
   Future<UserProfileModel?> updateProfile() async {
-    final messageProvider = Provider.of<MessageProvider>(Get.context!,listen: false);
+    final messageProvider =
+        Provider.of<MessageProvider>(Get.context!, listen: false);
     messageProvider.updateMessage();
     BaseModel? model = await NetUtil().get(API.user.profile);
     if (model.data == null)
@@ -72,6 +75,7 @@ class UserProvider extends ChangeNotifier {
   ///注销登录
   logout() async {
     await NetUtil().get(API.auth.logout, showMessage: true);
+    WebSocketUtil().closeWebSocket();
     NetUtil().logout();
     _isLogin = false;
     await HiveStore.appBox!.delete('token');
@@ -89,10 +93,6 @@ class UserProvider extends ChangeNotifier {
     _isSigned = state;
     notifyListeners();
   }
-
-
-
-  
 
   ///修改昵称
   setNickName(String name) {

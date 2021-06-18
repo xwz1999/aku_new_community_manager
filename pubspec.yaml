@@ -28,6 +28,8 @@ dependencies:
   qr_code_scanner: ^0.4.0-nullsafety.0
   #toast
   bot_toast: ^4.0.1
+  #websocket
+  web_socket_channel: ^2.1.0
 
   extended_text: ^5.0.4
 

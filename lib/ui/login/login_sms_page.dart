@@ -10,6 +10,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:pin_input_text_field/pin_input_text_field.dart';
+import 'package:power_logger/power_logger.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
@@ -120,19 +121,24 @@ class _LoginSMSPageState extends State<LoginSMSPage> {
             onChanged: (text) async {
               if (text.length == 6) {
                 Function cancel = BotToast.showLoading();
-                Response response = await NetUtil().dio!.post(
-                  API.auth.login,
-                  data: {'tel': widget.phone, 'code': text},
-                );
-                if (response.data['status'] == true) {
-                  await userProvider.setLogin(response.data['token']);
+                try {
+                  Response response = await NetUtil().dio!.post(
+                    API.auth.login,
+                    data: {'tel': widget.phone, 'code': text},
+                  );
+                  if (response.data['status'] == true) {
+                    await userProvider.setLogin(response.data['token']);
+                    cancel();
+                    Get.offAll(HomePage());
+                  } else {
+                    _textEditingController.clear();
+                    cancel();
+                    BotToast.showText(text: '登陆失败');
+                    Get.off(LoginPage());
+                  }
+                } catch (e) {
+                  LoggerData.addData(e);
                   cancel();
-                  Get.offAll(HomePage());
-                } else {
-                  _textEditingController.clear();
-                  cancel();
-                  BotToast.showText(text: '登陆失败');
-                  Get.off(LoginPage());
                 }
               }
 
