@@ -54,8 +54,8 @@ class WebSocketUtil {
   ///关闭连接回调；
   Function? onClosed;
 
-  ///屏蔽控制台输出
-  bool _consolePrint = false;
+  ///控制台输出
+  bool _consolePrint = true;
 
   ///注册websocket
   void initWebSocket(
@@ -201,7 +201,7 @@ class WebSocketUtil {
 
   //封装print
   void _dPrint(dynamic data) {
-    if (!this._consolePrint) {
+    if (this._consolePrint) {
       print(data);
     }
   }
