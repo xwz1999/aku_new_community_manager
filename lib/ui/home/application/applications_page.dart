@@ -84,16 +84,16 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication(
         '绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, () => GreenManagePage()),
     AppApplication(
-        '设施检查', R.ASSETS_HOME_IC_FACILITIES_PNG, () => FacilitiesSelectPage()),
+        '设施检查', R.ASSETS_HOME_FACILITIES_PNG, () => FacilitiesSelectPage()),
     AppApplication(
         '包裹管理', R.ASSETS_HOME_PACKAGE_PNG, () => PackagesManagePage()),
     AppApplication('钥匙管理', R.ASSETS_HOME_KEY_PNG, () => KeyManagePage()),
     AppApplication('规程管理', R.ASSETS_HOME_RULES_PNG, () => RulesManagePage()),
     AppApplication(
-        '卫生管理', R.ASSETS_PLACEHOLDER_WEBP, () => HygienceManagePage()),
-    AppApplication('考勤管理', R.ASSETS_PLACEHOLDER_WEBP, () => ClockInOutPage()),
-    AppApplication('访谈管理', R.ASSETS_PLACEHOLDER_WEBP, () => InterviewPage()),
-    AppApplication('家政服务', R.ASSETS_PLACEHOLDER_WEBP, () => HouseKeepingPage()),
+        '卫生管理', R.ASSETS_HOME_HYGIENICE_PNG, () => HygienceManagePage()),
+    AppApplication('考勤管理', R.ASSETS_HOME_CLOCK_IN_OUT_PNG, () => ClockInOutPage()),
+    AppApplication('访谈管理', R.ASSETS_HOME_INTERVIEW_PNG, () => InterviewPage()),
+    AppApplication('家政服务', R.ASSETS_HOME_HOUSE_KEEPING_PNG, () => HouseKeepingPage()),
   ];
 
   @override
