@@ -5,12 +5,10 @@ import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart
 import 'package:flutter/material.dart';
 
 class AkuButton extends StatefulWidget {
-  @required
   final Widget child;
   final double height;
   final double radius;
   final EdgeInsets padding;
-  @required
   final VoidCallback? onPressed;
   final Color color;
   final double width;

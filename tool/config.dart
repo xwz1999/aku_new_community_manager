@@ -3,7 +3,7 @@ class Config {
   static const String homeDir = '/users/zhangmeng';
 
   ///包名
-  static const String packageName = 'aku_community';
+  static const String packageName = 'aku_community_manager';
 
   ///打包目录
   static String get buildPath =>

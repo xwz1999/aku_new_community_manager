@@ -8,7 +8,8 @@ import 'package:aku_community_manager/tools/screen_tool.dart';
 class AkuTabBar extends StatefulWidget {
   final TabController controller;
   final List<String> tabs;
-  AkuTabBar({Key? key, /*required*/ required this.controller, /*required*/ required this.tabs})
+  final bool isScrollable;
+  AkuTabBar({Key? key, required this.controller, required this.tabs, this.isScrollable=false})
       : super(key: key);
 
   @override
@@ -19,7 +20,7 @@ class _AkuTabBarState extends State<AkuTabBar> {
   @override
   Widget build(BuildContext context) {
     return TabBar(
-      // isScrollable: true,
+      isScrollable: widget.isScrollable,
       labelColor: AppStyle.primaryTextColor,
       unselectedLabelColor: AppStyle.minorTextColor,
       labelStyle: TextStyle(

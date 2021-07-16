@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_select_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_page.dart';
@@ -43,17 +44,24 @@ class SearchWorkOrderPage extends StatefulWidget {
 class _SearchWorkOrderpageState extends State<SearchWorkOrderPage> {
   TextEditingController? _textController;
   List<AppApplication> _wisdomApplications = [
-    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, ()=>WarningPage()),
-    AppApplication('访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, ()=>VisitorManagerPage()),
-    AppApplication('报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, ()=>BusinessAndFixPage()),
-    AppApplication('物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG,()=> ItemsOutdoorPage()),
+    AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, () => WarningPage()),
     AppApplication(
-        '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, ()=>NewRenovationPage()),
+        '访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, () => VisitorManagerPage()),
+    if (UserTool.userProvider.infoModel!.manager)
+      AppApplication(
+          '报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, () => BusinessAndFixPage()),
     AppApplication(
-        '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, ()=>ActivityManagerPage()),
-    AppApplication('借还管理', R.ASSETS_HOME_IC_BORROW_PNG,()=> BorrowManagerPage()),
-    AppApplication('巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, ()=>InspectionManagePage()),
-    AppApplication('绿化管理', R.ASSETS_HOME_IC_GREENING_PNG,()=> GreenManagePage()),
+        '物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, () => ItemsOutdoorPage()),
+    AppApplication(
+        '装修管理', R.ASSETS_HOME_IC_DECORATION_PNG, () => NewRenovationPage()),
+    AppApplication(
+        '活动管理', R.ASSETS_HOME_IC_ACTIVITY_PNG, () => ActivityManagerPage()),
+    AppApplication(
+        '借还管理', R.ASSETS_HOME_IC_BORROW_PNG, () => BorrowManagerPage()),
+    AppApplication(
+        '巡检管理', R.ASSETS_HOME_IC_PATROL_PNG, () => InspectionManagePage()),
+    AppApplication(
+        '绿化管理', R.ASSETS_HOME_IC_GREENING_PNG, () => GreenManagePage()),
     AppApplication(
         '设施检查', R.ASSETS_HOME_IC_FACILITIES_PNG, () => FacilitiesSelectPage()),
     AppApplication(

@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_select_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_page.dart';
@@ -69,8 +70,9 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, () => WarningPage()),
     AppApplication(
         '访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, () => VisitorManagerPage()),
-    AppApplication(
-        '报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, () => BusinessAndFixPage()),
+    if (UserTool.userProvider.infoModel!.manager)
+      AppApplication(
+          '报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, () => BusinessAndFixPage()),
     AppApplication(
         '物品出户', R.ASSETS_HOME_IC_ARTICLE_PNG, () => ItemsOutdoorPage()),
     AppApplication(
@@ -91,9 +93,11 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('规程管理', R.ASSETS_HOME_RULES_PNG, () => RulesManagePage()),
     AppApplication(
         '卫生管理', R.ASSETS_HOME_HYGIENICE_PNG, () => HygienceManagePage()),
-    AppApplication('考勤管理', R.ASSETS_HOME_CLOCK_IN_OUT_PNG, () => ClockInOutPage()),
+    AppApplication(
+        '考勤管理', R.ASSETS_HOME_CLOCK_IN_OUT_PNG, () => ClockInOutPage()),
     AppApplication('访谈管理', R.ASSETS_HOME_INTERVIEW_PNG, () => InterviewPage()),
-    AppApplication('家政服务', R.ASSETS_HOME_HOUSE_KEEPING_PNG, () => HouseKeepingPage()),
+    AppApplication(
+        '家政服务', R.ASSETS_HOME_HOUSE_KEEPING_PNG, () => HouseKeepingPage()),
   ];
 
   @override

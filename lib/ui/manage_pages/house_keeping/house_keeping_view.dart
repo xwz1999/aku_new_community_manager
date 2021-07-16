@@ -26,7 +26,7 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
 
   @override
   void dispose() {
-    _refreshController!.dispose();
+    _refreshController?.dispose();
     super.dispose();
   }
 
@@ -34,6 +34,7 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
   Widget build(BuildContext context) {
     return BeeListView(
         path: API.manage.houseKeepingList,
+        // extraParams: {"status": widget.index == 0 ? null : widget.index},
         controller: _refreshController,
         convert: (models) {
           return models.tableList!
@@ -44,7 +45,11 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
           return ListView.separated(
               padding: EdgeInsets.all(24.w),
               itemBuilder: (context, index) {
-                return HouseKeepingCard(model: items[index]);
+                return HouseKeepingCard(
+                  callRefresh: () {
+                    _refreshController!.callRefresh();
+                  },
+                );
               },
               separatorBuilder: (_, __) {
                 return 24.w.heightBox;
