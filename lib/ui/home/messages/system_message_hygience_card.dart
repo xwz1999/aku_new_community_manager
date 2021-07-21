@@ -1,7 +1,7 @@
 // Flutter imports:
 import 'dart:async';
 
-import 'package:aku_community_manager/json_models/system_message_hygience_model.dart';
+import 'package:aku_community_manager/json_models/message/system_message_hygience_model.dart';
 import 'package:aku_community_manager/ui/home/messages/message_map.dart';
 import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';

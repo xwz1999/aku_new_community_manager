@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_select_page.dart';
@@ -96,8 +97,9 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication(
         '考勤管理', R.ASSETS_HOME_CLOCK_IN_OUT_PNG, () => ClockInOutPage()),
     AppApplication('访谈管理', R.ASSETS_HOME_INTERVIEW_PNG, () => InterviewPage()),
-    AppApplication(
-        '家政服务', R.ASSETS_HOME_HOUSE_KEEPING_PNG, () => HouseKeepingPage()),
+    if (UserTool.userProvider.infoModel!.houseKeepingAuthority == HKAUTH.HIDE)
+      AppApplication(
+          '家政服务', R.ASSETS_HOME_HOUSE_KEEPING_PNG, () => HouseKeepingPage()),
   ];
 
   @override

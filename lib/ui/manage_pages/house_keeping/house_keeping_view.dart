@@ -1,5 +1,5 @@
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/house_keeping/house_keeping_list_model.dart';
+import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +46,7 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
               padding: EdgeInsets.all(24.w),
               itemBuilder: (context, index) {
                 return HouseKeepingCard(
+                  model: items[index],
                   callRefresh: () {
                     _refreshController!.callRefresh();
                   },

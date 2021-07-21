@@ -83,6 +83,12 @@ void gen() async {
   await Pub.run('build_runner', arguments: ['build']);
 }
 
+@Task('生成model')
+void genClean() async {
+  await Pub.runAsync('build_runner',
+      arguments: ['build', '--delete-conflicting-outputs']);
+}
+
 @Task()
 Future<String> getVersion() async {
   String projectPath = Directory('.').absolute.path;
