@@ -1,17 +1,28 @@
 import 'dart:io';
 
+import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_func.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:power_logger/power_logger.dart';
 import 'package:velocity_x/velocity_x.dart';
+
 class HouseKeepingFeedBackPage extends StatefulWidget {
-  HouseKeepingFeedBackPage({Key? key}) : super(key: key);
+  final HouseKeepingListModel model;
+  final VoidCallback callRefresh;
+  HouseKeepingFeedBackPage(
+      {Key? key, required this.model, required this.callRefresh})
+      : super(key: key);
 
   @override
   _HouseKeepingFeedBackPageState createState() =>
@@ -21,20 +32,25 @@ class HouseKeepingFeedBackPage extends StatefulWidget {
 class _HouseKeepingFeedBackPageState extends State<HouseKeepingFeedBackPage> {
   int _feedBackStatus = 0;
   late TextEditingController _editingController;
-  late TextEditingController _priceController;
-
+  late TextEditingController _materialPriceController;
+  late TextEditingController _servicePriceController;
+  late TextEditingController _totalPriceController;
   List<File> _files = [];
   @override
   void initState() {
     super.initState();
     _editingController = TextEditingController();
-    _priceController = TextEditingController();
+    _materialPriceController = TextEditingController();
+    _servicePriceController = TextEditingController();
+    _totalPriceController = TextEditingController();
   }
 
   @override
   void dispose() {
     _editingController.dispose();
-    _priceController.dispose();
+    _materialPriceController.dispose();
+    _servicePriceController.dispose();
+    _totalPriceController.dispose();
     super.dispose();
   }
 
@@ -52,6 +68,34 @@ class _HouseKeepingFeedBackPageState extends State<HouseKeepingFeedBackPage> {
           _payTile(),
         ],
       ),
+      bottom: AkuBottomButton(
+        title: '立即提交',
+        onTap: () async {
+          Function cancel = BotToast.showLoading();
+          try {
+            List<String> _urls =
+                await HouseKeepingFunc.uploadHouseKeepingHandlePhoto(_files);
+            bool result = await HouseKeepingFunc.newHouseKeepingSubmit(
+              widget.model.id,
+              _feedBackStatus,
+              _editingController.text,
+              double.tryParse(_materialPriceController.text) ?? 0,
+              double.tryParse(_servicePriceController.text) ?? 0,
+              double.tryParse(_totalPriceController.text) ?? 0,
+              _urls,
+            );
+
+            if (result) {
+              Get.back();
+              Get.back();
+              widget.callRefresh();
+            }
+          } catch (e) {
+            LoggerData.addData(e);
+          }
+          cancel();
+        },
+      ),
     );
   }
 
@@ -65,9 +109,11 @@ class _HouseKeepingFeedBackPageState extends State<HouseKeepingFeedBackPage> {
         children: [
           '服务信息'.text.size(36.sp).black.bold.make(),
           40.w.heightBox,
-          ''.text.size(28.sp).black.make(),
+          widget.model.content.text.size(28.sp).black.make(),
           16.w.heightBox,
-          BeeGridImageView(urls: []),
+          BeeGridImageView(
+              urls:
+                  widget.model.submitImgList.map((e) => e.url ?? '').toList()),
         ],
       ),
     );
@@ -153,39 +199,45 @@ class _HouseKeepingFeedBackPageState extends State<HouseKeepingFeedBackPage> {
       color: Colors.white,
       child: Column(
         children: [
-          Row(
-            children: [
-              '支付费用'.text.size(28.sp).black.make(),
-              350.w.widthBox,
-              '¥'.text.size(32.sp).bold.color(Colors.red).make(),
-              24.w.widthBox,
-              TextField(
-                controller: _editingController,
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(
-                      RegExp(r'^[0-9][\.\d]*(,\d+)?$'))
-                ],
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    contentPadding: EdgeInsets.zero,
-                    isDense: true,
-                    border: InputBorder.none,
-                    hintText: '请输入金额',
-                    hintStyle: TextStyle(
-                        fontSize: 32.sp,
-                        color: kTextSubColor,
-                        fontWeight: FontWeight.bold)),
-                style: TextStyle(
-                  fontSize: 32.sp,
-                  color: Colors.black,
-                ),
-              ).expand(),
-            ],
-          ),
+          _payInputTile('材料费用', _materialPriceController),
+          _payInputTile('服务费用', _servicePriceController),
+          _payInputTile('总计费用', _totalPriceController),
           24.w.heightBox,
           AkuDivider.horizontal()
         ],
       ),
+    );
+  }
+
+  Widget _payInputTile(String title, TextEditingController controller) {
+    return Row(
+      children: [
+        title.text.size(28.sp).black.make(),
+        Spacer(),
+        '¥'.text.size(32.sp).bold.color(Colors.red).make(),
+        24.w.widthBox,
+        TextField(
+          controller: controller,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^[0-9][\.\d]*(,\d+)?$'))
+          ],
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.end,
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              isDense: true,
+              border: InputBorder.none,
+              hintText: '请输入金额',
+              hintStyle: TextStyle(
+                  fontSize: 32.sp,
+                  color: kTextSubColor,
+                  fontWeight: FontWeight.bold)),
+          style: TextStyle(
+            fontSize: 32.sp,
+            color: Colors.black,
+          ),
+        ).expand(),
+      ],
     );
   }
 }

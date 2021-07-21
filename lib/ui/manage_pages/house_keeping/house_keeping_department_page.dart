@@ -1,14 +1,22 @@
+import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_pick_staff_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
 
 class HouseKeepingDepartmentPage extends StatefulWidget {
-  HouseKeepingDepartmentPage({Key? key}) : super(key: key);
+  final int id;
+  final VoidCallback callRefresh;
+  HouseKeepingDepartmentPage(
+      {Key? key, required this.id, required this.callRefresh})
+      : super(key: key);
 
   @override
   _HouseKeepingDepartmentPageState createState() =>
@@ -17,29 +25,37 @@ class HouseKeepingDepartmentPage extends StatefulWidget {
 
 class _HouseKeepingDepartmentPageState
     extends State<HouseKeepingDepartmentPage> {
+  List<HouseKeepingPickStaffModel> _models = [];
+  int _selectId = 0;
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
-      title: '派单人员列表',
-      body: EasyRefresh(
-          firstRefresh: true,
-          header: MaterialHeader(),
-          onRefresh: () async {},
-          child: ListView(
-            children: [
-              _buildItem(1),
-            ],
-          )),
-    );
+        title: '派单人员列表',
+        body: EasyRefresh(
+            firstRefresh: true,
+            header: MaterialHeader(),
+            onRefresh: () async {
+              _models = await HouseKeepingFunc.newHouseKeepingPickStaffList();
+            },
+            child: ListView(children: _buildItem(_models))),
+        bottom: AkuBottomButton(
+          title: '立即派单',
+          onTap: () async {
+            bool result = await HouseKeepingFunc.newHouseKeepingOrderDepart(
+                widget.id, _selectId);
+            if (result) {
+              Get.back();
+              widget.callRefresh();
+            }
+          },
+        ));
   }
 
-  _buildItem(int index) {
+  _buildItem(List<HouseKeepingPickStaffModel> models) {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: index == 0
-              ? BorderSide.none
-              : BorderSide(color: Color(0xFFE8E8E8), width: 1.w),
+          top: BorderSide.none,
           bottom: BorderSide(color: Color(0xFFE8E8E8), width: 1.w),
         ),
       ),
@@ -52,7 +68,7 @@ class _HouseKeepingDepartmentPageState
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.symmetric(horizontal: 32.w),
             child: Text(
-              'model.name!',
+              '环境卫生部',
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontSize: 32.sp,
@@ -69,21 +85,18 @@ class _HouseKeepingDepartmentPageState
                 height: 1.w,
                 thickness: 1.w,
               ),
-              ...[].map((e) {
+              ...models.map((e) {
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AkuMaterialButton(
                       height: 96.w,
                       onPressed: () {
-                        // if (_pickedFixers
-                        //         .indexWhere((element) => element.id == e.id) ==
-                        //     -1) {
-                        //   _pickedFixers.add(e);
-                        // } else {
-                        //   _pickedFixers.remove(e);
-                        // }
-                        // _reportModel!.operato = e.id;
+                        if (_selectId == e.id) {
+                          _selectId = 0;
+                        } else {
+                          _selectId = e.id;
+                        }
                         setState(() {});
                       },
                       child: Row(
@@ -92,18 +105,13 @@ class _HouseKeepingDepartmentPageState
                           Checkbox(
                             checkColor: AppStyle.primaryTextColor,
                             activeColor: AppStyle.primaryColor,
-                            value: false,
+                            value: _selectId == e.id,
                             onChanged: (state) {
-                              // if (_pickedFixers.indexOf(e) == -1) {
-                              //   _pickedFixers.add(e);
-                              // } else {
-                              //   _pickedFixers.remove(e);
-                              // }
-                              // if (_reportModel!.operato == e.id) {
-                              //   _reportModel!.operato = -1;
-                              // } else {
-                              //   _reportModel!.operato = e.id;
-                              // }
+                              if (state ?? false) {
+                                _selectId = 0;
+                              } else {
+                                _selectId = e.id;
+                              }
                               setState(() {});
                             },
                             materialTapTargetSize:
@@ -115,7 +123,7 @@ class _HouseKeepingDepartmentPageState
                             width: 40.w,
                           ),
                           Text(
-                            e.name!,
+                            e.actualName,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.w,
@@ -129,7 +137,7 @@ class _HouseKeepingDepartmentPageState
                             width: 40.w,
                           ),
                           Text(
-                            e.tel!,
+                            e.tel,
                             style: TextStyle(
                               color: AppStyle.primaryTextColor,
                               fontSize: 28.w,

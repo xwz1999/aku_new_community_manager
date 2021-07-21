@@ -1,9 +1,13 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
 import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
+import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_department_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_feed_back_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_func.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
@@ -14,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,8 +26,12 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class HouseKeepingDetailPage extends StatefulWidget {
   final HouseKeepingListModel model;
   final List<HouseKeepingProcessModel> processModels;
+  final VoidCallback callRefresh;
   HouseKeepingDetailPage(
-      {Key? key, required this.model, required this.processModels})
+      {Key? key,
+      required this.model,
+      required this.processModels,
+      required this.callRefresh})
       : super(key: key);
 
   @override
@@ -54,7 +63,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
           _buildEvaluate(),
         ].sepWidget(separate: 16.w.heightBox),
       ),
-      bottom: _getBottomButtons(1),
+      bottom: _getBottomButtons(widget.model.status),
     );
   }
 
@@ -62,15 +71,43 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
     switch (status) {
       case 1:
         return AkuBottomButton(
-          title: '立即提交',
+          title: '立即派单',
           onTap: () {
-            Get.to(() => HouseKeepingFeedBackPage());
+            Get.to(() => HouseKeepingDepartmentPage(
+                id: widget.model.id, callRefresh: widget.callRefresh));
           },
         );
       case 2:
+        return UserTool.userProvider.infoModel!.houseKeepingAuthority ==
+                HKAUTH.PICK
+            ? AkuBottomButton(
+                title: '立即接单',
+                onTap: () async {
+                  bool reslut =
+                      await await HouseKeepingFunc.newHouseKeepingOrderReceive(
+                          widget.model.id);
+                  if (reslut) {
+                    Get.back();
+                  }
+                },
+              )
+            : SizedBox();
+      case 3:
         return AkuBottomButton(
-          title: '',
-          onTap: () {},
+          title: '提交报告',
+          onTap: () {
+            Get.to(() => HouseKeepingFeedBackPage(
+                  model: widget.model,
+                  callRefresh: widget.callRefresh
+                ));
+          },
+        );
+      case 4:
+        return AkuBottomButton(
+          title: '联系用户',
+          onTap: () async {
+            await launch(widget.model.proposerTel);
+          },
         );
       default:
         return SizedBox();

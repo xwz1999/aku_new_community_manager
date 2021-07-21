@@ -4,13 +4,16 @@ import 'package:aku_community_manager/json_models/manager/house_keeping/house_ke
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_department_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_detail_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HouseKeepingCard extends StatelessWidget {
@@ -31,6 +34,7 @@ class HouseKeepingCard extends StatelessWidget {
         await Get.to(() => HouseKeepingDetailPage(
               model: model,
               processModels: processModels,
+              callRefresh: callRefresh,
             ));
         callRefresh();
       },
@@ -128,7 +132,15 @@ class HouseKeepingCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
+                      HKAUTH.SEND)
+                  ? Get.to(() => HouseKeepingDepartmentPage(
+                        id: model.id,
+                        callRefresh: callRefresh,
+                      ))
+                  : null;
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -151,10 +163,13 @@ class HouseKeepingCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
-              // Get.to(() => BusinessAndFixDetailPage(model: widget.model));
-              // if (widget.callRefresh != null) {
-              //   widget.callRefresh!();
-              // }
+              Function cancel = BotToast.showLoading();
+              (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
+                      HKAUTH.SEND)
+                  ? await HouseKeepingFunc.newHouseKeepingUrgeWork(model.id)
+                  : await HouseKeepingFunc.newHouseKeepingOrderReceive(
+                      model.id);
+              cancel();
             },
             radius: 4,
             color: AppStyle.primaryColor,
@@ -195,7 +210,9 @@ class HouseKeepingCard extends StatelessWidget {
               : SizedBox(),
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              await launch(model.proposerTel);
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),

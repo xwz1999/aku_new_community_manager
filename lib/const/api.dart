@@ -287,6 +287,25 @@ class _Manage {
   ///管家app新版家政服务：根据家政服务主键id查询家政服务服务进程
   String get newHouseKeepingProcess =>
       '/user/housekeepingService/findHousekeepingProcessRecord';
+
+  ///管家app 新版家政服务：催促人员
+  String get newHouseKeepingUrgeWork =>
+      '/user/housekeepingService/urgedWorkers';
+
+  ///管家app 新版家政服务：接单
+  String get newHouseKeepingOrderReceive =>
+      '/user/housekeepingService/orderReceiving';
+
+  ///管家app 新版家政服务：查询所有的接单人员
+  String get newHouseKeepingPickStaffList =>
+      '/user/housekeepingService/findPickUpSinglePersonnel';
+
+  ///管家app 新版家政服务：派单
+  String get newHouseKeepingOrderDepart =>
+      '/user/housekeepingService/sendSingle';
+
+  ///管家app 新版家政服务：提交报告
+  String get newHouseKeepingSubmit => '/user/housekeepingService/submitReport';
 }
 
 class _Upload {
@@ -327,6 +346,10 @@ class _Upload {
   ///上传设施设备检查照片
   String get uploadFacilitiCheckPhoto =>
       '/user/upload/uploadFacilitiesCheckPhoto';
+
+  ///家政服务 上传处理完成照片
+  String get uploadHandlerPhoto =>
+      '/user/upload/uploadHousekeepingServiceHandlerPhone';
 }
 
 class _Message {
