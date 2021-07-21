@@ -1,5 +1,6 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
+import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_feed_back_page.dart';
@@ -15,9 +16,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/utils/extension/list_extension.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class HouseKeepingDetailPage extends StatefulWidget {
   final HouseKeepingListModel model;
-  HouseKeepingDetailPage({Key? key, required this.model}) : super(key: key);
+  final List<HouseKeepingProcessModel> processModels;
+  HouseKeepingDetailPage(
+      {Key? key, required this.model, required this.processModels})
+      : super(key: key);
 
   @override
   _HouseKeepingDetailPageState createState() => _HouseKeepingDetailPageState();
@@ -85,7 +91,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
             children: [
               '完成情况'.text.size(28.sp).color(kTextSubColor).make(),
               Spacer(),
-              'widget.model.completionString'.text.size(32.sp).black.make()
+              widget.model.completionString.text.size(32.sp).black.make()
             ],
           ),
           40.w.heightBox,
@@ -99,7 +105,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
               8.w.widthBox,
               '维修人'.text.size(28.sp).color(kTextSubColor).make(),
               Spacer(),
-              'widget.model.proposerName'.text.size(28.sp).black.make(),
+              widget.model.handlerName!.text.size(28.sp).black.make(),
             ],
           ),
           16.w.heightBox,
@@ -113,20 +119,21 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
               8.w.widthBox,
               '联系电话'.text.size(28.sp).color(kTextSubColor).make(),
               Spacer(),
-              'widget.model.proposerTel'.text.size(28.sp).black.make(),
+              widget.model.handlerTel!.text.size(28.sp).black.make(),
             ],
           ),
           16.w.heightBox,
           40.w.heightBox,
           '处理描述'.text.size(28.sp).color(kTextSubColor).make(),
           24.w.heightBox,
-          ('widget.model.processDescription')
-              .text
+          widget.model.processDescription!.text
               .size(2)
               .black
               .softWrap(true)
               .make(),
-          BeeGridImageView(urls: [])
+          BeeGridImageView(
+              urls:
+                  widget.model.handlerImgList.map((e) => e.url ?? '').toList())
         ],
       ),
     );
@@ -152,7 +159,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
                   allowHalfRating: true,
                   itemPadding: EdgeInsets.symmetric(horizontal: 15.w),
                   itemSize: 32.w,
-                  initialRating: (0).toDouble(),
+                  initialRating: (widget.model.evaluation!).toDouble(),
                   ratingWidget: RatingWidget(
                       empty: Icon(
                         CupertinoIcons.star,
@@ -171,8 +178,15 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
           40.w.heightBox,
           AkuDivider.horizontal(),
           40.w.heightBox,
-          ('').text.size(28.sp).black.softWrap(true).make(),
-          BeeGridImageView(urls: [])
+          widget.model.evaluationContent!.text
+              .size(28.sp)
+              .black
+              .softWrap(true)
+              .make(),
+          BeeGridImageView(
+              urls: widget.model.evaluationImgList
+                  .map((e) => e.url ?? '')
+                  .toList())
         ],
       ),
     );
@@ -181,15 +195,21 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
   _buildInfo() {
     return AkuTitleBox(
       title: '服务信息',
-      suffix: widget.model.statusString.text.size(28.sp).color(Color(0xFFFF4501)).make(),
+      suffix: widget.model.statusString.text
+          .size(28.sp)
+          .color(Color(0xFFFF4501))
+          .make(),
       children: [
         16.w.heightBox,
-        _buildTile(R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '报修人', widget.model.proposerName),
-        _buildTile(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', widget.model.proposerTel),
-        _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '报修区域', '${0}'),
+        _buildTile(
+            R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '申请人', widget.model.proposerName),
+        _buildTile(
+            R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', widget.model.proposerTel),
+        _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '地址',
+            '${S.of(context)!.tempPlotName}·${widget.model.roomName}'),
         8.w.heightBox,
         Text(
-          '',
+          widget.model.content,
           style: TextStyle(
             color: AppStyle.primaryTextColor,
             fontWeight: FontWeight.bold,
@@ -203,11 +223,12 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
             crossAxisSpacing: 16.w,
             mainAxisSpacing: 16.w,
           ),
-          children: [].map((e) {
+          children: widget.model.submitImgList.map((e) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
               child: FadeInImage.assetNetwork(
-                  placeholder: R.ASSETS_PLACEHOLDER_WEBP, image: API.image('')),
+                  placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                  image: API.image(e.url ?? '')),
             );
           }).toList(),
           shrinkWrap: true,
@@ -248,11 +269,11 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
 
   _buildProcess() {
     return AkuTitleBox(
-      title: '报修进程',
-      children: [].map((e) {
+      title: '服务进程',
+      children: widget.processModels.map((e) {
         return _buildProcessTile(
-          '',
-          DateUtil.formatDateStr(e.operationDate!,
+          e.operatorContent,
+          DateUtil.formatDateStr(e.operationDate,
               format: 'yyyy-MM-dd HH:mm:ss'),
         );
       }).toList(),

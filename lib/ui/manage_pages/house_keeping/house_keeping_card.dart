@@ -1,9 +1,11 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
+import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_detail_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_func.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +24,14 @@ class HouseKeepingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        await Get.to(() => HouseKeepingDetailPage(model: model));
+        List<HouseKeepingProcessModel> processModels =
+            await HouseKeepingFunc.getHouseKeepingProcess(
+          model.id,
+        );
+        await Get.to(() => HouseKeepingDetailPage(
+              model: model,
+              processModels: processModels,
+            ));
         callRefresh();
       },
       child: Container(

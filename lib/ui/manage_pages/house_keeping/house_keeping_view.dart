@@ -33,8 +33,10 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
   @override
   Widget build(BuildContext context) {
     return BeeListView(
-        path: API.manage.houseKeepingList,
-        // extraParams: {"status": widget.index == 0 ? null : widget.index},
+        path: API.manage.newHouseKeepingList,
+        extraParams: {
+          "housekeepingServiceStatus": widget.index == 0 ? null : widget.index
+        },
         controller: _refreshController,
         convert: (models) {
           return models.tableList!
