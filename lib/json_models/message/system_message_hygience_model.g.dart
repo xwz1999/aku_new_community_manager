@@ -15,12 +15,3 @@ SystemMessageHygineceModel _$SystemMessageHygineceModelFromJson(
     areaName: json['areaName'] as String,
   );
 }
-
-Map<String, dynamic> _$SystemMessageHygineceModelToJson(
-        SystemMessageHygineceModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'tel': instance.tel,
-      'areaName': instance.areaName,
-    };

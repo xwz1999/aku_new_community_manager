@@ -15,12 +15,3 @@ SystemMessageGreenModel _$SystemMessageGreenModelFromJson(
     areaName: json['areaName'] as String,
   );
 }
-
-Map<String, dynamic> _$SystemMessageGreenModelToJson(
-        SystemMessageGreenModel instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'tel': instance.tel,
-      'areaName': instance.areaName,
-    };
