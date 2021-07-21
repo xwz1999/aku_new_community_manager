@@ -1,13 +1,21 @@
+enum HKAUTH { 
+  ///家政服务派单权限
+  SEND, 
+  ///家政服务接单权限
+  PICK, 
+  ///家政服务隐藏
+  HIDE }
+
 class UserInfoModel {
   int? id;
   String? roleId;
   String? nickName;
   List<int>? jurisdiction;
 
-  ///派单(派单人)
+  ///报事报修派单(派单人)
   bool get canSendTicket => jurisdiction!.contains(52);
 
-  ///接单（维修人）
+  ///报事报修接单（维修人）
   bool get canPickUpTicket => jurisdiction!.contains(53);
 
   ///放行（保安）
@@ -22,10 +30,21 @@ class UserInfoModel {
   ///装修管理跟踪执行权限
   bool get canDecorationTrack => jurisdiction!.contains(60);
 
-  ///管家
+  ///报事报修管家
   bool get manager => canSendTicket && canPickUpTicket;
 
-  UserInfoModel({required this.id, this.roleId, this.nickName, this.jurisdiction});
+  HKAUTH get houseKeepingAuthority {
+    if (jurisdiction!.contains(68)) {
+      return HKAUTH.PICK;
+    } else if (jurisdiction!.contains(67)) {
+      return HKAUTH.SEND;
+    } else {
+      return HKAUTH.HIDE;
+    }
+  }
+
+  UserInfoModel(
+      {required this.id, this.roleId, this.nickName, this.jurisdiction});
 
   UserInfoModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
