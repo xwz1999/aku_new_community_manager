@@ -170,6 +170,7 @@ class HouseKeepingCard extends StatelessWidget {
                   : await HouseKeepingFunc.newHouseKeepingOrderReceive(
                       model.id);
               cancel();
+              callRefresh();
             },
             radius: 4,
             color: AppStyle.primaryColor,
@@ -190,7 +191,7 @@ class HouseKeepingCard extends StatelessWidget {
         ];
       case 3:
         return [
-          UserTool.userProvider.infoModel!.canPickUpTicket
+          UserTool.userProvider.infoModel!.houseKeepingAuthority == HKAUTH.PICK
               ? AkuMaterialButton(
                   height: 64.w,
                   onPressed: () async {},
@@ -207,25 +208,24 @@ class HouseKeepingCard extends StatelessWidget {
                     ),
                   ),
                 )
-              : SizedBox(),
-          AkuMaterialButton(
-            height: 64.w,
-            onPressed: () async {
-              await launch(model.proposerTel);
-            },
-            radius: 4,
-            color: AppStyle.primaryColor,
-            padding: EdgeInsets.symmetric(horizontal: 24.w),
-            child: Text(
-              ('联系住户'),
-              style: TextStyle(
-                color: AppStyle.primaryTextColor,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.sp,
-                height: 40 / 28,
-              ),
-            ),
-          ),
+              : AkuMaterialButton(
+                  height: 64.w,
+                  onPressed: () async {
+                    await launch('tel:${model.proposerTel}');
+                  },
+                  radius: 4,
+                  color: AppStyle.primaryColor,
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Text(
+                    ('联系住户'),
+                    style: TextStyle(
+                      color: AppStyle.primaryTextColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28.sp,
+                      height: 40 / 28,
+                    ),
+                  ),
+                ),
         ];
       case 4:
         return [

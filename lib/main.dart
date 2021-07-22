@@ -23,6 +23,7 @@ import 'package:aku_community_manager/style/apptheme.dart';
 import 'package:aku_community_manager/ui/splash/splash_page.dart';
 import 'package:aku_community_manager/utils/dev_util.dart';
 import 'package:aku_community_manager/utils/jpush_message_parse.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
                     BotToastNavigatorObserver(),
                   ],
                   localizationsDelegates: [
+                    S.delegate,
                     GlobalCupertinoLocalizations.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,

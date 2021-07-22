@@ -58,9 +58,10 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
         children: <Widget>[
           _buildInfo(),
           _buildProcess(),
-          _serviceFeedBack(),
-          payfeePrice,
-          _buildEvaluate(),
+          if (widget.model.handlingTime != null) _serviceFeedBack(),
+          if (widget.model.payFee != null) payfeePrice,
+          if (widget.model.evaluationTime != null) _buildEvaluate(),
+          16.w.heightBox,
         ].sepWidget(separate: 16.w.heightBox),
       ),
       bottom: _getBottomButtons(widget.model.status),
@@ -97,16 +98,14 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
           title: '提交报告',
           onTap: () {
             Get.to(() => HouseKeepingFeedBackPage(
-                  model: widget.model,
-                  callRefresh: widget.callRefresh
-                ));
+                model: widget.model, callRefresh: widget.callRefresh));
           },
         );
       case 4:
         return AkuBottomButton(
           title: '联系用户',
           onTap: () async {
-            await launch(widget.model.proposerTel);
+            await launch('tel:${widget.model.proposerTel}');
           },
         );
       default:
@@ -243,7 +242,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
         _buildTile(
             R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', widget.model.proposerTel),
         _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '地址',
-            '${S.of(context)!.tempPlotName}·${widget.model.roomName}'),
+            '${S.of(Get.context!)?.tempPlotName ?? ''}·${widget.model.roomName}'),
         8.w.heightBox,
         Text(
           widget.model.content,

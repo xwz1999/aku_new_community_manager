@@ -107,21 +107,23 @@ class _MessageState extends State<Message> {
                     children: [
                       Text(text, style: AppStyle().minorStyle),
                       Spacer(),
-                      Container(
-                        alignment: Alignment.center,
-                        width: 32.w,
-                        height: 32.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.w),
-                            color: Color(0xFFFF4501)),
-                        child: Text(
-                          number.toString(),
-                          style: TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontSize: 20.sp,
-                          ),
-                        ),
-                      ),
+                      number == 0
+                          ? SizedBox()
+                          : Container(
+                              alignment: Alignment.center,
+                              width: 32.w,
+                              height: 32.w,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(16.w),
+                                  color: Color(0xFFFF4501)),
+                              child: Text(
+                                number.toString(),
+                                style: TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontSize: 20.sp,
+                                ),
+                              ),
+                            ),
                     ],
                   ),
                 ],

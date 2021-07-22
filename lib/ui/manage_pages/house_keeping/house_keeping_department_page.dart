@@ -37,7 +37,9 @@ class _HouseKeepingDepartmentPageState
             onRefresh: () async {
               _models = await HouseKeepingFunc.newHouseKeepingPickStaffList();
             },
-            child: ListView(children: _buildItem(_models))),
+            child: ListView(
+                padding: EdgeInsets.all(32.w),
+                children: [_buildItem(_models)])),
         bottom: AkuBottomButton(
           title: '立即派单',
           onTap: () async {
@@ -108,9 +110,9 @@ class _HouseKeepingDepartmentPageState
                             value: _selectId == e.id,
                             onChanged: (state) {
                               if (state ?? false) {
-                                _selectId = 0;
-                              } else {
                                 _selectId = e.id;
+                              } else {
+                                _selectId = 0;
                               }
                               setState(() {});
                             },

@@ -1,10 +1,13 @@
-enum HKAUTH { 
+enum HKAUTH {
   ///家政服务派单权限
-  SEND, 
+  SEND,
+
   ///家政服务接单权限
-  PICK, 
+  PICK,
+
   ///家政服务隐藏
-  HIDE }
+  HIDE
+}
 
 class UserInfoModel {
   int? id;
@@ -32,6 +35,10 @@ class UserInfoModel {
 
   ///报事报修管家
   bool get manager => canSendTicket && canPickUpTicket;
+
+  ///隐藏报事报修
+  bool get hideFix =>
+      (!jurisdiction!.contains(53)) && (!jurisdiction!.contains(52));
 
   HKAUTH get houseKeepingAuthority {
     if (jurisdiction!.contains(68)) {

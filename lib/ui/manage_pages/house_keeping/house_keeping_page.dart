@@ -1,10 +1,10 @@
-import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_add_page.dart';
+import 'package:aku_community_manager/models/user/user_info_model.dart';
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HouseKeepingPage extends StatefulWidget {
@@ -16,7 +16,17 @@ class HouseKeepingPage extends StatefulWidget {
 
 class _HouseKeepingPageState extends State<HouseKeepingPage>
     with TickerProviderStateMixin {
-  List<String> _tabs = ['全部', '待派单', '已派单', '处理中', '待支付', '待评价', '已完成'];
+  List<String> get _tabs {
+    switch (UserTool.userProvider.infoModel!.houseKeepingAuthority) {
+      case HKAUTH.SEND:
+        return ['全部', '待派单', '已派单', '处理中', '待支付', '待评价', '已完成'];
+      case HKAUTH.PICK:
+        return ['全部', '已派单', '处理中', '待支付', '待评价', '已完成'];
+      default:
+        return [];
+    }
+  }
+
   late TabController _tabController;
   @override
   void initState() {
@@ -36,7 +46,11 @@ class _HouseKeepingPageState extends State<HouseKeepingPage>
       title: '家政服务',
       appBarBottom: PreferredSize(
         preferredSize: Size.fromHeight(88.w),
-        child: AkuTabBar(controller: _tabController, tabs: _tabs,isScrollable: true,),
+        child: AkuTabBar(
+          controller: _tabController,
+          tabs: _tabs,
+          isScrollable: true,
+        ),
       ),
       body: TabBarView(
         controller: _tabController,
@@ -48,20 +62,17 @@ class _HouseKeepingPageState extends State<HouseKeepingPage>
         ),
       ),
       actions: [
-        IconButton(
-            iconSize: 40.w,
-            icon: Icon(
-              CupertinoIcons.plus_circle,
-              size: 40.w,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Get.to(() => HouseKeepingAddPage());
-            })
+        // IconButton(
+        //     iconSize: 40.w,
+        //     icon: Icon(
+        //       CupertinoIcons.plus_circle,
+        //       size: 40.w,
+        //       color: Colors.black,
+        //     ),
+        //     onPressed: () {
+        //       Get.to(() => HouseKeepingAddPage());
+        //     })
       ],
-      // body: HouseKeepingView(
-      //   index: 0,
-      // ),
     );
   }
 }

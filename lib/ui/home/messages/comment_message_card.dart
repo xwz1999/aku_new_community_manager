@@ -295,6 +295,7 @@ class _CommentMessageCardState extends State<CommentMessageCard> {
                         //         color: AppStyle.primaryTextColor,
                         //         fontSize: 28.sp)),
                         RatingBar.builder(
+                          ignoreGestures: true,
                             initialRating: model.level!.toDouble(),
                             itemSize: 40.w,
                             allowHalfRating: true,

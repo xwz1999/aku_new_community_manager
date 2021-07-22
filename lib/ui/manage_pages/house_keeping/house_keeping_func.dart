@@ -9,7 +9,8 @@ import 'package:bot_toast/bot_toast.dart';
 
 class HouseKeepingFunc {
   ///获取家政服务进程
-  static Future getHouseKeepingProcess(int id) async {
+  static Future<List<HouseKeepingProcessModel>> getHouseKeepingProcess(
+      int id) async {
     BaseModel baseModel = await NetUtil().get(API.manage.newHouseKeepingProcess,
         params: {"housekeepingServiceId": id});
     if (baseModel.status ?? false) {
@@ -105,7 +106,7 @@ class HouseKeepingFunc {
       "materialFee": materialFee,
       "serviceFee": serviceFee,
       "payFee": payFee,
-      "handlerImgList":urls,
+      "handlerImgList": urls,
     });
     if (baseModel.status ?? false) {
       BotToast.showText(text: '提交成功');
