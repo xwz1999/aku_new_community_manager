@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:grinder/grinder.dart';
+import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
 import 'package:path/path.dart';
 
 import 'config.dart';
+import 'version_tool.dart';
+part '_add_version.dart';
 
 main(args) => grind(args);
 
@@ -87,14 +90,4 @@ void gen() async {
 void genClean() async {
   await Pub.runAsync('build_runner',
       arguments: ['build', '--delete-conflicting-outputs']);
-}
-
-@Task()
-Future<String> getVersion() async {
-  String projectPath = Directory('.').absolute.path;
-  String yamlPath = join(projectPath, 'pubspec.yaml');
-  String yamlContent = await File(yamlPath).readAsString();
-  dynamic content = loadYaml(yamlContent);
-  String version = content['version'];
-  return version;
 }
