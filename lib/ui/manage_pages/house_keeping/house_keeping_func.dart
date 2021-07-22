@@ -106,7 +106,7 @@ class HouseKeepingFunc {
       "materialFee": materialFee,
       "serviceFee": serviceFee,
       "payFee": payFee,
-      "handlerImgList": urls,
+      "handlerImgUrls": urls,
     });
     if (baseModel.status ?? false) {
       BotToast.showText(text: '提交成功');
