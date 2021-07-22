@@ -28,6 +28,8 @@ class MessageProvider extends ChangeNotifier {
         return '绿化任务';
       case 4:
         return '卫生任务';
+      case 5:
+        return '家政服务';
       default:
         return '未知';
     }

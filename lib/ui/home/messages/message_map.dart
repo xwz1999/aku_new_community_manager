@@ -1,5 +1,5 @@
 class MessageMap {
-  static sysType(int type){
+  static sysType(int type) {
     switch (type) {
       case 1:
         return '报事报修';
@@ -9,6 +9,8 @@ class MessageMap {
         return '绿化任务';
       case 4:
         return '卫生任务';
+      case 5:
+        return '家政服务';
       default:
         return '未知';
     }

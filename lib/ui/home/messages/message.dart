@@ -18,7 +18,7 @@ import 'package:provider/provider.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/messages/comment_message.dart';
-import 'package:aku_community_manager/ui/home/messages/system_message.dart';
+import 'package:aku_community_manager/ui/home/messages/system/system_message.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class Message extends StatefulWidget {

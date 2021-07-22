@@ -1,43 +1,34 @@
-// Flutter imports:
-import 'dart:async';
-
-import 'package:aku_community_manager/json_models/message/system_message_hygience_model.dart';
+import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/json_models/message/system_message_house_keeping_model.dart';
+import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/ui/home/messages/message_map.dart';
-import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keeping_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-// Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-
-class SystemMessageHygienceCard extends StatefulWidget {
+class SystemMessageHouseKeepingCard extends StatefulWidget {
   final int relationId;
   final String? date;
   final int type;
-  SystemMessageHygienceCard({
-    Key? key,
-    required this.relationId,
-    required this.date,
-    required this.type,
-  }) : super(key: key);
+  SystemMessageHouseKeepingCard(
+      {Key? key, required this.relationId, this.date, required this.type})
+      : super(key: key);
 
   @override
-  _SystemMessageHygienceCardState createState() =>
-      _SystemMessageHygienceCardState();
+  _SystemMessageHouseKeepingCardState createState() =>
+      _SystemMessageHouseKeepingCardState();
 }
 
-class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
-  SystemMessageHygineceModel? _systemModel;
+class _SystemMessageHouseKeepingCardState
+    extends State<SystemMessageHouseKeepingCard> {
+  SystemMessageHouseKeepingModel? _systemModel;
   bool _onLoad = true;
+
   @override
   void initState() {
     super.initState();
@@ -55,13 +46,13 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
         : _messageList(_systemModel!);
   }
 
-  Future getSystemMessage(int repairId) async {
+  Future getSystemMessage(int relationId) async {
     BaseModel baseModel =
         await NetUtil().get(API.message.getSysHygienceMessageById, params: {
-      "hygieneTaskId": repairId,
+      "housekeepingServiceId": relationId,
     });
     if (baseModel.status ?? false) {
-      return SystemMessageHygineceModel.fromJson(baseModel.data);
+      return SystemMessageHouseKeepingModel.fromJson(baseModel.data);
     }
   }
 
@@ -191,7 +182,7 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
     );
   }
 
-  Widget _messageList(SystemMessageHygineceModel model) {
+  Widget _messageList(SystemMessageHouseKeepingModel model) {
     return Column(
       children: [
         widget.date == null ? 16.w.heightBox : SizedBox(),
@@ -214,16 +205,6 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(children: [
-                // Container(
-                //   width: 16.w,
-                //   height: 16.w,
-                //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(8.w),
-                //       color: Color(0xFFFF4501)),
-                // ),
-                // SizedBox(
-                //   width: 16.w,
-                // ),
                 Text(
                   '系统通知',
                   style: TextStyle(
@@ -252,13 +233,13 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
                     width: 4.w,
                   ),
                   Text(
-                    '绿化人员',
+                    '服务人员',
                     style: TextStyle(
                         color: AppStyle.minorTextColor, fontSize: 28.sp),
                   ),
                   Spacer(),
                   Text(
-                    model.name,
+                    model.handlerName ?? '',
                     style: TextStyle(
                         color: AppStyle.primaryTextColor, fontSize: 28.sp),
                   ),
@@ -279,38 +260,38 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
                       style: TextStyle(
                           color: AppStyle.minorTextColor, fontSize: 28.sp)),
                   Spacer(),
-                  Text(model.tel,
+                  Text(model.handlerTel ?? '',
                       style: TextStyle(
                           color: AppStyle.primaryTextColor, fontSize: 28.sp)),
                 ],
               ),
               SizedBox(height: 16.w),
-              Row(
-                children: [
-                  Image.asset(
-                    R.ASSETS_MESSAGE_IC_AREA_PNG,
-                    width: 40.w,
-                    height: 40.w,
-                  ),
-                  SizedBox(
-                    width: 4.w,
-                  ),
-                  Text('报修区域',
-                      style: TextStyle(
-                          color: AppStyle.minorTextColor, fontSize: 28.sp)),
-                  Spacer(),
-                  Text('area',
-                      style: TextStyle(
-                          color: AppStyle.primaryTextColor, fontSize: 28.sp)),
-                ],
-              ),
-              SizedBox(height: 16.w),
+              // Row(
+              //   children: [
+              //     Image.asset(
+              //       R.ASSETS_MESSAGE_IC_AREA_PNG,
+              //       width: 40.w,
+              //       height: 40.w,
+              //     ),
+              //     SizedBox(
+              //       width: 4.w,
+              //     ),
+              //     Text('报修区域',
+              //         style: TextStyle(
+              //             color: AppStyle.minorTextColor, fontSize: 28.sp)),
+              //     Spacer(),
+              //     Text('area',
+              //         style: TextStyle(
+              //             color: AppStyle.primaryTextColor, fontSize: 28.sp)),
+              //   ],
+              // ),
+              // SizedBox(height: 16.w),
               Divider(
                 height: 1.w,
               ),
               AkuButton(
                 onPressed: () {
-                  Get.to(() => HygienceManagePage());
+                  Get.to(() => HouseKeepingPage());
                 },
                 child: Container(
                   height: 88.w,

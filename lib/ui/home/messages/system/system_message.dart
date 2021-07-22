@@ -1,6 +1,6 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/home/messages/system_message_green_card.dart';
-import 'package:aku_community_manager/ui/home/messages/system_message_hygience_card.dart';
+import 'package:aku_community_manager/ui/home/messages/system/system_message_green_card.dart';
+import 'package:aku_community_manager/ui/home/messages/system/system_message_hygience_card.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/message/system_message_item_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/home/messages/system_message_card.dart';
+import 'package:aku_community_manager/ui/home/messages/system/system_message_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 
@@ -76,6 +76,9 @@ class _SystemMessageState extends State<SystemMessage> {
       case 4:
         return SystemMessageHygienceCard(
             relationId: model.relationId!, date: _date, type: 4);
+      case 5:
+      return SystemMessageHygienceCard(
+            relationId: model.relationId!, date: _date, type: 5);
       default:
         return Container();
     }
