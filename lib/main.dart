@@ -55,13 +55,13 @@ void main() async {
     },
   );
   jpush.setup(
-    appKey: "99067fe33fa04aad88c3acac",
+    appKey: "028adb7b9eda661fefdf3072",
     channel: "developer-default",
     production: false,
     debug: true, // 设置是否打印 debug 日志
   );
   String? id = await JPush().getRegistrationID();
-  print(id);
+  print('jpush RegistrationID is $id');
   LoggerData.addData(id);
   runApp(MyApp());
 }

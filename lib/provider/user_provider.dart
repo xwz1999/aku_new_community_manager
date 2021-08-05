@@ -35,8 +35,10 @@ class UserProvider extends ChangeNotifier {
     await HiveStore.appBox!.put('login', true);
     _profileModel = await updateProfile();
     _infoModel = await updateUserInfo();
-    WebSocketUtil().setUser(infoModel!.id.toString());
-    WebSocketUtil().startWebSocket();
+    if (isLogin) {
+      WebSocketUtil().setUser(infoModel!.id.toString());
+      WebSocketUtil().startWebSocket();
+    }
     // await setCurrentHouse((_userDetailModel?.estateNames?.isEmpty ?? true)
     //     ? ''
     //     : _userDetailModel?.estateNames?.first);
@@ -68,6 +70,7 @@ class UserProvider extends ChangeNotifier {
     else {
       var userModel = UserInfoModel.fromJson(model.data);
       JPush().setAlias(userModel.id.toString());
+      print('jpush alias is ${userModel.id}');
       return userModel;
     }
   }

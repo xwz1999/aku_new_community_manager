@@ -8,6 +8,7 @@ import 'package:amap_flutter_location/amap_location_option.dart';
 
 // Project imports:
 import 'package:aku_community_manager/ui/home/application/applications_page.dart';
+import 'package:power_logger/power_logger.dart';
 
 enum WORKCLOCK {
   ///未上班打卡状态
@@ -51,6 +52,8 @@ class AppProvider extends ChangeNotifier {
     _flutterLocation = AMapFlutterLocation();
     _flutterLocation.onLocationChanged().listen((event) {
       _location = event;
+      LoggerData.addData(_location.toString());
+      print(_location.toString());
       if (_location != null) {
         stopLocation();
       }
@@ -64,8 +67,6 @@ class AppProvider extends ChangeNotifier {
     _flutterLocation.stopLocation();
     _flutterLocation.destroy();
   }
-
-  
 
   WORKCLOCK _clockStatus = WORKCLOCK.NOTIN;
   DateTime? _clockInTime;
