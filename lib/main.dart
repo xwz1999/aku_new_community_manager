@@ -60,7 +60,8 @@ void main() async {
     production: false,
     debug: true, // 设置是否打印 debug 日志
   );
-  String? id = await JPush().getRegistrationID();
+  String? id;
+  JPush().getRegistrationID().then((value) => id = value);
   print('jpush RegistrationID is $id');
   LoggerData.addData(id);
   runApp(MyApp());
