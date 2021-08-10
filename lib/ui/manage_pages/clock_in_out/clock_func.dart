@@ -1,9 +1,11 @@
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/clock_in_out/today_clock_record_model.dart';
+import 'package:aku_community_manager/json_models/clock_in_out/today_clock_record_model.dart';
+import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
 
 class ClockFunc {
   static Future initClockInfo() async {
@@ -16,7 +18,7 @@ class ClockFunc {
   }
 
   static Future clockIn(int id, DateTime dateTime) async {
-       await NetUtil().post(
+    await NetUtil().post(
       API.manage.clockInOut,
       params: {
         "id": id,
@@ -28,7 +30,7 @@ class ClockFunc {
   }
 
   static Future clockOut(int id, DateTime dateTime) async {
-     await NetUtil().post(API.manage.clockInOut,
+    await NetUtil().post(API.manage.clockInOut,
         params: {
           "id": id,
           "endClockDate":
@@ -49,5 +51,15 @@ class ClockFunc {
         },
         showMessage: true);
     return baseModel.status;
+  }
+
+  static Color lateOrLeaveEarlyColor(
+      DateTime time, DateTime? checkTime, bool isStart) {
+    if (checkTime == null) return kTextPrimaryColor;
+    if (isStart) {
+      return time.isAfter(checkTime) ? Colors.red : kTextPrimaryColor;
+    } else {
+      return time.isBefore(checkTime) ? Colors.red : kTextPrimaryColor;
+    }
   }
 }

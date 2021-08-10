@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:aku_community_manager/models/manager/clock_in_out/today_clock_record_model.dart';
+import 'package:aku_community_manager/json_models/clock_in_out/today_clock_record_model.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
@@ -65,7 +65,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
       controller: _refreshController,
       onRefresh: () async {
         UserTool.appProvider.initClock();
-        _model = await (ClockFunc.initClockInfo() );
+        _model = await (ClockFunc.initClockInfo());
         if (_model != null) {
           UserTool.appProvider.resetClock(); //若成功获取今日打卡信息，则先重置打卡状态
           if (_model!.startClockDate != null) {
@@ -101,9 +101,13 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
             64.w.heightBox,
             Row(
               children: [
-                _buildCard(0, time: UserTool.appProvider.clockInTime),
+                _buildCard(0,
+                    time: UserTool.appProvider.clockInTime,
+                    checkTime: _model!.startTime),
                 Spacer(),
-                _buildCard(1, time: UserTool.appProvider.clockOutTime)
+                _buildCard(1,
+                    time: UserTool.appProvider.clockOutTime,
+                    checkTime: _model!.endTime)
               ], //上班打卡为‘type’0.下班打卡为1
             ),
             150.w.heightBox,
@@ -122,12 +126,12 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
     DateTime _currentTime = DateTime.now();
     switch (UserTool.appProvider.clockStatus) {
       case WORKCLOCK.NOTIN:
-        ClockFunc.clockIn(_model!.id!, _currentTime);
+        ClockFunc.clockIn(_model!.id, _currentTime);
         UserTool.appProvider.setClockInTime(_currentTime);
         BotToast.showText(text: '上班打卡成功');
         break;
       case WORKCLOCK.IN:
-        ClockFunc.clockOut(_model!.id!, _currentTime);
+        ClockFunc.clockOut(_model!.id, _currentTime);
         UserTool.appProvider.setClockOutTime(_currentTime);
         BotToast.showText(text: '下班打卡成功');
         break;
@@ -172,7 +176,8 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
     );
   }
 
-  Widget _buildCard(int type, {DateTime? time}) {
+//type: 0 上班 1 下班
+  Widget _buildCard(int type, {DateTime? time, DateTime? checkTime}) {
     return Container(
       width: 296.w,
       height: 131.w,
@@ -227,7 +232,8 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
                           .text
                           .size(32.sp)
                           .bold
-                          .color(kTextPrimaryColor)
+                          .color(ClockFunc.lateOrLeaveEarlyColor(
+                              time, checkTime, type == 0))
                           .make()
                     ],
             ),
