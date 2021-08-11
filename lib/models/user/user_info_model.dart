@@ -9,6 +9,21 @@ enum HKAUTH {
   HIDE
 }
 
+///工程维修权限
+enum ERAUTH {
+  ///福航公司派单给维修公司
+  SENDTOCOMPANY,
+
+  ///维修公司派单给维修人员
+  SENDTOPERSON,
+
+  ///维修人员接单，
+  PICK,
+
+  ///无权限，隐藏入口
+  HIDE
+}
+
 class UserInfoModel {
   int? id;
   String? roleId;
@@ -47,6 +62,18 @@ class UserInfoModel {
       return HKAUTH.SEND;
     } else {
       return HKAUTH.HIDE;
+    }
+  }
+
+  ERAUTH get engineeringRepairAuthority {
+    if (jurisdiction!.contains(69)) {
+      return ERAUTH.SENDTOCOMPANY;
+    } else if (jurisdiction!.contains(70)) {
+      return ERAUTH.SENDTOPERSON;
+    } else if (jurisdiction!.contains(71)) {
+      return ERAUTH.PICK;
+    } else {
+      return ERAUTH.HIDE;
     }
   }
 

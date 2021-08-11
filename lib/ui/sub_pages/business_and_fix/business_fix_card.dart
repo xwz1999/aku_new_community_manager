@@ -20,6 +20,7 @@ import 'package:aku_community_manager/tools/widget_tool.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
 import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class BusinessFixCard extends StatefulWidget {
   final BussinessAndFixModel model;
@@ -175,8 +176,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
         Align(
             alignment: Alignment.centerRight,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: _getButtons())),
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: _getButtons())),
       ],
     );
   }
@@ -243,8 +244,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
               ? AkuMaterialButton(
                   height: 64.w,
                   onPressed: () async {
-                    Get.to(() => Get.to(
-                       ()=> FixMoreTimePage(dispatchId: widget.model.dispatchId!)));
+                    Get.to(() => Get.to(() =>
+                        FixMoreTimePage(dispatchId: widget.model.dispatchId!)));
                     if (widget.callRefresh != null) {
                       widget.callRefresh!();
                     }
@@ -263,6 +264,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                   ),
                 )
               : SizedBox(),
+          12.w.widthBox,
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
@@ -315,5 +317,4 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
         return [];
     }
   }
-
 }
