@@ -1,3 +1,5 @@
+part 'engineer_repair.dart';
+
 class API {
   ///HOST
   static const String host = 'http://39.103.177.88:8804';
@@ -17,6 +19,7 @@ class API {
   static _Manage manage = _Manage();
   static _Upload upload = _Upload();
   static _Message message = _Message();
+  static _EngineerRepair engineerReapair = _EngineerRepair();
 }
 
 class _Auth {
