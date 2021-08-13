@@ -11,6 +11,7 @@ class API {
   static String get resource => '$host/static';
 
   static String image(String path) => '$resource$path';
+
   static String file(String path) => '$resource$path';
 
   static const int networkTimeOut = 10000;
@@ -19,7 +20,7 @@ class API {
   static _Manage manage = _Manage();
   static _Upload upload = _Upload();
   static _Message message = _Message();
-  static _EngineerRepair engineerReapair = _EngineerRepair();
+  static _EngineerRepair engineerRepair = _EngineerRepair();
 }
 
 class _Auth {
@@ -353,6 +354,10 @@ class _Upload {
   ///家政服务 上传处理完成照片
   String get uploadHandlerPhoto =>
       '/user/upload/uploadHousekeepingServiceHandlerPhone';
+
+  ///上传报事报修工程维修照片
+  String get uploadEngineerRepair =>
+      '/user/upload/uploadButlerAppEngineeringRepair';
 }
 
 class _Message {

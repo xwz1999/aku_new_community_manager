@@ -1,23 +1,6 @@
 // Flutter imports:
 import 'dart:async';
 
-import 'package:aku_community_manager/provider/message_provider.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-// Package imports:
-import 'package:badges/badges.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart' hide Response;
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
@@ -27,6 +10,7 @@ import 'package:aku_community_manager/models/manager/item_num_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_model.dart';
 import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
 import 'package:aku_community_manager/provider/app_provider.dart';
+import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
@@ -47,8 +31,22 @@ import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix
 import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_page.dart';
 import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
+// Package imports:
+import 'package:badges/badges.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart' hide Response;
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({
