@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:grinder/grinder.dart';
+import 'package:path/path.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:yaml/yaml.dart';
-import 'package:path/path.dart';
 
 import 'config.dart';
 import 'version_tool.dart';
+
 part '_add_version.dart';
 
 main(args) => grind(args);

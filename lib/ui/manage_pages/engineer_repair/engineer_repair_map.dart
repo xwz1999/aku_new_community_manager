@@ -23,4 +23,25 @@ class ERMap {
         return '未知';
     }
   }
+
+  static operationType(int type) {
+    switch (type) {
+      case 1:
+        return '提交工程维修';
+      case 2:
+        return '维修公司派单';
+      case 3:
+        return '维修人员派单';
+      case 4:
+        return '维修人员接单';
+      case 5:
+        return '处理完成';
+      case 8:
+        return '作废';
+      case 9:
+        return '取消';
+      default:
+        return '未知';
+    }
+  }
 }

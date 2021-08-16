@@ -3,11 +3,14 @@ import 'package:aku_community_manager/json_models/manager/engineer_repair/engine
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_depart_company_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_detail_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_map.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class EngineerRepairCard extends StatelessWidget {
@@ -22,6 +25,8 @@ class EngineerRepairCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        await Get.to(
+            () => EngineerRepairDetailPage(repairEngineerId: model.id));
         callRefresh();
       },
       child: Container(
@@ -119,6 +124,12 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
+              (UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                      ERAUTH.SENDTOCOMPANY)
+                  ? await Get.to(
+                      () => EngineerRepairDepartCompany(repairId: model.id))
+                  : await Get.to(() =>
+                      EngineerRepairDetailPage(repairEngineerId: model.id));
               callRefresh();
             },
             radius: 4,
@@ -143,6 +154,12 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
+              (UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                      ERAUTH.SENDTOPERSON)
+                  ? await Get.to(() =>
+                      EngineerRepairDetailPage(repairEngineerId: model.id))
+                  : await Get.to(() =>
+                      EngineerRepairDetailPage(repairEngineerId: model.id));
               callRefresh();
             },
             radius: 4,
@@ -225,28 +242,29 @@ class EngineerRepairCard extends StatelessWidget {
               ),
             ),
           ),
-        ];case 5:
+        ];
+      case 5:
       case 6:
-      return [
-        AkuMaterialButton(
-          height: 64.w,
-          onPressed: () async {
-            callRefresh();
-          },
-          radius: 4,
-          color: AppStyle.primaryColor,
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Text(
-            ('验收记录'),
-            style: TextStyle(
-              color: AppStyle.primaryTextColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 28.sp,
-              height: 40 / 28,
+        return [
+          AkuMaterialButton(
+            height: 64.w,
+            onPressed: () async {
+              callRefresh();
+            },
+            radius: 4,
+            color: AppStyle.primaryColor,
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: Text(
+              ('验收记录'),
+              style: TextStyle(
+                color: AppStyle.primaryTextColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 28.sp,
+                height: 40 / 28,
+              ),
             ),
           ),
-        ),
-      ];
+        ];
       case 7:
         return [
           AkuMaterialButton(
