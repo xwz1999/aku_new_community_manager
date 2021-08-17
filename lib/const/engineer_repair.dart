@@ -33,4 +33,14 @@ class _EngineerRepair {
 
   ///管家app 报事报修工程维修：工程维修维修人员接单
   String get personPick => '/user/repairEngineering/maintenanceStaffPickSingle';
+
+  ///管家app 报事报修工程维修：提交工作汇报
+  String get submitReport => '/user/repairEngineering/submitReport';
+
+  ///管家app 报事报修工程维修：完成维修2021-08-09 15:56:12
+  String get complete => '/user/repairEngineering/completeMaintenance';
+
+  ///管家app 报事报修工程维修：根据工程维修主键id查询最新的维修结果
+  String get repairResult =>
+      '/user/repairEngineering/findNewResultByRepairEngineeringId';
 }

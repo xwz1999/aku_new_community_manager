@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_detail_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_organization_model.dart';
@@ -104,5 +106,42 @@ class EngineerRepairFunc {
       'id': repairId,
     });
     return model.status ?? false;
+  }
+
+  static Future uploadReportImages(List<File> files) async {
+    var model = await NetUtil()
+        .uploadFiles(files, API.upload.uploadEngineerRepairReport);
+    return model;
+  }
+
+  static Future submitReport(
+      int repairId, String detail, List<String> urls) async {
+    var model = await NetUtil().post(API.engineerRepair.submitReport, params: {
+      'repairEngineeringId': repairId,
+      'content': detail,
+      'workReportImgUrls': urls,
+    });
+    return model.status ?? false;
+  }
+
+  static Future complete(
+    int repairId,
+    String detail,
+    String material,
+    List<String> urls,
+  ) async {
+    var model = await NetUtil().post(API.engineerRepair.complete, params: {
+      'repairEngineeringId': repairId,
+      'content': detail,
+      'billMaterials': material,
+      'maintenanceImgUrls': urls,
+    });
+    return model.status ?? false;
+  }
+
+  static Future uploadCompleteImages(List<File> files) async {
+    var model =
+        await NetUtil().uploadFiles(files, API.upload.engineerRepairComplete);
+    return model;
   }
 }

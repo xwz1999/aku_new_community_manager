@@ -358,6 +358,14 @@ class _Upload {
   ///上传报事报修工程维修照片
   String get uploadEngineerRepair =>
       '/user/upload/uploadButlerAppEngineeringRepair';
+
+  ///上传报事报修工程维修工作汇报图片照片
+  String get uploadEngineerRepairReport =>
+      '/user/upload/uploadButlerAppWorkReport';
+
+  ///上传报事报修工程维修完成维修图片照片
+  String get engineerRepairComplete =>
+      '/user/upload/uploadButlerAppCompleteMaintenance';
 }
 
 class _Message {

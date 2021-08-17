@@ -3,11 +3,15 @@ import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_detail_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_process_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_work_report_model.dart';
+import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_complete_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_depart_company_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_depart_person_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_report_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -144,17 +148,40 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
             children: [
               AkuMaterialButton(
                   minWidth: 287.w,
-                  onPressed: () {},
+                  onPressed: () async {
+                    await Get.to(
+                        () => EngineerRepairCompletePage(detailModel: _model!));
+                  },
                   color: Colors.black,
                   child: '维修完成'.text.size(32.sp).color(Colors.white).make()),
               AkuMaterialButton(
                   color: kPrimaryColor,
-                  onPressed: () {
-                    //TODO:跳转汇报进度
+                  onPressed: () async {
+                    await Get.to(
+                        () => EngineerRepairReportPage(repairId: _model!.id));
                   },
                   child: '汇报进度'.text.size(32.sp).color(Colors.black).make()),
             ],
           );
+        case 5:
+          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                  ERAUTH.SENDTOCOMPANY
+              ? AkuMaterialButton(
+                  color: kPrimaryColor,
+                  onPressed: () async {
+                    await Get.to(
+                        () => EngineerRepairReportPage(repairId: _model!.id));
+                  },
+                  child: '验收审核'.text.size(32.sp).color(Colors.black).make())
+              : SizedBox();
+        case 6:
+          return AkuMaterialButton(
+              color: kPrimaryColor,
+              onPressed: () async {
+                await Get.to(
+                    () => EngineerRepairReportPage(repairId: _model!.id));
+              },
+              child: '验收结果'.text.size(32.sp).color(Colors.black).make());
         default:
           return SizedBox();
       }
