@@ -39,6 +39,5 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
-resource.dart
 flutter_sdk
 local.properties
