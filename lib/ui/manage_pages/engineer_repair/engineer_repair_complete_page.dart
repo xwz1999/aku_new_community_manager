@@ -86,6 +86,7 @@ class _EngineerRepairCompletePageState
           urls = await EngineerRepairFunc.uploadCompleteImages(_files);
           var result = await EngineerRepairFunc.complete(widget.detailModel.id,
               _reportDetailController.text, _materialController.text, urls);
+          cancel();
           if (result) {
             Get.back();
             Get.back();

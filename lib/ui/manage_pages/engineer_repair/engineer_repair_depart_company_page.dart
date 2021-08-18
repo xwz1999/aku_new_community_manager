@@ -35,6 +35,7 @@ class _EngineerRepairDepartCompanyState
         firstRefresh: true,
         header: MaterialHeader(),
         onRefresh: () async {
+          _models.clear();
           _models.addAll(await EngineerRepairFunc.getOrganization());
           _onLoad = false;
           setState(() {});

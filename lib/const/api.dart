@@ -366,6 +366,10 @@ class _Upload {
   ///上传报事报修工程维修完成维修图片照片
   String get engineerRepairComplete =>
       '/user/upload/uploadButlerAppCompleteMaintenance';
+
+  ///上传报事报修工程维修验收照片图片照片
+  String get engineerRepairAcceptance =>
+      '/user/upload/uploadButlerAppAcceptance';
 }
 
 class _Message {

@@ -1,12 +1,17 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_detail_model.dart';
+import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_new_acceptance_record_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_process_model.dart';
+import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_result_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_work_report_model.dart';
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_record_list_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_result_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_complete_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_depart_company_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_depart_person_page.dart';
@@ -60,6 +65,8 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
         onRefresh: () async {
           _model = await EngineerRepairFunc.getEngineerRepairDetail(
               widget.repairEngineerId);
+          _processModels.clear();
+          _reportModels.clear();
           _processModels.addAll(
               await EngineerRepairFunc.getProcess(widget.repairEngineerId));
           _reportModels.addAll(
@@ -78,13 +85,18 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                 children: [
                   _buildInfo(),
                   16.w.heightBox,
-                  if (_model!.maintenanceStaff != null) _buildOperator(),
-                  if (_model!.organizationId != null) _buildOrganization(),
+                  if (_model?.maintenanceStaff != null) _buildOperator(),
+                  if (_model?.organizationId != null) _buildOrganization(),
                   if (_processModels.isNotEmpty) _buildProcess(),
                   if (_reportModels.isNotEmpty) _buildReport(),
                   GestureDetector(
-                    onTap: () {
-                      // TODO:跳转验收记录
+                    onTap: () async {
+                      List<EngineerRepairNewAcceptanceRecordModel> models = [];
+                      models.addAll(
+                          await EngineerRepairFunc.getAcceptanceRecordList(
+                              widget.repairEngineerId));
+                      await Get.to(() => EngineerRepairAcceptanceRecordListPage(
+                          models: models));
                     },
                     child: Container(
                       color: Colors.white,
@@ -116,72 +128,106 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
     if (_model != null) {
       switch (_model!.status) {
         case 1:
-          return AkuBottomButton(
-            title: '立即派单',
-            onTap: () async {
-              await Get.off(EngineerRepairDepartCompany(
-                  repairId: widget.repairEngineerId));
-            },
-          );
+          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                  ERAUTH.SENDTOCOMPANY
+              ? AkuBottomButton(
+                  title: '立即派单',
+                  onTap: () async {
+                    await Get.off(EngineerRepairDepartCompany(
+                        repairId: widget.repairEngineerId));
+                  },
+                )
+              : SizedBox();
         case 2:
-          return AkuBottomButton(
-            title: '立即派单',
-            onTap: () async {
-              await Get.off(EngineerRepairDepartPersonPage(
-                  organizationId: _model!.organizationId!,
-                  organizationName: _model!.organizationName!,
-                  repairId: _model!.id));
-            },
-          );
+          print(UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+              ERAUTH.SENDTOPERSON);
+          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                  ERAUTH.SENDTOPERSON
+              ? AkuBottomButton(
+                  title: '立即派单',
+                  onTap: () async {
+                    await Get.off(EngineerRepairDepartPersonPage(
+                        organizationId: _model!.organizationId!,
+                        organizationName: _model!.organizationName!,
+                        repairId: _model!.id));
+                  },
+                )
+              : SizedBox();
         case 3:
-          return AkuBottomButton(
-            title: '立即接单',
-            onTap: () async {
-              var result = await EngineerRepairFunc.personPick(_model!.id);
-              if (result) {
-                Get.back();
-              }
-            },
-          );
+          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                  ERAUTH.PICK
+              ? AkuBottomButton(
+                  title: '立即接单',
+                  onTap: () async {
+                    var result =
+                        await EngineerRepairFunc.personPick(_model!.id);
+                    if (result) {
+                      Get.back();
+                    }
+                  },
+                )
+              : SizedBox();
         case 4:
-          return Row(
-            children: [
-              AkuMaterialButton(
-                  minWidth: 287.w,
-                  onPressed: () async {
-                    await Get.to(
-                        () => EngineerRepairCompletePage(detailModel: _model!));
-                  },
-                  color: Colors.black,
-                  child: '维修完成'.text.size(32.sp).color(Colors.white).make()),
-              AkuMaterialButton(
-                  color: kPrimaryColor,
-                  onPressed: () async {
-                    await Get.to(
-                        () => EngineerRepairReportPage(repairId: _model!.id));
-                  },
-                  child: '汇报进度'.text.size(32.sp).color(Colors.black).make()),
-            ],
-          );
+          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                  ERAUTH.PICK
+              ? Row(
+                  children: [
+                    AkuMaterialButton(
+                        minWidth: 287.w,
+                        onPressed: () async {
+                          await Get.to(() =>
+                              EngineerRepairCompletePage(detailModel: _model!));
+                        },
+                        color: Colors.black,
+                        child:
+                            '维修完成'.text.size(32.sp).color(Colors.white).make()),
+                    AkuMaterialButton(
+                        color: kPrimaryColor,
+                        onPressed: () async {
+                          await Get.to(() =>
+                              EngineerRepairReportPage(repairId: _model!.id));
+                        },
+                        child:
+                            '汇报进度'.text.size(32.sp).color(Colors.black).make()),
+                  ],
+                )
+              : SizedBox();
         case 5:
           return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
                   ERAUTH.SENDTOCOMPANY
               ? AkuMaterialButton(
                   color: kPrimaryColor,
                   onPressed: () async {
-                    await Get.to(
-                        () => EngineerRepairReportPage(repairId: _model!.id));
+                    EngineerRepairResultModel? resultModel =
+                        await EngineerRepairFunc.getRepairResult(
+                            widget.repairEngineerId);
+                    if (resultModel != null) {
+                      await Get.to(() => EngineerRepairAcceptancePage(
+                            resultModel: resultModel,
+                            detailModel: _model!,
+                          ));
+                    }
                   },
                   child: '验收审核'.text.size(32.sp).color(Colors.black).make())
               : SizedBox();
         case 6:
-          return AkuMaterialButton(
-              color: kPrimaryColor,
-              onPressed: () async {
-                await Get.to(
-                    () => EngineerRepairReportPage(repairId: _model!.id));
-              },
-              child: '验收结果'.text.size(32.sp).color(Colors.black).make());
+          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                  ERAUTH.PICK
+              ? AkuMaterialButton(
+                  color: kPrimaryColor,
+                  onPressed: () async {
+                    EngineerRepairNewAcceptanceRecordModel?
+                        acceptanceRecordModel =
+                        await EngineerRepairFunc.getAcceptanceRecord(
+                            widget.repairEngineerId);
+                    if (acceptanceRecordModel != null) {
+                      await Get.to(() => EngineerRepairAcceptanceResultPage(
+                            recordModel: acceptanceRecordModel,
+                          ));
+                    }
+                  },
+                  child: '验收结果'.text.size(32.sp).color(Colors.black).make())
+              : SizedBox();
         default:
           return SizedBox();
       }
@@ -292,10 +338,10 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
             R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '维修单位', _model!.organizationName!),
         16.w.heightBox,
         _buildTile(R.ASSETS_MESSAGE_IC_PEOPLE_PNG, '主要负责人',
-            _model!.organizationLeadingName!),
+            _model!.organizationLeadingName ?? ''),
         16.w.heightBox,
         _buildTile(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话',
-            _model!.organizationLeadingTel!)
+            _model!.organizationLeadingTel ?? '')
       ],
     ).pOnly(bottom: 16.w);
   }

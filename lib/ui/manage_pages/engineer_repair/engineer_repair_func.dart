@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_detail_model.dart';
+import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_new_acceptance_record_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_organization_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_person_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_process_model.dart';
+import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_result_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_work_report_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
@@ -143,5 +145,70 @@ class EngineerRepairFunc {
     var model =
         await NetUtil().uploadFiles(files, API.upload.engineerRepairComplete);
     return model;
+  }
+
+  static Future getRepairResult(int repairId) async {
+    var model = await NetUtil().get(API.engineerRepair.repairResult, params: {
+      'repairEngineeringId': repairId,
+    });
+    if (model.status ?? false) {
+      return EngineerRepairResultModel.fromJson(model.data);
+    } else {
+      return null;
+    }
+  }
+
+  static Future submitAcceptance(int id, int repairId, int result,
+      String advice, List<String> urls) async {
+    var model =
+        await NetUtil().post(API.engineerRepair.submitAcceptance, params: {
+      'id': id,
+      'repairEngineeringId': repairId,
+      'results': result,
+      'advice': advice,
+      'acceptanceImgUrls': urls,
+    });
+    return model.status ?? false;
+  }
+
+  static Future uploadAcceptanceImages(List<File> files) async {
+    var model =
+        await NetUtil().uploadFiles(files, API.upload.engineerRepairAcceptance);
+    return model;
+  }
+
+  static Future getAcceptanceRecord(int repairId) async {
+    var model =
+        await NetUtil().get(API.engineerRepair.acceptanceRecordNew, params: {
+      'repairEngineeringId': repairId,
+    });
+    if (model.status ?? false) {
+      return EngineerRepairNewAcceptanceRecordModel.fromJson(model.data);
+    } else {
+      return null;
+    }
+  }
+
+  static Future<List<EngineerRepairNewAcceptanceRecordModel>>
+      getAcceptanceRecordList(int repairId) async {
+    var model =
+        await NetUtil().get(API.engineerRepair.acceptanceRecordList, params: {
+      'repairEngineeringId': repairId,
+    });
+    if (model.status ?? false) {
+      return (model.data as List)
+          .map((e) => EngineerRepairNewAcceptanceRecordModel.fromJson(e))
+          .toList();
+    } else {
+      return [];
+    }
+  }
+
+  static Future startRectification(int repairId) async {
+    var model =
+        await NetUtil().post(API.engineerRepair.startRectification, params: {
+      'id': repairId,
+    });
+    return model.status ?? false;
   }
 }

@@ -43,4 +43,18 @@ class _EngineerRepair {
   ///管家app 报事报修工程维修：根据工程维修主键id查询最新的维修结果
   String get repairResult =>
       '/user/repairEngineering/findNewResultByRepairEngineeringId';
+
+  ///管家app 报事报修工程维修：提交验收报告
+  String get submitAcceptance => '/user/repairEngineering/submitAcceptance';
+
+  ///管家app 报事报修工程维修：根据工程维修主键id查询最新的验收记录(只查询一条记录)
+  String get acceptanceRecordNew =>
+      '/user/repairEngineering/findNewAcceptanceRecordByRepairEngineeringId';
+
+  ///管家app 报事报修工程维修：根据工程维修主键id查询验收记录（查询多条记录）
+  String get acceptanceRecordList =>
+      '/user/repairEngineering/findAcceptanceRecordByRepairEngineeringId';
+
+  ///管家app 报事报修工程维修：开始整改
+  String get startRectification => '/user/repairEngineering/startRectification';
 }
