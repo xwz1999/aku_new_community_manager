@@ -58,6 +58,7 @@ class _EngineerRepairDepartCompanyState
                     widget.repairId, _selectId);
                 if (result) {
                   Get.back();
+                  Get.back();
                 }
               },
       ),
@@ -65,23 +66,33 @@ class _EngineerRepairDepartCompanyState
   }
 
   Widget _buildTile(EngineerRepairOrganizationModel model) {
-    return Row(
-      children: [
-        Checkbox(
-          value: _selectId == model.id,
-          onChanged: (value) {
-            if (value ?? false) {
-              _selectId = model.id;
-            } else {
-              _selectId = 0;
-            }
-            setState(() {});
-          },
-          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        ).box.width(28.w).height(28.sp).make(),
-        8.w.widthBox,
-        model.name.text.size(32.sp).color(kTextPrimaryColor).make(),
-      ],
-    ).box.color(Colors.white).padding(EdgeInsets.all(32.w)).make();
+    return GestureDetector(
+      onTap: () {
+        if (_selectId == model.id) {
+          _selectId = 0;
+        } else {
+          _selectId = model.id;
+        }
+        setState(() {});
+      },
+      child: Row(
+        children: [
+          Checkbox(
+            value: _selectId == model.id,
+            onChanged: (value) {
+              if (value ?? false) {
+                _selectId = model.id;
+              } else {
+                _selectId = 0;
+              }
+              setState(() {});
+            },
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ).box.width(28.w).height(28.sp).make(),
+          8.w.widthBox,
+          model.name.text.size(32.sp).color(kTextPrimaryColor).make(),
+        ],
+      ).box.color(Colors.white).padding(EdgeInsets.all(32.w)).make(),
+    );
   }
 }

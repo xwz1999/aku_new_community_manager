@@ -54,17 +54,19 @@ class _EngineerRepairCompletePageState
           Container(
             width: double.infinity,
             color: Colors.white,
+            padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 '维修结果'.text.size(36.sp).color(kTextPrimaryColor).make(),
                 40.w.heightBox,
                 '处理描述'.text.size(28.sp).color(kTextPrimaryColor).make(),
                 24.w.heightBox,
-                _buildTextField(_reportDetailController),
+                _buildTextField(_reportDetailController, '请描述维修结果'),
                 24.w.heightBox,
                 '材料清单'.text.size(28.sp).color(kTextPrimaryColor).make(),
                 24.w.heightBox,
-                _buildTextField(_materialController),
+                _buildTextField(_materialController, '请填写材料清单'),
                 40.w.heightBox,
                 '上传维修完成照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
                 24.w.heightBox,
@@ -96,7 +98,7 @@ class _EngineerRepairCompletePageState
     );
   }
 
-  Widget _buildTextField(TextEditingController controller) {
+  Widget _buildTextField(TextEditingController controller, String hintText) {
     return Container(
       width: 686.w,
       height: 300.w,
@@ -110,12 +112,13 @@ class _EngineerRepairCompletePageState
       child: TextField(
         minLines: 5,
         maxLines: 10,
+        controller: controller,
         autofocus: false,
         onChanged: (value) {
           setState(() {});
         },
         decoration: InputDecoration(
-          hintText: '请简要描述一下维修结果',
+          hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 28.sp,
             color: kTextSubColor,

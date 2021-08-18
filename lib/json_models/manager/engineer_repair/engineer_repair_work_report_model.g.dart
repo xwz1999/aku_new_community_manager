@@ -15,8 +15,8 @@ EngineerRepairWorkReportModel _$EngineerRepairWorkReportModelFromJson(
     json['createId'] as int,
     json['createName'] as String,
     json['createDate'] as String,
-    (json['workReportImgLists'] as List<dynamic>)
-        .map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
+    (json['workReportImgLists'] as List<dynamic>?)
+        ?.map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
 }

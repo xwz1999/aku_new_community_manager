@@ -114,24 +114,25 @@ class _EngineerRepairAcceptanceResultPageState
           40.w.heightBox,
           '到现场验收照片'.text.size(28.sp).color(kTextSubColor).make(),
           24.w.heightBox,
-          GridView(
-            padding: EdgeInsets.only(top: 16.w),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 16.w,
-              mainAxisSpacing: 16.w,
+          if (widget.recordModel.acceptanceImgLists != null)
+            GridView(
+              padding: EdgeInsets.only(top: 16.w),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 16.w,
+                mainAxisSpacing: 16.w,
+              ),
+              children: widget.recordModel.acceptanceImgLists!.map((e) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(4.w),
+                  child: FadeInImage.assetNetwork(
+                      placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                      image: API.image(e.url!)),
+                );
+              }).toList(),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
             ),
-            children: widget.recordModel.acceptanceImgLists.map((e) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(4.w),
-                child: FadeInImage.assetNetwork(
-                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(e.url!)),
-              );
-            }).toList(),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-          ),
           40.w.heightBox,
           '反馈时间'.text.size(28.sp).color(kTextSubColor).make(),
           24.w.heightBox,
@@ -152,12 +153,12 @@ class _EngineerRepairAcceptanceResultPageState
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
           '处理描述',
-          widget.recordModel.content,
+          widget.recordModel.content ?? '',
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PHONE_PNG,
           '材料清单',
-          widget.recordModel.billMaterials,
+          widget.recordModel.billMaterials ?? '',
         ),
         _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '完成时间',
             widget.recordModel.createDate),
@@ -170,24 +171,25 @@ class _EngineerRepairAcceptanceResultPageState
             fontSize: 28.w,
           ),
         ),
-        GridView(
-          padding: EdgeInsets.only(top: 16.w),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 16.w,
-            mainAxisSpacing: 16.w,
+        if (widget.recordModel.maintenanceImgLists != null)
+          GridView(
+            padding: EdgeInsets.only(top: 16.w),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 16.w,
+              mainAxisSpacing: 16.w,
+            ),
+            children: widget.recordModel.maintenanceImgLists!.map((e) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(4.w),
+                child: FadeInImage.assetNetwork(
+                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                    image: API.image(e.url!)),
+              );
+            }).toList(),
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
           ),
-          children: widget.recordModel.maintenanceImgLists.map((e) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(4.w),
-              child: FadeInImage.assetNetwork(
-                  placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                  image: API.image(e.url!)),
-            );
-          }).toList(),
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-        ),
       ],
     );
   }

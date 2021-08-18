@@ -1,11 +1,17 @@
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_list_model.dart';
+import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_new_acceptance_record_model.dart';
+import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_result_model.dart';
 import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_record_list_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_depart_company_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_detail_page.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
 import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_map.dart';
+import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_report_page.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:flutter/material.dart';
@@ -186,6 +192,7 @@ class EngineerRepairCard extends StatelessWidget {
               ? AkuMaterialButton(
                   height: 64.w,
                   onPressed: () async {
+                    await EngineerRepairFunc.personPick(model.id);
                     callRefresh();
                   },
                   radius: 4,
@@ -227,6 +234,7 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
+              await Get.to(() => EngineerRepairReportPage(repairId: model.id));
               callRefresh();
             },
             radius: 4,
@@ -248,14 +256,37 @@ class EngineerRepairCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {
-              callRefresh();
-            },
+            onPressed: UserTool
+                        .userProvider.infoModel!.engineeringRepairAuthority ==
+                    ERAUTH.SENDTOCOMPANY
+                ? () async {
+                    EngineerRepairResultModel? resultModel =
+                        await EngineerRepairFunc.getRepairResult(model.id);
+                    if (resultModel != null) {
+                      await Get.to(() => EngineerRepairAcceptancePage(
+                            resultModel: resultModel,
+                            repairId: model.id,
+                            status: model.status,
+                          ));
+                    }
+                  }
+                : () async {
+                    List<EngineerRepairNewAcceptanceRecordModel> models = [];
+                    models.addAll(
+                        await EngineerRepairFunc.getAcceptanceRecordList(
+                            model.id));
+                    await Get.to(() =>
+                        EngineerRepairAcceptanceRecordListPage(models: models));
+                    callRefresh();
+                  },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              ('验收记录'),
+              UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+                      ERAUTH.SENDTOCOMPANY
+                  ? '验收审核'
+                  : '验收记录',
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontWeight: FontWeight.bold,

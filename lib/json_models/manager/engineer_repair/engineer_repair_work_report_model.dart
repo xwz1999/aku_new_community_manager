@@ -11,7 +11,7 @@ class EngineerRepairWorkReportModel {
   final int createId;
   final String createName;
   final String createDate;
-  final List<ImgModel> workReportImgLists;
+  final List<ImgModel>? workReportImgLists;
 
   factory EngineerRepairWorkReportModel.fromJson(Map<String, dynamic> json) =>
       _$EngineerRepairWorkReportModelFromJson(json);

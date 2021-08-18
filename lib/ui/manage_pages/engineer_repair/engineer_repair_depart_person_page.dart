@@ -42,6 +42,7 @@ class _EngineerRepairDepartPersonPageState
         firstRefresh: true,
         header: MaterialHeader(),
         onRefresh: () async {
+          _models.clear();
           _models.addAll(
               await EngineerRepairFunc.getPersons(widget.organizationId));
           if (_models.isNotEmpty) {
@@ -64,6 +65,7 @@ class _EngineerRepairDepartPersonPageState
                 var result = await EngineerRepairFunc.personSend(
                     widget.repairId, _selectId);
                 if (result) {
+                  Get.back();
                   Get.back();
                 }
               },
@@ -105,7 +107,11 @@ class _EngineerRepairDepartPersonPageState
                   AkuMaterialButton(
                     height: 96.w,
                     onPressed: () {
-                      _selectId = e.id;
+                      if (_selectId == e.id) {
+                        _selectId = 0;
+                      } else {
+                        _selectId = e.id;
+                      }
                       setState(() {});
                     },
                     child: Row(
@@ -132,7 +138,7 @@ class _EngineerRepairDepartPersonPageState
                           width: 40.w,
                         ),
                         Text(
-                          e.userName,
+                          e.actualName,
                           style: TextStyle(
                             color: AppStyle.primaryTextColor,
                             fontSize: 28.w,

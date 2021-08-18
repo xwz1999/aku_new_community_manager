@@ -7,8 +7,8 @@ part 'engineer_repair_result_model.g.dart';
 class EngineerRepairResultModel {
   final int id;
   final int repairEngineeringId;
-  final String content;
-  final String billMaterials;
+  final String? content;
+  final String? billMaterials;
   final List<ImgModel> maintenanceImgLists;
   final String createName;
   final String createDate;

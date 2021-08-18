@@ -84,7 +84,6 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                 padding: EdgeInsets.symmetric(vertical: 16.w),
                 children: [
                   _buildInfo(),
-                  16.w.heightBox,
                   if (_model?.maintenanceStaff != null) _buildOperator(),
                   if (_model?.organizationId != null) _buildOrganization(),
                   if (_processModels.isNotEmpty) _buildProcess(),
@@ -133,7 +132,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
               ? AkuBottomButton(
                   title: '立即派单',
                   onTap: () async {
-                    await Get.off(EngineerRepairDepartCompany(
+                    await Get.to(EngineerRepairDepartCompany(
                         repairId: widget.repairEngineerId));
                   },
                 )
@@ -146,7 +145,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
               ? AkuBottomButton(
                   title: '立即派单',
                   onTap: () async {
-                    await Get.off(EngineerRepairDepartPersonPage(
+                    await Get.to(EngineerRepairDepartPersonPage(
                         organizationId: _model!.organizationId!,
                         organizationName: _model!.organizationName!,
                         repairId: _model!.id));
@@ -183,6 +182,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                             '维修完成'.text.size(32.sp).color(Colors.white).make()),
                     AkuMaterialButton(
                         color: kPrimaryColor,
+                        minWidth: 463.w,
                         onPressed: () async {
                           await Get.to(() =>
                               EngineerRepairReportPage(repairId: _model!.id));
@@ -204,11 +204,13 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                     if (resultModel != null) {
                       await Get.to(() => EngineerRepairAcceptancePage(
                             resultModel: resultModel,
-                            detailModel: _model!,
+                            repairId: _model!.id,
+                            status: _model!.status,
                           ));
                     }
                   },
-                  child: '验收审核'.text.size(32.sp).color(Colors.black).make())
+                  child:
+                      '验收审核'.text.size(32.sp).bold.color(Colors.black).make())
               : SizedBox();
         case 6:
           return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
@@ -226,7 +228,8 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                           ));
                     }
                   },
-                  child: '验收结果'.text.size(32.sp).color(Colors.black).make())
+                  child:
+                      '验收结果'.text.size(32.sp).bold.color(Colors.black).make())
               : SizedBox();
         default:
           return SizedBox();
@@ -239,15 +242,19 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
   Widget _buildReport() {
     return AkuTitleBox(
       title: '工作日志',
-      children: _reportModels
-          .mapIndexed(
-              (currentValue, index) => _buildReportTile(currentValue, index))
-          .toList(),
+      children: [
+        40.w.heightBox,
+        ..._reportModels
+            .mapIndexed(
+                (currentValue, index) => _buildReportTile(currentValue, index))
+            .toList()
+      ],
     ).pOnly(bottom: 16.w);
   }
 
   Widget _buildReportTile(EngineerRepairWorkReportModel model, int index) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
@@ -271,8 +278,9 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
             .make()
             .pOnly(left: 58.w),
         18.w.heightBox,
-        BeeGridImageView(
-            urls: model.workReportImgLists.map((e) => e.url ?? '').toList())
+        if (model.workReportImgLists != null)
+          BeeGridImageView(
+              urls: model.workReportImgLists!.map((e) => e.url ?? '').toList())
       ],
     );
   }
@@ -286,7 +294,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
           e.operationDate,
         );
       }).toList(),
-    ).pOnly(bottom: 16.w);
+    );
   }
 
   Widget _buildProcessTile(String title, String date) {
@@ -326,7 +334,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
         _buildTile(
             R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', _model!.maintenanceStaffTel!)
       ],
-    ).pOnly(bottom: 16.w);
+    );
   }
 
   _buildOrganization() {
@@ -343,7 +351,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
         _buildTile(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话',
             _model!.organizationLeadingTel ?? '')
       ],
-    ).pOnly(bottom: 16.w);
+    );
   }
 
   _buildInfo() {
@@ -363,7 +371,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
           _model!.createTel,
         ),
         _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '报修区域',
-            '${S.of(context)!.tempPlotName}'),
+            '${S.of(context)!.tempPlotName} ${_model!.repairArea}'),
         AkuBox.h(8),
         Text(
           _model!.reportDetail,

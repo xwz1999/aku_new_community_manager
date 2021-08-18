@@ -7,17 +7,17 @@ part 'engineer_repair_new_acceptance_record_model.g.dart';
 class EngineerRepairNewAcceptanceRecordModel {
   final int id;
   final int repairEngineeringId;
-  final String content;
-  final String billMaterials;
-  final List<ImgModel> maintenanceImgLists;
+  final String? content;
+  final String? billMaterials;
+  final List<ImgModel>? maintenanceImgLists;
   final String createName;
   final String createDate;
   final int results;
   final String advice;
-  final String acceptancePeople;
+  final int acceptancePeople;
   final String acceptancePeopleName;
   final String acceptanceDate;
-  final List<ImgModel> acceptanceImgLists;
+  final List<ImgModel>? acceptanceImgLists;
   factory EngineerRepairNewAcceptanceRecordModel.fromJson(
           Map<String, dynamic> json) =>
       _$EngineerRepairNewAcceptanceRecordModelFromJson(json);

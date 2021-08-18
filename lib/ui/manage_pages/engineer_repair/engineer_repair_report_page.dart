@@ -34,6 +34,7 @@ class _EngineerRepairReportPageState extends State<EngineerRepairReportPage> {
         padding: EdgeInsets.symmetric(vertical: 16.w),
         children: [
           Container(
+            padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
             width: double.infinity,
             color: Colors.white,
             child: Column(
@@ -45,7 +46,6 @@ class _EngineerRepairReportPageState extends State<EngineerRepairReportPage> {
                 24.w.heightBox,
                 Container(
                   width: 686.w,
-                  height: 87.w,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.w),
                     border: Border.all(
@@ -61,6 +61,7 @@ class _EngineerRepairReportPageState extends State<EngineerRepairReportPage> {
                       });
                     },
                     minLines: 5,
+                    maxLines: 10,
                     decoration: InputDecoration(
                       hintText: '请输入具体描述',
                       hintStyle: TextStyle(
@@ -73,18 +74,18 @@ class _EngineerRepairReportPageState extends State<EngineerRepairReportPage> {
                       isDense: true,
                     ),
                   ),
-                )
+                ),
+                40.w.heightBox,
+                '上传照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
+                24.w.heightBox,
+                AkuPickImageWidget(onChanged: (files) {
+                  _files.clear();
+                  _files.addAll(files);
+                  setState(() {});
+                }),
               ],
             ),
           ),
-          40.w.heightBox,
-          '上传照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
-          24.w.heightBox,
-          AkuPickImageWidget(onChanged: (files) {
-            _files.clear();
-            _files.addAll(files);
-            setState(() {});
-          }),
         ],
       ),
       bottom: AkuBottomButton(
@@ -96,7 +97,6 @@ class _EngineerRepairReportPageState extends State<EngineerRepairReportPage> {
           var result = await EngineerRepairFunc.submitReport(
               widget.repairId, _reportDetail, urls);
           if (result) {
-            Get.back();
             Get.back();
           }
           cancel();

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_detail_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_new_acceptance_record_model.dart';
 import 'package:aku_community_manager/json_models/manager/engineer_repair/engineer_repair_result_model.dart';
 import 'package:aku_community_manager/style/app_style.dart';
@@ -24,11 +23,15 @@ import 'package:velocity_x/velocity_x.dart';
 import 'engineer_repair_map.dart';
 
 class EngineerRepairAcceptancePage extends StatefulWidget {
-  final EngineerRepairDetailModel detailModel;
+  final int repairId;
+  final int status;
   final EngineerRepairResultModel resultModel;
 
   const EngineerRepairAcceptancePage(
-      {Key? key, required this.detailModel, required this.resultModel})
+      {Key? key,
+      required this.repairId,
+      required this.resultModel,
+      required this.status})
       : super(key: key);
 
   @override
@@ -50,6 +53,29 @@ class _EngineerRepairAcceptancePageState
         children: [
           _buildInfo(),
           _buildCheckBox(),
+          GestureDetector(
+            onTap: () async {
+              List<EngineerRepairNewAcceptanceRecordModel> models = [];
+              models.addAll(await EngineerRepairFunc.getAcceptanceRecordList(
+                  widget.repairId));
+              await Get.to(
+                  () => EngineerRepairAcceptanceRecordListPage(models: models));
+            },
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(32.w),
+              child: Row(
+                children: [
+                  '查看验收记录'.text.size(28.sp).color(kTextPrimaryColor).make(),
+                  Spacer(),
+                  Icon(
+                    CupertinoIcons.chevron_right,
+                    size: 40.w,
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
       bottom: AkuBottomButton(
@@ -60,13 +86,12 @@ class _EngineerRepairAcceptancePageState
           urls = await EngineerRepairFunc.uploadAcceptanceImages(_files);
           var result = await EngineerRepairFunc.submitAcceptance(
               widget.resultModel.id,
-              widget.detailModel.id,
+              widget.repairId,
               _selectResult,
               _reportDetail,
               urls);
           cancel();
           if (result) {
-            Get.back();
             Get.back();
           }
         },
@@ -84,7 +109,7 @@ class _EngineerRepairAcceptancePageState
         Row(
           children: [
             AkuSingleCheckButton(
-              text: '工程维修',
+              text: '通过',
               value: 1,
               gropValue: _selectResult,
               onPressed: () {
@@ -94,7 +119,7 @@ class _EngineerRepairAcceptancePageState
             ),
             80.w.widthBox,
             AkuSingleCheckButton(
-              text: '异常',
+              text: '驳回',
               value: 2,
               gropValue: _selectResult,
               onPressed: () {
@@ -139,6 +164,7 @@ class _EngineerRepairAcceptancePageState
             ),
           ),
         ),
+        16.w.heightBox,
         '上传到场验收照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
         16.w.heightBox,
         AkuPickImageWidget(onChanged: (value) {
@@ -147,29 +173,6 @@ class _EngineerRepairAcceptancePageState
           setState(() {});
         }),
         16.w.heightBox,
-        GestureDetector(
-          onTap: () async {
-            List<EngineerRepairNewAcceptanceRecordModel> models = [];
-            models.addAll(await EngineerRepairFunc.getAcceptanceRecordList(
-                widget.detailModel.id));
-            await Get.to(
-                () => EngineerRepairAcceptanceRecordListPage(models: models));
-          },
-          child: Container(
-            color: Colors.white,
-            padding: EdgeInsets.all(32.w),
-            child: Row(
-              children: [
-                '查看验收记录'.text.size(28.sp).color(kTextPrimaryColor).make(),
-                Spacer(),
-                Icon(
-                  CupertinoIcons.chevron_right,
-                  size: 40.w,
-                )
-              ],
-            ),
-          ),
-        )
       ],
     );
   }
@@ -178,7 +181,7 @@ class _EngineerRepairAcceptancePageState
     return AkuTitleBox(
       title: '维修结果',
       suffix: Text(
-        ERMap.statusString(widget.detailModel.status),
+        ERMap.statusString(widget.status),
         style: TextStyle(color: Color(0xFFFF4501)),
       ),
       children: [
@@ -186,12 +189,12 @@ class _EngineerRepairAcceptancePageState
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
           '处理描述',
-          widget.resultModel.content,
+          widget.resultModel.content ?? '',
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PHONE_PNG,
           '材料清单',
-          widget.resultModel.billMaterials,
+          widget.resultModel.billMaterials ?? '',
         ),
         _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '完成时间',
             widget.resultModel.createDate),

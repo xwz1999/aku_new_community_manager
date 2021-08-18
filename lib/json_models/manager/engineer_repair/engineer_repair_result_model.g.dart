@@ -11,8 +11,8 @@ EngineerRepairResultModel _$EngineerRepairResultModelFromJson(
   return EngineerRepairResultModel(
     json['id'] as int,
     json['repairEngineeringId'] as int,
-    json['content'] as String,
-    json['billMaterials'] as String,
+    json['content'] as String?,
+    json['billMaterials'] as String?,
     (json['maintenanceImgLists'] as List<dynamic>)
         .map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
         .toList(),

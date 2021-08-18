@@ -40,6 +40,7 @@ class _EngineerRepairAcceptanceRecordListPageState
       color: Colors.white,
       padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -69,29 +70,30 @@ class _EngineerRepairAcceptanceRecordListPageState
           ),
           40.w.heightBox,
           '现场情况'.text.size(28.sp).color(kTextSubColor).make(),
-          40.w.heightBox,
+          24.w.heightBox,
           model.advice.text.size(28.sp).color(kTextPrimaryColor).make(),
           40.w.heightBox,
           '现场照片'.text.size(28.sp).color(kTextSubColor).make(),
           24.w.heightBox,
-          GridView(
-            padding: EdgeInsets.only(top: 16.w),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 16.w,
-              mainAxisSpacing: 16.w,
+          if (model.acceptanceImgLists != null)
+            GridView(
+              padding: EdgeInsets.only(top: 16.w),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 16.w,
+                mainAxisSpacing: 16.w,
+              ),
+              children: model.acceptanceImgLists!.map((e) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(4.w),
+                  child: FadeInImage.assetNetwork(
+                      placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                      image: API.image(e.url!)),
+                );
+              }).toList(),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
             ),
-            children: model.acceptanceImgLists.map((e) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(4.w),
-                child: FadeInImage.assetNetwork(
-                    placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(e.url!)),
-              );
-            }).toList(),
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-          ),
           40.w.heightBox,
           Row(
             children: [
