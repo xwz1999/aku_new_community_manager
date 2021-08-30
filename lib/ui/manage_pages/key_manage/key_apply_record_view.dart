@@ -1,15 +1,13 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/key_manage/key_manage_record_list_model.dart';
+import 'package:aku_community_manager/json_models/manager/key_manage/key_manage_record_list_model.dart';
+// Project imports:
+import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_card.dart';
 import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-// Project imports:
-import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_card.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class KeyApplyRecordView extends StatefulWidget {
