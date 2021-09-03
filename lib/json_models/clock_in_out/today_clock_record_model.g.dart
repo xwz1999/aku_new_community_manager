@@ -17,7 +17,7 @@ TodayClockRecordModel _$TodayClockRecordModelFromJson(
     clockName: json['clockName'] as String,
     clockTel: json['clockTel'] as String,
     createDate: json['createDate'] as String,
-    status: json['status'] as String,
+    status: json['status'] as int,
     firstTimeStart: json['firstTimeStart'] as String?,
     firstTimeEnd: json['firstTimeEnd'] as String?,
     secondTimeStart: json['secondTimeStart'] as String?,

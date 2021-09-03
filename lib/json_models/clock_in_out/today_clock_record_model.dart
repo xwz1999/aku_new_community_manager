@@ -1,5 +1,6 @@
 import 'package:common_utils/common_utils.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'today_clock_record_model.g.dart';
 
 @JsonSerializable()
@@ -12,7 +13,7 @@ class TodayClockRecordModel {
   final String clockName;
   final String clockTel;
   final String createDate;
-  final String status;
+  final int status;
   final String? firstTimeStart;
   final String? firstTimeEnd;
   final String? secondTimeStart;

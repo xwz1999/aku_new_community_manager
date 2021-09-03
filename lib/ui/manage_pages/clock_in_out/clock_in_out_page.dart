@@ -39,13 +39,15 @@ class _ClockInOutPageState extends State<ClockInOutPage>
       actions: [
         Center(
           child: Padding(
-            padding:  EdgeInsets.symmetric(vertical: 24.w,horizontal: 32.w),
-            child: InkWell(child: '工作申请'.text.size(30.sp).color(kTextPrimaryColor).make(),onTap: (){
-              Get.to(()=>WorkApplyPage());
-            },),
+            padding: EdgeInsets.symmetric(vertical: 24.w, horizontal: 32.w),
+            child: InkWell(
+              child: '工作申请'.text.size(30.sp).color(kTextPrimaryColor).make(),
+              onTap: () {
+                Get.to(() => WorkApplyPage());
+              },
+            ),
           ),
         ),
-
       ],
       appBarBottom: PreferredSize(
         child: AkuTabBar(controller: _tabController!, tabs: _tabs),
@@ -54,11 +56,10 @@ class _ClockInOutPageState extends State<ClockInOutPage>
       body: TabBarView(
         controller: _tabController,
         children: List.generate(_tabs.length, (index) {
-         
           if (index == 0) {
             return ClockInOutMainPage();
           } else {
-           return ClockInOutView(
+            return ClockInOutView(
               index: index,
             );
           }

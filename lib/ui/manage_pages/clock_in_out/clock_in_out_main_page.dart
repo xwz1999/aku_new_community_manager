@@ -27,6 +27,7 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
   Timer? _clockSetState;
   DateTime? _lastPressed;
   TodayClockRecordModel? _model;
+
   bool get canTap {
     if (_lastPressed == null ||
         DateTime.now().difference(_lastPressed!) > Duration(seconds: 15)) {
@@ -81,43 +82,51 @@ class _ClockInOutMainPageState extends State<ClockInOutMainPage>
 
         setState(() {});
       },
-      child: Container(
-        margin: EdgeInsets.all(32.w),
-        padding: EdgeInsets.all(32.w),
-        width: double.infinity,
-        child: Column(
-          children: [
-            DateUtil.formatDate(DateTime.now(), format: 'yyyy.MM.dd')
-                .text
-                .size(28.sp)
-                .color(kTextPrimaryColor)
-                .make(),
-            16.w.heightBox,
-            WeekDaysToChinese.fromString(DateUtil.getWeekday(DateTime.now()))
-                .text
-                .size(24.sp)
-                .color(kTextPrimaryColor)
-                .make(),
-            64.w.heightBox,
-            Row(
-              children: [
-                _buildCard(0,
-                    time: UserTool.appProvider.clockInTime,
-                    checkTime: _model!.startTime),
-                Spacer(),
-                _buildCard(1,
-                    time: UserTool.appProvider.clockOutTime,
-                    checkTime: _model!.endTime)
-              ], //上班打卡为‘type’0.下班打卡为1
+      child: _model == null
+          ? Container()
+          : Container(
+              margin: EdgeInsets.all(32.w),
+              padding: EdgeInsets.all(32.w),
+              width: double.infinity,
+              child: Column(
+                children: [
+                  DateUtil.formatDate(DateTime.now(), format: 'yyyy.MM.dd')
+                      .text
+                      .size(28.sp)
+                      .color(kTextPrimaryColor)
+                      .make(),
+                  16.w.heightBox,
+                  WeekDaysToChinese.fromString(
+                          DateUtil.getWeekday(DateTime.now()))
+                      .text
+                      .size(24.sp)
+                      .color(kTextPrimaryColor)
+                      .make(),
+                  64.w.heightBox,
+                  Row(
+                    children: [
+                      _buildCard(0,
+                          time: UserTool.appProvider.clockInTime,
+                          checkTime: _model!.startTime),
+                      Spacer(),
+                      _buildCard(1,
+                          time: UserTool.appProvider.clockOutTime,
+                          checkTime: _model!.endTime)
+                    ], //上班打卡为‘type’0.下班打卡为1
+                  ),
+                  150.w.heightBox,
+                  _buildClock(),
+                  65.w.heightBox,
+                  '今日工时'.text.size(24.sp).bold.color(kTextSubColor).make(),
+                  '共$getWorkHours'
+                      .text
+                      .size(24.sp)
+                      .bold
+                      .color(kTextSubColor)
+                      .make(),
+                ],
+              ),
             ),
-            150.w.heightBox,
-            _buildClock(),
-            65.w.heightBox,
-            '今日工时'.text.size(24.sp).bold.color(kTextSubColor).make(),
-            '共$getWorkHours'.text.size(24.sp).bold.color(kTextSubColor).make(),
-          ],
-        ),
-      ),
     );
   }
 
