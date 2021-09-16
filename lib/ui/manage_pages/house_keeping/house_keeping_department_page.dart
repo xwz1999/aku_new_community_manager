@@ -4,16 +4,17 @@ import 'package:aku_community_manager/ui/manage_pages/house_keeping/house_keepin
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:aku_community_manager/utils/extension/list_extension.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_community_manager/utils/extension/list_extension.dart';
 
 class HouseKeepingDepartmentPage extends StatefulWidget {
   final int id;
   final VoidCallback callRefresh;
+
   HouseKeepingDepartmentPage(
       {Key? key, required this.id, required this.callRefresh})
       : super(key: key);
@@ -27,6 +28,7 @@ class _HouseKeepingDepartmentPageState
     extends State<HouseKeepingDepartmentPage> {
   List<HouseKeepingPickStaffModel> _models = [];
   int _selectId = 0;
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -36,6 +38,7 @@ class _HouseKeepingDepartmentPageState
             header: MaterialHeader(),
             onRefresh: () async {
               _models = await HouseKeepingFunc.newHouseKeepingPickStaffList();
+              setState(() {});
             },
             child: ListView(
                 padding: EdgeInsets.all(32.w),

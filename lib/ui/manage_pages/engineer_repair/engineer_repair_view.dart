@@ -35,7 +35,8 @@ class _EngineerRepairViewState extends State<EngineerRepairView> {
           break;
       }
     } else {
-      UserTool.userProvider.infoModel!.engineeringRepairAuthority == ERAUTH.PICK
+      return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
+              ERAUTH.PICK
           ? widget.index + 2
           : widget.index + 1;
     }
@@ -46,7 +47,7 @@ class _EngineerRepairViewState extends State<EngineerRepairView> {
     return BeeListView(
         path: API.engineerRepair.engineerRepairList,
         extraParams: {
-          'repairStatus': repairEngineeringStatus,
+          'repairEngineeringStatus': repairEngineeringStatus,
         },
         controller: widget.controller,
         convert: (models) {

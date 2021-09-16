@@ -1,29 +1,28 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
-import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_detail_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_detail_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_map.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HyginecManageCard extends StatefulWidget {
   final int index;
   final HygienceListModel model;
   final VoidCallback? callRefresh;
-  HyginecManageCard({Key? key, required this.index, required this.model, this.callRefresh})
+  HyginecManageCard(
+      {Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -143,7 +142,7 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
             40.w.heightBox,
             Row(
               children: [
-                '请在期限前完成绿化任务'.text.size(24.sp).color(kTextSubColor).make(),
+                '请在期限前完成卫生任务'.text.size(24.sp).color(kTextSubColor).make(),
                 Spacer(),
                 AkuButton(
                   color: kPrimaryColor,

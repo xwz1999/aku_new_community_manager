@@ -19,6 +19,7 @@ import 'package:velocity_x/velocity_x.dart';
 class HouseKeepingCard extends StatelessWidget {
   final VoidCallback callRefresh;
   final HouseKeepingListModel model;
+
   const HouseKeepingCard(
       {Key? key, required this.callRefresh, required this.model})
       : super(key: key);
@@ -139,7 +140,18 @@ class HouseKeepingCard extends StatelessWidget {
                         id: model.id,
                         callRefresh: callRefresh,
                       ))
-                  : null;
+                  : () async {
+                      List<HouseKeepingProcessModel> processModels =
+                          await HouseKeepingFunc.getHouseKeepingProcess(
+                        model.id,
+                      );
+                      await Get.to(() => HouseKeepingDetailPage(
+                            model: model,
+                            processModels: processModels,
+                            callRefresh: callRefresh,
+                          ));
+                      callRefresh();
+                    };
             },
             radius: 4,
             color: AppStyle.primaryColor,

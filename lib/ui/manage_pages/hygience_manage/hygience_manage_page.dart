@@ -1,13 +1,11 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 // Project imports:
 import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HygienceManagePage extends StatefulWidget {
   HygienceManagePage({Key? key}) : super(key: key);
@@ -18,7 +16,7 @@ class HygienceManagePage extends StatefulWidget {
 
 class _HygienceManagePageState extends State<HygienceManagePage>
     with TickerProviderStateMixin {
-  List<String> _tabs = ['待处理', '未完成', '已完成'];
+  List<String> _tabs = ['待处理', '已完成', '未完成'];
   TabController? _tabController;
 
   @override

@@ -2,9 +2,9 @@ class ERMap {
   static statusString(int status) {
     switch (status) {
       case 1:
-        return '待派单';
+        return '待派单(公司)';
       case 2:
-        return '待派单';
+        return '待派单(人员)';
       case 3:
         return '待接单';
       case 4:

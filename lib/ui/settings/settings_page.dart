@@ -1,25 +1,23 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/agreements/about_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_community_manager/provider/user_provider.dart';
 import 'package:aku_community_manager/style/app_style.dart';
 import 'package:aku_community_manager/tools/screen_tool.dart';
 import 'package:aku_community_manager/tools/widget_tool.dart';
+import 'package:aku_community_manager/ui/agreements/about_page.dart';
 import 'package:aku_community_manager/ui/agreements/agreement_page.dart';
 import 'package:aku_community_manager/ui/agreements/privacy_page.dart';
 import 'package:aku_community_manager/ui/home/home_page.dart';
 import 'package:aku_community_manager/ui/settings/setting_feedback_page.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_tile.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key? key}) : super(key: key);
@@ -40,18 +38,18 @@ class _SettingsPageState extends State<SettingsPage> {
           vertical: 16.w,
         ),
         children: [
-          AkuTile(
-            title: Text('是否接受信息通知'),
-            arrow: false,
-            suffix: CupertinoSwitch(
-              value: _info,
-              onChanged: (value) {
-                setState(() {
-                  _info = value;
-                });
-              },
-            ),
-          ),
+          // AkuTile(
+          //   title: Text('是否接受信息通知'),
+          //   arrow: false,
+          //   suffix: CupertinoSwitch(
+          //     value: _info,
+          //     onChanged: (value) {
+          //       setState(() {
+          //         _info = value;
+          //       });
+          //     },
+          //   ),
+          // ),
           Divider(height: 1.w),
           AkuTile(
             title: Text('关于我们'),

@@ -7,9 +7,9 @@ class HygienceManageMap {
       case 1:
         return '待处理';
       case 2:
-        return '未完成';
-      case 3:
         return '已完成';
+      case 3:
+        return '未完成';
       default:
         return '未知';
     }
@@ -20,9 +20,9 @@ class HygienceManageMap {
       case 1:
         return Color(0xFFFF8200);
       case 2:
-        return Color(0xFFE60E0E);
-      case 3:
         return Color(0xFF999999);
+      case 3:
+        return Color(0xFFE60E0E);
       default:
         return Colors.black;
     }
