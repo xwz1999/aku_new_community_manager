@@ -17,7 +17,7 @@ class AboutPage extends StatelessWidget {
     );
 
     return AkuScaffold(
-      title: '关于小蜜蜂智慧社区管家端',
+      title: '关于小蜜蜂智慧小区管家端',
       body: ListView(
         padding: EdgeInsets.all(32.w),
         children: [
@@ -27,7 +27,7 @@ class AboutPage extends StatelessWidget {
           ),
           SizedBox(height: 100.w),
           Text(
-            '”小蜜蜂智慧社区”APP——幸福生活，简单到达',
+            '”小蜜蜂智慧小区”APP——幸福生活，简单到达',
             style: _style,
           ),
         ],
