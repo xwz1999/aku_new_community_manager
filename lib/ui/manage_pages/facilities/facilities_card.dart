@@ -1,19 +1,17 @@
 // Flutter imports:
 import 'package:aku_community_manager/models/manager/facilities/facilities_check_list_model.dart';
+// Project imports:
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/tools/aku_divider.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_inspect_report_page.dart';
 import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_map.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-// Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
 
 class FacilitiesCard extends StatefulWidget {
   final int index;
@@ -21,7 +19,11 @@ class FacilitiesCard extends StatefulWidget {
   final FacilitiesCheckListModel model;
   final VoidCallback? callRefresh;
   FacilitiesCard(
-      {Key? key, required this.index, required this.model, required this.facilitiesType, this.callRefresh})
+      {Key? key,
+      required this.index,
+      required this.model,
+      required this.facilitiesType,
+      this.callRefresh})
       : super(key: key);
 
   @override
@@ -123,13 +125,14 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
           _buildTile(
               R.ASSETS_MANAGE_CLOCK_PNG,
               '检查提交时间',
-              DateUtil.formatDateStr(widget.model.checkDate!,
+              DateUtil.formatDateStr(widget.model.checkDate ?? '',
                   format: 'yyyy-MM-dd HH:mm')),
         ];
       case 2:
         return [
           15.w.heightBox,
-          _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail!,
+          _buildTile(
+              R.ASSETS_MANAGE_CLOCK_PNG, '未完成原因', widget.model.detail ?? '',
               color: Colors.red),
           15.w.heightBox,
           _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',

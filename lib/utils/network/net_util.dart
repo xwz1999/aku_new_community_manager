@@ -1,13 +1,6 @@
 // Dart imports:
 import 'dart:io';
 
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:dio/dio.dart';
-import 'package:get/get.dart' hide Response, FormData, MultipartFile;
-import 'package:power_logger/power_logger.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
@@ -15,6 +8,12 @@ import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get.dart' hide Response, FormData, MultipartFile;
+import 'package:power_logger/power_logger.dart';
+import 'package:provider/provider.dart';
 
 class NetUtil {
   Dio? _dio;
@@ -142,7 +141,7 @@ class NetUtil {
     } else {
       for (var item in files) {
         BaseFileModel model = await NetUtil().upload(api, item);
-        urls.add(model.url??'');
+        urls.add(model.url ?? '');
       }
     }
 
@@ -176,7 +175,7 @@ class NetUtil {
     final userProvider = Provider.of<UserProvider>(Get.context!, listen: false);
     if (!model.status! && model.message == '登录失效，请登录' && userProvider.isLogin) {
       userProvider.logout();
-      Get.offAll(LoginPage());
+      Get.offAll(() => LoginPage());
     }
     if (!model.status! || showMessage) {
       BotToast.showText(text: model.message!);

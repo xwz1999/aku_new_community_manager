@@ -91,7 +91,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: AppStyle.primaryColor,
                     onPressed: () {
                       userProvider.logout();
-                      Get.offAll(HomePage());
+                      Get.offAll(() => HomePage());
                     },
                     child: Text(
                       '退出登录',

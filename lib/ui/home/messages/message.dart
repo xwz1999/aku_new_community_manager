@@ -1,25 +1,23 @@
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
+// Project imports:
+import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/message_provider.dart';
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/home/messages/comment_message.dart';
+import 'package:aku_community_manager/ui/home/messages/system/system_message.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get/instance_manager.dart';
 import 'package:provider/provider.dart';
-
-// Project imports:
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/home/messages/comment_message.dart';
-import 'package:aku_community_manager/ui/home/messages/system/system_message.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class Message extends StatefulWidget {
   Message({Key? key}) : super(key: key);
@@ -30,6 +28,7 @@ class Message extends StatefulWidget {
 
 class _MessageState extends State<Message> {
   EasyRefreshController _refreshController = EasyRefreshController();
+
   Widget _messageTypeImage(String type) {
     late String path;
     Color? ca;
@@ -156,7 +155,9 @@ class _MessageState extends State<Message> {
               messageProvider.sysDate,
               _messageTypeImage('系统消息'),
               '系统消息',
-              '你有一条新的${messageProvider.sysMesTypeString}待处理',
+              messageProvider.sysMessage == 0
+                  ? '暂无新的系统消息'
+                  : '你有一条新的${messageProvider.sysMesTypeString}待处理',
               messageProvider.sysMessage,
               onpressed: () async {
                 BaseModel baseModel =
@@ -174,7 +175,7 @@ class _MessageState extends State<Message> {
               messageProvider.commentDate,
               _messageTypeImage('评论消息'),
               '评论消息',
-              '你有一条新的评论回复',
+              messageProvider.commentMessage == 0 ? '暂无新的评论消息' : '你有一条新的评论回复',
               messageProvider.commentMessage,
               onpressed: () async {
                 BaseModel baseModel =
