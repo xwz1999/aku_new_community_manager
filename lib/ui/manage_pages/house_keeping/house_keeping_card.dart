@@ -206,7 +206,17 @@ class HouseKeepingCard extends StatelessWidget {
           UserTool.userProvider.infoModel!.houseKeepingAuthority == HKAUTH.PICK
               ? AkuMaterialButton(
                   height: 64.w,
-                  onPressed: () async {},
+                  onPressed: () async {
+                    List<HouseKeepingProcessModel> processModels =
+                        await HouseKeepingFunc.getHouseKeepingProcess(
+                      model.id,
+                    );
+                    await Get.to(() => HouseKeepingDetailPage(
+                          model: model,
+                          processModels: processModels,
+                          callRefresh: callRefresh,
+                        ));
+                  },
                   radius: 4,
                   color: AppStyle.primaryColor,
                   padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -243,7 +253,17 @@ class HouseKeepingCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              List<HouseKeepingProcessModel> processModels =
+                  await HouseKeepingFunc.getHouseKeepingProcess(
+                model.id,
+              );
+              await Get.to(() => HouseKeepingDetailPage(
+                    model: model,
+                    processModels: processModels,
+                    callRefresh: callRefresh,
+                  ));
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -262,7 +282,17 @@ class HouseKeepingCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              List<HouseKeepingProcessModel> processModels =
+                  await HouseKeepingFunc.getHouseKeepingProcess(
+                model.id,
+              );
+              await Get.to(() => HouseKeepingDetailPage(
+                    model: model,
+                    processModels: processModels,
+                    callRefresh: callRefresh,
+                  ));
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -281,7 +311,17 @@ class HouseKeepingCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              List<HouseKeepingProcessModel> processModels =
+                  await HouseKeepingFunc.getHouseKeepingProcess(
+                model.id,
+              );
+              await Get.to(() => HouseKeepingDetailPage(
+                    model: model,
+                    processModels: processModels,
+                    callRefresh: callRefresh,
+                  ));
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -300,7 +340,17 @@ class HouseKeepingCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              List<HouseKeepingProcessModel> processModels =
+                  await HouseKeepingFunc.getHouseKeepingProcess(
+                model.id,
+              );
+              await Get.to(() => HouseKeepingDetailPage(
+                    model: model,
+                    processModels: processModels,
+                    callRefresh: callRefresh,
+                  ));
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -319,7 +369,17 @@ class HouseKeepingCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: () async {},
+            onPressed: () async {
+              List<HouseKeepingProcessModel> processModels =
+                  await HouseKeepingFunc.getHouseKeepingProcess(
+                model.id,
+              );
+              await Get.to(() => HouseKeepingDetailPage(
+                    model: model,
+                    processModels: processModels,
+                    callRefresh: callRefresh,
+                  ));
+            },
             radius: 4,
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),

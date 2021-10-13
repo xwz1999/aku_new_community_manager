@@ -1,25 +1,23 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:aku_community_manager/models/user/user_info_model.dart';
-import 'package:aku_community_manager/provider/message_provider.dart';
-import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:get/get.dart';
-import 'package:jpush_flutter/jpush_flutter.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_community_manager/const/api.dart';
+// Flutter imports:
+import 'package:aku_community_manager/models/user/user_info_model.dart';
 import 'package:aku_community_manager/models/user/user_profile_model.dart';
+import 'package:aku_community_manager/provider/message_provider.dart';
 import 'package:aku_community_manager/utils/hive_store.dart';
 import 'package:aku_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:provider/provider.dart';
 
 //登录状态管理
 class UserProvider extends ChangeNotifier {
@@ -36,7 +34,7 @@ class UserProvider extends ChangeNotifier {
     _profileModel = await updateProfile();
     _infoModel = await updateUserInfo();
     if (isLogin) {
-      WebSocketUtil().setUser(infoModel!.id.toString());
+      WebSocketUtil().setUser(_infoModel?.id.toString() ?? '');
       WebSocketUtil().startWebSocket();
     }
     // await setCurrentHouse((_userDetailModel?.estateNames?.isEmpty ?? true)
@@ -46,8 +44,10 @@ class UserProvider extends ChangeNotifier {
   }
 
   UserProfileModel? _profileModel;
+
   UserProfileModel? get profileModel => _profileModel;
   UserInfoModel? _infoModel;
+
   UserInfoModel? get infoModel => _infoModel;
 
   ///更新用户profile

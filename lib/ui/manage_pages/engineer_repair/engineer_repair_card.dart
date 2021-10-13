@@ -213,6 +213,8 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
+              await Get.to(
+                  () => EngineerRepairDetailPage(repairEngineerId: model.id));
               callRefresh();
             },
             radius: 4,
@@ -301,6 +303,8 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
+              await Get.to(
+                  () => EngineerRepairDetailPage(repairEngineerId: model.id));
               callRefresh();
             },
             radius: 4,
