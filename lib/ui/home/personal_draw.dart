@@ -1,11 +1,4 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:flutter/material.dart';
-
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_community_manager/const/resource.dart';
 import 'package:aku_community_manager/provider/user_provider.dart';
@@ -14,6 +7,11 @@ import 'package:aku_community_manager/ui/login/login_page.dart';
 import 'package:aku_community_manager/ui/settings/settings_page.dart';
 import 'package:aku_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class PersonalDraw extends StatefulWidget {
   PersonalDraw({Key? key}) : super(key: key);
@@ -23,7 +21,7 @@ class PersonalDraw extends StatefulWidget {
 }
 
 class _PersonalDrawState extends State<PersonalDraw> {
-  Widget _myListTile(String path, String text, { VoidCallback? onPressed}) {
+  Widget _myListTile(String path, String text, {VoidCallback? onPressed}) {
     return AkuButton(
       onPressed: onPressed,
       child: Container(
@@ -125,7 +123,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                     : Get.to(() => LoginPage());
               },
             ),
-            _myListTile(R.ASSETS_USER_IC_KEFU_PNG, '联系客服'),
+            // _myListTile(R.ASSETS_USER_IC_KEFU_PNG, '联系客服'),
             _myListTile(R.ASSETS_USER_IC_SETUP_PNG, '设置', onPressed: () {
               Get.to(() => SettingsPage());
             }),
