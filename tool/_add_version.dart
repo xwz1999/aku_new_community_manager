@@ -16,7 +16,7 @@ void addVersion() async {
 }
 
 @Task('add path version number')
-void addVersionPatch() async {
+void addVersionMajor() async {
   String projectPath = Directory('.').absolute.path;
   String yamlPath = join(projectPath, 'pubspec.yaml');
   String yamlContent = await File(yamlPath).readAsString();
@@ -24,7 +24,7 @@ void addVersionPatch() async {
   String version = content['version'];
   //rename version
 
-  Version resultVersion = VersionTool.fromText(version).nextPatchTag('dev');
+  Version resultVersion = VersionTool.fromText(version).nextMajorTag('dev');
 
   String result = yamlContent.replaceFirst(version, resultVersion.toString());
   await File(yamlPath).writeAsString(result);

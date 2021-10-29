@@ -68,7 +68,7 @@ buildIos() async {
     'build',
     'ios',
     '--dart-define',
-    'BUILD_TYPE=PRODUCT'
+    'ISPRODUCT=true'
   ]);
 }
 
