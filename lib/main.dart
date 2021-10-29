@@ -1,14 +1,21 @@
 // Flutter imports:
 
+// Project imports:
+import 'package:aku_community_manager/provider/app_provider.dart';
 import 'package:aku_community_manager/provider/message_provider.dart';
+import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_community_manager/style/apptheme.dart';
 import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_community_manager/ui/splash/splash_page.dart';
+import 'package:aku_community_manager/utils/dev_util.dart';
+import 'package:aku_community_manager/utils/jpush_message_parse.dart';
 import 'package:aku_community_manager/utils/websocket/fier_dialog.dart';
 import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -16,19 +23,11 @@ import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:power_logger/power_logger.dart';
 import 'package:provider/provider.dart';
 
-// Project imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/apptheme.dart';
-import 'package:aku_community_manager/ui/splash/splash_page.dart';
-import 'package:aku_community_manager/utils/dev_util.dart';
-import 'package:aku_community_manager/utils/jpush_message_parse.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   JPush jpush = new JPush();
-  const isProduct = const bool.fromEnvironment('ISPRODUCT');
+  const isProduct =
+      const bool.fromEnvironment('ISPRODUCT', defaultValue: false);
   DevUtil.setDev(!isProduct);
   WebSocketUtil().initWebSocket(
       // heartDuration: Duration(seconds: 5),

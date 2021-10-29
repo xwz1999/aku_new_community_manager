@@ -61,7 +61,7 @@ dependencies:
   #瀑布流
   waterfall_flow: ^3.0.1
 
-  power_logger: ^1.0.1-nullsafety.1
+  power_logger: ^1.2.1
   logger: ^1.0.0
 
   hive: ^2.0.4
