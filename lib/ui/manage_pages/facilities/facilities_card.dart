@@ -18,6 +18,7 @@ class FacilitiesCard extends StatefulWidget {
   final int facilitiesType;
   final FacilitiesCheckListModel model;
   final VoidCallback? callRefresh;
+
   FacilitiesCard(
       {Key? key,
       required this.index,
@@ -74,6 +75,7 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
                           await Get.to(() => FacilitiesInspectReportPage(
                                 facilitiesType: widget.facilitiesType,
                                 id: widget.model.id!,
+                                model: widget.index != 1 ? widget.model : null,
                               ));
                           widget.callRefresh!();
                         },
@@ -98,6 +100,7 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
       await Get.to(() => FacilitiesInspectReportPage(
             facilitiesType: widget.facilitiesType,
             id: widget.model.id!,
+            model: widget.index != 1 ? widget.model : null,
           ));
       widget.callRefresh!();
     });

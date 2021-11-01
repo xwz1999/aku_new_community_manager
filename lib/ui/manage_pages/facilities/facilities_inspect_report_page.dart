@@ -3,30 +3,33 @@ import 'dart:io';
 
 // Flutter imports:
 import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_community_manager/models/manager/facilities/facilities_check_list_model.dart';
+// Project imports:
+import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
+import 'package:aku_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_community_manager/utils/network/base_model.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-// Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
-import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-
 class FacilitiesInspectReportPage extends StatefulWidget {
   final int facilitiesType;
   final int id;
+  final FacilitiesCheckListModel? model;
+
   FacilitiesInspectReportPage({
     Key? key,
     /*required*/ required this.facilitiesType,
     /*required*/ required this.id,
+    this.model,
   }) : super(key: key);
 
   @override
@@ -39,7 +42,9 @@ class _FacilitiesInspectReportPageState
   // List<File>? _selfPhotos;
   late List<File> _scenePhotos;
   String? _describtion;
-  int _scene = 1;//设施设备状况 1为正常 2为异常
+  int _scene = 1; //设施设备状况 1为正常 2为异常
+  bool get editEnable => widget.model == null;
+
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(
@@ -142,9 +147,7 @@ class _FacilitiesInspectReportPageState
     return Column(
       children: [
         Row(
-          children: [
-            '$title'.text.color(kTextPrimaryColor).size(32.sp).make()
-          ],
+          children: ['$title'.text.color(kTextPrimaryColor).size(32.sp).make()],
         ),
         32.w.heightBox,
         Row(
@@ -153,20 +156,24 @@ class _FacilitiesInspectReportPageState
               text: '正常',
               value: 1,
               gropValue: _scene,
-              onPressed: () {
-                _scene = 1;
-                setState(() {});
-              },
+              onPressed: !editEnable
+                  ? () {}
+                  : () {
+                      _scene = 1;
+                      setState(() {});
+                    },
             ),
             80.w.widthBox,
             AkuSingleCheckButton(
               text: '异常',
               value: 2,
               gropValue: _scene,
-              onPressed: () {
-                _scene = 2;
-                setState(() {});
-              },
+              onPressed: !editEnable
+                  ? () {}
+                  : () {
+                      _scene = 2;
+                      setState(() {});
+                    },
             ),
           ],
         ),
@@ -181,25 +188,27 @@ class _FacilitiesInspectReportPageState
               color: Color(0xFFE8E8E8),
             ),
           ),
-          child: TextField(
-            minLines: 5,
-            maxLines: 10,
-            autofocus: false,
-            onChanged: (value) {
-              _describtion = value;
-            },
-            decoration: InputDecoration(
-              hintText: '请详细描述异常情况',
-              hintStyle: TextStyle(
-                fontSize: 28.sp,
-                color: kTextSubColor,
-              ),
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
-              border: InputBorder.none,
-              isDense: true,
-            ),
-          ),
+          child: !editEnable
+              ? (widget.model!.detail ?? '').text.size(28.sp).black.make()
+              : TextField(
+                  minLines: 5,
+                  maxLines: 10,
+                  autofocus: false,
+                  onChanged: (value) {
+                    _describtion = value;
+                  },
+                  decoration: InputDecoration(
+                    hintText: '请详细描述异常情况',
+                    hintStyle: TextStyle(
+                      fontSize: 28.sp,
+                      color: kTextSubColor,
+                    ),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 16.w, horizontal: 24.w),
+                    border: InputBorder.none,
+                    isDense: true,
+                  ),
+                ),
         ),
       ],
     )
@@ -244,13 +253,19 @@ class _FacilitiesInspectReportPageState
         //   ],
         // ),
         32.w.heightBox,
-        AkuPickImageWidget(
-          description: '上传现场照片',
-          onChanged: (files) {
-            _scenePhotos = files;
-            setState(() {});
-          },
-        )
+        !editEnable
+            ? BeeGridImageView(
+                urls: (widget.model!.imgList ?? [])
+                    .map((e) => API.image(e.url ?? ''))
+                    .toList(),
+              )
+            : AkuPickImageWidget(
+                description: '上传现场照片',
+                onChanged: (files) {
+                  _scenePhotos = files;
+                  setState(() {});
+                },
+              )
       ],
     )
         .box
