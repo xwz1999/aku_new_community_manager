@@ -66,6 +66,8 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
         return VisitorStatus.VISIT_DONE;
       case 3:
         return VisitorStatus.OUTDATE;
+      case 4:
+        return VisitorStatus.ZUOFEI;
       default:
         return null;
     }
@@ -162,6 +164,8 @@ class _VisitorManagerCardState extends State<VisitorManagerCard> {
         return R.ASSETS_MANAGE_IC_DAOFANG_PNG;
       case VisitorStatus.OUTDATE:
         return R.ASSETS_MANAGE_IC_GUOQI_PNG;
+      case VisitorStatus.ZUOFEI:
+        return R.ASSETS_MANAGE_IC_ZUOFEI_PNG;
       default:
         return '';
     }

@@ -38,6 +38,10 @@ class BeeGridImageView extends StatelessWidget {
                 placeholder: R.ASSETS_PLACEHOLDER_WEBP,
                 image: API.image(urls[index]),
                 fit: BoxFit.cover,
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return Image.asset(R.ASSETS_PLACEHOLDER_WEBP,height: 184.w,
+                    width: 184.w,);
+                },
               ),
             ),
           ),

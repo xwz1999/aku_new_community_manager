@@ -33,12 +33,18 @@ class BorrowStatusItemModel {
   ///借取状态（1.出借中，2.已还，3.待检查）
   String get borrowStatusValue {
     switch (borrowStatus) {
+      case -1:
+        return '出借审核中';
+      case 0:
+        return '出借审核驳回';
       case 1:
         return '出借中';
       case 2:
-        return '已还';
+        return '已归还';
       case 3:
-        return '待检查';
+        return '归还审核中';
+      case 4:
+        return '归还审核驳回';
       default:
         return '未知';
     }

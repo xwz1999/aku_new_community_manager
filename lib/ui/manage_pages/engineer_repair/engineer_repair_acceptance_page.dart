@@ -219,7 +219,11 @@ class _EngineerRepairAcceptancePageState
               borderRadius: BorderRadius.circular(4.w),
               child: FadeInImage.assetNetwork(
                   placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                  image: API.image(e.url!)),
+                  image: API.image(e.url!),
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return Image.asset(R.ASSETS_PLACEHOLDER_WEBP,);
+                },
+              ),
             );
           }).toList(),
           shrinkWrap: true,

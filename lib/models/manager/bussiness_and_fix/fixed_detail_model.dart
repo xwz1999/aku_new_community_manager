@@ -172,6 +172,7 @@ class CostDetail {
 class RepairDetail {
   int? id;
   int? dispatchId;
+  String? roomName;
   String? name;
   String? tel;
   int? type;
@@ -181,6 +182,7 @@ class RepairDetail {
   RepairDetail(
       {this.id,
       this.dispatchId,
+        this.roomName,
       this.name,
       this.tel,
       this.type,
@@ -190,6 +192,7 @@ class RepairDetail {
   RepairDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     dispatchId = json['dispatchId'];
+    roomName = json['roomName'];
     name = json['name'];
     tel = json['tel'];
     type = json['type'];
@@ -206,6 +209,7 @@ class RepairDetail {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['dispatchId'] = this.dispatchId;
+    data['roomName'] = this.roomName;
     data['name'] = this.name;
     data['tel'] = this.tel;
     data['type'] = this.type;

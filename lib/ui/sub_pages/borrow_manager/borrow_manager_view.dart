@@ -25,6 +25,7 @@ class _BorrowManagerViewState extends State<BorrowManagerView>
   Widget build(BuildContext context) {
     super.build(context);
     return BeeListView(
+
       path: API.manage.borrowStatusList,
       extraParams: {'borrowStatus': widget.status},
       controller: _refreshController,
@@ -33,6 +34,7 @@ class _BorrowManagerViewState extends State<BorrowManagerView>
           .toList(),
       builder: (items) {
         return ListView.builder(
+          padding: EdgeInsets.only(left:16,right: 16 ),
           itemBuilder: (context, index) {
             return BorrowManagerCard(model: items[index]);
           },

@@ -28,8 +28,8 @@ class _AkuSingleCheckButtonState extends State<AkuSingleCheckButton> {
           color: isSelect ? Color(0xFFFFF8E0) : Colors.white,
           border: Border.all(
               color: isSelect ? Color(0xFFFFC40C) : Color(0xFF999999),
-              width: 3.w),
-          borderRadius: BorderRadius.circular(4.w)),
+              width: 1.w),
+          borderRadius: BorderRadius.circular(8.w)),
       width: 180.w,
       height: 72.w,
       child: widget.text.text

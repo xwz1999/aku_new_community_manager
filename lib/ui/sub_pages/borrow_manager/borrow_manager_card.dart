@@ -19,6 +19,8 @@ import 'package:aku_community_manager/ui/sub_pages/borrow_manager/borrow_manager
 import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:aku_community_manager/utils/network/net_util.dart';
 
+import 'borrow_manager_examine_page.dart';
+
 class BorrowManagerCard extends StatefulWidget {
   final BorrowStatusItemModel model;
   BorrowManagerCard({Key? key, required this.model}) : super(key: key);
@@ -46,13 +48,22 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
               AkuBox.w(24),
               Text(
                 DateUtil.formatDate(widget.model.create),
-                style: TextStyle(),
+                style: TextStyle(
+                  color: AppStyle.minorTextColor,
+                  fontSize: 22.sp,
+                ),
               ),
               Spacer(),
               Text(
                 widget.model.borrowStatusValue,
                 style: TextStyle(
-                  color: AppStyle.failColor,
+                  color: widget.model.borrowStatus==-1?Color(0xFFFB7302):
+                  widget.model.borrowStatus==0?Color(0xD9E60E0E):
+                  widget.model.borrowStatus==1?Color(0xD9000000):
+                  widget.model.borrowStatus==2?Color(0x73000000):
+                  widget.model.borrowStatus==3?Color(0xD9FB7402):
+                  widget.model.borrowStatus==4?Color(0xD9E60E0E):
+                  AppStyle.failColor,
                   fontWeight: FontWeight.bold,
                   fontSize: 24.sp,
                 ),
@@ -74,9 +85,13 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
             children: [
               FadeInImage.assetNetwork(
                 placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                image: API.image(widget.model.firstImg?.url ?? ''),
+                image: API.image(widget.model.imgUrls!.isEmpty?'':widget.model.imgUrls![0].url??''),
                 height: 184.w,
                 width: 184.w,
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return Image.asset(R.ASSETS_PLACEHOLDER_WEBP,height: 184.w,
+                    width: 184.w,);
+                },
               ),
               AkuBox.w(24),
               Expanded(
@@ -187,6 +202,25 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
                     ),
                   )
                 : SizedBox(),
+            widget.model.borrowStatus == -1
+                ? AkuMaterialButton(
+              minWidth: 160.w,
+              height: 64.w,
+              color: AppStyle.primaryColor,
+              radius: 4.w,
+              onPressed: () async {
+                await Get.to(BorrowManagerExaminePage(id: widget.model.id!, model: widget.model, type: 1,));
+              },
+              child: Text(
+                '点击审核',
+                style: TextStyle(
+                  color: AppStyle.primaryTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28.w,
+                ),
+              ),
+            )
+                : SizedBox(),
           ],
         ),
       ];
@@ -206,7 +240,7 @@ class _BorrowManagerCardState extends State<BorrowManagerCard> {
           width: 40.w,
         ),
         Text(
-          '$title\:',
+          '$title\：',
           style: TextStyle(
             color: AppStyle.minorTextColor,
             fontSize: 28.w,

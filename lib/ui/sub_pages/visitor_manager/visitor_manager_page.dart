@@ -14,6 +14,7 @@ enum VisitorStatus {
   NOT_VISIT,
   VISIT_DONE,
   OUTDATE,
+  ZUOFEI,
 }
 
 class VisitorCardsModel {

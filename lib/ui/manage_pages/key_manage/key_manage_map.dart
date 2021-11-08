@@ -21,11 +21,11 @@ class KeyManageMap {
 
  static Map<int, String> keyRecordStatus = {
     1: '待审核',
-    2: '已通过',
-    3: '已驳回',
-    4: '已归还',
-    5: '',
-    6: ''
+    2: '审核通过',
+    3: '审核驳回',
+    4: '归还待审核',
+    5: '归还审核驳回',
+    6: '已归还'
   };
 
   static Map<int, Color> keyRecordStatusColor = {

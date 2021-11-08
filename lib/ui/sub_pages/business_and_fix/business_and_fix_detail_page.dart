@@ -258,6 +258,11 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         AkuBox.h(16),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
+          '绑定房屋',
+          _detailModel.repairDetail!.roomName??'',
+        ),
+        _buildTile(
+          R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
           '报修人',
           _detailModel.repairDetail!.name!,
         ),

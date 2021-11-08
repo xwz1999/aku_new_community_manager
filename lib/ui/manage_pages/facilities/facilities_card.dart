@@ -13,18 +13,22 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'facilities_inspect_report_detail_page.dart';
+
 class FacilitiesCard extends StatefulWidget {
   final int index;
   final int facilitiesType;
+  final int executeStatus;
   final FacilitiesCheckListModel model;
   final VoidCallback? callRefresh;
+
 
   FacilitiesCard(
       {Key? key,
       required this.index,
       required this.model,
       required this.facilitiesType,
-      this.callRefresh})
+      this.callRefresh, required this.executeStatus})
       : super(key: key);
 
   @override
@@ -97,11 +101,21 @@ class _FacilitiesCardState extends State<FacilitiesCard> {
         .padding(EdgeInsets.all(24.w))
         .make()
         .onInkTap(() async {
-      await Get.to(() => FacilitiesInspectReportPage(
+          if(widget.executeStatus==2){
+            await Get.to(() => FacilitiesInspectReportDetailPage(
             facilitiesType: widget.facilitiesType,
             id: widget.model.id!,
-            model: widget.index != 1 ? widget.model : null,
+            model: widget.model,
+            ));
+        }
+          else{
+          await Get.to(() => FacilitiesInspectReportPage(
+          facilitiesType: widget.facilitiesType,
+          id: widget.model.id!,
+          model:  widget.model,
           ));
+    }
+
       widget.callRefresh!();
     });
   }

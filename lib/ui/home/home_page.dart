@@ -577,7 +577,7 @@ class _HomePageState extends State<HomePage> {
                           !userProvider.isLogin
                               ? SizedBox()
                               : Container(
-                                  height: 450.w,
+                                  height: 453.w,
                                   child: ListView.separated(
                                     padding: EdgeInsets.zero,
                                     separatorBuilder: (context, index) {

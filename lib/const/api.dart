@@ -125,6 +125,9 @@ class _Manage {
   ///借还管理：修改物品明细信息
   String get borrowEdit => '/user/borrow/updateArticleDetail';
 
+  ///借还管理：出借审核
+  String get lendingApproval => '/user/borrow/lendingApproval';
+
   ///物品出户：查询所有的物品出户信息(包含搜索条件)
   String get goodsOutList => '/user/articleOut/list';
 

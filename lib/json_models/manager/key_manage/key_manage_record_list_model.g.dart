@@ -17,5 +17,7 @@ KeyManageRecordListModel _$KeyManageRecordListModelFromJson(
     storageLocation: json['storageLocation'] as String?,
     auditDate: json['auditDate'] as String?,
     reason: json['reason'] as String?,
+    returnAuditDate: json['returnAuditDate'] as String?,
+    returnReason: json['returnReason'] as String?,
   );
 }

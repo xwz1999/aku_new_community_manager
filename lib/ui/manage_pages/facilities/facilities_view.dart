@@ -59,7 +59,7 @@ class _FacilitiesViewState extends State<FacilitiesView> {
                   model: items[index],
                   callRefresh: () {
                     _refreshController!.callRefresh();
-                  },
+                  }, executeStatus: widget.index + 1,
                 );
               },
               separatorBuilder: (_, __) {

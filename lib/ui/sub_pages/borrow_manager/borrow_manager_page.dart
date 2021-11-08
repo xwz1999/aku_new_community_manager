@@ -28,8 +28,9 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     return [
       '全部',
+      ...userProvider.infoModel!.canOperation ? ['待审核'] : [],
+      ...userProvider.infoModel!.canOperation ? ['检查中'] : [],
       '出借中',
-      ...userProvider.infoModel!.canOperation ? ['待检查'] : [],
       '已归还'
     ];
   }
@@ -76,10 +77,14 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
     final userProvider = Provider.of<UserProvider>(context);
     return [
       BorrowManagerView(),
+    ...userProvider.infoModel!.canOperation
+    ? [BorrowManagerView(status: -1)]
+        : [],
+    ...userProvider.infoModel!.canOperation
+    ? [BorrowManagerView(status: 3)]
+        : [],
       BorrowManagerView(status: 1),
-      ...userProvider.infoModel!.canOperation
-          ? [BorrowManagerView(status: 3)]
-          : [],
+
       BorrowManagerView(status: 2),
     ];
   }
