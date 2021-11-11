@@ -3,12 +3,22 @@
 class R {
   const R._();
 
+  /// ![preview](file:///Users/datang/aku_community_manager/assets/home/app_alarm.png)
+  static const String ASSETS_HOME_APP_ALARM_PNG = 'assets/home/app_alarm.png';
+
   /// ![preview](file:///Users/datang/aku_community_manager/assets/home/clock_in_out.png)
   static const String ASSETS_HOME_CLOCK_IN_OUT_PNG =
       'assets/home/clock_in_out.png';
 
+  /// ![preview](file:///Users/datang/aku_community_manager/assets/home/device_alarm.png)
+  static const String ASSETS_HOME_DEVICE_ALARM_PNG =
+      'assets/home/device_alarm.png';
+
   /// ![preview](file:///Users/datang/aku_community_manager/assets/home/facilities.png)
   static const String ASSETS_HOME_FACILITIES_PNG = 'assets/home/facilities.png';
+
+  /// ![preview](file:///Users/datang/aku_community_manager/assets/home/fire_alarm.png)
+  static const String ASSETS_HOME_FIRE_ALARM_PNG = 'assets/home/fire_alarm.png';
 
   /// ![preview](file:///Users/datang/aku_community_manager/assets/home/house_keeping.png)
   static const String ASSETS_HOME_HOUSE_KEEPING_PNG =
