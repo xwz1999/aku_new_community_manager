@@ -2,16 +2,16 @@
 import 'dart:io';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/api.dart';
 // Flutter imports:
-import 'package:aku_community_manager/models/user/user_info_model.dart';
-import 'package:aku_community_manager/models/user/user_profile_model.dart';
-import 'package:aku_community_manager/provider/message_provider.dart';
-import 'package:aku_community_manager/utils/hive_store.dart';
-import 'package:aku_community_manager/utils/network/base_file_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
-import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
+import 'package:aku_new_community_manager/models/user/user_info_model.dart';
+import 'package:aku_new_community_manager/models/user/user_profile_model.dart';
+import 'package:aku_new_community_manager/provider/message_provider.dart';
+import 'package:aku_new_community_manager/utils/hive_store.dart';
+import 'package:aku_new_community_manager/utils/network/base_file_model.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/utils/websocket/web_socket_util.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';

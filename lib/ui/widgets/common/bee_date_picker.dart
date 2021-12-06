@@ -1,4 +1,4 @@
-import 'package:aku_community_manager/ui/widgets/common/bee_custom_picker.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_custom_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

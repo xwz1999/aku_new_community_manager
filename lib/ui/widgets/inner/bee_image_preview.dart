@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

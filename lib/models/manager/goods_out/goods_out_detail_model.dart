@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:common_utils/common_utils.dart';
 
 // Project imports:
-import 'package:aku_community_manager/models/common/img_model.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
 
 // *	id	物品出户主键id
 // *	status	状态(1.待出门，2.已出门，3.驳回申请)

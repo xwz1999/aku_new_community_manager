@@ -2,7 +2,7 @@
 import 'dart:io';
 
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,13 +10,13 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class SettingFeedBackPage extends StatefulWidget {
   SettingFeedBackPage({Key? key}) : super(key: key);

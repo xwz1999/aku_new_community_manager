@@ -1,10 +1,10 @@
-import 'package:aku_community_manager/models/manager/clock_in_out/clock_apply_record_list_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
+import 'package:aku_new_community_manager/models/manager/clock_in_out/clock_apply_record_list_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 
 class ClockInOutApplyCard extends StatefulWidget {
   final ClockApplyRecordListModel model;

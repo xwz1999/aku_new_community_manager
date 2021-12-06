@@ -1,5 +1,5 @@
 // Project imports:
-import 'package:aku_community_manager/models/common/img_model.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
 
 class BorrowCheckItemModel {
   int? id;

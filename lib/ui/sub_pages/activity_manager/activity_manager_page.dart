@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/activity_item_model.dart';
-import 'package:aku_community_manager/ui/sub_pages/activity_manager/activity_manager_card.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
-import 'package:aku_community_manager/utils/network/base_list_model.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/activity_item_model.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/activity_manager/activity_manager_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/utils/network/base_list_model.dart';
 
 class ActivityManagerPage extends StatefulWidget {
   ActivityManagerPage({Key? key}) : super(key: key);

@@ -9,8 +9,8 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 // Project imports:
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_back_button.dart';
 
 // import 'package:qr_code_scanner/qr_code_scanner.dart';
 

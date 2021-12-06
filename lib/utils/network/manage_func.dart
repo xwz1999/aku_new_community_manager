@@ -4,11 +4,11 @@
 import 'package:dio/dio.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
-import 'package:aku_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/dispatch_report_model.dart';
+import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class ManageFunc {
   ///报事报修详情

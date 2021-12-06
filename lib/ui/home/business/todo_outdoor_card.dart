@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,9 +8,9 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
+import 'package:aku_new_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
 
 class ToDoOutDoorCard extends StatefulWidget {
   final ToDoOutDoorModel model;

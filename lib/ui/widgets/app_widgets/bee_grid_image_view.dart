@@ -1,6 +1,6 @@
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/ui/widgets/inner/bee_image_preview.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/bee_image_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

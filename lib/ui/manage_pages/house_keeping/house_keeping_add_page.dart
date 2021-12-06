@@ -1,11 +1,11 @@
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/house_keeping/house_keeping_building_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/house_keeping/house_keeping_building_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/aku_divider.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 
 class HouseKeepingAddPage extends StatefulWidget {
   HouseKeepingAddPage({Key? key}) : super(key: key);

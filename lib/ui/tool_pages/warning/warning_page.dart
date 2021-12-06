@@ -2,10 +2,10 @@
 import 'dart:ui';
 
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_cupertino_button.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_cupertino_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -17,11 +17,11 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Project imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/widget_tool.dart';
+import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class PermissonUtil {
   static Future getLocationPermisson() async {

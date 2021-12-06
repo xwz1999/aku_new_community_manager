@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'package:aku_community_manager/json_models/clock_in_out/today_clock_record_model.dart';
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/user_tool.dart';
-import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
-import 'package:aku_community_manager/utils/weekdays_to_chinese.dart';
+import 'package:aku_new_community_manager/json_models/clock_in_out/today_clock_record_model.dart';
+import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
+import 'package:aku_new_community_manager/utils/weekdays_to_chinese.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';

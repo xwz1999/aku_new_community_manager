@@ -1,9 +1,9 @@
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_main_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_in_out_view.dart';
-import 'package:aku_community_manager/ui/manage_pages/clock_in_out/work_apply_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/clock_in_out/clock_in_out_main_page.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/clock_in_out/clock_in_out_view.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/clock_in_out/work_apply_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

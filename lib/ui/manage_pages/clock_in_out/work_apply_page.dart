@@ -1,11 +1,11 @@
 
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
-import 'package:aku_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
-import 'package:aku_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_date_picker.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/aku_divider.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/clock_in_out/clock_func.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_date_picker.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

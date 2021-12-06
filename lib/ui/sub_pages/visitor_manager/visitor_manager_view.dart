@@ -6,10 +6,10 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/visitor_item_model.dart';
-import 'package:aku_community_manager/ui/sub_pages/visitor_manager/visitor_manager_card.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/visitor_item_model.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/visitor_manager/visitor_manager_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class VisitorManagerView extends StatefulWidget {
   final int? status;

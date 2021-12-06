@@ -7,11 +7,11 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/key_apply_record_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_view.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/key_manage/key_apply_record_page.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/key_manage/key_manage_view.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class KeyManagePage extends StatefulWidget {
   KeyManagePage({Key? key}) : super(key: key);

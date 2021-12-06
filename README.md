@@ -1,4 +1,4 @@
-# aku_community_manager
+# aku_new_community_manager
 
 A new Flutter application.
 

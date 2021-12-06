@@ -1,13 +1,13 @@
 // Flutter imports:
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/login/login_page.dart';
-import 'package:aku_community_manager/ui/settings/settings_page.dart';
-import 'package:aku_community_manager/ui/settings/user_info_page.dart';
-import 'package:aku_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/login/login_page.dart';
+import 'package:aku_new_community_manager/ui/settings/settings_page.dart';
+import 'package:aku_new_community_manager/ui/settings/user_info_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';

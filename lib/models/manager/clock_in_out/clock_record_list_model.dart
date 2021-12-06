@@ -1,5 +1,5 @@
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/utils/weekdays_to_chinese.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/utils/weekdays_to_chinese.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 

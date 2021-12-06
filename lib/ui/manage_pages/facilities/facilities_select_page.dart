@@ -1,13 +1,13 @@
 
-import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/facilities/facilities_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 class FacilitiesSelectPage extends StatefulWidget {
   FacilitiesSelectPage({Key? key}) : super(key: key);
 

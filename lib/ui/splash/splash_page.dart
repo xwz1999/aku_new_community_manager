@@ -1,16 +1,14 @@
 // Flutter imports:
 // Project imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/agreements/agreement_page.dart';
-import 'package:aku_community_manager/ui/agreements/privacy_page.dart';
-import 'package:aku_community_manager/ui/home/home_page.dart';
-import 'package:aku_community_manager/utils/dev_util.dart';
-import 'package:aku_community_manager/utils/hive_store.dart';
+import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/agreements/agreement_page.dart';
+import 'package:aku_new_community_manager/ui/agreements/privacy_page.dart';
+import 'package:aku_new_community_manager/ui/home/home_page.dart';
+import 'package:aku_new_community_manager/utils/dev_util.dart';
+import 'package:aku_new_community_manager/utils/hive_store.dart';
 // Package imports:
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +31,13 @@ class _SplashPageState extends State<SplashPage> {
   TapGestureRecognizer _agreementRecognizer = TapGestureRecognizer();
   TapGestureRecognizer _privacyRecognizer = TapGestureRecognizer();
 
-  Future _initialization() async {
-    await Firebase.initializeApp();
-    FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-    FlutterError.onError = (details) {
-      FirebaseCrashlytics.instance.recordFlutterError(details);
-    };
-  }
+  // Future _initialization() async {
+  //   await Firebase.initializeApp();
+  //   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  //   FlutterError.onError = (details) {
+  //     FirebaseCrashlytics.instance.recordFlutterError(details);
+  //   };
+  // }
 
   Future _initOp() async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
@@ -132,7 +130,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: _initialization(),
+        //future: _initialization(),
         builder: (context, snapshot) {
           return Center(
             child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),

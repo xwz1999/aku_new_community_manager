@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
 
 import 'AlarmModel.dart';
 
@@ -24,9 +24,12 @@ class FireDialog {
         content: Column(
           children: [
 
-            Text(getTitle(alarmModel)),
+            20.w.heightBox,
+            Text(getTitle(alarmModel),style: TextStyle(color: Colors.black,fontSize: 34.sp),),
+
             10.w.heightBox,
-            Text(getContent(alarmModel)),
+
+            Text(getContent(alarmModel),style: TextStyle(color: Colors.black,fontSize: 26.sp),textAlign: TextAlign.start,),
 
           ],
         ),
@@ -77,11 +80,11 @@ class FireDialog {
   static Widget getImage(AlarmModel alarmModel){
     switch(alarmModel.type){
       case 1:
-        return Image.asset(R.ASSETS_HOME_FIRE_ALARM_PNG,width: 110.w,height: 110.w,fit: BoxFit.fill,);
+        return Image.asset(R.ASSETS_HOME_FIRE_ALARM_PNG,width: 100.w,height: 100.w,fit: BoxFit.fitHeight,);
       case 2:
-        return Image.asset(R.ASSETS_HOME_DEVICE_ALARM_PNG,width: 110.w,height: 110.w,fit: BoxFit.fill,);
+        return Image.asset(R.ASSETS_HOME_DEVICE_ALARM_PNG,width: 100.w,height: 100.w,fit: BoxFit.fitHeight,);
       case 3:
-        return Image.asset(R.ASSETS_HOME_APP_ALARM_PNG,width: 110.w,height: 110.w,fit: BoxFit.fill,);
+        return Image.asset(R.ASSETS_HOME_APP_ALARM_PNG,width: 100.w,height: 100.w,fit: BoxFit.fitHeight,);
       default:
         return SizedBox();
 

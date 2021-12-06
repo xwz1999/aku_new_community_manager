@@ -6,9 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
 
 class AkuAvatar extends StatelessWidget {
   final double? size;

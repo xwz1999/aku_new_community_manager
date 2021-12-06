@@ -1,16 +1,16 @@
 // Flutter imports:
 
 // Project imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/provider/message_provider.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/apptheme.dart';
-import 'package:aku_community_manager/tools/user_tool.dart';
-import 'package:aku_community_manager/ui/splash/splash_page.dart';
-import 'package:aku_community_manager/utils/dev_util.dart';
-import 'package:aku_community_manager/utils/jpush_message_parse.dart';
-import 'package:aku_community_manager/utils/websocket/fier_dialog.dart';
-import 'package:aku_community_manager/utils/websocket/web_socket_util.dart';
+import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/message_provider.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/style/apptheme.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
+import 'package:aku_new_community_manager/ui/splash/splash_page.dart';
+import 'package:aku_new_community_manager/utils/dev_util.dart';
+import 'package:aku_new_community_manager/utils/jpush_message_parse.dart';
+import 'package:aku_new_community_manager/utils/websocket/fier_dialog.dart';
+import 'package:aku_new_community_manager/utils/websocket/web_socket_util.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';

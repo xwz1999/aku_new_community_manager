@@ -1,6 +1,6 @@
 // Flutter imports:
-import 'package:aku_community_manager/tools/user_tool.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,17 +9,17 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
-import 'package:aku_community_manager/models/user/user_info_model.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_map.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_chip_box.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
+import 'package:aku_new_community_manager/models/user/user_info_model.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/aku_map.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/tools/widget_tool.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/business_and_fix_detail_page.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_chip_box.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class BusinessFixCard extends StatefulWidget {

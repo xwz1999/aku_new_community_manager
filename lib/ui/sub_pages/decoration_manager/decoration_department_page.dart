@@ -1,5 +1,5 @@
 // // Flutter imports:
-// import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
+// import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 // import 'package:flutter/material.dart';
 
 // // Package imports:
@@ -7,13 +7,13 @@
 // import 'package:get/get.dart';
 
 // // Project imports:
-// import 'package:aku_community_manager/const/resource.dart';
-// import 'package:aku_community_manager/mock_models/decoration/decoration_model.dart';
-// import 'package:aku_community_manager/mock_models/fix/fixer_model.dart';
-// import 'package:aku_community_manager/style/app_style.dart';
-// import 'package:aku_community_manager/tools/screen_tool.dart';
-// import 'package:aku_community_manager/tools/widget_tool.dart';
-// import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+// import 'package:aku_new_community_manager/const/resource.dart';
+// import 'package:aku_new_community_manager/mock_models/decoration/decoration_model.dart';
+// import 'package:aku_new_community_manager/mock_models/fix/fixer_model.dart';
+// import 'package:aku_new_community_manager/style/app_style.dart';
+// import 'package:aku_new_community_manager/tools/screen_tool.dart';
+// import 'package:aku_new_community_manager/tools/widget_tool.dart';
+// import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 // class DecorationDepartmentPage extends StatefulWidget {
 //   final DecorationModel model;

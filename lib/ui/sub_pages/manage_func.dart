@@ -6,13 +6,13 @@
 import 'package:dio/dio.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/decoration/decoration_detail_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/decoration/decoration_detail_model.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_detail_model.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class ManageFunc {
   static Future<DecorationDetailModel> getDetcorationDetail(int id) async {

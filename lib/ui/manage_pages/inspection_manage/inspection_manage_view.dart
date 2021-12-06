@@ -7,10 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_list_model.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_list_model.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class InspectionMangeView extends StatefulWidget {
   final int/*!*/ inspectionStatus;

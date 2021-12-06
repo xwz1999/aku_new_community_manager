@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/bussiness_and_fix_view.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/bussiness_and_fix_view.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 class BusinessAndFixPage extends StatefulWidget {
   BusinessAndFixPage({Key? key}) : super(key: key);

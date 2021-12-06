@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -9,12 +9,12 @@ import 'package:shimmer/shimmer.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/message/comment_message_detail_model.dart';
-import 'package:aku_community_manager/models/message/comment_message_item_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/message/comment_message_detail_model.dart';
+import 'package:aku_new_community_manager/models/message/comment_message_item_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class CommentMessageCard extends StatefulWidget {
   final CommentMessageItemModel itemModel;

@@ -1,11 +1,11 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:aku_community_manager/ui/manage_pages/hygience_manage/hygience_manage_card.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/hygience_manage/hygience_manage_card.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

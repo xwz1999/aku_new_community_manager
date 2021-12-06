@@ -11,14 +11,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/common/img_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
-import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
 
 class InspectionPointDetailPage extends StatefulWidget {
   final int executePointId;

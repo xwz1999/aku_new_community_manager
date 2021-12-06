@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 export 'package:flutter_screenutil/flutter_screenutil.dart';
-export 'package:aku_community_manager/const/resource.dart';
+export 'package:aku_new_community_manager/const/resource.dart';
 
 //默认小区名称
 const kEstateName = '深圳华茂悦峰';

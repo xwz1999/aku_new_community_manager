@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class InspectionPointSubmitPage extends StatefulWidget {
   InspectionPointSubmitPage({Key? key}) : super(key: key);

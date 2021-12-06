@@ -1,4 +1,4 @@
-import 'package:aku_community_manager/models/common/img_model.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'engineer_repair_list_model.g.dart';
 

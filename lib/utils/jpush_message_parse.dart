@@ -1,7 +1,7 @@
 // Dart imports:
 import 'dart:convert';
 
-import 'package:aku_community_manager/utils/websocket/fier_dialog.dart';
+import 'package:aku_new_community_manager/utils/websocket/fier_dialog.dart';
 
 // Flutter imports:
 

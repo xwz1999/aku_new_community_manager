@@ -6,10 +6,10 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/goods_out/goods_out_item_model.dart';
-import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_card.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/goods_out/goods_out_item_model.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class ItemsOutdoorView extends StatefulWidget {
   final int? status;

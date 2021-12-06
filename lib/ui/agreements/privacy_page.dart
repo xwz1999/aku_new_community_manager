@@ -1,6 +1,6 @@
 // Flutter imports:
 // Project imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';

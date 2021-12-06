@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,11 +7,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/models/manager/goods_out/goods_out_item_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/models/manager/goods_out/goods_out_item_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/widget_tool.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
 
 class ItemsOutdoorCard extends StatefulWidget {
   final GoodsOutItemModel model;

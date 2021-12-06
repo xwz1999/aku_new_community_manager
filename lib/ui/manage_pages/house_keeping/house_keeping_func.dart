@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_pick_staff_model.dart';
-import 'package:aku_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_pick_staff_model.dart';
+import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 
 class HouseKeepingFunc {

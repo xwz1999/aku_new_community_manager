@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,11 +9,11 @@ import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/models/manager/inspection/inspection_list_model.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_manage_details_page.dart';
-import 'package:aku_community_manager/utils/extension/aku_date.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_list_model.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_manage_details_page.dart';
+import 'package:aku_new_community_manager/utils/extension/aku_date.dart';
 
 class InspectionManageCard extends StatefulWidget {
   final InspectionListModel cardModel;

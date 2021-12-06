@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
-import 'package:aku_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class FixSubmitFinishPage extends StatelessWidget {
   final BussinessAndFixModel model;

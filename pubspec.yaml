@@ -1,4 +1,4 @@
-name: aku_community_manager
+name: aku_new_community_manager
 description: A new Flutter application.
 
 publish_to: "none"
@@ -55,9 +55,9 @@ dependencies:
   velocity_x: ^2.6.0
   dotted_border: ^2.0.0-nullsafety.0
   dio: ^4.0.0
-  #谷歌崩溃分析
-  firebase_core: ^1.0.3
-  firebase_crashlytics: ^2.0.0
+#  #谷歌崩溃分析
+#  firebase_core: ^1.0.3
+#  firebase_crashlytics: ^2.0.0
   #瀑布流
   waterfall_flow: ^3.0.1
 

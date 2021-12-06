@@ -1,10 +1,10 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/green_manage/green_manage_list_model.dart';
-import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_details_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/green_manage/green_manage_list_model.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/green_manage/green_manage_details_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +14,11 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
-import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/manage_pages/green_manage/green_manage_map.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/aku_divider.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/tools/widget_tool.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/green_manage/green_manage_map.dart';
 
 class GreenManageCard extends StatefulWidget {
   final int index;

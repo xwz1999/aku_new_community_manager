@@ -1,14 +1,14 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_back_button.dart';
 
 ///show bottom sheet
 Future showAkuSheet({

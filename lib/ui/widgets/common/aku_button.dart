@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:aku_community_manager/ui/widgets/common/aku_cupertino_button.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_cupertino_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:flutter/material.dart';
 
 class AkuButton extends StatefulWidget {

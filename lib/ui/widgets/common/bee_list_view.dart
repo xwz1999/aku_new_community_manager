@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/utils/network/base_list_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/utils/network/base_list_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 /// ## BeeListView
 ///```dart

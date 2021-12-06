@@ -8,11 +8,11 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/key_aplly_input_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/key_manage/key_aplly_input_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class SelectPlacePage extends StatefulWidget {
   SelectPlacePage({Key? key}) : super(key: key);

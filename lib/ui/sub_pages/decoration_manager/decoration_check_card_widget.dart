@@ -2,9 +2,9 @@
 // import 'package:flutter/material.dart';
 
 // // Project imports:
-// import 'package:aku_community_manager/style/app_style.dart';
-// import 'package:aku_community_manager/tools/screen_tool.dart';
-// import 'package:aku_community_manager/tools/widget_tool.dart';
+// import 'package:aku_new_community_manager/style/app_style.dart';
+// import 'package:aku_new_community_manager/tools/screen_tool.dart';
+// import 'package:aku_new_community_manager/tools/widget_tool.dart';
 
 // class DecorationCheckCardWidget extends StatelessWidget {
 //   final CHECK_TYPE type;

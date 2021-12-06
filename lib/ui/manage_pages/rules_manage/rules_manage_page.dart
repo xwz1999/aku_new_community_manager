@@ -1,5 +1,5 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/manage_pages/rules_manage/rules_manage_detail_page.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/rules_manage/rules_manage_detail_page.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,11 +10,11 @@ import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/rules_manage/rules_manage_list_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/rules_manage/rules_manage_list_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class RulesManagePage extends StatefulWidget {
   RulesManagePage({Key? key}) : super(key: key);

@@ -14,10 +14,10 @@ import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/provider/user_provider.dart';
-import 'package:aku_community_manager/ui/settings/update_userinfo_func.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/ui/settings/update_userinfo_func.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
 
 class TelChangePage extends StatefulWidget {
   TelChangePage({Key? key}) : super(key: key);

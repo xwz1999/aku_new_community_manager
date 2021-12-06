@@ -11,10 +11,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/resource.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:aku_community_manager/utils/extension/list_extension.dart';
+import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
 
 class AkuPickImageWidget extends StatefulWidget {
   final double? size;

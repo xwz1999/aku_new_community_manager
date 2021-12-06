@@ -1,8 +1,8 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/manage_pages/facilities/facilities_view.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/facilities/facilities_view.dart';
 // Project imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';

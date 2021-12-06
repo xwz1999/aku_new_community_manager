@@ -1,8 +1,8 @@
-import 'package:aku_community_manager/models/user/user_info_model.dart';
-import 'package:aku_community_manager/tools/user_tool.dart';
+import 'package:aku_new_community_manager/models/user/user_info_model.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:aku_community_manager/models/common/img_model.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'house_keeping_list_model.g.dart';
 

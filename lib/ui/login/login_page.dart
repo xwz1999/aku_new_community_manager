@@ -2,14 +2,14 @@
 import 'dart:ui';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/screen_tool.dart';
-import 'package:aku_community_manager/tools/widget_tool.dart';
-import 'package:aku_community_manager/ui/login/login_sms_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_back_button.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/tools/widget_tool.dart';
+import 'package:aku_new_community_manager/ui/login/login_sms_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_back_button.dart';
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 // Package imports:
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';

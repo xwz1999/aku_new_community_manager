@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:common_utils/common_utils.dart';
 
 // Project imports:
-import 'package:aku_community_manager/models/common/img_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
 
 class BorrowStatusItemModel {
   int? id;

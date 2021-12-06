@@ -3,7 +3,7 @@ class Config {
   static const String homeDir = '/users/zhangmeng';
 
   ///包名
-  static const String packageName = 'aku_community_manager';
+  static const String packageName = 'aku_new_community_manager';
 
   ///打包目录
   static String get buildPath =>
@@ -11,9 +11,9 @@ class Config {
 
   ///测试包文件夹
   static String get apkDevDir =>
-      '/users/datang/team/bee/app/aku_community_manager/dev';
+      '/users/datang/team/bee/app/aku_new_community_manager/dev';
 
-  ///正式包文件夹aku_community_manager
+  ///正式包文件夹aku_new_community_manager
   static String get apkDir =>
-      '/users/datang/team/bee/app/aku_community_manager/release';
+      '/users/datang/team/bee/app/aku_new_community_manager/release';
 }

@@ -1,11 +1,11 @@
 // Package imports:
-import 'package:aku_community_manager/provider/message_provider.dart';
+import 'package:aku_new_community_manager/provider/message_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/user_provider.dart';
 
 ///获取应用或用户状态
 class UserTool {

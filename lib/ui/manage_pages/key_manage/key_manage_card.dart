@@ -1,8 +1,8 @@
 // Flutter imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/key_manage/key_manage_all_key_model.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/key_manage/key_manage_all_key_model.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
@@ -12,10 +12,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/tools/aku_divider.dart';
-import 'package:aku_community_manager/tools/extensions/list_extension_tool.dart';
-import 'package:aku_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/aku_divider.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
 
 class KeyManageCard extends StatefulWidget {
   final int/*!*/ index;

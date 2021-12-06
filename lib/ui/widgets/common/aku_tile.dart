@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 
 // Project imports:
-import 'package:aku_community_manager/tools/screen_tool.dart';
+import 'package:aku_new_community_manager/tools/screen_tool.dart';
 
 class AkuTile extends StatefulWidget {
   final Widget? prefix;

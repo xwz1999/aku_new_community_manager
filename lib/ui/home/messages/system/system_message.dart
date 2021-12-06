@@ -1,6 +1,6 @@
 // Flutter imports:
-import 'package:aku_community_manager/ui/home/messages/system/system_message_green_card.dart';
-import 'package:aku_community_manager/ui/home/messages/system/system_message_hygience_card.dart';
+import 'package:aku_new_community_manager/ui/home/messages/system/system_message_green_card.dart';
+import 'package:aku_new_community_manager/ui/home/messages/system/system_message_hygience_card.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -10,12 +10,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/message/system_message_item_model.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/home/messages/system/system_message_card.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/message/system_message_item_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/home/messages/system/system_message_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 
 class SystemMessage extends StatefulWidget {
   SystemMessage({Key? key}) : super(key: key);

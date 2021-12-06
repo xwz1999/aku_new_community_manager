@@ -6,14 +6,14 @@
 // import 'package:provider/provider.dart';
 
 // // Project imports:
-// import 'package:aku_community_manager/const/api.dart';
-// import 'package:aku_community_manager/models/manager/decoration/decoration_list_model.dart';
-// import 'package:aku_community_manager/provider/user_provider.dart';
-// import 'package:aku_community_manager/tools/screen_tool.dart';
-// import 'package:aku_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
-// import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-// import 'package:aku_community_manager/ui/widgets/common/bee_list_view.dart';
-// import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+// import 'package:aku_new_community_manager/const/api.dart';
+// import 'package:aku_new_community_manager/models/manager/decoration/decoration_list_model.dart';
+// import 'package:aku_new_community_manager/provider/user_provider.dart';
+// import 'package:aku_new_community_manager/tools/screen_tool.dart';
+// import 'package:aku_new_community_manager/ui/sub_pages/decoration_manager/decoration_manager_card.dart';
+// import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+// import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+// import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 
 // class DecorationManagerPage extends StatefulWidget {
 //   DecorationManagerPage({Key key}) : super(key: key);

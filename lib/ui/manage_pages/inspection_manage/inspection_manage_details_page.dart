@@ -2,7 +2,7 @@
 import 'dart:async';
 
 // Flutter imports:
-import 'package:aku_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,21 +18,21 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 // Project imports:
-import 'package:aku_community_manager/const/api.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_detail_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_point_model.dart';
-import 'package:aku_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
-import 'package:aku_community_manager/provider/app_provider.dart';
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_detail_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
-import 'package:aku_community_manager/ui/sub_pages/manage_func.dart';
-import 'package:aku_community_manager/ui/tool_pages/warning/warning_page.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/utils/extension/list_extension.dart';
-import 'package:aku_community_manager/utils/network/base_model.dart';
-import 'package:aku_community_manager/utils/network/net_util.dart';
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_detail_model.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_model.dart';
+import 'package:aku_new_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
+import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_detail_page.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
+import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
+import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
+import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class InspectionManageDetailsPage extends StatefulWidget {
   final int executeId;

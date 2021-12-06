@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 // Project imports:
-import 'package:aku_community_manager/style/app_style.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 
 class QrScannerPage extends StatefulWidget {
   QrScannerPage({Key? key}) : super(key: key);

@@ -1,10 +1,10 @@
-import 'package:aku_community_manager/models/user/user_info_model.dart';
-import 'package:aku_community_manager/tools/user_tool.dart';
-import 'package:aku_community_manager/ui/manage_pages/engineer_repair/add_engineer_repair_page.dart';
-import 'package:aku_community_manager/ui/manage_pages/engineer_repair/engineer_repair_view.dart';
-import 'package:aku_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:aku_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:aku_new_community_manager/models/user/user_info_model.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/add_engineer_repair_page.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_view.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
