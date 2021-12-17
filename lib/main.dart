@@ -54,7 +54,7 @@ void main() async {
     },
   );
   jpush.setup(
-    appKey: "028adb7b9eda661fefdf3072",
+    appKey: "27e128aa5a544a08e113f4e4",
     channel: "developer-default",
     production: false,
     debug: true, // 设置是否打印 debug 日志

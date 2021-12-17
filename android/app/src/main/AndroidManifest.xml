@@ -7,7 +7,7 @@
     <application android:name="io.flutter.app.FlutterApplication" android:label="小蜜蜂智慧小区管家端"
                  android:icon="@mipmap/ic_launcher" android:usesCleartextTraffic="true">
         <service android:name="com.amap.api.location.APSService"/>
-        <meta-data android:name="com.amap.api.v2.apikey" android:value="01b4902aa29bd50ae71ccc2c920ceb10"/>
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="0c11d9ba47089d971dc4d889b66593ab"/>
         <activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme"
                   android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
                   android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
