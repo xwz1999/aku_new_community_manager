@@ -1,10 +1,11 @@
 import 'dart:async';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:power_logger/power_logger.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
-const String baseUri = 'wss://test.kaidalai.cn/websocket/butlerApp';
+const String baseUri = 'wss://shop.kaidalai.cn/websocket/butlerApp';
 enum SOCKETSTATUS {
   CONNECTED, //已连接
   BREAKOFF, //已断开

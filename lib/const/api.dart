@@ -2,10 +2,10 @@ part 'engineer_repair.dart';
 
 class API {
   ///HOST
-  static const String host = 'http://39.103.177.88:8804';
+  static const String host = 'http://shop.kaidalai.cn';
 
   ///接口基础地址
-  static const String baseURL = '$host/IntelligentCommunity/butlerApp';
+  static const String baseURL = '$host/api/butlerApp';
 
   ///静态资源路径
   static String get resource => '$host/static';

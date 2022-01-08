@@ -93,6 +93,6 @@ void gen() async {
 
 @Task('生成model')
 void genClean() async {
-  await Pub.runAsync('build_runner',
+  await Pub.run('build_runner',
       arguments: ['build', '--delete-conflicting-outputs']);
 }
