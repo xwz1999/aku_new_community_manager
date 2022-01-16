@@ -93,6 +93,15 @@ void gen() async {
 
 @Task('生成model')
 void genClean() async {
-  await Pub.run('build_runner',
-      arguments: ['build', '--delete-conflicting-outputs']);
+  await runAsync(
+    'fvm',
+    arguments: [
+      'flutter',
+      'pub',
+      'run',
+      'build_runner',
+      'build',
+      '--delete-conflicting-outputs'
+    ],
+  );
 }

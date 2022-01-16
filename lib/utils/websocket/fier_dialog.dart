@@ -52,6 +52,10 @@ class FireDialog {
         return '设备故障';
       case 3:
         return '管家端APP报警';
+      case 4:
+        return '跌倒报警';
+      case 5:
+        return 'SOS紧急联系报警';
       default:
         return '';
     }
@@ -89,26 +93,43 @@ class FireDialog {
       case 1:
         return Image.asset(
           R.ASSETS_HOME_FIRE_ALARM_PNG,
-          width: 100.w,
-          height: 100.w,
+          width: 110.w,
+          height: 110.w,
           fit: BoxFit.fitHeight,
         );
       case 2:
         return Image.asset(
           R.ASSETS_HOME_DEVICE_ALARM_PNG,
-          width: 100.w,
-          height: 100.w,
+          width: 110.w,
+          height: 110.w,
           fit: BoxFit.fitHeight,
         );
       case 3:
         return Image.asset(
           R.ASSETS_HOME_APP_ALARM_PNG,
-          width: 100.w,
-          height: 100.w,
+          width: 110.w,
+          height: 110.w,
+          fit: BoxFit.fitHeight,
+        );
+      case 4:
+        return Image.asset(
+          R.ASSETS_HOME_APP_ALARM_PNG,
+          width: 110.w,
+          height: 110.w,
+          fit: BoxFit.fitHeight,
+        );
+      case 5:
+        return Image.asset(
+          R.ASSETS_HOME_SOS_PNG,
+          width: 110.w,
+          height: 110.w,
           fit: BoxFit.fitHeight,
         );
       default:
-        return SizedBox();
+        return SizedBox(
+          width: 110.w,
+          height: 110.w,
+        );
     }
   }
 }
