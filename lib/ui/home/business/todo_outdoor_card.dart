@@ -1,23 +1,25 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class ToDoOutDoorCard extends StatefulWidget {
   final ToDoOutDoorModel model;
   final VoidCallback? callRefresh;
   final bool homeDisplay;
   ToDoOutDoorCard(
-      {Key? key, required this.model, this.callRefresh, this.homeDisplay = false})
+      {Key? key,
+      required this.model,
+      this.callRefresh,
+      this.homeDisplay = false})
       : super(key: key);
 
   @override
@@ -102,7 +104,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                         ),
                         Spacer(),
                         Text(
-                          '五象新区人才公寓',
+                          '${S.of(context)!.tempPlotName}',
                           style: AppStyle().primaryStyle,
                         ),
                       ],

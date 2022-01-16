@@ -1,20 +1,19 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/manage_pages/rules_manage/rules_manage_detail_page.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/rules_manage/rules_manage_list_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/rules_manage/rules_manage_detail_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class RulesManagePage extends StatefulWidget {
   RulesManagePage({Key? key}) : super(key: key);
@@ -66,7 +65,9 @@ class _RulesManagePageState extends State<RulesManagePage> {
   Widget _buildCard(RulesManageListModel model) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => RulesManageDetailPage(model: model,));
+        Get.to(() => RulesManageDetailPage(
+              model: model,
+            ));
       },
       child: Container(
           color: Colors.white,
@@ -92,7 +93,11 @@ class _RulesManagePageState extends State<RulesManagePage> {
               32.w.heightBox,
               Row(
                 children: [
-                  '南宁人才公寓'.text.size(20.sp).color(kTextSubColor).make(),
+                  '${S.of(context)!.tempPlotName}'
+                      .text
+                      .size(20.sp)
+                      .color(kTextSubColor)
+                      .make(),
                   Spacer(),
                   '发布于 ${DateUtil.formatDateStr(model.releaseDate!, format: 'MM-dd HH:mm')}'
                       .text
