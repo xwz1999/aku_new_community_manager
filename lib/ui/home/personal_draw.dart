@@ -9,6 +9,7 @@ import 'package:aku_new_community_manager/ui/settings/user_info_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -101,7 +102,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                           children: [
                             Icon(Icons.location_on_outlined, size: 33.w),
                             Text(
-                              '人才公寓',
+                              '${S.of(context)!.tempPlotName}',
                               style: TextStyle(
                                   color: AppStyle.primaryTextColor,
                                   fontSize: 24.sp),

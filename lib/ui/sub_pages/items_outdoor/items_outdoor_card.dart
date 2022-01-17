@@ -1,22 +1,24 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:aku_new_community_manager/models/manager/goods_out/goods_out_item_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class ItemsOutdoorCard extends StatefulWidget {
   final GoodsOutItemModel model;
   final VoidCallback? callRefresh;
-  ItemsOutdoorCard({Key? key, /*required*/ /*required*/ required this.model, this.callRefresh})
+  ItemsOutdoorCard(
+      {Key? key,
+      /*required*/ /*required*/ required this.model,
+      this.callRefresh})
       : super(key: key);
 
   @override
@@ -97,7 +99,7 @@ class _ItemsOutdoorCardState extends State<ItemsOutdoorCard> {
                 ),
                 Spacer(),
                 Text(
-                  '五象新区人才公寓',
+                  '${S.of(context)!.tempPlotName}',
                   style: AppStyle().primaryStyle,
                 ),
               ],

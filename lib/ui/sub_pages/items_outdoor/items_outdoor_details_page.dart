@@ -1,16 +1,4 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/const/resource.dart';
@@ -21,13 +9,26 @@ import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.d
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/outdoor_notpass_page.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/outdoor_pass_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ItemsOutdoorDetailsPage extends StatefulWidget {
   final int id;
-  ItemsOutdoorDetailsPage({Key? key, /*required*/ required this.id}) : super(key: key);
+
+  ItemsOutdoorDetailsPage({Key? key, /*required*/ required this.id})
+      : super(key: key);
 
   @override
   _ItemsOutdoorDetailsPageState createState() =>
@@ -105,8 +106,8 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                         ),
                         AkuBox.h(16),
                         ...<Widget>[
-                          _buildTile(
-                              R.ASSETS_OUTDOOR_IC_HOME_PNG, '小区名称', '五象新区人才公寓'),
+                          _buildTile(R.ASSETS_OUTDOOR_IC_HOME_PNG, '小区名称',
+                              '${S.of(context)!.tempPlotName}'),
                           _buildTile(
                             R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                             '详细地址',
@@ -331,7 +332,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                 ),
               )
             : SizedBox();
-        
+
       case 2:
         return Container(
           height: 226.w,
@@ -389,7 +390,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
             ],
           ),
         );
-        
+
       case 3:
         return Container(
           height: 226.w,
@@ -450,7 +451,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
             ],
           ),
         );
-        
+
       default:
         return SizedBox();
     }

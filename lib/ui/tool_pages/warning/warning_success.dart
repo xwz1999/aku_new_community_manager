@@ -1,18 +1,17 @@
 // Dart imports:
 import 'dart:async';
 
-// Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:get/get.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
+// Flutter imports:
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+// Package imports:
+import 'package:get/get.dart';
 
 class WarningSuccess extends StatefulWidget {
   WarningSuccess({Key? key}) : super(key: key);
@@ -52,7 +51,7 @@ class _WarningSuccessState extends State<WarningSuccess> {
               width: 420.w,
             ),
             Text(
-              '人才公寓',
+              '${S.of(context)!.tempPlotName}',
               style: TextStyle(
                 fontSize: 44.w,
                 color: AppStyle.primaryTextColor,
