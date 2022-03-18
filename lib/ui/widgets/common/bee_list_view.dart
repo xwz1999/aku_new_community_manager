@@ -1,13 +1,11 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-
+import 'package:aku_new_community_manager/saas_models/net_model/base_list_model.dart';
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
-import 'package:aku_new_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_easyrefresh/easy_refresh.dart';
 
 /// ## BeeListView
 ///```dart
@@ -63,9 +61,9 @@ class BeeListView<T> extends StatefulWidget {
   final Map<String, dynamic>? extraParams;
   BeeListView({
     Key? key,
-     required this.path,
+    required this.path,
     required this.controller,
-     required this.convert,
+    required this.convert,
     required this.builder,
     this.size = 10,
     this.extraParams,
@@ -114,10 +112,10 @@ class _BeeListViewState<T> extends State<BeeListView> {
           widget.path,
           params: _params,
         );
-        if (_pageNum <= _model.pageCount!) {
+        if (_models.length <= _model.total) {
           _models.addAll(widget.convert(_model) as List<T?>);
         }
-        if (_pageNum >= _model.pageCount!) {
+        if (_models.length >= _model.total) {
           widget.controller!.finishLoad(
             success: true,
             noMore: true,

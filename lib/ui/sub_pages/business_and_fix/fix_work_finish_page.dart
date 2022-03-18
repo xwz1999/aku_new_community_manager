@@ -1,30 +1,27 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/fixed_detail_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/extensions/router_extension_tool.dart';
-import 'package:aku_new_community_manager/tools/screen_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/fix_submit_finish_page.dart';
+// Flutter imports:
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/manage_func.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class FixWorkFinishPage extends StatefulWidget {
   final FixedDetailModel model;
@@ -32,9 +29,9 @@ class FixWorkFinishPage extends StatefulWidget {
   final bool dispatchType;
   FixWorkFinishPage(
       {Key? key,
-      /*required*/ required this.model,
-      /*required*/ required this.dispatchType,
-      /*required*/ required this.fixModel})
+      required this.model,
+      required this.dispatchType,
+      required this.fixModel})
       : super(key: key);
 
   @override
@@ -425,13 +422,13 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
               materialPrice,
               humanPrice! + materialPrice!,
               1,
-              urls) );
-          if (baseModel.status!) {
+              urls));
+          if (baseModel.success!) {
             FixSubmitFinishPage(
               model: widget.fixModel,
             ).to();
           } else {
-            BotToast.showText(text: baseModel.message!);
+            BotToast.showText(text: baseModel.msg);
           }
         },
       ),

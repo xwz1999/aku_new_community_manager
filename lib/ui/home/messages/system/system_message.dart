@@ -1,21 +1,19 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/home/messages/system/system_message_green_card.dart';
-import 'package:aku_new_community_manager/ui/home/messages/system/system_message_hygience_card.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/message/system_message_item_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/home/messages/system/system_message_card.dart';
+import 'package:aku_new_community_manager/ui/home/messages/system/system_message_green_card.dart';
+import 'package:aku_new_community_manager/ui/home/messages/system/system_message_hygience_card.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class SystemMessage extends StatefulWidget {
   SystemMessage({Key? key}) : super(key: key);
@@ -46,9 +44,8 @@ class _SystemMessageState extends State<SystemMessage> {
               itemCount: items.length);
         },
         path: API.message.systemList,
-        convert: (model) => model.tableList!
-            .map((e) => SystemMessageItemModel.fromJson(e))
-            .toList(),
+        convert: (model) =>
+            model.rows.map((e) => SystemMessageItemModel.fromJson(e)).toList(),
       ),
     );
   }
@@ -77,7 +74,7 @@ class _SystemMessageState extends State<SystemMessage> {
         return SystemMessageHygienceCard(
             relationId: model.relationId!, date: _date, type: 4);
       case 5:
-      return SystemMessageHygienceCard(
+        return SystemMessageHygienceCard(
             relationId: model.relationId!, date: _date, type: 5);
       default:
         return Container();

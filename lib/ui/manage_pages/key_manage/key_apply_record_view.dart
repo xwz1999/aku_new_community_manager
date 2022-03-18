@@ -42,7 +42,7 @@ class _KeyApplyRecordViewState extends State<KeyApplyRecordView>
         },
         controller: _refreshController,
         convert: (models) {
-          return models.tableList!
+          return models.rows
               .map((e) => KeyManageRecordListModel.fromJson(e))
               .toList();
         },

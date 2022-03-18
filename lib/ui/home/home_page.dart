@@ -12,6 +12,7 @@ import 'package:aku_new_community_manager/models/todo_bussiness/todo_outdoor_mod
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_list_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
@@ -33,7 +34,6 @@ import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_page.dar
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:aku_new_community_manager/utils/network/base_list_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:aku_new_community_manager/utils/websocket/web_socket_util.dart';
 // Package imports:
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
       "pageNum": 1,
       "size": 3,
     }));
-    List<AnnouncementListModel> anounceModels = baseListModel.tableList!
+    List<AnnouncementListModel> anounceModels = baseListModel.rows
         .map((e) => AnnouncementListModel.fromJson(e))
         .toList();
     return anounceModels;

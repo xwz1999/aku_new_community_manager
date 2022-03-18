@@ -51,7 +51,7 @@ class _EngineerRepairViewState extends State<EngineerRepairView> {
         },
         controller: widget.controller,
         convert: (models) {
-          return models.tableList!
+          return models.rows
               .map((e) => EngineerRepairListModel.fromJson(e))
               .toList();
         },

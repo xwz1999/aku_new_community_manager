@@ -6,8 +6,8 @@ import 'package:aku_new_community_manager/ui/manage_pages/house_keeping/house_ke
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HouseKeepingView extends StatefulWidget {
   final int index;
@@ -56,7 +56,7 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
         },
         controller: _refreshController,
         convert: (models) {
-          return models.tableList!
+          return models.rows
               .map((e) => HouseKeepingListModel.fromJson(e))
               .toList();
         },

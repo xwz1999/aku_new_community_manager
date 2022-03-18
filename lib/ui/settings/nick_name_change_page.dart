@@ -12,7 +12,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class NickNameChangePage extends StatefulWidget {
@@ -71,11 +71,11 @@ class _NickNameChangePageState extends State<NickNameChangePage> {
                       API.user.updateNickName,
                       params: {'nickName': _textEditingController!.text});
 
-                  if (baseModel.status == true) {
+                  if (baseModel.success == true) {
                     userProvider.setNickName(_textEditingController!.text);
                     Get.back();
                   } else {
-                    BotToast.showText(text: baseModel.message!);
+                    BotToast.showText(text: baseModel.msg);
                   }
                 },
                 child: '保存'.text.black.size(32.sp).make(),

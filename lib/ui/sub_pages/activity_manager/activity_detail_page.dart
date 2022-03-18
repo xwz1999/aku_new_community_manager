@@ -12,7 +12,7 @@ import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 
 class ActivityDetailPage extends StatefulWidget {

@@ -17,7 +17,7 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/ui/settings/update_userinfo_func.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 
 class TelChangePage extends StatefulWidget {
   TelChangePage({Key? key}) : super(key: key);
@@ -112,7 +112,7 @@ class _TelChangePageState extends State<TelChangePage> {
                             BaseModel baseModel =
                                 await UpdateUserInfoFunc.sendTelUpdateCode(
                                     _newTelController!.text);
-                            if (baseModel.status!) {
+                            if (baseModel.success!) {
                               startTick();
                             } else {}
                           }
@@ -187,11 +187,11 @@ class _TelChangePageState extends State<TelChangePage> {
                         _oldTelController!.text,
                         _newTelController!.text,
                         _codeController!.text);
-                    if (baseModel.status!) {
+                    if (baseModel.success!) {
                       userProvider.setTel(_newTelController!.text);
                       Get.back();
                     } else {
-                      BotToast.showText(text: baseModel.message!);
+                      BotToast.showText(text: baseModel.msg);
                     }
                   }
                 },

@@ -1,6 +1,7 @@
 // Project imports:
 import 'package:aku_new_community_manager/models/common/img_model.dart';
 
+@Deprecated('逐步删除')
 class UserProfileModel {
   int? id;
   List<ImgModel>? imgUrls;

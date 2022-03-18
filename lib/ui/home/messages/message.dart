@@ -8,7 +8,7 @@ import 'package:aku_new_community_manager/ui/home/messages/comment_message.dart'
 import 'package:aku_new_community_manager/ui/home/messages/system/system_message.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:dio/dio.dart';
@@ -162,7 +162,7 @@ class _MessageState extends State<Message> {
               onpressed: () async {
                 BaseModel baseModel =
                     await NetUtil().get(API.message.allReadSysMes);
-                if (baseModel.status ?? false) {
+                if (baseModel.success ?? false) {
                   messageProvider.updateMessage();
                   Get.to(() => SystemMessage());
                 }
@@ -180,7 +180,7 @@ class _MessageState extends State<Message> {
               onpressed: () async {
                 BaseModel baseModel =
                     await NetUtil().get(API.message.allReadCommentMes);
-                if (baseModel.status ?? false) {
+                if (baseModel.success ?? false) {
                   messageProvider.updateMessage();
                   Get.to(() => CommentMessage());
                 }

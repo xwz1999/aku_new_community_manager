@@ -1,23 +1,21 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:get/get.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:aku_new_community_manager/utils/network/base_file_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AddBorrowObjectPage extends StatefulWidget {
   AddBorrowObjectPage({Key? key}) : super(key: key);
@@ -142,19 +140,19 @@ class _AddBorrowObjectPageState extends State<AddBorrowObjectPage> {
                       // int.tryParse(_numberController.text) == null
                       ? null
                       : () async {
-                          BaseFileModel baseFileModel = await NetUtil()
+                          BaseModel baseFileModel = await NetUtil()
                               .upload(API.upload.uploadArtical, file!);
-                          if (baseFileModel.status!) {
+                          if (baseFileModel.success) {
                             await NetUtil().post(
                               API.manage.insertArticle,
                               params: {
                                 "name": _textEditingController.text,
-                                "fileUrls": [baseFileModel.url]
+                                "fileUrls": [baseFileModel.data]
                               },
                               showMessage: true,
                             );
                           } else {
-                            BotToast.showText(text: baseFileModel.message!);
+                            BotToast.showText(text: baseFileModel.msg);
                           }
                           Get.back();
                         },

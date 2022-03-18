@@ -44,7 +44,7 @@ class _RulesManagePageState extends State<RulesManagePage> {
           path: API.manage.rulesManageList,
           controller: _refreshController,
           convert: (models) {
-            return models.tableList!
+            return models.rows
                 .map((e) => RulesManageListModel.fromJson(e))
                 .toList();
           },

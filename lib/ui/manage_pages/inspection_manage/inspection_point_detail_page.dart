@@ -1,24 +1,24 @@
 // Flutter imports:
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:common_utils/common_utils.dart';
-import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/common/img_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_check_detail_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
+import 'package:velocity_x/src/flutter/container.dart';
+import 'package:velocity_x/src/flutter/widgets.dart';
 
 class InspectionPointDetailPage extends StatefulWidget {
   final int executePointId;
@@ -48,8 +48,6 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
     _easyRefreshController = EasyRefreshController();
   }
 
- 
-
   @override
   void dispose() {
     _easyRefreshController?.dispose();
@@ -66,7 +64,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
             MaterialHeader(valueColor: AlwaysStoppedAnimation(kPrimaryColor)),
         firstRefresh: true,
         onRefresh: () async {
-          BaseModel baseModel = await (_getModels );
+          BaseModel baseModel = await (_getModels);
           if (baseModel.data != null) {
             _detialModel = InspectionCheckDetialModel.fromJson(baseModel.data);
             _onload = false;

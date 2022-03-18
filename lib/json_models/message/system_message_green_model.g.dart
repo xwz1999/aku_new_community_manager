@@ -7,11 +7,10 @@ part of 'system_message_green_model.dart';
 // **************************************************************************
 
 SystemMessageGreenModel _$SystemMessageGreenModelFromJson(
-    Map<String, dynamic> json) {
-  return SystemMessageGreenModel(
-    id: json['id'] as int,
-    name: json['name'] as String,
-    tel: json['tel'] as String,
-    areaName: json['areaName'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    SystemMessageGreenModel(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      tel: json['tel'] as String,
+      areaName: json['areaName'] as String,
+    );

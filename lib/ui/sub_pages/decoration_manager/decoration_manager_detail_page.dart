@@ -5,7 +5,7 @@
 // import 'package:aku_new_community_manager/const/api.dart';
 // import 'package:aku_new_community_manager/models/manager/decoration/decoration_detail_model.dart';
 // import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-// import 'package:aku_new_community_manager/utils/network/base_model.dart';
+// import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 // import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // import 'package:bot_toast/bot_toast.dart';
 // import 'package:flutter/cupertino.dart';
@@ -77,7 +77,7 @@
 //               await NetUtil().get(API.manage.decorationFindByld, params: {
 //             "decorationId	": widget.id,
 //           });
-//           if (baseModel.status) {
+//           if (baseModel.success) {
 //             _model = DecorationDetailModel.fromJson(baseModel.data);
 //             _onload = false;
 //           } else {

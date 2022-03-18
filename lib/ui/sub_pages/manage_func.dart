@@ -2,17 +2,16 @@
 
 // Flutter imports:
 
-// Package imports:
-import 'package:dio/dio.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/decoration/decoration_detail_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:dio/dio.dart';
+// Package imports:
 
 class ManageFunc {
   static Future<DecorationDetailModel> getDetcorationDetail(int id) async {
@@ -35,7 +34,7 @@ class ManageFunc {
   }
 
   static Future<InspectionDetailModel> getInspectionDetail(
-      int/*!*/ executeId) async {
+      int /*!*/ executeId) async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.inspectionFindDetailByld, params: {
       "executeId": executeId,
@@ -55,7 +54,7 @@ class ManageFunc {
   }
 
   static Future<List<InspectionPointModel>> getInspectionPointByExcuteId(
-      {required int/*!*/ excuteId}) async {
+      {required int /*!*/ excuteId}) async {
     BaseModel baseModel = await NetUtil()
         .get(API.manage.inspecntionFindPointByExecuteId, params: {
       "executeId": excuteId,
@@ -95,9 +94,9 @@ class ManageFunc {
     return baseModel;
   }
 
-  static Future getInspectionPointCheckDetailUnbegin(int planPointId) async{
-    BaseModel baseModel =
-        await NetUtil().get(API.manage.inspectionPointCheckDetailUnbegin, params: {
+  static Future getInspectionPointCheckDetailUnbegin(int planPointId) async {
+    BaseModel baseModel = await NetUtil()
+        .get(API.manage.inspectionPointCheckDetailUnbegin, params: {
       "planPointId": planPointId,
     });
     return baseModel;

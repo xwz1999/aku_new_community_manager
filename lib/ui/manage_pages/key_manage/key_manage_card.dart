@@ -1,27 +1,26 @@
 // Flutter imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/key_manage/key_manage_all_key_model.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
-import 'package:aku_new_community_manager/utils/network/net_util.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:velocity_x/velocity_x.dart';
-
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:url_launcher/url_launcher.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
 
 class KeyManageCard extends StatefulWidget {
-  final int/*!*/ index;
+  final int /*!*/ index;
   final KeyMangeAllKeyModel model;
   final VoidCallback? callRefresh;
-  KeyManageCard({Key? key, required this.index, required this.model, this.callRefresh})
+  KeyManageCard(
+      {Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -94,7 +93,7 @@ class _KeyManageCardState extends State<KeyManageCard> {
         button = _bottomButton('申请钥匙', () async {
           BaseModel baseModel = await NetUtil()
               .post(API.manage.applyKey, params: {"keyId": widget.model.id});
-          BotToast.showText(text: baseModel.message!);
+          BotToast.showText(text: baseModel.msg);
           widget.callRefresh!();
         }, Color(0xFFFFC40C), Colors.black) as MaterialButton?;
         break;
@@ -102,7 +101,7 @@ class _KeyManageCardState extends State<KeyManageCard> {
         button = _bottomButton('归还钥匙', () async {
           BaseModel baseModel = await NetUtil()
               .get(API.manage.returnKey, params: {"keyId": widget.model.id});
-          BotToast.showText(text: baseModel.message!);
+          BotToast.showText(text: baseModel.msg);
           widget.callRefresh!();
         }, Color(0xFFFFC40C), Colors.black) as MaterialButton?;
         break;

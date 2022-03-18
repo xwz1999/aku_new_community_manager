@@ -7,17 +7,16 @@ part of 'key_manage_record_list_model.dart';
 // **************************************************************************
 
 KeyManageRecordListModel _$KeyManageRecordListModelFromJson(
-    Map<String, dynamic> json) {
-  return KeyManageRecordListModel(
-    id: json['id'] as int,
-    code: json['code'] as String,
-    status: json['status'] as int,
-    facilityName: json['facilityName'] as String?,
-    correspondingPosition: json['correspondingPosition'] as String?,
-    storageLocation: json['storageLocation'] as String?,
-    auditDate: json['auditDate'] as String?,
-    reason: json['reason'] as String?,
-    returnAuditDate: json['returnAuditDate'] as String?,
-    returnReason: json['returnReason'] as String?,
-  );
-}
+        Map<String, dynamic> json) =>
+    KeyManageRecordListModel(
+      id: json['id'] as int,
+      code: json['code'] as String,
+      status: json['status'] as int,
+      facilityName: json['facilityName'] as String?,
+      correspondingPosition: json['correspondingPosition'] as String?,
+      storageLocation: json['storageLocation'] as String?,
+      auditDate: json['auditDate'] as String?,
+      reason: json['reason'] as String?,
+      returnAuditDate: json['returnAuditDate'] as String?,
+      returnReason: json['returnReason'] as String?,
+    );

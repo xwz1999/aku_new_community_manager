@@ -12,7 +12,7 @@ import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/outdoor_pas
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:common_utils/common_utils.dart';

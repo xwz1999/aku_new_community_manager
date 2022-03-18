@@ -7,11 +7,10 @@ part of 'system_message_hygience_model.dart';
 // **************************************************************************
 
 SystemMessageHygineceModel _$SystemMessageHygineceModelFromJson(
-    Map<String, dynamic> json) {
-  return SystemMessageHygineceModel(
-    id: json['id'] as int,
-    name: json['name'] as String,
-    tel: json['tel'] as String,
-    areaName: json['areaName'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    SystemMessageHygineceModel(
+      id: json['id'] as int,
+      name: json['name'] as String,
+      tel: json['tel'] as String,
+      areaName: json['areaName'] as String,
+    );

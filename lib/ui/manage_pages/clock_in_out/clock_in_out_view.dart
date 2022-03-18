@@ -43,7 +43,7 @@ class _ClockInOutViewState extends State<ClockInOutView> {
             path: API.manage.clockRecord,
             controller: _refreshController,
             convert: (models) {
-              return models.tableList!
+              return models.rows
                   .map((e) => ClockRecordListModel.fromJson(e))
                   .toList();
             },
@@ -65,7 +65,7 @@ class _ClockInOutViewState extends State<ClockInOutView> {
             path: API.manage.clockApplyRecord,
             controller: _refreshController,
             convert: (models) {
-              return models.tableList!
+              return models.rows
                   .map((e) => ClockApplyRecordListModel.fromJson(e))
                   .toList();
             },

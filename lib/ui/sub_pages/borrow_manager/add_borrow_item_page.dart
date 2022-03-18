@@ -1,27 +1,25 @@
 // Dart imports:
 import 'dart:io';
 
+// Project imports:
+import 'package:aku_new_community_manager/const/api.dart';
 // Flutter imports:
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get/instance_manager.dart';
 
-// Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/style/app_style.dart';
-import 'package:aku_new_community_manager/tools/widget_tool.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
-import 'package:aku_new_community_manager/utils/network/base_file_model.dart';
-import 'package:aku_new_community_manager/utils/network/net_util.dart';
-
 class AddBorrowItemPage extends StatefulWidget {
-  final int/*!*/ articleId;
+  final int /*!*/ articleId;
   AddBorrowItemPage({
     Key? key,
     required this.articleId,
@@ -57,23 +55,23 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
         AkuMaterialButton(
           minWidth: 120.w,
           onPressed: () async {
-            BaseFileModel baseFileModel =
+            BaseModel baseFileModel =
                 await NetUtil().upload(API.upload.uploadArticleDetail, file!);
-            if (baseFileModel.status!) {
+            if (baseFileModel.success) {
               await NetUtil().post(
                 API.manage.borrowinsertArticleDetail,
                 params: {
                   "articleId": widget.articleId,
                   "name": _textEditingController!.text,
                   "code": _codeEditingCOntroller!.text,
-                  "fileUrls": [baseFileModel.url]
+                  "fileUrls": [baseFileModel.data]
                 },
                 showMessage: true,
               );
 
               Get.back();
             } else {
-              BotToast.showText(text: baseFileModel.message!);
+              BotToast.showText(text: baseFileModel.msg);
             }
           },
           child: Text(

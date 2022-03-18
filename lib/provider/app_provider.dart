@@ -1,13 +1,16 @@
 // Flutter imports:
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:aku_new_community_manager/saas_models/login/community_model.dart';
+import 'package:aku_new_community_manager/saas_models/login/history_login_model.dart';
+import 'package:aku_new_community_manager/saas_models/login/picked_city_model.dart';
+// Project imports:
+import 'package:aku_new_community_manager/ui/home/application/applications_page.dart';
 // Package imports:
 import 'package:amap_flutter_location/amap_flutter_location.dart';
 import 'package:amap_flutter_location/amap_location_option.dart';
-
-// Project imports:
-import 'package:aku_new_community_manager/ui/home/application/applications_page.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:power_logger/power_logger.dart';
 
 enum WORKCLOCK {
@@ -120,6 +123,52 @@ class AppProvider extends ChangeNotifier {
     _clockInTime = null;
     _clockOutTime = null;
     _clockStatus = WORKCLOCK.NOTIN;
+    notifyListeners();
+  }
+
+  ///saas
+  ///历史登录信息
+  HistoryLoginModel? _pickedCityAndCommunity;
+
+  HistoryLoginModel? get pickedCityAndCommunity => _pickedCityAndCommunity;
+
+  void setPickedCity({PickedCityModel? city, CommunityModel? community}) {
+    if (city != null) {
+      _pickedCityAndCommunity = HistoryLoginModel(cityModel: city);
+    }
+    if (community != null) {
+      _pickedCityAndCommunity!.communityModel = community;
+    }
+    notifyListeners();
+  }
+
+  void resetPickedCity() {
+    _pickedCityAndCommunity = null;
+    notifyListeners();
+  }
+
+  ///登录页验证码计时器
+  int second = 60;
+  bool timerStart = false;
+  Timer? timer;
+
+  void startTimer() {
+    timerStart = true;
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (second > 0) {
+        second--;
+        notifyListeners();
+      } else {
+        stopTimer();
+      }
+    });
+  }
+
+  void stopTimer() {
+    second = 60;
+    timerStart = false;
+    timer?.cancel();
+    timer = null;
     notifyListeners();
   }
 }

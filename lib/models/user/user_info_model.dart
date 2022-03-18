@@ -24,7 +24,8 @@ enum ERAUTH {
   HIDE
 }
 
-class UserInfoModel {
+@Deprecated('逐步删除')
+class UserInformationModel {
   int? id;
   String? roleId;
   String? nickName;
@@ -77,10 +78,10 @@ class UserInfoModel {
     }
   }
 
-  UserInfoModel(
+  UserInformationModel(
       {required this.id, this.roleId, this.nickName, this.jurisdiction});
 
-  UserInfoModel.fromJson(Map<String, dynamic> json) {
+  UserInformationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     roleId = json['roleId'];
     nickName = json['nickName'];

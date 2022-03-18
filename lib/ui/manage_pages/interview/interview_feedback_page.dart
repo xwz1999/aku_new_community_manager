@@ -1,16 +1,16 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/interview/interview_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
 
 class InterviewFeedBackPage extends StatefulWidget {
   final InterviewListModel model;
@@ -57,7 +57,7 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
             },
             showMessage: true,
           );
-          if (baseModel.status!) {
+          if (baseModel.success!) {
             Get.back();
           }
         },
@@ -83,16 +83,16 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
             ],
           ),
           16.w.heightBox,
-          _inputWidget(_textEditingController,hintText:'请输入回复内容'),
+          _inputWidget(_textEditingController, hintText: '请输入回复内容'),
         ],
       ),
     );
   }
 
   Widget _inputWidget(
-    TextEditingController? controller,
-    {String? hintText,}
-  ) {
+    TextEditingController? controller, {
+    String? hintText,
+  }) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -108,12 +108,10 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
         autofocus: false,
         controller: controller,
         onChanged: (value) {
-          setState(() {
-            
-          });
+          setState(() {});
         },
         decoration: InputDecoration(
-          hintText: hintText??'',
+          hintText: hintText ?? '',
           hintStyle: TextStyle(
             fontSize: 28.sp,
             color: kTextSubColor,

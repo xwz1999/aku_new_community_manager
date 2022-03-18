@@ -11,7 +11,7 @@ import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_chec
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -78,10 +78,10 @@ class _FacilitiesInspectReportPageState
           "detail": _describtion,
           "imgUrls": _scenePhotoUrl,
         });
-        if (baseModel.status!) {
+        if (baseModel.success!) {
           Get.back();
         }
-        BotToast.showText(text: baseModel.message!);
+        BotToast.showText(text: baseModel.msg);
       },
       width: double.infinity,
       height: 100.w,

@@ -1,20 +1,18 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/business_fix_card.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class BussinessAndFixView extends StatefulWidget {
   final int? status;
-  BussinessAndFixView({Key? key,  this.status}) : super(key: key);
+  BussinessAndFixView({Key? key, this.status}) : super(key: key);
 
   @override
   _BussinessAndFixViewState createState() => _BussinessAndFixViewState();
@@ -45,7 +43,7 @@ class _BussinessAndFixViewState extends State<BussinessAndFixView>
         },
         controller: _easyRefreshController,
         convert: (models) {
-          return models.tableList!
+          return models.rows
               .map((e) => BussinessAndFixModel.fromJson(e))
               .toList();
         },

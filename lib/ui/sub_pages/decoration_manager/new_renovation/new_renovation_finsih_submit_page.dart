@@ -1,10 +1,10 @@
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_text_field.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +14,9 @@ import 'package:velocity_x/velocity_x.dart';
 class NewRenovationFinishSubmitPage extends StatefulWidget {
   final int id;
   final VoidCallback? callRefresh;
-  NewRenovationFinishSubmitPage({Key? key, /*required*/ required this.id, this.callRefresh}) : super(key: key);
+  NewRenovationFinishSubmitPage(
+      {Key? key, /*required*/ required this.id, this.callRefresh})
+      : super(key: key);
 
   @override
   _NewRenovationFinishSubmitPageState createState() =>
@@ -78,7 +80,7 @@ class _NewRenovationFinishSubmitPageState
                     "isQualified": _isQualified,
                   },
                   showMessage: true);
-          if (baseModel.status ?? false) {
+          if (baseModel.success ?? false) {
             Get.back();
           }
         },

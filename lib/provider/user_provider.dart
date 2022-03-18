@@ -3,13 +3,14 @@ import 'dart:io';
 
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 // Flutter imports:
 import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/models/user/user_profile_model.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/utils/hive_store.dart';
-import 'package:aku_new_community_manager/utils/network/base_file_model.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:aku_new_community_manager/utils/websocket/web_socket_util.dart';
 // Package imports:
@@ -46,9 +47,9 @@ class UserProvider extends ChangeNotifier {
   UserProfileModel? _profileModel;
 
   UserProfileModel? get profileModel => _profileModel;
-  UserInfoModel? _infoModel;
+  UserInformationModel? _infoModel;
 
-  UserInfoModel? get infoModel => _infoModel;
+  UserInformationModel? get infoModel => _infoModel;
 
   ///更新用户profile
   Future<UserProfileModel?> updateProfile() async {
@@ -62,13 +63,13 @@ class UserProvider extends ChangeNotifier {
       return UserProfileModel.fromJson(model.data);
   }
 
-  Future<UserInfoModel?> updateUserInfo() async {
+  Future<UserInformationModel?> updateUserInfo() async {
     BaseModel? model = await NetUtil().get(API.user.info);
 
     if (model.data == null)
       return null;
     else {
-      var userModel = UserInfoModel.fromJson(model.data);
+      var userModel = UserInformationModel.fromJson(model.data);
       JPush().setAlias(userModel.id.toString());
       print('jpush alias is ${userModel.id}');
       return userModel;
@@ -106,12 +107,12 @@ class UserProvider extends ChangeNotifier {
   ///修改头像
   setAvatar(File file) async {
     Function cancel = BotToast.showLoading();
-    BaseFileModel fileModel = await NetUtil().upload(API.upload.avatar, file);
-    if (fileModel.status == true) {
+    BaseModel fileModel = await NetUtil().upload(API.upload.avatar, file);
+    if (fileModel.success) {
       await NetUtil().post(
         API.user.updateAvatar,
         params: {
-          'fileUrls': [fileModel.url],
+          'fileUrls': [fileModel.data],
         },
         showMessage: true,
       );
@@ -125,5 +126,25 @@ class UserProvider extends ChangeNotifier {
   setTel(String tel) {
     _profileModel!.tel = tel;
     notifyListeners();
+  }
+
+  ///saas
+
+  UserInfoModel? _userInfoModel;
+
+  UserInfoModel? get userInfoModel => _userInfoModel;
+
+  ///修改头像
+  Future updateAvatar(String? path) async {
+    BaseModel model = await NetUtil().post(
+      SAASAPI.user.updateAvatar,
+      params: {
+        'fileUrls': [path]
+      },
+      showMessage: true,
+    );
+    if (model.success) {
+      await updateUserInfo();
+    }
   }
 }

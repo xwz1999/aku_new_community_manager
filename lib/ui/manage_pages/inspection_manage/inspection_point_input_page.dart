@@ -1,29 +1,30 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_submit_page.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+// Flutter imports:
+import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_submit_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
+import 'package:velocity_x/src/flutter/container.dart';
+import 'package:velocity_x/src/flutter/padding.dart';
+import 'package:velocity_x/src/flutter/widgets.dart';
 
 class InspectionPointInputPage extends StatefulWidget {
   final InspectionQRCodeModel? qrModel;
@@ -63,7 +64,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
     );
     _submitModel.executeCheckList = List.generate(
       widget.qrModel!.checkVoList!.length,
-      (index) => ExecuteCheckList(widget.qrModel!.checkVoList![index].id, -1, ''),
+      (index) =>
+          ExecuteCheckList(widget.qrModel!.checkVoList![index].id, -1, ''),
     );
   }
 
@@ -95,14 +97,15 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                     .uploadFiles(_selfPhotos!, API.upload.uploadInspectionFace);
 
                 _submitModel.inspectionSpaceImgPath = await NetUtil()
-                    .uploadFiles(_scenePhots!, API.upload.uploadInspectionSpace);
+                    .uploadFiles(
+                        _scenePhots!, API.upload.uploadInspectionSpace);
                 BaseModel baseModel =
-                    await (ManageFunc.getSubmitPoint(_submitModel) );
-                if (baseModel.status!) {
-                  BotToast.showText(text: baseModel.message!);
+                    await (ManageFunc.getSubmitPoint(_submitModel));
+                if (baseModel.success!) {
+                  BotToast.showText(text: baseModel.msg);
                   Get.to(() => InspectionPointSubmitPage());
                 } else {
-                  BotToast.showText(text: baseModel.message!);
+                  BotToast.showText(text: baseModel.msg);
                 }
               }
             : () {},

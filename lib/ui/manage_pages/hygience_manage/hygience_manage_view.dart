@@ -1,14 +1,13 @@
 // Flutter imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/hygience_manage/heygience_list_model.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
-import 'package:flutter/material.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/ui/manage_pages/hygience_manage/hygience_manage_card.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class HygienceManageView extends StatefulWidget {
   final int index;
@@ -19,7 +18,7 @@ class HygienceManageView extends StatefulWidget {
 }
 
 class _HygienceManageViewState extends State<HygienceManageView> {
- late EasyRefreshController _refreshController;
+  late EasyRefreshController _refreshController;
   @override
   void initState() {
     super.initState();
@@ -38,16 +37,14 @@ class _HygienceManageViewState extends State<HygienceManageView> {
         path: API.manage.hygienceList,
         controller: _refreshController,
         extraParams: {
-          "hygieneStatus":widget.index+1,
+          "hygieneStatus": widget.index + 1,
         },
         convert: (models) {
-          return models.tableList!
-              .map((e) => HygienceListModel.fromJson(e))
-              .toList();
+          return models.rows.map((e) => HygienceListModel.fromJson(e)).toList();
         },
         builder: (items) {
           return ListView.separated(
-            padding: EdgeInsets.all(24.w),
+              padding: EdgeInsets.all(24.w),
               itemBuilder: (context, index) {
                 return HyginecManageCard(
                   index: widget.index,

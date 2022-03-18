@@ -20,7 +20,7 @@ class EngineerRepairFunc {
       'reportDetail': reportDetail,
       'fileUrls': urls,
     });
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future<EngineerRepairDetailModel?> getEngineerRepairDetail(
@@ -28,7 +28,7 @@ class EngineerRepairFunc {
     var model = await NetUtil().get(API.engineerRepair.detail,
         params: {'repairEngineeringId': repairEngineeringId});
 
-    if (model.status ?? false) {
+    if (model.success) {
       return EngineerRepairDetailModel.fromJson(model.data);
     } else {
       return null;
@@ -40,7 +40,7 @@ class EngineerRepairFunc {
     var model = await NetUtil().get(API.engineerRepair.process,
         params: {'repairEngineeringId': repairEngineeringId});
 
-    if (model.status ?? false) {
+    if (model.success) {
       return (model.data as List)
           .map((e) => EngineerRepairProcessModel.fromJson(e))
           .toList();
@@ -54,7 +54,7 @@ class EngineerRepairFunc {
     var model = await NetUtil().get(API.engineerRepair.workReport,
         params: {'repairEngineeringId': repairEngineeringId});
 
-    if (model.status ?? false) {
+    if (model.success) {
       return (model.data as List)
           .map((e) => EngineerRepairWorkReportModel.fromJson(e))
           .toList();
@@ -68,7 +68,7 @@ class EngineerRepairFunc {
       API.engineerRepair.organization,
     );
 
-    if (model.status ?? false) {
+    if (model.success) {
       return (model.data as List)
           .map((e) => EngineerRepairOrganizationModel.fromJson(e))
           .toList();
@@ -82,7 +82,7 @@ class EngineerRepairFunc {
     var model = await NetUtil().get(API.engineerRepair.persons,
         params: {'repairOrganizationId': organizationId});
 
-    if (model.status ?? false) {
+    if (model.success) {
       return (model.data as List)
           .map((e) => EngineerRepairPersonModel.fromJson(e))
           .toList();
@@ -94,20 +94,20 @@ class EngineerRepairFunc {
   static Future companySend(int repairId, int organizationId) async {
     var model = await NetUtil().post(API.engineerRepair.companySend,
         params: {'id': repairId, 'organizationId': organizationId});
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future<bool> personSend(int repairId, int maintenanceStaffId) async {
     var model = await NetUtil().post(API.engineerRepair.personSend,
         params: {'id': repairId, 'maintenanceStaff': maintenanceStaffId});
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future<bool> personPick(int repairId) async {
     var model = await NetUtil().post(API.engineerRepair.personPick, params: {
       'id': repairId,
     });
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future uploadReportImages(List<File> files) async {
@@ -123,7 +123,7 @@ class EngineerRepairFunc {
       'content': detail,
       'workReportImgUrls': urls,
     });
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future complete(
@@ -138,7 +138,7 @@ class EngineerRepairFunc {
       'billMaterials': material,
       'maintenanceImgUrls': urls,
     });
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future uploadCompleteImages(List<File> files) async {
@@ -151,7 +151,7 @@ class EngineerRepairFunc {
     var model = await NetUtil().get(API.engineerRepair.repairResult, params: {
       'repairEngineeringId': repairId,
     });
-    if (model.status ?? false) {
+    if (model.success) {
       return EngineerRepairResultModel.fromJson(model.data);
     } else {
       return null;
@@ -168,7 +168,7 @@ class EngineerRepairFunc {
       'advice': advice,
       'acceptanceImgUrls': urls,
     });
-    return model.status ?? false;
+    return model.success;
   }
 
   static Future uploadAcceptanceImages(List<File> files) async {
@@ -182,7 +182,7 @@ class EngineerRepairFunc {
         await NetUtil().get(API.engineerRepair.acceptanceRecordNew, params: {
       'repairEngineeringId': repairId,
     });
-    if (model.status ?? false) {
+    if (model.success) {
       return EngineerRepairNewAcceptanceRecordModel.fromJson(model.data);
     } else {
       return null;
@@ -195,7 +195,7 @@ class EngineerRepairFunc {
         await NetUtil().get(API.engineerRepair.acceptanceRecordList, params: {
       'repairEngineeringId': repairId,
     });
-    if (model.status ?? false) {
+    if (model.success) {
       return (model.data as List)
           .map((e) => EngineerRepairNewAcceptanceRecordModel.fromJson(e))
           .toList();
@@ -209,6 +209,6 @@ class EngineerRepairFunc {
         await NetUtil().post(API.engineerRepair.startRectification, params: {
       'id': repairId,
     });
-    return model.status ?? false;
+    return model.success;
   }
 }

@@ -38,7 +38,7 @@ class _InterviewViewState extends State<InterviewView> {
           "interviewStatus": widget.index + 1,
         },
         convert: (models) {
-          return models.tableList!
+          return models.rows
               .map((e) => InterviewListModel.fromJson(e))
               .toList();
         },

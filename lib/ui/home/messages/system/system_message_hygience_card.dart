@@ -1,23 +1,21 @@
 // Flutter imports:
 import 'dart:async';
 
+// Project imports:
+import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/message/system_message_hygience_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/home/messages/message_map.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/hygience_manage/hygience_manage_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
-
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-// Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/style/app_style.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
-import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
 
 class SystemMessageHygienceCard extends StatefulWidget {
   final int relationId;
@@ -60,7 +58,7 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
         await NetUtil().get(API.message.getSysHygienceMessageById, params: {
       "hygieneTaskId": repairId,
     });
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       return SystemMessageHygineceModel.fromJson(baseModel.data);
     }
   }

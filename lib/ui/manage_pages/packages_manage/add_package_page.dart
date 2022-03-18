@@ -1,22 +1,20 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
+// Project imports:
+import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
-// Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/style/app_style.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
-import 'package:aku_new_community_manager/utils/network/net_util.dart';
-import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
 
 class AddPackagePage extends StatefulWidget {
   AddPackagePage({Key? key}) : super(key: key);
@@ -139,11 +137,11 @@ class _AddPackagePageState extends State<AddPackagePage> {
       },
     );
 
-    if (!baseModel.status!) {
-      BotToast.showText(text: baseModel.message!);
+    if (!baseModel.success!) {
+      BotToast.showText(text: baseModel.msg);
       return;
     }
-    BotToast.showText(text: baseModel.message!);
+    BotToast.showText(text: baseModel.msg);
     Get.back();
   }
 

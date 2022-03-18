@@ -1,29 +1,27 @@
 // Dart imports:
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:aku_new_community_manager/models/manager/package_manage/package_manage_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
 
 class PackageManageCard extends StatefulWidget {
   final int index;
   final PackageManageListModel model;
   final VoidCallback? callRefresh;
-  PackageManageCard({Key? key, required this.index, required this.model, this.callRefresh})
+  PackageManageCard(
+      {Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -130,8 +128,8 @@ class _PackageManageCardState extends State<PackageManageCard> {
   Future _remindPackage(int packageCollectionId) async {
     BaseModel baseModel = await NetUtil().get(API.manage.packageManageRemind,
         params: {"packageCollectionId": packageCollectionId});
-    if (!baseModel.status!) {
-      BotToast.showText(text: baseModel.message!);
+    if (!baseModel.success!) {
+      BotToast.showText(text: baseModel.msg);
     } else {
       BotToast.showText(text: '已成功提醒领取');
     }

@@ -1,12 +1,12 @@
 // Flutter imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/key_manage/key_manage_record_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/key_manage/key_manage_map.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -100,7 +100,7 @@ class _KeyApplyRecordCardState extends State<KeyApplyRecordCard> {
         button = _bottomButton('重新申请', () async {
           BaseModel baseModel = await NetUtil()
               .post(API.manage.applyKey, params: {"keyId": widget.model.id});
-          BotToast.showText(text: baseModel.message ?? '网络错误');
+          BotToast.showText(text: baseModel.msg);
           widget.callRefresh!();
         }, Colors.white, Colors.black) as MaterialButton?;
         break;

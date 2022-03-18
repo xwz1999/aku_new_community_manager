@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_pick_staff_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 
@@ -13,7 +13,7 @@ class HouseKeepingFunc {
       int id) async {
     BaseModel baseModel = await NetUtil().get(API.manage.newHouseKeepingProcess,
         params: {"housekeepingServiceId": id});
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       return (baseModel.data as List)
           .map((e) => HouseKeepingProcessModel.fromJson(e))
           .toList();
@@ -28,7 +28,7 @@ class HouseKeepingFunc {
         await NetUtil().get(API.manage.newHouseKeepingUrgeWork, params: {
       "housekeepingServiceId": id,
     });
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       BotToast.showText(text: '已成功催单，请耐心等候');
       return true;
     } else {
@@ -42,7 +42,7 @@ class HouseKeepingFunc {
         await NetUtil().post(API.manage.newHouseKeepingOrderReceive, params: {
       "id": id,
     });
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       BotToast.showText(text: '接单成功');
       return true;
     } else {
@@ -54,7 +54,7 @@ class HouseKeepingFunc {
   static Future newHouseKeepingPickStaffList() async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.newHouseKeepingPickStaffList);
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       return (baseModel.data as List)
           .map((e) => HouseKeepingPickStaffModel.fromJson(e))
           .toList();
@@ -70,11 +70,11 @@ class HouseKeepingFunc {
       "id": id,
       "handler": handlerId,
     });
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       BotToast.showText(text: '派单成功');
       return true;
     } else {
-      BotToast.showText(text: baseModel.message ?? '派单失败');
+      BotToast.showText(text: baseModel.msg);
       return false;
     }
   }
@@ -108,11 +108,11 @@ class HouseKeepingFunc {
       "payFee": payFee,
       "handlerImgUrls": urls,
     });
-    if (baseModel.status ?? false) {
+    if (baseModel.success ?? false) {
       BotToast.showText(text: '提交成功');
       return true;
     } else {
-      BotToast.showText(text: baseModel.message ?? '提交失败');
+      BotToast.showText(text: baseModel.msg);
       return false;
     }
   }

@@ -9,7 +9,7 @@ import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/hygience_manage/hygience_manage_detail_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/hygience_manage/hygience_manage_map.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -161,10 +161,10 @@ class _HyginecManageCardState extends State<HyginecManageCard> {
                         .post(API.manage.hygienceComplete, params: {
                       "id": widget.model.id,
                     });
-                    if (baseModel.status!) {
+                    if (baseModel.success!) {
                       widget.callRefresh!();
                     }
-                    BotToast.showText(text: baseModel.message!);
+                    BotToast.showText(text: baseModel.msg);
                   },
                 )
               ],

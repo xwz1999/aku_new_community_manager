@@ -7,14 +7,13 @@ part of 'engineer_repair_process_model.dart';
 // **************************************************************************
 
 EngineerRepairProcessModel _$EngineerRepairProcessModelFromJson(
-    Map<String, dynamic> json) {
-  return EngineerRepairProcessModel(
-    json['id'] as int,
-    json['repairEngineeringId'] as int,
-    json['operationDate'] as String,
-    json['operationType'] as int,
-    json['operator'] as int,
-    json['operatorType'] as int,
-    json['operatorContent'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    EngineerRepairProcessModel(
+      json['id'] as int,
+      json['repairEngineeringId'] as int,
+      json['operationDate'] as String,
+      json['operationType'] as int,
+      json['operator'] as int,
+      json['operatorType'] as int,
+      json['operatorContent'] as String,
+    );

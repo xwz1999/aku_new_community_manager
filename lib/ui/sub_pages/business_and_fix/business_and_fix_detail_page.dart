@@ -1,14 +1,4 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/const/resource.dart';
@@ -19,6 +9,7 @@ import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/fixed
 import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/work_order_type_model.dart';
 import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/work_time_limit_model.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_map.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
@@ -26,11 +17,18 @@ import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/fix_more_time_page.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/fix_work_finish_page.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/fixer_department_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_title_box.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/show_bottom_sheet.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/manage_func.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class BusinessAndFixDetailPage extends StatefulWidget {
   final BussinessAndFixModel model;
@@ -91,7 +89,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         controller: _easyRefreshController,
         header: MaterialHeader(),
         onRefresh: () async {
-          _detailModel = await (ManageFunc.repairDetail(widget.model.id!) );
+          _detailModel = await (ManageFunc.repairDetail(widget.model.id!));
           _reportModel.dispatchListId = widget.model.dispatchId!;
           _reportModel.workOrderTyoe = 1;
           _onload = false;
@@ -118,8 +116,9 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         builder: (context) {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
-              //派单权限 + 待派单状态=立即派单
-          if (userProvider.infoModel!.canSendTicket && widget.model.status! < 2) {
+          //派单权限 + 待派单状态=立即派单
+          if (userProvider.infoModel!.canSendTicket &&
+              widget.model.status! < 2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
               nullColor: AppStyle.minorColor,
@@ -144,10 +143,10 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
                 onPressed: () {
-                  Get.to(()=>FixerDepartmentPage(
-                    model: _reportModel,
-                    changeType: true,
-                  ));
+                  Get.to(() => FixerDepartmentPage(
+                        model: _reportModel,
+                        changeType: true,
+                      ));
                 },
                 child: Text(
                   '改派',
@@ -162,12 +161,12 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
                 onPressed: () async {
-                  BaseModel baseModel =
-                      await (ManageFunc.recevingOrders(widget.model.dispatchId) );
-                  if (baseModel.status!) {
+                  BaseModel baseModel = await (ManageFunc.recevingOrders(
+                      widget.model.dispatchId));
+                  if (baseModel.success) {
                     Get.back();
                   } else {
-                    BotToast.showText(text: baseModel.message!);
+                    BotToast.showText(text: baseModel.msg);
                   }
                 },
                 child: Text(
@@ -208,8 +207,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                       ),
                     ),
                     onPressed: () async {
-                      await Get.to(
-                         ()=> FixMoreTimePage(dispatchId: widget.model.dispatchId!));
+                      await Get.to(() => FixMoreTimePage(
+                          dispatchId: widget.model.dispatchId!));
                       _easyRefreshController!.callRefresh();
                     },
                     child: Text(
@@ -226,7 +225,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
                     radius: 4.w,
                     color: AppStyle.primaryColor,
                     onPressed: () {
-                      Get.to(()=>FixWorkFinishPage(
+                      Get.to(() => FixWorkFinishPage(
                           fixModel: widget.model,
                           model: _detailModel,
                           dispatchType:
@@ -259,7 +258,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
           '绑定房屋',
-          _detailModel.repairDetail!.roomName??'',
+          _detailModel.repairDetail!.roomName ?? '',
         ),
         _buildTile(
           R.ASSETS_MESSAGE_IC_PEOPLE_PNG,
@@ -385,7 +384,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           canTap,
           helpContent: '请选择工单子类',
           onTap: () async {
-            List models = await (ManageFunc.workOrderTypeDetail(1) );
+            List models = await (ManageFunc.workOrderTypeDetail(1));
             _workTypeModels =
                 models.map((e) => WorkOrderTypeModel.fromJson(e)).toList();
             showItemSheet(

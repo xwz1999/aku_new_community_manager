@@ -38,7 +38,7 @@ class _NewRenovationState extends State<NewRenovationView>
         controller: _refreshController,
         extraParams: {"userDecorationNewStatus": widget.index},
         convert: (models) {
-          return models.tableList!
+          return models.rows
               .map((e) => NewRenovationListModel.fromJson(e))
               .toList();
         },

@@ -4,10 +4,9 @@ import 'dart:io';
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/ui/login/login_page.dart';
-import 'package:aku_new_community_manager/utils/network/base_file_model.dart';
-import 'package:aku_new_community_manager/utils/network/base_list_model.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
@@ -73,7 +72,7 @@ class NetUtil {
     } on DioError catch (e) {
       _parseErr(e);
     }
-    return BaseModel.err();
+    return BaseModel.error();
   }
 
   /// ## alias of Dio().post
@@ -96,7 +95,7 @@ class NetUtil {
     } on DioError catch (e) {
       _parseErr(e);
     }
-    return BaseModel.err();
+    return BaseModel.error();
   }
 
   Future<BaseListModel> getList(
@@ -120,18 +119,18 @@ class NetUtil {
     return BaseListModel.err();
   }
 
-  Future<BaseFileModel> upload(String path, File file) async {
+  Future<BaseModel> upload(String path, File file) async {
     try {
       Response res = await _dio!.post(path,
           data: FormData.fromMap({
             'file': await MultipartFile.fromFile(file.path),
           }));
-      BaseFileModel baseListModel = BaseFileModel.fromJson(res.data);
-      return baseListModel;
+      BaseModel baseModel = BaseModel.fromJson(res.data);
+      return baseModel;
     } on DioError catch (e) {
       print(e);
     }
-    return BaseFileModel.err();
+    return BaseModel.error();
   }
 
   Future<List<String>> uploadFiles(List<File> files, String api) async {
@@ -140,8 +139,10 @@ class NetUtil {
       return [];
     } else {
       for (var item in files) {
-        BaseFileModel model = await NetUtil().upload(api, item);
-        urls.add(model.url ?? '');
+        BaseModel model = await NetUtil().upload(api, item);
+        if (model.data != null) {
+          urls.add(model.data as String);
+        }
       }
     }
 
@@ -173,12 +174,12 @@ class NetUtil {
 
   _parseRequestError(BaseModel model, {bool showMessage = false}) {
     final userProvider = Provider.of<UserProvider>(Get.context!, listen: false);
-    if (!model.status! && model.message == '登录失效，请登录' && userProvider.isLogin) {
+    if (!model.success && (model.code == 10010 || model.msg == '登录失效，请重新登录')) {
       userProvider.logout();
       Get.offAll(() => LoginPage());
-    }
-    if (!model.status! || showMessage) {
-      BotToast.showText(text: model.message!);
+      if (userProvider.isLogin) {
+        BotToast.showText(text: model.msg);
+      }
     }
   }
 }

@@ -1,38 +1,40 @@
 // Dart imports:
 import 'dart:async';
 
-// Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-import 'package:amap_flutter_base/amap_flutter_base.dart';
-import 'package:amap_flutter_map/amap_flutter_map.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:common_utils/common_utils.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_detail_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_input_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_page.dart';
+// Flutter imports:
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:amap_flutter_base/amap_flutter_base.dart';
+import 'package:amap_flutter_map/amap_flutter_map.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
+import 'package:velocity_x/src/flutter/container.dart';
+import 'package:velocity_x/src/flutter/gesture.dart';
+import 'package:velocity_x/src/flutter/padding.dart';
+import 'package:velocity_x/src/flutter/widgets.dart';
 
 class InspectionManageDetailsPage extends StatefulWidget {
   final int executeId;
@@ -55,7 +57,7 @@ class _InspectionManageDetailsPageState
     switch (status) {
       case 1:
         return Color(0xFFFF4501);
-        
+
       case 2:
         return Color(0xFF999999);
       case 3:
@@ -167,20 +169,21 @@ class _InspectionManageDetailsPageState
                           BaseModel _baseModel = await NetUtil().get(
                               API.manage.inspectionStart,
                               params: {"executeId": widget.executeId});
-                          if (_baseModel.status!) {
-                            BotToast.showText(text: _baseModel.message!);
+                          if (_baseModel.success!) {
+                            BotToast.showText(text: _baseModel.msg);
                             _refreshController!.callRefresh();
                             _startTimer(5000);
                           } else {
-                            BotToast.showText(text: _baseModel.message!);
+                            BotToast.showText(text: _baseModel.msg);
                           }
                         }
                       : () async {
-                          Barcode result = await (Get.to(() => QrScannerPage()) );
+                          Barcode result =
+                              await (Get.to(() => QrScannerPage()));
                           BaseModel baseModel =
                               await ManageFunc.getInspectionFindCheckDetailByQr(
                                   _detailModel!.id!, result.code);
-                          if (baseModel.status!) {
+                          if (baseModel.success!) {
                             Get.to(() => InspectionPointInputPage(
                                   inspectionName: _detailModel!.name,
                                   qrModel: InspectionQRCodeModel.fromJson(
@@ -507,7 +510,8 @@ class _InspectionManageDetailsPageState
             zoomGesturesEnabled: false,
             onMapCreated: (controller) {
               _aMapController = controller;
-              LatLng _target = LatLng(appProvider.location!['latitude'] as double,
+              LatLng _target = LatLng(
+                  appProvider.location!['latitude'] as double,
                   appProvider.location!['longitude'] as double);
               _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
                   CameraPosition(target: _target, zoom: 19)));
@@ -521,9 +525,9 @@ class _InspectionManageDetailsPageState
                   CameraPosition(target: argument.latLng, zoom: 19)));
               if (_canUploadLocation) {
                 BaseModel baseModel = await (_uploadLocation(widget.executeId,
-                    argument.latLng.longitude, argument.latLng.latitude) );
-                if (!baseModel.status!) {
-                  BotToast.showText(text: baseModel.message!);
+                    argument.latLng.longitude, argument.latLng.latitude));
+                if (!baseModel.success!) {
+                  BotToast.showText(text: baseModel.msg);
                 } else {
                   _canUploadLocation = false;
                   //绘制折线

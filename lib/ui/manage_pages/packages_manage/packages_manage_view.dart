@@ -1,16 +1,14 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_easyrefresh/easy_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/velocity_x.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/package_manage/package_manage_list_model.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/packages_manage/packages_manage_card.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class PackagesManageView extends StatefulWidget {
   final int index;
@@ -45,9 +43,8 @@ class _PackagesManageViewState extends State<PackagesManageView> {
       controller: _refreshController,
       extraParams: {"collectionStatus": widget.index + 1},
       convert: (models) {
-        List<PackageManageListModel> modelList = models.tableList!
-            .map((e) => PackageManageListModel.fromJson(e))
-            .toList();
+        List<PackageManageListModel> modelList =
+            models.rows.map((e) => PackageManageListModel.fromJson(e)).toList();
         print(modelList);
         return modelList;
       },

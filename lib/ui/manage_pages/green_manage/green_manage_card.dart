@@ -1,30 +1,30 @@
 // Flutter imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/green_manage/green_manage_list_model.dart';
-import 'package:aku_new_community_manager/ui/manage_pages/green_manage/green_manage_details_page.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
-import 'package:aku_new_community_manager/utils/network/net_util.dart';
-import 'package:bot_toast/bot_toast.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:velocity_x/velocity_x.dart';
-
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
+import 'package:aku_new_community_manager/ui/manage_pages/green_manage/green_manage_details_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/green_manage/green_manage_map.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:velocity_x/src/extensions/num_ext.dart';
+import 'package:velocity_x/src/extensions/string_ext.dart';
 
 class GreenManageCard extends StatefulWidget {
   final int index;
   final GreenManageListModel model;
   final VoidCallback? callRefresh;
-  GreenManageCard({Key? key, required this.index, required this.model, this.callRefresh})
+  GreenManageCard(
+      {Key? key, required this.index, required this.model, this.callRefresh})
       : super(key: key);
 
   @override
@@ -163,10 +163,10 @@ class _GreenManageCardState extends State<GreenManageCard> {
                         .post(API.manage.greenManageComplete, params: {
                       "id": widget.model.id,
                     });
-                    if (baseModel.status!) {
+                    if (baseModel.success!) {
                       widget.callRefresh!();
                     }
-                    BotToast.showText(text: baseModel.message!);
+                    BotToast.showText(text: baseModel.msg);
                   },
                 )
               ],

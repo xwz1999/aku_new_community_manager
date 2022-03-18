@@ -1,22 +1,20 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
-import 'package:get/get.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+// Flutter imports:
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/utils/network/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SettingFeedBackPage extends StatefulWidget {
   SettingFeedBackPage({Key? key}) : super(key: key);
@@ -90,11 +88,11 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
             "content": _content,
             "fileUrls": _imgeUrls,
           });
-          if (baseModel.status!) {
-            BotToast.showText(text: baseModel.message!);
+          if (baseModel.success!) {
+            BotToast.showText(text: baseModel.msg);
             Get.back();
           } else {
-            BotToast.showText(text: baseModel.message!);
+            BotToast.showText(text: baseModel.msg);
           }
         },
         child: Text('提交'),
