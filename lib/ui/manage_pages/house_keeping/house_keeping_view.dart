@@ -1,6 +1,5 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/house_keeping/house_keeping_card.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
@@ -33,14 +32,16 @@ class _HouseKeepingViewState extends State<HouseKeepingView> {
   }
 
   int? get housekeepingServiceStatus {
-    switch (UserTool.userProvider.infoModel!.houseKeepingAuthority) {
-      case HKAUTH.PICK:
+    switch (UserTool.userProvider.userInfoModel!.type) {
+      // case HKAUTH.PICK:
+      case 1:
         if (widget.index == 0) {
           return null;
         } else {
           return widget.index + 1;
         }
-      case HKAUTH.SEND:
+      // case HKAUTH.SEND:
+      case 2:
         return widget.index == 0 ? null : widget.index;
       default:
         return widget.index == 0 ? null : widget.index;

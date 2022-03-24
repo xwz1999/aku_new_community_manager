@@ -4,6 +4,7 @@ import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:aku_new_community_manager/models/manager/goods_out/goods_out_detail_model.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
@@ -12,7 +13,6 @@ import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/outdoor_pas
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:common_utils/common_utils.dart';
@@ -277,7 +277,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
     final userProvider = Provider.of<UserProvider>(context);
     switch (_model!.status) {
       case 1:
-        return userProvider.infoModel!.canPass
+        return userProvider.userInfoModel!.type == 1
             ? Container(
                 height: 98.w,
                 decoration: BoxDecoration(

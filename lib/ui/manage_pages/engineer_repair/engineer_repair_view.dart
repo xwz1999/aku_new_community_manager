@@ -1,6 +1,5 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_list_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_card.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
@@ -24,19 +23,19 @@ class _EngineerRepairViewState extends State<EngineerRepairView> {
     if (widget.index == 0) {
       return null;
     } else if (widget.index == 1) {
-      switch (UserTool.userProvider.infoModel!.engineeringRepairAuthority) {
-        case ERAUTH.SENDTOCOMPANY:
-          return 1;
-        case ERAUTH.SENDTOPERSON:
-          return 2;
-        case ERAUTH.PICK:
-          return 3;
-        case ERAUTH.HIDE:
-          break;
+      switch (UserTool.userProvider.userInfoModel!.type == 1) {
+        // case ERAUTH.SENDTOCOMPANY:
+        //   return 1;
+        // case ERAUTH.SENDTOPERSON:
+        //   return 2;
+        // case ERAUTH.PICK:
+        //   return 3;
+        // case ERAUTH.HIDE:
+        //   break;
+        default:
       }
     } else {
-      return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-              ERAUTH.PICK
+      return UserTool.userProvider.userInfoModel!.type == 1
           ? widget.index + 2
           : widget.index + 1;
     }

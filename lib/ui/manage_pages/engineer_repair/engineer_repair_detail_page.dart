@@ -5,7 +5,6 @@ import 'package:aku_new_community_manager/json_models/manager/engineer_repair/en
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_process_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_result_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_work_report_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
@@ -127,8 +126,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
     if (_model != null) {
       switch (_model!.status) {
         case 1:
-          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.SENDTOCOMPANY
+          return UserTool.userProvider.userInfoModel!.type == 1
               ? AkuBottomButton(
                   title: '立即派单',
                   onTap: () async {
@@ -138,10 +136,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                 )
               : SizedBox();
         case 2:
-          print(UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-              ERAUTH.SENDTOPERSON);
-          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.SENDTOPERSON
+          return UserTool.userProvider.userInfoModel!.type == 1
               ? AkuBottomButton(
                   title: '立即派单',
                   onTap: () async {
@@ -153,8 +148,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                 )
               : SizedBox();
         case 3:
-          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.PICK
+          return UserTool.userProvider.userInfoModel!.type == 1
               ? AkuBottomButton(
                   title: '立即接单',
                   onTap: () async {
@@ -167,8 +161,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                 )
               : SizedBox();
         case 4:
-          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.PICK
+          return UserTool.userProvider.userInfoModel!.type == 1
               ? Row(
                   children: [
                     AkuMaterialButton(
@@ -193,8 +186,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                 )
               : SizedBox();
         case 5:
-          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.SENDTOCOMPANY
+          return UserTool.userProvider.userInfoModel!.type == 1
               ? AkuMaterialButton(
                   color: kPrimaryColor,
                   onPressed: () async {
@@ -213,8 +205,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
                       '验收审核'.text.size(32.sp).bold.color(Colors.black).make())
               : SizedBox();
         case 6:
-          return UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.PICK
+          return UserTool.userProvider.userInfoModel!.type == 1
               ? AkuMaterialButton(
                   color: kPrimaryColor,
                   onPressed: () async {

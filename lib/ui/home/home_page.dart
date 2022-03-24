@@ -358,7 +358,7 @@ class _HomePageState extends State<HomePage> {
                     height: 67.w,
                     child: Text(
                       userProvider.isLogin
-                          ? 'HI，${userProvider.infoModel!.nickName}'
+                          ? 'HI，${userProvider.userInfoModel!.nickName}'
                           : '登录/注册',
                       style: TextStyle(
                         color: AppStyle.primaryTextColor,

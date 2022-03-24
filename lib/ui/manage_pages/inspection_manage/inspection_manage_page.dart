@@ -1,15 +1,13 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_manage_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 // Package imports:
 
@@ -25,7 +23,7 @@ class _InspectionManagePageState extends State<InspectionManagePage>
   List<String> get _tabs {
     UserProvider _userProvider =
         Provider.of<UserProvider>(context, listen: false);
-    if (_userProvider.infoModel!.canOperation) {
+    if (_userProvider.userInfoModel!.type == 1) {
       return ['待巡检', '已巡检', '巡检中', '未巡检', '全部'];
     } else {
       return ['待巡检', '已巡检', '巡检中', '未巡检', '全部'];

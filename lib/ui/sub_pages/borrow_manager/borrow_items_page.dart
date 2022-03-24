@@ -33,7 +33,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
     return AkuScaffold(
       title: '物品查看',
       actions: [
-        userProvider.infoModel!.canOperation
+        userProvider.userInfoModel!.type == 1
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {
@@ -95,7 +95,7 @@ class _BorrowItemPageState extends State<BorrowItemPage> {
                   ),
                 ),
                 Spacer(),
-                userProvider.infoModel!.canOperation
+                userProvider.userInfoModel!.type == 1
                     ? AkuMaterialButton(
                         padding: EdgeInsets.symmetric(horizontal: 24.w),
                         onPressed: () {

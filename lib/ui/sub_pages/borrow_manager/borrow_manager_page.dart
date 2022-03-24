@@ -1,17 +1,15 @@
 // Flutter imports:
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/borrow_manager/all_borrow_goods.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/borrow_manager/borrow_manager_view.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_tab_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class BorrowManagerPage extends StatefulWidget {
   BorrowManagerPage({Key? key}) : super(key: key);
@@ -22,14 +20,13 @@ class BorrowManagerPage extends StatefulWidget {
 
 class _BorrowManagerPageState extends State<BorrowManagerPage>
     with TickerProviderStateMixin {
-  
   TabController? _tabController;
   List<String> get _tabs {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     return [
       '全部',
-      ...userProvider.infoModel!.canOperation ? ['待审核'] : [],
-      ...userProvider.infoModel!.canOperation ? ['检查中'] : [],
+      ...userProvider.userInfoModel!.type == 1 ? ['待审核'] : [],
+      ...userProvider.userInfoModel!.type == 1 ? ['检查中'] : [],
       '出借中',
       '已归还'
     ];
@@ -77,14 +74,13 @@ class _BorrowManagerPageState extends State<BorrowManagerPage>
     final userProvider = Provider.of<UserProvider>(context);
     return [
       BorrowManagerView(),
-    ...userProvider.infoModel!.canOperation
-    ? [BorrowManagerView(status: -1)]
-        : [],
-    ...userProvider.infoModel!.canOperation
-    ? [BorrowManagerView(status: 3)]
-        : [],
+      ...userProvider.userInfoModel!.type == 1
+          ? [BorrowManagerView(status: -1)]
+          : [],
+      ...userProvider.userInfoModel!.type == 1
+          ? [BorrowManagerView(status: 3)]
+          : [],
       BorrowManagerView(status: 1),
-
       BorrowManagerView(status: 2),
     ];
   }

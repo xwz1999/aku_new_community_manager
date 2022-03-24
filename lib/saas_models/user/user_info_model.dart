@@ -1,25 +1,29 @@
 import 'package:aku_new_community_manager/models/common/img_model.dart';
+import 'package:common_utils/common_utils.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_info_model.g.dart';
 
 @JsonSerializable()
-class UserInfoModel {
+class UserInfoModel extends Equatable {
   final int id;
-  final int communityId;
-  final String communityCode;
-  final String? name;
-  final String? idCard;
+  final String userName;
+  final int type;
+  final String actualName;
   final String tel;
-
-  // 性别 1.男 2.女 3.保密
-  final int? sex;
+  final int sex;
+  final String userCode;
+  final String? birthDay;
+  final String? email;
+  final int status;
+  final int? lastLoginIp;
+  final String? lastLoginDate;
   final String? nickName;
-  final bool isExistPassword;
-  final bool isPointsSignSetting;
-  final bool isSign;
-  final int? points;
-  final List<ImgModel> imgList;
+  final String? address;
+  final String entryDate;
+  final String? remake;
+  final List<ImgModel>? imgList;
 
   String get sexValue {
     if (sex == 1) return '男';
@@ -28,31 +32,56 @@ class UserInfoModel {
     return '未设置';
   }
 
-  // DateTime? get birthdayDate => DateUtil.getDateTime(birthday ?? '');
+  DateTime? get birthdayDate => DateUtil.getDateTime(birthDay ?? '');
 
-  // String get birthdayValue {
-  //   if (TextUtil.isEmpty(birthday))
-  //     return '未设置';
-  //   else
-  //     return DateUtil.formatDate(birthdayDate, format: 'yyyy-MM-dd');
-  // }
+  String get birthdayValue {
+    if (TextUtil.isEmpty(birthDay))
+      return '未设置';
+    else
+      return DateUtil.formatDate(birthdayDate, format: 'yyyy-MM-dd');
+  }
 
   factory UserInfoModel.fromJson(Map<String, dynamic> json) =>
       _$UserInfoModelFromJson(json);
 
+  @override
+  List<Object?> get props => [
+        id,
+        userName,
+        type,
+        actualName,
+        tel,
+        sex,
+        userCode,
+        birthDay,
+        email,
+        status,
+        lastLoginIp,
+        lastLoginDate,
+        nickName,
+        address,
+        entryDate,
+        remake,
+        imgList,
+      ];
+
   const UserInfoModel({
     required this.id,
-    required this.communityId,
-    required this.communityCode,
-    this.name,
-    this.idCard,
+    required this.userName,
+    required this.type,
+    required this.actualName,
     required this.tel,
-    this.sex,
+    required this.sex,
+    required this.userCode,
+    this.birthDay,
+    this.email,
+    required this.status,
+    this.lastLoginIp,
+    this.lastLoginDate,
     this.nickName,
-    required this.isExistPassword,
-    required this.isPointsSignSetting,
-    required this.isSign,
-    this.points,
-    required this.imgList,
+    this.address,
+    required this.entryDate,
+    this.remake,
+    this.imgList,
   });
 }

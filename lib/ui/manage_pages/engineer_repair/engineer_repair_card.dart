@@ -2,7 +2,6 @@ import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_list_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_new_acceptance_record_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_result_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_page.dart';
@@ -130,8 +129,7 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
-              (UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                      ERAUTH.SENDTOCOMPANY)
+              (true)
                   ? await Get.to(
                       () => EngineerRepairDepartCompany(repairId: model.id))
                   : await Get.to(() =>
@@ -142,8 +140,7 @@ class EngineerRepairCard extends StatelessWidget {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                      ERAUTH.SENDTOCOMPANY
+              (UserTool.userProvider.userInfoModel!.type == 1
                   ? '分派单位'
                   : '查看详情'),
               style: TextStyle(
@@ -160,8 +157,7 @@ class EngineerRepairCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
-              (UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                      ERAUTH.SENDTOPERSON)
+              (UserTool.userProvider.userInfoModel!.type == 1)
                   ? await Get.to(() =>
                       EngineerRepairDetailPage(repairEngineerId: model.id))
                   : await Get.to(() =>
@@ -172,8 +168,7 @@ class EngineerRepairCard extends StatelessWidget {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                      ERAUTH.SENDTOPERSON
+              (UserTool.userProvider.userInfoModel!.type == 1
                   ? '指派人员'
                   : '查看详情'),
               style: TextStyle(
@@ -187,8 +182,7 @@ class EngineerRepairCard extends StatelessWidget {
         ];
       case 3:
         return [
-          UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                  ERAUTH.PICK
+          UserTool.userProvider.userInfoModel!.type == 1
               ? AkuMaterialButton(
                   height: 64.w,
                   onPressed: () async {
@@ -258,9 +252,7 @@ class EngineerRepairCard extends StatelessWidget {
         return [
           AkuMaterialButton(
             height: 64.w,
-            onPressed: UserTool
-                        .userProvider.infoModel!.engineeringRepairAuthority ==
-                    ERAUTH.SENDTOCOMPANY
+            onPressed: UserTool.userProvider.userInfoModel!.type == 1
                 ? () async {
                     EngineerRepairResultModel? resultModel =
                         await EngineerRepairFunc.getRepairResult(model.id);
@@ -285,10 +277,7 @@ class EngineerRepairCard extends StatelessWidget {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              UserTool.userProvider.infoModel!.engineeringRepairAuthority ==
-                      ERAUTH.SENDTOCOMPANY
-                  ? '验收审核'
-                  : '验收记录',
+              UserTool.userProvider.userInfoModel!.type == 1 ? '验收审核' : '验收记录',
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontWeight: FontWeight.bold,

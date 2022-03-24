@@ -45,7 +45,7 @@ class _BorrowItemDetailPageState extends State<BorrowItemDetailPage> {
     return AkuScaffold(
       title: '物品详情',
       actions: [
-        userProvider.infoModel!.canOperation
+        userProvider.userInfoModel!.type == 1
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () async {

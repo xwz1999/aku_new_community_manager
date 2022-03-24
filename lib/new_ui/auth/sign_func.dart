@@ -1,7 +1,5 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/new_ui/auth/set_nick_nage_page.dart';
-import 'package:aku_new_community_manager/new_ui/auth/set_psd_page.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/home/home_page.dart';
@@ -45,13 +43,6 @@ class SignFunc {
     return response;
   }
 
-  ///更新用户信息
-  static Future<UserInformationModel?> getUserInfo() async {
-    BaseModel baseModel = await NetUtil().get(SAASAPI.user.userProfile);
-    if (baseModel.data == null || !baseModel.success) return null;
-    return UserInformationModel.fromJson(baseModel.data);
-  }
-
   ///设置密码（密码不存在时调用
   static Future<bool> settingPsd(String psd) async {
     BaseModel baseModel = await NetUtil().get(SAASAPI.user.settingPsd,
@@ -91,9 +82,7 @@ class SignFunc {
   }
 
   static Future checkNameAndAccount() async {
-    if (!UserTool.userProvider.userInfoModel!.isExistPassword) {
-      await Get.to(() => SetPsdPage());
-    } else if (UserTool.userProvider.userInfoModel!.nickName == null) {
+    if (UserTool.userProvider.userInfoModel!.nickName == null) {
       await Get.to(() => SetNickNamePage());
     } else {
       Get.offAll(() => HomePage());

@@ -2,8 +2,8 @@
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/bussiness_and_fix/bussiness_and_fix_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/saas_models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_map.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
@@ -41,9 +41,9 @@ class BusinessFixCard extends StatefulWidget {
 }
 
 class _BusinessFixCardState extends State<BusinessFixCard> {
-  UserInformationModel? get userInfoModel {
+  UserInfoModel? get userInfoModel {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
-    return userProvider.infoModel;
+    return userProvider.userInfoModel;
   }
 
   String get dateStart => DateUtil.formatDateStr(widget.model.repairDate!,
@@ -102,8 +102,8 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
                 Text(
                   widget.hasFinished
                       ? '已处理'
-                      : AkuMap.fixStatus(userInfoModel!.canSendTicket,
-                          userInfoModel!.canPickUpTicket, widget.model.status!),
+                      : AkuMap.fixStatus(userInfoModel!.type == 1,
+                          userInfoModel!.type == 1, widget.model.status!),
                   style: widget.hasFinished
                       ? TextStyle(color: AppStyle.minorTextColor)
                       : TextStyle(
@@ -196,7 +196,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.canSendTicket
+              (UserTool.userProvider.userInfoModel!.type == 1
                   ? '立即派单'
                   : '查看详情'),
               style: TextStyle(
@@ -222,9 +222,9 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.canSendTicket
+              (UserTool.userProvider.userInfoModel!.type == 1
                   ? '改派'
-                  : UserTool.userProvider.infoModel!.canPickUpTicket
+                  : UserTool.userProvider.userInfoModel!.type == 1
                       ? '立即接单'
                       : '查看详情'),
               style: TextStyle(
@@ -238,7 +238,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
         ];
       case 3:
         return [
-          UserTool.userProvider.infoModel!.canPickUpTicket
+          UserTool.userProvider.userInfoModel!.type == 1
               ? AkuMaterialButton(
                   height: 64.w,
                   onPressed: () async {
@@ -275,7 +275,7 @@ class _BusinessFixCardState extends State<BusinessFixCard> {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.canPickUpTicket
+              (UserTool.userProvider.userInfoModel!.type == 1
                   ? '处理完成'
                   : '查看详情'),
               style: TextStyle(

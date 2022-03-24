@@ -1,13 +1,6 @@
 // Dart imports:
 import 'dart:io';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:common_utils/common_utils.dart';
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
@@ -20,6 +13,11 @@ import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_avatar.dart
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_tile.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
+// Package imports:
+import 'package:common_utils/common_utils.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserInfoPage extends StatefulWidget {
   UserInfoPage({Key? key}) : super(key: key);
@@ -40,7 +38,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
           AkuTile(
             onTap: () async {
               File? file = await akuPickImage();
-              if (file != null) await userProvider.setAvatar(file);
+              if (file != null) await userProvider.updateAvatar(file);
             },
             title: Text('头像'),
             height: 168.w,
@@ -52,7 +50,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
               setState(() {});
             },
             title: Text('昵称'),
-            suffix: Text(userProvider.infoModel!.nickName!),
+            suffix: Text(userProvider.userInfoModel!.nickName!),
           ),
           AkuTile(
             onTap: () async {
@@ -60,7 +58,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
               setState(() {});
             },
             title: Text('手机'),
-            suffix: Text(TextUtil.hideNumber(userProvider.profileModel!.tel!)),
+            suffix: Text(TextUtil.hideNumber(userProvider.userInfoModel!.tel)),
           ),
         ].sepWidget(separate: AkuDivider.horizontal()),
       ),

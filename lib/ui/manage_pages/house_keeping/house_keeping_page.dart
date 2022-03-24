@@ -1,4 +1,3 @@
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/house_keeping/house_keeping_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -17,10 +16,12 @@ class HouseKeepingPage extends StatefulWidget {
 class _HouseKeepingPageState extends State<HouseKeepingPage>
     with TickerProviderStateMixin {
   List<String> get _tabs {
-    switch (UserTool.userProvider.infoModel!.houseKeepingAuthority) {
-      case HKAUTH.SEND:
+    switch (UserTool.userProvider.userInfoModel!.type == 1) {
+      // case HKAUTH.SEND:
+      case true:
         return ['全部', '待派单', '已派单', '处理中', '待支付', '待评价', '已完成'];
-      case HKAUTH.PICK:
+      // case HKAUTH.PICK:
+      case false:
         return ['全部', '已派单', '处理中', '待支付', '待评价', '已完成'];
       default:
         return [];

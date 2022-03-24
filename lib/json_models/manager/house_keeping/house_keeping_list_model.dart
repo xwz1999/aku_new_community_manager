@@ -1,9 +1,8 @@
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
+import 'package:aku_new_community_manager/models/common/img_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:equatable/equatable.dart';
-
-import 'package:aku_new_community_manager/models/common/img_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'house_keeping_list_model.g.dart';
 
 @JsonSerializable()
@@ -58,8 +57,7 @@ class HouseKeepingListModel extends Equatable {
       case 1:
         return '待派单';
       case 2:
-        if (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
-            HKAUTH.PICK) {
+        if (UserTool.userProvider.userInfoModel!.type == 1) {
           return '已派单';
         } else {
           return '待接单';

@@ -1,7 +1,6 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/house_keeping/house_keeping_department_page.dart';
@@ -134,8 +133,7 @@ class HouseKeepingCard extends StatelessWidget {
           AkuMaterialButton(
             height: 64.w,
             onPressed: () async {
-              (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
-                      HKAUTH.SEND)
+              (UserTool.userProvider.userInfoModel!.type == 1)
                   ? Get.to(() => HouseKeepingDepartmentPage(
                         id: model.id,
                         callRefresh: callRefresh,
@@ -157,8 +155,7 @@ class HouseKeepingCard extends StatelessWidget {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
-                      HKAUTH.SEND
+              (UserTool.userProvider.userInfoModel!.type == 1
                   ? '立即派单'
                   : '查看详情'),
               style: TextStyle(
@@ -176,8 +173,7 @@ class HouseKeepingCard extends StatelessWidget {
             height: 64.w,
             onPressed: () async {
               Function cancel = BotToast.showLoading();
-              (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
-                      HKAUTH.SEND)
+              (UserTool.userProvider.userInfoModel!.type == 1)
                   ? await HouseKeepingFunc.newHouseKeepingUrgeWork(model.id)
                   : await HouseKeepingFunc.newHouseKeepingOrderReceive(
                       model.id);
@@ -188,10 +184,7 @@ class HouseKeepingCard extends StatelessWidget {
             color: AppStyle.primaryColor,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             child: Text(
-              (UserTool.userProvider.infoModel!.houseKeepingAuthority ==
-                      HKAUTH.PICK
-                  ? '立即接单'
-                  : '催单'),
+              (UserTool.userProvider.userInfoModel!.type == 1 ? '立即接单' : '催单'),
               style: TextStyle(
                 color: AppStyle.primaryTextColor,
                 fontWeight: FontWeight.bold,
@@ -203,7 +196,7 @@ class HouseKeepingCard extends StatelessWidget {
         ];
       case 3:
         return [
-          UserTool.userProvider.infoModel!.houseKeepingAuthority == HKAUTH.PICK
+          UserTool.userProvider.userInfoModel!.type == 1
               ? AkuMaterialButton(
                   height: 64.w,
                   onPressed: () async {

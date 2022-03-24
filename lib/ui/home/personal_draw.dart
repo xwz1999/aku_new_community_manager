@@ -83,7 +83,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                         //登录按钮
                         userProvider.isLogin
                             ? Text(
-                                userProvider.infoModel!.nickName!,
+                                userProvider.userInfoModel!.nickName!,
                                 style: TextStyle(
                                   color: AppStyle.primaryTextColor,
                                   fontSize: 28.sp,

@@ -1,4 +1,3 @@
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/add_engineer_repair_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_view.dart';
@@ -21,13 +20,13 @@ class EngineerRepairPage extends StatefulWidget {
 class _EngineerRepairPageState extends State<EngineerRepairPage>
     with TickerProviderStateMixin {
   List<String> get _tabs {
-    switch (UserTool.userProvider.infoModel!.engineeringRepairAuthority) {
-      case ERAUTH.SENDTOCOMPANY:
-        return ['全部', '待派单', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
-      case ERAUTH.SENDTOPERSON:
-        return ['全部', '待派单', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
-      case ERAUTH.PICK:
-        return ['全部', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
+    switch (UserTool.userProvider.userInfoModel!.type == 1) {
+      // case ERAUTH.SENDTOCOMPANY:
+      //   return ['全部', '待派单', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
+      // case ERAUTH.SENDTOPERSON:
+      //   return ['全部', '待派单', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
+      // case ERAUTH.PICK:
+      //   return ['全部', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
       default:
         return ['全部', '待派单', '已派单', '处理中', '待验收', '验收驳回', '已完成'];
     }

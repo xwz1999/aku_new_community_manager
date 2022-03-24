@@ -1,7 +1,6 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_list_model.dart';
 import 'package:aku_new_community_manager/json_models/manager/house_keeping/house_keeping_process_model.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
@@ -12,16 +11,16 @@ import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_grid_image_
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_title_box.dart';
+import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HouseKeepingDetailPage extends StatefulWidget {
   final HouseKeepingListModel model;
@@ -79,8 +78,7 @@ class _HouseKeepingDetailPageState extends State<HouseKeepingDetailPage> {
           },
         );
       case 2:
-        return UserTool.userProvider.infoModel!.houseKeepingAuthority ==
-                HKAUTH.PICK
+        return UserTool.userProvider.userInfoModel!.type == 1
             ? AkuBottomButton(
                 title: '立即接单',
                 onTap: () async {

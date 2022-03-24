@@ -66,8 +66,8 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
     UserProvider userProvider =
         Provider.of<UserProvider>(context, listen: false);
     return Text(
-      AkuMap.fixStatus(userProvider.infoModel!.canOperation,
-          userProvider.infoModel!.canPickUpTicket, widget.model.status!),
+      AkuMap.fixStatus(userProvider.userInfoModel!.type == 1,
+          userProvider.userInfoModel!.type == 1, widget.model.status!),
       style: TextStyle(
         color: widget.model.status! < 4
             ? Color(0XFFFF4501)
@@ -117,7 +117,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
           final userProvider =
               Provider.of<UserProvider>(context, listen: false);
           //派单权限 + 待派单状态=立即派单
-          if (userProvider.infoModel!.canSendTicket &&
+          if (userProvider.userInfoModel!.type == 1 &&
               widget.model.status! < 2) {
             return AkuMaterialButton(
               color: AppStyle.primaryColor,
@@ -138,7 +138,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             );
             //派单权限+已派单状态=改派
           } else if (widget.model.status == 2) {
-            if (userProvider.infoModel!.canSendTicket) {
+            if (userProvider.userInfoModel!.type == 1) {
               return AkuMaterialButton(
                 color: AppStyle.primaryColor,
                 nullColor: AppStyle.minorColor,
@@ -179,7 +179,7 @@ class _BusinessAndFixDetailPageState extends State<BusinessAndFixDetailPage> {
             }
             //已接单状态+接单权限=申请延时
           } else if ((widget.model.status == 3) &&
-              userProvider.infoModel!.canPickUpTicket)
+              userProvider.userInfoModel!.type == 1)
             return Container(
               height: 96.w,
               alignment: Alignment.center,

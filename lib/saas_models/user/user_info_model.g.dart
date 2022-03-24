@@ -9,18 +9,22 @@ part of 'user_info_model.dart';
 UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
     UserInfoModel(
       id: json['id'] as int,
-      communityId: json['communityId'] as int,
-      communityCode: json['communityCode'] as String,
-      name: json['name'] as String?,
-      idCard: json['idCard'] as String?,
+      userName: json['userName'] as String,
+      type: json['type'] as int,
+      actualName: json['actualName'] as String,
       tel: json['tel'] as String,
-      sex: json['sex'] as int?,
+      sex: json['sex'] as int,
+      userCode: json['userCode'] as String,
+      birthDay: json['birthDay'] as String?,
+      email: json['email'] as String?,
+      status: json['status'] as int,
+      lastLoginIp: json['lastLoginIp'] as int?,
+      lastLoginDate: json['lastLoginDate'] as String?,
       nickName: json['nickName'] as String?,
-      isExistPassword: json['isExistPassword'] as bool,
-      isPointsSignSetting: json['isPointsSignSetting'] as bool,
-      isSign: json['isSign'] as bool,
-      points: json['points'] as int?,
-      imgList: (json['imgList'] as List<dynamic>)
-          .map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
+      address: json['address'] as String?,
+      entryDate: json['entryDate'] as String,
+      remake: json['remake'] as String?,
+      imgList: (json['imgList'] as List<dynamic>?)
+          ?.map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );

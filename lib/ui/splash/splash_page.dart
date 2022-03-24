@@ -1,11 +1,11 @@
 // Flutter imports:
 // Project imports:
+import 'package:aku_new_community_manager/new_ui/auth/login_root_page.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/agreements/agreement_page.dart';
 import 'package:aku_new_community_manager/ui/agreements/privacy_page.dart';
-import 'package:aku_new_community_manager/ui/home/home_page.dart';
 import 'package:aku_new_community_manager/utils/dev_util.dart';
 import 'package:aku_new_community_manager/utils/hive_store.dart';
 // Package imports:
@@ -43,6 +43,8 @@ class _SplashPageState extends State<SplashPage> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     if (HiveStore.appBox!.containsKey('token')) {
       await userProvider.setLogin(HiveStore.appBox!.get('token'));
+    } else {
+      Get.to(() => LoginPage());
     }
     //初始化AMap
     // await AmapLocation.instance.init(iosKey: 'ios key');
@@ -122,7 +124,6 @@ class _SplashPageState extends State<SplashPage> {
       }
       if (mounted) PowerLogger.start(context, debug: DevUtil.isDev);
       await _initOp();
-      Get.off(() => HomePage());
     });
   }
 

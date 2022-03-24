@@ -1,7 +1,3 @@
-// Flutter imports:
-// Project imports:
-import 'package:aku_new_community_manager/const/resource.dart';
-import 'package:aku_new_community_manager/models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
@@ -71,7 +67,7 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication('一键报警', R.ASSETS_HOME_IC_POLICE_PNG, () => WarningPage()),
     AppApplication(
         '访客管理', R.ASSETS_HOME_IC_VISITORS_PNG, () => VisitorManagerPage()),
-    if (!UserTool.userProvider.infoModel!.hideFix)
+    if (!(UserTool.userProvider.userInfoModel!.type == 1))
       AppApplication(
           '报事报修', R.ASSETS_HOME_IC_SERVICE_PNG, () => BusinessAndFixPage()),
     AppApplication(
@@ -97,11 +93,10 @@ class _ApplicationPageState extends State<ApplicationPage>
     AppApplication(
         '考勤管理', R.ASSETS_HOME_CLOCK_IN_OUT_PNG, () => ClockInOutPage()),
     AppApplication('访谈管理', R.ASSETS_HOME_INTERVIEW_PNG, () => InterviewPage()),
-    if (UserTool.userProvider.infoModel!.houseKeepingAuthority != HKAUTH.HIDE)
+    if (UserTool.userProvider.userInfoModel!.type == 1)
       AppApplication(
           '家政服务', R.ASSETS_HOME_HOUSE_KEEPING_PNG, () => HouseKeepingPage()),
-    if (UserTool.userProvider.infoModel!.engineeringRepairAuthority !=
-        ERAUTH.HIDE)
+    if (UserTool.userProvider.userInfoModel!.type == 1)
       AppApplication(
           '工程维修', R.ASSETS_HOME_IC_SERVICE_PNG, () => EngineerRepairPage()),
   ];

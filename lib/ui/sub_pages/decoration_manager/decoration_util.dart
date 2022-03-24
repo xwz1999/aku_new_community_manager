@@ -1,11 +1,9 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:provider/provider.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:flutter/material.dart';
+// Package imports:
+import 'package:provider/provider.dart';
 
 class DecorationUIUtil {
   BuildContext context;
@@ -50,8 +48,7 @@ class DecorationUIUtil {
         }
       case 2:
         if (status < 5) {
-          if (userProvider.infoModel?.canOperation != null &&
-              userProvider.infoModel!.canOperation) {
+          if (userProvider.userInfoModel!.type == 1) {
             return '已指派';
           } else {
             return '待执行';

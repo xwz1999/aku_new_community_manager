@@ -32,7 +32,7 @@ class _AllBorrowGoodsState extends State<AllBorrowGoods> {
     return AkuScaffold(
       title: '全部物品',
       actions: [
-        userProvider.infoModel!.canOperation
+        userProvider.userInfoModel!.type == 1
             ? AkuMaterialButton(
                 minWidth: 120.w,
                 onPressed: () {

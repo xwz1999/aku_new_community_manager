@@ -11,7 +11,7 @@ class SAASAPI {
 
   ///静态资源路径
   static String get resource =>
-      'https://saas.kaidalai.cn/resource/${UserTool.userProvider.infoModel!.id}/';
+      'https://saas.kaidalai.cn/resource/${UserTool.userProvider.userInfoModel!.id}/';
 
   static String image(String? path) => '$resource$path';
 
@@ -30,6 +30,9 @@ class SAASAPI {
 }
 
 class _Login {
+  ///获取用户详情
+  String get userInfo => '/butlerApp/user/findDetail';
+
   ///查询所有小区信息
   String get allCommunity => '/butlerApp/login/findAllCommunity';
 
