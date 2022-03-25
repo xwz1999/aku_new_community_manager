@@ -30,6 +30,9 @@ class SAASAPI {
 }
 
 class _Login {
+  ///管家app用户退出
+  String get logOut => '/butlerApp/user/quit';
+
   ///获取用户详情
   String get userInfo => '/butlerApp/user/findDetail';
 

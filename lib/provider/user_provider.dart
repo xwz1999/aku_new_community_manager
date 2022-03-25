@@ -2,9 +2,8 @@
 
 import 'dart:io';
 
-// Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/const/saas_api.dart';
+import 'package:aku_new_community_manager/new_ui/auth/sign_func.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/saas_models/user/user_info_model.dart';
 import 'package:aku_new_community_manager/utils/hive_store.dart';
@@ -30,13 +29,14 @@ class UserProvider extends ChangeNotifier {
       await updateUserInfo();
       WebSocketUtil().setUser(_userInfoModel!.id.toString());
       WebSocketUtil().startWebSocket();
+      await SignFunc.checkNameAndAccount();
     }
     notifyListeners();
   }
 
   ///注销登录
   logout() async {
-    await NetUtil().get(API.auth.logout, showMessage: true);
+    await NetUtil().get(SAASAPI.login.logOut, showMessage: true);
     WebSocketUtil().closeWebSocket();
     NetUtil().logout();
     _isLogin = false;
@@ -88,6 +88,7 @@ class UserProvider extends ChangeNotifier {
     if (model.success) {
       await updateUserInfo();
     }
+    notifyListeners();
   }
 
   Future updateUserInfo() async {

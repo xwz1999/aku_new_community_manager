@@ -4,10 +4,14 @@ import 'package:aku_new_community_manager/new_ui/auth/login_root_page.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/agreements/agreement_page.dart';
 import 'package:aku_new_community_manager/ui/agreements/privacy_page.dart';
 import 'package:aku_new_community_manager/utils/dev_util.dart';
 import 'package:aku_new_community_manager/utils/hive_store.dart';
+import 'package:aku_new_community_manager/utils/websocket/fier_dialog.dart';
+import 'package:aku_new_community_manager/utils/websocket/web_socket_util.dart';
+import 'package:equatable/equatable.dart';
 // Package imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
@@ -38,20 +42,6 @@ class _SplashPageState extends State<SplashPage> {
   //     FirebaseCrashlytics.instance.recordFlutterError(details);
   //   };
   // }
-
-  Future _initOp() async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    if (HiveStore.appBox!.containsKey('token')) {
-      await userProvider.setLogin(HiveStore.appBox!.get('token'));
-    } else {
-      Get.to(() => LoginPage());
-    }
-    //初始化AMap
-    // await AmapLocation.instance.init(iosKey: 'ios key');
-    await Permission.locationWhenInUse.request();
-    final appProvider = Provider.of<AppProvider>(context, listen: false);
-    appProvider.startLocation();
-  }
 
   Future<bool?> _showLoginVerify() async {
     return await showCupertinoDialog(
@@ -109,6 +99,8 @@ class _SplashPageState extends State<SplashPage> {
       //初始化HiveStore
       await Hive.initFlutter();
       await HiveStore.init();
+
+      ///协议同意
       var agreement = false;
       if (HiveStore.appBox!.containsKey('agreement')) {
         agreement = await HiveStore.appBox!.get('agreement');
@@ -123,7 +115,36 @@ class _SplashPageState extends State<SplashPage> {
         }
       }
       if (mounted) PowerLogger.start(context, debug: DevUtil.isDev);
-      await _initOp();
+
+      ///第三方加载
+      EquatableConfig.stringify = true;
+      // AMapFlutterLocation.updatePrivacyShow(true, true);
+      // AMapFlutterLocation.updatePrivacyAgree(true);
+      WebSocketUtil().initWebSocket(
+        consolePrint: false,
+        onReceiveMes: (message) async {
+          await FireDialog.fireAlert(message);
+        },
+        onError: (e) {
+          LoggerData.addData(e);
+        },
+      );
+
+      ///定位权限申请
+      await Permission.locationWhenInUse.request();
+      final appProvider = Provider.of<AppProvider>(context, listen: false);
+      appProvider.startLocation();
+
+      ///城市信息更新
+      await UserTool.dataProvider.init();
+
+      ///从本地获取是否登录记录
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      if (HiveStore.appBox!.containsKey('token')) {
+        await userProvider.setLogin(HiveStore.appBox!.get('token'));
+      } else {
+        Get.to(() => LoginPage());
+      }
     });
   }
 
