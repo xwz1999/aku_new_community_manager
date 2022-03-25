@@ -3,20 +3,20 @@ class InspectionQRCodeModel {
   String? code;
   String? name;
   int? type;
-  List<CheckVoList>? checkVoList;
+  List<CheckVoList>? checkList;
 
   InspectionQRCodeModel(
-      {required this.id, this.code, this.name, this.type, this.checkVoList});
+      {required this.id, this.code, this.name, this.type, this.checkList});
 
   InspectionQRCodeModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     code = json['code'];
     name = json['name'];
     type = json['type'];
-    if (json['checkVoList'] != null) {
-      checkVoList = <CheckVoList>[];
+    if (json['checkList'] != null) {
+      checkList = <CheckVoList>[];
       json['checkVoList'].forEach((v) {
-        checkVoList!.add(new CheckVoList.fromJson(v));
+        checkList!.add(new CheckVoList.fromJson(v));
       });
     }
   }
@@ -27,8 +27,8 @@ class InspectionQRCodeModel {
     data['code'] = this.code;
     data['name'] = this.name;
     data['type'] = this.type;
-    if (this.checkVoList != null) {
-      data['checkVoList'] = this.checkVoList!.map((v) => v.toJson()).toList();
+    if (this.checkList != null) {
+      data['checkList'] = this.checkList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -37,7 +37,7 @@ class InspectionQRCodeModel {
     switch (this.type) {
       case 1:
         return '巡检模式1';
-        
+
       default:
         return '未知';
     }

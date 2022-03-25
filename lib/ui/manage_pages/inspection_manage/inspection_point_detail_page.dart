@@ -80,9 +80,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                   16.w.heightBox,
                   _inspectionHeadCard(_detialModel),
                   16.w.heightBox,
-                  ..._detialModel.checkFBIVoList!
-                      .map((e) => _bodyCard(e))
-                      .toList(),
+                  ..._detialModel.checkList!.map((e) => _bodyCard(e)).toList(),
                   _selfPhotoCard(),
                   _scenePhotoCard(),
                 ],
@@ -124,7 +122,8 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: FadeInImage.assetNetwork(
                     fit: BoxFit.fill,
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(ImgModel.first(_detialModel.faceImg)!)),
+                    image:
+                        API.image(ImgModel.first(_detialModel.faceImgList)!)),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,
@@ -176,7 +175,8 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                 child: FadeInImage.assetNetwork(
                     fit: BoxFit.fill,
                     placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                    image: API.image(ImgModel.first(_detialModel.spaceImg)!)),
+                    image:
+                        API.image(ImgModel.first(_detialModel.spaceImgList)!)),
               )
             : DottedBorder(
                 borderType: BorderType.RRect,

@@ -1,8 +1,7 @@
 // Dart imports:
 import 'dart:async';
 
-// Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
@@ -167,7 +166,7 @@ class _InspectionManageDetailsPageState
                   onPressed: _detailModel!.status == 1
                       ? () async {
                           BaseModel _baseModel = await NetUtil().get(
-                              API.manage.inspectionStart,
+                              SAASAPI.inspection.startInspection,
                               params: {"executeId": widget.executeId});
                           if (_baseModel.success!) {
                             BotToast.showText(text: _baseModel.msg);
@@ -578,12 +577,12 @@ class _InspectionManageDetailsPageState
 
   Future _uploadLocation(
       int executeId, double longitude, double latitude) async {
-    BaseModel baseModel = await NetUtil().post(API.manage.uploadLocation,
-        params: {
-          "executeId": executeId,
-          "longitude": longitude,
-          "latitude": latitude
-        });
+    BaseModel baseModel = await NetUtil()
+        .post(SAASAPI.inspection.uploadLocation, params: {
+      "executeId": executeId,
+      "longitude": longitude,
+      "latitude": latitude
+    });
     return baseModel;
   }
 }

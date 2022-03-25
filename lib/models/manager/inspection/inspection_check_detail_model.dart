@@ -8,9 +8,9 @@ class InspectionCheckDetialModel {
   String? name;
   int? type;
   String? completeDate;
-  List<CheckFBIVoList>? checkFBIVoList;
-  List<ImgModel>? faceImg;
-  List<ImgModel>? spaceImg;
+  List<CheckFBIVoList>? checkList;
+  List<ImgModel>? faceImgList;
+  List<ImgModel>? spaceImgList;
 
   InspectionCheckDetialModel(
       {required this.id,
@@ -19,9 +19,9 @@ class InspectionCheckDetialModel {
       this.name,
       this.type,
       this.completeDate,
-      this.checkFBIVoList,
-      this.faceImg,
-      this.spaceImg});
+      this.checkList,
+      this.faceImgList,
+      this.spaceImgList});
 
   InspectionCheckDetialModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -30,22 +30,22 @@ class InspectionCheckDetialModel {
     name = json['name'];
     type = json['type'];
     completeDate = json['completeDate'];
-    if (json['checkFBIVoList'] != null) {
-      checkFBIVoList = <CheckFBIVoList>[];
-      json['checkFBIVoList'].forEach((v) {
-        checkFBIVoList!.add(new CheckFBIVoList.fromJson(v));
+    if (json['checkList'] != null) {
+      checkList = <CheckFBIVoList>[];
+      json['checkList'].forEach((v) {
+        checkList!.add(new CheckFBIVoList.fromJson(v));
       });
     }
-    if (json['faceImg'] != null) {
-      faceImg = <ImgModel>[];
-      json['faceImg'].forEach((v) {
-        faceImg!.add(new ImgModel.fromJson(v));
+    if (json['faceImgList'] != null) {
+      faceImgList = <ImgModel>[];
+      json['faceImgList'].forEach((v) {
+        faceImgList!.add(new ImgModel.fromJson(v));
       });
     }
-    if (json['spaceImg'] != null) {
-      spaceImg = <ImgModel>[];
-      json['spaceImg'].forEach((v) {
-        spaceImg!.add(new ImgModel.fromJson(v));
+    if (json['spaceImgList'] != null) {
+      spaceImgList = <ImgModel>[];
+      json['spaceImgList'].forEach((v) {
+        spaceImgList!.add(new ImgModel.fromJson(v));
       });
     }
   }
@@ -58,15 +58,14 @@ class InspectionCheckDetialModel {
     data['name'] = this.name;
     data['type'] = this.type;
     data['completeDate'] = this.completeDate;
-    if (this.checkFBIVoList != null) {
-      data['checkFBIVoList'] =
-          this.checkFBIVoList!.map((v) => v.toJson()).toList();
+    if (this.checkList != null) {
+      data['checkList'] = this.checkList!.map((v) => v.toJson()).toList();
     }
-    if (this.faceImg != null) {
-      data['faceImg'] = this.faceImg!.map((v) => v.toJson()).toList();
+    if (this.faceImgList != null) {
+      data['faceImgList'] = this.faceImgList!.map((v) => v.toJson()).toList();
     }
-    if (this.spaceImg != null) {
-      data['spaceImg'] = this.spaceImg!.map((v) => v.toJson()).toList();
+    if (this.spaceImgList != null) {
+      data['spaceImgList'] = this.spaceImgList!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -75,7 +74,7 @@ class InspectionCheckDetialModel {
     switch (this.type) {
       case 1:
         return '巡检模式1';
-        
+
       default:
         return '未知';
     }

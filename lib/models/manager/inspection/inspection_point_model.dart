@@ -3,14 +3,19 @@ class InspectionPointModel {
   String? name;
   int? checkNum;
   String? completeDate;
+  int? longitude;
+  int? latitude;
 
-  InspectionPointModel({required this.id, this.name, this.checkNum, this.completeDate});
+  InspectionPointModel(
+      {required this.id, this.name, this.checkNum, this.completeDate});
 
   InspectionPointModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     checkNum = json['checkNum'];
     completeDate = json['completeDate'];
+    longitude = json['longitude'];
+    latitude = json['latitude'];
   }
 
   Map<String, dynamic> toJson() {
@@ -19,6 +24,8 @@ class InspectionPointModel {
     data['name'] = this.name;
     data['checkNum'] = this.checkNum;
     data['completeDate'] = this.completeDate;
+    data['longitude'] = this.longitude;
+    data['latitude'] = this.latitude;
     return data;
   }
 }

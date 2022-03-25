@@ -63,9 +63,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
       [],
     );
     _submitModel.executeCheckList = List.generate(
-      widget.qrModel!.checkVoList!.length,
-      (index) =>
-          ExecuteCheckList(widget.qrModel!.checkVoList![index].id, -1, ''),
+      widget.qrModel!.checkList!.length,
+      (index) => ExecuteCheckList(widget.qrModel!.checkList![index].id, -1, ''),
     );
   }
 
@@ -83,8 +82,8 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           16.w.heightBox,
           _inspectionHeadCard(),
           16.w.heightBox,
-          ..._model!.checkVoList!
-              .map((e) => _meterCard(e.name, _model!.checkVoList!.indexOf(e)))
+          ..._model!.checkList!
+              .map((e) => _meterCard(e.name, _model!.checkList!.indexOf(e)))
               .toList(),
           _selfPhotoCard(),
           _scenePhotoCard(),
@@ -93,12 +92,11 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
       bottom: AkuButton(
         onPressed: canSubmit
             ? () async {
-                _submitModel.inspectionFaceImgPath = await NetUtil()
+                _submitModel.inspectionFaceImg = await NetUtil()
                     .uploadFiles(_selfPhotos!, API.upload.uploadInspectionFace);
 
-                _submitModel.inspectionSpaceImgPath = await NetUtil()
-                    .uploadFiles(
-                        _scenePhots!, API.upload.uploadInspectionSpace);
+                _submitModel.inspectionSpaceImg = await NetUtil().uploadFiles(
+                    _scenePhots!, API.upload.uploadInspectionSpace);
                 BaseModel baseModel =
                     await (ManageFunc.getSubmitPoint(_submitModel));
                 if (baseModel.success!) {
@@ -247,7 +245,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
             maxLines: 10,
             autofocus: false,
             onChanged: (value) {
-              _submitModel.executeCheckList![index].remarkes = value;
+              _submitModel.executeCheckList![index].remakes = value;
             },
             decoration: InputDecoration(
               hintText: '请输入备注信息',

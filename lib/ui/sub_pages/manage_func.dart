@@ -4,6 +4,7 @@
 
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/models/manager/decoration/decoration_detail_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_detail_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_model.dart';
@@ -36,7 +37,7 @@ class ManageFunc {
   static Future<InspectionDetailModel> getInspectionDetail(
       int /*!*/ executeId) async {
     BaseModel baseModel =
-        await NetUtil().get(API.manage.inspectionFindDetailByld, params: {
+        await NetUtil().get(SAASAPI.inspection.detail, params: {
       "executeId": executeId,
     });
     return InspectionDetailModel.fromJson(baseModel.data);
@@ -45,7 +46,7 @@ class ManageFunc {
   static Future<List<InspectionPointModel>> getInspectionPointByPlanId(
       {required int planId}) async {
     BaseModel baseModel =
-        await NetUtil().get(API.manage.inspectionPointByPlanId, params: {
+        await NetUtil().get(SAASAPI.inspection.findPointByPlanId, params: {
       "planId": planId,
     });
     return (baseModel.data as List)
@@ -55,8 +56,8 @@ class ManageFunc {
 
   static Future<List<InspectionPointModel>> getInspectionPointByExcuteId(
       {required int /*!*/ excuteId}) async {
-    BaseModel baseModel = await NetUtil()
-        .get(API.manage.inspecntionFindPointByExecuteId, params: {
+    BaseModel baseModel =
+        await NetUtil().get(SAASAPI.inspection.findPointByExecuteId, params: {
       "executeId": excuteId,
     });
     return (baseModel.data as List)
@@ -67,20 +68,20 @@ class ManageFunc {
   static Future<BaseModel> getInspectionFindCheckDetailByQr(
       int executeId, String executePointCode) async {
     BaseModel baseModel = await NetUtil().get(
-        API.manage.inspectionFindCheckDetailByQR,
+        SAASAPI.inspection.findCheckDetailByQR,
         params: {"executeId": executeId, "executePointCode": executePointCode});
     return baseModel;
   }
 
   static Future getSubmitPoint(InspectionPointSubmitModel model) async {
     BaseModel baseModel =
-        await NetUtil().post(API.manage.submitPointDetail, params: {
-      "executePointId": model.executePointId,
+        await NetUtil().post(SAASAPI.inspection.submit, params: {
+      "id": model.executePointId,
       "executeCheckList": model.executeCheckList!
-          .map((e) => ExecuteCheckList(e.id, e.status, e.remarkes).toJson())
+          .map((e) => ExecuteCheckList(e.id, e.status, e.remakes).toJson())
           .toList(),
-      "inspectionFaceImg": model.inspectionFaceImgPath,
-      "inspectionSpaceImg": model.inspectionSpaceImgPath
+      "inspectionFaceImg": model.inspectionFaceImg,
+      "inspectionSpaceImg": model.inspectionSpaceImg
     });
 
     return baseModel;
@@ -88,15 +89,15 @@ class ManageFunc {
 
   static Future getInspectionPointCheckDetail(int executePointId) async {
     BaseModel baseModel =
-        await NetUtil().get(API.manage.inspectionPointCheckDetail, params: {
+        await NetUtil().get(SAASAPI.inspection.findExecutePointInfo, params: {
       "executePointId": executePointId,
     });
     return baseModel;
   }
 
   static Future getInspectionPointCheckDetailUnbegin(int planPointId) async {
-    BaseModel baseModel = await NetUtil()
-        .get(API.manage.inspectionPointCheckDetailUnbegin, params: {
+    BaseModel baseModel =
+        await NetUtil().get(SAASAPI.inspection.findExecutePointInfo, params: {
       "planPointId": planPointId,
     });
     return baseModel;

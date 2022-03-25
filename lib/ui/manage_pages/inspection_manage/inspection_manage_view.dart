@@ -1,6 +1,6 @@
 // Flutter imports:
 // Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_list_model.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_manage_card.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_list_view.dart';
@@ -36,7 +36,7 @@ class _InspectionMangeViewState extends State<InspectionMangeView> {
   @override
   Widget build(BuildContext context) {
     return BeeListView(
-      path: API.manage.inspectionList,
+      path: SAASAPI.inspection.list,
       controller: _easyRefreshController,
       extraParams: {"inspectionStatus": widget.inspectionStatus},
       convert: (models) {

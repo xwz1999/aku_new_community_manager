@@ -3,10 +3,10 @@
 class InspectionPointSubmitModel {
   int executePointId;
   List<ExecuteCheckList>? executeCheckList;
-  List<String?>? inspectionFaceImgPath;
-  List<String?>? inspectionSpaceImgPath;
+  List<String?>? inspectionFaceImg;
+  List<String?>? inspectionSpaceImg;
   InspectionPointSubmitModel(this.executePointId, this.executeCheckList,
-      {this.inspectionFaceImgPath, this.inspectionSpaceImgPath});
+      {this.inspectionFaceImg, this.inspectionSpaceImg});
   Map<String, dynamic>? executeCheckListToJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
@@ -22,14 +22,14 @@ class InspectionPointSubmitModel {
 class ExecuteCheckList {
   int? id;
   int status;
-  String remarkes;
-  ExecuteCheckList(this.id, this.status, this.remarkes);
+  String remakes;
+  ExecuteCheckList(this.id, this.status, this.remakes);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
       "id": this.id,
       "status": this.status,
-      "remakes": this.remarkes,
+      "remakes": this.remakes,
     };
     return data;
   }
