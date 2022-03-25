@@ -99,7 +99,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
                     _scenePhots!, API.upload.uploadInspectionSpace);
                 BaseModel baseModel =
                     await (ManageFunc.getSubmitPoint(_submitModel));
-                if (baseModel.success!) {
+                if (baseModel.success) {
                   BotToast.showText(text: baseModel.msg);
                   Get.to(() => InspectionPointSubmitPage());
                 } else {

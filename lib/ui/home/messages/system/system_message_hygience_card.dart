@@ -58,7 +58,7 @@ class _SystemMessageHygienceCardState extends State<SystemMessageHygienceCard> {
         await NetUtil().get(API.message.getSysHygienceMessageById, params: {
       "hygieneTaskId": repairId,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       return SystemMessageHygineceModel.fromJson(baseModel.data);
     }
   }

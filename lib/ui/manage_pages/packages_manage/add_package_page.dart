@@ -137,7 +137,7 @@ class _AddPackagePageState extends State<AddPackagePage> {
       },
     );
 
-    if (!baseModel.success!) {
+    if (!baseModel.success) {
       BotToast.showText(text: baseModel.msg);
       return;
     }

@@ -128,7 +128,7 @@ class _PackageManageCardState extends State<PackageManageCard> {
   Future _remindPackage(int packageCollectionId) async {
     BaseModel baseModel = await NetUtil().get(API.manage.packageManageRemind,
         params: {"packageCollectionId": packageCollectionId});
-    if (!baseModel.success!) {
+    if (!baseModel.success) {
       BotToast.showText(text: baseModel.msg);
     } else {
       BotToast.showText(text: '已成功提醒领取');

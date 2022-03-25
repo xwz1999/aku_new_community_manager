@@ -168,7 +168,7 @@ class _InspectionManageDetailsPageState
                           BaseModel _baseModel = await NetUtil().get(
                               SAASAPI.inspection.startInspection,
                               params: {"executeId": widget.executeId});
-                          if (_baseModel.success!) {
+                          if (_baseModel.success) {
                             BotToast.showText(text: _baseModel.msg);
                             _refreshController!.callRefresh();
                             _startTimer(5000);
@@ -182,7 +182,7 @@ class _InspectionManageDetailsPageState
                           BaseModel baseModel =
                               await ManageFunc.getInspectionFindCheckDetailByQr(
                                   _detailModel!.id!, result.code);
-                          if (baseModel.success!) {
+                          if (baseModel.success) {
                             Get.to(() => InspectionPointInputPage(
                                   inspectionName: _detailModel!.name,
                                   qrModel: InspectionQRCodeModel.fromJson(
@@ -525,7 +525,7 @@ class _InspectionManageDetailsPageState
               if (_canUploadLocation) {
                 BaseModel baseModel = await (_uploadLocation(widget.executeId,
                     argument.latLng.longitude, argument.latLng.latitude));
-                if (!baseModel.success!) {
+                if (!baseModel.success) {
                   BotToast.showText(text: baseModel.msg);
                 } else {
                   _canUploadLocation = false;

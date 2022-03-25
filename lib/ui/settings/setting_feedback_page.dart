@@ -88,7 +88,7 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
             "content": _content,
             "fileUrls": _imgeUrls,
           });
-          if (baseModel.success!) {
+          if (baseModel.success) {
             BotToast.showText(text: baseModel.msg);
             Get.back();
           } else {

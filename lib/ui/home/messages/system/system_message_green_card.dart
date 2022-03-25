@@ -57,7 +57,7 @@ class _SystemMessageGreenCardState extends State<SystemMessageGreenCard> {
         await NetUtil().get(API.message.getSysGreenMessageById, params: {
       "greenTaskId": repairId,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       return SystemMessageGreenModel.fromJson(baseModel.data);
     } else {
       return SystemMessageGreenModel.fail();

@@ -423,7 +423,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
               humanPrice! + materialPrice!,
               1,
               urls));
-          if (baseModel.success!) {
+          if (baseModel.success) {
             FixSubmitFinishPage(
               model: widget.fixModel,
             ).to();

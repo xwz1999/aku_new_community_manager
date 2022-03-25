@@ -163,7 +163,7 @@ class _GreenManageCardState extends State<GreenManageCard> {
                         .post(API.manage.greenManageComplete, params: {
                       "id": widget.model.id,
                     });
-                    if (baseModel.success!) {
+                    if (baseModel.success) {
                       widget.callRefresh!();
                     }
                     BotToast.showText(text: baseModel.msg);

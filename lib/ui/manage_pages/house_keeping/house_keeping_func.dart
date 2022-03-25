@@ -13,7 +13,7 @@ class HouseKeepingFunc {
       int id) async {
     BaseModel baseModel = await NetUtil().get(API.manage.newHouseKeepingProcess,
         params: {"housekeepingServiceId": id});
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       return (baseModel.data as List)
           .map((e) => HouseKeepingProcessModel.fromJson(e))
           .toList();
@@ -28,7 +28,7 @@ class HouseKeepingFunc {
         await NetUtil().get(API.manage.newHouseKeepingUrgeWork, params: {
       "housekeepingServiceId": id,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       BotToast.showText(text: '已成功催单，请耐心等候');
       return true;
     } else {
@@ -42,7 +42,7 @@ class HouseKeepingFunc {
         await NetUtil().post(API.manage.newHouseKeepingOrderReceive, params: {
       "id": id,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       BotToast.showText(text: '接单成功');
       return true;
     } else {
@@ -54,7 +54,7 @@ class HouseKeepingFunc {
   static Future newHouseKeepingPickStaffList() async {
     BaseModel baseModel =
         await NetUtil().get(API.manage.newHouseKeepingPickStaffList);
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       return (baseModel.data as List)
           .map((e) => HouseKeepingPickStaffModel.fromJson(e))
           .toList();
@@ -70,7 +70,7 @@ class HouseKeepingFunc {
       "id": id,
       "handler": handlerId,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       BotToast.showText(text: '派单成功');
       return true;
     } else {
@@ -108,7 +108,7 @@ class HouseKeepingFunc {
       "payFee": payFee,
       "handlerImgUrls": urls,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       BotToast.showText(text: '提交成功');
       return true;
     } else {

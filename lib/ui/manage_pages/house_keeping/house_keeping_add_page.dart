@@ -95,7 +95,7 @@ class _HouseKeepingAddPageState extends State<HouseKeepingAddPage> {
       },
       showMessage: true,
     );
-    if (baseModel.success!) {
+    if (baseModel.success) {
       Get.back();
     }
   }

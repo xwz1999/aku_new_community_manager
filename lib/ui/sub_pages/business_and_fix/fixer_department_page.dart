@@ -87,7 +87,7 @@ class _FixerDepartmentPageState extends State<FixerDepartmentPage> {
                 if (widget.changeType) {
                   BaseModel baseModel = await (ManageFunc.repairReassignment(
                       _reportModel!.dispatchListId!, _reportModel!.operato));
-                  if (baseModel.success!) {
+                  if (baseModel.success) {
                     BotToast.showText(text: '改派成功');
                     Get.back();
                   } else {

@@ -1,23 +1,21 @@
 // Dart imports:
 import 'dart:async';
 
-// Flutter imports:
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
+// Project imports:
+import 'package:aku_new_community_manager/provider/user_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/ui/settings/update_userinfo_func.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-// Project imports:
-import 'package:aku_new_community_manager/provider/user_provider.dart';
-import 'package:aku_new_community_manager/ui/settings/update_userinfo_func.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 
 class TelChangePage extends StatefulWidget {
   TelChangePage({Key? key}) : super(key: key);
@@ -112,7 +110,7 @@ class _TelChangePageState extends State<TelChangePage> {
                             BaseModel baseModel =
                                 await UpdateUserInfoFunc.sendTelUpdateCode(
                                     _newTelController!.text);
-                            if (baseModel.success!) {
+                            if (baseModel.success) {
                               startTick();
                             } else {}
                           }
@@ -187,7 +185,7 @@ class _TelChangePageState extends State<TelChangePage> {
                         _oldTelController!.text,
                         _newTelController!.text,
                         _codeController!.text);
-                    if (baseModel.success!) {
+                    if (baseModel.success) {
                       userProvider.setTel(_newTelController!.text);
                       Get.back();
                     } else {

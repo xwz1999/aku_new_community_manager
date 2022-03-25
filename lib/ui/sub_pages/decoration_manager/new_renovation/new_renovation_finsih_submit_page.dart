@@ -80,7 +80,7 @@ class _NewRenovationFinishSubmitPageState
                     "isQualified": _isQualified,
                   },
                   showMessage: true);
-          if (baseModel.success ?? false) {
+          if (baseModel.success) {
             Get.back();
           }
         },

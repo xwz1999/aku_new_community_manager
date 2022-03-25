@@ -1,10 +1,10 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/message/system_message_house_keeping_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/home/messages/message_map.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/house_keeping/house_keeping_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
-import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +51,7 @@ class _SystemMessageHouseKeepingCardState
         await NetUtil().get(API.message.getSysHygienceMessageById, params: {
       "housekeepingServiceId": relationId,
     });
-    if (baseModel.success ?? false) {
+    if (baseModel.success) {
       return SystemMessageHouseKeepingModel.fromJson(baseModel.data);
     }
   }

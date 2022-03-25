@@ -57,7 +57,7 @@ class _InterviewFeedBackPageState extends State<InterviewFeedBackPage> {
             },
             showMessage: true,
           );
-          if (baseModel.success!) {
+          if (baseModel.success) {
             Get.back();
           }
         },

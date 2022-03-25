@@ -4,6 +4,7 @@ import 'dart:io';
 // Flutter imports:
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/models/manager/facilities/facilities_check_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
@@ -11,7 +12,6 @@ import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_chec
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -51,11 +51,10 @@ class _FacilitiesInspectReportDetailPageState
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(!editEnable){
-      if(widget.model!.situation==1){
+    if (!editEnable) {
+      if (widget.model!.situation == 1) {
         _scene = 1;
-      }
-       else  if(widget.model!.situation==2){
+      } else if (widget.model!.situation == 2) {
         _scene = 2;
       }
     }
@@ -79,9 +78,7 @@ class _FacilitiesInspectReportDetailPageState
             width: double.infinity,
           ),
           _descriptionCard(
-            widget.facilitiesType == 1 ? '设施情况' : '设备情况',
-            widget.model
-          ),
+              widget.facilitiesType == 1 ? '设施情况' : '设备情况', widget.model),
           _scenePhotoCard(widget.model),
         ],
       ),
@@ -104,7 +101,7 @@ class _FacilitiesInspectReportDetailPageState
           "detail": _describtion,
           "imgUrls": _scenePhotoUrl,
         });
-        if (baseModel.success!) {
+        if (baseModel.success) {
           Get.back();
         }
         BotToast.showText(text: baseModel.msg);
@@ -136,9 +133,10 @@ class _FacilitiesInspectReportDetailPageState
         // 12.w.heightBox,
         // _buildTile(R.ASSETS_MESSAGE_IC_PHONE_PNG, '联系电话', model!.??''),
         // 12.w.heightBox,
-        _buildTile(R.ASSETS_MANAGE_ADDRESS_PNG, '检查场地',  model?.facilitiesName??''),
+        _buildTile(
+            R.ASSETS_MANAGE_ADDRESS_PNG, '检查场地', model?.facilitiesName ?? ''),
         12.w.heightBox,
-        _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间',  model?.beginDate??''),
+        _buildTile(R.ASSETS_MANAGE_CLOCK_PNG, '规定任务时间', model?.beginDate ?? ''),
       ],
     )
         .box
@@ -166,37 +164,32 @@ class _FacilitiesInspectReportDetailPageState
   }
 
   Widget _descriptionCard(
-    String title, FacilitiesCheckListModel? model,
+    String title,
+    FacilitiesCheckListModel? model,
     // int index,
   ) {
     return Column(
       children: [
         Row(
-          children: ['$title'.text.color(kTextPrimaryColor).size(32.sp).bold.make()],
+          children: [
+            '$title'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
+          ],
         ),
         16.w.heightBox,
         Row(
           children: [
             AkuSingleCheckButton(
-              text: '正常',
-              value: 1,
-              gropValue: _scene,
-              onPressed:  () {}
-
-            ),
+                text: '正常', value: 1, gropValue: _scene, onPressed: () {}),
             16.w.widthBox,
             AkuSingleCheckButton(
-              text: '异常',
-              value: 2,
-              gropValue: _scene,
-              onPressed: () {}
-
-            ),
+                text: '异常', value: 2, gropValue: _scene, onPressed: () {}),
           ],
         ),
         32.w.heightBox,
         Row(
-          children: ['补充说明'.text.color(kTextPrimaryColor).size(32.sp).bold.make()],
+          children: [
+            '补充说明'.text.color(kTextPrimaryColor).size(32.sp).bold.make()
+          ],
         ),
         16.w.heightBox,
         Container(

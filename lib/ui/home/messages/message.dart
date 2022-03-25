@@ -3,12 +3,12 @@ import 'package:aku_new_community_manager/const/api.dart';
 // Project imports:
 import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
+import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/home/messages/comment_message.dart';
 import 'package:aku_new_community_manager/ui/home/messages/system/system_message.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:dio/dio.dart';
@@ -162,7 +162,7 @@ class _MessageState extends State<Message> {
               onpressed: () async {
                 BaseModel baseModel =
                     await NetUtil().get(API.message.allReadSysMes);
-                if (baseModel.success ?? false) {
+                if (baseModel.success) {
                   messageProvider.updateMessage();
                   Get.to(() => SystemMessage());
                 }
@@ -180,7 +180,7 @@ class _MessageState extends State<Message> {
               onpressed: () async {
                 BaseModel baseModel =
                     await NetUtil().get(API.message.allReadCommentMes);
-                if (baseModel.success ?? false) {
+                if (baseModel.success) {
                   messageProvider.updateMessage();
                   Get.to(() => CommentMessage());
                 }

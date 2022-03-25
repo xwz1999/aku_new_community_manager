@@ -1,7 +1,7 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/clock_in_out/today_clock_record_model.dart';
-import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:common_utils/common_utils.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class ClockFunc {
   static Future initClockInfo() async {
     BaseModel baseModel = await NetUtil().get(API.manage.todayClockRecord);
-    if (baseModel.success! && baseModel.data != null) {
+    if (baseModel.success && baseModel.data != null) {
       return TodayClockRecordModel.fromJson(baseModel.data);
     } else {
       BotToast.showText(text: baseModel.msg);
