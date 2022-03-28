@@ -2,7 +2,7 @@ import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/new_ui/auth/set_nick_nage_page.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
-import 'package:aku_new_community_manager/ui/home/home_page.dart';
+import 'package:aku_new_community_manager/ui/home/new_home/new_home_page.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
@@ -85,7 +85,7 @@ class SignFunc {
     if (UserTool.userProvider.userInfoModel!.nickName == null) {
       await Get.to(() => SetNickNamePage());
     } else {
-      Get.offAll(() => HomePage());
+      Get.offAll(() => NewHomePage());
     }
   }
 

@@ -22,6 +22,7 @@ import 'package:pin_input_text_field/pin_input_text_field.dart';
 import 'package:power_logger/power_logger.dart';
 import 'package:provider/provider.dart';
 
+@Deprecated('旧页面')
 class LoginSMSPage extends StatefulWidget {
   final String phone;
   LoginSMSPage({Key? key, required this.phone}) : super(key: key);

@@ -1,6 +1,6 @@
 // Flutter imports:
 // Project imports:
-import 'package:aku_new_community_manager/new_ui/auth/login_root_page.dart';
+import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
@@ -143,7 +143,7 @@ class _SplashPageState extends State<SplashPage> {
       if (HiveStore.appBox!.containsKey('token')) {
         await userProvider.setLogin(HiveStore.appBox!.get('token'));
       } else {
-        Get.to(() => LoginPage());
+        Get.to(() => OtherLoginPage());
       }
     });
   }

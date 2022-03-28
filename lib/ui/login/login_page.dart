@@ -16,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
+@Deprecated('旧页面')
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
 

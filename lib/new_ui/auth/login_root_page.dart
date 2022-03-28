@@ -10,14 +10,14 @@ import 'package:velocity_x/velocity_x.dart';
 
 import 'other_login_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class Login_root_page extends StatefulWidget {
+  const Login_root_page({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _Login_root_pageState createState() => _Login_root_pageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _Login_root_pageState extends State<Login_root_page> {
   @override
   Widget build(BuildContext context) {
     return AkuScaffold(

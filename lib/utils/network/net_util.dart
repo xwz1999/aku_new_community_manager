@@ -1,8 +1,7 @@
 // Dart imports:
 import 'dart:io';
 
-// Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_list_model.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
@@ -24,10 +23,10 @@ class NetUtil {
 
   NetUtil._internal() {
     BaseOptions options = BaseOptions(
-      baseUrl: API.baseURL,
-      connectTimeout: API.networkTimeOut,
-      receiveTimeout: API.networkTimeOut,
-      sendTimeout: API.networkTimeOut,
+      baseUrl: SAASAPI.baseURL,
+      connectTimeout: SAASAPI.networkTimeOut,
+      receiveTimeout: SAASAPI.networkTimeOut,
+      sendTimeout: SAASAPI.networkTimeOut,
       headers: {},
     );
     if (_dio == null) _dio = Dio(options);
@@ -49,11 +48,11 @@ class NetUtil {
 
   ///call auth after login
   auth(int token) {
-    _dio!.options.headers.putIfAbsent('butlerApp-admin-token', () => token);
+    _dio!.options.headers.putIfAbsent('butlerApp-login-token', () => token);
   }
 
   logout() {
-    _dio!.options.headers.remove('butlerApp-admin-token');
+    _dio!.options.headers.remove('butlerApp-login-token');
   }
 
   /// ## alias of Dio().get

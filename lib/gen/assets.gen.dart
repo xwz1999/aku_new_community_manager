@@ -33,6 +33,14 @@ class $AssetsHomeGen {
   AssetGenImage get fireAlarm =>
       const AssetGenImage('assets/home/fire_alarm.png');
 
+  /// File path: assets/home/home_back.png
+  AssetGenImage get homeBack =>
+      const AssetGenImage('assets/home/home_back.png');
+
+  /// File path: assets/home/home_head.png
+  AssetGenImage get homeHead =>
+      const AssetGenImage('assets/home/home_head.png');
+
   /// File path: assets/home/house_keeping.png
   AssetGenImage get houseKeeping =>
       const AssetGenImage('assets/home/house_keeping.png');
@@ -100,6 +108,9 @@ class $AssetsHomeGen {
 
   /// File path: assets/home/key.png
   AssetGenImage get key => const AssetGenImage('assets/home/key.png');
+
+  /// File path: assets/home/message.png
+  AssetGenImage get message => const AssetGenImage('assets/home/message.png');
 
   /// File path: assets/home/nearby_pet.png
   AssetGenImage get nearbyPet =>

@@ -4,7 +4,7 @@ part 'other_api.dart';
 
 class SAASAPI {
   ///HOST
-  static const String host = 'http://121.41.26.225:8006';
+  static const String host = 'http://121.41.26.225:8008';
 
   ///接口基础地址
   static const String baseURL = '$host';
@@ -22,14 +22,17 @@ class SAASAPI {
 
   static _Login login = _Login();
   static _Inspection inspection = _Inspection();
-  static _City city = _City();
   static _User user = _User();
+  static _Message message = _Message();
 
   ///二级分类
   static _OtherApi other = _OtherApi();
 }
 
 class _Login {
+  ///查询所有的城市信息
+  String get allCity => '/butlerApp/city/allCity';
+
   ///管家app用户退出
   String get logOut => '/butlerApp/user/quit';
 
@@ -89,11 +92,6 @@ class _Inspection {
       '/butlerApp/user/inspection/findPlanPointInfo';
 }
 
-class _City {
-  ///查询所有的城市信息
-  String get allCity => '/app/city/allCity';
-}
-
 class _User {
   ///用户资料
   String get userProfile => '/app/user/findDetail';
@@ -118,4 +116,9 @@ class _User {
 
   ///修改用户头像
   String get updateAvatar => '/app/user/updateAvatarImg';
+}
+
+class _Message {
+  ///查询所有的管家app信息
+  String get messageList => '/butlerApp/user/message/list';
 }

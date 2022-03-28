@@ -26,7 +26,7 @@ class DataProvider extends ChangeNotifier {
   List<ChinaRegionModel> get cityModel => _cityModel;
 
   Future<bool> updateCityList() async {
-    var model = await NetUtil().get(SAASAPI.city.allCity);
+    var model = await NetUtil().get(SAASAPI.login.allCity);
     if (model.success) {
       _cityModel = (model.data as List)
           .map((e) => ChinaRegionModel.fromJson(e))

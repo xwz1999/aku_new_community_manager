@@ -2,6 +2,7 @@
 
 // Project imports:
 import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/data_provider.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/apptheme.dart';
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => UserProvider()),
           ChangeNotifierProvider(create: (context) => AppProvider()),
           ChangeNotifierProvider(create: (context) => MessageProvider()),
+          ChangeNotifierProvider(create: (context) => DataProvider()),
         ],
         child: GestureDetector(
           onTap: () {

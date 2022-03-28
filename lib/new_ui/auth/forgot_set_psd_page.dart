@@ -1,3 +1,4 @@
+import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/new_ui/auth/psd_verify.dart';
 import 'package:aku_new_community_manager/new_ui/auth/sign_func.dart';
 import 'package:aku_new_community_manager/new_ui/auth/widget/login_button_widget.dart';
@@ -10,8 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import 'login_root_page.dart';
 
 class ForgotSetPsdPage extends StatefulWidget {
   final String tel;
@@ -171,7 +170,7 @@ class _ForgotSetPsdPageState extends State<ForgotSetPsdPage> {
                           widget.tel,
                           _codeController.text);
                       if (result) {
-                        Get.offAll(() => LoginPage());
+                        Get.offAll(() => OtherLoginPage());
                       }
                     }
                   : null,
