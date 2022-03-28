@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
-import 'package:aku_new_community_manager/new_models/home/home_message_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/home/home_message_list_model.dart';
 import 'package:aku_new_community_manager/utils/bee_date_util.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';

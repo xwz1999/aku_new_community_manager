@@ -1,6 +1,6 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
-import 'package:aku_new_community_manager/new_models/home/home_message_list_model.dart';
+import 'package:aku_new_community_manager/saas_models/home/home_message_list_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/home/new_home/application_util.dart';
 import 'package:aku_new_community_manager/ui/home/new_home/home_swiper.dart';

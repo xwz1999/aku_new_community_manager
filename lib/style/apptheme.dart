@@ -1,47 +1,58 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
 // Package imports:
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTheme {
   static ThemeData get themeData {
     return ThemeData(primarySwatch: Colors.blue).copyWith(
+      progressIndicatorTheme:
+          ProgressIndicatorThemeData(color: Color(0xFFFFD000)),
       primaryColor: Color(0xFFFFD000),
-      accentColor: Color(0xFFFFD000),
-      textTheme: TextTheme().copyWith(
-        headline3: TextStyle(
-          fontSize: 40.sp,
-          color: Color(0xFF333333),
-          fontWeight: FontWeight.bold,
-        ),
-        subtitle1: TextStyle(
-          fontSize: 32.sp,
-          color: Color(0xFF333333),
-        ),
-        subtitle2: TextStyle(
-          fontSize: 28.sp,
-          color: Color(0xFF333333),
-        ),
-        bodyText1: TextStyle(
-          fontSize: 24.sp,
-          color: Color(0xFF333333),
-        ),
-      ),
+      textTheme: ThemeData.light().textTheme.copyWith(
+            headline3: TextStyle(
+              fontSize: 40.sp,
+              color: Color(0xFF333333),
+              fontWeight: FontWeight.bold,
+            ),
+            subtitle1: TextStyle(
+              fontSize: 32.sp,
+              color: Color(0xFF333333),
+            ),
+            subtitle2: TextStyle(
+              fontSize: 28.sp,
+              color: Color(0xFF333333),
+            ),
+            bodyText1: TextStyle(
+              fontSize: 24.sp,
+              color: Color(0xFF333333),
+            ),
+          ),
       floatingActionButtonTheme: FloatingActionButtonThemeData().copyWith(
         backgroundColor: Color(0xFFFFD000),
       ),
       appBarTheme: AppBarTheme(
         elevation: 0,
         centerTitle: true,
-        brightness: Brightness.light,
-        textTheme: TextTheme(
+        iconTheme: IconThemeData(
+          color: Color(0xFF333333),
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        toolbarTextStyle: TextTheme(
           headline6: TextStyle(
             color: Color(0xFF333333),
             fontSize: 36.sp,
             fontWeight: FontWeight.bold,
           ),
-        ),
+        ).bodyText2,
+        titleTextStyle: TextTheme(
+          headline6: TextStyle(
+            color: Color(0xFF333333),
+            fontSize: 36.sp,
+            fontWeight: FontWeight.bold,
+          ),
+        ).headline6,
       ),
       tabBarTheme: TabBarTheme(
         labelColor: Color(0xFF333333),
@@ -107,6 +118,8 @@ class AppTheme {
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       dividerColor: Color(0xFFE8E8E8),
+      colorScheme:
+          ColorScheme.fromSwatch().copyWith(secondary: Color(0xFFFFD000)),
     );
   }
 }
