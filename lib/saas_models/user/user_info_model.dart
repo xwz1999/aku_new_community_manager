@@ -24,6 +24,9 @@ class UserInfoModel extends Equatable {
   final String entryDate;
   final String? remake;
   final List<ImgModel>? imgList;
+  final String communityName;
+  final String positionName;
+  final int? workOrderJurisdiction;
 
   String get sexValue {
     if (sex == 1) return '男';
@@ -63,6 +66,9 @@ class UserInfoModel extends Equatable {
         entryDate,
         remake,
         imgList,
+        communityName,
+        positionName,
+        workOrderJurisdiction
       ];
 
   const UserInfoModel({
@@ -83,5 +89,8 @@ class UserInfoModel extends Equatable {
     required this.entryDate,
     this.remake,
     this.imgList,
+    required this.communityName,
+    required this.positionName,
+    this.workOrderJurisdiction,
   });
 }

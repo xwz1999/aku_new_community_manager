@@ -1,9 +1,9 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_back_button.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 ///用法大致同Scaffold
 
@@ -50,7 +50,10 @@ class AkuScaffold extends StatefulWidget {
 
   final List<Widget> actions;
 
+  final bool extendBody;
+
   final PreferredSizeWidget? appBarBottom;
+
   AkuScaffold({
     Key? key,
     this.appBar,
@@ -64,6 +67,7 @@ class AkuScaffold extends StatefulWidget {
     this.appBarColor = Colors.white,
     this.appBarBottom,
     this.actions = const [],
+    this.extendBody = false,
   }) : super(key: key);
 
   @override
@@ -75,11 +79,14 @@ class _AkuScaffoldState extends State<AkuScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
+      extendBody: widget.extendBody,
+      extendBodyBehindAppBar: widget.extendBody,
       appBar: widget.appBar ??
           AppBar(
             backgroundColor: widget.appBarColor,
             leading: widget.leading ?? AkuBackButton(),
-            brightness: widget.brightness,
+            systemOverlayStyle:
+                SystemUiOverlayStyle(statusBarBrightness: widget.brightness),
             elevation: 0,
             centerTitle: true,
             title: DefaultTextStyle(

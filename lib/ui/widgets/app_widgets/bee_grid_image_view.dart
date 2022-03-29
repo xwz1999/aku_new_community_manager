@@ -1,16 +1,18 @@
-import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
+import 'package:aku_new_community_manager/gen/assets.gen.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/bee_image_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BeeGridImageView extends StatelessWidget {
-  final List<String> urls;
+  final List<String?> urls;
   final EdgeInsetsGeometry padding;
+  final int? crossCount;
   const BeeGridImageView({
     Key? key,
     required this.urls,
     this.padding = EdgeInsets.zero,
+    this.crossCount = 3,
   }) : super(key: key);
 
   @override
@@ -19,7 +21,7 @@ class BeeGridImageView extends StatelessWidget {
     return GridView.builder(
       padding: padding,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
+        crossAxisCount: crossCount!,
         crossAxisSpacing: 16.w,
         mainAxisSpacing: 16.w,
       ),
@@ -29,19 +31,15 @@ class BeeGridImageView extends StatelessWidget {
             BeeImagePreview.toPath(path: urls[index], tag: urls[index]);
           },
           child: Hero(
-            tag: urls[index],
+            tag: urls[index]!,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8.w),
               child: FadeInImage.assetNetwork(
                 height: 184.w,
                 width: 184.w,
-                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                image: API.image(urls[index]),
+                placeholder: Assets.placeholder.path,
+                image: SAASAPI.image(urls[index]),
                 fit: BoxFit.cover,
-                imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset(R.ASSETS_PLACEHOLDER_WEBP,height: 184.w,
-                    width: 184.w,);
-                },
               ),
             ),
           ),

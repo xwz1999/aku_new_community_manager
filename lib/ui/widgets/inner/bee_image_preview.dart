@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
+import 'package:aku_new_community_manager/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+///图片点击放大预览
 class BeeImagePreview extends StatefulWidget {
   static Future<T?> toFile<T>({required File file, String? tag}) async {
     return await navigator!.push(
@@ -45,6 +46,7 @@ class BeeImagePreview extends StatefulWidget {
   final File? file;
   final String? path;
   final String? tag;
+
   BeeImagePreview.file({Key? key, required this.file, this.tag})
       : path = null,
         super(key: key);
@@ -63,8 +65,14 @@ class _BeeImagePreviewState extends State<BeeImagePreview> {
       return Hero(
         tag: widget.tag ?? widget.path!,
         child: FadeInImage.assetNetwork(
-          placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-          image: API.image(widget.path!),
+          placeholder: Assets.placeholder.path,
+          image: SAASAPI.image(widget.path),
+          imageErrorBuilder: (context, obj, stackTrace) {
+            return Image.asset(
+              Assets.placeholder.path,
+              fit: BoxFit.fill,
+            );
+          },
         ),
       );
     else

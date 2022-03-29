@@ -24,6 +24,7 @@ class SAASAPI {
   static _Inspection inspection = _Inspection();
   static _User user = _User();
   static _Message message = _Message();
+  static _WorkOrder workOrder = _WorkOrder();
 
   ///二级分类
   static _OtherApi other = _OtherApi();
@@ -121,4 +122,52 @@ class _User {
 class _Message {
   ///查询所有的管家app信息
   String get messageList => '/butlerApp/user/message/list';
+}
+
+class _WorkOrder {
+  ///提醒支付
+  String get reminderPay => '/butlerApp/user/workOrder/reminderPay';
+
+  ///开始服务
+  String get startService => '/butlerApp/user/workOrder/startService';
+
+  ///完成工单
+  String get finish => '/butlerApp/user/workOrder/finish';
+
+  ///汇报
+  String get report => '/butlerApp/user/workOrder/report';
+
+  ///领取任务
+  String get receiveTask => '/butlerApp/user/workOrder/receiveTask';
+
+  ///提醒用户确认
+  String get reminderConfirm => '/butlerApp/user/workOrder/reminderConfirm';
+
+  ///提醒完成
+  String get reminderDone => '/butlerApp/user/workOrder/reminderDone';
+
+  ///提醒处理
+  String get reminderProcessing => '/butlerApp/user/workOrder/reminderDone';
+
+  ///移至待分配
+  String get moveToAssignment => '/butlerApp/user/workOrder/moveToAssignment';
+
+  ///加入工单池
+  String get joinTicketPool => '/butlerApp/user/workOrder/joinTicketPool';
+
+  ///取消工单
+  String get cancel => '/butlerApp/user/workOrder/cancel';
+
+  ///查询服务团队名单
+  String get findServiceTeamList =>
+      '/butlerApp/user/workOrder/findServiceTeamList';
+
+  ///根据工单主键id查询工单信息
+  String get findById => '/butlerApp/user/workOrder/findById';
+
+  ///添加管家app工单信息
+  String get insert => '/butlerApp/user/workOrder/insert';
+
+  ///查询所有的管家app工单信息
+  String get list => '/butlerApp/user/workOrder/list';
 }

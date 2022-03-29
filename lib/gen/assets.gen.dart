@@ -146,6 +146,86 @@ class $AssetsHomeGen {
   AssetGenImage get sos => const AssetGenImage('assets/home/sos.png');
 }
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/alarm_clock.png
+  AssetGenImage get alarmClock =>
+      const AssetGenImage('assets/icons/alarm_clock.png');
+
+  /// File path: assets/icons/camera.png
+  AssetGenImage get camera => const AssetGenImage('assets/icons/camera.png');
+
+  /// File path: assets/icons/cancel_task.png
+  AssetGenImage get cancelTask =>
+      const AssetGenImage('assets/icons/cancel_task.png');
+
+  /// File path: assets/icons/clock_circle.png
+  AssetGenImage get clockCircle =>
+      const AssetGenImage('assets/icons/clock_circle.png');
+
+  /// File path: assets/icons/connect.png
+  AssetGenImage get connect => const AssetGenImage('assets/icons/connect.png');
+
+  /// File path: assets/icons/copy.png
+  AssetGenImage get copy => const AssetGenImage('assets/icons/copy.png');
+
+  /// File path: assets/icons/dissatisfied.png
+  AssetGenImage get dissatisfied =>
+      const AssetGenImage('assets/icons/dissatisfied.png');
+
+  /// File path: assets/icons/edit.png
+  AssetGenImage get edit => const AssetGenImage('assets/icons/edit.png');
+
+  /// File path: assets/icons/environment.png
+  AssetGenImage get environment =>
+      const AssetGenImage('assets/icons/environment.png');
+
+  /// File path: assets/icons/examining.png
+  AssetGenImage get examining =>
+      const AssetGenImage('assets/icons/examining.png');
+
+  /// File path: assets/icons/finish_order.png
+  AssetGenImage get finishOrder =>
+      const AssetGenImage('assets/icons/finish_order.png');
+
+  /// File path: assets/icons/normal.png
+  AssetGenImage get normal => const AssetGenImage('assets/icons/normal.png');
+
+  /// File path: assets/icons/pass.png
+  AssetGenImage get pass => const AssetGenImage('assets/icons/pass.png');
+
+  /// File path: assets/icons/phone.png
+  AssetGenImage get phone => const AssetGenImage('assets/icons/phone.png');
+
+  /// File path: assets/icons/phone_circle.png
+  AssetGenImage get phoneCircle =>
+      const AssetGenImage('assets/icons/phone_circle.png');
+
+  /// File path: assets/icons/record.png
+  AssetGenImage get record => const AssetGenImage('assets/icons/record.png');
+
+  /// File path: assets/icons/reject.png
+  AssetGenImage get reject => const AssetGenImage('assets/icons/reject.png');
+
+  /// File path: assets/icons/reward.png
+  AssetGenImage get reward => const AssetGenImage('assets/icons/reward.png');
+
+  /// File path: assets/icons/satisfied.png
+  AssetGenImage get satisfied =>
+      const AssetGenImage('assets/icons/satisfied.png');
+
+  /// File path: assets/icons/tag.png
+  AssetGenImage get tag => const AssetGenImage('assets/icons/tag.png');
+
+  /// File path: assets/icons/task_location.png
+  AssetGenImage get taskLocation =>
+      const AssetGenImage('assets/icons/task_location.png');
+
+  /// File path: assets/icons/watch.png
+  AssetGenImage get watch => const AssetGenImage('assets/icons/watch.png');
+}
+
 class $AssetsInspectionGen {
   const $AssetsInspectionGen();
 
@@ -456,6 +536,7 @@ class Assets {
   Assets._();
 
   static const $AssetsHomeGen home = $AssetsHomeGen();
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsInspectionGen inspection = $AssetsInspectionGen();
   static const $AssetsManageGen manage = $AssetsManageGen();
   static const $AssetsMessageGen message = $AssetsMessageGen();
