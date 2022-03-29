@@ -25,9 +25,9 @@ class UrgeDialog extends StatelessWidget {
           120.w.heightBox,
           title.text.size(36.sp).black.bold.isIntrinsic.make(),
           40.w.heightBox,
-          content.text.size(28.sp).isIntrinsic.make(),
+          content.text.size(28.sp).align(TextAlign.center).isIntrinsic.make(),
           150.w.heightBox,
-          BeeLongButton(onPressed: onConfirm, text: '确认提醒')
+          BeeLongButton(onPressed: onConfirm, text: '确认')
         ],
       ),
     );

@@ -10,27 +10,16 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class WorkOrderDistributorPage extends StatefulWidget {
-  const WorkOrderDistributorPage({Key? key}) : super(key: key);
+class WorkOrderReceiverPage extends StatefulWidget {
+  const WorkOrderReceiverPage({Key? key}) : super(key: key);
 
   @override
-  _WorkOrderDistributorPageState createState() =>
-      _WorkOrderDistributorPageState();
+  _WorkOrderReceiverPageState createState() => _WorkOrderReceiverPageState();
 }
 
-class _WorkOrderDistributorPageState extends State<WorkOrderDistributorPage>
+class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
     with SingleTickerProviderStateMixin {
-  List<String> _tabs = [
-    '全部',
-    '待分配',
-    '工单池',
-    '已接单',
-    '处理中',
-    '待确认',
-    '已完成',
-    '已评价',
-    '已取消'
-  ];
+  List<String> _tabs = ['全部', '工单池', '已接单', '处理中', '待确认', '已完成', '已评价', '已取消'];
   late TabController _tabController;
   EasyRefreshController _refreshController = EasyRefreshController();
   int _page = 1;
@@ -85,7 +74,7 @@ class _WorkOrderDistributorPageState extends State<WorkOrderDistributorPage>
           var base = await NetUtil().getList(SAASAPI.workOrder.list, params: {
             'pageNum': _page,
             'size': _size,
-            'status': index == 0 ? null : index,
+            'status': index == 0 ? null : index + 1,
           });
           _models =
               base.rows.map((e) => WorkOrderListModel.fromJson(e)).toList();
@@ -96,7 +85,7 @@ class _WorkOrderDistributorPageState extends State<WorkOrderDistributorPage>
           var base = await NetUtil().getList(SAASAPI.workOrder.list, params: {
             'pageNum': _page,
             'size': _size,
-            'status': index == 0 ? null : index,
+            'status': index == 0 ? null : index + 1,
           });
           if (_models.length < base.total) {
             _models.addAll(

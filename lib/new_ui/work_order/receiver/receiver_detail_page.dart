@@ -1,11 +1,13 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
+import 'package:aku_new_community_manager/new_ui/work_order/dialog/urge_dialog.dart';
 import 'package:aku_new_community_manager/saas_models/work_order/work_order_detail_model.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_image_network.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_divider.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_long_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/bottom_plural_button_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/stack_avatar.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -24,19 +26,19 @@ import '../team_list_page.dart';
 import '../work_order_func.dart';
 import '../work_order_map.dart';
 
-class DistributorDetailPage extends StatefulWidget {
+class ReceiverDetailPage extends StatefulWidget {
   final int id;
 
-  const DistributorDetailPage({
+  const ReceiverDetailPage({
     Key? key,
     required this.id,
   }) : super(key: key);
 
   @override
-  _DistributorDetailPageState createState() => _DistributorDetailPageState();
+  _ReceiverDetailPageState createState() => _ReceiverDetailPageState();
 }
 
-class _DistributorDetailPageState extends State<DistributorDetailPage> {
+class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
   WorkOrderDetailModel? _model;
   EasyRefreshController _refreshController = EasyRefreshController();
 
@@ -197,31 +199,33 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
       case 1:
         return BeeLongButton(
             onPressed: () async {
-              var re = await WorkOrderFuc.joinOrderPool(widget.id);
+              var re = await WorkOrderFuc.receiveTask(widget.id);
               if (re) {
                 _refreshController.callRefresh();
               }
             },
-            text: '加入工单池');
+            text: '领取任务');
       case 2:
         return BeeLongButton(
             onPressed: () async {
-              var re = await WorkOrderFuc.moveToAssignment(widget.id);
-              if (re) {
-                _refreshController.callRefresh();
-              }
+              Get.bottomSheet(UrgeDialog(
+                  onConfirm: () async {
+                    var re = await WorkOrderFuc.startService(widget.id);
+                    if (re) {
+                      _refreshController.callRefresh();
+                    }
+                  },
+                  title: '确认开始服务？',
+                  content: '建议事前前往现场确认情况\n并与申请人充分沟通后再点击开始处理'));
             },
-            text: '移至待分配');
+            text: '开始服务');
 
       case 3:
-        return BeeLongButton(
-            onPressed: () async {
-              var re = await WorkOrderFuc.reminderProcessing(widget.id);
-              if (re) {
-                _refreshController.callRefresh();
-              }
-            },
-            text: '提醒处理');
+        return BottomPluralButtonWidget(
+            onLeftTap: () {},
+            onRightTap: () {},
+            leftTitle: '提交报告',
+            rightTitle: '完成工单');
 
       case 4:
         return BeeLongButton(
@@ -240,7 +244,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                 _refreshController.callRefresh();
               }
             },
-            text: '提醒支付');
+            text: '提醒用户支付');
       case 6:
 
       case 7:
@@ -301,7 +305,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          '服务人员名单'
+          '处理人员名单'
               .text
               .size(28.sp)
               .color(Colors.black.withOpacity(0.85))
@@ -367,6 +371,15 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                     .color(Color(0xFFD48806))
                     .make(),
               ),
+              Spacer(),
+              Offstage(
+                offstage: _model!.status < 6,
+                child: '¥${_model!.totalCost ?? 0}'
+                    .text
+                    .size(24.sp)
+                    .color(Color(0xFFF5222D))
+                    .make(),
+              )
             ],
           ),
           16.w.heightBox,

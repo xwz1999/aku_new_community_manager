@@ -1,4 +1,5 @@
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
+import 'package:aku_new_community_manager/new_ui/work_order/distributor/distributor_card.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/distributor/distributor_detail_page.dart';
 import 'package:aku_new_community_manager/saas_models/work_order/work_order_list_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
@@ -7,19 +8,17 @@ import 'package:aku_new_community_manager/ui/widgets/common/car_bottom_button.da
 import 'package:aku_new_community_manager/utils/bee_date_util.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:velocity_x/src/extensions/string_ext.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../work_order_func.dart';
 import '../work_order_map.dart';
 
-class DistributorCard extends StatelessWidget {
+class ReceiverCard extends StatelessWidget {
   final WorkOrderListModel model;
   final VoidCallback refresh;
 
-  const DistributorCard({Key? key, required this.model, required this.refresh})
+  const ReceiverCard({Key? key, required this.model, required this.refresh})
       : super(key: key);
 
   @override
@@ -153,41 +152,38 @@ class DistributorCard extends StatelessWidget {
     switch (model.status) {
       case 1:
         return CardBottomButton.yellow(
-            text: '加入工单池',
+            text: '领取任务',
             onPressed: () async {
-              var re = await WorkOrderFuc.joinOrderPool(model.id);
+              var re = await WorkOrderFuc.receiveTask(model.id);
               if (re) {
                 refresh();
               }
             });
       case 2:
         return CardBottomButton.yellow(
-            text: '移至待分配',
+            text: '开始服务',
             onPressed: () async {
-              var re = await WorkOrderFuc.moveToAssignment(model.id);
+              var re = await WorkOrderFuc.startService(model.id);
               if (re) {
                 refresh();
               }
             });
       case 3:
-        return CardBottomButton.yellow(
-            text: '提醒处理',
-            onPressed: () async {
-              var re = await WorkOrderFuc.reminderProcessing(model.id);
-              if (re) {
-                refresh();
-              }
-            });
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CardBottomButton.yellow(text: '提交报告', onPressed: () async {}),
+            CardBottomButton.yellow(
+                text: '完成工单',
+                onPressed: () async {
+                  var re = await WorkOrderFuc.reminderProcessing(model.id);
+                  if (re) {
+                    refresh();
+                  }
+                }),
+          ],
+        );
       case 4:
-        return CardBottomButton.yellow(
-            text: '提醒完成',
-            onPressed: () async {
-              var re = await WorkOrderFuc.reminderDone(model.id);
-              if (re) {
-                refresh();
-              }
-            });
-      case 5:
         return CardBottomButton.yellow(
             text: '提醒确认',
             onPressed: () async {
@@ -196,7 +192,7 @@ class DistributorCard extends StatelessWidget {
                 refresh();
               }
             });
-      case 6:
+      case 5:
         return CardBottomButton.yellow(
             text: '提醒支付',
             onPressed: () async {
@@ -205,55 +201,14 @@ class DistributorCard extends StatelessWidget {
                 refresh();
               }
             });
+      case 6:
       case 7:
       case 8:
+        return CardBottomButton.yellow(text: '查看评价', onPressed: () {});
       case 9:
+      case 10:
       default:
         return SizedBox.shrink();
     }
-  }
-}
-
-class WorkOrderCardClip extends CustomClipper<Path> {
-  @override
-  bool shouldReclip(covariant CustomClipper oldClipper) {
-    return false;
-  }
-
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    //第一段圆弧起始位置的横坐标
-    double asx = 531.w;
-    //第一段圆弧终点位置横坐标
-    double aex = 542.46.w;
-    //第一段圆弧终点位置纵坐标
-    double aey = 9.34.w;
-
-    //第一段圆弧控制点位置横坐标
-    double acx = 540.w;
-
-    //第二段圆弧起始点位置横坐标
-    double bsx = 558.45.w;
-    //第二段圆弧起始点位置纵坐标
-    double bsy = 58.88.w;
-    //第二段圆弧终点点位置横坐标
-    double bex = 569.91.w;
-    //第二段圆弧终点位纵横坐标
-    double bey = 67.35.w;
-    //第二段圆弧控制点位置横坐标
-    double bcx = 561.06.w;
-    //第二段圆弧控制点位置纵坐标
-    double bcy = 67.35.w;
-    path.lineTo(asx, 0);
-    path.quadraticBezierTo(acx, 0, aex, aey);
-    path.lineTo(bsx, bsy);
-    path.quadraticBezierTo(bcx, bcy, bex, bey);
-    path.lineTo(size.width, bey);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.lineTo(0, 0);
-    path.close();
-    return path;
   }
 }
