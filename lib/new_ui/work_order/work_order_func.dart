@@ -1,7 +1,16 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/saas_models/work_order/work_order_bill_model.dart';
+import 'package:aku_new_community_manager/saas_models/work_order/work_order_progress_model.dart';
 import 'package:aku_new_community_manager/saas_models/work_order/work_order_submit_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+import 'package:bot_toast/bot_toast.dart';
+import 'package:dio/dio.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+
+import 'dialog/work_order_bill_dialog.dart';
+import 'dialog/work_order_progress_dialog.dart';
 
 class WorkOrderFuc {
   ///提醒用户确认
@@ -104,5 +113,58 @@ class WorkOrderFuc {
         showMessage: true);
 
     return base.success;
+  }
+
+  ///汇报进度
+  static Future<bool> reportProgress({
+    required int workOrderId,
+    required String content,
+    required List<String> imgUrls,
+  }) async {
+    var base = await NetUtil().post(SAASAPI.workOrder.insert,
+        params: {
+          'workOrderId': workOrderId,
+          'content': content,
+          'imgUrls': imgUrls,
+        },
+        showMessage: true);
+
+    return base.success;
+  }
+
+  ///查询工单进度
+  static Future getProgress({
+    required int workOrderId,
+  }) async {
+    var base = await NetUtil().get(SAASAPI.workOrder.findScheduleById,
+        params: {'workOrderId': workOrderId});
+    if (base.success) {
+      var models = (base.data as List)
+          .map((e) => WorkOrderProgressModel.fromJson(e))
+          .toList();
+      await Get.bottomSheet(WorkOrderProgressDialog(models: models));
+    } else {
+      BotToast.showText(text: base.msg);
+    }
+  }
+
+  ///查询账单
+  static Future getBill({
+    required int workOrderId,
+    required VoidCallback onConfirm,
+  }) async {
+    var base = await NetUtil()
+        .get(SAASAPI.workOrder.orderBill, params: {'workOrderId': workOrderId});
+    if (base.success) {
+      var models = (base.data as List)
+          .map((e) => WorkOrderBillModel.fromJson(e))
+          .toList();
+      await Get.bottomSheet(WorkOrderBillDialog(
+        models: models,
+        onConfirm: onConfirm,
+      ));
+    } else {
+      BotToast.showText(text: base.msg);
+    }
   }
 }

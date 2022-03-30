@@ -12,7 +12,7 @@ import 'package:aku_new_community_manager/ui/settings/tel_change_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_tile.dart';
-import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/bee_image_pick.dart';
 // Package imports:
 import 'package:common_utils/common_utils.dart';
 // Flutter imports:
@@ -37,7 +37,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
         children: [
           AkuTile(
             onTap: () async {
-              File? file = await akuPickImage();
+              File? file = await BeeImagePicker.pick(title: '选择图片');
               if (file != null) await userProvider.updateAvatar(file);
             },
             title: Text('头像'),

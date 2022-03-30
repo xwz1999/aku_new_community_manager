@@ -9,7 +9,7 @@ import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
-import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/bee_image_pick.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
@@ -129,7 +129,7 @@ class _AddBorrowItemPageState extends State<AddBorrowItemPage> {
                   file == null
                       ? InkWell(
                           onTap: () {
-                            akuPickImage().then((value) {
+                            BeeImagePicker.pick(title: '选择图片').then((value) {
                               if (value != null) file = value;
                               setState(() {});
                             });

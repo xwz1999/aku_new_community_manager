@@ -7,7 +7,7 @@ import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_map.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_title_box.dart';
@@ -70,7 +70,7 @@ class _EngineerRepairCompletePageState
                 40.w.heightBox,
                 '上传维修完成照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
                 24.w.heightBox,
-                AkuPickImageWidget(onChanged: (value) {
+                BeePickImageWidget(onChanged: (value) {
                   _files.clear();
                   _files.addAll(value);
                   setState(() {});

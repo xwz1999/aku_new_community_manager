@@ -8,7 +8,7 @@ import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_acceptance_record_list_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
@@ -167,7 +167,7 @@ class _EngineerRepairAcceptancePageState
         16.w.heightBox,
         '上传到场验收照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
         16.w.heightBox,
-        AkuPickImageWidget(onChanged: (value) {
+        BeePickImageWidget(onChanged: (value) {
           _files.clear();
           _files.addAll(value);
           setState(() {});
@@ -218,10 +218,12 @@ class _EngineerRepairAcceptancePageState
             return ClipRRect(
               borderRadius: BorderRadius.circular(4.w),
               child: FadeInImage.assetNetwork(
-                  placeholder: R.ASSETS_PLACEHOLDER_WEBP,
-                  image: API.image(e.url!),
+                placeholder: R.ASSETS_PLACEHOLDER_WEBP,
+                image: API.image(e.url!),
                 imageErrorBuilder: (context, error, stackTrace) {
-                  return Image.asset(R.ASSETS_PLACEHOLDER_WEBP,);
+                  return Image.asset(
+                    R.ASSETS_PLACEHOLDER_WEBP,
+                  );
                 },
               ),
             );

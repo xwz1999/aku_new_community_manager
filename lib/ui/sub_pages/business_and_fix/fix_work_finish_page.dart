@@ -14,7 +14,7 @@ import 'package:aku_new_community_manager/ui/sub_pages/business_and_fix/fix_subm
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_title_box.dart';
-import 'package:aku_new_community_manager/ui/widgets/inner/pick_image.dart';
+import 'package:aku_new_community_manager/ui/widgets/inner/bee_image_pick.dart';
 import 'package:aku_new_community_manager/utils/network/manage_func.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
@@ -209,7 +209,7 @@ class _FixWorkFinishPageState extends State<FixWorkFinishPage> {
                     return AkuMaterialButton(
                       radius: 8.w,
                       onPressed: () {
-                        akuPickImage().then((file) {
+                        BeeImagePicker.pick(title: '选择图片').then((file) {
                           setState(() {
                             if (file != null) _imgs.insert(0, file);
                           });

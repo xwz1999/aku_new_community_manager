@@ -6,7 +6,7 @@ import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 // Flutter imports:
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -64,7 +64,7 @@ class _SettingFeedBackPageState extends State<SettingFeedBackPage> {
                     ),
                   ),
                 ),
-                AkuPickImageWidget(
+                BeePickImageWidget(
                   size: 202.w,
                   onChanged: (newFile) {
                     _files = newFile;

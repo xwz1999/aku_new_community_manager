@@ -22,6 +22,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/src/extensions/num_ext.dart';
 import 'package:velocity_x/src/extensions/string_ext.dart';
 
+import '../history_report_page.dart';
 import '../team_list_page.dart';
 import '../work_order_func.dart';
 import '../work_order_map.dart';
@@ -74,7 +75,10 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 GestureDetector(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    await WorkOrderFuc.getProgress(
+                                        workOrderId: widget.id);
+                                  },
                                   child: Material(
                                     color: Colors.transparent,
                                     child: Row(
@@ -239,10 +243,16 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
       case 5:
         return BeeLongButton(
             onPressed: () async {
-              var re = await WorkOrderFuc.reminderPay(widget.id);
-              if (re) {
-                _refreshController.callRefresh();
-              }
+              WorkOrderFuc.getBill(
+                workOrderId: widget.id,
+                onConfirm: () async {
+                  var re = await WorkOrderFuc.reminderPay(widget.id);
+                  if (re) {
+                    _refreshController.callRefresh();
+                  }
+                  Get.back();
+                },
+              );
             },
             text: '提醒用户支付');
       case 6:
@@ -260,7 +270,9 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
 
   Widget _historyReport() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(HistoryReportPage(id: widget.id));
+      },
       child: Material(
         color: Colors.transparent,
         child: Container(
@@ -374,7 +386,7 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
               Spacer(),
               Offstage(
                 offstage: _model!.status < 6,
-                child: '¥${_model!.totalCost ?? 0}'
+                child: '¥${_model!.totalCost}'
                     .text
                     .size(24.sp)
                     .color(Color(0xFFF5222D))

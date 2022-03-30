@@ -20,6 +20,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/src/extensions/num_ext.dart';
 import 'package:velocity_x/src/extensions/string_ext.dart';
 
+import '../history_report_page.dart';
 import '../team_list_page.dart';
 import '../work_order_func.dart';
 import '../work_order_map.dart';
@@ -72,7 +73,10 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 GestureDetector(
-                                  onTap: () async {},
+                                  onTap: () async {
+                                    await WorkOrderFuc.getProgress(
+                                        workOrderId: widget.id);
+                                  },
                                   child: Material(
                                     color: Colors.transparent,
                                     child: Row(
@@ -235,10 +239,16 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
       case 5:
         return BeeLongButton(
             onPressed: () async {
-              var re = await WorkOrderFuc.reminderPay(widget.id);
-              if (re) {
-                _refreshController.callRefresh();
-              }
+              WorkOrderFuc.getBill(
+                workOrderId: widget.id,
+                onConfirm: () async {
+                  var re = await WorkOrderFuc.reminderPay(widget.id);
+                  if (re) {
+                    _refreshController.callRefresh();
+                  }
+                  Get.back();
+                },
+              );
             },
             text: '提醒支付');
       case 6:
@@ -256,7 +266,9 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
 
   Widget _historyReport() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Get.to(HistoryReportPage(id: widget.id));
+      },
       child: Material(
         color: Colors.transparent,
         child: Container(

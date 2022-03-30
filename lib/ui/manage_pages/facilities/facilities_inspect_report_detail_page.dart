@@ -7,7 +7,7 @@ import 'package:aku_new_community_manager/models/manager/facilities/facilities_c
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
@@ -274,7 +274,7 @@ class _FacilitiesInspectReportDetailPageState
                     .map((e) => API.image(e.url ?? ''))
                     .toList(),
               )
-            : AkuPickImageWidget(
+            : BeePickImageWidget(
                 description: '上传现场照片',
                 onChanged: (files) {
                   _scenePhotos = files;

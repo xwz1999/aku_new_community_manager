@@ -11,7 +11,7 @@ import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_submit_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -131,7 +131,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           ],
         ),
         32.w.heightBox,
-        AkuPickImageWidget(
+        BeePickImageWidget(
           onChanged: (files) {
             _selfPhotos = files;
             setState(() {});
@@ -155,7 +155,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
           ],
         ),
         32.w.heightBox,
-        AkuPickImageWidget(
+        BeePickImageWidget(
           onChanged: (files) {
             _scenePhots = files;
             setState(() {});

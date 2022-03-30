@@ -125,6 +125,15 @@ class _Message {
 }
 
 class _WorkOrder {
+  ///根据工单主键id查询工单
+  String get orderBill => '/butlerApp/user/workOrder/workOrderBill';
+
+  ///根据工单主键id查询工单进度列表
+  String get findScheduleById => '/butlerApp/user/workOrder/findScheduleById';
+
+  ///根据工单主键id查询工单报告列表
+  String get findRRById => '/butlerApp/user/workOrder/findRRById';
+
   ///提醒支付
   String get reminderPay => '/butlerApp/user/workOrder/reminderPay';
 

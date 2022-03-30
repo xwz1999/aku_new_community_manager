@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/aku_bottom_button.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -78,7 +78,7 @@ class _EngineerRepairReportPageState extends State<EngineerRepairReportPage> {
                 40.w.heightBox,
                 '上传照片'.text.size(28.sp).color(kTextPrimaryColor).make(),
                 24.w.heightBox,
-                AkuPickImageWidget(onChanged: (files) {
+                BeePickImageWidget(onChanged: (files) {
                   _files.clear();
                   _files.addAll(files);
                   setState(() {});

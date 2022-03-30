@@ -4,7 +4,7 @@ import 'package:aku_new_community_manager/json_models/manager/house_keeping/hous
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/aku_divider.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/house_keeping/house_keeping_func.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_pick_image_widget.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_grid_image_view.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -184,7 +184,7 @@ class _HouseKeepingFeedBackPageState extends State<HouseKeepingFeedBackPage> {
           40.w.heightBox,
           '上传服务完成照片'.text.size(28.sp).black.make(),
           24.w.heightBox,
-          AkuPickImageWidget(onChanged: (files) {
+          BeePickImageWidget(onChanged: (files) {
             _files = files;
           })
         ],
