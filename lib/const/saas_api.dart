@@ -25,9 +25,18 @@ class SAASAPI {
   static _User user = _User();
   static _Message message = _Message();
   static _WorkOrder workOrder = _WorkOrder();
+  static _HouseHoldAudit householdAudit = _HouseHoldAudit();
 
   ///二级分类
   static _OtherApi other = _OtherApi();
+}
+
+class _HouseHoldAudit {
+  ///查询所有的住户审核管理信息
+  String get list => '/butlerApp/user/review/list';
+
+  ///通过/驳回 房屋审核
+  String get review => '/butlerApp/user/review/review';
 }
 
 class _Login {

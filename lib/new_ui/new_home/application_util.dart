@@ -1,4 +1,5 @@
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
+import 'package:aku_new_community_manager/new_ui/household_audit/household_audit_page.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/distributor/work_order_distributor_page.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/receiver/work_order_receiver_page.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
@@ -51,8 +52,10 @@ class ApplicationUtil {
             }),
         AppElement(
             title: '住户审核',
-            imgPath: Assets.home.icArticle.path,
-            onTap: () async {})
+            imgPath: Assets.home.icVisitors.path,
+            onTap: () async {
+              Get.to(() => HouseholdAuditPage());
+            })
       ];
 }
 

@@ -228,7 +228,7 @@ class _NewHomePageState extends State<NewHomePage> {
           Column(
             children: [
               Row(
-                children: ApplicationUtil(['巡检管理', '工单管理'])
+                children: ApplicationUtil(['巡检管理', '工单管理', '住户审核'])
                     .elements
                     .map((e) => _applicationElement(e))
                     .toList()
@@ -348,7 +348,12 @@ class _NewHomePageState extends State<NewHomePage> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              '小蜜蜂'.text.size(32.sp).black.bold.make(),
+              '${UserTool.userProvider.userInfoModel!.nickName}'
+                  .text
+                  .size(32.sp)
+                  .black
+                  .bold
+                  .make(),
               10.w.heightBox,
               Row(
                 children: [
@@ -359,11 +364,12 @@ class _NewHomePageState extends State<NewHomePage> {
                       color: Color(0xFFFFC40C),
                       borderRadius: BorderRadius.circular(4.w),
                     ),
-                    child: '测试小区'
-                        .text
-                        .size(24.sp)
-                        .color(Colors.black.withOpacity(0.85))
-                        .make(),
+                    child:
+                        '${UserTool.userProvider.userInfoModel!.communityName}'
+                            .text
+                            .size(24.sp)
+                            .color(Colors.black.withOpacity(0.85))
+                            .make(),
                   ),
                   16.w.widthBox,
                   Container(
@@ -373,11 +379,12 @@ class _NewHomePageState extends State<NewHomePage> {
                       color: Color(0xFFFFC40C),
                       borderRadius: BorderRadius.circular(4.w),
                     ),
-                    child: '行政'
-                        .text
-                        .size(24.sp)
-                        .color(Colors.black.withOpacity(0.85))
-                        .make(),
+                    child:
+                        '${UserTool.userProvider.userInfoModel!.positionName}'
+                            .text
+                            .size(24.sp)
+                            .color(Colors.black.withOpacity(0.85))
+                            .make(),
                   )
                 ],
               ),

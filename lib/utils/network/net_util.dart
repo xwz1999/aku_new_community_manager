@@ -103,14 +103,11 @@ class NetUtil {
   }) async {
     try {
       Response res = await _dio!.get(path, queryParameters: params);
-      if ((res.data as Map<String, dynamic>).containsKey('status') &&
-          (res.data as Map<String, dynamic>).containsKey('data') &&
-          (res.data as Map<String, dynamic>).containsKey('message')) {
-        BaseModel baseModel = BaseModel.fromJson(res.data);
-        _parseRequestError(baseModel);
-      } else {
-        BaseListModel baseListModel = BaseListModel.fromJson(res.data);
+      if (res.data['success']) {
+        BaseListModel baseListModel = BaseListModel.fromJson(res.data['data']);
         return baseListModel;
+      } else {
+        return BaseListModel.err();
       }
     } on DioError catch (e) {
       _parseErr(e);
