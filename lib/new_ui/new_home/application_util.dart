@@ -1,4 +1,7 @@
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
+import 'package:aku_new_community_manager/new_ui/work_order/distributor/work_order_distributor_page.dart';
+import 'package:aku_new_community_manager/new_ui/work_order/receiver/work_order_receiver_page.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_manage_page.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -37,6 +40,17 @@ class ApplicationUtil {
             }),
         AppElement(
             title: '工单管理',
+            imgPath: Assets.home.icArticle.path,
+            onTap: () async {
+              if (UserTool.userProvider.userInfoModel!.workOrderJurisdiction ==
+                  1) {
+                Get.to(() => WorkOrderDistributorPage());
+              } else {
+                Get.to(() => WorkOrderReceiverPage());
+              }
+            }),
+        AppElement(
+            title: '住户审核',
             imgPath: Assets.home.icArticle.path,
             onTap: () async {})
       ];

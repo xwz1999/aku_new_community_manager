@@ -1,8 +1,8 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
-import 'package:aku_new_community_manager/new_ui/auth/set_nick_nage_page.dart';
+import 'package:aku_new_community_manager/new_ui/auth/set_nick_name_page.dart';
+import 'package:aku_new_community_manager/new_ui/new_home/new_home_page.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
-import 'package:aku_new_community_manager/ui/home/new_home/new_home_page.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
@@ -91,21 +91,21 @@ class SignFunc {
 
   ///检测昵称是否重复
   static Future<bool> checkNickRepeat(String nick) async {
-    BaseModel baseModel = await NetUtil().get(SAASAPI.user.checkNickRepeat,
+    BaseModel baseModel = await NetUtil().get(SAASAPI.login.checkNickNameRepeat,
         params: {
           'nickName': nick,
         },
         showMessage: true);
-    return baseModel.msg == '昵称可用';
+    return baseModel.success;
   }
 
   ///设置昵称
   static Future<bool> setNickName(String nick) async {
-    BaseModel baseModel = await NetUtil().get(SAASAPI.user.setNickName,
+    BaseModel baseModel = await NetUtil().get(SAASAPI.login.setNickName,
         params: {
           'nickName': nick,
         },
         showMessage: true);
-    return baseModel.msg == '设置成功';
+    return baseModel.success;
   }
 }

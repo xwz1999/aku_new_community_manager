@@ -74,7 +74,7 @@ class WorkOrderFuc {
   }
 
   ///完成工单
-  static Future<bool> confirmComplete(WorkOrderSubmitModel model) async {
+  static Future<bool> finish(WorkOrderSubmitModel model) async {
     BaseModel baseModel = await NetUtil().get(SAASAPI.workOrder.finish,
         params: model.toJson(), showMessage: true);
     return baseModel.success;

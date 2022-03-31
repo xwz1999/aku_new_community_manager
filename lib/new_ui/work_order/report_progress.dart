@@ -44,7 +44,7 @@ class _ReportProgressState extends State<ReportProgress> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    '具体需求'
+                    '进度汇报'
                         .text
                         .size(28.sp)
                         .color(Colors.black.withOpacity(0.45))
@@ -70,40 +70,40 @@ class _ReportProgressState extends State<ReportProgress> {
                     ),
                   ),
                 ),
-                32.w.heightBox,
-                Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 24.w),
-                  decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.06),
-                      borderRadius: BorderRadius.circular(16.w)),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: [
-                          '上传图片'
-                              .text
-                              .size(28.sp)
-                              .color(Colors.black.withOpacity(0.45))
-                              .make(),
-                          Spacer(),
-                          '建议上传图片不超过6张'
-                              .text
-                              .size(24.sp)
-                              .color(Colors.black.withOpacity(0.25))
-                              .make(),
-                        ],
-                      ),
-                      24.w.heightBox,
-                      BeePickImageWidget(
-                          maxCount: 6,
-                          onChanged: (value) {
-                            _photos = value;
-                          }),
-                    ],
-                  ),
-                )
+              ],
+            ),
+          ),
+          32.w.heightBox,
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.06),
+                borderRadius: BorderRadius.circular(16.w)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    '上传图片'
+                        .text
+                        .size(28.sp)
+                        .color(Colors.black.withOpacity(0.45))
+                        .make(),
+                    Spacer(),
+                    '建议上传图片不超过6张'
+                        .text
+                        .size(24.sp)
+                        .color(Colors.black.withOpacity(0.25))
+                        .make(),
+                  ],
+                ),
+                24.w.heightBox,
+                BeePickImageWidget(
+                    maxCount: 6,
+                    onChanged: (value) {
+                      _photos = value;
+                    }),
               ],
             ),
           )

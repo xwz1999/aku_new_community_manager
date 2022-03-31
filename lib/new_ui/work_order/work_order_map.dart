@@ -22,4 +22,6 @@ class WorkOrderMap {
     8: '用户已对您的表现进行评价',
     9: '任务已拒绝，中止工单进行'
   };
+
+  static Map<int, String> costType = {1: '人工费', 2: '耗材费'};
 }

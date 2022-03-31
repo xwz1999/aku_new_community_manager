@@ -13,8 +13,11 @@ WorkOrderSubmitModel _$WorkOrderSubmitModelFromJson(
       content: json['content'] as String,
       imgUrls:
           (json['imgUrls'] as List<dynamic>).map((e) => e as String).toList(),
-      workOrderFinishCostDTOList: WorkOrderFinishCostDTOList.fromJson(
-          json['workOrderFinishCostDTOList'] as Map<String, dynamic>),
+      workOrderFinishCostDTOList: (json['workOrderFinishCostDTOList']
+              as List<dynamic>)
+          .map((e) =>
+              WorkOrderFinishCostDTOList.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$WorkOrderSubmitModelToJson(

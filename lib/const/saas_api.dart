@@ -31,6 +31,12 @@ class SAASAPI {
 }
 
 class _Login {
+  ///管家app设置昵称
+  String get setNickName => '/butlerApp/user/setNickName';
+
+  ///检查昵称重复
+  String get checkNickNameRepeat => '/butlerApp/user/checkNickNameRepeat';
+
   ///查询所有的城市信息
   String get allCity => '/butlerApp/city/allCity';
 
@@ -105,12 +111,6 @@ class _User {
 
   ///app用户发送手机号验证码(忘记密码)
   String get sendForgotTelCode => '/app/user/sendTelCodeForgetPwd';
-
-  ///检测昵称是否重复
-  String get checkNickRepeat => '/app/user/checkNickNameRepeat';
-
-  ///设置昵称
-  String get setNickName => '/app/user/settingNickName';
 
   ///实名认证
   String get certification => '/app/user/verified';
