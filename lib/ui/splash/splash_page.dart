@@ -1,9 +1,9 @@
 // Flutter imports:
 // Project imports:
+import 'package:aku_new_community_manager/gen/assets.gen.dart';
 import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
-import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/agreements/agreement_page.dart';
 import 'package:aku_new_community_manager/ui/agreements/privacy_page.dart';
@@ -156,7 +156,7 @@ class _SplashPageState extends State<SplashPage> {
         //future: _initialization(),
         builder: (context, snapshot) {
           return Center(
-            child: Image.asset(R.ASSETS_PLACEHOLDER_WEBP),
+            child: Assets.newIcon.splash.image(),
           );
         },
       ),

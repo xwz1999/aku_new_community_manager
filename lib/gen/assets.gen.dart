@@ -207,6 +207,7 @@ class $AssetsNewIconGen {
 
   AssetGenImage get avatarPlaceholder =>
       const AssetGenImage('assets/newIcon/avatar_placeholder.png');
+  AssetGenImage get splash => const AssetGenImage('assets/newIcon/splash.png');
 }
 
 class $AssetsOutdoorGen {
