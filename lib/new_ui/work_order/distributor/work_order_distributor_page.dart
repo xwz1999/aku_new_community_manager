@@ -65,6 +65,7 @@ class _WorkOrderDistributorPageState extends State<WorkOrderDistributorPage>
       appBarBottom: PreferredSize(
         preferredSize: Size.fromHeight(88.w),
         child: AkuTabBar(
+          isScrollable: true,
           tabs: _tabs,
           controller: _tabController,
         ),

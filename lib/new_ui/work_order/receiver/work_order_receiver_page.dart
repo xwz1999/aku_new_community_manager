@@ -54,6 +54,7 @@ class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
       appBarBottom: PreferredSize(
         preferredSize: Size.fromHeight(88.w),
         child: AkuTabBar(
+          isScrollable: true,
           tabs: _tabs,
           controller: _tabController,
         ),
