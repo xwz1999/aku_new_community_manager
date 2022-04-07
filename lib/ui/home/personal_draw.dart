@@ -1,12 +1,13 @@
 // Flutter imports:
 // Project imports:
 import 'package:aku_new_community_manager/const/resource.dart';
+import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
-import 'package:aku_new_community_manager/ui/login/login_page.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/settings/settings_page.dart';
 import 'package:aku_new_community_manager/ui/settings/user_info_page.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_avatar.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_avatar_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -66,7 +67,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
               onTap: () {
                 userProvider.isLogin
                     ? Get.to(() => UserInfoPage())
-                    : Get.to(() => LoginPage());
+                    : Get.to(() => OtherLoginPage());
               },
               child: Container(
                 margin: EdgeInsets.only(bottom: 80.w, top: 40.w),
@@ -75,7 +76,11 @@ class _PersonalDrawState extends State<PersonalDraw> {
                   children: [
                     SizedBox(width: 32.w),
                     //头像按钮
-                    AkuAvatar(),
+                    BeeAvatarWidget(
+                      width: 96.w,
+                      height: 96.w,
+                      imgs: UserTool.userProvider.userInfoModel!.imgList,
+                    ),
                     SizedBox(width: 24.w),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -121,7 +126,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
               onPressed: () {
                 userProvider.isLogin
                     ? Get.to(() => UserInfoPage())
-                    : Get.to(() => LoginPage());
+                    : Get.to(() => OtherLoginPage());
               },
             ),
             // _myListTile(R.ASSETS_USER_IC_KEFU_PNG, '联系客服'),

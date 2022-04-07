@@ -1,3 +1,4 @@
+import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,6 +37,10 @@ class _PsdTextFieldState extends State<PsdTextField> {
         controller: widget.controller,
         obscureText: !visible,
         obscuringCharacter: '*',
+        style: TextStyle(
+          color: Colors.black.withOpacity(0.85),
+        ),
+        cursorColor: kPrimaryColor,
         decoration: InputDecoration(
             isDense: false,
             contentPadding:

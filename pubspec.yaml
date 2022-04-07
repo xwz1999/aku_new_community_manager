@@ -103,6 +103,7 @@ flutter:
     - assets/inspection/
     - assets/outdoor/
     - assets/icons/
+    - assets/newIcon/
 
     - assets/static_temp/
     - assets/static_fix/

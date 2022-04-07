@@ -1,5 +1,6 @@
 import 'package:aku_new_community_manager/new_ui/auth/sign_func.dart';
 import 'package:aku_new_community_manager/new_ui/auth/widget/login_button_widget.dart';
+import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -23,7 +24,6 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
     _nickController.dispose();
     super.dispose();
   }
-
 
   @override
   void initState() {
@@ -79,6 +79,10 @@ class _SetNickNamePageState extends State<SetNickNamePage> {
               },
               maxLength: 20,
               controller: _nickController,
+              style: TextStyle(
+                color: Colors.black.withOpacity(0.85),
+              ),
+              cursorColor: kPrimaryColor,
               decoration: InputDecoration(
                   isDense: false,
                   contentPadding:

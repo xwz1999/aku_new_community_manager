@@ -1,8 +1,9 @@
 // Flutter imports:
 // Project imports:
-import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 // Package imports:
@@ -65,12 +66,12 @@ class _NickNameChangePageState extends State<NickNameChangePage> {
               150.w.heightBox,
               MaterialButton(
                 onPressed: () async {
-                  BaseModel baseModel = await NetUtil().post(
-                      API.user.updateNickName,
+                  BaseModel baseModel = await NetUtil().get(
+                      SAASAPI.login.setNickName,
                       params: {'nickName': _textEditingController!.text});
 
                   if (baseModel.success == true) {
-                    userProvider.setNickName(_textEditingController!.text);
+                    UserTool.userProvider.updateUserInfo();
                     Get.back();
                   } else {
                     BotToast.showText(text: baseModel.msg);

@@ -202,6 +202,13 @@ class $AssetsMessageGen {
       const AssetGenImage('assets/message/ic_tongzhi.png');
 }
 
+class $AssetsNewIconGen {
+  const $AssetsNewIconGen();
+
+  AssetGenImage get avatarPlaceholder =>
+      const AssetGenImage('assets/newIcon/avatar_placeholder.png');
+}
+
 class $AssetsOutdoorGen {
   const $AssetsOutdoorGen();
 
@@ -276,6 +283,7 @@ class Assets {
   static const $AssetsInspectionGen inspection = $AssetsInspectionGen();
   static const $AssetsManageGen manage = $AssetsManageGen();
   static const $AssetsMessageGen message = $AssetsMessageGen();
+  static const $AssetsNewIconGen newIcon = $AssetsNewIconGen();
   static const $AssetsOutdoorGen outdoor = $AssetsOutdoorGen();
   static const AssetGenImage placeholder =
       AssetGenImage('assets/placeholder.webp');

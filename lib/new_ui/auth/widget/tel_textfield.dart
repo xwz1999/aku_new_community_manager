@@ -1,3 +1,4 @@
+import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,10 @@ class _TelTextFieldState extends State<TelTextField> {
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         keyboardType: TextInputType.number,
         controller: widget.controller,
+        style: TextStyle(
+          color: Colors.black.withOpacity(0.85),
+        ),
+        cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           isDense: true,
           border: InputBorder.none,

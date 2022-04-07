@@ -20,7 +20,18 @@ class WorkOrderReceiverPage extends StatefulWidget {
 
 class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
     with SingleTickerProviderStateMixin {
-  List<String> _tabs = ['全部', '待分配', '工单池', '已接单', '处理中', '待确认', '待支付', '已完成', '已评价', '已取消'];
+  List<String> _tabs = [
+    '全部',
+    '待分配',
+    '工单池',
+    '已接单',
+    '处理中',
+    '待确认',
+    '待支付',
+    '已完成',
+    '已评价',
+    '已取消'
+  ];
   late TabController _tabController;
   EasyRefreshController _refreshController = EasyRefreshController();
   int _page = 1;
@@ -45,12 +56,12 @@ class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
     return AkuScaffold(
       title: '工单管理',
       actions: [
-        IconButton(
-            onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.plus_circle,
-              size: 40.w,
-            ))
+        // IconButton(
+        //     onPressed: () {},
+        //     icon: Icon(
+        //       CupertinoIcons.plus_circle,
+        //       size: 40.w,
+        //     ))
       ],
       appBarBottom: PreferredSize(
         preferredSize: Size.fromHeight(88.w),
@@ -62,8 +73,11 @@ class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
       ),
       body: TabBarView(
           controller: _tabController,
-          children:
-              _tabs.mapIndexed((e, index) => WorkOrderReceiverWidget( index:index,)).toList()),
+          children: _tabs
+              .mapIndexed((e, index) => WorkOrderReceiverWidget(
+                    index: index,
+                  ))
+              .toList()),
     );
   }
 
@@ -98,17 +112,19 @@ class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
             _refreshController.finishLoad();
           }
         },
-        child:_models==[]?SizedBox(): ListView.separated(
-            padding: EdgeInsets.all(24.w),
-            itemBuilder: (context, index) {
-              return DistributorCard(
-                model: _models[index],
-                refresh: _refreshController.callRefresh,
-              );
-            },
-            separatorBuilder: (context, index) {
-              return 24.w.heightBox;
-            },
-            itemCount: _models.length));
+        child: _models == []
+            ? SizedBox()
+            : ListView.separated(
+                padding: EdgeInsets.all(24.w),
+                itemBuilder: (context, index) {
+                  return DistributorCard(
+                    model: _models[index],
+                    refresh: _refreshController.callRefresh,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return 24.w.heightBox;
+                },
+                itemCount: _models.length));
   }
 }

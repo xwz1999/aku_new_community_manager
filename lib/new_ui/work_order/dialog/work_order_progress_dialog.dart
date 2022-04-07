@@ -18,7 +18,7 @@ class WorkOrderProgressDialog extends StatelessWidget {
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.w), color: Colors.white),
-      child: Column(
+      child: ListView(
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 36.w),
@@ -114,13 +114,16 @@ class WorkOrderProgressDialog extends StatelessWidget {
               .color(Colors.black.withOpacity(0.85))
               .make(),
           32.w.widthBox,
-          '${model.content}'
-              .text
-              .size(28.sp)
-              .color(index == 0
-                  ? Color(0xFFFAC058)
-                  : Colors.black.withOpacity(0.65))
-              .make()
+          SizedBox(
+            width: 400.w,
+            child: '${model.content}'
+                .text
+                .size(28.sp)
+                .color(index == 0
+                    ? Color(0xFFFAC058)
+                    : Colors.black.withOpacity(0.65))
+                .make(),
+          )
         ],
       ),
     );

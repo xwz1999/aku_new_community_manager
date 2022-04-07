@@ -108,7 +108,7 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
                 await UserTool.userProvider.setLogin(response.data['data']);
                 await UserTool.dataProvider.addHistories();
               } else {
-                BotToast.showText(text: response.data['message']);
+                BotToast.showText(text: response.data['msg']);
               }
               cancel();
             },

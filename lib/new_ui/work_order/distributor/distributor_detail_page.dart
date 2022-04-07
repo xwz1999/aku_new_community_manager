@@ -51,6 +51,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
   Widget build(BuildContext context) {
     return AkuScaffold(
       title: '',
+      appBarColor: Colors.transparent,
       extendBody: true,
       body: Stack(
         children: [
@@ -107,7 +108,6 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                               ],
                             ),
                           ),
-
                           Spacer(),
                         ],
                       ),
@@ -115,47 +115,50 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                   ),
                 ),
           SafeArea(
-              child: EasyRefresh(
-            firstRefresh: true,
-            header: MaterialHeader(),
-            onRefresh: () async {
-              var base = await NetUtil().get(SAASAPI.workOrder.findById,
-                  params: {'workOrderId': widget.id});
-              if (base.success) {
-                _model = WorkOrderDetailModel.fromJson(base.data);
-                setState(() {});
-              }
-            },
-            child: _model == null
-                ? Container()
-                : ListView(
-                    padding:
-                        EdgeInsets.only(top: 140.w, left: 32.w, right: 32.w),
-                    children: [
-                      Offstage(
-                          offstage: _model!.status < 5,
-                          child: Column(
-                            children: [
-                              _historyReport(),
-                              24.w.heightBox,
-                            ],
-                          )),
-                      Offstage(
-                          offstage: _model!.servicePersonnelImgList == null ||
-                              _model!.servicePersonnelImgList!.isEmpty,
-                          child: Column(
-                            children: [
-                              _servicePeople(),
-                              24.w.heightBox,
-                            ],
-                          )),
-                      _head(),
-                      24.w.heightBox,
-                      _content(),
-                      24.w.heightBox,
-                      _taskInfo(),
-                    ],
-                  ),
+              child: Padding(
+            padding: EdgeInsets.only(top: 140.w),
+            child: EasyRefresh(
+              firstRefresh: true,
+              header: MaterialHeader(),
+              controller: _refreshController,
+              onRefresh: () async {
+                var base = await NetUtil().get(SAASAPI.workOrder.findById,
+                    params: {'workOrderId': widget.id});
+                if (base.success) {
+                  _model = WorkOrderDetailModel.fromJson(base.data);
+                  setState(() {});
+                }
+              },
+              child: _model == null
+                  ? Container()
+                  : ListView(
+                      padding: EdgeInsets.only(left: 32.w, right: 32.w),
+                      children: [
+                        Offstage(
+                            offstage: _model!.status < 5,
+                            child: Column(
+                              children: [
+                                _historyReport(),
+                                24.w.heightBox,
+                              ],
+                            )),
+                        Offstage(
+                            offstage: _model!.servicePersonnelImgList == null ||
+                                _model!.servicePersonnelImgList!.isEmpty,
+                            child: Column(
+                              children: [
+                                _servicePeople(),
+                                24.w.heightBox,
+                              ],
+                            )),
+                        _head(),
+                        24.w.heightBox,
+                        _content(),
+                        24.w.heightBox,
+                        _taskInfo(),
+                      ],
+                    ),
+            ),
           )),
         ],
       ),
@@ -247,10 +250,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                   var re = await WorkOrderFuc.reminderPay(widget.id);
                   if (re) {
                     _refreshController.callRefresh();
-                    setState(() {
-
-                    });
-
+                    setState(() {});
                   }
                   Get.back();
                 },
@@ -413,8 +413,15 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
           ),
           24.w.heightBox,
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 24.w),
+            padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 24.w),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.w),
+              border: Border.all(
+                color: Colors.black.withOpacity(0.25),
+              ),
+            ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 '申请人'
                     .text
@@ -434,6 +441,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                     16.w.widthBox,
                     Expanded(
                         child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         _model!.applicantName.text
                             .size(28.sp)
@@ -445,14 +453,14 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                             .size(28.sp)
                             .color(Colors.black.withOpacity(0.45))
                             .make(),
-                        GestureDetector(
-                            onTap: () {
-                              launch('tel:${_model!.applicantTel}');
-                            },
-                            child: Assets.icons.phoneCircle
-                                .image(width: 40.w, height: 40.w)),
                       ],
                     )),
+                    GestureDetector(
+                        onTap: () {
+                          launch('tel:${_model!.applicantTel}');
+                        },
+                        child: Assets.icons.phoneCircle
+                            .image(width: 65.w, height: 65.w))
                   ],
                 )
               ],

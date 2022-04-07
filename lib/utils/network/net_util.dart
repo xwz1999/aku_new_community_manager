@@ -6,7 +6,6 @@ import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_list_model.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
-import 'package:aku_new_community_manager/ui/login/login_page.dart';
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:dio/dio.dart';
@@ -171,12 +170,12 @@ class NetUtil {
 
   _parseRequestError(BaseModel model, {bool showMessage = false}) {
     final userProvider = Provider.of<UserProvider>(Get.context!, listen: false);
+    if (userProvider.isLogin) {
+      BotToast.showText(text: model.msg);
+    }
     if (!model.success && (model.code == 10010 || model.msg == '登录失效，请重新登录')) {
       userProvider.logout();
       Get.offAll(() => OtherLoginPage());
-      if (userProvider.isLogin) {
-        BotToast.showText(text: model.msg);
-      }
     }
   }
 }

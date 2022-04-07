@@ -1,19 +1,15 @@
 // Flutter imports:
 // Project imports:
+import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/screen_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
-import 'package:aku_new_community_manager/ui/agreements/about_page.dart';
 import 'package:aku_new_community_manager/ui/agreements/agreement_page.dart';
 import 'package:aku_new_community_manager/ui/agreements/privacy_page.dart';
-import 'package:aku_new_community_manager/ui/home/home_page.dart';
-import 'package:aku_new_community_manager/ui/settings/setting_feedback_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_tile.dart';
-// Package imports:
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -50,27 +46,27 @@ class _SettingsPageState extends State<SettingsPage> {
           //     },
           //   ),
           // ),
-          Divider(height: 1.w),
-          AkuTile(
-            title: Text('关于我们'),
-            arrow: true,
-            onTap: () {
-              Get.to(() => AboutPage());
-            },
-          ),
-          Divider(height: 1.w),
-          AkuTile(
-            title: Text('意见反馈'),
-            arrow: true,
-            onTap: () => Get.to(() => SettingFeedBackPage()),
-          ),
-          Divider(height: 1.w),
-          AkuTile(
-            title: Text('清理缓存'),
-            arrow: true,
-            onTap: () => BotToast.showText(text: '缓存清理完成'),
-          ),
-          Divider(height: 1.w),
+          // Divider(height: 1.w),
+          // AkuTile(
+          //   title: Text('关于我们'),
+          //   arrow: true,
+          //   onTap: () {
+          //     Get.to(() => AboutPage());
+          //   },
+          // ),
+          // Divider(height: 1.w),
+          // AkuTile(
+          //   title: Text('意见反馈'),
+          //   arrow: true,
+          //   onTap: () => Get.to(() => SettingFeedBackPage()),
+          // ),
+          // Divider(height: 1.w),
+          // AkuTile(
+          //   title: Text('清理缓存'),
+          //   arrow: true,
+          //   onTap: () => BotToast.showText(text: '缓存清理完成'),
+          // ),
+          // Divider(height: 1.w),
           AkuTile(
             title: Text('隐私政策'),
             arrow: true,
@@ -91,7 +87,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     color: AppStyle.primaryColor,
                     onPressed: () {
                       userProvider.logout();
-                      Get.offAll(() => HomePage());
+                      Get.offAll(() => OtherLoginPage());
                     },
                     child: Text(
                       '退出登录',

@@ -2,7 +2,8 @@ import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
 import 'package:aku_new_community_manager/saas_models/home/home_message_list_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
-import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_image_network.dart';
+import 'package:aku_new_community_manager/ui/home/personal_draw.dart';
+import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_avatar_widget.dart';
 import 'package:aku_new_community_manager/utils/bee_date_util.dart';
 import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
@@ -37,6 +38,7 @@ class _NewHomePageState extends State<NewHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
+      drawer: PersonalDraw(),
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight((72 + 96).w),
@@ -323,15 +325,18 @@ class _NewHomePageState extends State<NewHomePage> {
       decoration: BoxDecoration(
           color: Colors.white.withOpacity(0.3),
           borderRadius: BorderRadius.circular(54.w)),
-      child: ClipOval(
-        child: Container(
-          width: 96.w,
-          height: 96.w,
-          child: BeeImageNetwork(
-            imgs: UserTool.userProvider.userInfoModel?.imgList ?? [],
+      child: Builder(builder: (context) {
+        return GestureDetector(
+          onTap: () {
+            Scaffold.of(context).openDrawer();
+          },
+          child: BeeAvatarWidget(
+            width: 96.w,
+            height: 96.w,
+            imgs: UserTool.userProvider.userInfoModel!.imgList,
           ),
-        ),
-      ),
+        );
+      }),
     );
     return Container(
       height: 268.w,

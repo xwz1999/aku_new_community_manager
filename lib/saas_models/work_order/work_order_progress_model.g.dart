@@ -12,8 +12,5 @@ WorkOrderProgressModel _$WorkOrderProgressModelFromJson(
       id: json['id'] as int,
       status: json['status'] as int,
       content: json['content'] as String,
-      userType: json['userType'] as int,
-      createId: json['createId'] as int,
-      createName: json['createName'] as String,
       createDate: json['createDate'] as String,
     );

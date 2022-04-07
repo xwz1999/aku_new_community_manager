@@ -142,7 +142,8 @@ class WorkOrderFuc {
       var models = (base.data as List)
           .map((e) => WorkOrderProgressModel.fromJson(e))
           .toList();
-      await Get.bottomSheet(WorkOrderProgressDialog(models: models));
+      await Get.bottomSheet(WorkOrderProgressDialog(models: models),
+          isScrollControlled: true);
     } else {
       BotToast.showText(text: base.msg);
     }
