@@ -26,9 +26,18 @@ class SAASAPI {
   static _Message message = _Message();
   static _WorkOrder workOrder = _WorkOrder();
   static _HouseHoldAudit householdAudit = _HouseHoldAudit();
+  static _Home home = _Home();
 
   ///二级分类
   static _OtherApi other = _OtherApi();
+}
+
+class _Home {
+  ///待办事项
+  String get todoList => '/butlerApp/user/frontPage/pendingList';
+
+  ///状态数量栏
+  String get statusNum => '/butlerApp/user/frontPage/statusNumBar';
 }
 
 class _HouseHoldAudit {
