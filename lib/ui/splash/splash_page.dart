@@ -11,6 +11,7 @@ import 'package:aku_new_community_manager/utils/dev_util.dart';
 import 'package:aku_new_community_manager/utils/hive_store.dart';
 import 'package:aku_new_community_manager/utils/websocket/fier_dialog.dart';
 import 'package:aku_new_community_manager/utils/websocket/web_socket_util.dart';
+import 'package:amap_flutter_location/amap_flutter_location.dart';
 import 'package:equatable/equatable.dart';
 // Package imports:
 import 'package:flutter/cupertino.dart';
@@ -119,8 +120,8 @@ class _SplashPageState extends State<SplashPage> {
 
       ///第三方加载
       EquatableConfig.stringify = true;
-      // AMapFlutterLocation.updatePrivacyShow(true, true);
-      // AMapFlutterLocation.updatePrivacyAgree(true);
+      AMapFlutterLocation.updatePrivacyShow(true, true);
+      AMapFlutterLocation.updatePrivacyAgree(true);
       WebSocketUtil().initWebSocket(
         consolePrint: false,
         onReceiveMes: (message) async {

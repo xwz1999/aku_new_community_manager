@@ -47,9 +47,9 @@ dependencies:
   expandable: ^5.0.1
 
   url_launcher: ^6.0.3
-  amap_flutter_map: ^2.0.1
-  amap_flutter_location: ^2.0.0
-  amap_flutter_base: ^2.0.0
+  amap_flutter_map: ^3.0.0
+  amap_flutter_location: ^3.0.0
+  amap_flutter_base: ^3.0.0
   permission_handler: ^6.1.1
 
   velocity_x: ^2.6.0

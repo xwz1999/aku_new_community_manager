@@ -48,7 +48,7 @@ class _InspectionManagePageState extends State<InspectionManagePage>
     return AkuScaffold(
       title: '巡检管理',
       appBarBottom: PreferredSize(
-        child: AkuTabBar(controller: _tabController!, tabs: _tabs),
+        child: AkuTabBar(controller: _tabController!, tabs: _tabs,isScrollable: true,),
         preferredSize: Size.fromHeight(96.w),
       ),
       body: TabBarView(
