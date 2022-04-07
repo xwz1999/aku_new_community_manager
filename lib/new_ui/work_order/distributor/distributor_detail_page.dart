@@ -72,6 +72,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                40.w.heightBox,
                                 GestureDetector(
                                   onTap: () async {
                                     await WorkOrderFuc.getProgress(
@@ -106,6 +107,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                               ],
                             ),
                           ),
+
                           Spacer(),
                         ],
                       ),
@@ -128,7 +130,7 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                 ? Container()
                 : ListView(
                     padding:
-                        EdgeInsets.only(top: 120.w, left: 32.w, right: 32.w),
+                        EdgeInsets.only(top: 140.w, left: 32.w, right: 32.w),
                     children: [
                       Offstage(
                           offstage: _model!.status < 5,
@@ -245,6 +247,10 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
                   var re = await WorkOrderFuc.reminderPay(widget.id);
                   if (re) {
                     _refreshController.callRefresh();
+                    setState(() {
+
+                    });
+
                   }
                   Get.back();
                 },

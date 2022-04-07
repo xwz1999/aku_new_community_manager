@@ -109,6 +109,7 @@ class _SplashPageState extends State<SplashPage> {
         var result = await _showLoginVerify();
         if (result == null || !result) {
           SystemNavigator.pop();
+
           HiveStore.appBox!.put('agreement', false);
         } else {
           HiveStore.appBox!.put('agreement', true);

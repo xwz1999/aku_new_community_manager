@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:aku_new_community_manager/const/saas_api.dart';
+import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_list_model.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
@@ -172,7 +173,7 @@ class NetUtil {
     final userProvider = Provider.of<UserProvider>(Get.context!, listen: false);
     if (!model.success && (model.code == 10010 || model.msg == '登录失效，请重新登录')) {
       userProvider.logout();
-      Get.offAll(() => LoginPage());
+      Get.offAll(() => OtherLoginPage());
       if (userProvider.isLogin) {
         BotToast.showText(text: model.msg);
       }

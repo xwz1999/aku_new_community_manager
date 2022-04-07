@@ -23,10 +23,12 @@ class HouseholdAuditPage extends StatefulWidget {
 
 class _HouseholdAuditPageState extends State<HouseholdAuditPage>
     with SingleTickerProviderStateMixin {
-  List<String> _tabs = ['全部', '待审核', '已同意', '已驳回'];
+  List<String> _tabs = ['全部', '待审核', '已驳回', '已同意'];
   List<EasyRefreshController> _refreshControllers = [];
   late TabController _tabController;
   List<HouseholdAuditListModel> _models = [];
+  int _page = 1;
+  int _size = 10;
 
   @override
   void initState() {
@@ -67,14 +69,25 @@ class _HouseholdAuditPageState extends State<HouseholdAuditPage>
         header: MaterialHeader(),
         footer: MaterialFooter(),
         onRefresh: () async {
-          var base = await NetUtil().getList(SAASAPI.householdAudit.list);
+          _models = [];
+          _page = 1;
+          var base = await NetUtil().getList(SAASAPI.householdAudit.list,params: {
+            'pageNum': _page,
+            'size': _size,
+            'status':index==0?null:index
+          });
           _models = base.rows
               .map((e) => HouseholdAuditListModel.fromJson(e))
               .toList();
           setState(() {});
         },
         onLoad: () async {
-          var base = await NetUtil().getList(SAASAPI.householdAudit.list);
+          _page++;
+          var base = await NetUtil().getList(SAASAPI.householdAudit.list,params: {
+            'pageNum': _page,
+            'size': _size,
+            'status':index==0?null:index
+          });
           if (_models.length < base.total) {
             _models.addAll(base.rows
                 .map((e) => HouseholdAuditListModel.fromJson(e))
