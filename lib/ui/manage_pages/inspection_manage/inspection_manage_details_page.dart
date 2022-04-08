@@ -506,6 +506,8 @@ class _InspectionManageDetailsPageState
           height: 343.w,
           child: AMapWidget(
             apiKey: AMapApiKey(androidKey: '0c11d9ba47089d971dc4d889b66593ab'),
+            privacyStatement: AMapPrivacyStatement(
+                hasContains: true, hasShow: true, hasAgree: true),
             rotateGesturesEnabled: false,
             scaleEnabled: false,
             scrollGesturesEnabled: false,

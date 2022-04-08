@@ -47,31 +47,36 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AkuScaffold(
-      title: '',
-      backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          Row(
-            children: [
-              24.w.widthBox,
-              ..._tabs
-                  .mapIndexed((e, index) => _tab(e, index, onTap: (value) {
-                        _currentIndex = value;
-                        _controller.jumpToPage(_currentIndex);
-                        setState(() {});
-                      }))
-                  .toList(),
-            ],
-          ),
-          Flexible(
-            child: PageView(
-              controller: _controller,
-              children: [_verificationView(), _accountView()],
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: AkuScaffold(
+        title: '',
+        backgroundColor: Colors.white,
+        body: Column(
+          children: [
+            Row(
+              children: [
+                24.w.widthBox,
+                ..._tabs
+                    .mapIndexed((e, index) => _tab(e, index, onTap: (value) {
+                          _currentIndex = value;
+                          _controller.jumpToPage(_currentIndex);
+                          setState(() {});
+                        }))
+                    .toList(),
+              ],
             ),
-          ),
-          BottomTip(),
-        ],
+            Flexible(
+              child: PageView(
+                controller: _controller,
+                children: [_verificationView(), _accountView()],
+              ),
+            ),
+            BottomTip(),
+          ],
+        ),
       ),
     );
   }

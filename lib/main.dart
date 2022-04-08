@@ -96,7 +96,15 @@ class MyApp extends StatelessWidget {
                   title: '小蜜蜂管家',
                   theme: AppTheme.theme,
                   home: SplashPage(),
-                  builder: BotToastInit(),
+                  builder: (context, widget) {
+                    ScreenUtil.setContext(context);
+                    return MediaQuery(
+                      //Setting font does not change with system font size
+                      data:
+                          MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                      child: BotToastInit().call(context, widget),
+                    );
+                  },
                   navigatorObservers: [
                     BotToastNavigatorObserver(),
                   ],
