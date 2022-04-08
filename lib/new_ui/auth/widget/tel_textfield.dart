@@ -6,7 +6,10 @@ import 'package:velocity_x/velocity_x.dart';
 
 class TelTextField extends StatefulWidget {
   final TextEditingController controller;
-  const TelTextField({Key? key, required this.controller}) : super(key: key);
+  final Function(String) onChange;
+  const TelTextField(
+      {Key? key, required this.controller, required this.onChange})
+      : super(key: key);
 
   @override
   _TelTextFieldState createState() => _TelTextFieldState();
@@ -26,15 +29,18 @@ class _TelTextFieldState extends State<TelTextField> {
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         keyboardType: TextInputType.number,
         controller: widget.controller,
-        style: TextStyle(
-          color: Colors.black.withOpacity(0.85),
-        ),
+        onChanged: widget.onChange,
+        style:
+            TextStyle(color: Colors.black.withOpacity(0.85), fontSize: 32.sp),
         cursorColor: kPrimaryColor,
         decoration: InputDecoration(
           isDense: true,
           border: InputBorder.none,
-          prefixIcon: Center(child: '+86｜'.text.black.make()),
-          prefixIconConstraints: BoxConstraints.loose(Size(60, 60)),
+          prefixIcon: Padding(
+            padding: EdgeInsets.only(left: 24.w),
+            child: '+86｜'.text.black.make(),
+          ),
+          prefixIconConstraints: BoxConstraints(minHeight: 0, minWidth: 0),
           contentPadding: EdgeInsets.symmetric(vertical: 30.w),
           hintText: '点击输入手机号',
           hintStyle:

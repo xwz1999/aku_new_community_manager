@@ -52,11 +52,12 @@ class AppProvider extends ChangeNotifier {
   late AMapFlutterLocation _flutterLocation;
 
   startLocation() {
+    print('start location');
     _flutterLocation = AMapFlutterLocation();
     _flutterLocation.onLocationChanged().listen((event) {
       _location = event;
       LoggerData.addData(_location.toString());
-      print(_location.toString());
+      print('location' + _location.toString());
       if (_location != null) {
         stopLocation();
       }

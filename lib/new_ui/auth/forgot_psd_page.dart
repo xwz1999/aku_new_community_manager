@@ -62,7 +62,12 @@ class _ForgotPsdPageState extends State<ForgotPsdPage> {
             ],
           ),
           144.w.heightBox,
-          TelTextField(controller: _telController),
+          TelTextField(
+            controller: _telController,
+            onChange: (text) {
+              setState(() {});
+            },
+          ),
           100.w.heightBox,
           LoginButtonWidget(
               onTap: _telController.text.isNotEmpty

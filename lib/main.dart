@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: '小蜜蜂管家',
-                  theme: AppTheme.themeData,
+                  theme: AppTheme.theme,
                   home: SplashPage(),
                   builder: BotToastInit(),
                   navigatorObservers: [

@@ -37,6 +37,7 @@ import 'package:velocity_x/src/flutter/widgets.dart';
 
 class InspectionManageDetailsPage extends StatefulWidget {
   final int executeId;
+
   InspectionManageDetailsPage({
     Key? key,
     required this.executeId,
@@ -52,6 +53,7 @@ class _InspectionManageDetailsPageState
   TextStyle _textstyle =
       TextStyle(color: AppStyle.minorTextColor, fontSize: 28.sp);
   Map<int, String> _inspectionStatus = {1: '待巡检', 2: '已巡检', 3: '巡检中', 4: '未巡检'};
+
   Color _inspectionColor(int? status) {
     switch (status) {
       case 1:
@@ -79,6 +81,7 @@ class _InspectionManageDetailsPageState
   bool _exit = false;
   List<LatLng> _points = [];
   List<Polyline> _polylines = [];
+
   @override
   void initState() {
     super.initState();
@@ -499,61 +502,62 @@ class _InspectionManageDetailsPageState
         '巡检地图'.text.color(Color(0xFF333333)).size(32.sp).bold.make(),
         16.w.heightBox,
         SizedBox(
-          width: double.infinity,
+          width: 750.w,
           height: 343.w,
-          // child: AMapWidget(
-          //   rotateGesturesEnabled: false,
-          //   scaleEnabled: false,
-          //   scrollGesturesEnabled: false,
-          //   tiltGesturesEnabled: false,
-          //   zoomGesturesEnabled: false,
-          //   onMapCreated: (controller) {
-          //     _aMapController = controller;
-          //     LatLng _target = LatLng(
-          //         appProvider.location!['latitude'] as double,
-          //         appProvider.location!['longitude'] as double);
-          //     _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
-          //         CameraPosition(target: _target, zoom: 19)));
-          //   },
-          //   myLocationStyleOptions: MyLocationStyleOptions(true,
-          //       circleFillColor: Colors.yellow.withOpacity(0.1),
-          //       circleStrokeColor: Colors.transparent,
-          //       icon: BitmapDescriptor.defaultMarkerWithHue(210)),
-          //   onLocationChanged: (argument) async {
-          //     _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
-          //         CameraPosition(target: argument.latLng, zoom: 19)));
-          //     if (_canUploadLocation) {
-          //       BaseModel baseModel = await (_uploadLocation(widget.executeId,
-          //           argument.latLng.longitude, argument.latLng.latitude));
-          //       if (!baseModel.success) {
-          //         BotToast.showText(text: baseModel.msg);
-          //       } else {
-          //         _canUploadLocation = false;
-          //         //绘制折线
-          //         _points.add(argument.latLng);
-          //         if (_points.length % 5 == 0) {
-          //           if (_polylines.isEmpty) {
-          //             _polylines.add(Polyline(
-          //               points: _points,
-          //               color: Colors.red,
-          //               width: 10.w,
-          //             ));
-          //             setState(() {});
-          //           } else {
-          //             _polylines[0] = (Polyline(
-          //               points: _points,
-          //               color: Colors.red,
-          //               width: 10.w,
-          //             ));
-          //             setState(() {});
-          //           }
-          //         }
-          //       }
-          //     }
-          //   },
-          //   //绘制路线
-          //   polylines: Set<Polyline>.of(_polylines),
-          // ),
+          child: AMapWidget(
+            apiKey: AMapApiKey(androidKey: '0c11d9ba47089d971dc4d889b66593ab'),
+            rotateGesturesEnabled: false,
+            scaleEnabled: false,
+            scrollGesturesEnabled: false,
+            tiltGesturesEnabled: false,
+            zoomGesturesEnabled: false,
+            onMapCreated: (controller) {
+              _aMapController = controller;
+              LatLng _target = LatLng(
+                  appProvider.location!['latitude'] as double,
+                  appProvider.location!['longitude'] as double);
+              _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(target: _target, zoom: 19)));
+            },
+            myLocationStyleOptions: MyLocationStyleOptions(true,
+                circleFillColor: Colors.yellow.withOpacity(0.1),
+                circleStrokeColor: Colors.transparent,
+                icon: BitmapDescriptor.defaultMarkerWithHue(210)),
+            onLocationChanged: (argument) async {
+              _aMapController!.moveCamera(CameraUpdate.newCameraPosition(
+                  CameraPosition(target: argument.latLng, zoom: 19)));
+              if (_canUploadLocation) {
+                BaseModel baseModel = await (_uploadLocation(widget.executeId,
+                    argument.latLng.longitude, argument.latLng.latitude));
+                if (!baseModel.success) {
+                  BotToast.showText(text: baseModel.msg);
+                } else {
+                  _canUploadLocation = false;
+                  //绘制折线
+                  _points.add(argument.latLng);
+                  if (_points.length % 5 == 0) {
+                    if (_polylines.isEmpty) {
+                      _polylines.add(Polyline(
+                        points: _points,
+                        color: Colors.red,
+                        width: 10.w,
+                      ));
+                      setState(() {});
+                    } else {
+                      _polylines[0] = (Polyline(
+                        points: _points,
+                        color: Colors.red,
+                        width: 10.w,
+                      ));
+                      setState(() {});
+                    }
+                  }
+                }
+              }
+            },
+            // 绘制路线
+            polylines: Set<Polyline>.of(_polylines),
+          ),
         ),
       ],
     )

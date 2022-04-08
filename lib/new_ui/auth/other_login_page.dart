@@ -86,6 +86,9 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
         40.w.heightBox,
         TelTextField(
           controller: _tel,
+          onChange: (String) {
+            setState(() {});
+          },
         ),
         40.w.heightBox,
         PsdTextField(
@@ -149,7 +152,12 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
           align: MainAxisAlignment.start,
         ),
         40.w.heightBox,
-        TelTextField(controller: _tel),
+        TelTextField(
+          controller: _tel,
+          onChange: (String) {
+            setState(() {});
+          },
+        ),
         100.w.heightBox,
         LoginButtonWidget(
             onTap: UserTool.appProvider.second < 60

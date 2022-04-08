@@ -3,28 +3,28 @@ import 'dart:ui';
 
 // Flutter imports:
 import 'package:aku_new_community_manager/const/api.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_cupertino_button.dart';
-import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
-import 'package:aku_new_community_manager/utils/network/net_util.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:amap_flutter_base/amap_flutter_base.dart';
-import 'package:amap_flutter_map/amap_flutter_map.dart';
-import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 // Project imports:
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_cupertino_button.dart';
+import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
+// Package imports:
+import 'package:amap_flutter_base/amap_flutter_base.dart';
+import 'package:amap_flutter_map/amap_flutter_map.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PermissonUtil {
   static Future getLocationPermisson() async {
+    var per = await Permission.locationWhenInUse.request().isGranted;
+    print(per);
     return await Permission.locationWhenInUse.request().isGranted;
   }
 }
@@ -38,6 +38,7 @@ class WarningPage extends StatefulWidget {
 
 class _WarningPageState extends State<WarningPage> {
   AMapController? _mapController;
+
   @override
   void initState() {
     super.initState();
@@ -73,6 +74,8 @@ class _WarningPageState extends State<WarningPage> {
       body: Stack(
         children: [
           AMapWidget(
+            privacyStatement: AMapPrivacyStatement(
+                hasContains: true, hasShow: true, hasAgree: true),
             onMapCreated: (controller) {
               LatLng _target = LatLng(
                 appProvider.location!['latitude'] as double,
@@ -194,7 +197,7 @@ class _WarningPageState extends State<WarningPage> {
                 child: AkuCupertinoButton(
                   minWidth: 0,
                   onPressed: () async {
-                     await NetUtil()
+                    await NetUtil()
                         .post(API.manage.insertAlarmRecord, showMessage: true);
 
                     launch('tel:110');
@@ -284,17 +287,17 @@ class _WarningPageState extends State<WarningPage> {
     );
   }
 
-  // _getLocation() {
-  //   _location = null;
-  //   setState(() {});
-  //   PermissionTool.getLocationPermission().then((state) {
-  //     if (state) {
-  //       AmapLocation.instance.fetchLocation().then((location) {
-  //         _amapController.setCenterCoordinate(location.latLng);
-  //         _location = location;
-  //         setState(() {});
-  //       });
-  //     }
-  //   });
-  // }
+// _getLocation() {
+//   _location = null;
+//   setState(() {});
+//   PermissionTool.getLocationPermission().then((state) {
+//     if (state) {
+//       AmapLocation.instance.fetchLocation().then((location) {
+//         _amapController.setCenterCoordinate(location.latLng);
+//         _location = location;
+//         setState(() {});
+//       });
+//     }
+//   });
+// }
 }

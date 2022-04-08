@@ -54,7 +54,7 @@ class _InspectionManageCardState extends State<InspectionManageCard> {
     return AkuButton(
       onPressed: () {
         Get.to(
-          InspectionManageDetailsPage(
+          () => InspectionManageDetailsPage(
             executeId: widget.cardModel.id!,
           ),
         );
