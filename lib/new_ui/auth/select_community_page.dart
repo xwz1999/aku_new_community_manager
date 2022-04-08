@@ -1,4 +1,5 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
+import 'package:aku_new_community_manager/extensions/num_ext.dart';
 import 'package:aku_new_community_manager/saas_models/login/community_model.dart';
 import 'package:aku_new_community_manager/saas_models/login/history_login_model.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
@@ -11,6 +12,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../style/app_style.dart';
 
 class SelectCommunity extends StatefulWidget {
   const SelectCommunity({
@@ -159,6 +162,25 @@ class _SelectCommunityState extends State<SelectCommunity> {
       },
       child: AkuScaffold(
         title: '选择登录小区',
+        actions: [
+          Hero(
+            tag: 'event_add',
+            child: MaterialButton(
+              elevation: 0,
+              minWidth: 116.w,
+              padding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4.w),
+              ),
+              color: kPrimaryColor,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: '提交'.text.size(34.sp).make(),
+            ).centered(),
+          ),
+          32.wb
+        ],
         body: ListView(
           children: [
             selectCity,
@@ -172,22 +194,32 @@ class _SelectCommunityState extends State<SelectCommunity> {
   }
 
   Widget _historyTile(HistoryLoginModel model) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 24.w),
-      child: Row(
-        children: [
-          Icon(
-            CupertinoIcons.search,
-            size: 30.w,
-            color: Colors.black.withOpacity(0.2),
+    return GestureDetector(
+      onTap: () {
+        UserTool.appProvider.setPickedCity(
+            city: model.cityModel, community: model.communityModel);
+        setState(() {});
+      },
+      child: Material(
+        color: Colors.transparent,
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 24.w),
+          child: Row(
+            children: [
+              Icon(
+                CupertinoIcons.search,
+                size: 30.w,
+                color: Colors.black.withOpacity(0.2),
+              ),
+              24.w.widthBox,
+              '${model.communityModel!.name}(${model.cityModel.province.name}·${model.cityModel.city.name}·${model.cityModel.district.name})'
+                  .text
+                  .size(28.sp)
+                  .color(Colors.black.withOpacity(0.2))
+                  .make(),
+            ],
           ),
-          24.w.widthBox,
-          '${model.communityModel!.name}(${model.cityModel.province.name}·${model.cityModel.city.name}·${model.cityModel.district.name})'
-              .text
-              .size(28.sp)
-              .color(Colors.black.withOpacity(0.2))
-              .make(),
-        ],
+        ),
       ),
     );
   }

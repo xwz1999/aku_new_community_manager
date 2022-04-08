@@ -7,7 +7,7 @@ import 'package:aku_new_community_manager/saas_models/work_order/work_order_prog
 import 'package:aku_new_community_manager/saas_models/work_order/work_order_submit_model.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:bot_toast/bot_toast.dart';
-import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
 import 'dialog/work_order_bill_dialog.dart';
