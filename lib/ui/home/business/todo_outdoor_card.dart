@@ -2,6 +2,7 @@
 // Project imports:
 import 'package:aku_new_community_manager/models/todo_bussiness/todo_outdoor_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _ToDoOutDoorCardState extends State<ToDoOutDoorCard> {
                         ),
                         Spacer(),
                         Text(
-                          '${S.of(context)!.tempPlotName}',
+                          '${UserTool.userProvider.userInfoModel!.communityName}',
                           style: AppStyle().primaryStyle,
                         ),
                       ],

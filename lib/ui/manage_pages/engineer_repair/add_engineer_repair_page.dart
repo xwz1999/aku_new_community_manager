@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_pick_image_widget.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_check_button.dart';
@@ -48,7 +49,7 @@ class _AddEngineerRepairPageState extends State<AddEngineerRepairPage> {
                 height: 60.w,
               ),
               36.w.widthBox,
-              '${S.of(context)!.tempPlotName}'.text.size(28.sp).make(),
+              '${UserTool.userProvider.userInfoModel!.communityName}'.text.size(28.sp).make(),
             ],
           ),
           24.w.heightBox,

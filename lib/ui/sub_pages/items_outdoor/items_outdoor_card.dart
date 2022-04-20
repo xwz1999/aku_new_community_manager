@@ -3,6 +3,7 @@
 import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:aku_new_community_manager/models/manager/goods_out/goods_out_item_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/items_outdoor_details_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
@@ -99,7 +100,7 @@ class _ItemsOutdoorCardState extends State<ItemsOutdoorCard> {
                 ),
                 Spacer(),
                 Text(
-                  '${S.of(context)!.tempPlotName}',
+                  '${UserTool.userProvider.userInfoModel!.communityName}',
                   style: AppStyle().primaryStyle,
                 ),
               ],

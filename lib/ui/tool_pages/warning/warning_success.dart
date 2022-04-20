@@ -3,6 +3,7 @@ import 'dart:async';
 
 // Project imports:
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_detail_page.dart';
 // Flutter imports:
@@ -51,7 +52,7 @@ class _WarningSuccessState extends State<WarningSuccess> {
               width: 420.w,
             ),
             Text(
-              '${S.of(context)!.tempPlotName}',
+              '${UserTool.userProvider.userInfoModel!.communityName}',
               style: TextStyle(
                 fontSize: 44.w,
                 color: AppStyle.primaryTextColor,

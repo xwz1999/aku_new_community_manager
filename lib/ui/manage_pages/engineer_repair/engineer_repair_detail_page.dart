@@ -362,7 +362,7 @@ class _EngineerRepairDetailPageState extends State<EngineerRepairDetailPage> {
           _model!.createTel,
         ),
         _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '报修区域',
-            '${S.of(context)!.tempPlotName} ${_model!.repairArea}'),
+            '${UserTool.userProvider.userInfoModel!.communityName} ${_model!.repairArea}'),
         AkuBox.h(8),
         Text(
           _model!.reportDetail,

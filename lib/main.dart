@@ -27,9 +27,9 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   JPush jpush = new JPush();
-  const isProduct =
-      const bool.fromEnvironment('ISPRODUCT', defaultValue: false);
-  DevUtil.setDev(!isProduct);
+  const isDev =
+      const String.fromEnvironment('ENV', defaultValue: 'dev')=='dev';
+  DevUtil.setDev(isDev);
   WebSocketUtil().initWebSocket(
       // heartDuration: Duration(seconds: 5),
       onError: (e) {

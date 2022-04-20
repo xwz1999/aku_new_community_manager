@@ -107,7 +107,7 @@ class _PersonalDrawState extends State<PersonalDraw> {
                           children: [
                             Icon(Icons.location_on_outlined, size: 33.w),
                             Text(
-                              '${S.of(context)!.tempPlotName}',
+                              '${UserTool.userProvider.userInfoModel!.communityName}',
                               style: TextStyle(
                                   color: AppStyle.primaryTextColor,
                                   fontSize: 24.sp),

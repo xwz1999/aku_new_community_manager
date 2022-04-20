@@ -1,6 +1,7 @@
 import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_new_acceptance_record_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -44,7 +45,7 @@ class _EngineerRepairAcceptanceRecordListPageState
         children: [
           Row(
             children: [
-              '${S.of(context)!.tempPlotName}'
+              '${UserTool.userProvider.userInfoModel!.communityName}'
                   .text
                   .size(32.sp)
                   .color(kTextPrimaryColor)
