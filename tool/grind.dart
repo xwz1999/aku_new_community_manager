@@ -33,7 +33,7 @@ buildApk() async {
     'apk',
     '--target-platform=android-arm64',
     '--dart-define',
-    'ISPRODUCT=true'
+    'ENV=release'
   ]);
   String date = DateUtil.formatDate(DateTime.now(), format: 'yy_MM_dd_HH_mm');
   String version = await getVersion();
@@ -53,7 +53,7 @@ buildApkDev() async {
     'apk',
     '--target-platform=android-arm64',
     '--dart-define',
-    'ISPRODUCT=false'
+    'ENV=dev'
   ]);
   String date = DateUtil.formatDate(DateTime.now(), format: 'yy_MM_dd_HH_mm');
   String version = await getVersion();

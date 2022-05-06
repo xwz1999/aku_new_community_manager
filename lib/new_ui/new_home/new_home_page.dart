@@ -43,14 +43,12 @@ class _NewHomePageState extends State<NewHomePage> {
   }
 
   Future _getToDoList() async {
-    //type类型写死为公告
     var base = await NetUtil().get(SAASAPI.home.todoList);
     _todoModels =
         (base.data as List).map((e) => HomeTodoListModel.fromJson(e)).toList();
   }
 
   Future _getStatusNum() async {
-    //type类型写死为公告
     var base = await NetUtil().get(SAASAPI.home.statusNum);
     _homeNums = HomeStatusNumberModel.fromJson(base.data);
   }
@@ -348,7 +346,7 @@ class _NewHomePageState extends State<NewHomePage> {
               children: _todoModels
                   .mapIndexed((currentValue, index) =>
                       _todoListCard(currentValue, index))
-                  .toList(),
+                  .toList().sepWidget(separate: 20.w.widthBox),
             ),
           ),
         ],

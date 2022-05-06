@@ -4,6 +4,7 @@ import 'package:aku_new_community_manager/const/api.dart';
 import 'package:aku_new_community_manager/const/resource.dart';
 import 'package:aku_new_community_manager/json_models/manager/engineer_repair/engineer_repair_detail_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_func.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/engineer_repair/engineer_repair_map.dart';
@@ -152,7 +153,7 @@ class _EngineerRepairCompletePageState
           widget.detailModel.createTel,
         ),
         _buildTile(R.ASSETS_MESSAGE_IC_AREA_PNG, '报修区域',
-            '${S.of(context)!.tempPlotName}'),
+            '${UserTool.userProvider.userInfoModel!.communityName}'),
         AkuBox.h(8),
         Text(
           widget.detailModel.reportDetail,

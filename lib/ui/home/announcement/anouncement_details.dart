@@ -2,6 +2,7 @@
 // Project imports:
 import 'package:aku_new_community_manager/models/announce/announcement_detail_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -47,7 +48,7 @@ class AnouncementDetails extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('${S.of(context)!.tempPlotName}物业管理处',
+                      Text('${UserTool.userProvider.userInfoModel!.communityName}物业管理处',
                           style: AppStyle().primaryStyle),
                       SizedBox(
                         height: 4.w,

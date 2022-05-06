@@ -71,11 +71,12 @@ class _HouseholdAuditPageState extends State<HouseholdAuditPage>
         onRefresh: () async {
           _models = [];
           _page = 1;
-          var base = await NetUtil().getList(SAASAPI.householdAudit.list,params: {
-            'pageNum': _page,
-            'size': _size,
-            'status':index==0?null:index
-          });
+          var base = await NetUtil().getList(SAASAPI.householdAudit.list,
+              params: {
+                'pageNum': _page,
+                'size': _size,
+                'status': index == 0 ? null : index
+              });
           _models = base.rows
               .map((e) => HouseholdAuditListModel.fromJson(e))
               .toList();
@@ -83,11 +84,12 @@ class _HouseholdAuditPageState extends State<HouseholdAuditPage>
         },
         onLoad: () async {
           _page++;
-          var base = await NetUtil().getList(SAASAPI.householdAudit.list,params: {
-            'pageNum': _page,
-            'size': _size,
-            'status':index==0?null:index
-          });
+          var base = await NetUtil().getList(SAASAPI.householdAudit.list,
+              params: {
+                'pageNum': _page,
+                'size': _size,
+                'status': index == 0 ? null : index
+              });
           if (_models.length < base.total) {
             _models.addAll(base.rows
                 .map((e) => HouseholdAuditListModel.fromJson(e))
@@ -134,7 +136,7 @@ class _HouseholdAuditPageState extends State<HouseholdAuditPage>
                     ])),
                 child: Row(
                   children: [
-                    '2栋1单元502室'
+                    '${model.houseName}'
                         .text
                         .size(32.sp)
                         .color(Colors.black.withOpacity(0.85))
@@ -173,13 +175,12 @@ class _HouseholdAuditPageState extends State<HouseholdAuditPage>
                       children: [
                         SizedBox(
                             width: 160.w,
-                            child: '申请身份'
+                            child: '联系方式'
                                 .text
                                 .size(28.sp)
                                 .color(Colors.black.withOpacity(0.45))
                                 .make()),
-                        _identity[model.identity]!
-                            .text
+                        model.tel.text
                             .size(28.sp)
                             .color(Colors.black.withOpacity(0.85))
                             .make(),

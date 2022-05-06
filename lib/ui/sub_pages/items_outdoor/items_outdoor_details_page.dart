@@ -7,6 +7,7 @@ import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/tools/extensions/list_extension_tool.dart';
+import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/tools/widget_tool.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/outdoor_notpass_page.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/items_outdoor/outdoor_pass_page.dart';
@@ -107,7 +108,7 @@ class _ItemsOutdoorDetailsPageState extends State<ItemsOutdoorDetailsPage> {
                         AkuBox.h(16),
                         ...<Widget>[
                           _buildTile(R.ASSETS_OUTDOOR_IC_HOME_PNG, '小区名称',
-                              '${S.of(context)!.tempPlotName}'),
+                              '${UserTool.userProvider.userInfoModel!.communityName}'),
                           _buildTile(
                             R.ASSETS_OUTDOOR_IC_ADDRESS_PNG,
                             '详细地址',

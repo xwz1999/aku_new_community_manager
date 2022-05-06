@@ -16,8 +16,11 @@ class HouseholdAuditListModel extends Equatable {
   final String idCard;
   final int status;
   final String estateTypeName;
+
   factory HouseholdAuditListModel.fromJson(Map<String, dynamic> json) =>
       _$HouseholdAuditListModelFromJson(json);
+
+  String get houseName => buildingName + '栋' + unitName + '单元' + estateName;
 
   const HouseholdAuditListModel({
     required this.estateReviewId,
@@ -32,6 +35,7 @@ class HouseholdAuditListModel extends Equatable {
     required this.status,
     required this.estateTypeName,
   });
+
   @override
   List<Object?> get props => [
         estateReviewId,

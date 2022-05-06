@@ -29,6 +29,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+@Deprecated('废弃，酌情删除')
 class AppApplication {
   String name;
   String assetPath;
