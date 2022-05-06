@@ -108,6 +108,7 @@ class _NewHomePageState extends State<NewHomePage> {
           ),
           SafeArea(
             child: EasyRefresh(
+              firstRefresh: true,
               onRefresh: () async {
                 await _getAnnounces();
                 await _getStatusNum();
