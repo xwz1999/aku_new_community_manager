@@ -133,9 +133,9 @@ class _SplashPageState extends State<SplashPage> {
       );
 
       ///定位权限申请
-      await Permission.locationWhenInUse.request();
-      final appProvider = Provider.of<AppProvider>(context, listen: false);
-      appProvider.startLocation();
+      // await Permission.locationWhenInUse.request();
+      // final appProvider = Provider.of<AppProvider>(context, listen: false);
+      // appProvider.startLocation();
 
       ///城市信息更新
       await UserTool.dataProvider.init();
