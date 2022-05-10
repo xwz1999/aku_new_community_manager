@@ -25,7 +25,7 @@ class BeePickerBox extends StatelessWidget {
       // height: 48.w,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(title),
+        child: Text(title,style: TextStyle(color: Colors.black.withOpacity(0.85)),),
       ),
     );
   }
