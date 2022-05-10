@@ -19,6 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../ui/home/messages/message.dart';
 import 'application_util.dart';
 import 'home_swiper.dart';
 
@@ -90,10 +91,21 @@ class _NewHomePageState extends State<NewHomePage> {
                 ),
               ),
               24.w.widthBox,
-              Icon(
-                CupertinoIcons.bell,
-                size: 40.w,
+              SizedBox(
+                height: 40.w,
+                width: 40.w,
+                child: IconButton(
+                  padding:EdgeInsets.zero,
+                  onPressed: () {
+                    Get.to(() => Message());
+                  },
+                  icon: Icon(
+                    CupertinoIcons.bell,
+                    size: 40.w,
+                  ),
+                ),
               ),
+
               24.w.widthBox,
             ],
           ),
@@ -346,7 +358,8 @@ class _NewHomePageState extends State<NewHomePage> {
               children: _todoModels
                   .mapIndexed((currentValue, index) =>
                       _todoListCard(currentValue, index))
-                  .toList().sepWidget(separate: 20.w.widthBox),
+                  .toList()
+                  .sepWidget(separate: 20.w.widthBox),
             ),
           ),
         ],

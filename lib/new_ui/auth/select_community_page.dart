@@ -95,15 +95,18 @@ class _SelectCommunityState extends State<SelectCommunity> {
       onTap: () async {
         var cancel = BotToast.showLoading();
         List<CommunityModel> _communities = [];
-        var base = await NetUtil().get(SAASAPI.login.allCommunity, params: {
-          'cityId': UserTool
-              .appProvider.pickedCityAndCommunity!.cityModel.district.id,
-        });
-        if (base.success) {
-          _communities = (base.data as List)
-              .map((e) => CommunityModel.fromJson(e))
-              .toList();
-        }
+        try {
+          var base = await NetUtil().get(SAASAPI.login.allCommunity, params: {
+            'cityId': UserTool
+                .appProvider.pickedCityAndCommunity!.cityModel.district.id,
+          });
+          if (base.success) {
+            _communities = (base.data as List)
+                .map((e) => CommunityModel.fromJson(e))
+                .toList();
+          }
+        } catch (e) {}
+
         cancel();
         var _community = await BeeCommunityPicker.pick(context, _communities);
         print(_community?.name);

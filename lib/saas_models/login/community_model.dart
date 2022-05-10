@@ -15,8 +15,11 @@ class CommunityModel extends Equatable {
   final String address;
   @HiveField(3)
   final String addressDetails;
-  factory CommunityModel.fromJson(Map<String, dynamic> json) =>
-      _$CommunityModelFromJson(json);
+  factory CommunityModel.fromJson(Map<String, dynamic> json) {
+    return _$CommunityModelFromJson(json);
+  }
+
+
 
   const CommunityModel({
     required this.id,
