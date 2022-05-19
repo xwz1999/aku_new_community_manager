@@ -1,4 +1,5 @@
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:common_utils/common_utils.dart';
 import 'package:dio/dio.dart';
@@ -36,7 +37,7 @@ class MessageProvider extends ChangeNotifier {
   }
 
   updateMessage() async {
-    Response response = await NetUtil().dio!.get(API.message.messageCenter);
+    Response response = await NetUtil().dio!.get(SAASAPI.message.messageList);
     if (response.data == null) return;
     _sysMessage = response.data['sysCount'] ?? 0;
     _commentMessage = response.data['commentCount'] ?? 0;

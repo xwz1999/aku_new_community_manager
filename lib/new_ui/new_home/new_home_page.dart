@@ -91,21 +91,21 @@ class _NewHomePageState extends State<NewHomePage> {
                 ),
               ),
               24.w.widthBox,
-              SizedBox(
-                height: 40.w,
-                width: 40.w,
-                child: IconButton(
-                  padding:EdgeInsets.zero,
-                  onPressed: () {
-                    Get.to(() => Message());
-                  },
-                  icon: Icon(
-                    CupertinoIcons.bell,
-                    size: 40.w,
-                  ),
-                ),
-              ),
-
+              //TODO：暂时隐藏 消息中心待做
+              // SizedBox(
+              //   height: 40.w,
+              //   width: 40.w,
+              //   child: IconButton(
+              //     padding:EdgeInsets.zero,
+              //     onPressed: () {
+              //       Get.to(() => Message());
+              //     },
+              //     icon: Icon(
+              //       CupertinoIcons.bell,
+              //       size: 40.w,
+              //     ),
+              //   ),
+              // )
               24.w.widthBox,
             ],
           ),
@@ -435,7 +435,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       borderRadius: BorderRadius.circular(4.w),
                     ),
                     child:
-                        '${UserTool.userProvider.userInfoModel!.positionName}'
+                        '${UserTool.userProvider.userInfoModel!.positionName??''}'
                             .text
                             .size(24.sp)
                             .color(Colors.black.withOpacity(0.85))

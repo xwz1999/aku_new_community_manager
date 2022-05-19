@@ -3,8 +3,11 @@
 ///  FlutterGen
 /// *****************************************************
 
+// ignore_for_file: directives_ordering,unnecessary_import
+
 class FontFamily {
   FontFamily._();
 
+  /// Font family: Bebas
   static const String bebas = 'Bebas';
 }

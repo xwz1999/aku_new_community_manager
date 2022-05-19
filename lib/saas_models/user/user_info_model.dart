@@ -21,11 +21,11 @@ class UserInfoModel extends Equatable {
   final String? lastLoginDate;
   final String? nickName;
   final String? address;
-  final String entryDate;
+  final String? entryDate;
   final String? remake;
   final List<ImgModel>? imgList;
   final String communityName;
-  final String positionName;
+  final String? positionName;
   final int? workOrderJurisdiction;
 
   String get sexValue {

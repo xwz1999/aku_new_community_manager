@@ -22,12 +22,12 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
       lastLoginDate: json['lastLoginDate'] as String?,
       nickName: json['nickName'] as String?,
       address: json['address'] as String?,
-      entryDate: json['entryDate'] as String,
+      entryDate: json['entryDate'] as String?,
       remake: json['remake'] as String?,
       imgList: (json['imgList'] as List<dynamic>?)
           ?.map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       communityName: json['communityName'] as String,
-      positionName: json['positionName'] as String,
+      positionName: json['positionName'] as String?,
       workOrderJurisdiction: json['workOrderJurisdiction'] as int?,
     );
