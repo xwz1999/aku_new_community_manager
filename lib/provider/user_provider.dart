@@ -36,7 +36,6 @@ class UserProvider extends ChangeNotifier {
 
   ///注销登录
   logout() async {
-    await NetUtil().post(SAASAPI.login.logOut, showMessage: true);
     WebSocketUtil().closeWebSocket();
     NetUtil().logout();
     _isLogin = false;
