@@ -42,9 +42,11 @@ class BeePickerBox extends StatelessWidget {
             SizedBox(
               height: 88.w,
               child: NavigationToolbar(
-                leading: _buildButton(
-                  title: '取消',
+                leading: TextButton(
                   onPressed: () => Navigator.pop(context),
+                  child: Text(
+                    '取消',
+                  ),
                 ),
                 middle: Text(
                   title ?? '',
@@ -53,9 +55,11 @@ class BeePickerBox extends StatelessWidget {
                     fontSize: 28.sp,
                   ),
                 ),
-                trailing: _buildButton(
-                  title: confirmString,
+                trailing: TextButton(
                   onPressed: onPressed,
+                  child: Text(
+                    '${confirmString}',
+                  ),
                 ),
               ),
             ),
