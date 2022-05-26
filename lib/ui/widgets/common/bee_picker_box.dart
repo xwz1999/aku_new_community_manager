@@ -25,7 +25,10 @@ class BeePickerBox extends StatelessWidget {
       // height: 48.w,
       child: TextButton(
         onPressed: onPressed,
-        child: Text(title,style: TextStyle(color: Colors.black.withOpacity(0.85)),),
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.black.withOpacity(0.85)),
+        ),
       ),
     );
   }
@@ -41,26 +44,42 @@ class BeePickerBox extends StatelessWidget {
           children: [
             SizedBox(
               height: 88.w,
-              child: NavigationToolbar(
-                leading: TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(
-                    '取消',
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      '取消',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 28.sp,
+                      ),
+                    ),
                   ),
-                ),
-                middle: Text(
-                  title ?? '',
-                  style: TextStyle(
-                    color: kTextPrimaryColor,
-                    fontSize: 28.sp,
+                  Spacer(),
+                  Container(
+                    padding: EdgeInsets.all(25.w),
+                    child: Text(
+                      title ?? '',
+                      style: TextStyle(
+                        color: kTextPrimaryColor,
+                        fontSize: 28.sp,
+                      ),
+                    ),
                   ),
-                ),
-                trailing: TextButton(
-                  onPressed: onPressed,
-                  child: Text(
-                    '${confirmString}',
+                  Spacer(),
+                  TextButton(
+                    onPressed: onPressed,
+                    child: Text(
+                      '${confirmString}',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 28.sp,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             BeeDivider.horizontal(),

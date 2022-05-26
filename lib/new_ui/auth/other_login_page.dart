@@ -3,7 +3,7 @@ import 'package:aku_new_community_manager/new_ui/auth/widget/login_button_widget
 import 'package:aku_new_community_manager/new_ui/auth/widget/psd_textfield.dart';
 import 'package:aku_new_community_manager/new_ui/auth/widget/tel_textfield.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
-import 'package:aku_new_community_manager/provider/clock_timer_provider.dart';
+import 'package:aku_new_community_manager/provider/timer_provider.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:bot_toast/bot_toast.dart';

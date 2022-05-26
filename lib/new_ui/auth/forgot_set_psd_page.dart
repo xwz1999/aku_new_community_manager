@@ -3,7 +3,6 @@ import 'package:aku_new_community_manager/new_ui/auth/psd_verify.dart';
 import 'package:aku_new_community_manager/new_ui/auth/sign_func.dart';
 import 'package:aku_new_community_manager/new_ui/auth/widget/login_button_widget.dart';
 import 'package:aku_new_community_manager/new_ui/auth/widget/psd_textfield.dart';
-import 'package:aku_new_community_manager/provider/clock_timer_provider.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -13,6 +12,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../provider/timer_provider.dart';
 
 class ForgotSetPsdPage extends StatefulWidget {
   final String tel;
@@ -132,7 +133,7 @@ class _ForgotSetPsdPageState extends State<ForgotSetPsdPage> {
                         Get.to(() => ForgotSetPsdPage(
                               tel: widget.tel,
                             ));
-                        UserTool.appProvider.startTimer();
+                        clockTimer.startTimer();
                       } else {
                         BotToast.showText(text: base.msg);
                       }
