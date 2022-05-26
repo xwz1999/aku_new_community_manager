@@ -11,9 +11,9 @@ class Config {
 
   ///测试包文件夹
   static String get apkDevDir =>
-      '/users/zhangmeng/team/bee/aku_new_community_manager/dev';
+      '../team/bee/aku_new_community_manager/dev';
 
   ///正式包文件夹aku_new_community_manager
   static String get apkDir =>
-      '/users/zhangmeng/team/bee/aku_new_community_manager/release';
+      '../team/bee/aku_new_community_manager/release';
 }

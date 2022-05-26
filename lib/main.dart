@@ -2,6 +2,7 @@
 
 // Project imports:
 import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/clock_timer_provider.dart';
 import 'package:aku_new_community_manager/provider/data_provider.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
 import 'package:aku_new_community_manager/provider/timer_provider.dart';
@@ -31,13 +32,6 @@ void main() async {
   const isDev =
       const String.fromEnvironment('ENV', defaultValue: 'dev')=='dev';
   DevUtil.setDev(isDev);
-  WebSocketUtil().initWebSocket(
-      // heartDuration: Duration(seconds: 5),
-      onError: (e) {
-    LoggerData.addData(e);
-  }, onReceiveMes: (message) async {
-    await FireDialog.fireAlert(message);
-  });
   jpush.addEventHandler(
     // 接收通知回调方法。
     onReceiveNotification: (Map<String, dynamic>? message) async {
@@ -92,14 +86,14 @@ class MyApp extends StatelessWidget {
           },
           child: ScreenUtilInit(
               designSize: Size(750, 1334),
-              builder: () {
+              builder: (context,child) {
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: '小蜜蜂管家',
                   theme: AppTheme.theme,
                   home: SplashPage(),
                   builder: (context, widget) {
-                    ScreenUtil.setContext(context);
+                    // ScreenUtil.setContext(context);
                     return MediaQuery(
                       //Setting font does not change with system font size
                       data:

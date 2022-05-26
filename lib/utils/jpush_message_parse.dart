@@ -25,7 +25,7 @@ class JpushMessageParse {
       type = _innerMap['type'] ?? '0';
       switch (type) {
         case '1':
-          await FireDialog.fireAlert(subTitle!);
+          await FireDialog.fireAlarm(subTitle!);
           break;
         default:
       }

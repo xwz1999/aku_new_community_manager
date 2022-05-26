@@ -1,4 +1,5 @@
 import 'package:aku_new_community_manager/new_ui/auth/sign_func.dart';
+import 'package:aku_new_community_manager/provider/clock_timer_provider.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -27,15 +28,14 @@ class _CodeMessagePageState extends State<CodeMessagePage> {
 
   @override
   void initState() {
-    Future.delayed(Duration(milliseconds: 0), () async {
-      await SmsAutoFill().listenForCode();
-    });
     super.initState();
+    SmsAutoFill().listenForCode();
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    SmsAutoFill().unregisterListener();
     super.dispose();
   }
 

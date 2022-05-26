@@ -18,8 +18,6 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
-
-import '../../ui/home/messages/message.dart';
 import 'application_util.dart';
 import 'home_swiper.dart';
 
