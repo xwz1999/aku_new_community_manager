@@ -27,7 +27,6 @@ class UserProvider extends ChangeNotifier {
     await HiveStore.appBox!.put('login', true);
     if (isLogin) {
       await updateUserInfo();
-      WebSocketUtil().setUser(_userInfoModel!.id.toString());
       WebSocketUtil().startWebSocket();
       await SignFunc.checkNameAndAccount();
     }
