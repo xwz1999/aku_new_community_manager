@@ -125,7 +125,7 @@ class _SplashPageState extends State<SplashPage> {
       WebSocketUtil().initWebSocket(
         consolePrint: false,
         onReceiveMes: (message) async {
-          await FireDialog.fireAlert(message);
+          await FireDialog.fireAlarm(message);
         },
         onError: (e) {
           LoggerData.addData(e);

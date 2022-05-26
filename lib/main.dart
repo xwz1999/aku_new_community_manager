@@ -31,13 +31,6 @@ void main() async {
   const isDev =
       const String.fromEnvironment('ENV', defaultValue: 'dev')=='dev';
   DevUtil.setDev(isDev);
-  WebSocketUtil().initWebSocket(
-      // heartDuration: Duration(seconds: 5),
-      onError: (e) {
-    LoggerData.addData(e);
-  }, onReceiveMes: (message) async {
-    await FireDialog.fireAlert(message);
-  });
   jpush.addEventHandler(
     // 接收通知回调方法。
     onReceiveNotification: (Map<String, dynamic>? message) async {
