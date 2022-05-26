@@ -618,13 +618,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.11"
-  material_color_utilities:
-    dependency: transitive
-    description:
-      name: material_color_utilities
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.3"
   meta:
     dependency: transitive
     description:
@@ -736,7 +729,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.14"
+    version: "2.0.12"
   path_provider_ios:
     dependency: transitive
     description:
@@ -876,7 +869,7 @@ packages:
       name: shelf
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.0"
+    version: "1.2.0"
   shelf_web_socket:
     dependency: transitive
     description:
@@ -965,7 +958,7 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.8"
+    version: "0.4.3"
   time:
     dependency: transitive
     description:
@@ -1042,7 +1035,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.11"
+    version: "2.0.6"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -1063,7 +1056,7 @@ packages:
       name: velocity_x
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.5.0"
+    version: "3.4.0"
   vxstate:
     dependency: transitive
     description:
@@ -1121,5 +1114,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.16.0 <3.0.0"
-  flutter: ">=2.10.0"
+  dart: ">=2.15.0 <3.0.0"
+  flutter: ">=2.8.0"
