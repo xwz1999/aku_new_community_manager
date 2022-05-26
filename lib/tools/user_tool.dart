@@ -1,9 +1,9 @@
 // Package imports:
 // Project imports:
 import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/clock_timer_provider.dart';
 import 'package:aku_new_community_manager/provider/data_provider.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
-import 'package:aku_new_community_manager/provider/timer_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';

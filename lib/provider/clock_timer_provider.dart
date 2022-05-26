@@ -10,6 +10,7 @@ class ClockTimerProvider extends ChangeNotifier {
 
   void startTimer() {
     timerStart = true;
+    print(timer==null);
     if (timer != null) {
       return;
     }

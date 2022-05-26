@@ -28,7 +28,7 @@ class WebSocketUtil {
   static const String baseUri = 'wss://saas.kaidalai.cn/websocket/butlerApp';
 
   String get urlAddress =>
-      '$baseUri/${UserTool.userProvider.userInfoModel?.communityName}/${UserTool.userProvider.userInfoModel?.nickName}';
+      '$baseUri/${UserTool.userProvider.userInfoModel?.communityCode}/${UserTool.userProvider.userInfoModel?.nickName}';
 
   ///连接状态
   SOCKETSTATUS _socketStatus = SOCKETSTATUS.CLOSED;

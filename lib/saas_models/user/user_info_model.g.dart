@@ -27,6 +27,7 @@ UserInfoModel _$UserInfoModelFromJson(Map<String, dynamic> json) =>
       imgList: (json['imgList'] as List<dynamic>?)
           ?.map((e) => ImgModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      communityCode: json['communityCode'] as int,
       communityName: json['communityName'] as String,
       positionName: json['positionName'] as String?,
       workOrderJurisdiction: json['workOrderJurisdiction'] as int?,
