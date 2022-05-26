@@ -1,5 +1,4 @@
 import 'package:aku_new_community_manager/new_ui/auth/sign_func.dart';
-import 'package:aku_new_community_manager/provider/clock_timer_provider.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:bot_toast/bot_toast.dart';
