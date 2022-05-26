@@ -50,6 +50,7 @@ class DataProvider extends ChangeNotifier {
         _loginHistories.removeAt(_loginHistories.length - 1);
       }
       HiveStore.dataBox!.put('historyLogin', _loginHistories);
+
     }
   }
 }

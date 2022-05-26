@@ -1,5 +1,6 @@
 // Flutter imports:
 // Project imports:
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/new_ui/auth/other_login_page.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
@@ -10,6 +11,7 @@ import 'package:aku_new_community_manager/ui/agreements/privacy_page.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_material_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_tile.dart';
+import 'package:aku_new_community_manager/utils/network/net_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -85,7 +87,8 @@ class _SettingsPageState extends State<SettingsPage> {
                   child: AkuMaterialButton(
                     radius: 8.w,
                     color: AppStyle.primaryColor,
-                    onPressed: () {
+                    onPressed: ()async {
+                      await NetUtil().post(SAASAPI.login.logOut, showMessage: true);
                       userProvider.logout();
                       Get.offAll(() => OtherLoginPage());
                     },
