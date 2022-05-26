@@ -90,14 +90,14 @@ class MyApp extends StatelessWidget {
           },
           child: ScreenUtilInit(
               designSize: Size(750, 1334),
-              builder: () {
+              builder: (context,child) {
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: '小蜜蜂管家',
                   theme: AppTheme.theme,
                   home: SplashPage(),
                   builder: (context, widget) {
-                    ScreenUtil.setContext(context);
+                    // ScreenUtil.setContext(context);
                     return MediaQuery(
                       //Setting font does not change with system font size
                       data:
