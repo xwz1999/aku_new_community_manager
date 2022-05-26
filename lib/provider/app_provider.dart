@@ -149,7 +149,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   ///登录页验证码计时器
-  int second = 60;
+  /*int second = 60;
   bool timerStart = false;
   Timer? timer;
 
@@ -171,5 +171,6 @@ class AppProvider extends ChangeNotifier {
     timer?.cancel();
     timer = null;
     notifyListeners();
-  }
+  }*/
+  notifyListeners();
 }

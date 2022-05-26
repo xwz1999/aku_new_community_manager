@@ -4,6 +4,7 @@
 import 'package:aku_new_community_manager/provider/app_provider.dart';
 import 'package:aku_new_community_manager/provider/data_provider.dart';
 import 'package:aku_new_community_manager/provider/message_provider.dart';
+import 'package:aku_new_community_manager/provider/timer_provider.dart';
 import 'package:aku_new_community_manager/provider/user_provider.dart';
 import 'package:aku_new_community_manager/style/apptheme.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
@@ -77,6 +78,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => AppProvider()),
           ChangeNotifierProvider(create: (context) => MessageProvider()),
           ChangeNotifierProvider(create: (context) => DataProvider()),
+          ChangeNotifierProvider(create: (context) => ClockTimerProvider()),
         ],
         child: GestureDetector(
           onTap: () {

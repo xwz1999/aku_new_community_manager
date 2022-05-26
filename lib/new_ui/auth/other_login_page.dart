@@ -3,6 +3,7 @@ import 'package:aku_new_community_manager/new_ui/auth/widget/login_button_widget
 import 'package:aku_new_community_manager/new_ui/auth/widget/psd_textfield.dart';
 import 'package:aku_new_community_manager/new_ui/auth/widget/tel_textfield.dart';
 import 'package:aku_new_community_manager/provider/app_provider.dart';
+import 'package:aku_new_community_manager/provider/timer_provider.dart';
 import 'package:aku_new_community_manager/tools/user_tool.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -154,7 +155,7 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
   }
 
   Widget _verificationView() {
-    AppProvider appProvider = Provider.of<AppProvider>(context);
+    ClockTimerProvider clockTimer = Provider.of<ClockTimerProvider>(context);
     return ListView(
       padding: EdgeInsets.symmetric(horizontal: 32.w),
       children: [
@@ -171,7 +172,7 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
         ),
         100.w.heightBox,
         LoginButtonWidget(
-            onTap: UserTool.appProvider.second < 60
+            onTap: clockTimer.second < 60
                 ? () {}
                 : () async {
                     var check = checkInput();
@@ -184,13 +185,13 @@ class _OtherLoginPageState extends State<OtherLoginPage> {
                             .communityModel!.id);
                     if (base.success) {
                       Get.to(() => CodeMessagePage(tel: _tel.text));
-                      appProvider.startTimer();
+                      clockTimer.startTimer();
                     } else {
                       BotToast.showText(text: base.msg);
                     }
                   },
-            text: appProvider.timerStart
-                ? '${appProvider.second}秒后重新获取'
+            text: clockTimer.timerStart
+                ? '${clockTimer.second}秒后重新获取'
                 : '获取验证码'),
         24.w.heightBox,
         Row(

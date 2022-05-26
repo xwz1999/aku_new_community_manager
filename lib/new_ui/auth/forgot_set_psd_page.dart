@@ -10,7 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../provider/timer_provider.dart';
 
 class ForgotSetPsdPage extends StatefulWidget {
   final String tel;
@@ -52,6 +55,7 @@ class _ForgotSetPsdPageState extends State<ForgotSetPsdPage> {
 
   @override
   Widget build(BuildContext context) {
+    ClockTimerProvider clockTimer = Provider.of<ClockTimerProvider>(context);
     return AkuScaffold(
       title: '',
       backgroundColor: Colors.white,
@@ -129,7 +133,7 @@ class _ForgotSetPsdPageState extends State<ForgotSetPsdPage> {
                         Get.to(() => ForgotSetPsdPage(
                               tel: widget.tel,
                             ));
-                        UserTool.appProvider.startTimer();
+                        clockTimer.startTimer();
                       } else {
                         BotToast.showText(text: base.msg);
                       }
@@ -137,7 +141,7 @@ class _ForgotSetPsdPageState extends State<ForgotSetPsdPage> {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        '｜${UserTool.appProvider.second < 60 ? '${UserTool.appProvider.second}秒后重新获取' : '获取验证码'}'
+                        '｜${clockTimer.second < 60 ? '${clockTimer.second}秒后重新获取' : '获取验证码'}'
                             .text
                             .size(28.sp)
                             .color(Color(0xFF5096F1))
