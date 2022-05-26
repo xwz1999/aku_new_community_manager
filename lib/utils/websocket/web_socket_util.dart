@@ -95,8 +95,7 @@ class WebSocketUtil {
       onStart?.call();
       _webSocket!.stream.listen(
           (event) => webSocketReceiveMessage(event as String),
-          onError: webSocketOnError,
-          onDone: webSocketClosed);
+          onError: webSocketOnError, );
       initHeartBeat();
     } catch (e) {
       BotToast.showText(text: 'webSocket连接失败');
