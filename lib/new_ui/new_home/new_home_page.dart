@@ -391,7 +391,7 @@ class _NewHomePageState extends State<NewHomePage> {
       padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 48.w),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.w),
-          image: DecorationImage(image: Assets.home.homeHead)),
+          image: DecorationImage(image: AssetImage(Assets.home.homeHead.path))),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -433,7 +433,7 @@ class _NewHomePageState extends State<NewHomePage> {
                       borderRadius: BorderRadius.circular(4.w),
                     ),
                     child:
-                        '${UserTool.userProvider.userInfoModel!.positionName??''}'
+                        '${UserTool.userProvider.userInfoModel!.positionName ?? ''}'
                             .text
                             .size(24.sp)
                             .color(Colors.black.withOpacity(0.85))
