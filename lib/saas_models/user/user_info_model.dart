@@ -24,7 +24,7 @@ class UserInfoModel extends Equatable {
   final String? entryDate;
   final String? remake;
   final List<ImgModel>? imgList;
-  final int communityCode;
+  final String? communityCode;
   final String communityName;
   final String? positionName;
   final int? workOrderJurisdiction;
@@ -69,6 +69,7 @@ class UserInfoModel extends Equatable {
         imgList,
         communityName,
         positionName,
+        communityCode,
         workOrderJurisdiction
       ];
 
