@@ -86,7 +86,7 @@ class MyApp extends StatelessWidget {
               builder: (context,child) {
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
-                  title: '小蜜蜂管家',
+                  title: '小蜜蜂智慧生活管家',
                   theme: AppTheme.theme,
                   home: SplashPage(),
                   builder: (context, widget) {

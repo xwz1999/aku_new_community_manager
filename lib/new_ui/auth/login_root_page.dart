@@ -98,7 +98,7 @@ class BottomTip extends StatelessWidget {
               onTap: () {
                 //TODO:跳转隐私政策
               },
-              child: '《小蜜蜂隐私政策及用户协议》'
+              child: '《小蜜蜂智慧生活隐私政策及用户协议》'
                   .text
                   .size(24.sp)
                   .color(Color(0xFF5096F1))
