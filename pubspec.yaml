@@ -76,6 +76,8 @@ dependencies:
   equatable: ^2.0.0
   #打开文件
   open_file: ^3.2.1
+  #跳转索引列表
+  scroll_to_index: ^2.1.1
 
 dev_dependencies:
   flutter_test:

@@ -18,6 +18,8 @@ import 'package:flutter_easyrefresh/easy_refresh.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
+import '../../ui/home/messages/announce_view.dart';
+import '../../ui/home/messages/notice_page.dart';
 import 'application_util.dart';
 import 'home_swiper.dart';
 
@@ -89,21 +91,20 @@ class _NewHomePageState extends State<NewHomePage> {
                 ),
               ),
               24.w.widthBox,
-              //TODO：暂时隐藏 消息中心待做
-              // SizedBox(
-              //   height: 40.w,
-              //   width: 40.w,
-              //   child: IconButton(
-              //     padding:EdgeInsets.zero,
-              //     onPressed: () {
-              //       Get.to(() => Message());
-              //     },
-              //     icon: Icon(
-              //       CupertinoIcons.bell,
-              //       size: 40.w,
-              //     ),
-              //   ),
-              // )
+              SizedBox(
+                height: 40.w,
+                width: 40.w,
+                child: IconButton(
+                  padding:EdgeInsets.zero,
+                  onPressed: () {
+                    Get.to(() => NoticePage());
+                  },
+                  icon: Icon(
+                    CupertinoIcons.bell,
+                    size: 40.w,
+                  ),
+                ),
+              ),
               24.w.widthBox,
             ],
           ),
