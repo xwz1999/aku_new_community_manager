@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:common_utils/common_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:velocity_x/velocity_x.dart';
 import '../../../models/message/notice_model.dart';
 import 'announce_view.dart';
