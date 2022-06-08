@@ -56,6 +56,7 @@ class _NewHomePageState extends State<NewHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(UserTool.userProvider.userInfoModel!.workOrderJurisdiction);
     return Scaffold(
       extendBody: true,
       drawer: PersonalDraw(),

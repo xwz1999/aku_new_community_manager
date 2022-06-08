@@ -1,5 +1,6 @@
 import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/distributor/distributor_card.dart';
+import 'package:aku_new_community_manager/new_ui/work_order/receiver/receiver_card.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/receiver/work_order_receiver_widget.dart';
 import 'package:aku_new_community_manager/saas_models/work_order/work_order_list_model.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -33,20 +34,20 @@ class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
     '已取消'
   ];
   late TabController _tabController;
-  EasyRefreshController _refreshController = EasyRefreshController();
-  int _page = 1;
-  int _size = 10;
-  List<WorkOrderListModel> _models = [];
+  List<EasyRefreshController> _refreshControllers = [];
 
   @override
   void initState() {
+    _refreshControllers = List.filled(_tabs.length, EasyRefreshController());
     _tabController = TabController(length: _tabs.length, vsync: this);
     super.initState();
   }
 
   @override
   void dispose() {
-    _refreshController.dispose();
+    _refreshControllers.forEach((element) {
+      element.dispose();
+    });
     _tabController.dispose();
     super.dispose();
   }
@@ -75,56 +76,56 @@ class _WorkOrderReceiverPageState extends State<WorkOrderReceiverPage>
           controller: _tabController,
           children: _tabs
               .mapIndexed((e, index) => WorkOrderReceiverWidget(
-                    index: index,
+            refreshController: _refreshControllers[index],index: index,
                   ))
               .toList()),
     );
   }
 
-  Widget _getOrderView(int index) {
-    return EasyRefresh(
-        firstRefresh: true,
-        header: MaterialHeader(),
-        onRefresh: () async {
-          _models = [];
-          _page = 1;
-          var base = await NetUtil().getList(SAASAPI.workOrder.list, params: {
-            'pageNum': _page,
-            'size': _size,
-            'status': index == 0 ? null : index + 1,
-          });
-          _models =
-              base.rows.map((e) => WorkOrderListModel.fromJson(e)).toList();
-          setState(() {});
-        },
-        onLoad: () async {
-          _page++;
-          var base = await NetUtil().getList(SAASAPI.workOrder.list, params: {
-            'pageNum': _page,
-            'size': _size,
-            'status': index == 0 ? null : index + 1,
-          });
-          if (_models.length < base.total) {
-            _models.addAll(
-                base.rows.map((e) => WorkOrderListModel.fromJson(e)).toList());
-            setState(() {});
-          } else {
-            _refreshController.finishLoad();
-          }
-        },
-        child: _models == []
-            ? SizedBox()
-            : ListView.separated(
-                padding: EdgeInsets.all(24.w),
-                itemBuilder: (context, index) {
-                  return DistributorCard(
-                    model: _models[index],
-                    refresh: _refreshController.callRefresh,
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return 24.w.heightBox;
-                },
-                itemCount: _models.length));
-  }
+  // Widget _getOrderView(int index) {
+  //   return EasyRefresh(
+  //       firstRefresh: true,
+  //       header: MaterialHeader(),
+  //       onRefresh: () async {
+  //         _models = [];
+  //         _page = 1;
+  //         var base = await NetUtil().getList(SAASAPI.workOrder.list, params: {
+  //           'pageNum': _page,
+  //           'size': _size,
+  //           'status': index == 0 ? null : index + 1,
+  //         });
+  //         _models =
+  //             base.rows.map((e) => WorkOrderListModel.fromJson(e)).toList();
+  //         setState(() {});
+  //       },
+  //       onLoad: () async {
+  //         _page++;
+  //         var base = await NetUtil().getList(SAASAPI.workOrder.list, params: {
+  //           'pageNum': _page,
+  //           'size': _size,
+  //           'status': index == 0 ? null : index + 1,
+  //         });
+  //         if (_models.length < base.total) {
+  //           _models.addAll(
+  //               base.rows.map((e) => WorkOrderListModel.fromJson(e)).toList());
+  //           setState(() {});
+  //         } else {
+  //           _refreshController.finishLoad();
+  //         }
+  //       },
+  //       child: _models == []
+  //           ? SizedBox()
+  //           : ListView.separated(
+  //               padding: EdgeInsets.all(24.w),
+  //               itemBuilder: (context, index) {
+  //                 return ReceiverCard(
+  //                   model: _models[index],
+  //                   refresh: _refreshController.callRefresh,
+  //                 );
+  //               },
+  //               separatorBuilder: (context, index) {
+  //                 return 24.w.heightBox;
+  //               },
+  //               itemCount: _models.length));
+  // }
 }

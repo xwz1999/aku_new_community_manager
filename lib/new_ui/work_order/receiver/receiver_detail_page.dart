@@ -204,7 +204,7 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
 
   Widget _getBottomButton() {
     switch (_model?.status) {
-      case 1:
+      case 2:
         return BeeLongButton(
             onPressed: () async {
               var re = await WorkOrderFuc.receiveTask(widget.id);
@@ -213,7 +213,7 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
               }
             },
             text: '领取任务');
-      case 2:
+      case 3:
         return BeeLongButton(
             onPressed: () async {
               Get.bottomSheet(UrgeDialog(
@@ -228,14 +228,14 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
             },
             text: '开始服务');
 
-      case 3:
+      case 4:
         return BottomPluralButtonWidget(
             onLeftTap: () {},
             onRightTap: () {},
             leftTitle: '提交报告',
             rightTitle: '完成工单');
 
-      case 4:
+      case 5:
         return BeeLongButton(
             onPressed: () async {
               var re = await WorkOrderFuc.reminderConfirm(widget.id);
@@ -244,7 +244,7 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
               }
             },
             text: '提醒用户确认');
-      case 5:
+      case 6:
         return BeeLongButton(
             onPressed: () async {
               WorkOrderFuc.getBill(
@@ -259,13 +259,13 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
               );
             },
             text: '提醒用户支付');
-      case 6:
-
       case 7:
 
       case 8:
-        return SizedBox.shrink();
+
       case 9:
+        return SizedBox.shrink();
+      case 10:
         return SizedBox.shrink();
       default:
         return SizedBox.shrink();

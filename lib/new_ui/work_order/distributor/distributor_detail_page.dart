@@ -221,7 +221,6 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
               }
             },
             text: '移至待分配');
-
       case 3:
         return BeeLongButton(
             onPressed: () async {
@@ -231,7 +230,6 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
               }
             },
             text: '提醒处理');
-
       case 4:
         return BeeLongButton(
             onPressed: () async {

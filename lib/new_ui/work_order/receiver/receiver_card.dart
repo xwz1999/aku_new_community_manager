@@ -1,6 +1,7 @@
 import 'package:aku_new_community_manager/gen/assets.gen.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/distributor/distributor_card.dart';
 import 'package:aku_new_community_manager/new_ui/work_order/distributor/distributor_detail_page.dart';
+import 'package:aku_new_community_manager/new_ui/work_order/receiver/receiver_detail_page.dart';
 import 'package:aku_new_community_manager/saas_models/work_order/work_order_list_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/bee_hor_image_view.dart';
@@ -54,7 +55,7 @@ class ReceiverCard extends StatelessWidget {
             )),
         GestureDetector(
           onTap: () {
-            Get.to(() => DistributorDetailPage(
+            Get.to(() => ReceiverDetailPage(
                   id: model.id,
                 ));
           },
