@@ -22,7 +22,9 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:velocity_x/src/extensions/num_ext.dart';
 import 'package:velocity_x/src/extensions/string_ext.dart';
 
+import '../finish_report_page.dart';
 import '../history_report_page.dart';
+import '../report_progress.dart';
 import '../team_list_page.dart';
 import '../work_order_func.dart';
 import '../work_order_map.dart';
@@ -230,8 +232,12 @@ class _ReceiverDetailPageState extends State<ReceiverDetailPage> {
 
       case 4:
         return BottomPluralButtonWidget(
-            onLeftTap: () {},
-            onRightTap: () {},
+            onLeftTap: () {
+              Get.to(() => ReportProgress(id: widget.id,));
+            },
+            onRightTap: () {
+              Get.to(() => FinishReportPage(id:widget.id));
+            },
             leftTitle: '提交报告',
             rightTitle: '完成工单');
 

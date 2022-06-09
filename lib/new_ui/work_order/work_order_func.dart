@@ -122,7 +122,7 @@ class WorkOrderFuc {
     required String content,
     required List<String> imgUrls,
   }) async {
-    var base = await NetUtil().post(SAASAPI.workOrder.insert,
+    var base = await NetUtil().post(SAASAPI.workOrder.report,
         params: {
           'workOrderId': workOrderId,
           'content': content,

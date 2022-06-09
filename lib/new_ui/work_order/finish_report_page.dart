@@ -23,7 +23,8 @@ import 'package:velocity_x/src/extensions/num_ext.dart';
 import 'package:velocity_x/src/extensions/string_ext.dart';
 
 class FinishReportPage extends StatefulWidget {
-  const FinishReportPage({Key? key}) : super(key: key);
+  final int id;
+  const FinishReportPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _FinishReportPageState createState() => _FinishReportPageState();
@@ -44,6 +45,13 @@ class _FinishReportPageState extends State<FinishReportPage> {
     }
     return sum;
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _submitModel.workOrderId=widget.id;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,11 +106,11 @@ class _FinishReportPageState extends State<FinishReportPage> {
             width: double.infinity,
             padding: EdgeInsets.symmetric(horizontal: 24.w),
             decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.06),
-                borderRadius: BorderRadius.circular(16.w)),
+                color: Colors.white, borderRadius: BorderRadius.circular(16.w)),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                10.heightBox,
                 Row(
                   children: [
                     '上传图片'
@@ -225,6 +233,7 @@ class _FinishReportPageState extends State<FinishReportPage> {
   }
 
   Widget _costTile(WorkOrderFinishCostDTOList model, int index) {
+    int _type = 1;
     return Column(
       children: [
         32.w.heightBox,
@@ -250,14 +259,20 @@ class _FinishReportPageState extends State<FinishReportPage> {
                 return BeePickerBox(
                     onPressed: () {
                       Get.back();
+                      model.costType = _type;
                       setState(() {});
                     },
                     child: CupertinoPicker.builder(
                         itemExtent: 60.w,
                         childCount: WorkOrderMap.costType.keys.length,
                         onSelectedItemChanged: (index) {
-                          model.costType =
-                              WorkOrderMap.costType.keys.toList()[index];
+                          var typeStr =
+                              WorkOrderMap.costType.values.toList()[index];
+                          WorkOrderMap.costType.forEach((key, value) {
+                            if (value == typeStr) {
+                              _type = key;
+                            }
+                          });
                         },
                         itemBuilder: (context, index) {
                           var str =
@@ -330,7 +345,11 @@ class _FinishReportPageState extends State<FinishReportPage> {
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                   ],
                   onChanged: (text) {
-                    model.price = double.parse(text);
+                    if (text.isNotEmpty)
+                      model.price = double.parse(text);
+                    else
+                      model.price = 0;
+                    setState(() {});
                   },
                   autofocus: false,
                   decoration: InputDecoration(
@@ -377,7 +396,11 @@ class _FinishReportPageState extends State<FinishReportPage> {
                     FilteringTextInputFormatter.digitsOnly,
                   ],
                   onChanged: (text) {
-                    model.num = int.parse(text);
+                    if (text.isNotEmpty)
+                      model.num = int.parse(text);
+                    else
+                      model.num = 0;
+                    setState(() {});
                   },
                   autofocus: false,
                   decoration: InputDecoration(
@@ -416,7 +439,11 @@ class _FinishReportPageState extends State<FinishReportPage> {
                     FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
                   ],
                   onChanged: (text) {
-                    model.price = double.parse(text);
+                    if (text.isNotEmpty)
+                      model.price = double.parse(text);
+                    else
+                      model.price = 0;
+                    setState(() {});
                   },
                   autofocus: false,
                   decoration: InputDecoration(
