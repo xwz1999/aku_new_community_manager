@@ -2,10 +2,8 @@ import 'package:aku_new_community_manager/models/common/img_model.dart';
 import 'package:aku_new_community_manager/ui/widgets/app_widgets/bee_image_network.dart';
 import 'package:aku_new_community_manager/ui/widgets/inner/bee_image_preview.dart';
 import 'package:aku_new_community_manager/utils/extension/list_extension.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:velocity_x/src/extensions/string_ext.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class BeeHorImageView extends StatefulWidget {

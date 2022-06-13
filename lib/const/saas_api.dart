@@ -11,7 +11,7 @@ class SAASAPI {
 
   ///静态资源路径
   static String get resource =>
-      'https://saas.kaidalai.cn/resource/${UserTool.userProvider.userInfoModel!.id}/';
+      'https://saas.kaidalai.cn/resource/${UserTool.userProvider.userInfoModel!.communityCode}/';
 
   static String image(String? path) => '$resource$path';
 
