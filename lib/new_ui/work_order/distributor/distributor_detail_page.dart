@@ -222,15 +222,18 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
             },
             text: '移至待分配');
       case 3:
-        return BeeLongButton(
-            onPressed: () async {
-              var re = await WorkOrderFuc.reminderProcessing(widget.id);
-              if (re) {
-                _refreshController.callRefresh();
-              }
-            },
-            text: '提醒处理');
+        return SizedBox.shrink();
       case 4:
+      return BeeLongButton(
+          onPressed: () async {
+            var re = await WorkOrderFuc.reminderProcessing(widget.id);
+            if (re) {
+              _refreshController.callRefresh();
+            }
+          },
+          text: '提醒处理');
+
+      case 5:
         return BeeLongButton(
             onPressed: () async {
               var re = await WorkOrderFuc.reminderConfirm(widget.id);
@@ -239,7 +242,8 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
               }
             },
             text: '提醒用户确认');
-      case 5:
+
+      case 6:
         return BeeLongButton(
             onPressed: () async {
               WorkOrderFuc.getBill(
@@ -255,8 +259,6 @@ class _DistributorDetailPageState extends State<DistributorDetailPage> {
               );
             },
             text: '提醒支付');
-      case 6:
-
       case 7:
 
       case 8:

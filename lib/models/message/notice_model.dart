@@ -38,18 +38,6 @@ class NoticeModel extends Equatable {
   List<Object?> get props =>
       [id, type, status, title, content, sendDate, jumpId];
 
-  Map<String, dynamic> toMap() {
-    return {
-      'id': this.id,
-      'type': this.type,
-      'status': this.status,
-      'title': this.title,
-      'content': this.content,
-      'sendDate': this.sendDate,
-      'jumpId': this.jumpId,
-    };
-  }
-
   NoticeModel copyWith({
     int? id,
     int? type,

@@ -7,11 +7,11 @@ part of 'notice_model.dart';
 // **************************************************************************
 
 NoticeModel _$NoticeModelFromJson(Map<String, dynamic> json) => NoticeModel(
-    id: ['id'] as int,
-    type: ['type'] as int,
-    status: ['status'] as int,
-    title: ['title'] as String,
-    content: ['content'] as String,
-    sendDate: ['sendDate'] as String,
-    jumpId: ['jumpId'] as int,
+    id: json['id'] as int,
+    type: json['type'] as int,
+    status: json['status'] as int,
+    title: json['title'] as String,
+    content: json['content'] as String,
+    sendDate: json['sendDate'] as String,
+    jumpId: json['jumpId'] as int,
 );

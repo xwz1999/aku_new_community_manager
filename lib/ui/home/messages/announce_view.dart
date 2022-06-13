@@ -71,7 +71,6 @@ class _AnnounceViewState extends State<AnnounceView> {
           Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.top + 130.w),
       axis: Axis.vertical,
     );
-
     super.initState();
   }
 
@@ -102,7 +101,7 @@ class _AnnounceViewState extends State<AnnounceView> {
                   await NetUtil().getList(SAASAPI.message.messageList, params: {
                 'pageNum': _page,
                 'size': _size,
-                'type': 2,
+                'type': null,
               });
               _innerModelList =
                   base.rows.map((e) => NoticeModel.fromJson(e)).toList();
@@ -110,7 +109,6 @@ class _AnnounceViewState extends State<AnnounceView> {
               if (_modelLists.isNotEmpty) {
                 _headMonth = _modelLists[0].month;
               }
-
               setState(() {});
             },
             onLoad: () async {
@@ -119,7 +117,7 @@ class _AnnounceViewState extends State<AnnounceView> {
                   await NetUtil().getList(SAASAPI.message.messageList, params: {
                 'pageNum': _page,
                 'size': _size,
-                'type': 2,
+                'type': null,
               });
               if (base.total > _modelLists.length) {
                 _innerModelList =
@@ -127,7 +125,6 @@ class _AnnounceViewState extends State<AnnounceView> {
                 monthListDepart(_innerModelList);
                 setState(() {});
               } else {
-                print('1111111');
                 _refreshController.finishLoadCallBack!(noMore: true);
               }
             },
