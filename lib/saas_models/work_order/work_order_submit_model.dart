@@ -89,7 +89,7 @@ class WorkOrderFinishCostDTOList {
   Map<String, dynamic> toJson() => _$WorkOrderFinishCostDTOListToJson(this);
 
   static WorkOrderFinishCostDTOList get init =>
-      WorkOrderFinishCostDTOList(costType: 0, name: '', num: 0, price: 0);
+      WorkOrderFinishCostDTOList(costType: 2, name: '', num: 0, price: 0);
 
 //<editor-fold desc="Data Methods">
 

@@ -132,6 +132,7 @@ class _FinishReportPageState extends State<FinishReportPage> {
                     onChanged: (value) {
                       _photos = value;
                     }),
+                20.h.heightBox,
               ],
             ),
           )

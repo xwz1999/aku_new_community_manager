@@ -150,7 +150,6 @@ class _ReportProgressState extends State<ReportProgress> {
       BotToast.showText(text: '请输入具体需求');
       return false;
     }
-
     return true;
   }
 }
