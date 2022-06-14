@@ -17,18 +17,27 @@ class UrgeDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 32.w),
-      child: Column(
-        children: [
-          120.w.heightBox,
-          title.text.size(36.sp).black.bold.isIntrinsic.make(),
-          40.w.heightBox,
-          content.text.size(28.sp).align(TextAlign.center).isIntrinsic.make(),
-          150.w.heightBox,
-          BeeLongButton(onPressed: onConfirm, text: '确认')
-        ],
+    return Align(
+      alignment: Alignment.topCenter,
+      child: Container(
+        margin: EdgeInsets.all(40.w),
+        width: double.infinity,
+        height: 400.h,
+        padding: EdgeInsets.symmetric(horizontal: 32.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20.w),
+        ),
+        child: Column(
+          children: [
+            90.w.heightBox,
+            title.text.size(36.sp).black.bold.isIntrinsic.make(),
+            40.w.heightBox,
+            content.text.size(28.sp).align(TextAlign.center).isIntrinsic.make(),
+            30.w.heightBox,
+            BeeLongButton(onPressed: onConfirm, text: '确认')
+          ],
+        ),
       ),
     );
   }
