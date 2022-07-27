@@ -3,10 +3,12 @@ import 'dart:io';
 
 // Project imports:
 import 'package:aku_new_community_manager/const/api.dart';
+import 'package:aku_new_community_manager/const/saas_api.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_point_submit_model.dart';
 import 'package:aku_new_community_manager/models/manager/inspection/inspection_qrcode_model.dart';
 import 'package:aku_new_community_manager/saas_models/net_model/base_model.dart';
 import 'package:aku_new_community_manager/style/app_style.dart';
+
 // Flutter imports:
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_point_submit_page.dart';
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/inspection_utils.dart';
@@ -16,6 +18,7 @@ import 'package:aku_new_community_manager/ui/widgets/app_widgets/aku_single_chec
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
 import 'package:aku_new_community_manager/utils/network/net_util.dart';
+
 // Package imports:
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +32,7 @@ import 'package:velocity_x/src/flutter/widgets.dart';
 class InspectionPointInputPage extends StatefulWidget {
   final InspectionQRCodeModel? qrModel;
   final String? inspectionName;
+
   InspectionPointInputPage({Key? key, this.qrModel, this.inspectionName})
       : super(key: key);
 
@@ -42,6 +46,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
   InspectionQRCodeModel? _model;
   List<File>? _selfPhotos;
   List<File>? _scenePhots;
+
   bool get canSubmit {
     if (_selfPhotos == null && _scenePhots == null) {
       return false;
@@ -92,11 +97,12 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
       bottom: AkuButton(
         onPressed: canSubmit
             ? () async {
-                _submitModel.inspectionFaceImg = await NetUtil()
-                    .uploadFiles(_selfPhotos!, API.upload.uploadInspectionFace);
-
-                _submitModel.inspectionSpaceImg = await NetUtil().uploadFiles(
-                    _scenePhots!, API.upload.uploadInspectionSpace);
+                // _submitModel.inspectionFaceImg = await NetUtil()
+                //     .uploadFiles(_selfPhotos!, SAASAPI.upload.uploadImg);
+                _submitModel.inspectionFaceImg = [];
+                // _submitModel.inspectionSpaceImg = await NetUtil()
+                //     .uploadFiles(_scenePhots!, SAASAPI.upload.uploadImg);
+                _submitModel.inspectionSpaceImg = [];
                 BaseModel baseModel =
                     await (ManageFunc.getSubmitPoint(_submitModel));
                 if (baseModel.success) {

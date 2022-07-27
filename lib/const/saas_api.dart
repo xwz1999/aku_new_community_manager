@@ -27,9 +27,14 @@ class SAASAPI {
   static _WorkOrder workOrder = _WorkOrder();
   static _HouseHoldAudit householdAudit = _HouseHoldAudit();
   static _Home home = _Home();
+  static _Upload upload = _Upload();
 
   ///二级分类
   static _OtherApi other = _OtherApi();
+}
+
+class _Upload {
+  String get uploadImg => '/butlerApp/user/upload/uploadImg';
 }
 
 class _Home {

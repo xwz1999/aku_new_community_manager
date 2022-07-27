@@ -3,8 +3,8 @@ class InspectionPointModel {
   String? name;
   int? checkNum;
   String? completeDate;
-  int? longitude;
-  int? latitude;
+  num? longitude;
+  num? latitude;
 
   InspectionPointModel(
       {required this.id, this.name, this.checkNum, this.completeDate});

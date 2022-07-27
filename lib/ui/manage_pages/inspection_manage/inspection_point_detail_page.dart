@@ -232,14 +232,14 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                       color: Color(0xFFFFF8E0),
                       border: Border.all(color: Color(0xFFFFC40C), width: 3.w),
                     ),
-                    child: model.status == 1
-                        ? '正常'
+                    child: model.status == 2
+                        ? '异常'
                             .text
                             .color(kTextPrimaryColor)
                             .size(32.sp)
                             .bold
                             .make()
-                        : '异常'
+                        : '正常'
                             .text
                             .color(kTextPrimaryColor)
                             .size(32.sp)
@@ -460,7 +460,7 @@ class _InspectionPointDetailPageState extends State<InspectionPointDetailPage> {
                         ),
                         Spacer(),
                         Text(
-                          '${DateUtil.formatDateStr(model.completeDate!, format: "yyyy-MM-dd HH:mm")}',
+                          '${DateUtil.formatDateMs(model.completeDate!, format: "yyyy-MM-dd HH:mm")}',
                           style: AppStyle().primaryStyle,
                         ),
                       ],

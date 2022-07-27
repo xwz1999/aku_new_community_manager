@@ -7,7 +7,7 @@ class InspectionCheckDetialModel {
   String? code;
   String? name;
   int? type;
-  String? completeDate;
+  int? completeDate;
   List<CheckFBIVoList>? checkList;
   List<ImgModel>? faceImgList;
   List<ImgModel>? spaceImgList;

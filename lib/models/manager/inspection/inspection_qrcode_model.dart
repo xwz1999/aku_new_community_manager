@@ -15,7 +15,7 @@ class InspectionQRCodeModel {
     type = json['type'];
     if (json['checkList'] != null) {
       checkList = <CheckVoList>[];
-      json['checkVoList'].forEach((v) {
+      json['checkList'].forEach((v) {
         checkList!.add(new CheckVoList.fromJson(v));
       });
     }

@@ -13,6 +13,7 @@ import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/insp
 import 'package:aku_new_community_manager/ui/manage_pages/inspection_manage/qr_scanner_page.dart';
 import 'package:aku_new_community_manager/ui/sub_pages/manage_func.dart';
 import 'package:aku_new_community_manager/ui/tool_pages/warning/warning_page.dart';
+
 // Flutter imports:
 import 'package:aku_new_community_manager/ui/widgets/common/aku_button.dart';
 import 'package:aku_new_community_manager/ui/widgets/common/aku_scaffold.dart';
@@ -186,11 +187,12 @@ class _InspectionManageDetailsPageState
                               await ManageFunc.getInspectionFindCheckDetailByQr(
                                   _detailModel!.id!, result.code);
                           if (baseModel.success) {
-                            Get.to(() => InspectionPointInputPage(
+                            await Get.to(() => InspectionPointInputPage(
                                   inspectionName: _detailModel!.name,
                                   qrModel: InspectionQRCodeModel.fromJson(
                                       baseModel.data),
                                 ));
+                            _refreshController?.callRefresh();
                           } else {
                             showCupertinoDialog(
                                 context: context,
@@ -532,7 +534,7 @@ class _InspectionManageDetailsPageState
                 BaseModel baseModel = await (_uploadLocation(widget.executeId,
                     argument.latLng.longitude, argument.latLng.latitude));
                 if (!baseModel.success) {
-                  BotToast.showText(text: baseModel.msg);
+                  // BotToast.showText(text: baseModel.msg);
                 } else {
                   _canUploadLocation = false;
                   //绘制折线
@@ -583,12 +585,14 @@ class _InspectionManageDetailsPageState
 
   Future _uploadLocation(
       int executeId, double longitude, double latitude) async {
-    BaseModel baseModel = await NetUtil()
-        .post(SAASAPI.inspection.uploadLocation, params: {
-      "executeId": executeId,
-      "longitude": longitude,
-      "latitude": latitude
-    });
+    BaseModel baseModel = await NetUtil().post(
+        SAASAPI.inspection.uploadLocation,
+        params: {
+          "executeId": executeId,
+          "longitude": longitude,
+          "latitude": latitude
+        },
+        showMessage: false);
     return baseModel;
   }
 }
