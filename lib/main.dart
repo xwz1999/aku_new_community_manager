@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
           },
           child: ScreenUtilInit(
               designSize: Size(750, 1334),
-              builder: () {
+              builder: (context,child) {
                 return GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   title: '小蜜蜂管家',
