@@ -194,7 +194,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
               value: 0,
               gropValue: _submitModel.executeCheckList![index].status,
               onPressed: () {
-                _submitModel.executeCheckList![index].status = 0;
+                _submitModel.executeCheckList![index].status = 1;
                 setState(() {});
               },
             ),
@@ -204,7 +204,7 @@ class _InspectionPointInputPageState extends State<InspectionPointInputPage> {
               value: 1,
               gropValue: _submitModel.executeCheckList![index].status,
               onPressed: () {
-                _submitModel.executeCheckList![index].status = 1;
+                _submitModel.executeCheckList![index].status = 2;
                 setState(() {});
               },
             ),
